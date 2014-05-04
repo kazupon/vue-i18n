@@ -3,4 +3,5 @@
 .DS_Store
 node_modules
 components
+test/build.js
 npm-debug.log

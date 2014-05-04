@@ -1,0 +1,33 @@
+{
+  "name": "vue-i18n",
+  "version": "0.0.0",
+  "description": "Internationalization plugin of Vue.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kazupon/vue-i18n.git"
+  },
+  "keywords": [
+    "Vue.js",
+    "i18n",
+    "internationalization",
+    "plugin"
+  ],
+  "author": "kazuya kawaguchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kazupon/vue-i18n/issues"
+  },
+  "homepage": "https://github.com/kazupon/vue-i18n",
+  "devDependencies": {
+    "component": "^1.0.0-rc5",
+    "coveralls": "^2.10.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^1.18.2",
+    "mocha-phantomjs": "^3.3.2",
+    "poncho": "^0.1.1"
+  }
+}
