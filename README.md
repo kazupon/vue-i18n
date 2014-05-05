@@ -37,12 +37,17 @@ Vue.use(i18n, {
   lang: 'ja',
   resources: resources 
 });
+
+// create instance
+new Vue({
+  el: '#test-i18n'
+});
 ```
 
 Template the following:
 
 ```html
-<div class="message">
+<div id="test-i18n" class="message">
   <p v-t="message.hello"></p>
 </div>
 ```
@@ -50,7 +55,7 @@ Template the following:
 Output the following:
 
 ```html
-<div class="message">
+<div id="test-i18n" class="message">
   <p>ザ・ワールド</p>
 </div>
 ```
