@@ -10,12 +10,14 @@ describe('i18n', function () {
   var resources = {
     en: {
       message: {
-        hello: 'the world'
+        hello: 'the world',
+        hoge: 'hoge'
       }
     },
     ja: {
       message: {
-        hello: 'ザ・ワールド'
+        hello: 'ザ・ワールド',
+        hoge: 'ほげ'
       }
     }
   };
@@ -24,6 +26,7 @@ describe('i18n', function () {
     describe('en', function () {
       it('should translate an english', function () {
         mock('translate-en', '<p v-t="message.hello"></p>');
+
         Vue.use(i18n, {
           lang: 'en',
           resources: resources
@@ -41,6 +44,7 @@ describe('i18n', function () {
     describe('ja', function () {
       it('should translate a japanese', function () {
         mock('translate-ja', '<p v-t="message.hello"></p>');
+
         Vue.use(i18n, {
           lang: 'ja',
           resources: resources
@@ -59,6 +63,7 @@ describe('i18n', function () {
   describe('lang resource not found', function () {
     it('should not translate', function () {
       mock('translate-it', '<p v-t="message.hello"></p>');
+
       Vue.use(i18n, {
         lang: 'it',
         resources: resources
@@ -76,6 +81,7 @@ describe('i18n', function () {
   describe('resource key not found', function () {
     it('should not translate', function () {
       mock('translate-en-key-nothing', '<p v-t="message.foo"></p>');
+
       Vue.use(i18n, {
         lang: 'en',
         resources: resources
@@ -93,6 +99,7 @@ describe('i18n', function () {
   describe('resource key empty', function () {
     it('should not translate', function () {
       mock('translate-key-empty', '<p v-t=""></p>');
+
       Vue.use(i18n, {
         lang: 'en',
         resources: resources
@@ -114,6 +121,7 @@ describe('i18n', function () {
         'translate-default-value',
         '<p v-t="message.hello: {{hello}}"></p>'
       );
+
       Vue.use(i18n, {
         lang: 'en',
         resources: resources
@@ -132,10 +140,38 @@ describe('i18n', function () {
   });
   */
 
+  describe('translate component module', function () {
+      mock(
+        'translate-parent',
+        '<div><p v-t="message.hello"></p><div v-component="hoge"></div></div>'
+      );
+
+      Vue.use(i18n, {
+        lang: 'en',
+        resources: resources
+      });
+
+      new Vue({
+        el: '#translate-parent',
+        components: {
+          hoge: Vue.extend({
+            template: '<p id="translate-child" v-t="message.hoge"></p>'
+          })
+        }
+      });
+
+      var child_el = document.querySelector('#translate-child');
+      expect(child_el.textContent).to.be.eql(resources.en.message.hoge);
+
+      var parent_el = document.querySelector('#translate-parent p');
+      expect(parent_el.textContent).to.be.eql(resources.en.message.hello);
+  });
+
   // NOTE: Don't use `v-text` directive !!
   describe('v-text', function () {
     it('should not translate', function () {
       mock('translate-use-text', '<p v-t="message.hello" v-text="hello"></p>');
+
       Vue.use(i18n, {
         lang: 'en',
         resources: resources
