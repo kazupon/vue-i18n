@@ -4,4 +4,6 @@
 node_modules
 components
 test/build.js
+example/build/build.js
+example/components
 npm-debug.log

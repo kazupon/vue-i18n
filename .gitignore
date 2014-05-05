@@ -1,6 +1,8 @@
 node_modules
 components
 test/build.js
+example/components
+example/build/build.js
 .DS_Store
 *.swp
 *~
