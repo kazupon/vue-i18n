@@ -1,0 +1,19 @@
+{
+  // Enforcing
+  "indent": 2,
+  "maxlen": 80,
+
+  // Relaxing
+  "laxbreak": true,
+  "boss": true,
+  "expr": true,
+  "sub": true,
+  "debug": true,
+
+  // Environments
+  "browser": true,
+  "devel": true,
+
+  "globals": {
+  }
+}

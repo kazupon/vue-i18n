@@ -1,11 +1,14 @@
-SRC = $(wildcard lib/*.js)
 C8 = node_modules/.bin/component
 PONCHO = node_modules/.bin/poncho
 REPORTER = dot
 
 
-build: node_modules components $(SRC)
+build: check node_modules components index.js
 	@$(C8) build --dev -o test
+
+check:
+	@node_modules/.bin/jshint --config .jshintrc --exclude-path .jshintignore \
+		index.js test/specs/index.js
 
 components: component.json
 	@$(C8) install --dev

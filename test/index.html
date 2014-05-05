@@ -9,10 +9,11 @@
   <body>
     <div id="mocha"></div>
     <script src="mocha.js"></script>
+    <script src="prepare.js"></script>
     <script src="../node_modules/expect.js/index.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src="build.js" data-cover></script>
-    <script src="tests.js"></script>
+    <script src="specs/index.js"></script>
     <script>
       if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
       else { mocha.run(); }

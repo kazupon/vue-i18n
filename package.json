@@ -1,6 +1,6 @@
 {
   "name": "vue-i18n",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Internationalization plugin of Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "component": "^1.0.0-rc5",
     "coveralls": "^2.10.0",
     "expect.js": "^0.3.1",
+    "jshint": "^2.5.0",
     "mocha": "^1.18.2",
     "mocha-phantomjs": "^3.3.2",
     "poncho": "^0.1.1"

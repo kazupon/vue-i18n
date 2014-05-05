@@ -22,12 +22,12 @@ var i18n = require('vue-i18n');
 var resources = {
   en: {
     message: {
-      hello: 'world'
+      hello: 'the world'
     }
   },
   ja: {
     message: {
-      hello: '世界'
+      hello: 'ザ・ワールド'
     }
   }
 };
@@ -39,15 +39,33 @@ Vue.use(i18n, {
 });
 ```
 
+Template the following:
+
 ```html
 <div class="message">
   <p v-t="message.hello"></p>
 </div>
 ```
 
+Output the following:
+
+```html
+<div class="message">
+  <p>ザ・ワールド</p>
+</div>
+```
+
+
 # Testing
 
-TODO: 
+```shell
+$ make test
+```
+
+
+# TODO
+- specify default translate value
+- fallback translate
 
 
 # License
