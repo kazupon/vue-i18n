@@ -17,6 +17,8 @@ $ component install kazupon/vue-i18n
 
 # Usage
 
+## v-t directive
+
 ```js
 var Vue = require('vue')
 var i18n = require('vue-i18n')
@@ -61,6 +63,35 @@ Output the following:
 <div id="test-i18n" class="message">
   <p>ザ・ワールド</p>
 </div>
+```
+
+## Vue.t function
+
+```js
+var Vue = require('vue')
+var i18n = require('vue-i18n')
+
+// ready translated locales
+var locales = {
+  en: {
+    message: {
+      hello: 'the world'
+    }
+  },
+  ja: {
+    message: {
+      hello: 'ザ・ワールド'
+    }
+  }
+}
+
+// set plugin
+Vue.use(i18n, {
+  lang: 'en',
+  locales: locales
+})
+
+console.log(Vue.t('message.hello')) // output the 'the wolrd'
 ```
 
 
