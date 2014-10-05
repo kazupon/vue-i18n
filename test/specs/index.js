@@ -2,12 +2,12 @@
  * import(s)
  */
 
-var i18n = require('vue-i18n');
-var Vue = require('vue');
+var i18n = require('vue-i18n')
+var Vue = require('vue')
 
 
 describe('i18n', function () {
-  var resources = {
+  var locales = {
     en: {
       message: {
         hello: 'the world',
@@ -20,45 +20,41 @@ describe('i18n', function () {
         hoge: 'ほげ'
       }
     }
-  };
+  }
 
   describe('basic', function () {
     describe('en', function () {
       it('should translate an english', function () {
-        mock('translate-en', '<p v-t="message.hello"></p>');
+        mock('translate-en', '<p v-t="message.hello"></p>')
 
         Vue.use(i18n, {
           lang: 'en',
-          resources: resources
-        });
+          locales: locales
+        })
 
-        new Vue({
-          el: '#translate-en'
-        });
+        new Vue({ el: '#translate-en' })
 
-        var el = document.querySelector('#translate-en');
-        expect(el.textContent).to.be.eql(resources.en.message.hello);
-      });
-    });
+        var el = document.querySelector('#translate-en')
+        expect(el.textContent).to.be.eql(locales.en.message.hello)
+      })
+    })
 
     describe('ja', function () {
       it('should translate a japanese', function () {
-        mock('translate-ja', '<p v-t="message.hello"></p>');
+        mock('translate-ja', '<p v-t="message.hello"></p>')
 
         Vue.use(i18n, {
           lang: 'ja',
-          resources: resources
-        });
+          resources: locales
+        })
 
-        new Vue({
-          el: '#translate-ja'
-        });
+        new Vue({ el: '#translate-ja' })
 
-        var el = document.querySelector('#translate-ja');
-        expect(el.textContent).to.be.eql(resources.ja.message.hello);
-      });
-    });
-  });
+        var el = document.querySelector('#translate-ja')
+        expect(el.textContent).to.be.eql(locales.ja.message.hello)
+      })
+    })
+  })
 
   describe('lang resource not found', function () {
     it('should not translate', function () {
@@ -66,53 +62,47 @@ describe('i18n', function () {
 
       Vue.use(i18n, {
         lang: 'it',
-        resources: resources
-      });
+        locales: locales
+      })
 
-      new Vue({
-        el: '#translate-it'
-      });
+      new Vue({ el: '#translate-it' })
 
-      var el = document.querySelector('#translate-it');
-      expect(el.textContent).to.be.eql('message.hello');
-    });
-  });
+      var el = document.querySelector('#translate-it')
+      expect(el.textContent).to.be.eql('message.hello')
+    })
+  })
 
   describe('resource key not found', function () {
     it('should not translate', function () {
-      mock('translate-en-key-nothing', '<p v-t="message.foo"></p>');
+      mock('translate-en-key-nothing', '<p v-t="message.foo"></p>')
 
       Vue.use(i18n, {
         lang: 'en',
-        resources: resources
-      });
+        locales: locales
+      })
 
-      new Vue({
-        el: '#translate-en-key-nothing'
-      });
+      new Vue({ el: '#translate-en-key-nothing' })
 
-      var el = document.querySelector('#translate-en-key-nothing');
-      expect(el.textContent).to.be.eql('message.foo');
-    });
-  });
+      var el = document.querySelector('#translate-en-key-nothing')
+      expect(el.textContent).to.be.eql('message.foo')
+    })
+  })
 
   describe('resource key empty', function () {
     it('should not translate', function () {
-      mock('translate-key-empty', '<p v-t=""></p>');
+      mock('translate-key-empty', '<p v-t=""></p>')
 
       Vue.use(i18n, {
         lang: 'en',
-        resources: resources
-      });
+        locales: locales
+      })
 
-      new Vue({
-        el: '#translate-key-empty'
-      });
+      new Vue({ el: '#translate-key-empty' })
 
-      var el = document.querySelector('#translate-key-empty');
-      expect(el.textContent).to.be.eql('');
-    });
-  });
+      var el = document.querySelector('#translate-key-empty')
+      expect(el.textContent).to.be.eql('')
+    })
+  })
 
   /*
   describe('specify default value', function () {
@@ -124,7 +114,7 @@ describe('i18n', function () {
 
       Vue.use(i18n, {
         lang: 'en',
-        resources: resources
+        locales: locales
       });
 
       new Vue({
@@ -141,15 +131,16 @@ describe('i18n', function () {
   */
 
   describe('translate component module', function () {
+    it('should translate', function () {
       mock(
         'translate-parent',
         '<div><p v-t="message.hello"></p><div v-component="hoge"></div></div>'
-      );
+      )
 
       Vue.use(i18n, {
         lang: 'en',
-        resources: resources
-      });
+        locales: locales
+      })
 
       new Vue({
         el: '#translate-parent',
@@ -158,34 +149,35 @@ describe('i18n', function () {
             template: '<p id="translate-child" v-t="message.hoge"></p>'
           })
         }
-      });
+      })
 
-      var child_el = document.querySelector('#translate-child');
-      expect(child_el.textContent).to.be.eql(resources.en.message.hoge);
+      var child_el = document.querySelector('#translate-child')
+      expect(child_el.textContent).to.be.eql(locales.en.message.hoge)
 
-      var parent_el = document.querySelector('#translate-parent p');
-      expect(parent_el.textContent).to.be.eql(resources.en.message.hello);
-  });
+      var parent_el = document.querySelector('#translate-parent p')
+      expect(parent_el.textContent).to.be.eql(locales.en.message.hello)
+    })
+  })
 
   // NOTE: Don't use `v-text` directive !!
   describe('v-text', function () {
     it('should not translate', function () {
-      mock('translate-use-text', '<p v-t="message.hello" v-text="hello"></p>');
+      mock('translate-use-text', '<p v-t="message.hello" v-text="hello"></p>')
 
       Vue.use(i18n, {
         lang: 'en',
-        resources: resources
-      });
+        locales: locales
+      })
 
       new Vue({
         el: '#translate-use-text',
         data: {
           hello: 'world'
         }
-      });
+      })
 
-      var el = document.querySelector('#translate-use-text');
-      expect(el.textContent).to.be.eql('world');
-    });
-  });
-});
+      var el = document.querySelector('#translate-use-text')
+      expect(el.textContent).to.be.eql('world')
+    })
+  })
+})
