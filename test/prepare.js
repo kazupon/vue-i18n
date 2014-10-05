@@ -1,39 +1,39 @@
 function mock (id, html, attrs) {
-  var el = document.createElement('div');
-  el.id = id;
-  el.innerHTML = html;
+  var el = document.createElement('div')
+  el.id = id
+  el.innerHTML = html
   if (attrs) {
     for (var attr in attrs) {
-      el.setAttribute(attr, attrs[attr]);
+      el.setAttribute(attr, attrs[attr])
     }
   }
-  document.getElementById('test').appendChild(el);
-  return el;
+  document.getElementById('test').appendChild(el)
+  return el
 }
 
 function mockHTMLEvent (type) {
-  var e = document.createEvent('HTMLEvents');
-  e.initEvent(type, true, true);
-  return e;
+  var e = document.createEvent('HTMLEvents')
+  e.initEvent(type, true, true)
+  return e
 }
 
 function mockKeyEvent (type) {
-  var e = document.createEvent('KeyboardEvent');
+  var e = document.createEvent('KeyboardEvent')
   var initMethod = e.initKeyboardEvent
     ? 'initKeyboardEvent'
-    : 'initKeyEvent';
-  e[initMethod](type, true, true, null, false, false, false, false, 9, 0);
-  return e;
+    : 'initKeyEvent'
+  e[initMethod](type, true, true, null, false, false, false, false, 9, 0)
+  return e
 }
 
 function mockMouseEvent (type) {
-  var e = document.createEvent('MouseEvent');
-  e.initMouseEvent(type, true, true, null, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-  return e;
+  var e = document.createEvent('MouseEvent')
+  e.initMouseEvent(type, true, true, null, 1, 0, 0, 0, 0, false, false, false, false, 0, null)
+  return e
 }
 
 
-var testDiv = document.createElement('div');
-testDiv.id = 'test';
-testDiv.style.display = 'none';
-document.body.appendChild(testDiv);
+var testDiv = document.createElement('div')
+testDiv.id = 'test'
+testDiv.style.display = 'none'
+document.body.appendChild(testDiv)

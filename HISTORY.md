@@ -1,3 +1,7 @@
+# v0.1.1 / 2014-10-06
+
+* Add `Vue.t` function
+
 # v0.1.0 / 2014-05-06
 
 * Release first

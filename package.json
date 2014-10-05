@@ -1,6 +1,6 @@
 {
   "name": "vue-i18n",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Internationalization plugin of Vue.js",
   "main": "lib/index.js",
   "scripts": {

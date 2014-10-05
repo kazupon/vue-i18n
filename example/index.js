@@ -1,8 +1,8 @@
-var Vue = require('vue');
-var i18n = require('vue-i18n');
+var Vue = require('vue')
+var i18n = require('vue-i18n')
 
-// ready translated resources
-var resources = {
+// ready translated locales
+var locales = {
   en: {
     message: {
       hello: 'the world'
@@ -13,15 +13,15 @@ var resources = {
       hello: 'ザ・ワールド'
     }
   }
-};
+}
 
 // set plugin
 Vue.use(i18n, {
   lang: 'ja',
-  resources: resources 
-});
+  locales: locales
+})
 
 // create instance
 new Vue({
   el: '#test-i18n'
-});
+})
