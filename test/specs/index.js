@@ -185,27 +185,5 @@ describe('i18n', function () {
         expect(parent_el.textContent).to.be.eql(locales.en.message.hello)
       })
     })
-
-    // NOTE: Don't use `v-text` directive !!
-    describe('v-text', function () {
-      it('should not translate', function () {
-        mock('translate-use-text', '<p v-t="message.hello" v-text="hello"></p>')
-
-        Vue.use(i18n, {
-          lang: 'en',
-          locales: locales
-        })
-
-        new Vue({
-          el: '#translate-use-text',
-          data: {
-            hello: 'world'
-          }
-        })
-
-        var el = document.querySelector('#translate-use-text')
-        expect(el.textContent).to.be.eql('world')
-      })
-    })
   })
 })
