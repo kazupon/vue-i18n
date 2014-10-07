@@ -1,8 +1,8 @@
 {
-  "name": "vue-i18n-example",
+  "name": "component-vue-i18n-example",
   "private": true,
   "version": "0.0.1",
-  "description": "vue-i18n example",
+  "description": "component vue-i18n example",
   "license": "MIT",
   "keywords": [
     "Vue.js",
