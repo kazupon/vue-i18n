@@ -10,9 +10,28 @@ Internationalization plugin of Vue.js
 
 # Installing
 
+## component
+
 ```shell
 $ component install kazupon/vue-i18n
 ```
+
+## bower
+
+```shell
+$ bower install vue-i18n
+```
+
+## brwoerify
+
+```shell
+$ npm install vue-i18n
+```
+
+
+# Support Vue.js versoin
+
+0.10.4 later
 
 
 # Usage
