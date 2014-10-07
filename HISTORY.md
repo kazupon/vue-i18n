@@ -1,3 +1,7 @@
+# v0.1.2 / 2014-10-07
+
+* Support bower
+
 # v0.1.1 / 2014-10-06
 
 * Add `Vue.t` function

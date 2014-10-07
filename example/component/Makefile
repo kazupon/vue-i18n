@@ -1,4 +1,4 @@
-C8 = ../node_modules/.bin/component
+C8 = ../../node_modules/.bin/component
 
 build: components index.js
 	@$(C8) build --dev
