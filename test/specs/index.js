@@ -85,7 +85,7 @@ describe('i18n', function () {
 
     describe('lang resource not found', function () {
       it('should not translate', function () {
-        mock('translate-it', '<p v-t="message.hello"></p>');
+        mock('translate-it', '<p v-t="message.hello"></p>')
 
         Vue.use(i18n, {
           lang: 'it',
@@ -137,24 +137,24 @@ describe('i18n', function () {
         mock(
           'translate-default-value',
           '<p v-t="message.hello: {{hello}}"></p>'
-        );
+        )
 
         Vue.use(i18n, {
           lang: 'en',
           locales: locales
-        });
+        })
 
         new Vue({
           el: '#translate-default-value',
           data: {
             hello: 'スタープラチナ ザ・ワールド'
           }
-        });
+        })
 
-        var el = document.querySelector('#translate-default-value');
-        expect(el.textContent).to.be.eql('スタープラチナ ザ・ワールド');
-      });
-    });
+        var el = document.querySelector('#translate-default-value')
+        expect(el.textContent).to.be.eql('スタープラチナ ザ・ワールド')
+      })
+    })
     */
 
     describe('translate component module', function () {

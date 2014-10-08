@@ -18,7 +18,7 @@ module.exports = function (Vue, opts) {
       for (var i = 0; i < namespaces.length; i++) {
         locale = locale[namespaces[i]]
         if (!locale) {
-          ret = key;
+          ret = key
           break
         } else {
           ret = locale
