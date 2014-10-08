@@ -22,7 +22,7 @@ $ component install kazupon/vue-i18n
 $ bower install vue-i18n
 ```
 
-## brwoserify
+## browserify
 
 ```shell
 $ npm install vue-i18n
