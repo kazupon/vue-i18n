@@ -8,7 +8,11 @@
 Internationalization plugin of Vue.js
 
 
-# Installing
+# Requirments
+- works with Vue.js ^`0.10.4`
+
+
+# Instllation
 
 ## component
 
@@ -27,11 +31,6 @@ $ bower install vue-i18n
 ```shell
 $ npm install vue-i18n
 ```
-
-
-# Support Vue.js versoin
-
-0.10.4 later
 
 
 # Usage
