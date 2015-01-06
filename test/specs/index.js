@@ -1,9 +1,9 @@
 /**
- * import(s)
+ * Import(s)
  */
 
-var i18n = require('vue-i18n')
-var Vue = require('vue')
+var Vue = require('../../node_modules/vue/dist/vue')
+var i18n = require('../../index')
 
 
 describe('i18n', function () {
@@ -48,6 +48,7 @@ describe('i18n', function () {
   })
 
 
+  /*
   describe('v-t', function () {
     describe('basic', function () {
       describe('en', function () {
@@ -131,32 +132,6 @@ describe('i18n', function () {
       })
     })
 
-    /*
-    describe('specify default value', function () {
-      it('should translate with default value', function () {
-        mock(
-          'translate-default-value',
-          '<p v-t="message.hello: {{hello}}"></p>'
-        )
-
-        Vue.use(i18n, {
-          lang: 'en',
-          locales: locales
-        })
-
-        new Vue({
-          el: '#translate-default-value',
-          data: {
-            hello: 'スタープラチナ ザ・ワールド'
-          }
-        })
-
-        var el = document.querySelector('#translate-default-value')
-        expect(el.textContent).to.be.eql('スタープラチナ ザ・ワールド')
-      })
-    })
-    */
-
     describe('translate component module', function () {
       it('should translate', function () {
         mock(
@@ -186,4 +161,5 @@ describe('i18n', function () {
       })
     })
   })
+  */
 })
