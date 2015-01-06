@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * Import(s)
+ */
+
+var webpack = require('webpack')
+var config = require('../webpack.conf')
+
+
+config.output.filename = 'vue-i18n.min.js'
+config.plugins.unshift(new webpack.optimize.UglifyJsPlugin())
+
+webpack(config, function (err, stats) {
+  var code = 0
+
+  if (err) {
+    console.error('error:' + err.message)
+    code = 1
+  }
+
+  process.exit(code)
+})
