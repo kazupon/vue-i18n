@@ -1,36 +1,48 @@
-C8 = node_modules/.bin/component
-PONCHO = node_modules/.bin/poncho
-REPORTER = dot
+KARMA = ./node_modules/karma/bin/karma
+MOCHA = ./node_modules/mocha/bin/_mocha
+SRCS = ./index.js ./test/specs/*.js
 
 
-build: check node_modules components index.js
-	@$(C8) build --dev -o test
+dist: lint node_modules
+	@./task/dist
 
-dist: check node_modules components index.js
-	@$(C8) build --standalone vue-i18n -o dist -n vue-i18n
+minify: lint node_modules
+	@./task/minify
 
-check:
-	@node_modules/.bin/jshint --config .jshintrc --exclude-path .jshintignore \
-		index.js test/specs/index.js
-
-components: component.json
-	@$(C8) install --dev
+lint:
+	@node_modules/.bin/jshint --config .jshintrc --exclude-path .jshintignore $(SRCS)
 
 node_modules: package.json
 	@npm install
 
-test: build
-	@node_modules/.bin/mocha-phantomjs --reporter $(REPORTER) test/index.html
+test: lint node_modules
+	@$(KARMA) start
 
-test_cov: build
-	@$(PONCHO) test/index.html
+coverage:
+	@VUE_I18N_TYPE=coverage $(MAKE) test
 
-test_coveralls: build
-	echo TRAVIS_JOB_ID $(TRAVIS_JOB_ID)
-	@$(PONCHO) --reporter lcov test/index.html | node_modules/.bin/coveralls
+coveralls:
+	@VUE_I18N_TYPE=coveralls $(MAKE) test
+
+e2e:
+	@$(MOCHA) -R dot ./test/e2e/index.js
+
+sauce1:
+	@VUE_I18N_TYPE=sauce SAUCE=batch1 $(MAKE) test
+	
+sauce2:
+	@VUE_I18N_TYPE=sauce SAUCE=batch2 $(MAKE) test
+
+sauce3:
+	@VUE_I18N_TYPE=sauce SAUCE=batch3 $(MAKE) test
+
+sauce: sauce1 sauce2 sauce3
+
+ci: coverage coveralls e2e sauce
 
 clean:
-	@rm -rf test/build.js dist
+	@rm -rf coverage
+	@rm -rf dist
 
 
-.PHONY: test test_cov test_coveralls lib_cov clean
+.PHONY: dist lint test coverage node_modules clean
