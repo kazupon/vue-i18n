@@ -1,6 +1,6 @@
 KARMA = ./node_modules/karma/bin/karma
 MOCHA = ./node_modules/mocha/bin/_mocha
-SRCS = ./index.js ./test/specs/*.js
+SRCS = ./index.js ./test/specs/*.js ./test/e2e/*.js
 
 
 dist: lint node_modules
@@ -25,7 +25,7 @@ coveralls:
 	@VUE_I18N_TYPE=coveralls $(MAKE) test
 
 e2e:
-	@$(MOCHA) -R dot ./test/e2e/index.js
+	@$(MOCHA) -R dot ./test/e2e/translation.js
 
 sauce1:
 	@VUE_I18N_TYPE=sauce SAUCE=batch1 $(MAKE) test
