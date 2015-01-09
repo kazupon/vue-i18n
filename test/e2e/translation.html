@@ -15,17 +15,23 @@
           locales: {
             en: {
               hello: 'hello',
-              world: 'world'
+              world: 'world',
+              foo: {
+                bar: 'bar'
+              }
             },
             ja: {
               hello: 'こんにちは',
-              world: '世界'
+              world: '世界',
+              foo: {
+                bar: 'バー'
+              }
             }
           }
         })
 
         var translation = {
-          template: '<p class="directive" v-t="hello"></p><p class="class-method">{{world}}</p>',
+          template: '<p class="directive" v-t="hello"></p><p class="static">{{world}}</p><div class="instance">{{* $t("foo.bar")}}</br>buz</div>',
           computed: {
             world: function () {
               return Vue.t('world')

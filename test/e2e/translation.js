@@ -24,9 +24,14 @@ describe('translation', function () {
           expect(text).to.be.eql('hello')
         })
         .evaluate(function () {
-          return document.querySelector('#translation p.class-method').innerText
+          return document.querySelector('#translation p.static').innerText
         }, function (text) {
           expect(text).to.be.eql('world')
+        })
+        .evaluate(function () {
+          return document.querySelector('#translation div.instance').innerHTML
+        }, function (html) {
+          expect(html).to.be.eql('bar<br>buz')
         })
         .run(done)
     })
