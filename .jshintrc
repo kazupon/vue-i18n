@@ -12,6 +12,7 @@
 
   // Environments
   "browser": true,
+  "debug": true,
 
   "globals": {
   }
