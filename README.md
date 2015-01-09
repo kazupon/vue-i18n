@@ -114,6 +114,48 @@ Vue.use(i18n, {
 console.log(Vue.t('message.hello')) // output the 'the wolrd'
 ```
 
+## $t method (for 0.11.4 later)
+
+```html
+<div id="message">
+Message:<br>{{$t('message.hello')}}
+</div>
+```
+
+```js
+var Vue = require('vue')
+var i18n = require('vue-i18n')
+
+// ready translated locales
+var locales = {
+  en: {
+    message: {
+      hello: 'the world'
+    }
+  },
+  ja: {
+    message: {
+      hello: 'ザ・ワールド'
+    }
+  }
+}
+
+// set plugin
+Vue.use(i18n, {
+  lang: 'en',
+  locales: locales
+})
+
+new Vue().$mount('#message')
+```
+
+render the following:
+
+```html
+<div id="message">
+Message:<br>the world
+</div>
+```
 
 # Testing
 
@@ -123,10 +165,11 @@ $ make test
 
 
 # TODO
-- specify default translate value
-- fallback translate
+See the `TODO.md`
 
 
 # License
+
+## MIT
 
 See the `LICENSE`.
