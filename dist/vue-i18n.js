@@ -72,6 +72,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var lang = opts.lang || 'en'
 	  var locales = opts.locales || opts.resources || {}
 
+	  // for Vue 0.11.4 later
+	  try {
+	    var path = Vue.parsers.path
+	    Vue.prototype.$t = function (key) {
+	      return key ? (path.get(locales[lang], key) || key) : ''
+	    }
+	  } catch (e) {
+	    Vue.utils.warn('not support $t in this Vue version')
+	  }
+
 	  Vue.t = function (key) {
 	    var ret = key || ''
 	    var locale = locales[lang]
