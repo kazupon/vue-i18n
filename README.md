@@ -4,6 +4,8 @@
 [![Coverage Status](https://img.shields.io/coveralls/kazupon/vue-i18n.svg)](https://coveralls.io/r/kazupon/vue-i18n?branch=master)
 [![NPM version](https://badge.fury.io/js/vue-i18n.svg)](http://badge.fury.io/js/vue-i18n)
 [![Dependency Status](https://david-dm.org/kazupon/vue-i18n.svg)](https://david-dm.org/kazupon/vue-i18n) 
+[![Sauce Test Status](https://saucelabs.com/buildstatus/vue-i18n)](https://saucelabs.com/u/vue-i18n)
+
 
 Internationalization plugin of Vue.js
 
@@ -112,6 +114,48 @@ Vue.use(i18n, {
 console.log(Vue.t('message.hello')) // output the 'the wolrd'
 ```
 
+## $t method (for 0.11.4 later)
+
+```html
+<div id="message">
+Message:<br>{{$t('message.hello')}}
+</div>
+```
+
+```js
+var Vue = require('vue')
+var i18n = require('vue-i18n')
+
+// ready translated locales
+var locales = {
+  en: {
+    message: {
+      hello: 'the world'
+    }
+  },
+  ja: {
+    message: {
+      hello: 'ザ・ワールド'
+    }
+  }
+}
+
+// set plugin
+Vue.use(i18n, {
+  lang: 'en',
+  locales: locales
+})
+
+new Vue().$mount('#message')
+```
+
+render the following:
+
+```html
+<div id="message">
+Message:<br>the world
+</div>
+```
 
 # Testing
 
@@ -121,10 +165,11 @@ $ make test
 
 
 # TODO
-- specify default translate value
-- fallback translate
+See the `TODO.md`
 
 
 # License
+
+## MIT
 
 See the `LICENSE`.

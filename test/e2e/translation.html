@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue-i18n end-to-end</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../../dist/vue-i18n.js"></script>
+  </head>
+  <body>
+    <div id="translation"></div>
+    <script>
+      (function () {
+        Vue.use(window['vue-i18n'], {
+          lang: 'en',
+          locales: {
+            en: {
+              hello: 'hello',
+              world: 'world',
+              foo: {
+                bar: 'bar'
+              }
+            },
+            ja: {
+              hello: 'こんにちは',
+              world: '世界',
+              foo: {
+                bar: 'バー'
+              }
+            }
+          }
+        })
+
+        var translation = {
+          template: '<p class="directive" v-t="hello"></p><p class="static">{{world}}</p><div class="instance">{{* $t("foo.bar")}}</br>buz</div>',
+          computed: {
+            world: function () {
+              return Vue.t('world')
+            }
+          }
+        }
+
+        new Vue(translation).$mount('#translation')
+      })()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+- [ ] Template Strings format
+- [ ] Tynamic language changing

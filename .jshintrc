@@ -2,7 +2,6 @@
   // Enforcing
   "eqeqeq": true,
   "indent": 2,
-  "maxlen": 80,
 
   // Relaxing
   "asi": true,
@@ -13,6 +12,7 @@
 
   // Environments
   "browser": true,
+  "debug": true,
 
   "globals": {
   }
