@@ -23,6 +23,63 @@ describe('i18n', function () {
   }
 
 
+  describe('$t', function () {
+    describe('en', function () {
+      it('should translate an english', function () {
+        Vue.use(i18n, {
+          lang: 'en',
+          locales: locales
+        })
+
+        var vm = new Vue()
+        expect(vm.$t('message.hello')).to.be.eql(locales.en.message.hello)
+      })
+    })
+
+    describe('ja', function () {
+      it('should translate a japanese', function () {
+        Vue.use(i18n, {
+          lang: 'ja',
+          resources: locales
+        })
+
+        var vm = new Vue()
+        expect(vm.$t('message.hello')).to.be.eql(locales.ja.message.hello)
+      })
+    })
+
+    describe('key', function () {
+      before(function () {
+        Vue.use(i18n, {
+          lang: 'en',
+          locales: locales
+        })
+      })
+
+      describe('not specify', function () {
+        it('should return empty string', function () {
+          var vm = new Vue()
+          expect(vm.$t()).to.be.eql('')
+        })
+      })
+
+      describe('empty string', function () {
+        it('should return empty string', function () {
+          var vm = new Vue()
+          expect(vm.$t('')).to.be.eql('')
+        })
+      })
+
+      describe('not found', function () {
+        it('should return key string', function () {
+          var vm = new Vue()
+          expect(vm.$t('foo.bar')).to.be.eql('foo.bar')
+        })
+      })
+    })
+  })
+
+
   describe('Vue.t', function () {
     describe('en', function () {
       it('should translate an english', function () {
@@ -49,8 +106,6 @@ describe('i18n', function () {
 
 
   describe('v-t', function () {
-    var vm, targetVM
-
     before(function () {
       Vue.config.async = false
     })
