@@ -16,22 +16,22 @@
             en: {
               hello: 'hello',
               world: 'world',
-              foo: {
-                bar: 'bar'
+              message: {
+                hello: 'Hello {name} !!'
               }
             },
             ja: {
               hello: 'こんにちは',
               world: '世界',
-              foo: {
-                bar: 'バー'
+              message: {
+                hello: 'こんにちは {name} !!'
               }
             }
           }
         })
 
         var translation = {
-          template: '<p class="directive" v-t="hello"></p><p class="static">{{world}}</p><div class="instance">{{* $t("foo.bar")}}</br>buz</div>',
+          template: '<p class="directive" v-t="hello"></p><p class="static">{{world}}</p><div class="instance">{{* $t("message.hello", "en", { name: "kazupon" })}}</br>How are you?</div>',
           computed: {
             world: function () {
               return Vue.t('world')

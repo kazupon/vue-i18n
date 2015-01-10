@@ -1,5 +1,5 @@
 /**
- * vue-i18n v1.0.0
+ * vue-i18n v1.1.0
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -61,27 +61,64 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Expose internationalization plugin
+	 * Import(s)
+	 */
+
+	var format = __webpack_require__(1)
+
+
+	/**
+	 * Export(s)
+	 */
+
+	module.exports = plugin
+
+
+	/**
+	 * plugin
 	 *
 	 * @param {Object} Vue
 	 * @param {Object} opts
 	 */
 
-	module.exports = function (Vue, opts) {
+	function plugin (Vue, opts) {
 	  opts = opts || {}
 	  var lang = opts.lang || 'en'
 	  var locales = opts.locales || opts.resources || {}
 
-	  // for Vue 0.11.4 later
+	  // `$t` method (for Vue 0.11.4 later)
 	  try {
 	    var path = Vue.parsers.path
+	    var util = Vue.util
+
 	    Vue.prototype.$t = function (key) {
-	      return key ? (path.get(locales[lang], key) || key) : ''
+	      if (!key) { return '' }
+
+	      var args = null
+	      var language = lang
+	      if (arguments.length === 2) {
+	        if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
+	          args = arguments[1]
+	        } else if (typeof arguments[1] === 'string') {
+	          language = arguments[1]
+	        }
+	      } else if (arguments.length === 3) {
+	        if (typeof arguments[1] === 'string') {
+	          language = arguments[1]
+	        }
+	        if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
+	          args = arguments[2]
+	        }
+	      }
+
+	      var val = path.get(locales[language], key)
+	      return (args ? format(val, args) : val) || key
 	    }
 	  } catch (e) {
 	    Vue.utils.warn('not support $t in this Vue version')
 	  }
 
+	  // 't' function
 	  Vue.t = function (key) {
 	    var ret = key || ''
 	    var locale = locales[lang]
@@ -100,12 +137,82 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return ret
 	  }
 
+	  // 'v-t' directive
 	  Vue.directive('t', {
 	    isLiteral: true,
 	    bind: function () {
 	      if (this.el.nodeType !== 1) { return }
 
 	      this.el.textContent = Vue.t(this.expression)
+	    }
+	  })
+	}
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 *  String format template
+	 *  - Inspired:  
+	 *    https://github.com/Matt-Esch/string-template/index.js
+	 */
+
+	/**
+	 * Import(s)
+	 */
+
+	var slice = Array.prototype.slice
+
+
+	/**
+	 * Constant(s)
+	 */
+
+	var RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
+
+
+	/**
+	 * Export(s)
+	 */
+
+	module.exports = template 
+
+
+	/**
+	 * template
+	 *  
+	 * @param {String} string
+	 * @return {String}
+	 */
+
+	function template (string) {
+	  var args
+
+	  if (arguments.length === 2 && typeof arguments[1] === 'object') {
+	    args = arguments[1]
+	  } else {
+	    args = slice.call(arguments, 1)
+	  }
+
+	  if (!args || !args.hasOwnProperty) {
+	    args = {}
+	  }
+
+	  return string.replace(RE_NARGS, function (match, i, index) {
+	    var result
+
+	    if (string[index - 1] === '{' &&
+	      string[index + match.length] === '}') {
+	      return i
+	    } else {
+	      result = args.hasOwnProperty(i) ? args[i] : null
+	      if (result === null || result === undefined) {
+	        return ''
+	      }
+
+	      return result
 	    }
 	  })
 	}

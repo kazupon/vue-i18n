@@ -1,25 +1,62 @@
 /**
- * Expose internationalization plugin
+ * Import(s)
+ */
+
+var format = require('./lib/format')
+
+
+/**
+ * Export(s)
+ */
+
+module.exports = plugin
+
+
+/**
+ * plugin
  *
  * @param {Object} Vue
  * @param {Object} opts
  */
 
-module.exports = function (Vue, opts) {
+function plugin (Vue, opts) {
   opts = opts || {}
   var lang = opts.lang || 'en'
   var locales = opts.locales || opts.resources || {}
 
-  // for Vue 0.11.4 later
+  // `$t` method (for Vue 0.11.4 later)
   try {
     var path = Vue.parsers.path
+    var util = Vue.util
+
     Vue.prototype.$t = function (key) {
-      return key ? (path.get(locales[lang], key) || key) : ''
+      if (!key) { return '' }
+
+      var args = null
+      var language = lang
+      if (arguments.length === 2) {
+        if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
+          args = arguments[1]
+        } else if (typeof arguments[1] === 'string') {
+          language = arguments[1]
+        }
+      } else if (arguments.length === 3) {
+        if (typeof arguments[1] === 'string') {
+          language = arguments[1]
+        }
+        if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
+          args = arguments[2]
+        }
+      }
+
+      var val = path.get(locales[language], key)
+      return (args ? format(val, args) : val) || key
     }
   } catch (e) {
     Vue.utils.warn('not support $t in this Vue version')
   }
 
+  // 't' function
   Vue.t = function (key) {
     var ret = key || ''
     var locale = locales[lang]
@@ -38,6 +75,7 @@ module.exports = function (Vue, opts) {
     return ret
   }
 
+  // 'v-t' directive
   Vue.directive('t', {
     isLiteral: true,
     bind: function () {

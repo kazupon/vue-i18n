@@ -13,6 +13,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/vue/dist/vue.js',
+      'lib/*.js',
       'index.js',
       'test/**/specs/*.js'
     ],
@@ -24,6 +25,7 @@ module.exports = function (config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'node_modules/vue/dist/vue.js': ['commonjs'],
+      'lib/*.js': ['coverage', 'commonjs'],
       'index.js': ['coverage', 'commonjs'],
       'test/**/specs/*.js': ['commonjs']
     },
