@@ -11,20 +11,28 @@ describe('i18n', function () {
     en: {
       message: {
         hello: 'the world',
-        hoge: 'hoge'
+        hoge: 'hoge',
+        format: {
+          named: 'Hello {name}, how are you?',
+          list: 'Hello {0}, how are you?'
+        }
       }
     },
     ja: {
       message: {
         hello: 'ザ・ワールド',
-        hoge: 'ほげ'
+        hoge: 'ほげ',
+        format: {
+          named: 'こんにちは {name}, ごきげんいかが？',
+          list: 'こんにちは {0}, ごきげんいかが？'
+        }
       }
     }
   }
 
 
   describe('$t', function () {
-    describe('en', function () {
+    describe('en language locale', function () {
       it('should translate an english', function () {
         Vue.use(i18n, {
           lang: 'en',
@@ -36,7 +44,7 @@ describe('i18n', function () {
       })
     })
 
-    describe('ja', function () {
+    describe('ja language locale', function () {
       it('should translate a japanese', function () {
         Vue.use(i18n, {
           lang: 'ja',
@@ -48,7 +56,7 @@ describe('i18n', function () {
       })
     })
 
-    describe('key', function () {
+    describe('key argument', function () {
       before(function () {
         Vue.use(i18n, {
           lang: 'en',
@@ -70,11 +78,61 @@ describe('i18n', function () {
         })
       })
 
-      describe('not found', function () {
+      describe('not regist key', function () {
         it('should return key string', function () {
           var vm = new Vue()
           expect(vm.$t('foo.bar')).to.be.eql('foo.bar')
         })
+      })
+    })
+
+    describe('format arguments', function () {
+      before(function () {
+        Vue.use(i18n, {
+          lang: 'en',
+          locales: locales
+        })
+      })
+
+      describe('named', function () {
+        it('should return replaced string', function () {
+          var vm = new Vue()
+          expect(vm.$t('message.format.named', { name: 'kazupon' }))
+            .to.be.eql('Hello kazupon, how are you?')
+        })
+      })
+
+      describe('list', function () {
+        it('should return replaced string', function () {
+          var vm = new Vue()
+          expect(vm.$t('message.format.list', ['kazupon']))
+            .to.be.eql('Hello kazupon, how are you?')
+        })
+      })
+    })
+
+    describe('language argument', function () {
+      it('should return empty string', function () {
+        Vue.use(i18n, {
+          lang: 'en',
+          locales: locales
+        })
+
+        var vm = new Vue()
+        expect(vm.$t('message.hello', 'ja')).to.be.eql(locales.ja.message.hello)
+      })
+    })
+
+    describe('format & language arguments', function () {
+      it('should return replaced string', function () {
+        Vue.use(i18n, {
+          lang: 'en',
+          locales: locales
+        })
+
+        var vm = new Vue()
+        expect(vm.$t('message.format.list', 'ja', ['kazupon']))
+          .to.be.eql('こんにちは kazupon, ごきげんいかが？')
       })
     })
   })

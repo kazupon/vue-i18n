@@ -31,7 +31,7 @@ describe('translation', function () {
         .evaluate(function () {
           return document.querySelector('#translation div.instance').innerHTML
         }, function (html) {
-          expect(html).to.be.eql('bar<br>buz')
+          expect(html).to.be.eql('Hello kazupon !!<br>How are you?')
         })
         .run(done)
     })
