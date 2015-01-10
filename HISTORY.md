@@ -1,3 +1,8 @@
+# v1.1.0 / 2015-01-10
+
+* Support template string in `$t` method
+* Support language changing in `$t` method
+
 # v1.0.0 / 2015-01-10
 
 * Add `$t` method
