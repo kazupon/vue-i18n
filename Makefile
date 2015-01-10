@@ -1,6 +1,6 @@
 KARMA = ./node_modules/karma/bin/karma
 MOCHA = ./node_modules/mocha/bin/_mocha
-SRCS = ./index.js ./test/specs/*.js ./test/e2e/*.js
+SRCS = ./lib/*.js ./index.js ./test/specs/*.js ./test/e2e/*.js
 
 
 dist: lint node_modules
