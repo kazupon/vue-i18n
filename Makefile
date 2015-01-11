@@ -1,13 +1,16 @@
 KARMA = ./node_modules/karma/bin/karma
 MOCHA = ./node_modules/mocha/bin/_mocha
-SRCS = ./lib/*.js ./index.js ./test/specs/*.js ./test/e2e/*.js
+SRCS = ./lib/*.js ./*.js ./test/**/*.js
 
 
-dist: lint node_modules
+dist: semi node_modules
 	@./task/dist
 
-minify: lint node_modules
+minify: semi node_modules
 	@./task/minify
+
+semi: lint
+	@node_modules/.bin/semi rm $(SRCS)
 
 lint:
 	@node_modules/.bin/jshint --config .jshintrc --exclude-path .jshintignore $(SRCS)
@@ -15,7 +18,7 @@ lint:
 node_modules: package.json
 	@npm install
 
-test: lint node_modules
+test: semi node_modules
 	@$(KARMA) start
 
 coverage:
