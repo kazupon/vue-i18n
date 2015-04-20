@@ -5,5 +5,5 @@ before_install:
   - npm install -g phantomjs
 env:
   global:
-    - secure: OEN6oZ1RosVu13J7L+AIpxvNm5dMqCepFAzmiZCIzXKeix8dkWBj6G9myxygAezApaOrbQ+6w4nj4MLXaAi1c53twryt7tvtaEna3qBpU9apGsaWGchrW94If0kYYjKvsz0z9wcRbaiyJvj1kSXmF9jujoq6UmjsCT/fCKOIxn4=
-    - secure: ZAbOA+A7yWRMCQAbyU7oEH0F1LWhwHFbR9DcorTbcRVMIdenUVSZd1Q4+qS04nNvoJ93WNWkR2mII+tcbsWnNxjzjPSyxW4xvFguiGx5gLe4P7iixzk+iPc/oLzbymgHXdg4ywXkH/wxx8qqG6bpvS42vBTAXfbKifOM/X5cxFY=
+    - secure: gGwalTlWUM7/AZlkWzFTcfQorHSy0ENaAOPaSa98w/V2XcK0TMthLv6ZNjtIKzeFkXx2di+o77+0BI3o04adHgNnV1XT30WxSwbk9kOgwVc46z+5OObyHdcp+vJUxeBmMVlVK4R80yfxaK1QAkmognZ0sRy+UvijDg6RF5hFLoA=
+    - secure: KUuknlU27hTpPd3DqDp2ZxDQKkArWsqpzj9XClO4hyn3AanpIbHdzIcdn25UF9dsipRS4dZ0oaofeuW9ldoIIK0S5SOUAC8YfNWnaA7eC7CO0hpH88jepSaFTtmFJEBVEKx5TxfFiNVNFrehP3HwLdvX9UPPchvCy6CM+hOf+cI=

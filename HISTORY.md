@@ -1,3 +1,7 @@
+# v1.1.1 / 2015-04-21
+
+* Fix unit test error
+
 # v1.1.0 / 2015-01-10
 
 * Support template string in `$t` method
