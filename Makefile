@@ -10,7 +10,7 @@ minify: semi node_modules
 	@./task/minify
 
 semi: lint
-	@node_modules/.bin/semi rm $(SRCS)
+	@node_modules/.bin/semi rm $(SRCS) --silent
 
 lint:
 	@node_modules/.bin/jshint --config .jshintrc --exclude-path .jshintignore $(SRCS)
