@@ -2,8 +2,8 @@
  * Import(s)
  */
 
-var pathResolve = require('path').resolve;
-var urlFormat = require('url').format;
+var pathResolve = require('path').resolve
+var urlFormat = require('url').format
 
 
 /**

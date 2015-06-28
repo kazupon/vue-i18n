@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/kazupon/vue-i18n.svg?branch=master)](https://travis-ci.org/kazupon/vue-i18n)
 [![Coverage Status](https://img.shields.io/coveralls/kazupon/vue-i18n.svg)](https://coveralls.io/r/kazupon/vue-i18n?branch=master)
 [![NPM version](https://badge.fury.io/js/vue-i18n.svg)](http://badge.fury.io/js/vue-i18n)
-[![Dependency Status](https://david-dm.org/kazupon/vue-i18n.svg)](https://david-dm.org/kazupon/vue-i18n) 
 [![Sauce Test Status](https://saucelabs.com/buildstatus/vue-i18n)](https://saucelabs.com/u/vue-i18n)
 
 
@@ -16,10 +15,10 @@ Internationalization plugin of Vue.js
 
 # Instllation
 
-## component
+## npm
 
 ```shell
-$ component install kazupon/vue-i18n
+$ npm install vue-i18n
 ```
 
 ## bower
@@ -28,18 +27,23 @@ $ component install kazupon/vue-i18n
 $ bower install vue-i18n
 ```
 
-## browserify
+## component
 
 ```shell
-$ npm install vue-i18n
+$ component install kazupon/vue-i18n
+```
+
+## duo
+
+```javascript
+var i18n = require('kazupon/vue-i18n')
+
 ```
 
 
 # Usage
 
-## v-t directive
-
-```js
+```javascript
 var Vue = require('vue')
 var i18n = require('vue-i18n')
 
@@ -85,9 +89,75 @@ Output the following:
 </div>
 ```
 
+
+# Formatting
+
+## Named formatting
+
+Locale the following:
+
+```javascript
+var locales = {
+  en: {
+    message: {
+      hello: '{msg} world'
+    }
+  }
+}
+```
+
+Template the following:
+
+```html
+<div class="message">
+  <p>{{ $t('message.hello', { msg: "hello"}) }}</p>
+</div>
+```
+
+Output the following:
+
+```html
+<div class="message">
+  <p>hello world</p>
+</div>
+```
+
+## List formatting
+
+Locale the following:
+
+```javascript
+var locales = {
+  en: {
+    message: {
+      hello: '{0} world'
+    }
+  }
+}
+```
+
+Template the following:
+
+```html
+<div class="message">
+  <p>{{ $t('message.hello', ["hello"]) }}</p>
+</div>
+```
+
+Output the following:
+
+```html
+<div class="message">
+  <p>hello world</p>
+</div>
+```
+
+
+# API
+
 ## Vue.t function
 
-```js
+```javascript
 var Vue = require('vue')
 var i18n = require('vue-i18n')
 
@@ -122,7 +192,7 @@ Message:<br>{{$t('message.hello')}}
 </div>
 ```
 
-```js
+```javascript
 var Vue = require('vue')
 var i18n = require('vue-i18n')
 
@@ -156,6 +226,7 @@ render the following:
 Message:<br>the world
 </div>
 ```
+
 
 # Testing
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-i18n",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Internationalization plugin of Vue.js",
   "main": "index.js",
   "scripts": {
@@ -25,12 +25,9 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "jshint": "^2.5.0",
-    "mocha": "^1.18.2",
-    "vue": "~0.11.4",
-    "webpack": "^1.4.13",
     "karma": "^0.12.24",
     "karma-chrome-launcher": "^0.1.5",
-    "karma-commonjs": "0.0.12",
+    "karma-commonjs": "^0.0.12",
     "karma-coverage": "^0.2.6",
     "karma-coveralls": "^0.1.4",
     "karma-expect": "^1.1.0",
@@ -39,6 +36,10 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-safari-launcher": "^0.1.1",
     "karma-sauce-launcher": "^0.2.10",
-    "nightmare": "^1.6.5"
+    "mocha": "^1.18.2",
+    "nightmare": "^1.6.5",
+    "semi": "^3.1.1",
+    "vue": "~0.11.4",
+    "webpack": "^1.4.13"
   }
 }

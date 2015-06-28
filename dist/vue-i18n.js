@@ -1,5 +1,5 @@
 /**
- * vue-i18n v1.1.0
+ * vue-i18n v1.1.1
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -17,41 +17,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -86,6 +86,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var lang = opts.lang || 'en'
 	  var locales = opts.locales || opts.resources || {}
 
+	  function getVal (path, key, lang, args) {
+	    var value = key
+	    try {
+	      var val = path.get(locales[lang], key)
+	      value = (args ? format(val, args) : val) || key
+	    } catch (e) {
+	      value = key
+	    }
+	    return value
+	  }
+
 	  // `$t` method (for Vue 0.11.4 later)
 	  try {
 	    var path = Vue.parsers.path
@@ -111,8 +122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 
-	      var val = path.get(locales[language], key)
-	      return (args ? format(val, args) : val) || key
+	      return getVal(path, key, language, args)
 	    }
 	  } catch (e) {
 	    Vue.utils.warn('not support $t in this Vue version')
@@ -221,3 +231,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 });
+;

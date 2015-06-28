@@ -24,6 +24,17 @@ function plugin (Vue, opts) {
   var lang = opts.lang || 'en'
   var locales = opts.locales || opts.resources || {}
 
+  function getVal (path, key, lang, args) {
+    var value = key
+    try {
+      var val = path.get(locales[lang], key)
+      value = (args ? format(val, args) : val) || key
+    } catch (e) {
+      value = key
+    }
+    return value
+  }
+
   // `$t` method (for Vue 0.11.4 later)
   try {
     var path = Vue.parsers.path
@@ -49,8 +60,7 @@ function plugin (Vue, opts) {
         }
       }
 
-      var val = path.get(locales[language], key)
-      return (args ? format(val, args) : val) || key
+      return getVal(path, key, language, args)
     }
   } catch (e) {
     Vue.utils.warn('not support $t in this Vue version')
