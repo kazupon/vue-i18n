@@ -27,12 +27,6 @@ $ npm install vue-i18n
 $ bower install vue-i18n
 ```
 
-## component
-
-```shell
-$ component install kazupon/vue-i18n
-```
-
 ## duo
 
 ```javascript

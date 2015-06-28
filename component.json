@@ -3,18 +3,6 @@
   "repo": "kazupon/vue-i18n",
   "version": "1.1.1",
   "description": "Internationalization plugin of Vue.js",
-  "license": "MIT",
-  "keywords": [
-    "Vue.js",
-    "i18n",
-    "internationalization",
-    "plugin"
-  ],
-  "dependencies": {},
-  "development": {},
-  "scripts": [
-    "lib/format.js",
-    "index.js"
-  ],
-  "main": "index.js"
+  "main": "index.js",
+  "license": "MIT"
 }
