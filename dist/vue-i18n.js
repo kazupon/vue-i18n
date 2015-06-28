@@ -1,5 +1,5 @@
 /**
- * vue-i18n v1.1.1
+ * vue-i18n v2.0.0
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function plugin (Vue, opts) {
 	  opts = opts || {}
 	  var lang = opts.lang || 'en'
-	  var locales = opts.locales || opts.resources || {}
+	  var locales = opts.locales || {}
 
 	  function getVal (path, key, lang, args) {
 	    var value = key
@@ -97,71 +97,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return value
 	  }
 
-	  // `$t` method (for Vue 0.11.4 later)
-	  try {
-	    var path = Vue.parsers.path
-	    var util = Vue.util
+	  var path = Vue.parsers.path
+	  var util = Vue.util
 
-	    Vue.prototype.$t = function (key) {
-	      if (!key) { return '' }
+	  Vue.prototype.$t = function (key) {
+	    if (!key) { return '' }
 
-	      var args = null
-	      var language = lang
-	      if (arguments.length === 2) {
-	        if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
-	          args = arguments[1]
-	        } else if (typeof arguments[1] === 'string') {
-	          language = arguments[1]
-	        }
-	      } else if (arguments.length === 3) {
-	        if (typeof arguments[1] === 'string') {
-	          language = arguments[1]
-	        }
-	        if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
-	          args = arguments[2]
-	        }
+	    var args = null
+	    var language = lang
+	    if (arguments.length === 2) {
+	      if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
+	        args = arguments[1]
+	      } else if (typeof arguments[1] === 'string') {
+	        language = arguments[1]
 	      }
-
-	      return getVal(path, key, language, args)
-	    }
-	  } catch (e) {
-	    Vue.utils.warn('not support $t in this Vue version')
-	  }
-
-	  // 't' function
-	  Vue.t = function (key) {
-	    var ret = key || ''
-	    var locale = locales[lang]
-	    if (key && locale) {
-	      var namespaces = key.split('.')
-	      for (var i = 0; i < namespaces.length; i++) {
-	        locale = locale[namespaces[i]]
-	        if (!locale) {
-	          ret = key
-	          break
-	        } else {
-	          ret = locale
-	        }
+	    } else if (arguments.length === 3) {
+	      if (typeof arguments[1] === 'string') {
+	        language = arguments[1]
+	      }
+	      if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
+	        args = arguments[2]
 	      }
 	    }
-	    return ret
+
+	    return getVal(path, key, language, args)
 	  }
-
-	  // 'v-t' directive
-	  Vue.directive('t', {
-	    isLiteral: true,
-	    bind: function () {
-	      if (this.el.nodeType !== 1) { return }
-
-	      this.el.textContent = Vue.t(this.expression)
-	    }
-	  })
 	}
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 *  String format template

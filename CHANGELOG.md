@@ -1,3 +1,10 @@
+# v2.0.0 / 2015-06-29
+
+* Support Vue.js 0.12
+* Remove the followings (Breaking Changes)
+    * `Vue.t` function
+    * `v-t` directive
+
 # v1.1.1 / 2015-04-21
 
 * Fix unit test error
