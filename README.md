@@ -222,6 +222,14 @@ Message:<br>the world
 ```
 
 
+# Contributing
+- Fork it !
+- Create your top branch from `dev`: `git branch my-new-topic origin/dev`
+- Commit your changes: `git commit -am 'Add some topic'`
+- Push to the branch: `git push origin my-new-topic`
+- Submit a pull request to `dev` branch of `vuejs/vue-validator` repository !
+
+
 # Testing
 
 ```shell
@@ -229,12 +237,8 @@ $ make test
 ```
 
 
-# TODO
-See the `TODO.md`
-
-
 # License
 
 ## MIT
 
-See the `LICENSE`.
+[MIT](http://opensource.org/licenses/MIT)
