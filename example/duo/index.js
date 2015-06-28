@@ -22,6 +22,6 @@ Vue.use(i18n, {
 })
 
 // create instance
-new Vue({
+var vm = new Vue({
   el: '#test-i18n'
 })

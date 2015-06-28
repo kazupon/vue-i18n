@@ -3,19 +3,6 @@
   "private": true,
   "version": "0.0.1",
   "description": "duo vue-i18n example",
-  "license": "MIT",
-  "keywords": [
-    "Vue.js",
-    "i18n",
-    "internationalization"
-  ],
-  "dependencies": {
-    "kazupon/vue-i18n": "*",
-    "yyx990803/vue": "^0.11.0-rc"
-  },
-  "development": {},
-  "scripts": [
-    "index.js"
-  ],
-  "main": "index.js"
+  "main": "index.js",
+  "license": "MIT"
 }
