@@ -19,17 +19,7 @@ describe('translation', function () {
       new Nightmare()
         .goto(resolve('./translation.html'))
         .evaluate(function () {
-          return document.querySelector('#translation p.directive').innerText
-        }, function (text) {
-          expect(text).to.be.eql('hello')
-        })
-        .evaluate(function () {
-          return document.querySelector('#translation p.static').innerText
-        }, function (text) {
-          expect(text).to.be.eql('world')
-        })
-        .evaluate(function () {
-          return document.querySelector('#translation div.instance').innerHTML
+          return document.querySelector('#message').innerHTML
         }, function (html) {
           expect(html).to.be.eql('Hello kazupon !!<br>How are you?')
         })

@@ -31,12 +31,7 @@
         })
 
         var translation = {
-          template: '<p class="directive" v-t="hello"></p><p class="static">{{world}}</p><div class="instance">{{* $t("message.hello", "en", { name: "kazupon" })}}</br>How are you?</div>',
-          computed: {
-            world: function () {
-              return Vue.t('world')
-            }
-          }
+          template: '<p id="message">{{* $t("message.hello", "en", { name: "kazupon" })}}</br>How are you?</p>',
         }
 
         new Vue(translation).$mount('#translation')

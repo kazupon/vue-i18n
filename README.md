@@ -9,8 +9,8 @@
 Internationalization plugin of Vue.js
 
 
-# Requirments
-- works with Vue.js ^`0.10.4`
+# Requirements
+- works with Vue.js ^`0.12.0`
 
 
 # Instllation
@@ -58,7 +58,7 @@ var locales = {
 // set plugin
 Vue.use(i18n, {
   lang: 'ja',
-  locales: locales // NOTE: 'resources' is deprecated
+  locales: locales
 })
 
 // create instance
@@ -71,7 +71,7 @@ Template the following:
 
 ```html
 <div id="test-i18n" class="message">
-  <p v-t="message.hello"></p>
+  <p>{{ $t("message.hello") }}</p>
 </div>
 ```
 
@@ -149,77 +149,12 @@ Output the following:
 
 # API
 
-## Vue.t function
+## #$t(keypath, [lang], [arguments])
+- keypath: `String` **required**
+- lang: `String` **optional**
+- arguments: `Array | Object` **optional**
 
-```javascript
-var Vue = require('vue')
-var i18n = require('vue-i18n')
-
-// ready translated locales
-var locales = {
-  en: {
-    message: {
-      hello: 'the world'
-    }
-  },
-  ja: {
-    message: {
-      hello: 'ザ・ワールド'
-    }
-  }
-}
-
-// set plugin
-Vue.use(i18n, {
-  lang: 'en',
-  locales: locales
-})
-
-console.log(Vue.t('message.hello')) // output the 'the wolrd'
-```
-
-## $t method (for 0.11.4 later)
-
-```html
-<div id="message">
-Message:<br>{{$t('message.hello')}}
-</div>
-```
-
-```javascript
-var Vue = require('vue')
-var i18n = require('vue-i18n')
-
-// ready translated locales
-var locales = {
-  en: {
-    message: {
-      hello: 'the world'
-    }
-  },
-  ja: {
-    message: {
-      hello: 'ザ・ワールド'
-    }
-  }
-}
-
-// set plugin
-Vue.use(i18n, {
-  lang: 'en',
-  locales: locales
-})
-
-new Vue().$mount('#message')
-```
-
-render the following:
-
-```html
-<div id="message">
-Message:<br>the world
-</div>
-```
+Translate the locale of `keypath`. if specify `lang`, translate the locale of `lang`. if you are specified list formatting locale or named formatting of `keypath`, also you must specify `arguments`.
 
 
 # Contributing
