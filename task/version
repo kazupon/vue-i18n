@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+/**
+ * Import(s)
+ */
+
+var fs = require('fs')
+var path = require('path')
+var program = require('commander')
+
+
+program
+  .usage('<x.y.z>')
+  .parse(process.argv)
+
+var version = program.args.pop()
+
+if (!version) {
+  program.help()
+  return process.exit(0)
+}
+
+var manifests = ['package.json', 'bower.json', 'component.json']
+manifests.forEach(function (file) {
+  file = path.normalize(path.join(__dirname, '..', file))
+  var json = fs.readFileSync(file).toString()
+  json = json.replace(
+    /"version"\s*:\s*"(.+?)"/,
+    '"version": "' + version + '"'
+  )
+  fs.writeFileSync(file, json)
+  console.log('updated:', file)
+})

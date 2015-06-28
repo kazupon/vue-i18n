@@ -9,6 +9,9 @@ dist: semi node_modules
 minify: semi node_modules
 	@./task/minify
 
+version:
+	@./task/version
+
 semi: lint
 	@node_modules/.bin/semi rm $(SRCS) --silent
 

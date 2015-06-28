@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/kazupon/vue-i18n",
   "devDependencies": {
+    "commander": "^2.8.1",
     "expect.js": "^0.3.1",
     "jshint": "^2.5.0",
     "karma": "^0.12.24",
