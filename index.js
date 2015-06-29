@@ -27,7 +27,7 @@ function plugin (Vue, opts) {
   function getVal (path, key, lang, args) {
     var value = key
     try {
-      var val = path.get(locales[lang], key)
+      var val = path.get(locales[lang], key) || locales[lang][key]
       value = (args ? format(val, args) : val) || key
     } catch (e) {
       value = key

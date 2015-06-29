@@ -16,7 +16,9 @@ describe('i18n', function () {
           named: 'Hello {name}, how are you?',
           list: 'Hello {0}, how are you?'
         }
-      }
+      },
+      'hello world': 'Hello World',
+      'Hello {0}': 'Hello {0}'
     },
     ja: {
       message: {
@@ -72,6 +74,24 @@ describe('i18n', function () {
         it('should return key string', function () {
           var vm = new Vue()
           expect(vm.$t('foo.bar')).to.be.eql('foo.bar')
+        })
+      })
+
+      describe('sentence fragment', function () {
+        it('should translate fragment', function () {
+          var vm = new Vue()
+          expect(vm.$t('hello world')).to.be.eql('Hello World')
+        })
+
+        it('should return replaced string if available', function () {
+          var vm = new Vue()
+          expect(vm.$t('Hello {0}', ['kazupon']))
+            .to.be.eql('Hello kazupon')
+        })
+
+        it('should return key if unavailable', function () {
+          var vm = new Vue()
+          expect(vm.$t('Hello')).to.be.eql('Hello')
         })
       })
     })
