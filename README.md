@@ -162,7 +162,7 @@ Translate the locale of `keypath`. if specify `lang`, translate the locale of `l
 - Create your top branch from `dev`: `git branch my-new-topic origin/dev`
 - Commit your changes: `git commit -am 'Add some topic'`
 - Push to the branch: `git push origin my-new-topic`
-- Submit a pull request to `dev` branch of `vuejs/vue-validator` repository !
+- Submit a pull request to `dev` branch of `kazupon/vue-i18n` repository !
 
 
 # Testing
