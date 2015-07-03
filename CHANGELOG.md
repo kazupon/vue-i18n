@@ -1,3 +1,7 @@
+# v2.1.0 / 2015-07-03
+
+* Add global local language setting with `Vue.config.lang`
+
 # v2.0.0 / 2015-06-29
 
 * Support Vue.js 0.12

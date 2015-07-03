@@ -1,5 +1,5 @@
 /**
- * vue-i18n v2.0.0
+ * vue-i18n v2.1.0
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -64,7 +64,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Import(s)
 	 */
 
-	var format = __webpack_require__(1)
+	var extend = __webpack_require__(1)
 
 
 	/**
@@ -86,10 +86,63 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var lang = opts.lang || 'en'
 	  var locales = opts.locales || {}
 
+	  defineConfig(Vue.config, lang)
+	  extend(Vue, locales)
+	}
+
+
+	/**
+	 * defineConfig
+	 *
+	 * This function define `lang` property to `Vue.config`.
+	 *
+	 * @param {Object} config
+	 * @param {String} lang
+	 * @private
+	 */
+
+	function defineConfig (config, lang) {
+	  Object.defineProperty(config, 'lang', {
+	    get: function () { return lang },
+	    set: function (val) { lang = val }
+	  })
+	}
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Import(s)
+	 */
+
+	var format = __webpack_require__(2)
+
+
+	/**
+	 * Export(s)
+	 */
+
+	module.exports = extend
+
+
+	/**
+	 * extend
+	 *  
+	 * @param {Vue} Vue
+	 * @param {Object} locales
+	 * @return {Vue}
+	 */
+
+	function extend (Vue, locales) {
+	  var path = Vue.parsers.path
+	  var util = Vue.util
+
 	  function getVal (path, key, lang, args) {
 	    var value = key
 	    try {
-	      var val = path.get(locales[lang], key)
+	      var val = path.get(locales[lang], key) || locales[lang][key]
 	      value = (args ? format(val, args) : val) || key
 	    } catch (e) {
 	      value = key
@@ -97,14 +150,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return value
 	  }
 
-	  var path = Vue.parsers.path
-	  var util = Vue.util
-
 	  Vue.prototype.$t = function (key) {
 	    if (!key) { return '' }
 
 	    var args = null
-	    var language = lang
+	    var language = Vue.config.lang
 	    if (arguments.length === 2) {
 	      if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
 	        args = arguments[1]
@@ -122,11 +172,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return getVal(path, key, language, args)
 	  }
+
+	  return Vue
 	}
 
 
 /***/ },
-/* 1 */
+/* 2 */
 /***/ function(module, exports) {
 
 	/**
