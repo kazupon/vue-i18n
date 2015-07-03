@@ -149,12 +149,50 @@ Output the following:
 
 # API
 
-## #$t(keypath, [lang], [arguments])
+## $t(keypath, [lang], [arguments])
 - keypath: `String` **required**
 - lang: `String` **optional**
 - arguments: `Array | Object` **optional**
 
-Translate the locale of `keypath`. if specify `lang`, translate the locale of `lang`. if you are specified list formatting locale or named formatting of `keypath`, also you must specify `arguments`.
+Translate the locale of `keypath`. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
+
+
+# Options
+
+## Plugin options
+
+```javascript
+Vue.use(plugin, {
+  lang: 'en',
+  locals: {
+    en: {
+      ...
+    },
+    ...
+    ja: {
+      ...
+    }
+  }
+})
+```
+
+### lang
+Specify translate the language code.
+
+If you abbreviated the `lang` option, translate as well as 'en' language code option (default: 'en').
+
+### locals
+Specify translate some local dictionary.
+
+If you abbreviated the `locales` option, set the empty local dictionary.
+
+
+# Configrations
+
+## Vue.config.lang
+Get or set a global translation language code. Default by `en` string value. You can change the language of the global level dynamic translation in your application. 
+
+When specified with `lang` plugins option at `Vue.use`, `Vue.config.lang` is set that value.
 
 
 # Contributing
