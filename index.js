@@ -2,7 +2,7 @@
  * Import(s)
  */
 
-var format = require('./lib/format')
+var extend = require('./lib/extend')
 
 
 /**
@@ -24,40 +24,24 @@ function plugin (Vue, opts) {
   var lang = opts.lang || 'en'
   var locales = opts.locales || {}
 
-  function getVal (path, key, lang, args) {
-    var value = key
-    try {
-      var val = path.get(locales[lang], key) || locales[lang][key]
-      value = (args ? format(val, args) : val) || key
-    } catch (e) {
-      value = key
-    }
-    return value
-  }
+  defineConfig(Vue.config, lang)
+  extend(Vue, locales)
+}
 
-  var path = Vue.parsers.path
-  var util = Vue.util
 
-  Vue.prototype.$t = function (key) {
-    if (!key) { return '' }
+/**
+ * defineConfig
+ *
+ * This function define `lang` property to `Vue.config`.
+ *
+ * @param {Object} config
+ * @param {String} lang
+ * @private
+ */
 
-    var args = null
-    var language = lang
-    if (arguments.length === 2) {
-      if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
-        args = arguments[1]
-      } else if (typeof arguments[1] === 'string') {
-        language = arguments[1]
-      }
-    } else if (arguments.length === 3) {
-      if (typeof arguments[1] === 'string') {
-        language = arguments[1]
-      }
-      if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
-        args = arguments[2]
-      }
-    }
-
-    return getVal(path, key, language, args)
-  }
+function defineConfig (config, lang) {
+  Object.defineProperty(config, 'lang', {
+    get: function () { return lang },
+    set: function (val) { lang = val }
+  })
 }

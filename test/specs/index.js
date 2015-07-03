@@ -190,4 +190,26 @@ describe('i18n', function () {
       })
     })
   })
+
+
+  describe('global lang config', function () {
+    var vm
+    beforeEach(function () {
+      vm = new Vue()
+    })
+
+    describe('ja', function () {
+      it('should translate with japanese', function () {
+        Vue.config.lang = 'ja'
+        expect(vm.$t('message.hello')).to.be.eql(locales.ja.message.hello)
+      })
+
+      describe('en', function () {
+        it('should translate with english', function () {
+          Vue.config.lang = 'en'
+          expect(vm.$t('message.hello')).to.be.eql(locales.en.message.hello)
+        })
+      })
+    })
+  })
 })
