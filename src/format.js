@@ -5,48 +5,35 @@
  */
 
 /**
- * Import(s)
- */
-
-var slice = Array.prototype.slice
-
-
-/**
  * Constant(s)
  */
 
-var RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
+const RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
 
 
 /**
  * Export(s)
  */
 
-module.exports = template 
-
-
 /**
  * template
  *  
  * @param {String} string
+ * @param {Array} ...args
  * @return {String}
  */
 
-function template (string) {
-  var args
-
-  if (arguments.length === 2 && typeof arguments[1] === 'object') {
-    args = arguments[1]
-  } else {
-    args = slice.call(arguments, 1)
+export default function (string, ...args) {
+  if (args.length === 1 && typeof args[0] === 'object') {
+    args = args[0]
   }
 
   if (!args || !args.hasOwnProperty) {
     args = {}
   }
 
-  return string.replace(RE_NARGS, function (match, i, index) {
-    var result
+  return string.replace(RE_NARGS, (match, i, index) => {
+    let result
 
     if (string[index - 1] === '{' &&
       string[index + match.length] === '}') {

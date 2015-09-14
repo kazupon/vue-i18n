@@ -2,15 +2,12 @@
  * Import(s)
  */
 
-var extend = require('./lib/extend')
+import extend from './extend'
 
 
 /**
  * Export(s)
  */
-
-module.exports = plugin
-
 
 /**
  * plugin
@@ -19,13 +16,9 @@ module.exports = plugin
  * @param {Object} opts
  */
 
-function plugin (Vue, opts) {
-  opts = opts || {}
-  var lang = opts.lang || 'en'
-  var locales = opts.locales || {}
-
-  defineConfig(Vue.config, lang)
-  extend(Vue, locales)
+export default function (Vue, opts = { lang: 'en', locales: {} }) {
+  defineConfig(Vue.config, opts.lang)
+  extend(Vue, opts.locales)
 }
 
 
@@ -41,7 +34,7 @@ function plugin (Vue, opts) {
 
 function defineConfig (config, lang) {
   Object.defineProperty(config, 'lang', {
-    get: function () { return lang },
-    set: function (val) { lang = val }
+    get: () => { return lang },
+    set: (val) => { lang = val }
   })
 }

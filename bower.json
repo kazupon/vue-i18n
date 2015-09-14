@@ -1,24 +1,35 @@
 {
   "name": "vue-i18n",
   "main": "dist/vue-i18n.js",
-  "description": "Internationalization plugin of Vue.js",
-  "version": "2.1.0",
+  "description": "Internationalization plugin for Vue.js",
+  "version": "2.2.0",
   "homepage": "https://github.com/kazupon/vue-i18n",
   "authors": [
     "kazuya kawaguchi <kawakazu80@gmail.com>"
   ],
+  "moduleType": [
+    "globals",
+    "node",
+    "amd"
+  ],
+  "keywords": [
+    "vue.js",
+    "vue",
+    "i18n",
+    "internationalization",
+    "plugin"
+  ],
   "license": "MIT",
   "ignore": [
-    ".*",
-    "examples",
+    "**/.*",
     "node_modules",
-    "components",
+    "config",
     "bower_components",
+    "lib",
     "test",
-    "tests",
-    "examples",
-    "Makefile",
+    "*.js",
     "*.json",
+    "*.yml",
     "*.md"
   ]
 }
