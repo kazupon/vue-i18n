@@ -1,21 +1,8 @@
-/**
- * Import(s)
- */
-
-var pathResolve = require('path').resolve
-var urlFormat = require('url').format
+import {resolve as pathResolve} from 'path'
+import {format as urlFormat} from 'url'
 
 
-/**
- * Exports(s)
- */
-
-module.exports = {
-  resolve: resolve
-}
-
-
-function resolve (path) {
+export function resolve (path) {
   return urlFormat({
     protocol: 'file',
     slashes: true,

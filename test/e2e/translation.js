@@ -1,27 +1,17 @@
-/**
- * Import(s)
- */
-
-var Nightmare = require('nightmare')
-var expect = require('expect.js')
-var resolve = require('./helper').resolve
+import assert from 'power-assert'
+import Nightmare from 'nightmare'
+import {resolve} from './helper'
 
 
-/**
- * Test(s)
- */
-
-describe('translation', function () {
-  describe('rendered', function () {
-    this.timeout(20000)
-
-    it('should be valid', function (done) {
+describe('translation', () => {
+  describe('rendered', () => {
+    it('should be valid', (done) => {
       new Nightmare()
         .goto(resolve('./translation.html'))
-        .evaluate(function () {
+        .evaluate(() => {
           return document.querySelector('#message').innerHTML
-        }, function (html) {
-          expect(html).to.be.eql('Hello kazupon !!<br>How are you?')
+        }, (html) => {
+          assert(html === 'Hello kazupon !!<br>How are you?')
         })
         .run(done)
     })
