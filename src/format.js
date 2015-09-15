@@ -4,16 +4,8 @@
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
-/**
- * Constant(s)
- */
-
 const RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
 
-
-/**
- * Export(s)
- */
 
 /**
  * template

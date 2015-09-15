@@ -1,7 +1,3 @@
-/**
- * Import(s)
- */
-
 import assert from 'power-assert'
 import format from '../../src/format'
 

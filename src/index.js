@@ -1,13 +1,5 @@
-/**
- * Import(s)
- */
-
 import extend from './extend'
 
-
-/**
- * Export(s)
- */
 
 /**
  * plugin

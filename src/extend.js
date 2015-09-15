@@ -1,13 +1,4 @@
-/**
- * Import(s)
- */
-
 import format from './format'
-
-
-/**
- * Export(s)
- */
 
 
 /**

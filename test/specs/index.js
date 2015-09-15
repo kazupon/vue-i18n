@@ -1,7 +1,3 @@
-/**
- * Import(s)
- */
-
 import assert from 'power-assert'
 import Vue from 'vue'
 import plugin from '../../src/index'
