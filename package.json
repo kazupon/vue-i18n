@@ -52,6 +52,8 @@
     "build": "babel src --out-dir lib --source-maps-inline",
     "bundle": "webpack --config config/webpack.conf.js && webpack --config config/webpack.min.conf.js",
     "clean": "rm -rf lib && rm -rf coverage && rm -rf dist",
+    "coverage": "VUE_I18N_TYPE=coverage karma start config/karma.conf.js",
+    "coveralls": "VUE_I18N_TYPE=coveralls karma start config/karma.conf.js",
     "e2e": "webpack-dev-server --quiet -h --config config/webpack.e2e.conf.js --content-base test/e2e & mocha -t 20000 --compilers js:espower-babel/guess test/e2e/test.js && kill $! || (kill $! && exit 1)",
     "lint": "eslint src test config",
     "test": "karma start config/karma.conf.js",

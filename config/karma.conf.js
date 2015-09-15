@@ -124,9 +124,6 @@ module.exports = function (config) {
     default:
       settings.browsers = ['PhantomJS']
       settings.reporters = ['mocha', 'coverage']
-      settings.coverageReporter = {
-        reporters: [{ type: 'text-summary', dir: '../coverage' }]
-      }
       break
   }
 
