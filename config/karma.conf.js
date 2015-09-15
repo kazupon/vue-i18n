@@ -2,8 +2,7 @@
 // Generated on Tue Sep 08 2015 19:27:24 GMT+0900 (JST)
 
 module.exports = function (config) {
-  config.set({
-
+  var settings = {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -56,6 +55,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    /*
     reporters: [
       'mocha', 'coverage'
     ],
@@ -69,6 +69,7 @@ module.exports = function (config) {
         type: 'text-summary', dir: '../coverage'
       }]
     },
+    */
 
     // web server port
     port: 9876,
@@ -83,12 +84,52 @@ module.exports = function (config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true
-  })
+  }
+
+  switch (process.env.VUE_I18N_TYPE) {
+    case 'coverage':
+      settings.browsers = ['PhantomJS']
+      settings.reporters = ['coverage']
+      settings.coverageReporter = {
+        reporters: [{
+          type: 'html', dir: '../coverage'
+        }, {
+          type: 'text-summary', dir: '../coverage'
+        }]
+      }
+      break
+    case 'coveralls':
+      settings.browsers = ['PhantomJS']
+      settings.reporters = ['coverage', 'coveralls']
+      settings.coverageReporter = {
+        reporters: [{ type: 'lcov', dir: '../coverage' }]
+      }
+      break
+    case 'sauce':
+      var batch = process.env.SAUCE || 'batch1'
+      var sauce = require('./sauce')[batch]
+      settings.sauceLabs = sauce.sauceLabs
+      settings.captureTimeout = sauce.captureTimeout
+      settings.customLaunchers = sauce.customLaunchers
+      settings.browsers = sauce.browsers
+      settings.reporters = sauce.reporters
+      break
+    case 'browser':
+      settings.browsers = ['Chrome', 'Safari', 'Firefox']
+      settings.reporters = ['progress']
+      break
+    default:
+      settings.browsers = ['PhantomJS']
+      settings.reporters = ['mocha', 'coverage']
+      settings.coverageReporter = {
+        reporters: [{ type: 'text-summary', dir: '../coverage' }]
+      }
+      break
+  }
+
+
+  config.set(settings)
 }
