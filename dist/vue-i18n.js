@@ -1,14 +1,13 @@
-/**
- * vue-i18n v2.1.0
+/*!
+ * vue-i18n v2.2.0
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(factory);
+		define([], factory);
 	else if(typeof exports === 'object')
 		exports["vue-i18n"] = factory();
 	else
@@ -60,19 +59,17 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * Import(s)
-	 */
+	'use strict';
 
-	var extend = __webpack_require__(1)
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	/**
-	 * Export(s)
-	 */
+	var _extend = __webpack_require__(1);
 
-	module.exports = plugin
-
+	var _extend2 = _interopRequireDefault(_extend);
 
 	/**
 	 * plugin
@@ -81,15 +78,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} opts
 	 */
 
-	function plugin (Vue, opts) {
-	  opts = opts || {}
-	  var lang = opts.lang || 'en'
-	  var locales = opts.locales || {}
+	exports['default'] = function (Vue) {
+	  var opts = arguments.length <= 1 || arguments[1] === undefined ? { lang: 'en', locales: {} } : arguments[1];
 
-	  defineConfig(Vue.config, lang)
-	  extend(Vue, locales)
-	}
-
+	  defineConfig(Vue.config, opts.lang);
+	  (0, _extend2['default'])(Vue, opts.locales);
+	};
 
 	/**
 	 * defineConfig
@@ -101,81 +95,97 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @private
 	 */
 
-	function defineConfig (config, lang) {
+	function defineConfig(config, lang) {
 	  Object.defineProperty(config, 'lang', {
-	    get: function () { return lang },
-	    set: function (val) { lang = val }
-	  })
+	    get: function get() {
+	      return lang;
+	    },
+	    set: function set(val) {
+	      lang = val;
+	    }
+	  });
 	}
-
+	module.exports = exports['default'];
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * Import(s)
-	 */
+	'use strict';
 
-	var format = __webpack_require__(2)
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	/**
-	 * Export(s)
-	 */
+	var _format = __webpack_require__(2);
 
-	module.exports = extend
-
+	var _format2 = _interopRequireDefault(_format);
 
 	/**
 	 * extend
-	 *  
+	 * 
 	 * @param {Vue} Vue
 	 * @param {Object} locales
 	 * @return {Vue}
 	 */
 
-	function extend (Vue, locales) {
-	  var path = Vue.parsers.path
-	  var util = Vue.util
+	exports['default'] = function (Vue, locales) {
+	  var path = Vue.parsers.path;
+	  var util = Vue.util;
 
-	  function getVal (path, key, lang, args) {
-	    var value = key
+	  function getVal(path, key, lang, args) {
+	    var value = key;
 	    try {
-	      var val = path.get(locales[lang], key) || locales[lang][key]
-	      value = (args ? format(val, args) : val) || key
+	      var val = path.get(locales[lang], key) || locales[lang][key];
+	      value = (args ? (0, _format2['default'])(val, args) : val) || key;
 	    } catch (e) {
-	      value = key
+	      value = key;
 	    }
-	    return value
+	    return value;
 	  }
+
+	  /**
+	   * $t
+	   *
+	   * @param {String} key
+	   * @param {Array} ...args
+	   * @return {String}
+	   */
 
 	  Vue.prototype.$t = function (key) {
-	    if (!key) { return '' }
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
 
-	    var args = null
-	    var language = Vue.config.lang
-	    if (arguments.length === 2) {
-	      if (util.isObject(arguments[1]) || util.isArray(arguments[1])) {
-	        args = arguments[1]
-	      } else if (typeof arguments[1] === 'string') {
-	        language = arguments[1]
+	    if (!key) {
+	      return '';
+	    }
+
+	    var language = Vue.config.lang;
+	    if (args.length === 1) {
+	      if (util.isObject(args[0]) || util.isArray(args[0])) {
+	        args = args[0];
+	      } else if (typeof args[0] === 'string') {
+	        language = args[0];
 	      }
-	    } else if (arguments.length === 3) {
-	      if (typeof arguments[1] === 'string') {
-	        language = arguments[1]
+	    } else if (args.length === 2) {
+	      if (typeof args[0] === 'string') {
+	        language = args[0];
 	      }
-	      if (util.isObject(arguments[2]) || util.isArray(arguments[2])) {
-	        args = arguments[2]
+	      if (util.isObject(args[1]) || util.isArray(args[1])) {
+	        args = args[1];
 	      }
 	    }
 
-	    return getVal(path, key, language, args)
-	  }
+	    return getVal(path, key, language, args);
+	  };
 
-	  return Vue
-	}
+	  return Vue;
+	};
 
+	module.exports = exports['default'];
 
 /***/ },
 /* 2 */
@@ -187,64 +197,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *    https://github.com/Matt-Esch/string-template/index.js
 	 */
 
-	/**
-	 * Import(s)
-	 */
+	'use strict';
 
-	var slice = Array.prototype.slice
-
-
-	/**
-	 * Constant(s)
-	 */
-
-	var RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
-
-
-	/**
-	 * Export(s)
-	 */
-
-	module.exports = template 
-
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var RE_NARGS = /\{([0-9a-zA-Z]+)\}/g;
 
 	/**
 	 * template
 	 *  
 	 * @param {String} string
+	 * @param {Array} ...args
 	 * @return {String}
 	 */
 
-	function template (string) {
-	  var args
+	exports['default'] = function (string) {
+	  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	    args[_key - 1] = arguments[_key];
+	  }
 
-	  if (arguments.length === 2 && typeof arguments[1] === 'object') {
-	    args = arguments[1]
-	  } else {
-	    args = slice.call(arguments, 1)
+	  if (args.length === 1 && typeof args[0] === 'object') {
+	    args = args[0];
 	  }
 
 	  if (!args || !args.hasOwnProperty) {
-	    args = {}
+	    args = {};
 	  }
 
 	  return string.replace(RE_NARGS, function (match, i, index) {
-	    var result
+	    var result = undefined;
 
-	    if (string[index - 1] === '{' &&
-	      string[index + match.length] === '}') {
-	      return i
+	    if (string[index - 1] === '{' && string[index + match.length] === '}') {
+	      return i;
 	    } else {
-	      result = args.hasOwnProperty(i) ? args[i] : null
+	      result = args.hasOwnProperty(i) ? args[i] : null;
 	      if (result === null || result === undefined) {
-	        return ''
+	        return '';
 	      }
 
-	      return result
+	      return result;
 	    }
-	  })
-	}
+	  });
+	};
 
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ])

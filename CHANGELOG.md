@@ -1,3 +1,7 @@
+# v2.2.0 / 2015-09-16
+
+* Re-implemetation with ES6 (babel)
+
 # v2.1.0 / 2015-07-03
 
 * Add global local language setting with `Vue.config.lang`
