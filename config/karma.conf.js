@@ -123,7 +123,7 @@ module.exports = function (config) {
       break
     default:
       settings.browsers = ['PhantomJS']
-      settings.reporters = ['mocha', 'coverage']
+      settings.reporters = ['mocha']
       break
   }
 

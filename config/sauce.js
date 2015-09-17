@@ -1,9 +1,6 @@
-/**
- * from https://github.com/yyx990803/vue/blob/master/grunt/sauce.js
- */
-
+var pack = require('../package.json')
 var sauceConfig = {
-  testName: 'vue-i18n unit tests',
+  testName: pack.name + ' unit tests',
   recordScreenshots: false,
   build: process.env.TRAVIS_JOB_ID || Date.now(),
 }
