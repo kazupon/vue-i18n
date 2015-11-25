@@ -13,7 +13,7 @@ Internationalization plugin of Vue.js
 - works with Vue.js ^`0.12.0`
 
 
-# Instllation
+# Installation
 
 ## npm
 
@@ -156,7 +156,7 @@ Translate the locale of `keypath`. If you specified `lang`, translate the locale
 ```javascript
 Vue.use(plugin, {
   lang: 'en',
-  locals: {
+  locales: {
     en: {
       ...
     },
@@ -173,16 +173,16 @@ Specify translate the language code.
 
 If you abbreviated the `lang` option, translate as well as 'en' language code option (default: 'en').
 
-### locals
+### locales
 Specify translate some local dictionary.
 
 If you abbreviated the `locales` option, set the empty local dictionary.
 
 
-# Configrations
+# Configuration
 
 ## Vue.config.lang
-Get or set a global translation language code. Default by `en` string value. You can change the language of the global level dynamic translation in your application. 
+Get or set a global translation language code. Default by `en` string value. You can change the language of the global level dynamic translation in your application.
 
 When specified with `lang` plugins option at `Vue.use`, `Vue.config.lang` is set that value.
 
