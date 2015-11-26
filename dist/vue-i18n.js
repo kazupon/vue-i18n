@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v2.2.0
+ * vue-i18n v2.3.0
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -64,6 +64,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	exports['default'] = install;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -72,18 +73,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _extend2 = _interopRequireDefault(_extend);
 
 	/**
-	 * plugin
+	 * install
 	 *
 	 * @param {Object} Vue
 	 * @param {Object} opts
 	 */
 
-	exports['default'] = function (Vue) {
+	function install(Vue) {
 	  var opts = arguments.length <= 1 || arguments[1] === undefined ? { lang: 'en', locales: {} } : arguments[1];
 
 	  defineConfig(Vue.config, opts.lang);
 	  (0, _extend2['default'])(Vue, opts.locales);
-	};
+	}
 
 	/**
 	 * defineConfig
@@ -105,6 +106,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  });
 	}
+
+	/**
+	 * install automaticlly 
+	 */
+
+	if (typeof window !== 'undefined' && window.Vue) {
+	  window.Vue.use(install);
+	}
 	module.exports = exports['default'];
 
 /***/ },
@@ -123,6 +132,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
+	var _compare = __webpack_require__(3);
+
+	var _compare2 = _interopRequireDefault(_compare);
+
 	/**
 	 * extend
 	 * 
@@ -132,13 +145,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	exports['default'] = function (Vue, locales) {
-	  var path = Vue.parsers.path;
+	  var getPath = Vue.version && (0, _compare2['default'])('1.0.8', Vue.version) === -1 ? Vue.parsers.path.getPath : Vue.parsers.path.get;
 	  var util = Vue.util;
 
-	  function getVal(path, key, lang, args) {
+	  function getVal(key, lang, args) {
 	    var value = key;
 	    try {
-	      var val = path.get(locales[lang], key) || locales[lang][key];
+	      var val = getPath(locales[lang], key) || locales[lang][key];
 	      value = (args ? (0, _format2['default'])(val, args) : val) || key;
 	    } catch (e) {
 	      value = key;
@@ -179,7 +192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
-	    return getVal(path, key, language, args);
+	    return getVal(key, language, args);
 	  };
 
 	  return Vue;
@@ -239,6 +252,77 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return result;
 	    }
 	  });
+	};
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	/**
+	 * Version compare
+	 * - Inspired:
+	 *   https://github.com/omichelsen/compare-versions
+	 */
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var PATCH_PATTERN = /-([\w-.]+)/;
+
+	function split(v) {
+	  var temp = v.split('.');
+	  var arr = temp.splice(0, 2);
+	  arr.push(temp.join('.'));
+	  return arr;
+	}
+
+	/**
+	 * compare
+	 *
+	 * @param {String} v1
+	 * @param {String} v2
+	 * @return {Number}
+	 */
+
+	exports['default'] = function (v1, v2) {
+	  var s1 = split(v1);
+	  var s2 = split(v2);
+
+	  for (var i = 0; i < 3; i++) {
+	    var n1 = parseInt(s1[i] || 0, 10);
+	    var n2 = parseInt(s2[i] || 0, 10);
+
+	    if (n1 > n2) {
+	      return 1;
+	    }
+	    if (n2 > n1) {
+	      return -1;
+	    }
+	  }
+
+	  if ((s1[2] + s2[2] + '').indexOf('-') > -1) {
+	    var p1 = (PATCH_PATTERN.exec(s1[2]) || [''])[0];
+	    var p2 = (PATCH_PATTERN.exec(s2[2]) || [''])[0];
+
+	    if (p1 === '') {
+	      return 1;
+	    }
+	    if (p2 === '') {
+	      return -1;
+	    }
+	    if (p1 > p2) {
+	      return 1;
+	    }
+	    if (p2 > p1) {
+	      return -1;
+	    }
+	  }
+
+	  return 0;
 	};
 
 	module.exports = exports['default'];

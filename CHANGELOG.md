@@ -1,3 +1,17 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/kazupon/vue-i18n/compare/v2.2.0...v2.3.0) (2015-11-26)
+
+
+### Bug Fixes
+
+* **index:** cannot work at Vue 1.0.10 later ([6fd543e](https://github.com/kazupon/vue-i18n/commit/6fd543e)), closes [#9](https://github.com/kazupon/vue-i18n/issues/9)
+
+### Features
+
+* **index:** support automatically install for standalone ([ada2673](https://github.com/kazupon/vue-i18n/commit/ada2673))
+
+
+
 # v2.2.0 / 2015-09-16
 
 * Re-implemetation with ES6 (babel)
