@@ -1,4 +1,5 @@
 import format from './format'
+import compare from './compare'
 
 
 /**
@@ -10,13 +11,15 @@ import format from './format'
  */
 
 export default function (Vue, locales) {
-  const path = Vue.parsers.path
+  const getPath = (Vue.version && compare('1.0.8', Vue.version) === -1) 
+      ? Vue.parsers.path.getPath
+      : Vue.parsers.path.get
   const util = Vue.util
 
-  function getVal (path, key, lang, args) {
+  function getVal (key, lang, args) {
     let value = key
     try {
-      let val = path.get(locales[lang], key) || locales[lang][key]
+      let val = getPath(locales[lang], key) || locales[lang][key]
       value = (args ? format(val, args) : val) || key
     } catch (e) {
       value = key
@@ -51,7 +54,7 @@ export default function (Vue, locales) {
       }
     }
 
-    return getVal(path, key, language, args)
+    return getVal(key, language, args)
   }
 
   return Vue
