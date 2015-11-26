@@ -2,13 +2,13 @@ import extend from './extend'
 
 
 /**
- * plugin
+ * install
  *
  * @param {Object} Vue
  * @param {Object} opts
  */
 
-export default function (Vue, opts = { lang: 'en', locales: {} }) {
+export default function install (Vue, opts = { lang: 'en', locales: {} }) {
   defineConfig(Vue.config, opts.lang)
   extend(Vue, opts.locales)
 }
@@ -29,4 +29,13 @@ function defineConfig (config, lang) {
     get: () => { return lang },
     set: (val) => { lang = val }
   })
+}
+
+
+/**
+ * install automaticlly 
+ */
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(install)
 }
