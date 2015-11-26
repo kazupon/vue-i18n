@@ -55,8 +55,8 @@ var batches = [
     sl_ios_safari: {
       base: 'SauceLabs',
       browserName: 'iphone',
-      platform: 'OS X 10.10',
-      version: '8.1'
+      platform: 'OS X 10.9',
+      version: '7.1'
     },
     sl_android: {
       base: 'SauceLabs',
