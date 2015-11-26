@@ -11,7 +11,7 @@ Internationalization plugin of Vue.js
 
 
 # Requirements
-- works with Vue.js ^`0.12.0`
+- works with Vue.js `0.12.0`+
 
 
 # Installation
@@ -27,6 +27,17 @@ $ npm install vue-i18n
 ```shell
 $ bower install vue-i18n
 ```
+
+When used in CommonJS, you must explicitly install the router via Vue.use():
+
+```javascript
+var Vue = require('vue')
+var i18n = require('vue-validator')
+
+Vue.use(i18n, { ... })
+```
+
+You don't need to do this when using the standalone build because it installs itself automatically.
 
 # Usage
 
