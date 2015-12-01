@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v2.3.0
+ * vue-i18n v2.3.1
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -64,7 +64,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports['default'] = install;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -73,18 +72,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _extend2 = _interopRequireDefault(_extend);
 
 	/**
-	 * install
+	 * plugin
 	 *
 	 * @param {Object} Vue
 	 * @param {Object} opts
 	 */
 
-	function install(Vue) {
+	exports['default'] = function (Vue) {
 	  var opts = arguments.length <= 1 || arguments[1] === undefined ? { lang: 'en', locales: {} } : arguments[1];
 
 	  defineConfig(Vue.config, opts.lang);
 	  (0, _extend2['default'])(Vue, opts.locales);
-	}
+	};
 
 	/**
 	 * defineConfig
@@ -105,14 +104,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      lang = val;
 	    }
 	  });
-	}
-
-	/**
-	 * install automaticlly 
-	 */
-
-	if (typeof window !== 'undefined' && window.Vue) {
-	  window.Vue.use(install);
 	}
 	module.exports = exports['default'];
 

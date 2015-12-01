@@ -1,3 +1,12 @@
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/kazupon/vue-i18n/compare/v2.3.0...v2.3.1) (2015-12-01)
+
+### Reverts
+
+* **index:** automatically install for standalone ([25b8059](https://github.com/kazupon/vue-i18n/commit/25b8059))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/kazupon/vue-i18n/compare/v2.2.0...v2.3.0) (2015-11-26)
 
