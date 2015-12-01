@@ -37,8 +37,6 @@ var i18n = require('vue-validator')
 Vue.use(i18n, { ... })
 ```
 
-You don't need to do this when using the standalone build because it installs itself automatically.
-
 # Usage
 
 ```javascript
