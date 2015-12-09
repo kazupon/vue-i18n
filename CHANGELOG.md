@@ -1,3 +1,24 @@
+<a name="2.3.3"></a>
+## [2.3.3](https://github.com/kazupon/vue-i18n/compare/v2.3.2...v2.3.3) (2015-12-09)
+
+
+### Bug Fixes
+
+* **npm:** npm install error ([e31e89e](https://github.com/kazupon/vue-i18n/commit/e31e89e))
+
+### Features
+
+* **bower:** good-bye bower :wink: ([d99eb15](https://github.com/kazupon/vue-i18n/commit/d99eb15))
+
+
+### BREAKING CHANGES
+
+* bower: not support `bower` package manager
+
+I think that bower is dead. :no_good:
+
+
+
 <a name="2.3.2"></a>
 ## [2.3.2](https://github.com/kazupon/vue-i18n/compare/v2.3.1...v2.3.2) (2015-12-09)
 
