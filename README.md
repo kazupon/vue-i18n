@@ -22,12 +22,6 @@ Internationalization plugin of Vue.js
 $ npm install vue-i18n
 ```
 
-## bower
-
-```shell
-$ bower install vue-i18n
-```
-
 When used in CommonJS, you must explicitly install the router via Vue.use():
 
 ```javascript
