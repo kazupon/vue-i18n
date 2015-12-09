@@ -31,6 +31,6 @@ function defineConfig (config, lang) {
   })
 }
 
-plugin.version = '2.3.1'
+plugin.version = '2.3.2'
 
 export default plugin

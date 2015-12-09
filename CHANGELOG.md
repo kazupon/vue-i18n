@@ -1,3 +1,13 @@
+<a name="2.3.2"></a>
+## [2.3.2](https://github.com/kazupon/vue-i18n/compare/v2.3.1...v2.3.2) (2015-12-09)
+
+
+### Features
+
+* **bundle:** more compact the vue-i18n distribution file ([2f32ecc](https://github.com/kazupon/vue-i18n/commit/2f32ecc))
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](https://github.com/kazupon/vue-i18n/compare/v2.3.0...v2.3.1) (2015-12-01)
 
