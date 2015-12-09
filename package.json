@@ -9,15 +9,22 @@
   "bugs": {
     "url": "https://github.com/kazupon/vue-i18n/issues"
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-plugin-espower": "^2.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.3.13",
     "babel-preset-es2015": "^6.1.18",
+    "babel-preset-es2015-rollup": "^1.0.0",
     "cz-conventional-changelog": "^1.1.4",
     "eslint": "^1.10.2",
     "eslint-loader": "^1.1.1",
-    "espower-babel": "^3.3.0",
+    "espower-babel": "^4.0.0",
     "istanbul-instrumenter-loader": "^0.1.3",
     "json-loader": "^0.5.4",
     "karma": "^0.13.9",
@@ -37,11 +44,22 @@
     "nightmare": "^2.0.8",
     "phantomjs": "^1.9.19",
     "power-assert": "^1.2.0",
+    "rollup": "^0.21.1",
+    "rollup-plugin-babel": "^2.2.0",
+    "rollup-plugin-replace": "^1.1.0",
+    "uglify-js": "^2.6.1",
     "vue": "^0.12.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   },
+  "files": [
+    "dist/vue-i18n.js",
+    "dist/vue-i18n.min.js",
+    "dist/vue-i18n.common.js",
+    "src"
+  ],
   "homepage": "https://github.com/kazupon/vue-i18n",
+  "jsnext:main": "src/index.js",
   "keywords": [
     "i18n",
     "internationalization",
@@ -50,30 +68,26 @@
     "vue.js"
   ],
   "license": "MIT",
-  "main": "dist/vue-i18n.js",
+  "main": "dist/vue-i18n.common.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kazupon/vue-i18n.git"
   },
   "scripts": {
     "browser": "VUE_I18N_TYPE=browser karma start config/karma.conf.js",
+    "build": "node config/build.js",
     "ci": "npm run lint && npm run coverage && npm run coveralls && npm run sauce",
-    "clean": "rm -rf lib && rm -rf coverage && rm -rf dist",
+    "clean": "rm -rf coverage && rm -rf dist/*.*",
     "coolkids": "VUE_I18N_TYPE=sauce SAUCE=batch1 karma start config/karma.conf.js",
     "coverage": "VUE_I18N_TYPE=coverage karma start config/karma.conf.js",
-    "dev": "webpack-dev-server --quiet --config config/webpack.test.conf.js --host 0.0.0.0",
     "coveralls": "VUE_I18N_TYPE=coveralls karma start config/karma.conf.js",
-    "e2e": "webpack-dev-server --quiet -h --config config/webpack.e2e.conf.js --content-base test/e2e & mocha -t 20000 --compilers js:espower-babel/guess test/e2e/test.js && kill $! || (kill $! && exit 1)",
+    "dev": "webpack-dev-server --quiet --config config/webpack.test.conf.js",
+    "e2e": "webpack-dev-server --quiet --config config/webpack.e2e.conf.js & mocha -t 20000 --compilers js:espower-babel/guess test/e2e/test.js && kill $! || (kill $! && exit 1)",
     "ie": "VUE_I18N_TYPE=sauce SAUCE=batch2 karma start config/karma.conf.js",
     "lint": "eslint src test",
     "mobile": "VUE_I18N_TYPE=sauce SAUCE=batch3 karma start config/karma.conf.js",
     "sauce": "npm run coolkids && npm run ie && npm run mobile",
     "test": "npm run ci",
     "unit": "npm run lint && karma start config/karma.conf.js"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

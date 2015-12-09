@@ -32,9 +32,9 @@ When used in CommonJS, you must explicitly install the router via Vue.use():
 
 ```javascript
 var Vue = require('vue')
-var i18n = require('vue-validator')
+var VueI18n = require('vue-i18n')
 
-Vue.use(i18n, { ... })
+Vue.use(VueI18n, { ... })
 ```
 
 # Usage

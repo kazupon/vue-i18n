@@ -8,7 +8,7 @@ import extend from './extend'
  * @param {Object} opts
  */
 
-export default function (Vue, opts = { lang: 'en', locales: {} }) {
+function plugin (Vue, opts = { lang: 'en', locales: {} }) {
   defineConfig(Vue.config, opts.lang)
   extend(Vue, opts.locales)
 }
@@ -30,3 +30,7 @@ function defineConfig (config, lang) {
     set: (val) => { lang = val }
   })
 }
+
+plugin.version = '2.3.1'
+
+export default plugin
