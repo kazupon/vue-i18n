@@ -1,9 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './test/e2e/index.js'/*{
-    app: ['webpack/hot/dev-server', './test/e2e/index.js']
-  }*/,
+  entry: './test/e2e/index.js',
   output: {
     path: './test/e2e',
     filename: 'e2e.js',

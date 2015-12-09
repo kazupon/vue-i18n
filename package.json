@@ -84,7 +84,7 @@
     "dev": "webpack-dev-server --quiet --config config/webpack.test.conf.js",
     "e2e": "webpack-dev-server --quiet --config config/webpack.e2e.conf.js & mocha -t 20000 --compilers js:espower-babel/guess test/e2e/test.js && kill $! || (kill $! && exit 1)",
     "ie": "VUE_I18N_TYPE=sauce SAUCE=batch2 karma start config/karma.conf.js",
-    "lint": "eslint src test",
+    "lint": "eslint src test config",
     "mobile": "VUE_I18N_TYPE=sauce SAUCE=batch3 karma start config/karma.conf.js",
     "sauce": "npm run coolkids && npm run ie && npm run mobile",
     "test": "npm run ci",
