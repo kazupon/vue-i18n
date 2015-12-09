@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v2.3.2
+ * vue-i18n v2.3.3
  * (c) 2015 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -218,7 +218,7 @@
     });
   }
 
-  plugin.version = '2.3.2';
+  plugin.version = '2.3.3';
 
   return plugin;
 
