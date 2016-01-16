@@ -202,7 +202,7 @@ When specified with `lang` plugins option at `Vue.use`, `Vue.config.lang` is set
 # Testing
 
 ```shell
-$ make test
+$ npm run unit
 ```
 
 
