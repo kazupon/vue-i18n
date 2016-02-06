@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v2.3.3
- * (c) 2015 kazuya kawaguchi
+ * vue-i18n v2.4.0
+ * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -145,14 +145,14 @@
     }
 
     /**
-     * $t
+     * Vue.t
      *
      * @param {String} key
      * @param {Array} ...args
      * @return {String}
      */
 
-    Vue.prototype.$t = function (key) {
+    Vue.t = function (key) {
       for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
@@ -178,6 +178,22 @@
       }
 
       return getVal(key, language, args);
+    };
+
+    /**
+     * $t
+     *
+     * @param {String} key
+     * @param {Array} ...args
+     * @return {String}
+     */
+
+    Vue.prototype.$t = function (key) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      return Vue.t.apply(Vue, [key].concat(args));
     };
 
     return Vue;
@@ -218,7 +234,7 @@
     });
   }
 
-  plugin.version = '2.3.3';
+  plugin.version = '2.4.0';
 
   return plugin;
 

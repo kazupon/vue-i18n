@@ -1,3 +1,13 @@
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/kazupon/vue-i18n/compare/v2.3.3...v2.4.0) (2016-02-06)
+
+
+### Features
+
+* **i18n:** add Vue.t function ([68935e3](https://github.com/kazupon/vue-i18n/commit/68935e3)), closes [#17](https://github.com/kazupon/vue-i18n/issues/17)
+
+
+
 <a name="2.3.3"></a>
 ## [2.3.3](https://github.com/kazupon/vue-i18n/compare/v2.3.2...v2.3.3) (2015-12-09)
 
