@@ -37,6 +37,93 @@ describe('i18n', () => {
   })
 
 
+  describe('Vue.t', () => {
+    describe('en language locale', () => {
+      it('should translate an english', () => {
+        assert(Vue.t('message.hello') === locales.en.message.hello)
+      })
+    })
+
+    describe('ja language locale', () => {
+      it('should translate a japanese', () => {
+        assert(Vue.t('message.hello', 'ja') === locales.ja.message.hello)
+      })
+    })
+
+    describe('key argument', () => {
+      describe('not specify', () => {
+        it('should return empty string', () => {
+          assert(Vue.t() === '')
+        })
+      })
+
+      describe('empty string', () => {
+        it('should return empty string', () => {
+          assert(Vue.t('') === '')
+        })
+      })
+
+      describe('not regist key', () => {
+        it('should return key string', () => {
+          assert(Vue.t('foo.bar') === 'foo.bar')
+        })
+      })
+
+      describe('sentence fragment', () => {
+        it('should translate fragment', () => {
+          assert(Vue.t('hello world') === 'Hello World')
+        })
+
+        it('should return replaced string if available', () => {
+          assert(
+            Vue.t('Hello {0}', ['kazupon']),
+            'Hello kazupon'
+          )
+        })
+
+        it('should return key if unavailable', () => {
+          assert(Vue.t('Hello') === 'Hello')
+        })
+      })
+    })
+
+    describe('format arguments', () => {
+      context('named', () => {
+        it('should return replaced string', () => {
+          assert(
+            Vue.t('message.format.named', { name: 'kazupon' }),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+
+      context('list', () => {
+        it('should return replaced string', () => {
+          assert(
+            Vue.t('message.format.list', ['kazupon']),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+    })
+
+    describe('language argument', () => {
+      it('should return empty string', () => {
+        assert(Vue.t('message.hello', 'ja') === locales.ja.message.hello)
+      })
+    })
+
+    describe('format & language arguments', () => {
+      it('should return replaced string', () => {
+        assert(
+          Vue.t('message.format.list', 'ja', ['kazupon']),
+          'こんにちは kazupon, ごきげんいかが？'
+        )
+      })
+    })
+  })
+
+
   describe('$t', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {

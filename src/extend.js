@@ -27,15 +27,16 @@ export default function (Vue, locales) {
     return value
   }
 
+
   /**
-   * $t
+   * Vue.t
    *
    * @param {String} key
    * @param {Array} ...args
    * @return {String}
    */
 
-  Vue.prototype.$t = (key, ...args) => {
+  Vue.t = (key, ...args) => {
     if (!key) { return '' }
 
     let language = Vue.config.lang
@@ -55,6 +56,19 @@ export default function (Vue, locales) {
     }
 
     return getVal(key, language, args)
+  }
+
+
+  /**
+   * $t
+   *
+   * @param {String} key
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  Vue.prototype.$t = (key, ...args) => {
+    return Vue.t(key, ...args)
   }
 
   return Vue

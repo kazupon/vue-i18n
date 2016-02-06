@@ -152,6 +152,13 @@ Output the following:
 
 Translate the locale of `keypath`. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
 
+## Vue.t(keypath, [lang], [arguments])
+- keypath: `String` **required**
+- lang: `String` **optional**
+- arguments: `Array | Object` **optional**
+
+This is the same as the `$t` method. This is translate function for global.
+
 
 # Options
 
