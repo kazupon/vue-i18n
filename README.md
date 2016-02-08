@@ -80,7 +80,38 @@ Output the following:
 ```
 
 
+
 # Formatting
+## HTML formatting
+In some cases you might want to rendered your translation as an HTML message and not a static string.
+
+```javascript
+var locales = {
+  en: {
+    message: {
+      hello: 'hello <br> world'
+    }
+  }
+}
+```
+
+Template the following (notice the tripple brackets):
+
+```html
+<div class="message">
+  <p>{{{ $t('message.hello') }}}</p>
+</div>
+```
+
+Output the following (instead of the message pre formatted)
+
+```html
+<div class="message">
+  <p>hello
+  <!--<br> exists but is rendered as html and not a string-->
+  world</p>
+</div>
+```
 
 ## Named formatting
 
