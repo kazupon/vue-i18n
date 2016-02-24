@@ -11,6 +11,13 @@ describe('format', () => {
           name: 'kazupon', email: 'foo@domain.com'
         }), 'name: kazupon, email: foo@domain.com')
       })
+
+      it('should be replace with object value', () => {
+        let template = 'name: %{name}, email: %{email}'
+        assert(format(template, {
+          name: 'kazupon', email: 'foo@domain.com'
+        }), 'name: kazupon, email: foo@domain.com')
+      })
     })
 
     context('Array', () => {
