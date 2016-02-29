@@ -4,7 +4,7 @@
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
-const RE_NARGS = /\{([0-9a-zA-Z]+)\}/g
+const RE_NARGS = /(%|)\{([0-9a-zA-Z]+)\}/g
 
 
 /**
@@ -24,7 +24,7 @@ export default function (string, ...args) {
     args = {}
   }
 
-  return string.replace(RE_NARGS, (match, i, index) => {
+  return string.replace(RE_NARGS, (match, prefix, i, index) => {
     let result
 
     if (string[index - 1] === '{' &&
