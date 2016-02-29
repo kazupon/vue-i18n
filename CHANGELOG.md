@@ -1,3 +1,12 @@
+<a name="2.4.1"></a>
+## [2.4.1](https://github.com/kazupon/vue-i18n/compare/v2.4.0...v2.4.1) (2016-02-29)
+
+### Features
+
+* **i18n:** support ruby on rails i18n interpolation format ([b6b2490](https://github.com/kazupon/vue-i18n/commit/b6b2490))
+
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/kazupon/vue-i18n/compare/v2.3.3...v2.4.0) (2016-02-06)
 

@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v2.4.0
+ * vue-i18n v2.4.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -18,7 +18,7 @@ babelHelpers;
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
-var RE_NARGS = /\{([0-9a-zA-Z]+)\}/g;
+var RE_NARGS = /(%|)\{([0-9a-zA-Z]+)\}/g;
 
 /**
  * template
@@ -41,7 +41,7 @@ function format (string) {
     args = {};
   }
 
-  return string.replace(RE_NARGS, function (match, i, index) {
+  return string.replace(RE_NARGS, function (match, prefix, i, index) {
     var result = undefined;
 
     if (string[index - 1] === '{' && string[index + match.length] === '}') {
@@ -230,6 +230,6 @@ function defineConfig(config, lang) {
   });
 }
 
-plugin.version = '2.4.0';
+plugin.version = '2.4.1';
 
 module.exports = plugin;
