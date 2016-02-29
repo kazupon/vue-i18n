@@ -80,7 +80,6 @@ Output the following:
 ```
 
 
-
 # Formatting
 ## HTML formatting
 In some cases you might want to rendered your translation as an HTML message and not a static string.
@@ -162,6 +161,38 @@ Template the following:
 ```html
 <div class="message">
   <p>{{ $t('message.hello', ["hello"]) }}</p>
+</div>
+```
+
+Output the following:
+
+```html
+<div class="message">
+  <p>hello world</p>
+</div>
+```
+
+
+# Interpolation format
+## Support ruby on rails i18n format
+
+Locale the following:
+
+```javascript
+var locales = {
+  en: {
+    message: {
+      hello: '%{msg} world'
+    }
+  }
+}
+```
+
+Template the following:
+
+```html
+<div class="message">
+  <p>{{ $t('message.hello', { msg: "hello"}) }}</p>
 </div>
 ```
 
