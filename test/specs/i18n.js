@@ -272,11 +272,11 @@ describe('i18n', () => {
       new ViewModel()
 
       Vue.nextTick(() => {
-        let child_el = document.querySelector('#translate-child')
-        assert(child_el.textContent === locales.en.message.hoge)
+        let child = document.querySelector('#translate-child')
+        assert(child.textContent === locales.en.message.hoge)
 
-        let parent_el = document.querySelector('#translate-parent p')
-        assert(parent_el.textContent === locales.en.message.hello)
+        let parent = document.querySelector('#translate-parent p')
+        assert(parent.textContent === locales.en.message.hello)
 
         done()
       })
