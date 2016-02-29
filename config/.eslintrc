@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "process": true
+  },
+  "rules": {
+    "no-console": 0
+  }
+}
