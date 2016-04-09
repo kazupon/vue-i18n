@@ -1,3 +1,4 @@
+import util, { warn } from './util'
 import extend from './extend'
 
 
@@ -9,6 +10,11 @@ import extend from './extend'
  */
 
 function plugin (Vue, opts = { lang: 'en', locales: {} }) {
+  if (plugin.installed) {
+    warn('already installed.')
+      return
+  }
+
   defineConfig(Vue.config, opts.lang)
   extend(Vue, opts.locales)
 }
