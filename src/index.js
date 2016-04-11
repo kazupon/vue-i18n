@@ -12,7 +12,7 @@ import extend from './extend'
 function plugin (Vue, opts = { lang: 'en', locales: {} }) {
   if (plugin.installed) {
     warn('already installed.')
-      return
+    return
   }
 
   defineConfig(Vue.config, opts.lang)
