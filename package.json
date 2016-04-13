@@ -51,7 +51,7 @@
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-replace": "^1.1.0",
     "uglify-js": "^2.6.1",
-    "vue": "^0.12.0",
+    "vue": "^1.0.21",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
@@ -84,6 +84,7 @@
     "coolkids": "VUE_I18N_TYPE=sauce SAUCE=batch1 karma start config/karma.conf.js",
     "coverage": "VUE_I18N_TYPE=coverage karma start config/karma.conf.js",
     "coveralls": "VUE_I18N_TYPE=coveralls karma start config/karma.conf.js",
+    "proto": "webpack-dev-server --quite --config config/webpack.dev.conf.js --host 0.0.0.0",
     "dev": "webpack-dev-server --quiet --config config/webpack.test.conf.js",
     "e2e": "webpack-dev-server --quiet --config config/webpack.e2e.conf.js & mocha -t 20000 --compilers js:espower-babel/guess test/e2e/test.js && kill $! || (kill $! && exit 1)",
     "ie": "VUE_I18N_TYPE=sauce SAUCE=batch2 karma start config/karma.conf.js",

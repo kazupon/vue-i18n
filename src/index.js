@@ -1,5 +1,9 @@
-import util, { warn } from './util'
-import extend from './extend'
+import { warn } from './util'
+import Override from './override'
+import Config from './config'
+import Extend from './extend'
+
+let langVM // singleton
 
 
 /**
@@ -15,26 +19,20 @@ function plugin (Vue, opts = { lang: 'en', locales: {} }) {
     return
   }
 
-  defineConfig(Vue.config, opts.lang)
-  extend(Vue, opts.locales)
+  setupLangVM(Vue, opts.lang)
+
+  Override(Vue, langVM)
+  Config(Vue, langVM)
+  Extend(Vue, opts.locales)
 }
 
-
-/**
- * defineConfig
- *
- * This function define `lang` property to `Vue.config`.
- *
- * @param {Object} config
- * @param {String} lang
- * @private
- */
-
-function defineConfig (config, lang) {
-  Object.defineProperty(config, 'lang', {
-    get: () => { return lang },
-    set: (val) => { lang = val }
-  })
+function setupLangVM (Vue, lang) {
+  const silent = Vue.config.silent
+  Vue.config.silent = true
+  if (!langVM) {
+    langVM = new Vue({ data: { lang: lang } })
+  }
+  Vue.config.silent = silent
 }
 
 plugin.version = '2.4.1'

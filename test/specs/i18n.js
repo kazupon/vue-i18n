@@ -291,15 +291,21 @@ describe('i18n', () => {
     })
 
     context('ja', () => {
-      it('should translate with japanese', () => {
+      it('should translate with japanese', (done) => {
         Vue.config.lang = 'ja'
-        assert(vm.$t('message.hello') === locales.ja.message.hello)
+        Vue.nextTick(() => {
+          assert(vm.$t('message.hello') === locales.ja.message.hello)
+          done()
+        })
       })
 
       context('en', () => {
-        it('should translate with english', () => {
+        it('should translate with english', (done) => {
           Vue.config.lang = 'en'
-          assert(vm.$t('message.hello') === locales.en.message.hello)
+          Vue.nextTick(() => {
+            assert(vm.$t('message.hello') === locales.en.message.hello)
+            done()
+          })
         })
       })
     })
