@@ -253,8 +253,15 @@ describe('i18n', () => {
 
   describe('global lang config', () => {
     let vm
-    beforeEach(() => {
+    beforeEach((done) => {
       vm = new Vue()
+      vm.$nextTick(done)
+    })
+
+    afterEach((done) => {
+      vm.$destroy();
+      vm = null
+      Vue.nextTick(done)
     })
 
     context('ja', () => {
