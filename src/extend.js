@@ -6,11 +6,10 @@ import compare from './compare'
  * extend
  * 
  * @param {Vue} Vue
- * @param {Object} locales
  * @return {Vue}
  */
 
-export default function (Vue, locales) {
+export default function (Vue) {
   const getPath = (Vue.version && compare('1.0.8', Vue.version) === -1) 
       ? Vue.parsers.path.getPath
       : Vue.parsers.path.get
@@ -19,7 +18,8 @@ export default function (Vue, locales) {
   function getVal (key, lang, args) {
     let value = key
     try {
-      let val = getPath(locales[lang], key) || locales[lang][key]
+      let locale = Vue.locale(lang)
+      let val = getPath(locale, key) || locale[key]
       value = (args ? format(val, args) : val) || key
     } catch (e) {
       value = key

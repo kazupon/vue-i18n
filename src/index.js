@@ -1,4 +1,5 @@
-import { warn } from './util'
+import util, { warn, empty, each } from './util'
+import Asset from './asset'
 import Override from './override'
 import Config from './config'
 import Extend from './extend'
@@ -19,11 +20,15 @@ function plugin (Vue, opts = { lang: 'en', locales: {} }) {
     return
   }
 
+  util.Vue = Vue
   setupLangVM(Vue, opts.lang)
+
+  Asset(Vue)
+  setupLocale(Vue, opts.locales)
 
   Override(Vue, langVM)
   Config(Vue, langVM)
-  Extend(Vue, opts.locales)
+  Extend(Vue)
 }
 
 function setupLangVM (Vue, lang) {
@@ -33,6 +38,14 @@ function setupLangVM (Vue, lang) {
     langVM = new Vue({ data: { lang: lang } })
   }
   Vue.config.silent = silent
+}
+
+function setupLocale (Vue, locales) {
+  if (!empty(locales)) {
+    each(locales, (locale, lang) => {
+      Vue.locale(lang, locale)
+    })
+  }
 }
 
 plugin.version = '2.4.1'

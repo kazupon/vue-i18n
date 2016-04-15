@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import locales from './fixture/locales'
 import plugin from '../../src/index'
+import 'babel-polyfill'
 
 require('./format')
 require('./compare')
@@ -11,3 +12,4 @@ Vue.use(plugin, {
 })
 
 require('./i18n')
+require('./asset')
