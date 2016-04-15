@@ -3,58 +3,110 @@ import Vue from 'vue'
 
 
 describe('asset', () => {
+  let locale
   const DELAY = 10
 
-  describe('sync', () => {
-    it('should be translated', () => {
-      Vue.locale('en', {
+  beforeEach(() => {
+    Vue.locale('en', null) // reset
+  })
+
+  describe('register sync', () => {
+    it('should be registed', () => {
+      let locale = {
         message: {
           foo: 'foo'
         }
-      })
-      assert(Vue.t('message.foo') === 'foo')
+      }
+      Vue.locale('en', locale)
+      assert(Vue.locale('en') === locale)
     })
   })
 
 
-  describe('async', () => {
+  describe('regsiter async', () => {
     describe('promise like function', () => {
-      beforeEach((done) => {
-        Vue.locale('en', () => {
-          return (resolve, reject) => {
-            setTimeout(() => {
-              resolve({ message: { bar: 'bar' } })
-            }, DELAY)
-          }
+      describe('resolve', () => {
+        beforeEach((done) => {
+          locale = { message: { bar: 'bar' } }
+          Vue.locale('en', () => {
+            return (resolve, reject) => {
+              setTimeout(() => {
+                resolve(locale)
+              }, DELAY)
+            }
+          })
+          Vue.nextTick(done)
         })
-        Vue.nextTick(done)
+
+        it('should be registered', (done) => {
+          setTimeout(() => {
+            assert(Vue.locale('en') === locale)
+            done()
+          }, DELAY + 5)
+        })
       })
 
-      it('should be translated', (done) => {
-        setTimeout(() => {
-          assert(Vue.t('message.bar') === 'bar')
-          done()
-        }, DELAY + 5)
+      describe('reject', () => {
+        beforeEach((done) => {
+          Vue.locale('en', () => {
+            return (resolve, reject) => {
+              setTimeout(() => {
+                reject()
+              }, DELAY)
+            }
+          })
+          Vue.nextTick(done)
+        })
+
+        it('should not be registered', (done) => {
+          setTimeout(() => {
+            assert(!Vue.locale('en'))
+            done()
+          }, DELAY + 5)
+        })
       })
     })
 
     describe('promise ', () => {
-      beforeEach((done) => {
-        Vue.locale('en', () => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve({ message: { buz: 'buz' } })
-            }, DELAY)
+      describe('resolve', () => {
+        beforeEach((done) => {
+          locale = { mesasge: { buz: 'buz' } }
+          Vue.locale('en', () => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(locale)
+              }, DELAY)
+            })
           })
+          Vue.nextTick(done)
         })
-        Vue.nextTick(done)
+
+        it('should be translated', (done) => {
+          setTimeout(() => {
+            assert(Vue.locale('en') === locale)
+            done()
+          }, DELAY + 5)
+        })
       })
 
-      it('should be translated', (done) => {
-        setTimeout(() => {
-          assert(Vue.t('message.buz') === 'buz')
-          done()
-        }, DELAY + 5)
+      describe('reject', () => {
+        beforeEach((done) => {
+          Vue.locale('en', () => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                reject()
+              }, DELAY)
+            })
+          })
+          Vue.nextTick(done)
+        })
+
+        it('should be translated', (done) => {
+          setTimeout(() => {
+            assert(!Vue.locale('en'))
+            done()
+          }, DELAY + 5)
+        })
       })
     })
   })
