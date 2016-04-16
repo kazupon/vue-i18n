@@ -10,7 +10,7 @@ Internationalization plugin of Vue.js
 
 
 # Requirements
-- works with Vue.js `0.12.0`+
+works with Vue.js `1.0.0`+
 
 
 # Installation
@@ -50,10 +50,24 @@ var locales = {
   }
 }
 
-// set plugin
-Vue.use(i18n, {
+// install plugin
+// DEPRECATED:
+//   `options` arguments, please use `Vue.config.lang` and `Vue.locale`.
+//   3.1 later, not used `options` arguments!!
+Vue.use(i18n/*, {
   lang: 'ja',
   locales: locales
+}*/)
+
+
+// RECOMMEND: 3.0 or later
+// set lang
+Vue.config.lang = 'ja'
+
+// RECOMMEND: 3.0 or later
+// set locales
+Object.keys(locales).forEach(function (lang) {
+  Vue.locale(lang, locales[lang])
 })
 
 // create instance
@@ -203,25 +217,87 @@ Output the following:
 </div>
 ```
 
+# API References
 
-# API
+## Global Config
+
+### lang
+
+- **Type:** `String`
+
+- **Default:** `en`
+
+- **Usage:**
+
+  Get or set a translation language code. Default by `en` string value.
+
+  ```javascript
+  Vue.config.lang = 'ja'
+  ```
+
+## Global Methods
+
+### Vue.locale ( lang, [locale] )
+
+- **Arguments:**
+    - `{String} lang`
+    - `{Object | Function} [locale]`
+- **Return:**
+    - locale function or object
+
+- **Usage:**
+
+  Register or retrieve a locale
+
+  ```javascript
+  // register locale with object
+  Vue.locale('en', { message: 'hello' })
+
+  // register with external locale
+  Vue.locale('ja', function () {
+    return fetch('/locales/ja', {
+      method: 'get',
+      // ...
+    }).then(function (json) {
+      return Promise.resolve(json)
+    }).catch(function (error) {
+      return Promise.reject()
+    })
+  })
+  ```
+
+### Vue.t( keypath, [lang], [arguments] )
+
+- **Arguments:**
+  - `{String} keypath`
+  - `{String} [lang]`
+  - `{Array | Object [arguments]`
+
+- **Return:**
+  Translated string
+
+- **Usage:**
+  This is the same as the `$t` method. This is translate function for global. more detail see [$t](https://github.com/kazupon/vue-i18n#$t)
+
+## Instance Methods
 
 ## $t(keypath, [lang], [arguments])
-- keypath: `String` **required**
-- lang: `String` **optional**
-- arguments: `Array | Object` **optional**
 
-Translate the locale of `keypath`. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
+- **Arguments:**
+  - `{String} keypath`
+  - `{String} [lang]`
+  - `{Array | Object [arguments]`
 
-## Vue.t(keypath, [lang], [arguments])
-- keypath: `String` **required**
-- lang: `String` **optional**
-- arguments: `Array | Object` **optional**
+- **Return:**
+  Translated string
 
-This is the same as the `$t` method. This is translate function for global.
+- **Usage:**
+  Translate the locale of `keypath`. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
 
 
 # Options
+
+> NOTE: Deprecated in 3.0 or later
 
 ## Plugin options
 
@@ -249,14 +325,6 @@ If you abbreviated the `lang` option, translate as well as 'en' language code op
 Specify translate some local dictionary.
 
 If you abbreviated the `locales` option, set the empty local dictionary.
-
-
-# Configuration
-
-## Vue.config.lang
-Get or set a global translation language code. Default by `en` string value. You can change the language of the global level dynamic translation in your application.
-
-When specified with `lang` plugins option at `Vue.use`, `Vue.config.lang` is set that value.
 
 
 # Contributing
