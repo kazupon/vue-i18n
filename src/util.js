@@ -24,6 +24,19 @@ export function warn (msg, err) {
   }
 }
 
+const hasOwnProperty = Object.prototype.hasOwnProperty
+/**
+ * Check whether the object has the property.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @return {Boolean}
+ */
+
+export function hasOwn (obj, key) {
+  return hasOwnProperty.call(obj, key)
+}
+
 /**
  * empty
  *
@@ -39,7 +52,7 @@ export function empty (target) {
     if (target.length === 0) { return true }
   } else if (exports.Vue.util.isPlainObject(target)) {
     for (let key in target) {
-      if (exports.Vue.util.hasOwn(target, key)) { return false }
+      if (hasOwn(target, key)) { return false }
     }
   }
 
@@ -60,7 +73,6 @@ export function each (target, iterator, context) {
       iterator.call(context || target[i], target[i], i)
     }
   } else if (exports.Vue.util.isPlainObject(target)) {
-    const hasOwn = exports.Vue.util.hasOwn
     for (let key in target) {
       if (hasOwn(target, key)) {
         iterator.call(context || target[key], target[key], key)
@@ -69,6 +81,7 @@ export function each (target, iterator, context) {
   }
 }
 
+let Watcher
 /**
  * getWatcher
  *
@@ -76,7 +89,6 @@ export function each (target, iterator, context) {
  * @return {Watcher}
  */
 
-let Watcher
 export function getWatcher (vm) {
   if (!Watcher) {
     const unwatch = vm.$watch('__watcher__', (a) => {})
@@ -86,6 +98,7 @@ export function getWatcher (vm) {
   return Watcher
 }
 
+let Dep
 /**
  * getDep
  *
@@ -93,7 +106,6 @@ export function getWatcher (vm) {
  * @return {Dep}
  */
 
-let Dep
 export function getDep (vm) {
   if (!Dep) {
     Dep = vm._data.__ob__.dep.constructor
