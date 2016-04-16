@@ -10,7 +10,7 @@ import compare from './compare'
  */
 
 export default function (Vue) {
-  const getPath = (Vue.version && compare('1.0.8', Vue.version) === -1) 
+  const getPath = (compare('1.0.8', Vue.version) === -1) 
       ? Vue.parsers.path.getPath
       : Vue.parsers.path.get
   const util = Vue.util

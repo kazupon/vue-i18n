@@ -1,4 +1,5 @@
 import util, { warn, empty, each } from './util'
+import compare from './compare'
 import Asset from './asset'
 import Override from './override'
 import Config from './config'
@@ -17,6 +18,13 @@ let langVM // singleton
 function plugin (Vue, opts = { lang: 'en', locales: {} }) {
   if (plugin.installed) {
     warn('already installed.')
+    return
+  }
+
+  if (!Vue.version || compare(Vue.version, '1.0') < 0) {
+    warn('vue-i18n (' + plugin.version
+      + ') need to use vue version 1.0 or later (vue version: '
+      + Vue.version + ').')
     return
   }
 
