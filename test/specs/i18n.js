@@ -259,7 +259,7 @@ describe('i18n', () => {
     })
 
     afterEach((done) => {
-      vm.$destroy();
+      vm.$destroy()
       vm = null
       Vue.nextTick(done)
     })

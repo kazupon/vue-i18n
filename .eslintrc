@@ -2,6 +2,7 @@
   "extends": "standard",
   "rules": {
     "complexity": 0,
+    "operator-linebreak": [2, "before"],
     "no-trailing-spaces": 0,
     "no-inline-comments": 0,
     "no-multiple-empty-lines": [2, {"max": 2}],
