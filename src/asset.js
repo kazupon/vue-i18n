@@ -9,9 +9,10 @@ export default function (Vue) {
    *
    * @param {String} id
    * @param {Object | Function | Promise} definition
+   * @param {Function} cb
    */
   
-  Vue.locale = (id, definition) => {
+  Vue.locale = (id, definition, cb) => {
     if (definition === undefined) { // gettter
       return locales[id]
     } else { // setter
@@ -22,6 +23,7 @@ export default function (Vue) {
         setLocale(id, definition, (locale) => {
           if (locale) {
             locales[id] = locale
+            cb && cb()
           } else {
             warn('failed set `' + id + '` locale')
           }
