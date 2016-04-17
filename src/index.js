@@ -15,24 +15,35 @@ let langVM // singleton
  * @param {Object} opts
  */
 
-function plugin (Vue, opts = { lang: 'en', locales: {} }) {
-  if (plugin.installed) {
+function plugin (Vue, opts = {}) {
+  if (process.env.NODE_ENV !== 'production' && plugin.installed) {
     warn('already installed.')
     return
   }
 
-  if (!Vue.version || compare(Vue.version, '1.0') < 0) {
+  if (process.env.NODE_ENV !== 'production'
+    && (!Vue.version || compare(Vue.version, '1.0') < 0)) {
     warn('vue-i18n (' + plugin.version
       + ') need to use vue version 1.0 or later (vue version: '
       + Vue.version + ').')
     return
   }
 
+  if (process.env.NODE_ENV !== 'production' && opts.lang) {
+    warn('`options.lang` will be deprecated in vue-i18n 3.1 later.')
+  }
+  let lang = opts.lang || 'en'
+
+  if (process.env.NODE_ENV !== 'production' && opts.locales) {
+    warn('`options.locales` will be deprecated in vue-i18n 3.1 later.')
+  }
+  let locales = opts.locales || {}
+
   util.Vue = Vue
-  setupLangVM(Vue, opts.lang)
+  setupLangVM(Vue, lang)
 
   Asset(Vue)
-  setupLocale(Vue, opts.locales)
+  setupLocale(Vue, locales)
 
   Override(Vue, langVM)
   Config(Vue, langVM)
