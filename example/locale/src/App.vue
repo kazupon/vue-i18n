@@ -36,35 +36,33 @@ export default {
     selected (val, old) {
       var self = this
       if (!Vue.locale(val)) {
-        this.loading = true
-        this.load(val).then((json) => {
-          self.loading = false
-          if (Object.keys(json).length === 0) {
-            return Promise.reject(new Error('locale empty !!'))
-          } else {
-            Vue.locale(val, json)
-            Vue.config.lang = val
-            return Promise.resolve()
-          }
-        }).catch((error) => {
-          self.error = error.message
+        Vue.locale(val, () => {
+          self.loading = true
+          return fetch('/locale/' + val, {
+            method: 'get',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }).then((res) => {
+            return res.json()
+          }).then((json) => {
+            self.loading = false
+            if (Object.keys(json).length === 0) {
+              return Promise.reject(new Error('locale empty !!'))
+            } else {
+              return Promise.resolve(json)
+            }
+          }).catch((error) => {
+            self.error = error.message
+            return Promise.reject()
+          })
+        }, () => {
+          Vue.config.lang = val
         })
       } else {
         Vue.config.lang = val
       }
-    }
-  },
-  methods: {
-    load (code) {
-      return fetch('/locale/' + code, {
-        method: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then((res) => {
-        return res.json()
-      })
     }
   }
 }
