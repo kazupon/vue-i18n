@@ -9,8 +9,8 @@
 Internationalization plugin of Vue.js
 
 
-# Requirements
-works with Vue.js `1.0.0`+
+# Compatibility
+- Vue.js `1.0.0`+
 
 
 # Installation
@@ -27,25 +27,27 @@ When used in CommonJS, you must explicitly install the router via Vue.use():
 var Vue = require('vue')
 var VueI18n = require('vue-i18n')
 
-Vue.use(VueI18n, { ... })
+Vue.use(VueI18n)
+Vue.config.lang = 'ja'
+Vue.locale('ja', { ... })
 ```
 
 # Usage
 
 ```javascript
 var Vue = require('vue')
-var i18n = require('vue-i18n')
+var VueI18n = require('vue-i18n')
 
 // ready translated locales
 var locales = {
   en: {
     message: {
-      hello: 'the world'
+      hello: 'hello world'
     }
   },
   ja: {
     message: {
-      hello: 'ザ・ワールド'
+      hello: 'こんにちは、世界'
     }
   }
 }
@@ -53,47 +55,42 @@ var locales = {
 // install plugin
 // DEPRECATED:
 //   `options` arguments, please use `Vue.config.lang` and `Vue.locale`.
-//   3.1 later, not used `options` arguments!!
-Vue.use(i18n/*, {
+//   3.1 or later, not used `options` arguments!!
+Vue.use(VueI18n/*, {
   lang: 'ja',
   locales: locales
 }*/)
 
 
-// RECOMMEND: 3.0 or later
 // set lang
+// RECOMMEND: 3.0 or later
 Vue.config.lang = 'ja'
 
-// RECOMMEND: 3.0 or later
 // set locales
+// RECOMMEND: 3.0 or later
 Object.keys(locales).forEach(function (lang) {
   Vue.locale(lang, locales[lang])
 })
 
 // create instance
-new Vue({
-  el: '#test-i18n'
-})
+new Vue({ el: 'body' })
 ```
 
 Template the following:
 
 ```html
-<div id="test-i18n" class="message">
-  <p>{{ $t("message.hello") }}</p>
-</div>
+<p>{{ $t("message.hello") }}</p>
 ```
 
 Output the following:
 
 ```html
-<div id="test-i18n" class="message">
-  <p>ザ・ワールド</p>
-</div>
+<p>こんにちは、世界</p>
 ```
 
 
 # Formatting
+
 ## HTML formatting
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
@@ -110,19 +107,15 @@ var locales = {
 Template the following (notice the tripple brackets):
 
 ```html
-<div class="message">
-  <p>{{{ $t('message.hello') }}}</p>
-</div>
+<p>{{{ $t('message.hello') }}}</p>
 ```
 
 Output the following (instead of the message pre formatted)
 
 ```html
-<div class="message">
-  <p>hello
-  <!--<br> exists but is rendered as html and not a string-->
-  world</p>
-</div>
+<p>hello
+<!--<br> exists but is rendered as html and not a string-->
+world</p>
 ```
 
 ## Named formatting
@@ -142,17 +135,13 @@ var locales = {
 Template the following:
 
 ```html
-<div class="message">
-  <p>{{ $t('message.hello', { msg: "hello"}) }}</p>
-</div>
+<p>{{ $t('message.hello', { msg: "hello"}) }}</p>
 ```
 
 Output the following:
 
 ```html
-<div class="message">
-  <p>hello world</p>
-</div>
+<p>hello world</p>
 ```
 
 ## List formatting
@@ -172,21 +161,15 @@ var locales = {
 Template the following:
 
 ```html
-<div class="message">
-  <p>{{ $t('message.hello', ["hello"]) }}</p>
-</div>
+<p>{{ $t('message.hello', ["hello"]) }}</p>
 ```
 
 Output the following:
 
 ```html
-<div class="message">
-  <p>hello world</p>
-</div>
+<p>hello world</p>
 ```
 
-
-# Interpolation format
 ## Support ruby on rails i18n format
 
 Locale the following:
@@ -204,18 +187,63 @@ var locales = {
 Template the following:
 
 ```html
-<div class="message">
-  <p>{{ $t('message.hello', { msg: "hello"}) }}</p>
-</div>
+<p>{{ $t('message.hello', { msg: "hello"}) }}</p>
 ```
 
 Output the following:
 
 ```html
-<div class="message">
-  <p>hello world</p>
-</div>
+<p>hello world</p>
 ```
+
+# Dynamic locale
+
+Sometimes, you need to set dynamically the locale from external location. You can set dynamically it with `Vue.locale`.
+
+the below the example:
+
+```javascript
+var self = this
+var lang = 'ja'
+Vue.locale(lang, function () {
+  self.loading = true
+  return fetch('/locale/' + lang, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(function (res) {
+    return res.json()
+  }).then(function (json) {
+    self.loading = false
+    if (Object.keys(json).length === 0) {
+      return Promise.reject(new Error('locale empty !!'))
+    } else {
+      return Promise.resolve(json)
+    }
+  }).catch(function (error) {
+    self.error = error.message
+    return Promise.reject()
+  })
+}, function () {
+  Vue.config.lang = lang
+})
+```
+
+## Dynamic locale interfaces
+
+In dynamic locales, You can use the two type interfaces:
+
+### 1. function
+You need to implement locale setting that return function have `function (resolve, reject)` like promise (future). The following, those argument of the function, if successful, you need to use the `resolve` according to locale object. if failed, you need to use `reject`
+
+- successful: `resolve`
+- failed: `reject`
+
+### 2. promise
+As mentioned above, You need to implement locale setting that return a promise. if successful, you need to `resolve` according to locale object. if failed, you need to use `reject`.
+
 
 # API References
 
@@ -237,11 +265,12 @@ Output the following:
 
 ## Global Methods
 
-### Vue.locale ( lang, [locale] )
+### Vue.locale ( lang, [locale], [cb] )
 
 - **Arguments:**
     - `{String} lang`
     - `{Object | Function} [locale]`
+    - `{Function} [cb]`
 - **Return:**
     - locale function or object
 
@@ -263,6 +292,8 @@ Output the following:
     }).catch(function (error) {
       return Promise.reject()
     })
+  }, function () {
+    Vue.config.lang = 'ja'
   })
   ```
 
@@ -297,7 +328,7 @@ Output the following:
 
 # Options
 
-> NOTE: Deprecated in 3.0 or later
+> NOTE: Deprecated in 3.1 or later :warning:
 
 ## Plugin options
 
@@ -335,15 +366,32 @@ If you abbreviated the `locales` option, set the empty local dictionary.
 - Submit a pull request to `dev` branch of `kazupon/vue-i18n` repository !
 
 
-# Testing
+# Development Setup
 
-```shell
-$ npm run unit
-```
+    # install deps
+    npm install
+
+    # build dist files
+    npm run build
+
+    # lint
+    npm run lint
+
+    # run unit tests only
+    npm run unit
+
+    # run e2e tests only
+    npm run e2e
+
+    # lint & run all tests
+    npm test
+
+
+# Changelog
+
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
 # License
-
-## MIT
 
 [MIT](http://opensource.org/licenses/MIT)
