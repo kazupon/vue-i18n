@@ -1,3 +1,17 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/kazupon/vue-i18n/compare/v2.4.1...v3.0.0) (2016-04-18)
+
+
+### Features
+
+* **lang:** support lang reactive changing ([203ee85](https://github.com/kazupon/vue-i18n/commit/203ee85)), closes [#2](https://github.com/kazupon/vue-i18n/issues/2) [#15](https://github.com/kazupon/vue-i18n/issues/15)
+* **locale:** support dynamic local ([4d61e8d](https://github.com/kazupon/vue-i18n/commit/4d61e8d)), closes [#6](https://github.com/kazupon/vue-i18n/issues/6) [#21](https://github.com/kazupon/vue-i18n/issues/21)
+
+### DEPRECATED
+
+* **index:** plugin install `Vue.use` options (`options.locales`, `options.lang`). See [README](https://github.com/kazupon/vue-i18n/blob/dev/README.md)
+    
+
 <a name="2.4.1"></a>
 ## [2.4.1](https://github.com/kazupon/vue-i18n/compare/v2.4.0...v2.4.1) (2016-02-29)
 

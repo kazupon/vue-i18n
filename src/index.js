@@ -67,6 +67,6 @@ function setupLocale (Vue, locales) {
   }
 }
 
-plugin.version = '2.4.1'
+plugin.version = '3.0.0'
 
 export default plugin
