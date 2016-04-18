@@ -11,7 +11,7 @@ describe('asset', () => {
   })
 
   describe('register sync', () => {
-    it('should be registed', () => {
+    it('should be registered', () => {
       let locale = {
         message: {
           foo: 'foo'
@@ -81,7 +81,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should be translated', (done) => {
+        it('should be registered', (done) => {
           setTimeout(() => {
             assert(Vue.locale('en') === locale)
             done()
@@ -101,7 +101,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should be translated', (done) => {
+        it('should not be registered', (done) => {
           setTimeout(() => {
             assert(!Vue.locale('en'))
             done()
