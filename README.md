@@ -15,7 +15,14 @@ Internationalization plugin of Vue.js
 
 # Installation
 
-## npm
+## CDN
+jsdelivr
+
+```html
+<script src="https://cdn.jsdelivr.net/vue.i18n/3.0.1/vue-i18n.min.js"></script>
+```
+
+## NPM
 
 ```shell
 $ npm install vue-i18n
