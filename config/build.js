@@ -17,7 +17,7 @@ fs.writeFileSync('src/index.js', main)
 var readme = fs
   .readFileSync('readme.md', 'utf-8')
   .replace(
-    /\<script src=\"https\:\/\/cdn\.jsdelivr\.net\/vue\.i18n\/[\d\.]+.[\d]+\/vue-i18n\.min\.js\"\>\<\/script\>/,
+    /<script src="https:\/\/cdn\.jsdelivr\.net\/vue\.i18n\/[\d\.]+.[\d]+\/vue-i18n\.min\.js"><\/script>/,
     '<script src="https://cdn.jsdelivr.net/vue.i18n/' + pack.version + '/vue-i18n.min.js"></script>'
   )
 fs.writeFileSync('readme.md', readme)
