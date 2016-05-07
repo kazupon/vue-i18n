@@ -77,6 +77,7 @@
   "scripts": {
     "browser": "VUE_I18N_TYPE=browser karma start config/karma.conf.js",
     "build": "node config/build.js",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -n ./node_modules/git-commit-message-convention/convention.js",
     "ci": "npm run lint && npm run coverage && npm run coveralls && npm run sauce",
     "clean": "rm -rf coverage && rm -rf dist/*.*",
     "coolkids": "VUE_I18N_TYPE=sauce SAUCE=batch1 karma start config/karma.conf.js",
@@ -88,6 +89,7 @@
     "ie": "VUE_I18N_TYPE=sauce SAUCE=batch2 karma start config/karma.conf.js",
     "lint": "eslint src/*.js test/**/*.js config/*.js",
     "mobile": "VUE_I18N_TYPE=sauce SAUCE=batch3 karma start config/karma.conf.js",
+    "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
     "sauce": "npm run coolkids && npm run ie && npm run mobile",
     "test": "npm run ci",
     "unit": "npm run lint && karma start config/karma.conf.js"
