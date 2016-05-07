@@ -3,6 +3,7 @@ import locales from './fixture/locales'
 import plugin from '../../src/index'
 import 'babel-polyfill'
 
+require('./path')
 require('./format')
 require('./compare')
 

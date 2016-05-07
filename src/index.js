@@ -1,4 +1,5 @@
 import util, { warn, empty, each } from './util'
+import path from './path'
 import compare from './compare'
 import Asset from './asset'
 import Override from './override'
@@ -39,7 +40,7 @@ function plugin (Vue, opts = {}) {
   }
   let locales = opts.locales || {}
 
-  util.Vue = Vue
+  path.Vue = util.Vue = Vue
   setupLangVM(Vue, lang)
 
   Asset(Vue)

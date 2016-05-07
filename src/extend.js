@@ -1,5 +1,5 @@
 import format from './format'
-import compare from './compare'
+import { getValue } from './path'
 
 
 /**
@@ -10,16 +10,13 @@ import compare from './compare'
  */
 
 export default function (Vue) {
-  const getPath = (compare('1.0.8', Vue.version) === -1) 
-      ? Vue.parsers.path.getPath
-      : Vue.parsers.path.get
-  const util = Vue.util
+  const { isArray, isObject } = Vue.util
 
   function getVal (key, lang, args) {
     let value = key
     try {
       let locale = Vue.locale(lang)
-      let val = getPath(locale, key) || locale[key]
+      let val = getValue(locale, key) || locale[key]
       value = (args ? format(val, args) : val) || key
     } catch (e) {
       value = key
@@ -41,7 +38,7 @@ export default function (Vue) {
 
     let language = Vue.config.lang
     if (args.length === 1) {
-      if (util.isObject(args[0]) || util.isArray(args[0])) {
+      if (isObject(args[0]) || isArray(args[0])) {
         args = args[0]
       } else if (typeof args[0] === 'string') {
         language = args[0]
@@ -50,7 +47,7 @@ export default function (Vue) {
       if (typeof args[0] === 'string') {
         language = args[0]
       }
-      if (util.isObject(args[1]) || util.isArray(args[1])) {
+      if (isObject(args[1]) || isArray(args[1])) {
         args = args[1]
       }
     }
