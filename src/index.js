@@ -1,4 +1,4 @@
-import util, { warn, empty, each } from './util'
+import util, { warn } from './util'
 import path from './path'
 import compare from './compare'
 import Asset from './asset'
@@ -30,21 +30,12 @@ function plugin (Vue, opts = {}) {
     return
   }
 
-  if (process.env.NODE_ENV !== 'production' && opts.lang) {
-    warn('`options.lang` will be deprecated in vue-i18n 3.1 later.')
-  }
-  let lang = opts.lang || 'en'
-
-  if (process.env.NODE_ENV !== 'production' && opts.locales) {
-    warn('`options.locales` will be deprecated in vue-i18n 3.1 later.')
-  }
-  let locales = opts.locales || {}
+  let lang = 'en'
 
   path.Vue = util.Vue = Vue
   setupLangVM(Vue, lang)
 
   Asset(Vue)
-  setupLocale(Vue, locales)
 
   Override(Vue, langVM)
   Config(Vue, langVM)
@@ -58,14 +49,6 @@ function setupLangVM (Vue, lang) {
     langVM = new Vue({ data: { lang: lang } })
   }
   Vue.config.silent = silent
-}
-
-function setupLocale (Vue, locales) {
-  if (!empty(locales)) {
-    each(locales, (locale, lang) => {
-      Vue.locale(lang, locale)
-    })
-  }
 }
 
 plugin.version = '3.0.1'

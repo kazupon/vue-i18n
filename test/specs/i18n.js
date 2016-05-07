@@ -4,6 +4,14 @@ import locales from './fixture/locales'
 
 
 describe('i18n', () => {
+  before((done) => {
+    Object.keys(locales).forEach((lang) => {
+      Vue.locale(lang, locales[lang])
+    })
+    Vue.config.lang = 'en'
+    Vue.nextTick(done)
+  })
+
   describe('Vue.t', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {
