@@ -1,3 +1,4 @@
+import { warn } from './util'
 import format from './format'
 import { getValue } from './path'
 
@@ -41,6 +42,14 @@ export default function (Vue) {
     return args ? format(val, args) : val
   }
 
+  function warnDefault (key) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn('Cannot translate the value of keypath "' + key + '". '
+        + 'Use the value of keypath as default')
+    }
+    return key
+  }
+
 
   /**
    * Vue.t
@@ -54,7 +63,7 @@ export default function (Vue) {
     if (!key) { return '' }
 
     const { lang, params } = parseArgs(...args)
-    return translate(Vue.locale(lang), key, params) || key
+    return translate(Vue.locale(lang), key, params) || warnDefault(key)
   }
 
 
@@ -72,7 +81,7 @@ export default function (Vue) {
     const { lang, params } = parseArgs(...args)
     return translate(this.$options.locales && this.$options.locales[lang], key, params) 
       || translate(Vue.locale(lang), key, params)
-      || key
+      || warnDefault(key)
   }
 
   return Vue
