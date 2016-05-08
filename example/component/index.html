@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>component based locale</title>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../../dist/vue-i18n.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ $t("message.hello") }}</p>
+      <component1></component1>
+    </div>
+    <script>
+      var locales = {
+        en: {
+          message: {
+            hello: 'hello world'
+          }
+        },
+        ja: {
+          message: {
+            hello: 'こんにちは、世界'
+          }
+        }
+      }
+      
+      Vue.use(VueI18n)
+      Vue.config.lang = 'ja'
+      
+      Object.keys(locales).forEach(function (lang) {
+        Vue.locale(lang, locales[lang])
+      })
+
+      new Vue({
+        el: '#app',
+        components: {
+          component1: {
+            template: '<p>component1 local: {{ $t("hello") }}</p>'
+              + '<p>component1 global: {{ $t("message.hello") }}</p>',
+            locales: {
+              en: { hello: 'hello component1' },
+              ja: { hello: 'こんにちは、component1' }
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
