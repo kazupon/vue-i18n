@@ -205,6 +205,68 @@ Output the following:
 <p>hello world</p>
 ```
 
+# Component locale
+
+You can translate component based.
+
+The below locale setting example:
+
+```javascript
+var locales = {
+  en: {
+    message: {
+      hello: 'hello world'
+    }
+  },
+  ja: {
+    message: {
+      hello: 'こんにちは、世界'
+    }
+  }
+}
+      
+Vue.config.lang = 'ja'
+Object.keys(locales).forEach(function (lang) {
+  Vue.locale(lang, locales[lang])
+})
+
+new Vue({
+  el: '#app',
+  components: {
+    component1: {
+      template: '<p>component1 local: {{ $t("hello") }}</p>'
+        + '<p>component1 global: {{ $t("message.hello") }}</p>',
+      locales: {
+        en: { hello: 'hello component1' },
+        ja: { hello: 'こんにちは、component1' }
+      }
+    }
+  }
+})
+```
+
+Template the following:
+
+```html
+<div id="app">
+  <p>{{ $t("message.hello") }}</p>
+  <component1></component1>
+</div>
+```
+
+Output the following:
+
+```html
+<div id="app">
+  <p>こんにちは、世界</p>
+  <p>component1 local: こんにちは、component1</p>
+  <p>component1 global: こんにちは、世界</p>
+</div>
+```
+
+> :pencil: If you set the locale of same keypath as global locale (`Vue.locale()`), in its component, `$t` is translate with component locale.
+
+
 # Dynamic locale
 
 Sometimes, you need to set dynamically the locale from external location. You can set dynamically it with `Vue.locale`.
@@ -317,7 +379,20 @@ As mentioned above, You need to implement locale setting that return a promise. 
   Translated string
 
 - **Usage:**
-  This is the same as the `$t` method. This is translate function for global. more detail see [$t](https://github.com/kazupon/vue-i18n#$t)
+  This is the same as the `$t` method. This is translate function for global locale only. more detail see [$t](https://github.com/kazupon/vue-i18n#$t)
+
+## Constructor Options
+
+### locales
+
+- **Type:** `Object`
+
+- **Details:**
+
+  A locale definition object to be made available to the Vue instance only.
+
+- **See also:**
+  - [$t](https://github.com/kazupon/vue-i18n#$t)
 
 ## Instance Methods
 
@@ -332,7 +407,7 @@ As mentioned above, You need to implement locale setting that return a promise. 
   Translated string
 
 - **Usage:**
-  Translate the locale of `keypath`. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
+  Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
 
 
 # Options
