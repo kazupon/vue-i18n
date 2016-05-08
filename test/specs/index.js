@@ -10,3 +10,4 @@ Vue.use(plugin)
 
 require('./i18n')
 require('./asset')
+require('./component')

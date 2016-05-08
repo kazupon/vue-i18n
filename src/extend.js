@@ -12,16 +12,33 @@ import { getValue } from './path'
 export default function (Vue) {
   const { isArray, isObject } = Vue.util
 
-  function getVal (key, lang, args) {
-    let value = key
-    try {
-      let locale = Vue.locale(lang)
-      let val = getValue(locale, key) || locale[key]
-      value = (args ? format(val, args) : val) || key
-    } catch (e) {
-      value = key
+  function parseArgs (...args) {
+    let lang = Vue.config.lang
+    if (args.length === 1) {
+      if (isObject(args[0]) || isArray(args[0])) {
+        args = args[0]
+      } else if (typeof args[0] === 'string') {
+        lang = args[0]
+      }
+    } else if (args.length === 2) {
+      if (typeof args[0] === 'string') {
+        lang = args[0]
+      }
+      if (isObject(args[1]) || isArray(args[1])) {
+        args = args[1]
+      }
     }
-    return value
+
+    return { lang, params: args }
+  }
+
+  function translate (locale, key, args) {
+    if (!locale) { return null }
+
+    let val = getValue(locale, key) || locale[key]
+    if (!val) { return null }
+
+    return args ? format(val, args) : val
   }
 
 
@@ -36,23 +53,8 @@ export default function (Vue) {
   Vue.t = (key, ...args) => {
     if (!key) { return '' }
 
-    let language = Vue.config.lang
-    if (args.length === 1) {
-      if (isObject(args[0]) || isArray(args[0])) {
-        args = args[0]
-      } else if (typeof args[0] === 'string') {
-        language = args[0]
-      }
-    } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
-        language = args[0]
-      }
-      if (isObject(args[1]) || isArray(args[1])) {
-        args = args[1]
-      }
-    }
-
-    return getVal(key, language, args)
+    const { lang, params } = parseArgs(...args)
+    return translate(Vue.locale(lang), key, params) || key
   }
 
 
@@ -64,8 +66,13 @@ export default function (Vue) {
    * @return {String}
    */
 
-  Vue.prototype.$t = (key, ...args) => {
-    return Vue.t(key, ...args)
+  Vue.prototype.$t = function (key, ...args) {
+    if (!key) { return '' }
+
+    const { lang, params } = parseArgs(...args)
+    return translate(this.$options.locales && this.$options.locales[lang], key, params) 
+      || translate(Vue.locale(lang), key, params)
+      || key
   }
 
   return Vue
