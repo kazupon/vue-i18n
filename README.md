@@ -30,7 +30,7 @@ $ npm install vue-i18n
 
 When used in CommonJS, you must explicitly install the router via Vue.use():
 
-> :warning: if you are using `vue-router`, you must install with `Vue.use()` in advance of `router#start`.
+> :warning: if you are using `vue-router`, you must install with `Vue.use()` in advance of instance methods (`router#map`, `router#start`, ...etc).
 
 ```javascript
 var Vue = require('vue')
