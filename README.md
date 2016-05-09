@@ -24,9 +24,16 @@ jsdelivr
 
 ## NPM
 
-```shell
-$ npm install vue-i18n
-```
+### stable version
+
+    $ npm install vue-i18n
+
+### development version
+
+    $ git clone https://github.com/kazupon/vue-i18n node_modules/vue-i18n
+    $ cd node_modules/vue-i18n
+    $ npm install
+    $ npm run build
 
 When used in CommonJS, you must explicitly install the router via Vue.use():
 
@@ -40,6 +47,8 @@ Vue.use(VueI18n)
 Vue.config.lang = 'ja'
 Vue.locale('ja', { ... })
 ```
+
+You don't need to do this when using the standalone build, as it installs itself automatically.
 
 # Usage
 
