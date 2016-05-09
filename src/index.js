@@ -30,7 +30,7 @@ function plugin (Vue, opts = {}) {
     return
   }
 
-  let lang = 'en'
+  const lang = 'en'
 
   path.Vue = util.Vue = Vue
   setupLangVM(Vue, lang)

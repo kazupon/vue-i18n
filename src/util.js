@@ -51,9 +51,11 @@ export function empty (target) {
     if (target.length > 0) { return false }
     if (target.length === 0) { return true }
   } else if (exports.Vue.util.isPlainObject(target)) {
+    /* eslint-disable prefer-const */
     for (let key in target) {
       if (hasOwn(target, key)) { return false }
     }
+    /* eslint-enable prefer-const */
   }
 
   return true
@@ -73,11 +75,13 @@ export function each (target, iterator, context) {
       iterator.call(context || target[i], target[i], i)
     }
   } else if (exports.Vue.util.isPlainObject(target)) {
+    /* eslint-disable prefer-const */
     for (let key in target) {
       if (hasOwn(target, key)) {
         iterator.call(context || target[key], target[key], key)
       }
     }
+    /* eslint-enable prefer-const */
   }
 }
 
@@ -91,7 +95,7 @@ let Watcher
 
 export function getWatcher (vm) {
   if (!Watcher) {
-    const unwatch = vm.$watch('__watcher__', (a) => {})
+    const unwatch = vm.$watch('__watcher__', a => {})
     Watcher = vm._watchers[0].constructor
     unwatch()
   }

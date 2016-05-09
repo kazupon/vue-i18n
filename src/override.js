@@ -3,8 +3,8 @@ export default function (Vue, langVM) {
   const init = Vue.prototype._init
   Vue.prototype._init = function (options) {
     options = options || {}
-    let root = options._parent || options.parent || this
-    let lang = root.$lang
+    const root = options._parent || options.parent || this
+    const lang = root.$lang
 
     if (lang) {
       this.$lang = lang

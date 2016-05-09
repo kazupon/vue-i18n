@@ -12,7 +12,7 @@ describe('asset', () => {
 
   describe('register sync', () => {
     it('should be registered', () => {
-      let locale = {
+      const locale = {
         message: {
           foo: 'foo'
         }
@@ -26,7 +26,7 @@ describe('asset', () => {
   describe('regsiter async', () => {
     describe('promise like function', () => {
       describe('resolve', () => {
-        beforeEach((done) => {
+        beforeEach(done => {
           locale = { message: { bar: 'bar' } }
           Vue.locale('en', () => {
             return (resolve, reject) => {
@@ -38,7 +38,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should be registered', (done) => {
+        it('should be registered', done => {
           setTimeout(() => {
             assert(Vue.locale('en') === locale)
             done()
@@ -47,7 +47,7 @@ describe('asset', () => {
       })
 
       describe('reject', () => {
-        beforeEach((done) => {
+        beforeEach(done => {
           Vue.locale('en', () => {
             return (resolve, reject) => {
               setTimeout(() => {
@@ -58,7 +58,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should not be registered', (done) => {
+        it('should not be registered', done => {
           setTimeout(() => {
             assert(!Vue.locale('en'))
             done()
@@ -69,7 +69,7 @@ describe('asset', () => {
 
     describe('promise ', () => {
       describe('resolve', () => {
-        beforeEach((done) => {
+        beforeEach(done => {
           locale = { mesasge: { buz: 'buz' } }
           Vue.locale('en', () => {
             return new Promise((resolve, reject) => {
@@ -81,7 +81,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should be registered', (done) => {
+        it('should be registered', done => {
           setTimeout(() => {
             assert(Vue.locale('en') === locale)
             done()
@@ -90,7 +90,7 @@ describe('asset', () => {
       })
 
       describe('reject', () => {
-        beforeEach((done) => {
+        beforeEach(done => {
           Vue.locale('en', () => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
@@ -101,7 +101,7 @@ describe('asset', () => {
           Vue.nextTick(done)
         })
 
-        it('should not be registered', (done) => {
+        it('should not be registered', done => {
           setTimeout(() => {
             assert(!Vue.locale('en'))
             done()

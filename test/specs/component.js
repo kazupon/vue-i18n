@@ -4,8 +4,8 @@ import locales from './fixture/locales'
 
 
 describe('component locales', () => {
-  before((done) => {
-    Object.keys(locales).forEach((lang) => {
+  before(done => {
+    Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
     Vue.config.lang = 'en'
@@ -13,7 +13,7 @@ describe('component locales', () => {
   })
 
   let vm
-  beforeEach((done) => {
+  beforeEach(done => {
     vm = new Vue({
       el: document.createElement('div'),
       template: '<div><component1></component1></div>',

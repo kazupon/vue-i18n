@@ -5,7 +5,7 @@ export default function (Vue, langVM) {
   const Dep = getDep(langVM)
 
   function makeComputedGetter (getter, owner) {
-    let watcher = new Watcher(owner, getter, null, {
+    const watcher = new Watcher(owner, getter, null, {
       lazy: true
     })
 
@@ -25,6 +25,6 @@ export default function (Vue, langVM) {
     enumerable: true,
     configurable: true,
     get: makeComputedGetter(() => { return langVM.lang }, langVM),
-    set: Vue.util.bind((val) => { langVM.lang = val }, langVM)
+    set: Vue.util.bind(val => { langVM.lang = val }, langVM)
   })
 }

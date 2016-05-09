@@ -11,7 +11,7 @@ describe('path', () => {
 
   describe('object', () => {
     it('should get value', () => {
-      let val = getValue({ a: { b: 1 } }, 'a')
+      const val = getValue({ a: { b: 1 } }, 'a')
       assert(val.b === 1)
     })
   })

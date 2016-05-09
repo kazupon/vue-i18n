@@ -12,7 +12,7 @@ const exports = {}
 export default exports
 
 // cache
-let pathCache = Object.create(null)
+const pathCache = Object.create(null)
 
 // actions
 const APPEND = 0
@@ -31,7 +31,7 @@ const IN_DOUBLE_QUOTE = 6
 const AFTER_PATH = 7
 const ERROR = 8
 
-let pathStateMachine = []
+const pathStateMachine = []
 
 pathStateMachine[BEFORE_PATH] = {
   'ws': [BEFORE_PATH],
@@ -93,7 +93,7 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
 function getPathCharType (ch) {
   if (ch === undefined) { return 'eof' }
 
-  let code = ch.charCodeAt(0)
+  const code = ch.charCodeAt(0)
 
   switch (code) {
     case 0x5B: // [
@@ -142,7 +142,7 @@ function getPathCharType (ch) {
 function formatSubPath (path) {
   const { isLiteral, stripQuotes } = exports.Vue.util
 
-  let trimmed = path.trim()
+  const trimmed = path.trim()
   // invalid leading 0
   if (path.charAt(0) === '0' && isNaN(path)) { return false }
 
@@ -157,13 +157,13 @@ function formatSubPath (path) {
  */
 
 function parse (path) {
-  let keys = []
+  const keys = []
   let index = -1
   let mode = BEFORE_PATH
   let subPathDepth = 0
   let c, newChar, key, type, transition, action, typeMap
 
-  let actions = []
+  const actions = []
 
   actions[PUSH] = function () {
     if (key !== undefined) {
@@ -202,7 +202,7 @@ function parse (path) {
   }
 
   function maybeUnescapeQuote () {
-    let nextChar = path[index + 1]
+    const nextChar = path[index + 1]
     if ((mode === IN_SINGLE_QUOTE && nextChar === "'")
       || (mode === IN_DOUBLE_QUOTE && nextChar === '"')) {
       index++
@@ -278,15 +278,15 @@ export function getValue (obj, path) {
 
   if (!isObject(obj)) { return null }
 
-  let paths = parsePath(path)
+  const paths = parsePath(path)
   if (empty(paths)) { return null }
 
+  const length = paths.length
   let ret = null
   let last = obj
-  let length = paths.length
   let i = 0
   while (i < length) {
-    let value = last[paths[i]]
+    const value = last[paths[i]]
     if (value === undefined) {
       last = null
       break

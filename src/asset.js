@@ -1,6 +1,6 @@
 import { warn, isPromise } from './util'
 
-let locales = Object.create(null) // locales store
+const locales = Object.create(null) // locales store
 
 
 export default function (Vue) {
@@ -20,7 +20,7 @@ export default function (Vue) {
         locales[id] = undefined
         delete locales[id]
       } else {
-        setLocale(id, definition, (locale) => {
+        setLocale(id, definition, locale => {
           if (locale) {
             locales[id] = locale
             cb && cb()
@@ -38,7 +38,7 @@ function setLocale (id, definition, cb) {
   if (typeof definition === 'object') { // sync
     cb(definition)
   } else {
-    let future = definition.call(this)
+    const future = definition.call(this)
     if (typeof future === 'function') {
       if (future.resolved) {
         // cached
@@ -48,8 +48,8 @@ function setLocale (id, definition, cb) {
         future.pendingCallbacks.push(cb)
       } else {
         future.requested = true
-        let cbs = future.pendingCallbacks = [cb]
-        future((locale) => { // resolve
+        const cbs = future.pendingCallbacks = [cb]
+        future(locale => { // resolve
           future.resolved = locale
           for (let i = 0, l = cbs.length; i < l; i++) {
             cbs[i](locale)
@@ -59,11 +59,11 @@ function setLocale (id, definition, cb) {
         })
       }
     } else if (isPromise(future)) { // promise
-      future.then((locale) => { // resolve
+      future.then(locale => { // resolve
         cb(locale)
       }, () => { // reject
         cb()
-      }).catch((err) => {
+      }).catch(err => {
         console.error(err)
         cb()
       })

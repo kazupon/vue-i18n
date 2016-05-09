@@ -36,7 +36,7 @@ export default function (Vue) {
   function translate (locale, key, args) {
     if (!locale) { return null }
 
-    let val = getValue(locale, key) || locale[key]
+    const val = getValue(locale, key) || locale[key]
     if (!val) { return null }
 
     return args ? format(val, args) : val

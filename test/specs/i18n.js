@@ -4,8 +4,8 @@ import locales from './fixture/locales'
 
 
 describe('i18n', () => {
-  before((done) => {
-    Object.keys(locales).forEach((lang) => {
+  before(done => {
+    Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
     Vue.config.lang = 'en'
@@ -102,14 +102,14 @@ describe('i18n', () => {
   describe('$t', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {
-        let vm = new Vue()
+        const vm = new Vue()
         assert(vm.$t('message.hello') === locales.en.message.hello)
       })
     })
 
     describe('ja language locale', () => {
       it('should translate a japanese', () => {
-        let vm = new Vue()
+        const vm = new Vue()
         assert(vm.$t('message.hello', 'ja') === locales.ja.message.hello)
       })
     })
@@ -117,33 +117,33 @@ describe('i18n', () => {
     describe('key argument', () => {
       describe('not specify', () => {
         it('should return empty string', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(vm.$t() === '')
         })
       })
 
       describe('empty string', () => {
         it('should return empty string', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(vm.$t('') === '')
         })
       })
 
       describe('not regist key', () => {
         it('should return key string', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(vm.$t('foo.bar') === 'foo.bar')
         })
       })
 
       describe('sentence fragment', () => {
         it('should translate fragment', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(vm.$t('hello world') === 'Hello World')
         })
 
         it('should return replaced string if available', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(
             vm.$t('Hello {0}', ['kazupon']),
             'Hello kazupon'
@@ -151,7 +151,7 @@ describe('i18n', () => {
         })
 
         it('should return key if unavailable', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(vm.$t('Hello') === 'Hello')
         })
       })
@@ -160,7 +160,7 @@ describe('i18n', () => {
     describe('format arguments', () => {
       context('named', () => {
         it('should return replaced string', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(
             vm.$t('message.format.named', { name: 'kazupon' }),
             'Hello kazupon, how are you?'
@@ -170,7 +170,7 @@ describe('i18n', () => {
 
       context('list', () => {
         it('should return replaced string', () => {
-          let vm = new Vue()
+          const vm = new Vue()
           assert(
             vm.$t('message.format.list', ['kazupon']),
             'Hello kazupon, how are you?'
@@ -181,14 +181,14 @@ describe('i18n', () => {
 
     describe('language argument', () => {
       it('should return empty string', () => {
-        let vm = new Vue()
+        const vm = new Vue()
         assert(vm.$t('message.hello', 'ja') === locales.ja.message.hello)
       })
     })
 
     describe('format & language arguments', () => {
       it('should return replaced string', () => {
-        let vm = new Vue()
+        const vm = new Vue()
         assert(
           vm.$t('message.format.list', 'ja', ['kazupon']),
           'こんにちは kazupon, ごきげんいかが？'
@@ -199,22 +199,22 @@ describe('i18n', () => {
 
 
   describe('reactive translation', () => {
-    it('should translate', (done) => {
+    it('should translate', done => {
       const ViewModel = Vue.extend({
         template: '<div><p>{{ $t("message.hello", lang) }}</p></div>',
         data: () => {
           return { lang: 'en' }
         },
         el: () => {
-          let el = document.createElement('div')
+          const el = document.createElement('div')
           el.id = 'translate-reactive'
           document.body.appendChild(el)
           return el
         }
       })
 
-      let vm = new ViewModel()
-      let el = document.querySelector('#translate-reactive')
+      const vm = new ViewModel()
+      const el = document.querySelector('#translate-reactive')
       Vue.nextTick(() => {
         assert(el.textContent === locales.en.message.hello)
 
@@ -229,11 +229,11 @@ describe('i18n', () => {
 
 
   describe('translate component', () => {
-    it('should translate', (done) => {
+    it('should translate', done => {
       const ViewModel = Vue.extend({
         template: '<div><p>{{ $t("message.hello") }}</p><hoge></hoge></div>',
         el: () => {
-          let el = document.createElement('div')
+          const el = document.createElement('div')
           el.id = 'translate-parent'
           document.body.appendChild(el)
           return el
@@ -247,10 +247,10 @@ describe('i18n', () => {
       new ViewModel()
 
       Vue.nextTick(() => {
-        let child = document.querySelector('#translate-child')
+        const child = document.querySelector('#translate-child')
         assert(child.textContent === locales.en.message.hoge)
 
-        let parent = document.querySelector('#translate-parent p')
+        const parent = document.querySelector('#translate-parent p')
         assert(parent.textContent === locales.en.message.hello)
 
         done()
@@ -261,19 +261,19 @@ describe('i18n', () => {
 
   describe('global lang config', () => {
     let vm
-    beforeEach((done) => {
+    beforeEach(done => {
       vm = new Vue()
       vm.$nextTick(done)
     })
 
-    afterEach((done) => {
+    afterEach(done => {
       vm.$destroy()
       vm = null
       Vue.nextTick(done)
     })
 
     context('ja', () => {
-      it('should translate with japanese', (done) => {
+      it('should translate with japanese', done => {
         Vue.config.lang = 'ja'
         Vue.nextTick(() => {
           assert(vm.$t('message.hello') === locales.ja.message.hello)
@@ -282,7 +282,7 @@ describe('i18n', () => {
       })
 
       context('en', () => {
-        it('should translate with english', (done) => {
+        it('should translate with english', done => {
           Vue.config.lang = 'en'
           Vue.nextTick(() => {
             assert(vm.$t('message.hello') === locales.en.message.hello)
