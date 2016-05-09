@@ -62,21 +62,13 @@ var locales = {
 }
 
 // install plugin
-// DEPRECATED:
-//   `options` arguments, please use `Vue.config.lang` and `Vue.locale`.
-//   3.1 or later, not used `options` arguments!!
-Vue.use(VueI18n/*, {
-  lang: 'ja',
-  locales: locales
-}*/)
+Vue.use(VueI18n)
 
 
 // set lang
-// RECOMMEND: 3.0 or later
 Vue.config.lang = 'ja'
 
 // set locales
-// RECOMMEND: 3.0 or later
 Object.keys(locales).forEach(function (lang) {
   Vue.locale(lang, locales[lang])
 })
@@ -408,38 +400,6 @@ As mentioned above, You need to implement locale setting that return a promise. 
 
 - **Usage:**
   Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
-
-
-# Options
-
-> NOTE: Deprecated in 3.1 or later :warning:
-
-## Plugin options
-
-```javascript
-Vue.use(plugin, {
-  lang: 'en',
-  locales: {
-    en: {
-      ...
-    },
-    ...
-    ja: {
-      ...
-    }
-  }
-})
-```
-
-### lang
-Specify translate the language code.
-
-If you abbreviated the `lang` option, translate as well as 'en' language code option (default: 'en').
-
-### locales
-Specify translate some local dictionary.
-
-If you abbreviated the `locales` option, set the empty local dictionary.
 
 
 # Contributing
