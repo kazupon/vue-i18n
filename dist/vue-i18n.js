@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v3.0.0
+ * vue-i18n v3.1.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -83,28 +83,6 @@
     return true;
   }
 
-  /**
-   * each
-   *
-   * @param {Array|Object} target
-   * @param {Function} iterator
-   * @param {Object} [context]
-   */
-
-  function each(target, iterator, context) {
-    if (Array.isArray(target)) {
-      for (var i = 0; i < target.length; i++) {
-        iterator.call(context || target[i], target[i], i);
-      }
-    } else if (exports$1.Vue.util.isPlainObject(target)) {
-      for (var key in target) {
-        if (hasOwn(target, key)) {
-          iterator.call(context || target[key], target[key], key);
-        }
-      }
-    }
-  }
-
   var Watcher = void 0;
   /**
    * getWatcher
@@ -146,6 +124,316 @@
 
   function isPromise(p) {
     return p && typeof p.then === 'function';
+  }
+
+  // export default for holding the Vue reference
+  var exports$2 = {};
+  // cache
+  var pathCache = Object.create(null);
+
+  // actions
+  var APPEND = 0;
+  var PUSH = 1;
+  var INC_SUB_PATH_DEPTH = 2;
+  var PUSH_SUB_PATH = 3;
+
+  // states
+  var BEFORE_PATH = 0;
+  var IN_PATH = 1;
+  var BEFORE_IDENT = 2;
+  var IN_IDENT = 3;
+  var IN_SUB_PATH = 4;
+  var IN_SINGLE_QUOTE = 5;
+  var IN_DOUBLE_QUOTE = 6;
+  var AFTER_PATH = 7;
+  var ERROR = 8;
+
+  var pathStateMachine = [];
+
+  pathStateMachine[BEFORE_PATH] = {
+    'ws': [BEFORE_PATH],
+    'ident': [IN_IDENT, APPEND],
+    '[': [IN_SUB_PATH],
+    'eof': [AFTER_PATH]
+  };
+
+  pathStateMachine[IN_PATH] = {
+    'ws': [IN_PATH],
+    '.': [BEFORE_IDENT],
+    '[': [IN_SUB_PATH],
+    'eof': [AFTER_PATH]
+  };
+
+  pathStateMachine[BEFORE_IDENT] = {
+    'ws': [BEFORE_IDENT],
+    'ident': [IN_IDENT, APPEND]
+  };
+
+  pathStateMachine[IN_IDENT] = {
+    'ident': [IN_IDENT, APPEND],
+    '0': [IN_IDENT, APPEND],
+    'number': [IN_IDENT, APPEND],
+    'ws': [IN_PATH, PUSH],
+    '.': [BEFORE_IDENT, PUSH],
+    '[': [IN_SUB_PATH, PUSH],
+    'eof': [AFTER_PATH, PUSH]
+  };
+
+  pathStateMachine[IN_SUB_PATH] = {
+    "'": [IN_SINGLE_QUOTE, APPEND],
+    '"': [IN_DOUBLE_QUOTE, APPEND],
+    '[': [IN_SUB_PATH, INC_SUB_PATH_DEPTH],
+    ']': [IN_PATH, PUSH_SUB_PATH],
+    'eof': ERROR,
+    'else': [IN_SUB_PATH, APPEND]
+  };
+
+  pathStateMachine[IN_SINGLE_QUOTE] = {
+    "'": [IN_SUB_PATH, APPEND],
+    'eof': ERROR,
+    'else': [IN_SINGLE_QUOTE, APPEND]
+  };
+
+  pathStateMachine[IN_DOUBLE_QUOTE] = {
+    '"': [IN_SUB_PATH, APPEND],
+    'eof': ERROR,
+    'else': [IN_DOUBLE_QUOTE, APPEND]
+  };
+
+  /**
+   * Determine the type of a character in a keypath.
+   *
+   * @param {Char} ch
+   * @return {String} type
+   */
+
+  function getPathCharType(ch) {
+    if (ch === undefined) {
+      return 'eof';
+    }
+
+    var code = ch.charCodeAt(0);
+
+    switch (code) {
+      case 0x5B: // [
+      case 0x5D: // ]
+      case 0x2E: // .
+      case 0x22: // "
+      case 0x27: // '
+      case 0x30:
+        // 0
+        return ch;
+
+      case 0x5F: // _
+      case 0x24:
+        // $
+        return 'ident';
+
+      case 0x20: // Space
+      case 0x09: // Tab
+      case 0x0A: // Newline
+      case 0x0D: // Return
+      case 0xA0: // No-break space
+      case 0xFEFF: // Byte Order Mark
+      case 0x2028: // Line Separator
+      case 0x2029:
+        // Paragraph Separator
+        return 'ws';
+    }
+
+    // a-z, A-Z
+    if (code >= 0x61 && code <= 0x7A || code >= 0x41 && code <= 0x5A) {
+      return 'ident';
+    }
+
+    // 1-9
+    if (code >= 0x31 && code <= 0x39) {
+      return 'number';
+    }
+
+    return 'else';
+  }
+
+  /**
+   * Format a subPath, return its plain form if it is
+   * a literal string or number. Otherwise prepend the
+   * dynamic indicator (*).
+   *
+   * @param {String} path
+   * @return {String}
+   */
+
+  function formatSubPath(path) {
+    var _exports$Vue$util = exports$2.Vue.util;
+    var isLiteral = _exports$Vue$util.isLiteral;
+    var stripQuotes = _exports$Vue$util.stripQuotes;
+
+
+    var trimmed = path.trim();
+    // invalid leading 0
+    if (path.charAt(0) === '0' && isNaN(path)) {
+      return false;
+    }
+
+    return isLiteral(trimmed) ? stripQuotes(trimmed) : '*' + trimmed;
+  }
+
+  /**
+   * Parse a string path into an array of segments
+   *
+   * @param {String} path
+   * @return {Array|undefined}
+   */
+
+  function parse(path) {
+    var keys = [];
+    var index = -1;
+    var mode = BEFORE_PATH;
+    var subPathDepth = 0;
+    var c = void 0,
+        newChar = void 0,
+        key = void 0,
+        type = void 0,
+        transition = void 0,
+        action = void 0,
+        typeMap = void 0;
+
+    var actions = [];
+
+    actions[PUSH] = function () {
+      if (key !== undefined) {
+        keys.push(key);
+        key = undefined;
+      }
+    };
+
+    actions[APPEND] = function () {
+      if (key === undefined) {
+        key = newChar;
+      } else {
+        key += newChar;
+      }
+    };
+
+    actions[INC_SUB_PATH_DEPTH] = function () {
+      actions[APPEND]();
+      subPathDepth++;
+    };
+
+    actions[PUSH_SUB_PATH] = function () {
+      if (subPathDepth > 0) {
+        subPathDepth--;
+        mode = IN_SUB_PATH;
+        actions[APPEND]();
+      } else {
+        subPathDepth = 0;
+        key = formatSubPath(key);
+        if (key === false) {
+          return false;
+        } else {
+          actions[PUSH]();
+        }
+      }
+    };
+
+    function maybeUnescapeQuote() {
+      var nextChar = path[index + 1];
+      if (mode === IN_SINGLE_QUOTE && nextChar === "'" || mode === IN_DOUBLE_QUOTE && nextChar === '"') {
+        index++;
+        newChar = '\\' + nextChar;
+        actions[APPEND]();
+        return true;
+      }
+    }
+
+    while (mode != null) {
+      index++;
+      c = path[index];
+
+      if (c === '\\' && maybeUnescapeQuote()) {
+        continue;
+      }
+
+      type = getPathCharType(c);
+      typeMap = pathStateMachine[mode];
+      transition = typeMap[type] || typeMap['else'] || ERROR;
+
+      if (transition === ERROR) {
+        return; // parse error
+      }
+
+      mode = transition[0];
+      action = actions[transition[1]];
+      if (action) {
+        newChar = transition[2];
+        newChar = newChar === undefined ? c : newChar;
+        if (action() === false) {
+          return;
+        }
+      }
+
+      if (mode === AFTER_PATH) {
+        keys.raw = path;
+        return keys;
+      }
+    }
+  }
+
+  /**
+   * External parse that check for a cache hit first
+   *
+   * @param {String} path
+   * @return {Array|undefined}
+   */
+
+  function parsePath(path) {
+    var hit = pathCache[path];
+    if (!hit) {
+      hit = parse(path);
+      if (hit) {
+        pathCache[path] = hit;
+      }
+    }
+    return hit;
+  }
+
+  /**
+   * Get value from path string
+   *
+   * @param {Object} obj
+   * @param {String} path
+   * @return value
+   */
+
+  function getValue(obj, path) {
+    var isObject = exports$2.Vue.util.isObject;
+
+
+    if (!isObject(obj)) {
+      return null;
+    }
+
+    var paths = parsePath(path);
+    if (empty(paths)) {
+      return null;
+    }
+
+    var ret = null;
+    var last = obj;
+    var length = paths.length;
+    var i = 0;
+    while (i < length) {
+      var value = last[paths[i]];
+      if (value === undefined) {
+        last = null;
+        break;
+      }
+      last = value;
+      i++;
+    }
+
+    ret = last;
+    return ret;
   }
 
   /**
@@ -420,19 +708,53 @@
    */
 
   function Extend (Vue) {
-    var getPath = compare('1.0.8', Vue.version) === -1 ? Vue.parsers.path.getPath : Vue.parsers.path.get;
-    var util = Vue.util;
+    var _Vue$util = Vue.util;
+    var isArray = _Vue$util.isArray;
+    var isObject = _Vue$util.isObject;
 
-    function getVal(key, lang, args) {
-      var value = key;
-      try {
-        var locale = Vue.locale(lang);
-        var val = getPath(locale, key) || locale[key];
-        value = (args ? format(val, args) : val) || key;
-      } catch (e) {
-        value = key;
+
+    function parseArgs() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
       }
-      return value;
+
+      var lang = Vue.config.lang;
+      if (args.length === 1) {
+        if (isObject(args[0]) || isArray(args[0])) {
+          args = args[0];
+        } else if (typeof args[0] === 'string') {
+          lang = args[0];
+        }
+      } else if (args.length === 2) {
+        if (typeof args[0] === 'string') {
+          lang = args[0];
+        }
+        if (isObject(args[1]) || isArray(args[1])) {
+          args = args[1];
+        }
+      }
+
+      return { lang: lang, params: args };
+    }
+
+    function translate(locale, key, args) {
+      if (!locale) {
+        return null;
+      }
+
+      var val = getValue(locale, key) || locale[key];
+      if (!val) {
+        return null;
+      }
+
+      return args ? format(val, args) : val;
+    }
+
+    function warnDefault(key) {
+      if ('development' !== 'production') {
+        warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
+      }
+      return key;
     }
 
     /**
@@ -444,31 +766,20 @@
      */
 
     Vue.t = function (key) {
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
+      for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
       }
 
       if (!key) {
         return '';
       }
 
-      var language = Vue.config.lang;
-      if (args.length === 1) {
-        if (util.isObject(args[0]) || util.isArray(args[0])) {
-          args = args[0];
-        } else if (typeof args[0] === 'string') {
-          language = args[0];
-        }
-      } else if (args.length === 2) {
-        if (typeof args[0] === 'string') {
-          language = args[0];
-        }
-        if (util.isObject(args[1]) || util.isArray(args[1])) {
-          args = args[1];
-        }
-      }
+      var _parseArgs = parseArgs.apply(undefined, args);
 
-      return getVal(key, language, args);
+      var lang = _parseArgs.lang;
+      var params = _parseArgs.params;
+
+      return translate(Vue.locale(lang), key, params) || warnDefault(key);
     };
 
     /**
@@ -480,11 +791,20 @@
      */
 
     Vue.prototype.$t = function (key) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        args[_key2 - 1] = arguments[_key2];
+      if (!key) {
+        return '';
       }
 
-      return Vue.t.apply(Vue, [key].concat(args));
+      for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
+      }
+
+      var _parseArgs2 = parseArgs.apply(undefined, args);
+
+      var lang = _parseArgs2.lang;
+      var params = _parseArgs2.params;
+
+      return translate(this.$options.locales && this.$options.locales[lang], key, params) || translate(Vue.locale(lang), key, params) || warnDefault(key);
     };
 
     return Vue;
@@ -512,21 +832,12 @@
       return;
     }
 
-    if ('development' !== 'production' && opts.lang) {
-      warn('`options.lang` will be deprecated in vue-i18n 3.1 later.');
-    }
-    var lang = opts.lang || 'en';
+    var lang = 'en';
 
-    if ('development' !== 'production' && opts.locales) {
-      warn('`options.locales` will be deprecated in vue-i18n 3.1 later.');
-    }
-    var locales = opts.locales || {};
-
-    exports$1.Vue = Vue;
+    exports$2.Vue = exports$1.Vue = Vue;
     setupLangVM(Vue, lang);
 
     Asset(Vue);
-    setupLocale(Vue, locales);
 
     Override(Vue, langVM);
     Config(Vue, langVM);
@@ -542,15 +853,7 @@
     Vue.config.silent = silent;
   }
 
-  function setupLocale(Vue, locales) {
-    if (!empty(locales)) {
-      each(locales, function (locale, lang) {
-        Vue.locale(lang, locale);
-      });
-    }
-  }
-
-  plugin.version = '3.0.0';
+  plugin.version = '3.1.0';
 
   return plugin;
 

@@ -1,3 +1,25 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/kazupon/vue-i18n/compare/v3.0.0...v3.1.0) (2016-05-09)
+
+
+### :star: New Features
+
+* component locales ([12fe695](https://github.com/kazupon/vue-i18n/commit/12fe695)), closes [#29](https://github.com/kazupon/vue-i18n/issues/29)
+
+
+### :warning: Depcreted
+
+* **options:** remove Vue.use options ([d87b59b](https://github.com/kazupon/vue-i18n/commit/d87b59b))
+
+
+### :zap: Improvements
+
+* **keypath:** port the object path parser ([3ae04b7](https://github.com/kazupon/vue-i18n/commit/3ae04b7))
+* **translation:** fix hypenate included key translating ([d0a415f](https://github.com/kazupon/vue-i18n/commit/d0a415f)), closes [#24](https://github.com/kazupon/vue-i18n/issues/24)
+* **translation:** warning outputing when cannot translate with keypath ([b4c7c0e](https://github.com/kazupon/vue-i18n/commit/b4c7c0e)), closes [#22](https://github.com/kazupon/vue-i18n/issues/22)
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/kazupon/vue-i18n/compare/v2.4.1...v3.0.0) (2016-04-18)
 
