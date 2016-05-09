@@ -1,3 +1,13 @@
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/kazupon/vue-i18n/compare/v3.1.0...v3.1.1) (2016-05-09)
+
+
+### :star: New Features
+
+* auto installation for standalone ([2b0dc09](https://github.com/kazupon/vue-i18n/commit/2b0dc09))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/kazupon/vue-i18n/compare/v3.0.0...v3.1.0) (2016-05-09)
 
