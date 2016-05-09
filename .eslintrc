@@ -1,7 +1,8 @@
 {
-  "extends": "standard",
+  "extends": "vue",
   "rules": {
     "complexity": 0,
+    "object-curly-spacing": ["error", "always"],
     "operator-linebreak": [2, "before"],
     "no-trailing-spaces": 0,
     "no-inline-comments": 0,
