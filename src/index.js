@@ -54,3 +54,7 @@ function setupLangVM (Vue, lang) {
 plugin.version = '3.1.0'
 
 export default plugin
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin)
+}
