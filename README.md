@@ -10,7 +10,8 @@ Internationalization plugin of Vue.js
 
 
 # Compatibility
-- Vue.js `1.0.0`+
+- Vue.js `1.0.0`+ 
+- Vue.js `2.0.0-pre-alpha`+
 
 
 # Installation
