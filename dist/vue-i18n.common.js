@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v3.1.1
+ * vue-i18n v4.0.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -69,11 +69,13 @@ function empty(target) {
       return true;
     }
   } else if (exports$1.Vue.util.isPlainObject(target)) {
+    /* eslint-disable prefer-const */
     for (var key in target) {
       if (hasOwn(target, key)) {
         return false;
       }
     }
+    /* eslint-enable prefer-const */
   }
 
   return true;
@@ -414,9 +416,9 @@ function getValue(obj, path) {
     return null;
   }
 
+  var length = paths.length;
   var ret = null;
   var last = obj;
-  var length = paths.length;
   var i = 0;
   while (i < length) {
     var value = last[paths[i]];
@@ -459,6 +461,7 @@ function compare (v1, v2) {
   var s1 = split(v1);
   var s2 = split(v2);
 
+  /* eslint-disable prefer-const */
   for (var i = 0; i < 3; i++) {
     var n1 = parseInt(s1[i] || 0, 10);
     var n2 = parseInt(s2[i] || 0, 10);
@@ -470,6 +473,7 @@ function compare (v1, v2) {
       return -1;
     }
   }
+  /* eslint-enable prefer-const */
 
   if ((s1[2] + s2[2] + '').indexOf('-') > -1) {
     var p1 = (PATCH_PATTERN.exec(s1[2]) || [''])[0];
@@ -849,7 +853,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '3.1.1';
+plugin.version = '4.0.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);

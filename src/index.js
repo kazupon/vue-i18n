@@ -51,7 +51,7 @@ function setupLangVM (Vue, lang) {
   Vue.config.silent = silent
 }
 
-plugin.version = '3.1.1'
+plugin.version = '4.0.0'
 
 export default plugin
 

@@ -1,3 +1,13 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/kazupon/vue-i18n/compare/v3.1.1...v4.0.0) (2016-05-10)
+
+
+### :zap: Improvements
+
+* support vue 2.0-pre-alpha ([f6517bc](https://github.com/kazupon/vue-i18n/commit/f6517bc))
+
+
+
 <a name="3.1.1"></a>
 ## [3.1.1](https://github.com/kazupon/vue-i18n/compare/v3.1.0...v3.1.1) (2016-05-09)
 

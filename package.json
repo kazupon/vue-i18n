@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n",
   "description": "Internationalization plugin for Vue.js",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -81,12 +81,12 @@
     "coolkids": "VUE_I18N_TYPE=sauce SAUCE=batch1 karma start config/karma.conf.js",
     "coverage": "VUE_I18N_TYPE=coverage karma start config/karma.conf.js",
     "coveralls": "VUE_I18N_TYPE=coveralls karma start config/karma.conf.js",
-    "proto": "webpack-dev-server --quite --config config/webpack.dev.conf.js --host 0.0.0.0",
     "dev": "webpack-dev-server --quiet --config config/webpack.test.conf.js",
     "e2e": "webpack-dev-server --quiet --config config/webpack.e2e.conf.js & mocha --opts test/e2e/mocha.opts --harmony test/e2e/test.js && kill $! || (kill $! && exit 1)",
     "ie": "VUE_I18N_TYPE=sauce SAUCE=batch2 karma start config/karma.conf.js",
     "lint": "eslint src/*.js test/**/*.js config/*.js",
     "mobile": "VUE_I18N_TYPE=sauce SAUCE=batch3 karma start config/karma.conf.js",
+    "proto": "webpack-dev-server --quite --config config/webpack.dev.conf.js --host 0.0.0.0",
     "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
     "sauce": "npm run coolkids && npm run ie && npm run mobile",
     "test": "npm run ci",
