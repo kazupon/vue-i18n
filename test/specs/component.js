@@ -1,6 +1,7 @@
 import assert from 'power-assert'
 import Vue from 'vue'
 import locales from './fixture/locales'
+import compare from '../../src/compare'
 
 
 describe('component locales', () => {
@@ -14,9 +15,8 @@ describe('component locales', () => {
 
   let vm
   beforeEach(done => {
-    vm = new Vue({
+    const options = {
       el: document.createElement('div'),
-      template: '<div><component1></component1></div>',
       components: {
         component1: {
           locales: {
@@ -30,7 +30,19 @@ describe('component locales', () => {
           }
         }
       }
-    })
+    }
+
+    if (compare(Vue.version, '2.0.0-alpha') < 0) {
+      options.template = '<div><component1></component1></div>'
+    } else {
+      options.render = function () {
+        return this.$createElement('div', {}, [
+          this.$createElement('component1', {})
+        ])
+      }
+    }
+
+    vm = new Vue(options)
     vm.$nextTick(done)
   })
 
