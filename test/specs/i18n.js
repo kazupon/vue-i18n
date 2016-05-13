@@ -199,28 +199,35 @@ describe('i18n', () => {
   })
 
 
-  /*
   describe('reactive translation', () => {
     it('should translate', done => {
-      const ViewModel = Vue.extend({
-        template: '<div><p>{{ $t("message.hello", lang) }}</p></div>',
+      const options = {
         data: () => {
           return { lang: 'en' }
         },
         el: () => {
           const el = document.createElement('div')
-          el.id = 'translate-reactive'
           document.body.appendChild(el)
           return el
         }
-      })
+      }
 
+      if (compare(Vue.version, '2.0.0-alpha') < 0) {
+        options.template = '<p>{{ $t("message.hello", lang) }}</p>'
+      } else {
+        options.render = function () {
+          return this.$createElement('p', {}, [this.__toString__(this.$t('message.hello', this.lang))])
+        }
+      }
+
+      const ViewModel = Vue.extend(options)
       const vm = new ViewModel()
-      const el = document.querySelector('#translate-reactive')
+
+      const el = vm.$el
       Vue.nextTick(() => {
         assert(el.textContent === locales.en.message.hello)
 
-        vm.$set('lang', 'ja') // set japanese
+        Vue.set(vm, 'lang', 'ja') // set japanese
         Vue.nextTick(() => {
           assert(el.textContent === locales.ja.message.hello)
           done()
@@ -228,7 +235,6 @@ describe('i18n', () => {
       })
     })
   })
-  */
 
 
   describe('translate component', () => {
