@@ -317,6 +317,8 @@ You need to implement locale setting that return function have `function (resolv
 ### 2. promise
 As mentioned above, You need to implement locale setting that return a promise. if successful, you need to `resolve` according to locale object. if failed, you need to use `reject`.
 
+> :warning: You must return a **ES6 compatible** promise.
+
 
 # API References
 
