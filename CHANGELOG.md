@@ -1,3 +1,13 @@
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/kazupon/vue-i18n/compare/v4.0.0...v4.0.1) (2016-06-06)
+
+
+### :bug: Bug Fixes
+
+* **translate:** fix underscore named argument translate issue ([eeaf936](https://github.com/kazupon/vue-i18n/commit/eeaf936))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/kazupon/vue-i18n/compare/v3.1.1...v4.0.0) (2016-05-10)
 

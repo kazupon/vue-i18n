@@ -20,7 +20,7 @@ Internationalization plugin of Vue.js
 jsdelivr
 
 ```html
-<script src="https://cdn.jsdelivr.net/vue.i18n/4.0.0/vue-i18n.min.js"></script>
+<script src="https://cdn.jsdelivr.net/vue.i18n/4.0.1/vue-i18n.min.js"></script>
 ```
 
 ## NPM

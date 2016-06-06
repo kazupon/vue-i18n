@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.0.0
+ * vue-i18n v4.0.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -665,7 +665,7 @@
    *    https://github.com/Matt-Esch/string-template/index.js
    */
 
-  var RE_NARGS = /(%|)\{([0-9a-zA-Z]+)\}/g;
+  var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
   /**
    * template
@@ -857,7 +857,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.0.0';
+  plugin.version = '4.0.1';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
