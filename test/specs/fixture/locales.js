@@ -10,7 +10,8 @@ export default {
     },
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
-    'continue-with-new-account': 'continue with new account'
+    'continue-with-new-account': 'continue with new account',
+    underscore: '{hello_msg} world'
   },
   ja: {
     message: {

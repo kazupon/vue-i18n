@@ -4,7 +4,7 @@
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
-const RE_NARGS = /(%|)\{([0-9a-zA-Z]+)\}/g
+const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g
 
 
 /**

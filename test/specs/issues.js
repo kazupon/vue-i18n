@@ -5,14 +5,20 @@ import locales from './fixture/locales'
 
 describe('issues', () => {
   let vm
+  beforeEach(() => {
+    vm = new Vue()
+  })
+
 
   describe('#24', () => {
-    beforeEach(() => {
-      vm = new Vue()
-    })
-
     it('should be translated', () => {
       assert(vm.$t('continue-with-new-account') === locales[Vue.config.lang]['continue-with-new-account'])
+    })
+  })
+
+  describe('#35', () => {
+    it('should be translated', () => {
+      assert(vm.$t('underscore', { hello_msg: 'hello' }) === 'hello world')
     })
   })
 })
