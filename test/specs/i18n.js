@@ -1,10 +1,11 @@
 import assert from 'power-assert'
 import Vue from 'vue'
-import compare from '../../src/compare'
 import locales from './fixture/locales'
 
 
 describe('i18n', () => {
+  const version = Number(Vue.version.split('.')[0])
+
   before(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
@@ -200,36 +201,35 @@ describe('i18n', () => {
 
 
   describe('reactive translation', () => {
+    let el
+    beforeEach(() => {
+      el = document.createElement('div')
+      document.body.appendChild(el)
+    })
+
     it('should translate', done => {
       const options = {
-        data: () => {
+        el,
+        data () {
           return { lang: 'en' }
-        },
-        el: () => {
-          const el = document.createElement('div')
-          document.body.appendChild(el)
-          return el
         }
       }
 
-      if (compare(Vue.version, '2.0.0-alpha') < 0) {
-        options.template = '<p>{{ $t("message.hello", lang) }}</p>'
+      if (version >= 2) {
+        options.render = function (h) {
+          return h('p', {}, [this.$t('message.hello', this.lang)])
+        }
       } else {
-        options.render = function () {
-          return this.$createElement('p', {}, [this.__toString__(this.$t('message.hello', this.lang))])
-        }
+        options.template = '<p>{{ $t("message.hello", lang) }}</p>'
       }
 
-      const ViewModel = Vue.extend(options)
-      const vm = new ViewModel()
-
-      const el = vm.$el
+      const vm = new Vue(options)
       Vue.nextTick(() => {
-        assert(el.textContent === locales.en.message.hello)
+        assert(vm.$el.textContent === locales.en.message.hello)
 
-        Vue.set(vm, 'lang', 'ja') // set japanese
+        vm.lang = 'ja' // set japanese
         Vue.nextTick(() => {
-          assert(el.textContent === locales.ja.message.hello)
+          assert(vm.$el.textContent === locales.ja.message.hello)
           done()
         })
       })
@@ -238,45 +238,43 @@ describe('i18n', () => {
 
 
   describe('translate component', () => {
+    let el
+    beforeEach(() => {
+      el = document.createElement('div')
+      document.body.appendChild(el)
+    })
+
     it('should translate', done => {
       const compOptions = {}
-      if (compare(Vue.version, '2.0.0-alpha') < 0) {
-        compOptions.template = '<p>{{* $t("message.hoge") }}</p>'
-      } else {
-        compOptions.render = function () {
-          return this.$createElement('p', {}, [this.__toString__(this.$t('message.hoge'))])
+      if (version >= 2) {
+        compOptions.render = function (h) {
+          return h('p', {}, [this.$t('message.hoge')])
         }
+      } else {
+        compOptions.template = '<p>{{* $t("message.hoge") }}</p>'
       }
 
       const options = {
-        el: () => {
-          const el = document.createElement('div')
-          document.body.appendChild(el)
-          return el
-        },
+        el,
         components: { hoge: compOptions }
       }
 
-      if (compare(Vue.version, '2.0.0-alpha') < 0) {
-        options.template = '<div><p>{{ $t("message.hello") }}</p><hoge></hoge></div>'
-      } else {
-        options.render = function () {
-          return this.$createElement('div', {}, [
-            this.$createElement('p', {}, [this.__toString__(this.$t('message.hello'))]),
-            this.$createElement('hoge', {})
+      if (version >= 2) {
+        options.render = function (h) {
+          return h('div', {}, [
+            h('p', {}, [this.$t('message.hello')]),
+            h('hoge', {})
           ])
         }
+      } else {
+        options.template = '<div><p>{{ $t("message.hello") }}</p><hoge></hoge></div>'
       }
 
-      const ViewModel = Vue.extend(options)
-      const vm = new ViewModel()
-
+      const vm = new Vue(options)
       Vue.nextTick(() => {
-        const child = vm.$el.children[1]
-        assert(child.textContent === locales.en.message.hoge)
-
-        const parent = vm.$el.children[0]
-        assert(parent.textContent === locales.en.message.hello)
+        const children = vm.$el.querySelectorAll('p')
+        assert(children[0].innerText === locales.en.message.hello)
+        assert(children[1].innerText === locales.en.message.hoge)
 
         done()
       })

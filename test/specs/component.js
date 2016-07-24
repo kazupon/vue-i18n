@@ -1,10 +1,11 @@
 import assert from 'power-assert'
 import Vue from 'vue'
 import locales from './fixture/locales'
-import compare from '../../src/compare'
 
 
 describe('component locales', () => {
+  const version = Number(Vue.version.split('.')[0])
+
   before(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
@@ -15,31 +16,37 @@ describe('component locales', () => {
 
   let vm
   beforeEach(done => {
-    const options = {
-      el: document.createElement('div'),
-      components: {
-        component1: {
-          locales: {
-            en: {
-              foo: {
-                bar: {
-                  buz: 'hello world'
-                }
-              }
+    const el = document.createElement('div')
+    const compOptions = {
+      locales: {
+        en: {
+          foo: {
+            bar: {
+              buz: 'hello world'
             }
           }
         }
       }
     }
-
-    if (compare(Vue.version, '2.0.0-alpha') < 0) {
-      options.template = '<div><component1></component1></div>'
-    } else {
-      options.render = function () {
-        return this.$createElement('div', {}, [
-          this.$createElement('component1', {})
-        ])
+    if (version >= 2) {
+      compOptions.render = function (h) {
+        return h('p', {}, [this.$t('foo.bar.buz')])
       }
+    } else {
+      compOptions.template = '<p>{{* $t("foo.bar.buz") }}</p>'
+    }
+
+    const options = {
+      el,
+      components: { component1: compOptions }
+    }
+
+    if (version >= 2) {
+      options.render = function (h) {
+        return h('div', {}, [h('component1', {})])
+      }
+    } else {
+      options.template = '<div><component1></component1></div>'
     }
 
     vm = new Vue(options)
@@ -50,6 +57,7 @@ describe('component locales', () => {
     it('should be translated', () => {
       const comp1 = vm.$children[0] // component1
       assert(comp1.$t('foo.bar.buz') === 'hello world')
+      assert(comp1.$el.innerText === 'hello world')
     })
   })
 
