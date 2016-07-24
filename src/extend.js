@@ -11,12 +11,12 @@ import { getValue } from './path'
  */
 
 export default function (Vue) {
-  const { isArray, isObject } = Vue.util
+  const { isObject } = Vue.util
 
   function parseArgs (...args) {
     let lang = Vue.config.lang
     if (args.length === 1) {
-      if (isObject(args[0]) || isArray(args[0])) {
+      if (isObject(args[0]) || Array.isArray(args[0])) {
         args = args[0]
       } else if (typeof args[0] === 'string') {
         lang = args[0]
@@ -25,7 +25,7 @@ export default function (Vue) {
       if (typeof args[0] === 'string') {
         lang = args[0]
       }
-      if (isObject(args[1]) || isArray(args[1])) {
+      if (isObject(args[1]) || Array.isArray(args[1])) {
         args = args[1]
       }
     }
