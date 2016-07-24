@@ -1,6 +1,5 @@
 import util, { warn } from './util'
 import path from './path'
-import compare from './compare'
 import Asset from './asset'
 import Override from './override'
 import Config from './config'
@@ -17,13 +16,14 @@ let langVM // singleton
  */
 
 function plugin (Vue, opts = {}) {
+  const version = (Vue.version && Number(Vue.version.split('.')[0])) || -1
+
   if (process.env.NODE_ENV !== 'production' && plugin.installed) {
     warn('already installed.')
     return
   }
 
-  if (process.env.NODE_ENV !== 'production'
-    && (!Vue.version || compare(Vue.version, '1.0') < 0)) {
+  if (process.env.NODE_ENV !== 'production' && version < 1) {
     warn('vue-i18n (' + plugin.version
       + ') need to use vue version 1.0 or later (vue version: '
       + Vue.version + ').')
