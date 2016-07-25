@@ -1,3 +1,18 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/kazupon/vue-i18n/compare/v4.0.1...v4.1.0) (2016-07-25)
+
+
+### :bug: Bug Fixes
+
+* **util:** fixed isArray reference errors ([0c6f6a0](https://github.com/kazupon/vue-i18n/commit/0c6f6a0))
+
+
+### :star: New Features
+
+* support vue 2.0.0.beta later ([0e1d2f7](https://github.com/kazupon/vue-i18n/commit/0e1d2f7))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/kazupon/vue-i18n/compare/v4.0.0...v4.0.1) (2016-06-06)
 

@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.0.1
+ * vue-i18n v4.1.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -438,68 +438,6 @@
     return ret;
   }
 
-  /**
-   * Version compare
-   * - Inspired:
-   *   https://github.com/omichelsen/compare-versions
-   */
-
-  var PATCH_PATTERN = /-([\w-.]+)/;
-
-  function split(v) {
-    var temp = v.split('.');
-    var arr = temp.splice(0, 2);
-    arr.push(temp.join('.'));
-    return arr;
-  }
-
-  /**
-   * compare
-   *
-   * @param {String} v1
-   * @param {String} v2
-   * @return {Number}
-   */
-
-  function compare (v1, v2) {
-    var s1 = split(v1);
-    var s2 = split(v2);
-
-    /* eslint-disable prefer-const */
-    for (var i = 0; i < 3; i++) {
-      var n1 = parseInt(s1[i] || 0, 10);
-      var n2 = parseInt(s2[i] || 0, 10);
-
-      if (n1 > n2) {
-        return 1;
-      }
-      if (n2 > n1) {
-        return -1;
-      }
-    }
-    /* eslint-enable prefer-const */
-
-    if ((s1[2] + s2[2] + '').indexOf('-') > -1) {
-      var p1 = (PATCH_PATTERN.exec(s1[2]) || [''])[0];
-      var p2 = (PATCH_PATTERN.exec(s2[2]) || [''])[0];
-
-      if (p1 === '') {
-        return 1;
-      }
-      if (p2 === '') {
-        return -1;
-      }
-      if (p1 > p2) {
-        return 1;
-      }
-      if (p2 > p1) {
-        return -1;
-      }
-    }
-
-    return 0;
-  }
-
   var locales = Object.create(null); // locales store
 
   function Asset (Vue) {
@@ -712,9 +650,7 @@
    */
 
   function Extend (Vue) {
-    var _Vue$util = Vue.util;
-    var isArray = _Vue$util.isArray;
-    var isObject = _Vue$util.isObject;
+    var isObject = Vue.util.isObject;
 
 
     function parseArgs() {
@@ -724,7 +660,7 @@
 
       var lang = Vue.config.lang;
       if (args.length === 1) {
-        if (isObject(args[0]) || isArray(args[0])) {
+        if (isObject(args[0]) || Array.isArray(args[0])) {
           args = args[0];
         } else if (typeof args[0] === 'string') {
           lang = args[0];
@@ -733,7 +669,7 @@
         if (typeof args[0] === 'string') {
           lang = args[0];
         }
-        if (isObject(args[1]) || isArray(args[1])) {
+        if (isObject(args[1]) || Array.isArray(args[1])) {
           args = args[1];
         }
       }
@@ -826,12 +762,14 @@
   function plugin(Vue) {
     var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+    var version = Vue.version && Number(Vue.version.split('.')[0]) || -1;
+
     if ('development' !== 'production' && plugin.installed) {
       warn('already installed.');
       return;
     }
 
-    if ('development' !== 'production' && (!Vue.version || compare(Vue.version, '1.0') < 0)) {
+    if ('development' !== 'production' && version < 1) {
       warn('vue-i18n (' + plugin.version + ') need to use vue version 1.0 or later (vue version: ' + Vue.version + ').');
       return;
     }
@@ -857,7 +795,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.0.1';
+  plugin.version = '4.1.0';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
