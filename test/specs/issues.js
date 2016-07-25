@@ -12,13 +12,19 @@ describe('issues', () => {
 
   describe('#24', () => {
     it('should be translated', () => {
-      assert(vm.$t('continue-with-new-account') === locales[Vue.config.lang]['continue-with-new-account'])
+      assert.equal(
+        vm.$t('continue-with-new-account'),
+        locales[Vue.config.lang]['continue-with-new-account']
+      )
     })
   })
 
   describe('#35', () => {
     it('should be translated', () => {
-      assert(vm.$t('underscore', { hello_msg: 'hello' }) === 'hello world')
+      assert.equal(
+        vm.$t('underscore', { hello_msg: 'hello' }),
+        'hello world'
+      )
     })
   })
 })

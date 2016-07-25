@@ -18,7 +18,7 @@ describe('asset', () => {
         }
       }
       Vue.locale('en', locale)
-      assert(Vue.locale('en') === locale)
+      assert.equal(Vue.locale('en'), locale)
     })
   })
 
@@ -40,7 +40,7 @@ describe('asset', () => {
 
         it('should be registered', done => {
           setTimeout(() => {
-            assert(Vue.locale('en') === locale)
+            assert.equal(Vue.locale('en'), locale)
             done()
           }, DELAY + 5)
         })
@@ -60,7 +60,7 @@ describe('asset', () => {
 
         it('should not be registered', done => {
           setTimeout(() => {
-            assert(!Vue.locale('en'))
+            assert.ok(!Vue.locale('en'))
             done()
           }, DELAY + 5)
         })
@@ -83,7 +83,7 @@ describe('asset', () => {
 
         it('should be registered', done => {
           setTimeout(() => {
-            assert(Vue.locale('en') === locale)
+            assert.equal(Vue.locale('en'), locale)
             done()
           }, DELAY + 5)
         })
@@ -103,7 +103,7 @@ describe('asset', () => {
 
         it('should not be registered', done => {
           setTimeout(() => {
-            assert(!Vue.locale('en'))
+            assert.ok(!Vue.locale('en'))
             done()
           }, DELAY + 5)
         })

@@ -56,15 +56,15 @@ describe('component locales', () => {
   describe('local', () => {
     it('should be translated', () => {
       const comp1 = vm.$children[0] // component1
-      assert(comp1.$t('foo.bar.buz') === 'hello world')
-      assert(comp1.$el.innerText === 'hello world')
+      assert.equal(comp1.$t('foo.bar.buz'), 'hello world')
+      assert.equal(comp1.$el.innerText, 'hello world')
     })
   })
 
   describe('global', () => {
     it('should be translated', () => {
       const comp1 = vm.$children[0] // component1
-      assert(comp1.$t('message.hello') === 'the world')
+      assert.equal(comp1.$t('message.hello'), 'the world')
     })
   })
 })

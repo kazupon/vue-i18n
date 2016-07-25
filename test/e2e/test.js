@@ -11,7 +11,7 @@ describe('translation', () => {
         .evaluate(() => {
           return document.querySelector('#message').innerHTML
         }, html => {
-          assert(html === 'Hello kazupon !!<br>How are you?')
+          assert.equal(html, 'Hello kazupon !!<br>How are you?')
         })
         .run(done)
     })

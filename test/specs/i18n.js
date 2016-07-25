@@ -17,49 +17,49 @@ describe('i18n', () => {
   describe('Vue.t', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {
-        assert(Vue.t('message.hello') === locales.en.message.hello)
+        assert.equal(Vue.t('message.hello'), locales.en.message.hello)
       })
     })
 
     describe('ja language locale', () => {
       it('should translate a japanese', () => {
-        assert(Vue.t('message.hello', 'ja') === locales.ja.message.hello)
+        assert.equal(Vue.t('message.hello', 'ja'), locales.ja.message.hello)
       })
     })
 
     describe('key argument', () => {
       describe('not specify', () => {
         it('should return empty string', () => {
-          assert(Vue.t() === '')
+          assert.equal(Vue.t(), '')
         })
       })
 
       describe('empty string', () => {
         it('should return empty string', () => {
-          assert(Vue.t('') === '')
+          assert.equal(Vue.t(''), '')
         })
       })
 
       describe('not regist key', () => {
         it('should return key string', () => {
-          assert(Vue.t('foo.bar') === 'foo.bar')
+          assert.equal(Vue.t('foo.bar'), 'foo.bar')
         })
       })
 
       describe('sentence fragment', () => {
         it('should translate fragment', () => {
-          assert(Vue.t('hello world') === 'Hello World')
+          assert.equal(Vue.t('hello world'), 'Hello World')
         })
 
         it('should return replaced string if available', () => {
-          assert(
+          assert.equal(
             Vue.t('Hello {0}', ['kazupon']),
             'Hello kazupon'
           )
         })
 
         it('should return key if unavailable', () => {
-          assert(Vue.t('Hello') === 'Hello')
+          assert.equal(Vue.t('Hello'), 'Hello')
         })
       })
     })
@@ -67,7 +67,7 @@ describe('i18n', () => {
     describe('format arguments', () => {
       context('named', () => {
         it('should return replaced string', () => {
-          assert(
+          assert.equal(
             Vue.t('message.format.named', { name: 'kazupon' }),
             'Hello kazupon, how are you?'
           )
@@ -76,7 +76,7 @@ describe('i18n', () => {
 
       context('list', () => {
         it('should return replaced string', () => {
-          assert(
+          assert.equal(
             Vue.t('message.format.list', ['kazupon']),
             'Hello kazupon, how are you?'
           )
@@ -86,13 +86,13 @@ describe('i18n', () => {
 
     describe('language argument', () => {
       it('should return empty string', () => {
-        assert(Vue.t('message.hello', 'ja') === locales.ja.message.hello)
+        assert.equal(Vue.t('message.hello', 'ja'), locales.ja.message.hello)
       })
     })
 
     describe('format & language arguments', () => {
       it('should return replaced string', () => {
-        assert(
+        assert.equal(
           Vue.t('message.format.list', 'ja', ['kazupon']),
           'こんにちは kazupon, ごきげんいかが？'
         )
@@ -105,14 +105,14 @@ describe('i18n', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {
         const vm = new Vue()
-        assert(vm.$t('message.hello') === locales.en.message.hello)
+        assert.equal(vm.$t('message.hello'), locales.en.message.hello)
       })
     })
 
     describe('ja language locale', () => {
       it('should translate a japanese', () => {
         const vm = new Vue()
-        assert(vm.$t('message.hello', 'ja') === locales.ja.message.hello)
+        assert.equal(vm.$t('message.hello', 'ja'), locales.ja.message.hello)
       })
     })
 
@@ -120,33 +120,33 @@ describe('i18n', () => {
       describe('not specify', () => {
         it('should return empty string', () => {
           const vm = new Vue()
-          assert(vm.$t() === '')
+          assert.equal(vm.$t(), '')
         })
       })
 
       describe('empty string', () => {
         it('should return empty string', () => {
           const vm = new Vue()
-          assert(vm.$t('') === '')
+          assert.equal(vm.$t(''), '')
         })
       })
 
       describe('not regist key', () => {
         it('should return key string', () => {
           const vm = new Vue()
-          assert(vm.$t('foo.bar') === 'foo.bar')
+          assert.equal(vm.$t('foo.bar'), 'foo.bar')
         })
       })
 
       describe('sentence fragment', () => {
         it('should translate fragment', () => {
           const vm = new Vue()
-          assert(vm.$t('hello world') === 'Hello World')
+          assert.equal(vm.$t('hello world'), 'Hello World')
         })
 
         it('should return replaced string if available', () => {
           const vm = new Vue()
-          assert(
+          assert.equal(
             vm.$t('Hello {0}', ['kazupon']),
             'Hello kazupon'
           )
@@ -154,7 +154,7 @@ describe('i18n', () => {
 
         it('should return key if unavailable', () => {
           const vm = new Vue()
-          assert(vm.$t('Hello') === 'Hello')
+          assert.equal(vm.$t('Hello'), 'Hello')
         })
       })
     })
@@ -163,7 +163,7 @@ describe('i18n', () => {
       context('named', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
-          assert(
+          assert.equal(
             vm.$t('message.format.named', { name: 'kazupon' }),
             'Hello kazupon, how are you?'
           )
@@ -173,7 +173,7 @@ describe('i18n', () => {
       context('list', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
-          assert(
+          assert.equal(
             vm.$t('message.format.list', ['kazupon']),
             'Hello kazupon, how are you?'
           )
@@ -184,14 +184,14 @@ describe('i18n', () => {
     describe('language argument', () => {
       it('should return empty string', () => {
         const vm = new Vue()
-        assert(vm.$t('message.hello', 'ja') === locales.ja.message.hello)
+        assert.equal(vm.$t('message.hello', 'ja'), locales.ja.message.hello)
       })
     })
 
     describe('format & language arguments', () => {
       it('should return replaced string', () => {
         const vm = new Vue()
-        assert(
+        assert.equal(
           vm.$t('message.format.list', 'ja', ['kazupon']),
           'こんにちは kazupon, ごきげんいかが？'
         )
@@ -225,11 +225,11 @@ describe('i18n', () => {
 
       const vm = new Vue(options)
       Vue.nextTick(() => {
-        assert(vm.$el.textContent === locales.en.message.hello)
+        assert.equal(vm.$el.textContent, locales.en.message.hello)
 
         vm.lang = 'ja' // set japanese
         Vue.nextTick(() => {
-          assert(vm.$el.textContent === locales.ja.message.hello)
+          assert.equal(vm.$el.textContent, locales.ja.message.hello)
           done()
         })
       })
@@ -273,8 +273,8 @@ describe('i18n', () => {
       const vm = new Vue(options)
       Vue.nextTick(() => {
         const children = vm.$el.querySelectorAll('p')
-        assert(children[0].innerText === locales.en.message.hello)
-        assert(children[1].innerText === locales.en.message.hoge)
+        assert.equal(children[0].innerText, locales.en.message.hello)
+        assert.equal(children[1].innerText, locales.en.message.hoge)
 
         done()
       })
@@ -299,7 +299,7 @@ describe('i18n', () => {
       it('should translate with japanese', done => {
         Vue.config.lang = 'ja'
         Vue.nextTick(() => {
-          assert(vm.$t('message.hello') === locales.ja.message.hello)
+          assert.equal(vm.$t('message.hello'), locales.ja.message.hello)
           done()
         })
       })
@@ -308,7 +308,7 @@ describe('i18n', () => {
         it('should translate with english', done => {
           Vue.config.lang = 'en'
           Vue.nextTick(() => {
-            assert(vm.$t('message.hello') === locales.en.message.hello)
+            assert.equal(vm.$t('message.hello'), locales.en.message.hello)
             done()
           })
         })
