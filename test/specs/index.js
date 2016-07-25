@@ -4,7 +4,6 @@ import 'babel-polyfill'
 
 require('./path')
 require('./format')
-require('./compare')
 
 Vue.use(plugin)
 

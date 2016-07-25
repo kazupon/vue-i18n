@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import plugin from '../../src/index'
-import compare from '../../src/compare'
+
+const version = Number(Vue.version.split('.')[0])
 
 Vue.use(plugin, {
   lang: 'en',
@@ -24,16 +25,16 @@ Vue.use(plugin, {
 
 const translation = {}
 
-if (compare(Vue.version, '2.0.0-alpha') < 0) {
-  translation.template = '<p id="message">{{* $t("message.hello", "en", { name: "kazupon" })}}</br>How are you?</p>'
-} else {
-  translation.render = function () {
-    return this.$createElement('p', { staticAttrs: { id: 'message' } }, [
-      this.__toString__(this.$t('message.hello', 'en', { name: 'kazupon' })),
-      this.$createElement('br'),
+if (version >= 2) {
+  translation.render = function (h) {
+    return h('p', { staticAttrs: { id: 'message' } }, [
+      this.$t('message.hello', 'en', { name: 'kazupon' }),
+      h('br'),
       'How are you?'
     ])
   }
+} else {
+  translation.template = '<p id="message">{{* $t("message.hello", "en", { name: "kazupon" })}}</br>How are you?</p>'
 }
 
 new Vue(translation).$mount('#translation')
