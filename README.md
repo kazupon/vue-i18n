@@ -11,7 +11,7 @@ Internationalization plugin of Vue.js
 
 # Compatibility
 - Vue.js `1.0.0`+ 
-- Vue.js `2.0.0-bata.1`+
+- Vue.js `2.0.0-beta.1`+
 
 
 # Installation
