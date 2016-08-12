@@ -1,5 +1,8 @@
+import Vue from 'vue'
 import assert from 'power-assert'
-import format from '../../src/format'
+import Format from '../../src/format'
+
+const format = Format(Vue)
 
 
 describe('format', () => {
