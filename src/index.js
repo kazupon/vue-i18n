@@ -1,4 +1,4 @@
-import { warn } from './util'
+import warn from './warn'
 import Asset from './asset'
 import Override from './override'
 import Config from './config'

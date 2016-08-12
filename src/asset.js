@@ -1,4 +1,4 @@
-import { warn } from './util'
+import warn from './warn'
 
 const locales = Object.create(null) // locales store
 

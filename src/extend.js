@@ -1,4 +1,4 @@
-import { warn } from './util'
+import warn from './warn'
 import Format from './format'
 import Path from './path'
 
