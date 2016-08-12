@@ -61,30 +61,6 @@ export function empty (target) {
   return true
 }
 
-/**
- * each
- *
- * @param {Array|Object} target
- * @param {Function} iterator
- * @param {Object} [context]
- */
-
-export function each (target, iterator, context) {
-  if (Array.isArray(target)) {
-    for (let i = 0; i < target.length; i++) {
-      iterator.call(context || target[i], target[i], i)
-    }
-  } else if (exports.Vue.util.isPlainObject(target)) {
-    /* eslint-disable prefer-const */
-    for (let key in target) {
-      if (hasOwn(target, key)) {
-        iterator.call(context || target[key], target[key], key)
-      }
-    }
-    /* eslint-enable prefer-const */
-  }
-}
-
 let Watcher
 /**
  * getWatcher
