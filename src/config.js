@@ -1,6 +1,8 @@
 import { getWatcher, getDep } from './observer'
 
-export default function (Vue, langVM) {
+let fallback // fallback lang
+
+export default function (Vue, langVM, lang) {
   const { bind } = Vue.util
   const Watcher = getWatcher(langVM)
   const Dep = getDep(langVM)
@@ -27,5 +29,14 @@ export default function (Vue, langVM) {
     configurable: true,
     get: makeComputedGetter(() => { return langVM.lang }, langVM),
     set: bind(val => { langVM.lang = val }, langVM)
+  })
+
+  // define Vue.config.fallbackLang configration
+  fallback = lang
+  Object.defineProperty(Vue.config, 'fallbackLang', {
+    enumerable: true,
+    configurable: true,
+    get: () => { return fallback },
+    set: val => { fallback = val }
   })
 }

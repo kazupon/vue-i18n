@@ -17,6 +17,8 @@ export default function (Vue) {
 
   function parseArgs (...args) {
     let lang = Vue.config.lang
+    let fallback = Vue.config.fallbackLang
+
     if (args.length === 1) {
       if (isObject(args[0]) || Array.isArray(args[0])) {
         args = args[0]
@@ -32,7 +34,7 @@ export default function (Vue) {
       }
     }
 
-    return { lang, params: args }
+    return { lang, fallback, params: args }
   }
 
   function translate (locale, key, args) {
@@ -64,8 +66,10 @@ export default function (Vue) {
   Vue.t = (key, ...args) => {
     if (!key) { return '' }
 
-    const { lang, params } = parseArgs(...args)
-    return translate(Vue.locale(lang), key, params) || warnDefault(key)
+    const { lang, fallback, params } = parseArgs(...args)
+    return translate(Vue.locale(lang), key, params) 
+      || translate(Vue.locale(fallback), key, params) 
+      || warnDefault(key)
   }
 
 
@@ -80,9 +84,11 @@ export default function (Vue) {
   Vue.prototype.$t = function (key, ...args) {
     if (!key) { return '' }
 
-    const { lang, params } = parseArgs(...args)
+    const { lang, fallback, params } = parseArgs(...args)
     return translate(this.$options.locales && this.$options.locales[lang], key, params) 
+      || translate(this.$options.locales && this.$options.locales[fallback], key, params) 
       || translate(Vue.locale(lang), key, params)
+      || translate(Vue.locale(fallback), key, params)
       || warnDefault(key)
   }
 

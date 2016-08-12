@@ -98,6 +98,15 @@ describe('i18n', () => {
         )
       })
     })
+
+    describe('fallback', () => {
+      it('should return fallback string', () => {
+        assert.equal(
+          Vue.t('message.fallback', 'ja'),
+          locales.en.message.fallback
+        )
+      })
+    })
   })
 
 
@@ -197,6 +206,16 @@ describe('i18n', () => {
         )
       })
     })
+
+    describe('fallback', () => {
+      it('should return fallback string', () => {
+        const vm = new Vue()
+        assert.equal(
+          vm.$t('message.fallback', 'ja'),
+          locales.en.message.fallback
+        )
+      })
+    })
   })
 
 
@@ -282,35 +301,61 @@ describe('i18n', () => {
   })
 
 
-  describe('global lang config', () => {
-    let vm
-    beforeEach(done => {
-      vm = new Vue()
-      vm.$nextTick(done)
-    })
-
-    afterEach(done => {
-      vm.$destroy()
-      vm = null
-      Vue.nextTick(done)
-    })
-
-    context('ja', () => {
-      it('should translate with japanese', done => {
-        Vue.config.lang = 'ja'
-        Vue.nextTick(() => {
-          assert.equal(vm.$t('message.hello'), locales.ja.message.hello)
-          done()
-        })
+  describe('extend Vue.config', () => {
+    describe('lang', () => {
+      let vm
+      beforeEach(done => {
+        vm = new Vue()
+        vm.$nextTick(done)
       })
 
-      context('en', () => {
-        it('should translate with english', done => {
-          Vue.config.lang = 'en'
+      afterEach(done => {
+        vm.$destroy()
+        vm = null
+        Vue.nextTick(done)
+      })
+
+      context('ja', () => {
+        it('should translate with japanese', done => {
+          Vue.config.lang = 'ja'
           Vue.nextTick(() => {
-            assert.equal(vm.$t('message.hello'), locales.en.message.hello)
+            assert.equal(vm.$t('message.hello'), locales.ja.message.hello)
             done()
           })
+        })
+
+        context('en', () => {
+          it('should translate with english', done => {
+            Vue.config.lang = 'en'
+            Vue.nextTick(() => {
+              assert.equal(vm.$t('message.hello'), locales.en.message.hello)
+              done()
+            })
+          })
+        })
+      })
+    })
+
+    describe('fallbackLang', () => {
+      let orgLang, orgFallbackLang
+      beforeEach(done => {
+        orgLang = Vue.config.lang
+        orgFallbackLang = Vue.config.fallbackLang
+        Vue.nextTick(done)
+      })
+
+      afterEach(done => {
+        Vue.config.fallbackLang = orgFallbackLang
+        Vue.config.lang = orgLang
+        Vue.nextTick(done)
+      })
+
+      it('should be changed', done => {
+        Vue.config.lang = 'ja'
+        Vue.nextTick(() => {
+          Vue.config.fallbackLang = 'ja'
+          assert.equal(Vue.t('message.fallback1'), locales.ja.message.fallback1)
+          done()
         })
       })
     })

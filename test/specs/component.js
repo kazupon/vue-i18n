@@ -24,7 +24,10 @@ describe('component locales', () => {
             bar: {
               buz: 'hello world'
             }
-          }
+          },
+          fallback: 'this is fallback on component'
+        },
+        ja: {
         }
       }
     }
@@ -65,6 +68,13 @@ describe('component locales', () => {
     it('should be translated', () => {
       const comp1 = vm.$children[0] // component1
       assert.equal(comp1.$t('message.hello'), 'the world')
+    })
+  })
+
+  describe('fallback', () => {
+    it('should be work', () => {
+      const comp1 = vm.$children[0] // component1
+      assert.equal(comp1.$t('fallback', 'ja'), 'this is fallback on component')
     })
   })
 })
