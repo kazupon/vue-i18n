@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.1.0
+ * vue-i18n v4.2.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -13,12 +13,6 @@ babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator ===
 };
 babelHelpers;
 
-/**
- * Utilties
- */
-
-// export default for holding the Vue reference
-var exports$1 = {};
 /**
  * warn
  *
@@ -36,50 +30,146 @@ function warn(msg, err) {
   }
 }
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-/**
- * Check whether the object has the property.
- *
- * @param {Object} obj
- * @param {String} key
- * @return {Boolean}
- */
+var locales = Object.create(null); // locales store
 
-function hasOwn(obj, key) {
-  return hasOwnProperty.call(obj, key);
-}
+function Asset (Vue) {
+  /**
+   * Register or retrieve a global locale definition.
+   *
+   * @param {String} id
+   * @param {Object | Function | Promise} definition
+   * @param {Function} cb
+   */
 
-/**
- * empty
- *
- * @param {Array|Object} target
- * @return {Boolean}
- */
-
-function empty(target) {
-  if (target === null || target === undefined) {
-    return true;
-  }
-
-  if (Array.isArray(target)) {
-    if (target.length > 0) {
-      return false;
-    }
-    if (target.length === 0) {
-      return true;
-    }
-  } else if (exports$1.Vue.util.isPlainObject(target)) {
-    /* eslint-disable prefer-const */
-    for (var key in target) {
-      if (hasOwn(target, key)) {
-        return false;
+  Vue.locale = function (id, definition, cb) {
+    if (definition === undefined) {
+      // gettter
+      return locales[id];
+    } else {
+      // setter
+      if (definition === null) {
+        locales[id] = undefined;
+        delete locales[id];
+      } else {
+        setLocale(id, definition, function (locale) {
+          if (locale) {
+            locales[id] = locale;
+            cb && cb();
+          } else {
+            warn('failed set `' + id + '` locale');
+          }
+        });
       }
     }
-    /* eslint-enable prefer-const */
-  }
-
-  return true;
+  };
 }
+
+function setLocale(id, definition, cb) {
+  var _this = this;
+
+  if ((typeof definition === 'undefined' ? 'undefined' : babelHelpers.typeof(definition)) === 'object') {
+    // sync
+    cb(definition);
+  } else {
+    (function () {
+      var future = definition.call(_this);
+      if (typeof future === 'function') {
+        if (future.resolved) {
+          // cached
+          cb(future.resolved);
+        } else if (future.requested) {
+          // pool callbacks
+          future.pendingCallbacks.push(cb);
+        } else {
+          (function () {
+            future.requested = true;
+            var cbs = future.pendingCallbacks = [cb];
+            future(function (locale) {
+              // resolve
+              future.resolved = locale;
+              for (var i = 0, l = cbs.length; i < l; i++) {
+                cbs[i](locale);
+              }
+            }, function () {
+              // reject
+              cb();
+            });
+          })();
+        }
+      } else if (isPromise(future)) {
+        // promise
+        future.then(function (locale) {
+          // resolve
+          cb(locale);
+        }, function () {
+          // reject
+          cb();
+        }).catch(function (err) {
+          console.error(err);
+          cb();
+        });
+      }
+    })();
+  }
+}
+
+/**
+ * Forgiving check for a promise
+ *
+ * @param {Object} p
+ * @return {Boolean}
+ */
+
+function isPromise(p) {
+  return p && typeof p.then === 'function';
+}
+
+function Override (Vue, langVM) {
+  // override _init
+  var init = Vue.prototype._init;
+  Vue.prototype._init = function (options) {
+    var _this = this;
+
+    options = options || {};
+    var root = options._parent || options.parent || this;
+    var lang = root.$lang;
+
+    if (lang) {
+      this.$lang = lang;
+    } else {
+      this.$lang = langVM;
+    }
+
+    this._langUnwatch = this.$lang.$watch('lang', function (a, b) {
+      update(_this);
+    });
+
+    init.call(this, options);
+  };
+
+  // override _destroy
+  var destroy = Vue.prototype._destroy;
+  Vue.prototype._destroy = function () {
+    if (this._langUnwatch) {
+      this._langUnwatch();
+      this._langUnwatch = null;
+    }
+
+    this.$lang = null;
+    destroy.apply(this, arguments);
+  };
+}
+
+function update(vm) {
+  var i = vm._watchers.length;
+  while (i--) {
+    vm._watchers[i].update(true); // shallow updates
+  }
+}
+
+/**
+ * Observer
+ */
 
 var Watcher = void 0;
 /**
@@ -113,19 +203,113 @@ function getDep(vm) {
   return Dep;
 }
 
-/**
- * Forgiving check for a promise
- *
- * @param {Object} p
- * @return {Boolean}
- */
+var fallback = void 0; // fallback lang
 
-function isPromise(p) {
-  return p && typeof p.then === 'function';
+function Config (Vue, langVM, lang) {
+  var bind = Vue.util.bind;
+
+  var Watcher = getWatcher(langVM);
+  var Dep = getDep(langVM);
+
+  function makeComputedGetter(getter, owner) {
+    var watcher = new Watcher(owner, getter, null, {
+      lazy: true
+    });
+
+    return function computedGetter() {
+      if (watcher.dirty) {
+        watcher.evaluate();
+      }
+      if (Dep.target) {
+        watcher.depend();
+      }
+      return watcher.value;
+    };
+  }
+
+  // define Vue.config.lang configration
+  Object.defineProperty(Vue.config, 'lang', {
+    enumerable: true,
+    configurable: true,
+    get: makeComputedGetter(function () {
+      return langVM.lang;
+    }, langVM),
+    set: bind(function (val) {
+      langVM.lang = val;
+    }, langVM)
+  });
+
+  // define Vue.config.fallbackLang configration
+  fallback = lang;
+  Object.defineProperty(Vue.config, 'fallbackLang', {
+    enumerable: true,
+    configurable: true,
+    get: function get() {
+      return fallback;
+    },
+    set: function set(val) {
+      fallback = val;
+    }
+  });
 }
 
-// export default for holding the Vue reference
-var exports$2 = {};
+/**
+ *  String format template
+ *  - Inspired:  
+ *    https://github.com/Matt-Esch/string-template/index.js
+ */
+
+var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
+
+function Format (Vue) {
+  var hasOwn = Vue.util.hasOwn;
+
+  /**
+   * template
+   *  
+   * @param {String} string
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  function template(string) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (args.length === 1 && babelHelpers.typeof(args[0]) === 'object') {
+      args = args[0];
+    }
+
+    if (!args || !args.hasOwnProperty) {
+      args = {};
+    }
+
+    return string.replace(RE_NARGS, function (match, prefix, i, index) {
+      var result = void 0;
+
+      if (string[index - 1] === '{' && string[index + match.length] === '}') {
+        return i;
+      } else {
+        result = hasOwn(args, i) ? args[i] : null;
+        if (result === null || result === undefined) {
+          return '';
+        }
+
+        return result;
+      }
+    });
+  }
+
+  return template;
+}
+
+/**
+ *  Path paerser
+ *  - Inspired:  
+ *    Vue.js Path parser
+ */
+
 // cache
 var pathCache = Object.create(null);
 
@@ -262,7 +446,7 @@ function getPathCharType(ch) {
  */
 
 function formatSubPath(path) {
-  var _exports$Vue$util = exports$2.Vue.util;
+  var _exports$Vue$util = exports.Vue.util;
   var isLiteral = _exports$Vue$util.isLiteral;
   var stripQuotes = _exports$Vue$util.stripQuotes;
 
@@ -395,247 +579,75 @@ function parsePath(path) {
   return hit;
 }
 
-/**
- * Get value from path string
- *
- * @param {Object} obj
- * @param {String} path
- * @return value
- */
-
-function getValue(obj, path) {
-  var isObject = exports$2.Vue.util.isObject;
+function Path (Vue) {
+  var _Vue$util = Vue.util;
+  var isObject = _Vue$util.isObject;
+  var isPlainObject = _Vue$util.isPlainObject;
+  var hasOwn = _Vue$util.hasOwn;
 
 
-  if (!isObject(obj)) {
-    return null;
-  }
-
-  var paths = parsePath(path);
-  if (empty(paths)) {
-    return null;
-  }
-
-  var length = paths.length;
-  var ret = null;
-  var last = obj;
-  var i = 0;
-  while (i < length) {
-    var value = last[paths[i]];
-    if (value === undefined) {
-      last = null;
-      break;
+  function empty(target) {
+    if (target === null || target === undefined) {
+      return true;
     }
-    last = value;
-    i++;
+
+    if (Array.isArray(target)) {
+      if (target.length > 0) {
+        return false;
+      }
+      if (target.length === 0) {
+        return true;
+      }
+    } else if (isPlainObject(target)) {
+      /* eslint-disable prefer-const */
+      for (var key in target) {
+        if (hasOwn(target, key)) {
+          return false;
+        }
+      }
+      /* eslint-enable prefer-const */
+    }
+
+    return true;
   }
 
-  ret = last;
-  return ret;
-}
-
-var locales = Object.create(null); // locales store
-
-function Asset (Vue) {
   /**
-   * Register or retrieve a global locale definition.
+   * Get value from path string
    *
-   * @param {String} id
-   * @param {Object | Function | Promise} definition
-   * @param {Function} cb
+   * @param {Object} obj
+   * @param {String} path
+   * @return value
    */
 
-  Vue.locale = function (id, definition, cb) {
-    if (definition === undefined) {
-      // gettter
-      return locales[id];
-    } else {
-      // setter
-      if (definition === null) {
-        locales[id] = undefined;
-        delete locales[id];
-      } else {
-        setLocale(id, definition, function (locale) {
-          if (locale) {
-            locales[id] = locale;
-            cb && cb();
-          } else {
-            warn('failed set `' + id + '` locale');
-          }
-        });
-      }
-    }
-  };
-}
-
-function setLocale(id, definition, cb) {
-  var _this = this;
-
-  if ((typeof definition === 'undefined' ? 'undefined' : babelHelpers.typeof(definition)) === 'object') {
-    // sync
-    cb(definition);
-  } else {
-    (function () {
-      var future = definition.call(_this);
-      if (typeof future === 'function') {
-        if (future.resolved) {
-          // cached
-          cb(future.resolved);
-        } else if (future.requested) {
-          // pool callbacks
-          future.pendingCallbacks.push(cb);
-        } else {
-          (function () {
-            future.requested = true;
-            var cbs = future.pendingCallbacks = [cb];
-            future(function (locale) {
-              // resolve
-              future.resolved = locale;
-              for (var i = 0, l = cbs.length; i < l; i++) {
-                cbs[i](locale);
-              }
-            }, function () {
-              // reject
-              cb();
-            });
-          })();
-        }
-      } else if (isPromise(future)) {
-        // promise
-        future.then(function (locale) {
-          // resolve
-          cb(locale);
-        }, function () {
-          // reject
-          cb();
-        }).catch(function (err) {
-          console.error(err);
-          cb();
-        });
-      }
-    })();
-  }
-}
-
-function Override (Vue, langVM) {
-  // override _init
-  var init = Vue.prototype._init;
-  Vue.prototype._init = function (options) {
-    var _this = this;
-
-    options = options || {};
-    var root = options._parent || options.parent || this;
-    var lang = root.$lang;
-
-    if (lang) {
-      this.$lang = lang;
-    } else {
-      this.$lang = langVM;
+  function getValue(obj, path) {
+    if (!isObject(obj)) {
+      return null;
     }
 
-    this._langUnwatch = this.$lang.$watch('lang', function (a, b) {
-      update(_this);
-    });
-
-    init.call(this, options);
-  };
-
-  // override _destroy
-  var destroy = Vue.prototype._destroy;
-  Vue.prototype._destroy = function () {
-    if (this._langUnwatch) {
-      this._langUnwatch();
-      this._langUnwatch = null;
+    var paths = parsePath(path);
+    if (empty(paths)) {
+      return null;
     }
 
-    this.$lang = null;
-    destroy.apply(this, arguments);
-  };
-}
-
-function update(vm) {
-  var i = vm._watchers.length;
-  while (i--) {
-    vm._watchers[i].update(true); // shallow updates
-  }
-}
-
-function Config (Vue, langVM) {
-  var Watcher = getWatcher(langVM);
-  var Dep = getDep(langVM);
-
-  function makeComputedGetter(getter, owner) {
-    var watcher = new Watcher(owner, getter, null, {
-      lazy: true
-    });
-
-    return function computedGetter() {
-      if (watcher.dirty) {
-        watcher.evaluate();
+    var length = paths.length;
+    var ret = null;
+    var last = obj;
+    var i = 0;
+    while (i < length) {
+      var value = last[paths[i]];
+      if (value === undefined) {
+        last = null;
+        break;
       }
-      if (Dep.target) {
-        watcher.depend();
-      }
-      return watcher.value;
-    };
-  }
-
-  // define Vue.config.lang configration
-  Object.defineProperty(Vue.config, 'lang', {
-    enumerable: true,
-    configurable: true,
-    get: makeComputedGetter(function () {
-      return langVM.lang;
-    }, langVM),
-    set: Vue.util.bind(function (val) {
-      langVM.lang = val;
-    }, langVM)
-  });
-}
-
-/**
- *  String format template
- *  - Inspired:  
- *    https://github.com/Matt-Esch/string-template/index.js
- */
-
-var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
-
-/**
- * template
- *  
- * @param {String} string
- * @param {Array} ...args
- * @return {String}
- */
-
-function format (string) {
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  if (args.length === 1 && babelHelpers.typeof(args[0]) === 'object') {
-    args = args[0];
-  }
-
-  if (!args || !args.hasOwnProperty) {
-    args = {};
-  }
-
-  return string.replace(RE_NARGS, function (match, prefix, i, index) {
-    var result = void 0;
-
-    if (string[index - 1] === '{' && string[index + match.length] === '}') {
-      return i;
-    } else {
-      result = args.hasOwnProperty(i) ? args[i] : null;
-      if (result === null || result === undefined) {
-        return '';
-      }
-
-      return result;
+      last = value;
+      i++;
     }
-  });
+
+    ret = last;
+    return ret;
+  }
+
+  return getValue;
 }
 
 /**
@@ -648,6 +660,8 @@ function format (string) {
 function Extend (Vue) {
   var isObject = Vue.util.isObject;
 
+  var format = Format(Vue);
+  var getValue = Path(Vue);
 
   function parseArgs() {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
@@ -655,6 +669,8 @@ function Extend (Vue) {
     }
 
     var lang = Vue.config.lang;
+    var fallback = Vue.config.fallbackLang;
+
     if (args.length === 1) {
       if (isObject(args[0]) || Array.isArray(args[0])) {
         args = args[0];
@@ -670,7 +686,7 @@ function Extend (Vue) {
       }
     }
 
-    return { lang: lang, params: args };
+    return { lang: lang, fallback: fallback, params: args };
   }
 
   function translate(locale, key, args) {
@@ -713,9 +729,10 @@ function Extend (Vue) {
     var _parseArgs = parseArgs.apply(undefined, args);
 
     var lang = _parseArgs.lang;
+    var fallback = _parseArgs.fallback;
     var params = _parseArgs.params;
 
-    return translate(Vue.locale(lang), key, params) || warnDefault(key);
+    return translate(Vue.locale(lang), key, params) || translate(Vue.locale(fallback), key, params) || warnDefault(key);
   };
 
   /**
@@ -738,9 +755,10 @@ function Extend (Vue) {
     var _parseArgs2 = parseArgs.apply(undefined, args);
 
     var lang = _parseArgs2.lang;
+    var fallback = _parseArgs2.fallback;
     var params = _parseArgs2.params;
 
-    return translate(this.$options.locales && this.$options.locales[lang], key, params) || translate(Vue.locale(lang), key, params) || warnDefault(key);
+    return translate(this.$options.locales && this.$options.locales[lang], key, params) || translate(this.$options.locales && this.$options.locales[fallback], key, params) || translate(Vue.locale(lang), key, params) || translate(Vue.locale(fallback), key, params) || warnDefault(key);
   };
 
   return Vue;
@@ -772,13 +790,10 @@ function plugin(Vue) {
 
   var lang = 'en';
 
-  exports$2.Vue = exports$1.Vue = Vue;
   setupLangVM(Vue, lang);
-
   Asset(Vue);
-
   Override(Vue, langVM);
-  Config(Vue, langVM);
+  Config(Vue, langVM, lang);
   Extend(Vue);
 }
 
@@ -791,7 +806,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.1.0';
+plugin.version = '4.2.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);

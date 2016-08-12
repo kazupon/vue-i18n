@@ -1,3 +1,18 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/kazupon/vue-i18n/compare/v4.1.0...v4.2.0) (2016-08-12)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* **format:** use hasOwn function of Vue.util ([a8a19a0](https://github.com/kazupon/vue-i18n/commit/a8a19a0))
+
+
+### :star: New Features
+
+* **fallback:** add fallback translation feature ([1d1f0f2](https://github.com/kazupon/vue-i18n/commit/1d1f0f2)), closes [#36](https://github.com/kazupon/vue-i18n/issues/36)
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/kazupon/vue-i18n/compare/v4.0.1...v4.1.0) (2016-07-25)
 
