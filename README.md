@@ -207,6 +207,33 @@ Output the following:
 <p>hello world</p>
 ```
 
+# Fallback translation
+
+Locale the following:
+
+```javascript
+var locales = {
+  en: {
+    message: 'hello world'
+  },
+  ja: {
+  }
+}
+Vue.config.lang = 'ja'
+```
+
+Template the following:
+
+```html
+<p>{{ $t('message') }}</p>
+```
+
+Output the following:
+
+```html
+<p>hello world</p>
+```
+
 # Component locale
 
 You can translate component based.
@@ -336,6 +363,20 @@ As mentioned above, You need to implement locale setting that return a promise. 
 
   ```javascript
   Vue.config.lang = 'ja'
+  ```
+
+### fallbackLang
+
+- **Type:** `String`
+
+- **Default:** `en`
+
+- **Usage:**
+
+  Get or set a translation fallback language code. Default by `en` string value.
+
+  ```javascript
+  Vue.config.fallbackLang = 'ja'
   ```
 
 ## Global Methods
