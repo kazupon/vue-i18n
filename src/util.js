@@ -92,14 +92,3 @@ export function getDep (vm) {
   }
   return Dep
 }
-
-/**
- * Forgiving check for a promise
- *
- * @param {Object} p
- * @return {Boolean}
- */
-
-export function isPromise (p) {
-  return p && typeof p.then === 'function'
-}

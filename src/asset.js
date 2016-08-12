@@ -1,4 +1,4 @@
-import { warn, isPromise } from './util'
+import { warn } from './util'
 
 const locales = Object.create(null) // locales store
 
@@ -69,4 +69,15 @@ function setLocale (id, definition, cb) {
       })
     }
   }
+}
+
+/**
+ * Forgiving check for a promise
+ *
+ * @param {Object} p
+ * @return {Boolean}
+ */
+
+function isPromise (p) {
+  return p && typeof p.then === 'function'
 }
