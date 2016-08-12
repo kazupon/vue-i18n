@@ -2,11 +2,6 @@
  * Utilties
  */
 
-// export default for holding the Vue reference
-const exports = {}
-export default exports
-
-
 /**
  * warn
  *
@@ -22,43 +17,6 @@ export function warn (msg, err) {
       console.warn(err.stack)
     }
   }
-}
-
-const hasOwnProperty = Object.prototype.hasOwnProperty
-/**
- * Check whether the object has the property.
- *
- * @param {Object} obj
- * @param {String} key
- * @return {Boolean}
- */
-
-export function hasOwn (obj, key) {
-  return hasOwnProperty.call(obj, key)
-}
-
-/**
- * empty
- *
- * @param {Array|Object} target
- * @return {Boolean}
- */
-
-export function empty (target) {
-  if (target === null || target === undefined) { return true }
-
-  if (Array.isArray(target)) {
-    if (target.length > 0) { return false }
-    if (target.length === 0) { return true }
-  } else if (exports.Vue.util.isPlainObject(target)) {
-    /* eslint-disable prefer-const */
-    for (let key in target) {
-      if (hasOwn(target, key)) { return false }
-    }
-    /* eslint-enable prefer-const */
-  }
-
-  return true
 }
 
 let Watcher

@@ -1,6 +1,8 @@
 import assert from 'power-assert'
-import { getValue } from '../../src/path'
+import Vue from 'vue'
+import Path from '../../src/path'
 
+const getValue = Path(Vue)
 
 describe('path', () => {
   describe('primivite', () => {

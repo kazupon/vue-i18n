@@ -1,6 +1,6 @@
 import { warn } from './util'
 import Format from './format'
-import { getValue } from './path'
+import Path from './path'
 
 
 /**
@@ -13,6 +13,7 @@ import { getValue } from './path'
 export default function (Vue) {
   const { isObject } = Vue.util
   const format = Format(Vue)
+  const getValue = Path(Vue)
 
   function parseArgs (...args) {
     let lang = Vue.config.lang

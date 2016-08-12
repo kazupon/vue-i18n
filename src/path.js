@@ -4,13 +4,6 @@
  *    Vue.js Path parser
  */
 
-import { empty } from './util'
-
-
-// export default for holding the Vue reference
-const exports = {}
-export default exports
-
 // cache
 const pathCache = Object.create(null)
 
@@ -265,36 +258,58 @@ function parsePath (path) {
   return hit
 }
 
-/**
- * Get value from path string
- *
- * @param {Object} obj
- * @param {String} path
- * @return value
- */
+export default function (Vue) {
+  const { isObject, isPlainObject, hasOwn } = Vue.util
 
-export function getValue (obj, path) {
-  const { isObject } = exports.Vue.util
+  function empty (target) {
+    if (target === null || target === undefined) { return true }
 
-  if (!isObject(obj)) { return null }
-
-  const paths = parsePath(path)
-  if (empty(paths)) { return null }
-
-  const length = paths.length
-  let ret = null
-  let last = obj
-  let i = 0
-  while (i < length) {
-    const value = last[paths[i]]
-    if (value === undefined) {
-      last = null
-      break
+    if (Array.isArray(target)) {
+      if (target.length > 0) { return false }
+      if (target.length === 0) { return true }
+    } else if (isPlainObject(target)) {
+      /* eslint-disable prefer-const */
+      for (let key in target) {
+        if (hasOwn(target, key)) { return false }
+      }
+      /* eslint-enable prefer-const */
     }
-    last = value
-    i++
+
+    return true
   }
-  
-  ret = last
-  return ret
+
+  /**
+   * Get value from path string
+   *
+   * @param {Object} obj
+   * @param {String} path
+   * @return value
+   */
+
+  function getValue (obj, path) {
+    if (!isObject(obj)) { return null }
+
+    const paths = parsePath(path)
+    if (empty(paths)) { return null }
+
+    const length = paths.length
+    let ret = null
+    let last = obj
+    let i = 0
+    while (i < length) {
+      const value = last[paths[i]]
+      if (value === undefined) {
+        last = null
+        break
+      }
+      last = value
+      i++
+    }
+    
+    ret = last
+    return ret
+  }
+
+  return getValue
 }
+

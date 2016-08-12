@@ -1,5 +1,4 @@
-import util, { warn } from './util'
-import path from './path'
+import { warn } from './util'
 import Asset from './asset'
 import Override from './override'
 import Config from './config'
@@ -32,7 +31,6 @@ function plugin (Vue, opts = {}) {
 
   const lang = 'en'
 
-  path.Vue = util.Vue = Vue
   setupLangVM(Vue, lang)
 
   Asset(Vue)
