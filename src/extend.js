@@ -17,7 +17,7 @@ export default function (Vue) {
 
   function parseArgs (...args) {
     let lang = Vue.config.lang
-    let fallback = Vue.config.fallbackLang
+    const fallback = Vue.config.fallbackLang
 
     if (args.length === 1) {
       if (isObject(args[0]) || Array.isArray(args[0])) {
