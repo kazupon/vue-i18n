@@ -1,6 +1,7 @@
-import { getWatcher, getDep } from './util'
+import { getWatcher, getDep } from './observer'
 
 export default function (Vue, langVM) {
+  const { bind } = Vue.util
   const Watcher = getWatcher(langVM)
   const Dep = getDep(langVM)
 
@@ -25,6 +26,6 @@ export default function (Vue, langVM) {
     enumerable: true,
     configurable: true,
     get: makeComputedGetter(() => { return langVM.lang }, langVM),
-    set: Vue.util.bind(val => { langVM.lang = val }, langVM)
+    set: bind(val => { langVM.lang = val }, langVM)
   })
 }
