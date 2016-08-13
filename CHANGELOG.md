@@ -1,3 +1,13 @@
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/kazupon/vue-i18n/compare/v4.2.0...v4.2.1) (2016-08-13)
+
+
+### :zap: Improvements
+
+* **translate:** fallback translation warning ([5f6b271](https://github.com/kazupon/vue-i18n/commit/5f6b271))
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/kazupon/vue-i18n/compare/v4.1.0...v4.2.0) (2016-08-12)
 

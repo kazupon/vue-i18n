@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.2.0
+ * vue-i18n v4.2.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -662,7 +662,9 @@
    */
 
   function Extend (Vue) {
-    var isObject = Vue.util.isObject;
+    var _Vue$util = Vue.util;
+    var isObject = _Vue$util.isObject;
+    var bind = _Vue$util.bind;
 
     var format = Format(Vue);
     var getValue = Path(Vue);
@@ -693,7 +695,7 @@
       return { lang: lang, fallback: fallback, params: args };
     }
 
-    function translate(locale, key, args) {
+    function interpolate(locale, key, args) {
       if (!locale) {
         return null;
       }
@@ -706,11 +708,37 @@
       return args ? format(val, args) : val;
     }
 
+    function translate(getter, lang, fallback, key, params) {
+      var res = null;
+      res = interpolate(getter(lang), key, params);
+      if (res) {
+        return res;
+      }
+
+      res = interpolate(getter(fallback), key, params);
+      if (res) {
+        if ('development' !== 'production') {
+          warn('Fall back to translate the keypath "' + key + '" with "' + fallback + '" language.');
+        }
+        return res;
+      } else {
+        return null;
+      }
+    }
+
     function warnDefault(key) {
       if ('development' !== 'production') {
         warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
       }
       return key;
+    }
+
+    function getAssetLocale(lang) {
+      return Vue.locale(lang);
+    }
+
+    function getComponentLocale(lang) {
+      return this.$options.locales[lang];
     }
 
     /**
@@ -736,7 +764,7 @@
       var fallback = _parseArgs.fallback;
       var params = _parseArgs.params;
 
-      return translate(Vue.locale(lang), key, params) || translate(Vue.locale(fallback), key, params) || warnDefault(key);
+      return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(key);
     };
 
     /**
@@ -762,7 +790,14 @@
       var fallback = _parseArgs2.fallback;
       var params = _parseArgs2.params;
 
-      return translate(this.$options.locales && this.$options.locales[lang], key, params) || translate(this.$options.locales && this.$options.locales[fallback], key, params) || translate(Vue.locale(lang), key, params) || translate(Vue.locale(fallback), key, params) || warnDefault(key);
+      var res = null;
+      if (this.$options.locales) {
+        res = translate(bind(getComponentLocale, this), lang, fallback, key, params);
+        if (res) {
+          return res;
+        }
+      }
+      return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(key);
     };
 
     return Vue;
@@ -810,7 +845,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.2.0';
+  plugin.version = '4.2.1';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
