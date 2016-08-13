@@ -11,7 +11,7 @@ import Path from './path'
  */
 
 export default function (Vue) {
-  const { isObject } = Vue.util
+  const { isObject, bind } = Vue.util
   const format = Format(Vue)
   const getValue = Path(Vue)
 
@@ -37,7 +37,7 @@ export default function (Vue) {
     return { lang, fallback, params: args }
   }
 
-  function translate (locale, key, args) {
+  function interpolate (locale, key, args) {
     if (!locale) { return null }
 
     const val = getValue(locale, key) || locale[key]
@@ -45,6 +45,23 @@ export default function (Vue) {
 
     return args ? format(val, args) : val
   }
+
+  function translate (getter, lang, fallback, key, params) {
+    let res = null
+    res = interpolate(getter(lang), key, params) 
+    if (res) { return res } 
+
+    res = interpolate(getter(fallback), key, params) 
+    if (res) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn('Fall back to translate the keypath "' + key + '" with "' + fallback + '" language.')
+      }
+      return res
+    } else {
+      return null
+    }
+  }
+
 
   function warnDefault (key) {
     if (process.env.NODE_ENV !== 'production') {
@@ -54,6 +71,13 @@ export default function (Vue) {
     return key
   }
 
+  function getAssetLocale (lang) {
+    return Vue.locale(lang)
+  }
+
+  function getComponentLocale (lang) {
+    return this.$options.locales[lang]
+  }
 
   /**
    * Vue.t
@@ -65,10 +89,8 @@ export default function (Vue) {
 
   Vue.t = (key, ...args) => {
     if (!key) { return '' }
-
     const { lang, fallback, params } = parseArgs(...args)
-    return translate(Vue.locale(lang), key, params) 
-      || translate(Vue.locale(fallback), key, params) 
+    return translate(getAssetLocale, lang, fallback, key, params)
       || warnDefault(key)
   }
 
@@ -83,12 +105,13 @@ export default function (Vue) {
 
   Vue.prototype.$t = function (key, ...args) {
     if (!key) { return '' }
-
     const { lang, fallback, params } = parseArgs(...args)
-    return translate(this.$options.locales && this.$options.locales[lang], key, params) 
-      || translate(this.$options.locales && this.$options.locales[fallback], key, params) 
-      || translate(Vue.locale(lang), key, params)
-      || translate(Vue.locale(fallback), key, params)
+    let res = null
+    if (this.$options.locales) {
+      res = translate(bind(getComponentLocale, this), lang, fallback, key, params)
+      if (res) { return res }
+    }
+    return translate(getAssetLocale, lang, fallback, key, params)
       || warnDefault(key)
   }
 
