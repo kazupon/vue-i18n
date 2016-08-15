@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.2.1
+ * vue-i18n v4.2.2
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -383,6 +383,31 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
 };
 
 /**
+ * Check if an expression is a literal value.
+ *
+ * @param {String} exp
+ * @return {Boolean}
+ */
+
+var literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/;
+function isLiteral(exp) {
+  return literalValueRE.test(exp);
+}
+
+/**
+ * Strip quotes from a string
+ *
+ * @param {String} str
+ * @return {String | false}
+ */
+
+function stripQuotes(str) {
+  var a = str.charCodeAt(0);
+  var b = str.charCodeAt(str.length - 1);
+  return a === b && (a === 0x22 || a === 0x27) ? str.slice(1, -1) : str;
+}
+
+/**
  * Determine the type of a character in a keypath.
  *
  * @param {Char} ch
@@ -446,11 +471,6 @@ function getPathCharType(ch) {
  */
 
 function formatSubPath(path) {
-  var _exports$Vue$util = exports.Vue.util;
-  var isLiteral = _exports$Vue$util.isLiteral;
-  var stripQuotes = _exports$Vue$util.stripQuotes;
-
-
   var trimmed = path.trim();
   // invalid leading 0
   if (path.charAt(0) === '0' && isNaN(path)) {
@@ -841,7 +861,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.2.1';
+plugin.version = '4.2.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);

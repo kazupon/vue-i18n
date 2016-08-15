@@ -1,3 +1,13 @@
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/kazupon/vue-i18n/compare/v4.2.1...v4.2.2) (2016-08-15)
+
+
+### :bug: Bug Fixes
+
+* **path:** fix array path syntax error ([bc9dbee](https://github.com/kazupon/vue-i18n/commit/bc9dbee)), closes [#42](https://github.com/kazupon/vue-i18n/issues/42) [#43](https://github.com/kazupon/vue-i18n/issues/43)
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/kazupon/vue-i18n/compare/v4.2.0...v4.2.1) (2016-08-13)
 
