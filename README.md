@@ -9,27 +9,27 @@
 Internationalization plugin of Vue.js
 
 
-# Compatibility
+## Compatibility
 - Vue.js `1.0.0`+ 
 - Vue.js `2.0.0-beta.1`+
 
 
-# Installation
+## Installation
 
-## CDN
+### CDN
 jsdelivr
 
 ```html
 <script src="https://cdn.jsdelivr.net/vue.i18n/4.2.1/vue-i18n.min.js"></script>
 ```
 
-## NPM
+### NPM
 
-### stable version
+#### stable version
 
     $ npm install vue-i18n
 
-### development version
+#### development version
 
     $ git clone https://github.com/kazupon/vue-i18n node_modules/vue-i18n
     $ cd node_modules/vue-i18n
@@ -51,7 +51,7 @@ Vue.locale('ja', { ... })
 
 You don't need to do this when using the standalone build, as it installs itself automatically.
 
-# Usage
+## Usage
 
 ```javascript
 var Vue = require('vue')
@@ -100,9 +100,9 @@ Output the following:
 ```
 
 
-# Formatting
+## Formatting
 
-## HTML formatting
+### HTML formatting
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
 ```javascript
@@ -129,7 +129,7 @@ Output the following (instead of the message pre formatted)
 world</p>
 ```
 
-## Named formatting
+### Named formatting
 
 Locale the following:
 
@@ -155,7 +155,7 @@ Output the following:
 <p>hello world</p>
 ```
 
-## List formatting
+### List formatting
 
 Locale the following:
 
@@ -181,7 +181,7 @@ Output the following:
 <p>hello world</p>
 ```
 
-## Support ruby on rails i18n format
+### Support ruby on rails i18n format
 
 Locale the following:
 
@@ -207,7 +207,7 @@ Output the following:
 <p>hello world</p>
 ```
 
-# Fallback translation
+## Fallback translation
 
 Locale the following:
 
@@ -234,7 +234,7 @@ Output the following:
 <p>hello world</p>
 ```
 
-# Component locale
+## Component locale
 
 You can translate component based.
 
@@ -296,7 +296,7 @@ Output the following:
 > :pencil: If you set the locale of same keypath as global locale (`Vue.locale()`), in its component, `$t` is translate with component locale.
 
 
-# Dynamic locale
+## Dynamic locale
 
 Sometimes, you need to set dynamically the locale from external location. You can set dynamically it with `Vue.locale`.
 
@@ -331,27 +331,27 @@ Vue.locale(lang, function () {
 })
 ```
 
-## Dynamic locale interfaces
+### Dynamic locale interfaces
 
 In dynamic locales, You can use the two type interfaces:
 
-### 1. function
+#### 1. function
 You need to implement locale setting that return function have `function (resolve, reject)` like promise (future). The following, those argument of the function, if successful, you need to use the `resolve` according to locale object. if failed, you need to use `reject`
 
 - successful: `resolve`
 - failed: `reject`
 
-### 2. promise
+#### 2. promise
 As mentioned above, You need to implement locale setting that return a promise. if successful, you need to `resolve` according to locale object. if failed, you need to use `reject`.
 
 > :warning: You must return a **ES6 compatible** promise.
 
 
-# API References
+## API References
 
-## Global Config
+### Global Config
 
-### lang
+#### lang
 
 - **Type:** `String`
 
@@ -365,7 +365,7 @@ As mentioned above, You need to implement locale setting that return a promise. 
   Vue.config.lang = 'ja'
   ```
 
-### fallbackLang
+#### fallbackLang
 
 - **Type:** `String`
 
@@ -379,9 +379,9 @@ As mentioned above, You need to implement locale setting that return a promise. 
   Vue.config.fallbackLang = 'ja'
   ```
 
-## Global Methods
+### Global Methods
 
-### Vue.locale ( lang, [locale], [cb] )
+#### Vue.locale ( lang, [locale], [cb] )
 
 - **Arguments:**
     - `{String} lang`
@@ -413,7 +413,7 @@ As mentioned above, You need to implement locale setting that return a promise. 
   })
   ```
 
-### Vue.t( keypath, [lang], [arguments] )
+#### Vue.t( keypath, [lang], [arguments] )
 
 - **Arguments:**
   - `{String} keypath`
@@ -426,9 +426,9 @@ As mentioned above, You need to implement locale setting that return a promise. 
 - **Usage:**
   This is the same as the `$t` method. This is translate function for global locale only. more detail see [$t](https://github.com/kazupon/vue-i18n#$t)
 
-## Constructor Options
+### Constructor Options
 
-### locales
+#### locales
 
 - **Type:** `Object`
 
@@ -439,9 +439,9 @@ As mentioned above, You need to implement locale setting that return a promise. 
 - **See also:**
   - [$t](https://github.com/kazupon/vue-i18n#$t)
 
-## Instance Methods
+### Instance Methods
 
-## $t(keypath, [lang], [arguments])
+#### $t(keypath, [lang], [arguments])
 
 - **Arguments:**
   - `{String} keypath`
@@ -455,7 +455,7 @@ As mentioned above, You need to implement locale setting that return a promise. 
   Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
 
 
-# Contributing
+## Contributing
 - Fork it !
 - Create your top branch from `dev`: `git branch my-new-topic origin/dev`
 - Commit your changes: `git commit -am 'Add some topic'`
@@ -463,7 +463,7 @@ As mentioned above, You need to implement locale setting that return a promise. 
 - Submit a pull request to `dev` branch of `kazupon/vue-i18n` repository !
 
 
-# Development Setup
+## Development Setup
 
     # install deps
     npm install
@@ -484,11 +484,11 @@ As mentioned above, You need to implement locale setting that return a promise. 
     npm test
 
 
-# Changelog
+## Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
-# License
+## License
 
 [MIT](http://opensource.org/licenses/MIT)
