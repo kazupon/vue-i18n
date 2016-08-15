@@ -27,4 +27,13 @@ describe('issues', () => {
       )
     })
   })
+
+  describe('#42, #43', () => {
+    it('should not be occured error', () => {
+      assert.equal(
+        vm.$t('message[\'hello\']'),
+        locales[Vue.config.lang]['message']['hello']
+      )
+    })
+  })
 })

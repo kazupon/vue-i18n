@@ -77,6 +77,33 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
 }
 
 /**
+ * Check if an expression is a literal value.
+ *
+ * @param {String} exp
+ * @return {Boolean}
+ */
+
+const literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/
+function isLiteral (exp) {
+  return literalValueRE.test(exp)
+}
+
+/**
+ * Strip quotes from a string
+ *
+ * @param {String} str
+ * @return {String | false}
+ */
+
+function stripQuotes (str) {
+  const a = str.charCodeAt(0)
+  const b = str.charCodeAt(str.length - 1)
+  return a === b && (a === 0x22 || a === 0x27)
+    ? str.slice(1, -1)
+    : str
+}
+
+/**
  * Determine the type of a character in a keypath.
  *
  * @param {Char} ch
@@ -133,8 +160,6 @@ function getPathCharType (ch) {
  */
 
 function formatSubPath (path) {
-  const { isLiteral, stripQuotes } = exports.Vue.util
-
   const trimmed = path.trim()
   // invalid leading 0
   if (path.charAt(0) === '0' && isNaN(path)) { return false }
