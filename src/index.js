@@ -30,8 +30,8 @@ function plugin (Vue, opts = {}) {
   }
 
   const lang = 'en'
-
   setupLangVM(Vue, lang)
+
   Asset(Vue)
   Override(Vue, langVM, version)
   Config(Vue, langVM, lang)
@@ -42,7 +42,7 @@ function setupLangVM (Vue, lang) {
   const silent = Vue.config.silent
   Vue.config.silent = true
   if (!langVM) {
-    langVM = new Vue({ data: { lang: lang } })
+    langVM = new Vue({ data: { lang } })
   }
   Vue.config.silent = silent
 }

@@ -13,12 +13,8 @@ export default function (Vue, langVM, lang) {
     })
 
     return function computedGetter () {
-      if (watcher.dirty) {
-        watcher.evaluate()
-      }
-      if (Dep.target) {
-        watcher.depend()
-      }
+      watcher.dirty && watcher.evaluate()
+      Dep.target && watcher.depend()
       return watcher.value
     }
   }
