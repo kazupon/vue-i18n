@@ -1,40 +1,37 @@
-export default function (Vue, langVM) {
+export default function (Vue, langVM, version) {
+  function update (vm) {
+    if (version > 1) {
+      vm.$forceUpdate()
+    } else {
+      let i = vm._watchers.length
+      while (i--) {
+        vm._watchers[i].update(true) // shallow updates
+      }
+    }
+  }
+
   // override _init
   const init = Vue.prototype._init
   Vue.prototype._init = function (options) {
-    options = options || {}
-    const root = options._parent || options.parent || this
-    const lang = root.$lang
-
-    if (lang) {
-      this.$lang = lang
-    } else {
-      this.$lang = langVM
-    }
-
-    this._langUnwatch = this.$lang.$watch('lang', (a, b) => {
-      update(this)
-    })
-
     init.call(this, options)
+
+    if (!this.$parent) { // root
+      this.$lang = langVM
+      this._langUnwatch = this.$lang.$watch('lang', (a, b) => {
+        update(this)
+      })
+    }
   }
 
   // override _destroy
   const destroy = Vue.prototype._destroy
   Vue.prototype._destroy = function () {
-    if (this._langUnwatch) {
+    if (!this.$parent && this._langUnwatch) {
       this._langUnwatch()
       this._langUnwatch = null
+      this.$lang = null
     }
 
-    this.$lang = null
     destroy.apply(this, arguments)
-  }
-}
-
-function update (vm) {
-  let i = vm._watchers.length
-  while (i--) {
-    vm._watchers[i].update(true) // shallow updates
   }
 }

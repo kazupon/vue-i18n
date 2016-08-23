@@ -336,6 +336,126 @@ describe('i18n', () => {
       })
     })
 
+    describe('component tree', () => {
+      let el
+      beforeEach(() => {
+        el = document.createElement('div')
+        document.body.appendChild(el)
+      })
+
+      it('should translate', done => {
+        let vm
+        const parentLocales = {
+          en: { foo: { bar: 'hello parent' } },
+          ja: { foo: { bar: 'こんにちは、親' } }
+        }
+        const child1Locales = {
+          en: { foo: { bar: 'hello child1' } },
+          ja: { foo: { bar: 'こんにちは、子1' } }
+        }
+        const child2Locales = {
+          en: { foo: { bar: 'hello child2' } },
+          ja: { foo: { bar: 'こんにちは、子2' } }
+        }
+        const child3Locales = {
+          en: { foo: { bar: 'hello child3' } },
+          ja: { foo: { bar: 'こんにちは、子3' } }
+        }
+
+        if (version >= 2) {
+          vm = new Vue({
+            render (h) {
+              return h('div', [
+                h('p', { attrs: { id: 'parent' } }, [this.$t('foo.bar')]),
+                h('child1'),
+                h('child2')
+              ])
+            },
+            locales: parentLocales,
+            components: {
+              child1: {
+                render (h) {
+                  return h('div', [
+                    h('p', { attrs: { id: 'child1' } }, [this.$t('foo.bar')]),
+                    h('child3')
+                  ])
+                },
+                locales: child1Locales,
+                components: {
+                  child3: {
+                    render (h) {
+                      return h('div', [
+                        h('p', { attrs: { id: 'child3' } }, [this.$t('foo.bar')])
+                      ])
+                    },
+                    locales: child3Locales
+                  }
+                }
+              },
+              child2: {
+                render (h) {
+                  return h('div', [
+                    h('p', { attrs: { id: 'child2' } }, [this.$t('foo.bar')])
+                  ])
+                },
+                locales: child2Locales
+              }
+            }
+          })
+        } else {
+          vm = new Vue({
+            template: `<div>
+              <p id="parent">{{ $t("foo.bar") }}</p>
+              <child1></child1>
+              <child2></child2>
+            </div>`,
+            locales: parentLocales,
+            components: {
+              child1: {
+                template: `<div>
+                  <p id="child1">{{ $t("foo.bar") }}</p>
+                  <child3></child3>
+                </div>`,
+                locales: child1Locales,
+                components: {
+                  child3: {
+                    template: `<div>
+                      <p id="child3">{{ $t("foo.bar") }}</p>
+                    </div>`,
+                    locales: child3Locales
+                  }
+                }
+              },
+              child2: {
+                template: `<div>
+                  <p id="child2">{{ $t("foo.bar") }}</p>
+                </div>`,
+                locales: child2Locales
+              }
+            }
+          })
+        }
+        vm.$mount(el)
+
+        const parent = vm.$el.querySelector('#parent')
+        const child1 = vm.$el.querySelector('#child1')
+        const child2 = vm.$el.querySelector('#child2')
+        const child3 = vm.$el.querySelector('#child3')
+        assert.equal(parent.textContent, 'hello parent')
+        assert.equal(child1.textContent, 'hello child1')
+        assert.equal(child2.textContent, 'hello child2')
+        assert.equal(child3.textContent, 'hello child3')
+        Vue.config.lang = 'ja'
+        Vue.nextTick(() => {
+          assert.equal(parent.textContent, 'こんにちは、親')
+          assert.equal(child1.textContent, 'こんにちは、子1')
+          assert.equal(child2.textContent, 'こんにちは、子2')
+          assert.equal(child3.textContent, 'こんにちは、子3')
+          done()
+        })
+      })
+    })
+
     describe('fallbackLang', () => {
       let orgLang, orgFallbackLang
       beforeEach(done => {
