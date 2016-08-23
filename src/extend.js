@@ -79,6 +79,14 @@ export default function (Vue) {
     return this.$options.locales[lang]
   }
 
+  function fetchChoice (locale, choice) {
+    if (!locale && typeof locale !== 'string') return null
+    const choices = locale.split('|')
+    choice = choice - 1
+    if (!choices[choice]) return locale
+    return choices[choice].trim()
+  }
+
   /**
    * Vue.t
    *
@@ -94,6 +102,19 @@ export default function (Vue) {
       || warnDefault(key)
   }
 
+  /**
+   * Vue.tc
+   *
+   * @param {String} key
+   * @param {number|undefined} choice
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  Vue.tc = (key, choice, ...args) => {
+    if (!choice) { choice = 1 }
+    return fetchChoice(Vue.t(key, ...args), choice)
+  }
 
   /**
    * $t
@@ -113,6 +134,21 @@ export default function (Vue) {
     }
     return translate(getAssetLocale, lang, fallback, key, params)
       || warnDefault(key)
+  }
+
+  /**
+   * $tc
+   *
+   * @param {String} key
+   * @param {number|undefined} choice
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  Vue.prototype.$tc = function (key, choice, ...args) {
+    if (typeof choice !== 'number' && typeof choice !== 'undefined') return key
+    if (!choice) { choice = 1 }
+    return fetchChoice(this.$t(key, ...args), choice)
   }
 
   return Vue

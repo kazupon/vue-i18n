@@ -109,6 +109,106 @@ describe('i18n', () => {
     })
   })
 
+  describe('Vue.tc', () => {
+    describe('en language locale', () => {
+      it('should translate an english', () => {
+        assert.equal(Vue.tc('plurals.car', 1), 'car')
+      })
+    })
+
+    describe('multi plural check', () => {
+      it('should fetch pluralized string', () => {
+        assert.equal(Vue.tc('plurals.car', 2), 'cars')
+      })
+    })
+
+    describe('ja language locale', () => {
+      it('should translate a japanese', () => {
+        assert.equal(Vue.tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+      })
+    })
+
+    describe('key argument', () => {
+      describe('not specify', () => {
+        it('should return empty string', () => {
+          assert.equal(Vue.tc(), '')
+        })
+      })
+
+      describe('empty string', () => {
+        it('should return empty string', () => {
+          assert.equal(Vue.tc(''), '')
+        })
+      })
+
+      describe('not regist key', () => {
+        it('should return key string', () => {
+          assert.equal(Vue.tc('foo.bar'), 'foo.bar')
+        })
+      })
+
+      describe('sentence fragment', () => {
+        it('should translate fragment', () => {
+          assert.equal(Vue.tc('hello world'), 'Hello World')
+        })
+
+        it('should return replaced string if available', () => {
+          assert.equal(
+            Vue.tc('Hello {0}', 1, ['kazupon']),
+            'Hello kazupon'
+          )
+        })
+
+        it('should return key if unavailable', () => {
+          assert.equal(Vue.tc('Hello'), 'Hello')
+        })
+      })
+    })
+
+    describe('format arguments', () => {
+      context('named', () => {
+        it('should return replaced string', () => {
+          assert.equal(
+            Vue.tc('plurals.format.named', 1, { name: 'kazupon' }),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+
+      context('list', () => {
+        it('should return replaced string', () => {
+          assert.equal(
+            Vue.tc('plurals.format.list', 1, ['kazupon']),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+    })
+
+    describe('language argument', () => {
+      it('should return empty string', () => {
+        assert.equal(Vue.tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+      })
+    })
+
+    describe('format & language arguments', () => {
+      it('should return replaced string', () => {
+        assert.equal(
+          Vue.tc('plurals.format.list', 1, 'ja', ['kazupon']),
+          'こんにちは kazupon, ごきげんいかが？'
+        )
+      })
+    })
+
+    describe('fallback', () => {
+      it('should return fallback string', () => {
+        assert.equal(
+          Vue.tc('plurals.fallback', 1, 'ja'),
+          'これはフォールバック'
+        )
+      })
+    })
+  })
 
   describe('$t', () => {
     describe('en language locale', () => {
@@ -213,6 +313,115 @@ describe('i18n', () => {
         assert.equal(
           vm.$t('message.fallback', 'ja'),
           locales.en.message.fallback
+        )
+      })
+    })
+  })
+
+
+  describe('$tc', () => {
+    describe('en language locale', () => {
+      it('should translate plural english', () => {
+        const vm = new Vue()
+        assert.equal(vm.$tc('plurals.car', 1), 'car')
+      })
+    })
+
+    describe('multi plural check', () => {
+      it('should fetch pluralized string', () => {
+        const vm = new Vue()
+        assert.equal(vm.$tc('plurals.car', 2), 'cars')
+      })
+    })
+
+    describe('key argument', () => {
+      describe('not specify', () => {
+        it('should return empty string', () => {
+          const vm = new Vue()
+          assert.equal(vm.$tc(), '')
+        })
+      })
+
+      describe('empty string', () => {
+        it('should return empty string', () => {
+          const vm = new Vue()
+          assert.equal(vm.$tc(''), '')
+        })
+      })
+
+      describe('not regist key', () => {
+        it('should return key string', () => {
+          const vm = new Vue()
+          assert.equal(vm.$tc('foo.bar'), 'foo.bar')
+        })
+      })
+
+      describe('sentence fragment', () => {
+        it('should translate fragment', () => {
+          const vm = new Vue()
+          assert.equal(vm.$tc('hello world'), 'Hello World')
+        })
+
+        it('should return replaced string if available', () => {
+          const vm = new Vue()
+          assert.equal(
+            vm.$tc('Hello {0}', 1, ['kazupon']),
+            'Hello kazupon'
+          )
+        })
+
+        it('should return key if unavailable', () => {
+          const vm = new Vue()
+          assert.equal(vm.$tc('Hello'), 'Hello')
+        })
+      })
+    })
+
+    describe('format arguments', () => {
+      context('named', () => {
+        it('should return replaced string', () => {
+          const vm = new Vue()
+          assert.equal(
+            vm.$tc('plurals.format.named', 1, { name: 'kazupon' }),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+
+      context('list', () => {
+        it('should return replaced string', () => {
+          const vm = new Vue()
+          assert.equal(
+            vm.$tc('plurals.format.list', 1, ['kazupon']),
+            'Hello kazupon, how are you?'
+          )
+        })
+      })
+    })
+
+    describe('language argument', () => {
+      it('should return empty string', () => {
+        const vm = new Vue()
+        assert.equal(vm.$tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+      })
+    })
+
+    describe('format & language arguments', () => {
+      it('should return replaced string', () => {
+        const vm = new Vue()
+        assert.equal(
+          vm.$tc('plurals.format.list', 1, 'ja', ['kazupon']),
+          'こんにちは kazupon, ごきげんいかが？'
+        )
+      })
+    })
+
+    describe('fallback', () => {
+      it('should return fallback string', () => {
+        const vm = new Vue()
+        assert.equal(
+          vm.$tc('plurals.fallback', 2, 'ja'),
+          'ザ・ワールド'
         )
       })
     })
