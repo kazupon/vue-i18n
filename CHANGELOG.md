@@ -1,3 +1,13 @@
+<a name="4.2.3"></a>
+## [4.2.3](https://github.com/kazupon/vue-i18n/compare/v4.2.2...v4.2.3) (2016-08-23)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* improve re-rendering cost when change the lang ([0707338](https://github.com/kazupon/vue-i18n/commit/0707338))
+
+
+
 <a name="4.2.2"></a>
 ## [4.2.2](https://github.com/kazupon/vue-i18n/compare/v4.2.1...v4.2.2) (2016-08-15)
 

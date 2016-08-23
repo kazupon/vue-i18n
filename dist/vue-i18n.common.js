@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.2.2
+ * vue-i18n v4.2.3
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -124,47 +124,45 @@ function isPromise(p) {
   return p && typeof p.then === 'function';
 }
 
-function Override (Vue, langVM) {
+function Override (Vue, langVM, version) {
+  function update(vm) {
+    if (version > 1) {
+      vm.$forceUpdate();
+    } else {
+      var i = vm._watchers.length;
+      while (i--) {
+        vm._watchers[i].update(true); // shallow updates
+      }
+    }
+  }
+
   // override _init
   var init = Vue.prototype._init;
   Vue.prototype._init = function (options) {
     var _this = this;
 
-    options = options || {};
-    var root = options._parent || options.parent || this;
-    var lang = root.$lang;
-
-    if (lang) {
-      this.$lang = lang;
-    } else {
-      this.$lang = langVM;
-    }
-
-    this._langUnwatch = this.$lang.$watch('lang', function (a, b) {
-      update(_this);
-    });
-
     init.call(this, options);
+
+    if (!this.$parent) {
+      // root
+      this.$lang = langVM;
+      this._langUnwatch = this.$lang.$watch('lang', function (a, b) {
+        update(_this);
+      });
+    }
   };
 
   // override _destroy
   var destroy = Vue.prototype._destroy;
   Vue.prototype._destroy = function () {
-    if (this._langUnwatch) {
+    if (!this.$parent && this._langUnwatch) {
       this._langUnwatch();
       this._langUnwatch = null;
+      this.$lang = null;
     }
 
-    this.$lang = null;
     destroy.apply(this, arguments);
   };
-}
-
-function update(vm) {
-  var i = vm._watchers.length;
-  while (i--) {
-    vm._watchers[i].update(true); // shallow updates
-  }
 }
 
 /**
@@ -217,12 +215,8 @@ function Config (Vue, langVM, lang) {
     });
 
     return function computedGetter() {
-      if (watcher.dirty) {
-        watcher.evaluate();
-      }
-      if (Dep.target) {
-        watcher.depend();
-      }
+      watcher.dirty && watcher.evaluate();
+      Dep.target && watcher.depend();
       return watcher.value;
     };
   }
@@ -844,10 +838,10 @@ function plugin(Vue) {
   }
 
   var lang = 'en';
-
   setupLangVM(Vue, lang);
+
   Asset(Vue);
-  Override(Vue, langVM);
+  Override(Vue, langVM, version);
   Config(Vue, langVM, lang);
   Extend(Vue);
 }
@@ -861,7 +855,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.2.2';
+plugin.version = '4.2.3';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
