@@ -12,7 +12,15 @@ export default {
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
     'continue-with-new-account': 'continue with new account',
-    underscore: '{hello_msg} world'
+    underscore: '{hello_msg} world',
+    plurals: {
+      car: 'car | cars',
+      format: {
+        named: 'Hello {name}, how are you? | Hi {name}, you look fine',
+        list: 'Hello {0}, how are you? | Hi {0}, you look fine'
+      },
+      fallback: 'this is fallback | this is a plural fallback'
+    }
   },
   ja: {
     message: {
@@ -23,6 +31,14 @@ export default {
         list: 'こんにちは {0}, ごきげんいかが？'
       },
       fallback1: 'これはフォールバック'
+    },
+    plurals: {
+      car: 'ザ・ワールド | これはフォールバック',
+      format: {
+        named: 'こんにちは {name}, ごきげんいかが？ | こんにちは {name}, ごきげんいかが？',
+        list: 'こんにちは {0}, ごきげんいかが？| こんにちは {0}, ごきげんいかが？'
+      },
+      fallback: 'これはフォールバック | ザ・ワールド'
     }
   }
 }
