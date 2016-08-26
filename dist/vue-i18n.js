@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.3.0
+ * vue-i18n v4.3.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -915,7 +915,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.3.0';
+  plugin.version = '4.3.1';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
