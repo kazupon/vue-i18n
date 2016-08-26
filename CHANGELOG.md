@@ -1,3 +1,13 @@
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/kazupon/vue-i18n/compare/v4.2.3...v4.3.0) (2016-08-26)
+
+
+### :star: New Features
+
+* add pluralization ([#44](https://github.com/kazupon/vue-i18n/issues/44)) by [@mmochetti](https://github.com/mmochetti) ([b5b84d8](https://github.com/kazupon/vue-i18n/commit/b5b84d8))
+
+
+
 <a name="4.2.3"></a>
 ## [4.2.3](https://github.com/kazupon/vue-i18n/compare/v4.2.2...v4.2.3) (2016-08-23)
 
