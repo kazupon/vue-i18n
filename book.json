@@ -1,0 +1,21 @@
+{
+  "gitbook": "3.x.x",
+  "root": "./gitbook",
+  "plugins": ["edit-link", "github", "advanced-emoji@0.2.1"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/kazupon/vue-i18n/tree/dev/gitbook",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/kazupon/vue-i18n/"
+    }
+  },
+  "links": {
+    "sharing": {
+      "facebook": false,
+      "twitter": false
+    }
+  }
+}
+
