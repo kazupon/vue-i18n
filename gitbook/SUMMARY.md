@@ -1,4 +1,5 @@
-# Summary
+# vue-i18n documentation
 
-* [Introduction](README.md)
+Internationalization plugin of Vue.js
 
+* [Installation](installation.md)

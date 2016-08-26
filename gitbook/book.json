@@ -1,6 +1,6 @@
 {
   "gitbook": "3.x.x",
-  "root": "./gitbook",
+  "root": "./",
   "plugins": ["edit-link", "github", "advanced-emoji@0.2.1"],
   "pluginsConfig": {
     "edit-link": {
