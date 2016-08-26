@@ -75,11 +75,20 @@
   Translated string
 
 - **Usage:**
-  This is the same as the `$t` method. This is translate function for global locale only. more detail see [$t](https://github.com/kazupon/vue-i18n#$t)
+  This is the same as the `$t` method. This is translate function for global locale only. more detail see [$t](#tkeypath-lang-arguments).
 
-### Vue.tc( keypath, [chice], [arguments] )
+### Vue.tc( keypath, [choice], [arguments] )
 
-TODO:
+- **Arguments:**
+  - `{String} keypath`
+  - `{Number} [choice] - default: 1`
+  - `{String | Array | Object [arguments]`
+
+- **Return:**
+  Translated pluralization string
+
+- **Usage:**
+  This is the same as the `$tc` method. This is translate pluralization function for global locale only. more detail see [$tc](#tc-keypath-choice-arguments-).
 
 ## Constructor Options
 
@@ -92,7 +101,7 @@ TODO:
   A locale definition object to be made available to the Vue instance only.
 
 - **See also:**
-  - [$t](https://github.com/kazupon/vue-i18n#$t)
+  - [$t](#tkeypath-lang-arguments)
 
 ## Instance Methods
 
@@ -107,9 +116,18 @@ TODO:
   Translated string
 
 - **Usage:**
-  Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](https://github.com/kazupon/vue-i18n#formatting).
+  Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](formatting.md).
 
-### $tc( keypath, [chice], [arguments] )
+### $tc( keypath, [choice], [arguments] )
 
-TODO:
+- **Arguments:**
+  - `{String} keypath`
+  - `{Number} [choice] - default: 1`
+  - `{String | Array | Object [arguments]`
 
+- **Return:**
+  Translated pluralization string
+
+- **Usage:**
+
+  Translate the locale of `keypath` with pluralization. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you will specify String value to `arguments`, translate the locale of value. If you wll specify Array or Object value to `arguments`, you must specify with `arguments` of [$t](#tkeypath-lang-arguments).
