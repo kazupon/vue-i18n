@@ -54,7 +54,8 @@ export default function (Vue) {
     res = interpolate(getter(fallback), key, params) 
     if (res) {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Fall back to translate the keypath "' + key + '" with "' + fallback + '" language.')
+        warn('Fall back to translate the keypath "' + key + '" with "' 
+          + fallback + '" language.')
       }
       return res
     } else {
@@ -80,10 +81,10 @@ export default function (Vue) {
   }
 
   function fetchChoice (locale, choice) {
-    if (!locale && typeof locale !== 'string') return null
+    if (!locale && typeof locale !== 'string') { return null }
     const choices = locale.split('|')
     choice = choice - 1
-    if (!choices[choice]) return locale
+    if (!choices[choice]) { return locale }
     return choices[choice].trim()
   }
 
@@ -129,7 +130,9 @@ export default function (Vue) {
     const { lang, fallback, params } = parseArgs(...args)
     let res = null
     if (this.$options.locales) {
-      res = translate(bind(getComponentLocale, this), lang, fallback, key, params)
+      res = translate(
+        bind(getComponentLocale, this), lang, fallback, key, params
+      )
       if (res) { return res }
     }
     return translate(getAssetLocale, lang, fallback, key, params)
@@ -146,7 +149,8 @@ export default function (Vue) {
    */
 
   Vue.prototype.$tc = function (key, choice, ...args) {
-    if (typeof choice !== 'number' && typeof choice !== 'undefined') return key
+    if (typeof choice !== 'number'
+      && typeof choice !== 'undefined') { return key }
     if (!choice) { choice = 1 }
     return fetchChoice(this.$t(key, ...args), choice)
   }
