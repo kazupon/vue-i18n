@@ -298,10 +298,21 @@ Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, <span class="hljs-fu
 <li><p><strong>Return:</strong>
 Translated string</p></li>
 <li><p><strong>Usage:</strong>
-This is the same as the <code>$t</code> method. This is translate function for global locale only. more detail see <a href="https://github.com/kazupon/vue-i18n#$t" target="_blank">$t</a></p></li></ul>
-<h3 id="vuetc-keypath-chice-arguments-">Vue.tc( keypath, [chice], [arguments] )</h3><p>TODO:</p><h2 id="constructor-options">Constructor Options</h2><h3 id="locales">locales</h3><ul><li><p><strong>Type:</strong> <code>Object</code></p></li>
+This is the same as the <code>$t</code> method. This is translate function for global locale only. more detail see <a href="#tkeypath-lang-arguments">$t</a>.</p></li></ul>
+<h3 id="vuetc-keypath-choice-arguments-">Vue.tc( keypath, [choice], [arguments] )</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} keypath</code>
+</li>
+<li><code>{Number} [choice] - default: 1</code>
+</li>
+<li><code>{String | Array | Object [arguments]</code>
+</li></ul>
+</li>
+<li><p><strong>Return:</strong>
+Translated pluralization string</p></li>
+<li><p><strong>Usage:</strong>
+This is the same as the <code>$tc</code> method. This is translate pluralization function for global locale only. more detail see <a href="#tc-keypath-choice-arguments-">$tc</a>.</p></li></ul>
+<h2 id="constructor-options">Constructor Options</h2><h3 id="locales">locales</h3><ul><li><p><strong>Type:</strong> <code>Object</code></p></li>
 <li><p><strong>Details:</strong></p><p>A locale definition object to be made available to the Vue instance only.</p></li>
-<li><p><strong>See also:</strong></p><ul><li><a href="https://github.com/kazupon/vue-i18n#$t" target="_blank">$t</a>
+<li><p><strong>See also:</strong></p><ul><li><a href="#tkeypath-lang-arguments">$t</a>
 </li></ul>
 </li></ul>
 <h2 id="instance-methods">Instance Methods</h2><h3 id="tkeypath-lang-arguments">$t(keypath, [lang], [arguments])</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} keypath</code>
@@ -314,8 +325,18 @@ This is the same as the <code>$t</code> method. This is translate function for g
 <li><p><strong>Return:</strong>
 Translated string</p></li>
 <li><p><strong>Usage:</strong>
-Translate the locale of <code>keypath</code>. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified <code>lang</code>, translate the locale of <code>lang</code>. If you specified <code>keypath</code> of list / named formatting local, you must specify <code>arguments</code> too. For <code>arguments</code> more details see <a href="https://github.com/kazupon/vue-i18n#formatting" target="_blank">Formatting</a>.</p></li></ul>
-<h3 id="tc-keypath-chice-arguments-">$tc( keypath, [chice], [arguments] )</h3><p>TODO:</p>
+Translate the locale of <code>keypath</code>. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified <code>lang</code>, translate the locale of <code>lang</code>. If you specified <code>keypath</code> of list / named formatting local, you must specify <code>arguments</code> too. For <code>arguments</code> more details see <a href="formatting.html">Formatting</a>.</p></li></ul>
+<h3 id="tc-keypath-choice-arguments-">$tc( keypath, [choice], [arguments] )</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} keypath</code>
+</li>
+<li><code>{Number} [choice] - default: 1</code>
+</li>
+<li><code>{String | Array | Object [arguments]</code>
+</li></ul>
+</li>
+<li><p><strong>Return:</strong>
+Translated pluralization string</p></li>
+<li><p><strong>Usage:</strong></p><p>Translate the locale of <code>keypath</code> with pluralization. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you will specify String value to <code>arguments</code>, translate the locale of value. If you wll specify Array or Object value to <code>arguments</code>, you must specify with <code>arguments</code> of <a href="#tkeypath-lang-arguments">$t</a>.</p></li></ul>
+
                                 
                                 </section>
                             
@@ -354,7 +375,7 @@ Translate the locale of <code>keypath</code>. Translate in preferentially compon
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.9","depth":1,"previous":{"title":"Dynamic locale","level":"1.8","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-08-26T05:55:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-26T05:59:13.556Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.9","depth":1,"previous":{"title":"Dynamic locale","level":"1.8","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-08-26T07:02:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-26T07:28:13.907Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

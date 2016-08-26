@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.2.3
+ * vue-i18n v4.3.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -751,6 +751,18 @@ function Extend (Vue) {
     return this.$options.locales[lang];
   }
 
+  function fetchChoice(locale, choice) {
+    if (!locale && typeof locale !== 'string') {
+      return null;
+    }
+    var choices = locale.split('|');
+    choice = choice - 1;
+    if (!choices[choice]) {
+      return locale;
+    }
+    return choices[choice].trim();
+  }
+
   /**
    * Vue.t
    *
@@ -778,6 +790,26 @@ function Extend (Vue) {
   };
 
   /**
+   * Vue.tc
+   *
+   * @param {String} key
+   * @param {number|undefined} choice
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  Vue.tc = function (key, choice) {
+    for (var _len3 = arguments.length, args = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+      args[_key3 - 2] = arguments[_key3];
+    }
+
+    if (!choice) {
+      choice = 1;
+    }
+    return fetchChoice(Vue.t.apply(Vue, [key].concat(args)), choice);
+  };
+
+  /**
    * $t
    *
    * @param {String} key
@@ -790,8 +822,8 @@ function Extend (Vue) {
       return '';
     }
 
-    for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-      args[_key3 - 1] = arguments[_key3];
+    for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
     }
 
     var _parseArgs2 = parseArgs.apply(undefined, args);
@@ -808,6 +840,30 @@ function Extend (Vue) {
       }
     }
     return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(key);
+  };
+
+  /**
+   * $tc
+   *
+   * @param {String} key
+   * @param {number|undefined} choice
+   * @param {Array} ...args
+   * @return {String}
+   */
+
+  Vue.prototype.$tc = function (key, choice) {
+    if (typeof choice !== 'number' && typeof choice !== 'undefined') {
+      return key;
+    }
+    if (!choice) {
+      choice = 1;
+    }
+
+    for (var _len5 = arguments.length, args = Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
+      args[_key5 - 2] = arguments[_key5];
+    }
+
+    return fetchChoice(this.$t.apply(this, [key].concat(args)), choice);
   };
 
   return Vue;
@@ -855,7 +911,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.2.3';
+plugin.version = '4.3.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
