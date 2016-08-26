@@ -13,14 +13,14 @@ var main = fs
   .replace(/plugin\.version = '[\d\.]+'/, "plugin.version = '" + pack.version + "'")
 fs.writeFileSync('src/index.js', main)
 
-// update readme.md
-var readme = fs
-  .readFileSync('readme.md', 'utf-8')
+// update installation.md
+var installation = fs
+  .readFileSync('./gitbook/installation.md', 'utf-8')
   .replace(
     /<script src="https:\/\/cdn\.jsdelivr\.net\/vue\.i18n\/[\d\.]+.[\d]+\/vue-i18n\.min\.js"><\/script>/,
     '<script src="https://cdn.jsdelivr.net/vue.i18n/' + pack.version + '/vue-i18n.min.js"></script>'
   )
-fs.writeFileSync('readme.md', readme)
+fs.writeFileSync('./gitbook/installation.md', installation)
 
 
 // CommonJS build.
