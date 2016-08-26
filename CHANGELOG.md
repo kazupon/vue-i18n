@@ -1,3 +1,13 @@
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/kazupon/vue-i18n/compare/v4.3.0...v4.3.1) (2016-08-26)
+
+
+### :bug: Bug Fixes
+
+* **npm:** fix installing bug ([57e66aa](https://github.com/kazupon/vue-i18n/commit/57e66aa)), closes [#46](https://github.com/kazupon/vue-i18n/issues/46)
+
+
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/kazupon/vue-i18n/compare/v4.2.3...v4.3.0) (2016-08-26)
 
