@@ -1,0 +1,401 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>API References · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="dynamic.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="started.html">
+            
+                <a href="started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="formatting.html">
+            
+                <a href="formatting.html">
+            
+                    
+                    Formatting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="pluralization.html">
+            
+                <a href="pluralization.html">
+            
+                    
+                    Pluralization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="fallback.html">
+            
+                <a href="fallback.html">
+            
+                    
+                    Fallback translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="component.html">
+            
+                <a href="component.html">
+            
+                    
+                    Component locale
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="dynamic.html">
+            
+                <a href="dynamic.html">
+            
+                    
+                    Dynamic locale
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="api.html">
+            
+                <a href="api.html">
+            
+                    
+                    API References
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >API References</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-references">API References</h1><h2 id="global-config">Global Config</h2><h3 id="lang">lang</h3><ul><li><p><strong>Type:</strong> <code>String</code></p></li>
+<li><p><strong>Default:</strong> <code>en</code></p></li>
+<li><p><strong>Usage:</strong></p><p>Get or set a translation language code. Default by <code>en</code> string value.</p><pre><code class="lang-javascript">Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span></code></pre>
+</li></ul>
+<h3 id="fallbacklang">fallbackLang</h3><ul><li><p><strong>Type:</strong> <code>String</code></p></li>
+<li><p><strong>Default:</strong> <code>en</code></p></li>
+<li><p><strong>Usage:</strong></p><p>Get or set a translation fallback language code. Default by <code>en</code> string value.</p><pre><code class="lang-javascript">Vue.config.fallbackLang = <span class="hljs-string">&apos;ja&apos;</span></code></pre>
+</li></ul>
+<h2 id="global-methods">Global Methods</h2><h3 id="vuelocale--lang-locale-cb-">Vue.locale ( lang, [locale], [cb] )</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} lang</code>
+</li>
+<li><code>{Object | Function} [locale]</code>
+</li>
+<li><code>{Function} [cb]</code>
+</li></ul>
+</li>
+<li><p><strong>Return:</strong></p><ul><li>locale function or object
+</li></ul>
+</li>
+<li><p><strong>Usage:</strong></p><p>Register or retrieve a locale</p><pre><code class="lang-javascript"><span class="hljs-comment">// register locale with object</span>
+Vue.locale(<span class="hljs-string">&apos;en&apos;</span>, { message: <span class="hljs-string">&apos;hello&apos;</span> })
+
+<span class="hljs-comment">// register with external locale</span>
+Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">&apos;/locales/ja&apos;</span>, {
+    method: <span class="hljs-string">&apos;get&apos;</span>,
+    <span class="hljs-comment">// ...</span>
+  }).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">json</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(json)
+  }).catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject()
+  })
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
+})</code></pre>
+</li></ul>
+<h3 id="vuet-keypath-lang-arguments-">Vue.t( keypath, [lang], [arguments] )</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} keypath</code>
+</li>
+<li><code>{String} [lang]</code>
+</li>
+<li><code>{Array | Object [arguments]</code>
+</li></ul>
+</li>
+<li><p><strong>Return:</strong>
+Translated string</p></li>
+<li><p><strong>Usage:</strong>
+This is the same as the <code>$t</code> method. This is translate function for global locale only. more detail see <a href="https://github.com/kazupon/vue-i18n#$t" target="_blank">$t</a></p></li></ul>
+<h3 id="vuetc-keypath-chice-arguments-">Vue.tc( keypath, [chice], [arguments] )</h3><p>TODO:</p><h2 id="constructor-options">Constructor Options</h2><h3 id="locales">locales</h3><ul><li><p><strong>Type:</strong> <code>Object</code></p></li>
+<li><p><strong>Details:</strong></p><p>A locale definition object to be made available to the Vue instance only.</p></li>
+<li><p><strong>See also:</strong></p><ul><li><a href="https://github.com/kazupon/vue-i18n#$t" target="_blank">$t</a>
+</li></ul>
+</li></ul>
+<h2 id="instance-methods">Instance Methods</h2><h3 id="tkeypath-lang-arguments">$t(keypath, [lang], [arguments])</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} keypath</code>
+</li>
+<li><code>{String} [lang]</code>
+</li>
+<li><code>{Array | Object [arguments]</code>
+</li></ul>
+</li>
+<li><p><strong>Return:</strong>
+Translated string</p></li>
+<li><p><strong>Usage:</strong>
+Translate the locale of <code>keypath</code>. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified <code>lang</code>, translate the locale of <code>lang</code>. If you specified <code>keypath</code> of list / named formatting local, you must specify <code>arguments</code> too. For <code>arguments</code> more details see <a href="https://github.com/kazupon/vue-i18n#formatting" target="_blank">Formatting</a>.</p></li></ul>
+<h3 id="tc-keypath-chice-arguments-">$tc( keypath, [chice], [arguments] )</h3><p>TODO:</p>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="dynamic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Dynamic locale">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.9","depth":1,"previous":{"title":"Dynamic locale","level":"1.8","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-08-26T05:55:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-26T05:59:13.556Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
