@@ -40,8 +40,25 @@ export default function (Vue) {
   function interpolate (locale, key, args) {
     if (!locale) { return null }
 
-    const val = getValue(locale, key) || locale[key]
+    let val = getValue(locale, key) || locale[key]
     if (!val) { return null }
+
+    // Check for the existance of links within the translated string
+    if (val.indexOf('@:') >= 0) {
+      // Match all the links within the local
+      // We are going to replace each of
+      // them with its translation
+      const matches = val.match(/(@:[\w|\.]+)/g)
+      for (const idx in matches) {
+        const link = matches[idx]
+        // Remove the leading @:
+        const linkPlaceholder = link.substr(2)
+        // Translate the link
+        const translatedstring = interpolate(locale, linkPlaceholder, args)
+        // Replace the link with the translated string
+        val = val.replace(link, translatedstring)
+      }
+    }
 
     return args ? format(val, args) : val
   }
