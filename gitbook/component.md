@@ -42,7 +42,7 @@ Template the following:
 
 ```html
 <div id="app">
-  <p>{{ $t("message.hello") }}</p>
+  <p>{{ $t('message.hello') }}</p>
   <component1></component1>
 </div>
 ```

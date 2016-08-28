@@ -44,7 +44,7 @@ var locales = {
 Template the following:
 
 ```html
-<p>{{ $t('message.hello', { msg: "hello"}) }}</p>
+<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
 ```
 
 Output the following:
@@ -70,7 +70,7 @@ var locales = {
 Template the following:
 
 ```html
-<p>{{ $t('message.hello', ["hello"]) }}</p>
+<p>{{ $t('message.hello', ['hello']) }}</p>
 ```
 
 Output the following:
@@ -96,7 +96,7 @@ var locales = {
 Template the following:
 
 ```html
-<p>{{ $t('message.hello', { msg: "hello"}) }}</p>
+<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
 ```
 
 Output the following:
