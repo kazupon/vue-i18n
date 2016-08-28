@@ -7,7 +7,11 @@ export default {
         named: 'Hello {name}, how are you?',
         list: 'Hello {0}, how are you?'
       },
-      fallback: 'this is fallback'
+      fallback: 'this is fallback',
+      link: '@:message.hello',
+      link_end: 'This is a linked translation to @:message.hello',
+      link_within: 'Isn\'t @:message.hello we live in great?',
+      link_multiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?'
     },
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',

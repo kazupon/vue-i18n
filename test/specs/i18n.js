@@ -21,6 +21,30 @@ describe('i18n', () => {
       })
     })
 
+    describe('linked translation', () => {
+      it('should translate simple link', () => {
+        assert.equal(Vue.t('message.link'), locales.en.message.hello)
+      })
+    })
+
+    describe('linked translation', () => {
+      it('should translate link at the end of locale', () => {
+        assert.equal(Vue.t('message.link_end'), 'This is a linked translation to the world')
+      })
+    })
+
+    describe('linked translation', () => {
+      it('should translate link within a locale', () => {
+        assert.equal(Vue.t('message.link_within'), 'Isn\'t the world we live in great?')
+      })
+    })
+
+    describe('linked translation', () => {
+      it('should translate multiple links within a locale', () => {
+        assert.equal(Vue.t('message.link_multiple'), 'Hello hoge!, isn\'t the world great?')
+      })
+    })
+
     describe('ja language locale', () => {
       it('should translate a japanese', () => {
         assert.equal(Vue.t('message.hello', 'ja'), locales.ja.message.hello)
