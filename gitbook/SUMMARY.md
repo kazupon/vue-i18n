@@ -6,6 +6,7 @@ Internationalization plugin of Vue.js
 * [Getting Started](started.md)
 * [Formatting](formatting.md)
 * [Pluralization](pluralization.md)
+* [Linked translation](linked.md)
 * [Fallback translation](fallback.md)
 * [Component locale](component.md)
 * [Dynamic locale](dynamic.md)
