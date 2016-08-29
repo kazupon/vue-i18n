@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.3.1
+ * vue-i18n v4.4.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -719,6 +719,23 @@
         return null;
       }
 
+      // Check for the existance of links within the translated string
+      if (val.indexOf('@:') >= 0) {
+        // Match all the links within the local
+        // We are going to replace each of
+        // them with its translation
+        var matches = val.match(/(@:[\w|\.]+)/g);
+        for (var idx in matches) {
+          var link = matches[idx];
+          // Remove the leading @:
+          var linkPlaceholder = link.substr(2);
+          // Translate the link
+          var translatedstring = interpolate(locale, linkPlaceholder, args);
+          // Replace the link with the translated string
+          val = val.replace(link, translatedstring);
+        }
+      }
+
       return args ? format(val, args) : val;
     }
 
@@ -915,7 +932,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.3.1';
+  plugin.version = '4.4.0';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);

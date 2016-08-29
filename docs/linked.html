@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Installation · GitBook</title>
+        <title>Linked translation · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="started.html" />
+    <link rel="next" href="fallback.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="pluralization.html" />
     
 
     </head>
@@ -106,7 +106,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="installation.html">
+        <li class="chapter " data-level="1.2" data-path="installation.html">
             
                 <a href="installation.html">
             
@@ -158,7 +158,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="linked.html">
+        <li class="chapter active" data-level="1.6" data-path="linked.html">
             
                 <a href="linked.html">
             
@@ -253,7 +253,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Installation</a>
+        <a href="." >Linked translation</a>
     </h1>
 </div>
 
@@ -268,23 +268,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="installation">Installation</h1><h2 id="compatibility">Compatibility</h2><ul><li>Vue.js <code>1.0.0</code>+ 
-</li>
-<li>Vue.js <code>2.0.0-beta.1</code>+
-</li></ul>
-<h2 id="installation">Installation</h2><h3 id="cdn">CDN</h3><p>jsdelivr</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/vue.i18n/4.4.0/vue-i18n.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<h3 id="npm">NPM</h3><h4 id="stable-version">stable version</h4><pre><code>$ npm install vue-i18n</code></pre>
-<h4 id="development-version">development version</h4><pre><code>$ git clone https://github.com/kazupon/vue-i18n node_modules/vue-i18n
-$ cd node_modules/vue-i18n
-$ npm install
-$ npm run build</code></pre>
-<p>When used in CommonJS, you must explicitly install the router via Vue.use():</p><blockquote><p><img align="absmiddle" alt=":warning:" class="emoji" src="gitbook/gitbook-plugin-advanced-emoji/emojis/warning.png" title=":warning:"> if you are using <code>vue-router</code>, you must install with <code>Vue.use()</code> in advance of instance methods (<code>router#map</code>, <code>router#start</code>, ...etc).</p></blockquote><pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Vue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue&apos;</span>)
-<span class="hljs-keyword">var</span> VueI18n = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue-i18n&apos;</span>)
+                                <h1 id="linked-translation">Linked translation</h1><p>If there&apos;s a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an <code>@:</code> sign followed by the full name of the translation key including the namespace you want to link to.</p><p>Locale the following:</p><pre><code class="lang-javascript"><span class="hljs-keyword">var</span> locales = {
+  en: {
+    message: {
+      the_world: <span class="hljs-string">&apos;the world&apos;</span>,
+      dio: <span class="hljs-string">&apos;DIO:&apos;</span>,
+      linked: <span class="hljs-string">&apos;@:message.dio @:message.the_world !!!!&apos;</span>
+    }
+  }
+}</code></pre>
+<p>Template the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;message.linked&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>Output the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>DIO: the world !!!!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
 
-Vue.use(VueI18n)
-Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
-Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, { ... })</code></pre>
-<p>You don&apos;t need to do this when using the standalone build, as it installs itself automatically.</p>
                                 
                                 </section>
                             
@@ -311,12 +306,12 @@ Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, { ... })</code></pre
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="pluralization.html" class="navigation navigation-prev " aria-label="Previous page: Pluralization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="started.html" class="navigation navigation-next " aria-label="Next page: Getting Started">
+                <a href="fallback.html" class="navigation navigation-next " aria-label="Next page: Fallback translation">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -327,7 +322,7 @@ Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, { ... })</code></pre
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Installation","level":"1.2","depth":1,"next":{"title":"Getting Started","level":"1.3","depth":1,"path":"started.md","ref":"started.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"installation.md","mtime":"2016-08-29T10:47:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-29T10:47:35.473Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Linked translation","level":"1.6","depth":1,"next":{"title":"Fallback translation","level":"1.7","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"previous":{"title":"Pluralization","level":"1.5","depth":1,"path":"pluralization.md","ref":"pluralization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"linked.md","mtime":"2016-08-29T10:41:55.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-29T10:47:35.473Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
