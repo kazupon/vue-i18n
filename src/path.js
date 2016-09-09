@@ -126,6 +126,7 @@ function getPathCharType (ch) {
 
     case 0x5F: // _
     case 0x24: // $
+    case 0x2D: // -
       return 'ident'
 
     case 0x20: // Space
