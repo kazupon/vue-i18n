@@ -36,4 +36,13 @@ describe('issues', () => {
       )
     })
   })
+
+  describe('#51', () => {
+    it('should be translated', () => {
+      assert.equal(
+        vm.$t('message.hyphen-locale'),
+        'hello hyphen'
+      )
+    })
+  })
 })

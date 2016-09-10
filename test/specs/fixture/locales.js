@@ -11,7 +11,8 @@ export default {
       link: '@:message.hello',
       link_end: 'This is a linked translation to @:message.hello',
       link_within: 'Isn\'t @:message.hello we live in great?',
-      link_multiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?'
+      link_multiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
+      'hyphen-locale': 'hello hyphen'
     },
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
@@ -34,7 +35,8 @@ export default {
         named: 'こんにちは {name}, ごきげんいかが？',
         list: 'こんにちは {0}, ごきげんいかが？'
       },
-      fallback1: 'これはフォールバック'
+      fallback1: 'これはフォールバック',
+      'hyphen-locale': 'こんにちは、ハイフン'
     },
     plurals: {
       car: 'ザ・ワールド | これはフォールバック',
