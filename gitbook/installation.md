@@ -8,6 +8,11 @@
 ## Installation
 
 ### CDN
+uppkg
+```html
+<script src="https://unpkg.com/vue-i18n@4.4.0/dist/vue-i18n.min.js"></script>
+```
+
 jsdelivr
 
 ```html
