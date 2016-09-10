@@ -1,3 +1,13 @@
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/kazupon/vue-i18n/compare/v4.4.0...v4.4.1) (2016-09-10)
+
+
+### :zap: Improvements
+
+* **translate:** support hyphenated key ([#52](https://github.com/kazupon/vue-i18n/issues/52)) by [@tariq86](https://github.com/tariq86) ([a40acfd](https://github.com/kazupon/vue-i18n/commit/a40acfd))
+
+
+
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/kazupon/vue-i18n/compare/v4.3.1...v4.4.0) (2016-08-29)
 
