@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.4.0
+ * vue-i18n v4.4.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -426,8 +426,9 @@ function getPathCharType(ch) {
       return ch;
 
     case 0x5F: // _
-    case 0x24:
-      // $
+    case 0x24: // $
+    case 0x2D:
+      // -
       return 'ident';
 
     case 0x20: // Space
@@ -928,7 +929,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.4.0';
+plugin.version = '4.4.1';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
