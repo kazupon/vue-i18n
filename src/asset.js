@@ -23,10 +23,10 @@ export default function (Vue) {
         setLocale(id, definition, locale => {
           if (locale) {
             locales[id] = locale
-            cb && cb()
           } else {
             warn('failed set `' + id + '` locale')
           }
+          cb && cb()
         })
       }
     }
