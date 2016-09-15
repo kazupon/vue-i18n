@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.4.1
+ * vue-i18n v4.5.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -54,10 +54,10 @@ function Asset (Vue) {
         setLocale(id, definition, function (locale) {
           if (locale) {
             locales[id] = locale;
-            cb && cb();
           } else {
             warn('failed set `' + id + '` locale');
           }
+          cb && cb();
         });
       }
     }
@@ -202,6 +202,7 @@ function getDep(vm) {
 }
 
 var fallback = void 0; // fallback lang
+var missingHandler = null; // missing handler
 
 function Config (Vue, langVM, lang) {
   var bind = Vue.util.bind;
@@ -243,6 +244,18 @@ function Config (Vue, langVM, lang) {
     },
     set: function set(val) {
       fallback = val;
+    }
+  });
+
+  // define Vue.config.missingHandler configration
+  Object.defineProperty(Vue.config, 'missingHandler', {
+    enumerable: true,
+    configurable: true,
+    get: function get() {
+      return missingHandler;
+    },
+    set: function set(val) {
+      missingHandler = val;
     }
   });
 }
@@ -754,10 +767,11 @@ function Extend (Vue) {
     }
   }
 
-  function warnDefault(key) {
+  function warnDefault(lang, key, vm) {
     if (process.env.NODE_ENV !== 'production') {
       warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
     }
+    Vue.config.missingHandler && Vue.config.missingHandler.apply(null, [lang, key, vm]);
     return key;
   }
 
@@ -804,7 +818,7 @@ function Extend (Vue) {
     var fallback = _parseArgs.fallback;
     var params = _parseArgs.params;
 
-    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(key);
+    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(lang, key, null);
   };
 
   /**
@@ -857,7 +871,7 @@ function Extend (Vue) {
         return res;
       }
     }
-    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(key);
+    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(lang, key, this);
   };
 
   /**
@@ -929,7 +943,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.4.1';
+plugin.version = '4.5.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);

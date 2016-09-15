@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Component Locale · GitBook</title>
+        <title>Locale and KeyPath Syntax · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="dynamic.html" />
+    <link rel="next" href="linked.html" />
     
     
-    <link rel="prev" href="fallback.html" />
+    <link rel="prev" href="pluralization.html" />
     
 
     </head>
@@ -158,7 +158,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="syntax.html">
+        <li class="chapter active" data-level="1.6" data-path="syntax.html">
             
                 <a href="syntax.html">
             
@@ -197,7 +197,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="component.html">
+        <li class="chapter " data-level="1.9" data-path="component.html">
             
                 <a href="component.html">
             
@@ -266,7 +266,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Component Locale</a>
+        <a href="." >Locale and KeyPath Syntax</a>
     </h1>
 </div>
 
@@ -281,47 +281,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="component-locale">Component locale</h1><p>You can translate component based.</p><p>The below locale setting example:</p><pre><code class="lang-javascript"><span class="hljs-keyword">var</span> locales = {
-  en: {
-    message: {
-      hello: <span class="hljs-string">&apos;hello world&apos;</span>
-    }
+                                <h1 id="locale-and-keypath-syntax">Locale and KeyPath Syntax</h1><p>You can use the bellow structure locale:</p><pre><code class="lang-json">{
+  key1: <span class="hljs-string">&apos;this is message1&apos;</span>, <span class="hljs-comment">// basic</span>
+  nested: { <span class="hljs-comment">// nested</span>
+    message1: <span class="hljs-string">&apos;this is nested message1&apos;</span>
   },
-  ja: {
-    message: {
-      hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&apos;</span>
-    }
-  }
-}
-
-Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
-<span class="hljs-built_in">Object</span>.keys(locales).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">lang</span>) </span>{
-  Vue.locale(lang, locales[lang])
-})
-
-<span class="hljs-keyword">new</span> Vue({
-  el: <span class="hljs-string">&apos;#app&apos;</span>,
-  components: {
-    component1: {
-      template: <span class="hljs-string">&apos;&lt;p&gt;component1 local: {{ $t(&quot;hello&quot;) }}&lt;/p&gt;&apos;</span>
-        + <span class="hljs-string">&apos;&lt;p&gt;component1 global: {{ $t(&quot;message.hello&quot;) }}&lt;/p&gt;&apos;</span>,
-      locales: {
-        en: { hello: <span class="hljs-string">&apos;hello component1&apos;</span> },
-        ja: { hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;component1&apos;</span> }
-      }
-    }
-  }
-})</code></pre>
-<p>Template the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;message.hello&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">component1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component1</span>&gt;</span>
+  errors: [ <span class="hljs-comment">// array</span>
+    <span class="hljs-string">&apos;this is 0 error code message&apos;</span>,
+    { <span class="hljs-comment">// array in object</span>
+       inernal1: <span class="hljs-string">&apos;this is internal 1 error message&apos;</span>
+    },
+    [ <span class="hljs-comment">// array in array</span>
+       <span class="hljs-string">&apos;this is nested array error 1&apos;</span>
+    ]
+  ]
+}</code></pre>
+<p>In the above locale structure,  You can translate with using below key paths.</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;key1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;nested.message1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errros[0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[1].internal1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[2][0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Output the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>component1 local: &#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;component1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>component1 global: &#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<p>Ouput the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is 0 error code message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is internal 1 error message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested array error 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<blockquote><p><img align="absmiddle" alt=":pencil:" class="emoji" src="gitbook/gitbook-plugin-advanced-emoji/emojis/pencil.png" title=":pencil:"> If you set the locale of same keypath as global locale (<code>Vue.locale()</code>), in its component, <code>$t</code> is translate with component locale.</p></blockquote>
+
                                 
                                 </section>
                             
@@ -348,12 +347,12 @@ Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
 
             
                 
-                <a href="fallback.html" class="navigation navigation-prev " aria-label="Previous page: Fallback Translation">
+                <a href="pluralization.html" class="navigation navigation-prev " aria-label="Previous page: Pluralization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="dynamic.html" class="navigation navigation-next " aria-label="Next page: Dynamic Locale">
+                <a href="linked.html" class="navigation navigation-next " aria-label="Next page: Linked Translation">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -364,7 +363,7 @@ Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Component Locale","level":"1.9","depth":1,"next":{"title":"Dynamic Locale","level":"1.10","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"previous":{"title":"Fallback Translation","level":"1.8","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"component.md","mtime":"2016-08-29T10:50:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-15T10:27:52.344Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Locale and KeyPath Syntax","level":"1.6","depth":1,"next":{"title":"Linked Translation","level":"1.7","depth":1,"path":"linked.md","ref":"linked.md","articles":[]},"previous":{"title":"Pluralization","level":"1.5","depth":1,"path":"pluralization.md","ref":"pluralization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"syntax.md","mtime":"2016-09-15T10:27:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-15T10:27:52.344Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

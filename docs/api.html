@@ -156,12 +156,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="linked.html">
+        <li class="chapter " data-level="1.6" data-path="syntax.html">
+            
+                <a href="syntax.html">
+            
+                    
+                    Locale and KeyPath Syntax
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="linked.html">
             
                 <a href="linked.html">
             
                     
-                    Linked translation
+                    Linked Translation
             
                 </a>
             
@@ -169,12 +182,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="fallback.html">
+        <li class="chapter " data-level="1.8" data-path="fallback.html">
             
                 <a href="fallback.html">
             
                     
-                    Fallback translation
+                    Fallback Translation
             
                 </a>
             
@@ -182,12 +195,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="component.html">
+        <li class="chapter " data-level="1.9" data-path="component.html">
             
                 <a href="component.html">
             
                     
-                    Component locale
+                    Component Locale
             
                 </a>
             
@@ -195,12 +208,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="dynamic.html">
+        <li class="chapter " data-level="1.10" data-path="dynamic.html">
             
                 <a href="dynamic.html">
             
                     
-                    Dynamic locale
+                    Dynamic Locale
             
                 </a>
             
@@ -208,7 +221,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.10" data-path="api.html">
+        <li class="chapter active" data-level="1.11" data-path="api.html">
             
                 <a href="api.html">
             
@@ -273,6 +286,12 @@
 <h3 id="fallbacklang">fallbackLang</h3><ul><li><p><strong>Type:</strong> <code>String</code></p></li>
 <li><p><strong>Default:</strong> <code>en</code></p></li>
 <li><p><strong>Usage:</strong></p><p>Get or set a translation fallback language code. Default by <code>en</code> string value.</p><pre><code class="lang-javascript">Vue.config.fallbackLang = <span class="hljs-string">&apos;ja&apos;</span></code></pre>
+</li></ul>
+<h3 id="missinghandler">missingHandler</h3><ul><li><p><strong>Type:</strong> <code>Function</code></p></li>
+<li><p><strong>Default:</strong> <code>null</code></p></li>
+<li><p><strong>Usage:</strong></p><p>Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.</p><pre><code class="lang-javascript">Vue.config.missingHandler = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">lang, key, vm</span>) </span>{
+  <span class="hljs-comment">// handle translation missing</span>
+}</code></pre>
 </li></ul>
 <h2 id="global-methods">Global Methods</h2><h3 id="vuelocale--lang-locale-cb-">Vue.locale ( lang, [locale], [cb] )</h3><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{String} lang</code>
 </li>
@@ -376,7 +395,7 @@ Translated pluralization string</p></li>
 
             
                 
-                <a href="dynamic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Dynamic locale">
+                <a href="dynamic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Dynamic Locale">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -388,7 +407,7 @@ Translated pluralization string</p></li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.10","depth":1,"previous":{"title":"Dynamic locale","level":"1.9","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-08-26T07:31:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-10T14:55:18.229Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.11","depth":1,"previous":{"title":"Dynamic Locale","level":"1.10","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-09-15T10:27:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-15T10:27:52.344Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
