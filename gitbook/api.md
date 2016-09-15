@@ -30,6 +30,23 @@
   Vue.config.fallbackLang = 'ja'
   ```
 
+### missingHandler
+
+- **Type:** `Function`
+
+- **Default:** `null`
+
+- **Usage:**
+
+  Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.
+
+  ```javascript
+  Vue.config.missingHandler = function (lang, key, vm) {
+    // handle translation missing
+  }
+  ```
+
+
 ## Global Methods
 
 ### Vue.locale ( lang, [locale], [cb] )
