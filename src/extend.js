@@ -81,11 +81,12 @@ export default function (Vue) {
   }
 
 
-  function warnDefault (key) {
+  function warnDefault (lang, key, vm) {
     if (process.env.NODE_ENV !== 'production') {
       warn('Cannot translate the value of keypath "' + key + '". '
         + 'Use the value of keypath as default')
     }
+    Vue.config.missingHandler && Vue.config.missingHandler.apply(null, [lang, key, vm])
     return key
   }
 
@@ -117,7 +118,7 @@ export default function (Vue) {
     if (!key) { return '' }
     const { lang, fallback, params } = parseArgs(...args)
     return translate(getAssetLocale, lang, fallback, key, params)
-      || warnDefault(key)
+      || warnDefault(lang, key, null)
   }
 
   /**
@@ -153,7 +154,7 @@ export default function (Vue) {
       if (res) { return res }
     }
     return translate(getAssetLocale, lang, fallback, key, params)
-      || warnDefault(key)
+      || warnDefault(lang, key, this)
   }
 
   /**

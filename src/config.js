@@ -1,6 +1,7 @@
 import { getWatcher, getDep } from './observer'
 
 let fallback // fallback lang
+let missingHandler = null // missing handler
 
 export default function (Vue, langVM, lang) {
   const { bind } = Vue.util
@@ -34,5 +35,13 @@ export default function (Vue, langVM, lang) {
     configurable: true,
     get: () => { return fallback },
     set: val => { fallback = val }
+  })
+
+  // define Vue.config.missingHandler configration
+  Object.defineProperty(Vue.config, 'missingHandler', {
+    enumerable: true,
+    configurable: true,
+    get: () => { return missingHandler },
+    set: val => { missingHandler = val }
   })
 }
