@@ -86,6 +86,26 @@ describe('i18n', () => {
           assert.equal(Vue.t('Hello'), 'Hello')
         })
       })
+
+      describe('array keypath', () => {
+        context('basic', () => {
+          it('should be translated', () => {
+            assert.equal(Vue.t('errors[0]'), locales.en.errors[0])
+          })
+        })
+
+        context('object', () => {
+          it('should be translated', () => {
+            assert.equal(Vue.t('errors[1].internal1'), locales.en.errors[1].internal1)
+          })
+        })
+
+        context('array', () => {
+          it('should be translated', () => {
+            assert.equal(Vue.t('errors[2][0]'), locales.en.errors[2][0])
+          })
+        })
+      })
     })
 
     describe('format arguments', () => {

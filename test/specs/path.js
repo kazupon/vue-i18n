@@ -18,6 +18,24 @@ describe('path', () => {
     })
   })
 
+  describe('number key in object', () => {
+    it('should get value', () => {
+      assert.equal(
+        getValue({ errors: { '1': 'error number 1' } }, 'errors[1]'),
+        'error number 1'
+      )
+    })
+  })
+
+  describe('array', () => {
+    it('should get value', () => {
+      assert.equal(
+        getValue({ errors: ['error number 0'] }, 'errors[0]'),
+        'error number 0'
+      )
+    })
+  })
+
   describe('not found', () => {
     it('should not get null', () => {
       assert.equal(getValue({}, 'a.b'), null)

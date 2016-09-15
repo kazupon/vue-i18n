@@ -25,7 +25,16 @@ export default {
         list: 'Hello {0}, how are you? | Hi {0}, you look fine'
       },
       fallback: 'this is fallback | this is a plural fallback'
-    }
+    },
+    errors: [
+      'this is 0 error code message',
+      {
+         internal1: 'this is internal 1 error message'
+      },
+      [
+         'this is nested array error 1'
+      ]
+    ]
   },
   ja: {
     message: {
@@ -45,6 +54,15 @@ export default {
         list: 'こんにちは {0}, ごきげんいかが？| こんにちは {0}, ごきげんいかが？'
       },
       fallback: 'これはフォールバック | ザ・ワールド'
-    }
+    },
+    errors: [
+      'これはエラーコード0のエラーメッセージです。',
+      {
+         internal1: 'これは内部エラーコード1のエラーメッセージです。'
+      },
+      [
+         'これはネストされた配列のエラー1です。'
+      ]
+    ]
   }
 }
