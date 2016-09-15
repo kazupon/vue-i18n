@@ -1,3 +1,13 @@
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/kazupon/vue-i18n/compare/v4.4.1...v4.5.0) (2016-09-15)
+
+
+### :star: New Features
+
+* **config:** translation miss capturing configration ([aca0ed6](https://github.com/kazupon/vue-i18n/commit/aca0ed6)), closes [#54](https://github.com/kazupon/vue-i18n/issues/54)
+
+
+
 <a name="4.4.1"></a>
 ## [4.4.1](https://github.com/kazupon/vue-i18n/compare/v4.4.0...v4.4.1) (2016-09-10)
 
