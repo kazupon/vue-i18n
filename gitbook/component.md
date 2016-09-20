@@ -8,12 +8,14 @@ The below locale setting example:
 var locales = {
   en: {
     message: {
-      hello: 'hello world'
+      hello: 'hello world',
+      greeting: 'good morning'
     }
   },
   ja: {
     message: {
-      hello: 'こんにちは、世界'
+      hello: 'こんにちは、世界',
+      greeting: 'おはようございます'
     }
   }
 }
@@ -27,8 +29,8 @@ new Vue({
   el: 'body',
   components: {
     component1: {
-      template: '<p>orverride with component1 message.hello locale: {{ $t("message.hello") }}</p>'
-        + '<p>global component1 hello locale: {{ $t("hello") }}</p>',
+      template: '<p>orverride message.hello locale in component1: {{ $t("message.hello") }}</p>'
+        + '<p>global message.greeting locale in component1: {{ $t("message.greeting") }}</p>',
       locales: {
         en: { message: { hello: 'hello component1' } },
         ja: { message: { hello: 'こんにちは、component1' } }
@@ -52,8 +54,8 @@ Output the following:
 ```html
 <div id="app">
   <p>global message.hello locale: こんにちは、世界</p>
-  <p>orverride with component1 message.hello locale: こんにちは、component1</p>
-  <p>global component1 hello locale: hello</p>
+  <p>orverride message.hello locale in component1: こんにちは、component1</p>
+  <p>global message.greeting locale in component1: おはようございます</p>
 </div>
 ```
 
