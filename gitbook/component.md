@@ -24,14 +24,14 @@ Object.keys(locales).forEach(function (lang) {
 })
 
 new Vue({
-  el: '#app',
+  el: 'body',
   components: {
     component1: {
-      template: '<p>component1 local: {{ $t("hello") }}</p>'
-        + '<p>component1 global: {{ $t("message.hello") }}</p>',
+      template: '<p>orverride with component1 message.hello locale: {{ $t("message.hello") }}</p>'
+        + '<p>global component1 hello locale: {{ $t("hello") }}</p>',
       locales: {
-        en: { hello: 'hello component1' },
-        ja: { hello: 'こんにちは、component1' }
+        en: { message: { hello: 'hello component1' } },
+        ja: { message: { hello: 'こんにちは、component1' } }
       }
     }
   }
@@ -42,7 +42,7 @@ Template the following:
 
 ```html
 <div id="app">
-  <p>{{ $t('message.hello') }}</p>
+  <p>global message.hello locale: {{ $t('message.hello') }}</p>
   <component1></component1>
 </div>
 ```
@@ -51,9 +51,9 @@ Output the following:
 
 ```html
 <div id="app">
-  <p>こんにちは、世界</p>
-  <p>component1 local: こんにちは、component1</p>
-  <p>component1 global: こんにちは、世界</p>
+  <p>global message.hello locale: こんにちは、世界</p>
+  <p>orverride with component1 message.hello locale: こんにちは、component1</p>
+  <p>global component1 hello locale: hello</p>
 </div>
 ```
 
