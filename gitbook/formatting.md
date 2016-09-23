@@ -104,3 +104,14 @@ Output the following:
 ```html
 <p>hello world</p>
 ```
+
+## Registering a custom formatter
+
+If the provided formatter doesn't meet your needs, you can also register a custom formatter,
+
+```javascript
+Vue.config.i18nFormatter = function(string, ...arguments) {
+  //...
+  //return formattedString;
+}
+```

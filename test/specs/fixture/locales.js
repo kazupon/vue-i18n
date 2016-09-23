@@ -29,10 +29,10 @@ export default {
     errors: [
       'this is 0 error code message',
       {
-         internal1: 'this is internal 1 error message'
+        internal1: 'this is internal 1 error message'
       },
       [
-         'this is nested array error 1'
+        'this is nested array error 1'
       ]
     ]
   },
@@ -58,10 +58,10 @@ export default {
     errors: [
       'これはエラーコード0のエラーメッセージです。',
       {
-         internal1: 'これは内部エラーコード1のエラーメッセージです。'
+        internal1: 'これは内部エラーコード1のエラーメッセージです。'
       },
       [
-         'これはネストされた配列のエラー1です。'
+        'これはネストされた配列のエラー1です。'
       ]
     ]
   }
