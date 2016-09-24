@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.5.0
+ * vue-i18n v4.6.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -203,6 +203,7 @@ function getDep(vm) {
 
 var fallback = void 0; // fallback lang
 var missingHandler = null; // missing handler
+var i18nFormatter = null; // custom formatter
 
 function Config (Vue, langVM, lang) {
   var bind = Vue.util.bind;
@@ -256,6 +257,18 @@ function Config (Vue, langVM, lang) {
     },
     set: function set(val) {
       missingHandler = val;
+    }
+  });
+
+  // define Vue.config.i18Formatter configration
+  Object.defineProperty(Vue.config, 'i18nFormatter', {
+    enumerable: true,
+    configurable: true,
+    get: function get() {
+      return i18nFormatter;
+    },
+    set: function set(val) {
+      i18nFormatter = val;
     }
   });
 }
@@ -746,7 +759,7 @@ function Extend (Vue) {
       }
     }
 
-    return args ? format(val, args) : val;
+    return !args ? val : Vue.config.i18nFormatter ? Vue.config.i18nFormatter.apply(null, [val].concat(args)) : format(val, args);
   }
 
   function translate(getter, lang, fallback, key, params) {
@@ -943,7 +956,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.5.0';
+plugin.version = '4.6.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
