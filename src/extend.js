@@ -60,10 +60,11 @@ export default function (Vue) {
       }
     }
 
-    if (!args) {
-      return val
-    }    
-    return Vue.config.i18nFormatter ? Vue.config.i18nFormatter.apply(null, [val].concat(args)) : format(val, args)
+    return !args
+      ? val
+      : Vue.config.i18nFormatter
+        ? Vue.config.i18nFormatter.apply(null, [val].concat(args))
+        : format(val, args)
   }
 
   function translate (getter, lang, fallback, key, params) {
