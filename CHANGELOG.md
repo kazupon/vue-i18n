@@ -1,3 +1,13 @@
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/kazupon/vue-i18n/compare/v4.5.0...v4.6.0) (2016-09-24)
+
+
+### :star: New Features
+
+* **config:** custom message formatter ([#57](https://github.com/kazupon/vue-i18n/issues/57)) by [@jvmccarthy](https://github.com/jvmccarthy) ([2748eb4](https://github.com/kazupon/vue-i18n/commit/2748eb4))
+
+
+
 <a name="4.5.0"></a>
 # [4.5.0](https://github.com/kazupon/vue-i18n/compare/v4.4.1...v4.5.0) (2016-09-15)
 
