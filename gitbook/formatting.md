@@ -110,7 +110,7 @@ Output the following:
 If the provided formatter doesn't meet your needs, you can also register a custom formatter,
 
 ```javascript
-Vue.config.i18nFormatter = function(string, ...arguments) {
+Vue.config.i18nFormatter = function (string, ...arguments) {
   //...
   //return formattedString;
 }

@@ -57,7 +57,7 @@
   Assign a customer message formatter.
 
   ```javascript
-  Vue.config.i18nFormatter = function(string, ...arguments) {
+  Vue.config.i18nFormatter = function (string, ...arguments) {
     //...
     //return formattedString;
   }
