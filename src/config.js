@@ -2,6 +2,7 @@ import { getWatcher, getDep } from './observer'
 
 let fallback // fallback lang
 let missingHandler = null // missing handler
+let i18nFormatter = null
 
 export default function (Vue, langVM, lang) {
   const { bind } = Vue.util
@@ -43,5 +44,13 @@ export default function (Vue, langVM, lang) {
     configurable: true,
     get: () => { return missingHandler },
     set: val => { missingHandler = val }
+  })
+
+  // define Vue.config.i18Formatter configration
+  Object.defineProperty(Vue.config, 'i18nFormatter', {
+    enumerable: true,
+    configurable: true,
+    get: () => { return i18nFormatter },
+    set: val => { i18nFormatter = val }
   })
 }

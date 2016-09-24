@@ -46,6 +46,23 @@
   }
   ```
 
+### i18nFormatter
+
+- **Type:** `Function`
+
+- **Default:** `null`
+
+- **Usage:**
+
+  Assign a customer message formatter.
+
+  ```javascript
+  Vue.config.i18nFormatter = function(string, ...arguments) {
+    //...
+    //return formattedString;
+  }
+  ```
+
 
 ## Global Methods
 
