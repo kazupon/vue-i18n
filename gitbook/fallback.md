@@ -11,6 +11,7 @@ var locales = {
   }
 }
 Vue.config.lang = 'ja'
+Vue.config.fallbackLang = 'en'
 ```
 
 Template the following:
