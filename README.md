@@ -23,23 +23,25 @@ See the [here](https://kazupon.github.io/vue-i18n)
 
 ## Development Setup
 
-    # install deps
-    npm install
+```shell
+# install deps
+npm install
 
-    # build dist files
-    npm run build
+# build dist files
+npm run build
 
-    # lint
-    npm run lint
+# lint
+npm run lint
 
-    # run unit tests only
-    npm run unit
+# run unit tests only
+npm run unit
 
-    # run e2e tests only
-    npm run e2e
+# run e2e tests only
+npm run e2e
 
-    # lint & run all tests
-    npm test
+# lint & run all tests
+npm test
+```
 
 
 ## Changelog
