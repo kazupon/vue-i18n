@@ -32,7 +32,7 @@ function plugin (Vue, opts = {}) {
   const lang = 'en'
   setupLangVM(Vue, lang)
 
-  Asset(Vue)
+  Asset(Vue, langVM)
   Override(Vue, langVM, version)
   Config(Vue, langVM, lang)
   Extend(Vue)
