@@ -42,7 +42,7 @@ function setupLangVM (Vue, lang) {
   const silent = Vue.config.silent
   Vue.config.silent = true
   if (!langVM) {
-    langVM = new Vue({ data: { lang } })
+    langVM = new Vue({ data: { lang, locales: {} } })
   }
   Vue.config.silent = silent
 }

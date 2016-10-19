@@ -11,4 +11,5 @@ Internationalization plugin of Vue.js
 * [Fallback Translation](fallback.md)
 * [Component Locale](component.md)
 * [Dynamic Locale](dynamic.md)
+* [Hot reload](hot-reload.md)
 * [API References](api.md)
