@@ -20,6 +20,7 @@ export default {
     underscore: '{hello_msg} world',
     plurals: {
       car: 'car | cars',
+      apple: 'no apples | one apple | {count} apples',
       format: {
         named: 'Hello {name}, how are you? | Hi {name}, you look fine',
         list: 'Hello {0}, how are you? | Hi {0}, you look fine'
