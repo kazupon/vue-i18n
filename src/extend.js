@@ -5,7 +5,7 @@ import Path from './path'
 
 /**
  * extend
- * 
+ *
  * @param {Vue} Vue
  * @return {Vue}
  */
@@ -69,13 +69,13 @@ export default function (Vue) {
 
   function translate (getter, lang, fallback, key, params) {
     let res = null
-    res = interpolate(getter(lang), key, params) 
-    if (res) { return res } 
+    res = interpolate(getter(lang), key, params)
+    if (res) { return res }
 
-    res = interpolate(getter(fallback), key, params) 
+    res = interpolate(getter(fallback), key, params)
     if (res) {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Fall back to translate the keypath "' + key + '" with "' 
+        warn('Fall back to translate the keypath "' + key + '" with "'
           + fallback + '" language.')
       }
       return res
@@ -102,10 +102,23 @@ export default function (Vue) {
     return this.$options.locales[lang]
   }
 
+  function getOldChoiceIndexFixed (choice) {
+    return choice ? choice > 1 ? 1 : 0 : 1
+  }
+
+  function getChoiceIndex (choice, choicesLength) {
+    choice = Math.abs(choice)
+
+    if (choicesLength === 2) return getOldChoiceIndexFixed(choice)
+
+    return choice ? Math.min(choice, 2) : 0
+  }
+
   function fetchChoice (locale, choice) {
     if (!locale && typeof locale !== 'string') { return null }
     const choices = locale.split('|')
-    choice = choice - 1
+
+    choice = getChoiceIndex(choice, choices.length)
     if (!choices[choice]) { return locale }
     return choices[choice].trim()
   }
@@ -135,7 +148,6 @@ export default function (Vue) {
    */
 
   Vue.tc = (key, choice, ...args) => {
-    if (!choice) { choice = 1 }
     return fetchChoice(Vue.t(key, ...args), choice)
   }
 
@@ -173,7 +185,6 @@ export default function (Vue) {
   Vue.prototype.$tc = function (key, choice, ...args) {
     if (typeof choice !== 'number'
       && typeof choice !== 'undefined') { return key }
-    if (!choice) { choice = 1 }
     return fetchChoice(this.$t(key, ...args), choice)
   }
 

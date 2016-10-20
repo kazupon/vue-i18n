@@ -154,6 +154,16 @@ describe('i18n', () => {
   })
 
   describe('Vue.tc', () => {
+    describe('split plural with zero choice', () => {
+      it('should allow a zero choice, a one choice and a plural choice', () => {
+        const count = 10
+
+        assert.equal(Vue.tc('plurals.apple', 0), 'no apples')
+        assert.equal(Vue.tc('plurals.apple', 1), 'one apple')
+        assert.equal(Vue.tc('plurals.apple', count, { count }), '10 apples')
+      })
+    })
+
     describe('en language locale', () => {
       it('should translate an english', () => {
         assert.equal(Vue.tc('plurals.car', 1), 'car')
