@@ -1,3 +1,18 @@
+<a name="4.7.0"></a>
+# [4.7.0](https://github.com/kazupon/vue-i18n/compare/v4.6.0...v4.7.0) (2016-10-28)
+
+
+### :star: New Features
+
+* hot reloading ([#71](https://github.com/kazupon/vue-i18n/issues/71)) by [@gglnx](https://github.com/gglnx) ([7bb94ac](https://github.com/kazupon/vue-i18n/commit/7bb94ac))
+
+
+### :zap: Improvements
+
+* **pluralization:** zero choice ([#70](https://github.com/kazupon/vue-i18n/issues/70)) by [@sebwas](https://github.com/sebwas) ([5f0004f](https://github.com/kazupon/vue-i18n/commit/5f0004f))
+
+
+
 <a name="4.6.0"></a>
 # [4.6.0](https://github.com/kazupon/vue-i18n/compare/v4.5.0...v4.6.0) (2016-09-24)
 
