@@ -109,7 +109,7 @@ export default function (Vue) {
   function getChoiceIndex (choice, choicesLength) {
     choice = Math.abs(choice)
 
-    if (choicesLength === 2) return getOldChoiceIndexFixed(choice)
+    if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
 
     return choice ? Math.min(choice, 2) : 0
   }

@@ -17,11 +17,9 @@ export default function (Vue, langVM, version) {
 
     if (!this.$parent) { // root
       this.$lang = langVM
-      this._langUnwatch = this.$lang.$watch('$data', (a, b) => {
+      this._langUnwatch = this.$lang.$watch('$data', (val, old) => {
         update(this)
-      }, {
-        deep: true
-      })
+      }, { deep: true })
     }
   }
 
