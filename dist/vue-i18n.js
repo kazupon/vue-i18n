@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.6.0
+ * vue-i18n v4.7.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -34,9 +34,7 @@
     }
   }
 
-  var locales = Object.create(null); // locales store
-
-  function Asset (Vue) {
+  function Asset (Vue, langVM) {
     /**
      * Register or retrieve a global locale definition.
      *
@@ -48,16 +46,16 @@
     Vue.locale = function (id, definition, cb) {
       if (definition === undefined) {
         // gettter
-        return locales[id];
+        return langVM.locales[id];
       } else {
         // setter
         if (definition === null) {
-          locales[id] = undefined;
-          delete locales[id];
+          langVM.locales[id] = undefined;
+          delete langVM.locales[id];
         } else {
           setLocale(id, definition, function (locale) {
             if (locale) {
-              locales[id] = locale;
+              langVM.locales[id] = locale;
             } else {
               warn('failed set `' + id + '` locale');
             }
@@ -150,9 +148,9 @@
       if (!this.$parent) {
         // root
         this.$lang = langVM;
-        this._langUnwatch = this.$lang.$watch('lang', function (a, b) {
+        this._langUnwatch = this.$lang.$watch('$data', function (val, old) {
           update(_this);
-        });
+        }, { deep: true });
       }
     };
 
@@ -697,7 +695,7 @@
 
   /**
    * extend
-   * 
+   *
    * @param {Vue} Vue
    * @return {Vue}
    */
@@ -800,12 +798,27 @@
       return this.$options.locales[lang];
     }
 
+    function getOldChoiceIndexFixed(choice) {
+      return choice ? choice > 1 ? 1 : 0 : 1;
+    }
+
+    function getChoiceIndex(choice, choicesLength) {
+      choice = Math.abs(choice);
+
+      if (choicesLength === 2) {
+        return getOldChoiceIndexFixed(choice);
+      }
+
+      return choice ? Math.min(choice, 2) : 0;
+    }
+
     function fetchChoice(locale, choice) {
       if (!locale && typeof locale !== 'string') {
         return null;
       }
       var choices = locale.split('|');
-      choice = choice - 1;
+
+      choice = getChoiceIndex(choice, choices.length);
       if (!choices[choice]) {
         return locale;
       }
@@ -852,9 +865,6 @@
         args[_key3 - 2] = arguments[_key3];
       }
 
-      if (!choice) {
-        choice = 1;
-      }
       return fetchChoice(Vue.t.apply(Vue, [key].concat(args)), choice);
     };
 
@@ -904,9 +914,6 @@
       if (typeof choice !== 'number' && typeof choice !== 'undefined') {
         return key;
       }
-      if (!choice) {
-        choice = 1;
-      }
 
       for (var _len5 = arguments.length, args = Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
         args[_key5 - 2] = arguments[_key5];
@@ -945,7 +952,7 @@
     var lang = 'en';
     setupLangVM(Vue, lang);
 
-    Asset(Vue);
+    Asset(Vue, langVM);
     Override(Vue, langVM, version);
     Config(Vue, langVM, lang);
     Extend(Vue);
@@ -955,12 +962,12 @@
     var silent = Vue.config.silent;
     Vue.config.silent = true;
     if (!langVM) {
-      langVM = new Vue({ data: { lang: lang } });
+      langVM = new Vue({ data: { lang: lang, locales: {} } });
     }
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.6.0';
+  plugin.version = '4.7.0';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
