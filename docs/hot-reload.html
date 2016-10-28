@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Getting Started · GitBook</title>
+        <title>Hot reload · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="formatting.html" />
+    <link rel="next" href="api.html" />
     
     
-    <link rel="prev" href="installation.html" />
+    <link rel="prev" href="dynamic.html" />
     
 
     </head>
@@ -119,7 +119,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="started.html">
+        <li class="chapter " data-level="1.3" data-path="started.html">
             
                 <a href="started.html">
             
@@ -223,7 +223,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="hot-reload.html">
+        <li class="chapter active" data-level="1.11" data-path="hot-reload.html">
             
                 <a href="hot-reload.html">
             
@@ -279,7 +279,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Getting Started</a>
+        <a href="." >Hot reload</a>
     </h1>
 </div>
 
@@ -294,39 +294,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="getting-started">Getting Started</h1><pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Vue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue&apos;</span>)
-<span class="hljs-keyword">var</span> VueI18n = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue-i18n&apos;</span>)
-
-<span class="hljs-comment">// ready translated locales</span>
-<span class="hljs-keyword">var</span> locales = {
-  en: {
-    message: {
-      hello: <span class="hljs-string">&apos;hello world&apos;</span>
-    }
-  },
-  ja: {
-    message: {
-      hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&apos;</span>
-    }
-  }
-}
-
-<span class="hljs-comment">// install plugin</span>
-Vue.use(VueI18n)
-
-
-<span class="hljs-comment">// set lang</span>
-Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
-
-<span class="hljs-comment">// set locales</span>
-<span class="hljs-built_in">Object</span>.keys(locales).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">lang</span>) </span>{
-  Vue.locale(lang, locales[lang])
-})
-
-<span class="hljs-comment">// create instance</span>
-<span class="hljs-keyword">new</span> Vue({ el: <span class="hljs-string">&apos;body&apos;</span> })</code></pre>
-<p>Template the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&quot;message.hello&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
-<p>Output the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+                                <h1 id="hot-reload">Hot reload</h1><p>You can watch for changes in translation files and hot reload changes into your application.</p><pre><code class="lang-javascript"><span class="hljs-comment">// Support hot updates</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) {
+  <span class="hljs-built_in">module</span>.hot.accept([<span class="hljs-string">&apos;./en&apos;</span>, <span class="hljs-string">&apos;./ja&apos;</span>], () =&gt; {
+    Vue.locale(<span class="hljs-string">&apos;en&apos;</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./en&apos;</span>).default);
+    Vue.locale(<span class="hljs-string">&apos;ja&apos;</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./ja&apos;</span>).default);
+  });
+}</code></pre>
 
                                 
                                 </section>
@@ -354,12 +328,12 @@ Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
 
             
                 
-                <a href="installation.html" class="navigation navigation-prev " aria-label="Previous page: Installation">
+                <a href="dynamic.html" class="navigation navigation-prev " aria-label="Previous page: Dynamic Locale">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="formatting.html" class="navigation navigation-next " aria-label="Next page: Formatting">
+                <a href="api.html" class="navigation navigation-next " aria-label="Next page: API References">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -370,7 +344,7 @@ Vue.config.lang = <span class="hljs-string">&apos;ja&apos;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.3","depth":1,"next":{"title":"Formatting","level":"1.4","depth":1,"path":"formatting.md","ref":"formatting.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"started.md","mtime":"2016-08-26T07:31:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-10-28T23:07:14.681Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Hot reload","level":"1.11","depth":1,"next":{"title":"API References","level":"1.12","depth":1,"path":"api.md","ref":"api.md","articles":[]},"previous":{"title":"Dynamic Locale","level":"1.10","depth":1,"path":"dynamic.md","ref":"dynamic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"hot-reload.md","mtime":"2016-10-28T23:06:35.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-10-28T23:07:14.681Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
