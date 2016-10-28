@@ -78,7 +78,7 @@
     "browser": "VUE_I18N_TYPE=browser karma start config/karma.conf.js",
     "build": "node config/build.js && npm run docs:build",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -n ./node_modules/git-commit-message-convention/convention.js",
-    "ci": "npm run lint && npm run coverage && npm run coveralls && npm run sauce",
+    "ci": "npm run lint && npm run coverage && npm run coveralls",
     "clean": "rm -rf coverage && rm -rf dist/*.*",
     "coolkids": "VUE_I18N_TYPE=sauce SAUCE=batch1 karma start config/karma.conf.js",
     "coverage": "VUE_I18N_TYPE=coverage karma start config/karma.conf.js",
