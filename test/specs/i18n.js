@@ -1,7 +1,6 @@
 import assert from 'power-assert'
 import Vue from 'vue'
 import locales from './fixture/locales'
-import updatedLocales from './fixture/locales-updated'
 
 
 describe('i18n', () => {
@@ -513,48 +512,6 @@ describe('i18n', () => {
         vm.lang = 'ja' // set japanese
         Vue.nextTick(() => {
           assert.equal(vm.$el.textContent, locales.ja.message.hello)
-          done()
-        })
-      })
-    })
-  })
-
-
-  describe('hot reload', () => {
-    let el
-    beforeEach(() => {
-      el = document.createElement('div')
-      document.body.appendChild(el)
-    })
-
-    it('should translate', done => {
-      const options = {
-        el,
-        data () {
-          return { lang: 'en' }
-        }
-      }
-
-      if (version >= 2) {
-        options.render = function (h) {
-          return h('p', {}, [this.$t('message.hello', this.lang)])
-        }
-      } else {
-        options.template = '<p>{{ $t("message.hello", lang) }}</p>'
-      }
-
-      const vm = new Vue(options)
-
-      Vue.nextTick(() => {
-        assert.equal(vm.$el.textContent, locales.en.message.hello)
-
-        // Update translation
-        Object.keys(updatedLocales).forEach(lang => {
-          Vue.locale(lang, updatedLocales[lang])
-        })
-
-        Vue.nextTick(() => {
-          assert.equal(vm.$el.textContent, updatedLocales.en.message.hello)
           done()
         })
       })
