@@ -1,9 +1,6 @@
 import warn from './warn'
 
-const locales = Object.create(null) // locales store
-
-
-export default function (Vue) {
+export default function (Vue, langVM) {
   /**
    * Register or retrieve a global locale definition.
    *
@@ -14,15 +11,15 @@ export default function (Vue) {
   
   Vue.locale = (id, definition, cb) => {
     if (definition === undefined) { // gettter
-      return locales[id]
+      return langVM.locales[id]
     } else { // setter
       if (definition === null) {
-        locales[id] = undefined
-        delete locales[id]
+        langVM.locales[id] = undefined
+        delete langVM.locales[id]
       } else {
         setLocale(id, definition, locale => {
           if (locale) {
-            locales[id] = locale
+            langVM.locales[id] = locale
           } else {
             warn('failed set `' + id + '` locale')
           }
