@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.7.0
+ * vue-i18n v4.7.1
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -301,6 +301,8 @@
 
       if (args.length === 1 && babelHelpers.typeof(args[0]) === 'object') {
         args = args[0];
+      } else {
+        args = {};
       }
 
       if (!args || !args.hasOwnProperty) {
@@ -313,7 +315,7 @@
         if (string[index - 1] === '{' && string[index + match.length] === '}') {
           return i;
         } else {
-          result = hasOwn(args, i) ? args[i] : null;
+          result = hasOwn(args, i) ? args[i] : match;
           if (result === null || result === undefined) {
             return '';
           }
@@ -411,7 +413,7 @@
    * @return {Boolean}
    */
 
-  var literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/;
+  var literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
   function isLiteral(exp) {
     return literalValueRE.test(exp);
   }
@@ -749,7 +751,7 @@
         // Match all the links within the local
         // We are going to replace each of
         // them with its translation
-        var matches = val.match(/(@:[\w|\.]+)/g);
+        var matches = val.match(/(@:[\w|.]+)/g);
         for (var idx in matches) {
           var link = matches[idx];
           // Remove the leading @:
@@ -967,7 +969,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.7.0';
+  plugin.version = '4.7.1';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
