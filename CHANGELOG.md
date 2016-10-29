@@ -1,3 +1,18 @@
+<a name="4.7.1"></a>
+## [4.7.1](https://github.com/kazupon/vue-i18n/compare/v4.7.0...v4.7.1) (2016-10-29)
+
+
+### :bug: Bug Fixes
+
+* **interpolate:** named formatting: use name if value is missing ([#77](https://github.com/kazupon/vue-i18n/issues/77)) by [@SebastianS90](https://github.com/SebastianS90) ([a0cc343](https://github.com/kazupon/vue-i18n/commit/a0cc343))
+
+
+### :zap: Improvements
+
+* **named:** using default use nmae when value is missing ([c34e8f1](https://github.com/kazupon/vue-i18n/commit/c34e8f1))
+
+
+
 <a name="4.7.0"></a>
 # [4.7.0](https://github.com/kazupon/vue-i18n/compare/v4.6.0...v4.7.0) (2016-10-28)
 
