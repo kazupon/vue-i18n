@@ -21,6 +21,8 @@ export default function (Vue) {
   function template (string, ...args) {
     if (args.length === 1 && typeof args[0] === 'object') {
       args = args[0]
+    } else {
+      args = {}
     }
 
     if (!args || !args.hasOwnProperty) {
@@ -34,9 +36,9 @@ export default function (Vue) {
         && string[index + match.length] === '}') {
         return i
       } else {
-        result = hasOwn(args, i) ? args[i] : null
+        result = hasOwn(args, i) ? args[i] : match
         if (result === null || result === undefined) {
-          return match
+          return ''
         }
 
         return result

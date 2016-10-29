@@ -8,18 +8,31 @@ const format = Format(Vue)
 describe('format', () => {
   describe('argument', () => {
     context('Object', () => {
-      it('should be replace with object value', () => {
-        const template = 'name: {name}, email: {email}'
-        assert.equal(format(template, {
-          name: 'kazupon', email: 'foo@domain.com'
-        }), 'name: kazupon, email: foo@domain.com')
+      context('default delimiter', () => {
+        it('should be replace with object value', () => {
+          const template = 'name: {name}, email: {email}'
+          assert.equal(format(template, {
+            name: 'kazupon', email: 'foo@domain.com'
+          }), 'name: kazupon, email: foo@domain.com')
+        })
       })
 
-      it('should be replace with object value', () => {
-        const template = 'name: %{name}, email: %{email}'
-        assert.equal(format(template, {
-          name: 'kazupon', email: 'foo@domain.com'
-        }), 'name: kazupon, email: foo@domain.com')
+      context('RoR delimiter', () => {
+        it('should be replace with object value', () => {
+          const template = 'name: %{name}, email: %{email}'
+          assert.equal(format(template, {
+            name: 'kazupon', email: 'foo@domain.com'
+          }), 'name: kazupon, email: foo@domain.com')
+        })
+      })
+
+      context('missing', () => {
+        it('should be replace with as is', () => {
+          const template = 'name: {name}, email: {email}'
+          assert.equal(format(template, {
+            name: 'kazupon'
+          }), 'name: kazupon, email: {email}')
+        })
       })
     })
 
@@ -36,21 +49,21 @@ describe('format', () => {
     context('null', () => {
       it('should be replace with empty', () => {
         const template = 'name: {0}, email: {1}'
-        assert.equal(format(template, null), 'name: , email: ')
+        assert.equal(format(template, null), 'name: {0}, email: {1}')
       })
     })
 
     context('undefined', () => {
       it('should be replace with empty', () => {
         const template = 'name: {0}, email: {1}'
-        assert.equal(format(template, undefined), 'name: , email: ')
+        assert.equal(format(template, undefined), 'name: {0}, email: {1}')
       })
     })
 
     context('not specify', () => {
       it('should be replace with empty', () => {
         const template = 'name: {0}, email: {1}'
-        assert.equal(format(template), 'name: , email: ')
+        assert.equal(format(template), 'name: {0}, email: {1}')
       })
     })
   })
