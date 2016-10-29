@@ -36,7 +36,7 @@ export default function (Vue) {
       } else {
         result = hasOwn(args, i) ? args[i] : null
         if (result === null || result === undefined) {
-          return ''
+          return match
         }
 
         return result
