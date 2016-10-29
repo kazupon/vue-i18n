@@ -48,7 +48,7 @@ export default function (Vue) {
       // Match all the links within the local
       // We are going to replace each of
       // them with its translation
-      const matches = val.match(/(@:[\w|\.]+)/g)
+      const matches = val.match(/(@:[\w|.]+)/g)
       for (const idx in matches) {
         const link = matches[idx]
         // Remove the leading @:

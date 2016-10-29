@@ -83,7 +83,7 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
  * @return {Boolean}
  */
 
-const literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/
+const literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
 function isLiteral (exp) {
   return literalValueRE.test(exp)
 }
