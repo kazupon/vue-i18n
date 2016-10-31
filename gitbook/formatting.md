@@ -13,10 +13,10 @@ var locales = {
 }
 ```
 
-Template the following (notice the tripple brackets):
+Template the following (triple brackets are deprecated in vue 2.0 and replaced by v-html):
 
 ```html
-<p>{{{ $t('message.hello') }}}</p>
+<p v-html="$t('message.hello')"></p>
 ```
 
 Output the following (instead of the message pre formatted)
