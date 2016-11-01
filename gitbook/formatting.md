@@ -13,7 +13,12 @@ var locales = {
 }
 ```
 
-Template the following (triple brackets are deprecated in vue 2.0 and replaced by v-html):
+Template the following for Vue 1 (notice the triple brackets):
+```html
+<p>{{{ $t('message.hello') }}}</p>
+```
+
+Or for Vue 2 (triple brackets are deprecated in vue 2.0 and replaced by v-html):
 
 ```html
 <p v-html="$t('message.hello')"></p>
