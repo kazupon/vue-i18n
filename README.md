@@ -6,11 +6,11 @@
 [![Sauce Test Status](https://saucelabs.com/buildstatus/vue-i18n)](https://saucelabs.com/u/vue-i18n)
 
 
-Internationalization plugin of Vue.js
+Internationalization plugin for Vue.js
 
 ## Documentation
 
-See the [here](https://kazupon.github.io/vue-i18n)
+Docs are available [here](https://kazupon.github.io/vue-i18n).
 
 
 ## Contributing
@@ -46,7 +46,7 @@ npm test
 
 ## Changelog
 
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
+Change details for each release are documented in [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
 ## License
