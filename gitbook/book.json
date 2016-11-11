@@ -1,7 +1,7 @@
 {
   "gitbook": "3.x.x",
   "root": "./",
-  "plugins": ["edit-link", "github", "advanced-emoji@0.2.1"],
+  "plugins": ["edit-link", "theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git", "-fontsettings", "github", "advanced-emoji@0.2.1"],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/kazupon/vue-i18n/tree/dev/gitbook",
