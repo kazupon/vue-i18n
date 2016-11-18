@@ -28,7 +28,7 @@ let Dep
  */
 
 export function getDep (vm) {
-  if (!Dep) {
+  if (!Dep && vm && vm._data && vm._data.__ob__ && vm._data.__ob__.dep) {
     Dep = vm._data.__ob__.dep.constructor
   }
   return Dep
