@@ -29,7 +29,7 @@ In the above locale structure,  You can translate with using below key paths.
   <!-- nested -->
   <p>{{ $t('nested.message1') }}</p>
   <!-- array -->
-  <p>{{ $t('errros[0]') }}</p>
+  <p>{{ $t('errors[0]') }}</p>
   <!-- object in array -->
   <p>{{ $t('errors[1].internal1') }}</p>
   <!-- array in array -->
