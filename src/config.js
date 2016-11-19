@@ -16,7 +16,7 @@ export default function (Vue, langVM, lang) {
 
     return function computedGetter () {
       watcher.dirty && watcher.evaluate()
-      Dep.target && watcher.depend()
+      Dep && Dep.target && watcher.depend()
       return watcher.value
     }
   }
