@@ -3,6 +3,7 @@ export default {
     message: {
       hello: 'the world',
       hoge: 'hoge',
+      empty: '',
       format: {
         named: 'Hello {name}, how are you?',
         list: 'Hello {0}, how are you?'
@@ -41,6 +42,7 @@ export default {
     message: {
       hello: 'ザ・ワールド',
       hoge: 'ほげ',
+      empty: '',
       format: {
         named: 'こんにちは {name}, ごきげんいかが？',
         list: 'こんにちは {0}, ごきげんいかが？'

@@ -1,7 +1,7 @@
 import warn from './warn'
 import Format from './format'
 import Path from './path'
-
+import { isNil } from './util'
 
 /**
  * extend
@@ -40,8 +40,9 @@ export default function (Vue) {
   function interpolate (locale, key, args) {
     if (!locale) { return null }
 
-    let val = getValue(locale, key) || locale[key]
-    if (!val) { return null }
+    let val = getValue(locale, key)
+    if (isNil(val)) val = locale[key]
+    if (isNil(val)) { return null }
 
     // Check for the existance of links within the translated string
     if (val.indexOf('@:') >= 0) {
@@ -70,10 +71,10 @@ export default function (Vue) {
   function translate (getter, lang, fallback, key, params) {
     let res = null
     res = interpolate(getter(lang), key, params)
-    if (res) { return res }
+    if (!isNil(res)) { return res }
 
     res = interpolate(getter(fallback), key, params)
-    if (res) {
+    if (!isNil(res)) {
       if (process.env.NODE_ENV !== 'production') {
         warn('Fall back to translate the keypath "' + key + '" with "'
           + fallback + '" language.')
@@ -85,7 +86,8 @@ export default function (Vue) {
   }
 
 
-  function warnDefault (lang, key, vm) {
+  function warnDefault (lang, key, vm, result) {
+    if (!isNil(result)) { return result }
     if (process.env.NODE_ENV !== 'production') {
       warn('Cannot translate the value of keypath "' + key + '". '
         + 'Use the value of keypath as default')
@@ -134,8 +136,7 @@ export default function (Vue) {
   Vue.t = (key, ...args) => {
     if (!key) { return '' }
     const { lang, fallback, params } = parseArgs(...args)
-    return translate(getAssetLocale, lang, fallback, key, params)
-      || warnDefault(lang, key, null)
+    return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params))
   }
 
   /**
@@ -169,8 +170,7 @@ export default function (Vue) {
       )
       if (res) { return res }
     }
-    return translate(getAssetLocale, lang, fallback, key, params)
-      || warnDefault(lang, key, this)
+    return warnDefault(lang, key, this, translate(getAssetLocale, lang, fallback, key, params))
   }
 
   /**

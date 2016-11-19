@@ -8,7 +8,7 @@ export default function (Vue, langVM) {
    * @param {Object | Function | Promise} definition
    * @param {Function} cb
    */
-  
+
   Vue.locale = (id, definition, cb) => {
     if (definition === undefined) { // gettter
       return langVM.locales[id]

@@ -1,6 +1,8 @@
+import { isNil } from './util'
+
 /**
  *  String format template
- *  - Inspired:  
+ *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
@@ -12,7 +14,7 @@ export default function (Vue) {
 
   /**
    * template
-   *  
+   *
    * @param {String} string
    * @param {Array} ...args
    * @return {String}
@@ -37,7 +39,7 @@ export default function (Vue) {
         return i
       } else {
         result = hasOwn(args, i) ? args[i] : match
-        if (result === null || result === undefined) {
+        if (isNil(result)) {
           return ''
         }
 

@@ -21,6 +21,12 @@ describe('i18n', () => {
       })
     })
 
+    describe('empty string', () => {
+      it('should support empty string', () => {
+        assert.equal(Vue.t('message.empty'), locales.en.message.empty)
+      })
+    })
+
     describe('linked translation', () => {
       it('should translate simple link', () => {
         assert.equal(Vue.t('message.link'), locales.en.message.hello)
