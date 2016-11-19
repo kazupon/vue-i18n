@@ -41,7 +41,7 @@ export default function (Vue) {
     if (!locale) { return null }
 
     let val = getValue(locale, key)
-    if (isNil(val)) val = locale[key]
+    if (isNil(val)) { val = locale[key] }
     if (isNil(val)) { return null }
 
     // Check for the existance of links within the translated string
