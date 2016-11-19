@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.7.1
+ * vue-i18n v4.7.2
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -193,7 +193,7 @@ var Dep = void 0;
  */
 
 function getDep(vm) {
-  if (!Dep) {
+  if (!Dep && vm && vm._data && vm._data.__ob__ && vm._data.__ob__.dep) {
     Dep = vm._data.__ob__.dep.constructor;
   }
   return Dep;
@@ -216,7 +216,7 @@ function Config (Vue, langVM, lang) {
 
     return function computedGetter() {
       watcher.dirty && watcher.evaluate();
-      Dep.target && watcher.depend();
+      Dep && Dep.target && watcher.depend();
       return watcher.value;
     };
   }
@@ -272,8 +272,22 @@ function Config (Vue, langVM, lang) {
 }
 
 /**
+ * utilites
+ */
+
+/**
+ * isNil
+ *
+ * @param {*} val
+ * @return Boolean
+ */
+function isNil(val) {
+  return val === null || val === undefined;
+}
+
+/**
  *  String format template
- *  - Inspired:  
+ *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
@@ -284,7 +298,7 @@ function Format (Vue) {
 
   /**
    * template
-   *  
+   *
    * @param {String} string
    * @param {Array} ...args
    * @return {String}
@@ -312,7 +326,7 @@ function Format (Vue) {
         return i;
       } else {
         result = hasOwn(args, i) ? args[i] : match;
-        if (result === null || result === undefined) {
+        if (isNil(result)) {
           return '';
         }
 
@@ -737,8 +751,11 @@ function Extend (Vue) {
       return null;
     }
 
-    var val = getValue(locale, key) || locale[key];
-    if (!val) {
+    var val = getValue(locale, key);
+    if (isNil(val)) {
+      val = locale[key];
+    }
+    if (isNil(val)) {
       return null;
     }
 
@@ -765,12 +782,12 @@ function Extend (Vue) {
   function translate(getter, lang, fallback, key, params) {
     var res = null;
     res = interpolate(getter(lang), key, params);
-    if (res) {
+    if (!isNil(res)) {
       return res;
     }
 
     res = interpolate(getter(fallback), key, params);
-    if (res) {
+    if (!isNil(res)) {
       if (process.env.NODE_ENV !== 'production') {
         warn('Fall back to translate the keypath "' + key + '" with "' + fallback + '" language.');
       }
@@ -780,7 +797,10 @@ function Extend (Vue) {
     }
   }
 
-  function warnDefault(lang, key, vm) {
+  function warnDefault(lang, key, vm, result) {
+    if (!isNil(result)) {
+      return result;
+    }
     if (process.env.NODE_ENV !== 'production') {
       warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
     }
@@ -846,7 +866,7 @@ function Extend (Vue) {
     var fallback = _parseArgs.fallback;
     var params = _parseArgs.params;
 
-    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(lang, key, null);
+    return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params));
   };
 
   /**
@@ -896,7 +916,7 @@ function Extend (Vue) {
         return res;
       }
     }
-    return translate(getAssetLocale, lang, fallback, key, params) || warnDefault(lang, key, this);
+    return warnDefault(lang, key, this, translate(getAssetLocale, lang, fallback, key, params));
   };
 
   /**
@@ -965,7 +985,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.7.1';
+plugin.version = '4.7.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
