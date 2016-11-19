@@ -1,3 +1,18 @@
+<a name="4.7.2"></a>
+## [4.7.2](https://github.com/kazupon/vue-i18n/compare/v4.7.1...v4.7.2) (2016-11-19)
+
+
+### :bug: Bug Fixes
+
+* **observer:** fix dep undefined error ([#88](https://github.com/kazupon/vue-i18n/issues/88)) by [@fandaa](https://github.com/fandaa) ([724974e](https://github.com/kazupon/vue-i18n/commit/724974e)), closes [#88](https://github.com/kazupon/vue-i18n/issues/88)
+
+
+### :zap: Improvements
+
+* **extend:** support translate empty string ([#86](https://github.com/kazupon/vue-i18n/issues/86)) by [@QingWei](https://github.com/QingWei)-Li ([8e6d154](https://github.com/kazupon/vue-i18n/commit/8e6d154))
+
+
+
 <a name="4.7.1"></a>
 ## [4.7.1](https://github.com/kazupon/vue-i18n/compare/v4.7.0...v4.7.1) (2016-10-29)
 
