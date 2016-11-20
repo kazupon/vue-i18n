@@ -8,7 +8,7 @@
 ## Installation
 
 ### CDN
-uppkg
+unpkg
 ```html
 <script src="https://unpkg.com/vue-i18n@4.7.2/dist/vue-i18n.min.js"></script>
 ```
