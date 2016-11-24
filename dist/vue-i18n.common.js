@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.7.2
+ * vue-i18n v4.7.3
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -752,6 +752,9 @@ function Extend (Vue) {
     }
 
     var val = getValue(locale, key);
+    if (Array.isArray(val)) {
+      return val;
+    }
     if (isNil(val)) {
       val = locale[key];
     }
@@ -985,7 +988,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.7.2';
+plugin.version = '4.7.3';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
