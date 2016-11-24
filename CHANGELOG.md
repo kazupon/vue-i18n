@@ -1,3 +1,13 @@
+<a name="4.7.3"></a>
+## [4.7.3](https://github.com/kazupon/vue-i18n/compare/v4.7.2...v4.7.3) (2016-11-24)
+
+
+### :bug: Bug Fixes
+
+* **extend:** fix array local ([35c268a](https://github.com/kazupon/vue-i18n/commit/35c268a)), closes [#91](https://github.com/kazupon/vue-i18n/issues/91) [#59](https://github.com/kazupon/vue-i18n/issues/59)
+
+
+
 <a name="4.7.2"></a>
 ## [4.7.2](https://github.com/kazupon/vue-i18n/compare/v4.7.1...v4.7.2) (2016-11-19)
 
