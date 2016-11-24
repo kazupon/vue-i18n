@@ -36,7 +36,10 @@ export default {
       [
         'this is nested array error 1'
       ]
-    ]
+    ],
+    issues: {
+      array_bugs: ['bug1', 'bug2']
+    }
   },
   ja: {
     message: {
@@ -66,6 +69,9 @@ export default {
       [
         'これはネストされた配列のエラー1です。'
       ]
-    ]
+    ],
+    issues: {
+      array_bugs: ['バグ1', 'バグ2']
+    }
   }
 }

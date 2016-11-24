@@ -45,4 +45,14 @@ describe('issues', () => {
       )
     })
   })
+
+  describe('#91, #51', () => {
+    it('should be translated', () => {
+      const arrayLocales = locales[Vue.config.lang].issues.array_bugs
+      for (let i = 0; i < arrayLocales.length; i++) {
+        const item = vm.$t('issues.array_bugs')[i]
+        assert.equal(item, arrayLocales[i])
+      }
+    })
+  })
 })

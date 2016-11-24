@@ -41,6 +41,7 @@ export default function (Vue) {
     if (!locale) { return null }
 
     let val = getValue(locale, key)
+    if (Array.isArray(val)) { return val }
     if (isNil(val)) { val = locale[key] }
     if (isNil(val)) { return null }
 
