@@ -44,6 +44,7 @@ export default function (Vue) {
     if (Array.isArray(val)) { return val }
     if (isNil(val)) { val = locale[key] }
     if (isNil(val)) { return null }
+    if (typeof val !== 'string') { warn("Value of key '" + key + "' is not a string!"); return null }
 
     // Check for the existance of links within the translated string
     if (val.indexOf('@:') >= 0) {
