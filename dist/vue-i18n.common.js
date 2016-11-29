@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.7.3
+ * vue-i18n v4.7.4
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -761,6 +761,9 @@ function Extend (Vue) {
     if (isNil(val)) {
       return null;
     }
+    if (typeof val !== 'string') {
+      warn("Value of key '" + key + "' is not a string!");return null;
+    }
 
     // Check for the existance of links within the translated string
     if (val.indexOf('@:') >= 0) {
@@ -988,7 +991,7 @@ function setupLangVM(Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '4.7.3';
+plugin.version = '4.7.4';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
