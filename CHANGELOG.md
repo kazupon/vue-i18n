@@ -1,3 +1,13 @@
+<a name="4.7.4"></a>
+## [4.7.4](https://github.com/kazupon/vue-i18n/compare/v4.7.3...v4.7.4) (2016-11-29)
+
+
+### :bug: Bug Fixes
+
+* **extend:** fix interpolate error [@tariq86](https://github.com/tariq86) ([5f24e17](https://github.com/kazupon/vue-i18n/commit/5f24e17))
+
+
+
 <a name="4.7.3"></a>
 ## [4.7.3](https://github.com/kazupon/vue-i18n/compare/v4.7.2...v4.7.3) (2016-11-24)
 
