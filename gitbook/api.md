@@ -40,6 +40,8 @@
 
   Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.
 
+  If mssingHandler is assigned, and occured translation missing, it's not warned.
+
   ```javascript
   Vue.config.missingHandler = function (lang, key, vm) {
     // handle translation missing
