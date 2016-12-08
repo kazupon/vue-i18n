@@ -302,7 +302,7 @@
 </li></ul>
 <h3 id="missinghandler">missingHandler</h3><ul><li><p><strong>Type:</strong> <code>Function</code></p></li>
 <li><p><strong>Default:</strong> <code>null</code></p></li>
-<li><p><strong>Usage:</strong></p><p>Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.</p><pre><code class="lang-javascript">Vue.config.missingHandler = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">lang, key, vm</span>) </span>{
+<li><p><strong>Usage:</strong></p><p>Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.</p><p>If mssingHandler is assigned, and occured translation missing, it&apos;s not warned.</p><pre><code class="lang-javascript">Vue.config.missingHandler = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">lang, key, vm</span>) </span>{
   <span class="hljs-comment">// handle translation missing</span>
 }</code></pre>
 </li></ul>
@@ -427,7 +427,7 @@ Translated pluralization string</p></li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.12","depth":1,"previous":{"title":"Hot reload","level":"1.11","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-09-24T13:03:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-11-29T05:19:12.464Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.12","depth":1,"previous":{"title":"Hot reload","level":"1.11","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.1","livereload"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"3.x.x"},"file":{"path":"api.md","mtime":"2016-12-08T15:21:38.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-12-08T15:25:53.567Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -442,6 +442,10 @@ Translated pluralization string</p></li>
     
         
         <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

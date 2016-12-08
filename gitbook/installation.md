@@ -10,13 +10,13 @@
 ### CDN
 unpkg
 ```html
-<script src="https://unpkg.com/vue-i18n@4.7.4/dist/vue-i18n.min.js"></script>
+<script src="https://unpkg.com/vue-i18n@4.8.0/dist/vue-i18n.min.js"></script>
 ```
 
 jsdelivr
 
 ```html
-<script src="https://cdn.jsdelivr.net/vue.i18n/4.7.4/vue-i18n.min.js"></script>
+<script src="https://cdn.jsdelivr.net/vue.i18n/4.8.0/vue-i18n.min.js"></script>
 ```
 
 ### NPM
