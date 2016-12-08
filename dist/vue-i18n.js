@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.7.4
+ * vue-i18n v4.8.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -811,10 +811,13 @@
       if (!isNil(result)) {
         return result;
       }
-      if ('development' !== 'production') {
-        warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
+      if (Vue.config.missingHandler) {
+        Vue.config.missingHandler.apply(null, [lang, key, vm]);
+      } else {
+        if ('development' !== 'production') {
+          warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
+        }
       }
-      Vue.config.missingHandler && Vue.config.missingHandler.apply(null, [lang, key, vm]);
       return key;
     }
 
@@ -995,7 +998,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.7.4';
+  plugin.version = '4.8.0';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
