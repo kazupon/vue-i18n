@@ -7,12 +7,6 @@ var replace = require('rollup-plugin-replace')
 var pack = require('../package.json')
 var banner = require('./banner')
 
-// update main file
-var main = fs
-  .readFileSync('src/index.js', 'utf-8')
-  .replace(/plugin\.version = '[\d.]+'/, "plugin.version = '" + pack.version + "'")
-fs.writeFileSync('src/index.js', main)
-
 // update installation.md
 var installation = fs
   .readFileSync('./gitbook/installation.md', 'utf-8')
@@ -50,7 +44,8 @@ rollup.rollup({
     entry: 'src/index.js',
     plugins: [
       replace({
-        'process.env.NODE_ENV': "'development'"
+        'process.env.NODE_ENV': "'development'",
+        '__VERSION__': pack.version
       }),
       babel({
         presets: ['es2015-rollup']
@@ -71,7 +66,8 @@ rollup.rollup({
     entry: 'src/index.js',
     plugins: [
       replace({
-        'process.env.NODE_ENV': "'production'"
+        'process.env.NODE_ENV': "'production'",
+        '__VERSION__': pack.version
       }),
       babel({
         presets: ['es2015-rollup']
