@@ -90,11 +90,14 @@ export default function (Vue) {
 
   function warnDefault (lang, key, vm, result) {
     if (!isNil(result)) { return result }
-    if (process.env.NODE_ENV !== 'production') {
-      warn('Cannot translate the value of keypath "' + key + '". '
-        + 'Use the value of keypath as default')
+    if (Vue.config.missingHandler) {
+      Vue.config.missingHandler.apply(null, [lang, key, vm])
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        warn('Cannot translate the value of keypath "' + key + '". '
+          + 'Use the value of keypath as default')
+      }
     }
-    Vue.config.missingHandler && Vue.config.missingHandler.apply(null, [lang, key, vm])
     return key
   }
 
