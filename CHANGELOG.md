@@ -1,3 +1,13 @@
+<a name="4.8.0"></a>
+# [4.8.0](https://github.com/kazupon/vue-i18n/compare/v4.7.4...v4.8.0) (2016-12-08)
+
+
+### :zap: Improvements
+
+* **extend:** disable no translation warning when set missingHandler ([168a97c](https://github.com/kazupon/vue-i18n/commit/168a97c)), closes [#96](https://github.com/kazupon/vue-i18n/issues/96)
+
+
+
 <a name="4.7.4"></a>
 ## [4.7.4](https://github.com/kazupon/vue-i18n/compare/v4.7.3...v4.7.4) (2016-11-29)
 
