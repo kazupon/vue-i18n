@@ -167,3 +167,15 @@
 - **Usage:**
 
   Translate the locale of `keypath` with pluralization. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you will specify String value to `arguments`, translate the locale of value. If you wll specify Array or Object value to `arguments`, you must specify with `arguments` of [$t](#tkeypath-lang-arguments).
+
+### $texist(keypath, [arguments])
+
+- **Arguments:**
+  - `{String} keypath`
+  - `{Array | Object} [arguments]`
+
+- **Return:**
+  Whether keypath exists (Boolean)
+
+- **Usage:**
+  Return whether key path exists in Boolean.
