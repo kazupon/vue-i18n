@@ -46,3 +46,9 @@ Vue.locale('ja', { ... })
 ```
 
 You don't need to do this when using the standalone build, as it installs itself automatically.
+
+### YARN
+
+alernatively, using Facebook's recently released [yarn](https://yarnpkg.com) package manager.
+
+    $ yarn
