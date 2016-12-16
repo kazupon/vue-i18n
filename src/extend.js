@@ -205,16 +205,10 @@ export default function (Vue) {
   Vue.prototype.$texist = function (key, ...args) {
     if (!key) { return false }
     const { lang, fallback, params } = parseArgs(...args)
-
-    let locale
-    if (this.$options.locales) {
-      locale = bind(getComponentLocale, this)
-    } else {
-      locale = getAssetLocale
-    }
-
-    const result = translate(locale, lang, fallback, key, params)
-    return !isNil(result)
+    const locale = this.$options.locales 
+      ? bind(getComponentLocale, this)
+      : getAssetLocale
+    return !isNil(translate(locale, lang, fallback, key, params))
   }
 
   return Vue

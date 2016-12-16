@@ -491,19 +491,19 @@ describe('i18n', () => {
     describe('existing key', () => {
       it('should return true', () => {
         const vm = new Vue()
-        assert.equal(vm.$texist('message.hello'), true)
+        assert(vm.$texist('message.hello') === true)
       })
 
       it('should return true with language', () => {
         const vm = new Vue()
-        assert.equal(vm.$texist('message.hello', 'ja'), true)
+        assert(vm.$texist('message.hello', 'ja') === true)
       })
     })
 
     describe('not existing key', () => {
       it('should return false', () => {
         const vm = new Vue()
-        assert.equal(vm.$texist('message.hallo'), false)
+        assert(vm.$texist('message.hallo') === false)
       })
     })
   })
