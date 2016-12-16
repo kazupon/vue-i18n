@@ -194,7 +194,7 @@ export default function (Vue) {
   }
 
   /**
-   * $texist
+   * $te
    *
    * @param {String} key
    * @param {Array} ...args
@@ -202,7 +202,7 @@ export default function (Vue) {
    *
    */
 
-  Vue.prototype.$texist = function (key, ...args) {
+  Vue.prototype.$te = function (key, ...args) {
     if (!key) { return false }
     const { lang, fallback, params } = parseArgs(...args)
     const locale = this.$options.locales 
