@@ -8,12 +8,12 @@
 
 Internationalization plugin for Vue.js
 
-## Documentation
+## :book: Documentation
 
 Docs are available [here](https://kazupon.github.io/vue-i18n).
 
 
-## Contributing
+## :muscle: Contributing
 - Fork it !
 - Create your top branch from `dev`: `git branch my-new-topic origin/dev`
 - Commit your changes: `git commit -am 'Add some topic'`
@@ -21,7 +21,7 @@ Docs are available [here](https://kazupon.github.io/vue-i18n).
 - Submit a pull request to `dev` branch of `kazupon/vue-i18n` repository !
 
 
-## Development Setup
+## :hammer: Development Setup
 
 ```shell
 # install deps
@@ -44,11 +44,11 @@ npm test
 ```
 
 
-## Changelog
+## :scroll: Changelog
 
 Change details for each release are documented in [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
-## License
+## :copyright: License
 
 [MIT](http://opensource.org/licenses/MIT)
