@@ -42,7 +42,9 @@ pathStateMachine[IN_PATH] = {
 
 pathStateMachine[BEFORE_IDENT] = {
   'ws': [BEFORE_IDENT],
-  'ident': [IN_IDENT, APPEND]
+  'ident': [IN_IDENT, APPEND],
+  '0': [IN_IDENT, APPEND],
+  'number': [IN_IDENT, APPEND]
 }
 
 pathStateMachine[IN_IDENT] = {

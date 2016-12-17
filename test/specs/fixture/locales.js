@@ -13,7 +13,9 @@ export default {
       link_end: 'This is a linked translation to @:message.hello',
       link_within: 'Isn\'t @:message.hello we live in great?',
       link_multiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
-      'hyphen-locale': 'hello hyphen'
+      'hyphen-locale': 'hello hyphen',
+      '1234': 'Number-based keys are found',
+      '1mixedKey': 'Mixed keys are not found.'
     },
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
@@ -51,7 +53,9 @@ export default {
         list: 'こんにちは {0}, ごきげんいかが？'
       },
       fallback1: 'これはフォールバック',
-      'hyphen-locale': 'こんにちは、ハイフン'
+      'hyphen-locale': 'こんにちは、ハイフン',
+      '1234': '数字ベースのキーは見つかりませんでした。',
+      '1mixedKey': 'ミックスされたキーは見つかりませんでした。'
     },
     plurals: {
       car: 'ザ・ワールド | これはフォールバック',

@@ -55,4 +55,17 @@ describe('issues', () => {
       }
     })
   })
+
+  describe('#97', () => {
+    it('should be translated', () => {
+      assert.equal(
+        vm.$t('message.1234'),
+        locales[Vue.config.lang]['message']['1234']
+      )
+      assert.equal(
+        vm.$t('message.1mixedKey'),
+        locales[Vue.config.lang]['message']['1mixedKey']
+      )
+    })
+  })
 })
