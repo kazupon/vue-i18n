@@ -270,6 +270,24 @@ describe('i18n', () => {
     })
   })
 
+  describe('Vue.te', () => {
+    describe('existing key', () => {
+      it('should return true', () => {
+        assert(Vue.te('message.hello') === true)
+      })
+
+      it('should return true with language', () => {
+        assert(Vue.te('message.hello', 'ja') === true)
+      })
+    })
+
+    describe('not existing key', () => {
+      it('should return false', () => {
+        assert(Vue.te('message.hallo') === false)
+      })
+    })
+  })
+
   describe('$t', () => {
     describe('en language locale', () => {
       it('should translate an english', () => {

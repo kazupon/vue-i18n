@@ -163,6 +163,19 @@ export default function (Vue) {
   }
 
   /**
+   * Vue.te
+   *
+   * @param {String} key
+   * @param {Array} ...args
+   * @return {Boolean}
+   */
+
+  Vue.te = (key, ...args) => {
+    const { lang } = parseArgs(...args)
+    return exist(getAssetLocale(lang), key)
+  }
+
+  /**
    * $t
    *
    * @param {String} key

@@ -126,6 +126,18 @@
 - **Usage:**
   This is the same as the `$tc` method. This is translate pluralization function for global locale only. more detail see [$tc](#tc-keypath-choice-arguments-).
 
+### Vue.te(keypath, [lang])
+
+- **Arguments:**
+  - `{String} keypath`
+  - `{String} [lang]`
+
+- **Return:**
+  Whether keypath exists, boolean value
+
+- **Usage:**
+  Check whether key path exists in global locale. If you specified `lang`, check the locale of `lang`.
+
 ## Constructor Options
 
 ### locales
