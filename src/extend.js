@@ -37,6 +37,11 @@ export default function (Vue) {
     return { lang, fallback, params: args }
   }
 
+  function exist (locale, key) {
+    if (!locale || !key) { return false }
+    return !isNil(getValue(locale, key))
+  }
+
   function interpolate (locale, key, args) {
     if (!locale) { return null }
 
@@ -203,12 +208,15 @@ export default function (Vue) {
    */
 
   Vue.prototype.$te = function (key, ...args) {
-    if (!key) { return false }
-    const { lang, fallback, params } = parseArgs(...args)
-    const locale = this.$options.locales 
-      ? bind(getComponentLocale, this)
-      : getAssetLocale
-    return !isNil(translate(locale, lang, fallback, key, params))
+    const { lang } = parseArgs(...args)
+    let found = false
+    if (this.$options.locales) { // exist component locale
+      found = exist(bind(getComponentLocale)(lang), key)
+    }
+    if (!found) {
+      found = exist(getAssetLocale(lang), key)
+    }
+    return found
   }
 
   return Vue
