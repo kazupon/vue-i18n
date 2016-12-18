@@ -1,3 +1,18 @@
+<a name="4.9.0"></a>
+# [4.9.0](https://github.com/kazupon/vue-i18n/compare/v4.8.0...v4.9.0) (2016-12-17)
+
+
+### :bug: Bug Fixes
+
+* **path:** fix nested key translation ([e15ead4](https://github.com/kazupon/vue-i18n/commit/e15ead4)), closes [#97](https://github.com/kazupon/vue-i18n/issues/97)
+
+
+### :star: New Features
+
+* add globally locale checking ([4cac8b9](https://github.com/kazupon/vue-i18n/commit/4cac8b9))
+* locale checking ([#98](https://github.com/kazupon/vue-i18n/issues/98)) by [@long](https://github.com/long)-long-float ([0bc0a6b](https://github.com/kazupon/vue-i18n/commit/0bc0a6b))
+
+
 <a name="4.8.0"></a>
 # [4.8.0](https://github.com/kazupon/vue-i18n/compare/v4.7.4...v4.8.0) (2016-12-08)
 
