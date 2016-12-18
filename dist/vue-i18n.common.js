@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.8.0
+ * vue-i18n v4.9.0
  * (c) 2016 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -382,7 +382,9 @@ pathStateMachine[IN_PATH] = {
 
 pathStateMachine[BEFORE_IDENT] = {
   'ws': [BEFORE_IDENT],
-  'ident': [IN_IDENT, APPEND]
+  'ident': [IN_IDENT, APPEND],
+  '0': [IN_IDENT, APPEND],
+  'number': [IN_IDENT, APPEND]
 };
 
 pathStateMachine[IN_IDENT] = {
@@ -746,6 +748,13 @@ function Extend (Vue) {
     return { lang: lang, fallback: fallback, params: args };
   }
 
+  function exist(locale, key) {
+    if (!locale || !key) {
+      return false;
+    }
+    return !isNil(getValue(locale, key));
+  }
+
   function interpolate(locale, key, args) {
     if (!locale) {
       return null;
@@ -896,6 +905,26 @@ function Extend (Vue) {
   };
 
   /**
+   * Vue.te
+   *
+   * @param {String} key
+   * @param {Array} ...args
+   * @return {Boolean}
+   */
+
+  Vue.te = function (key) {
+    for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
+    }
+
+    var _parseArgs2 = parseArgs.apply(undefined, args);
+
+    var lang = _parseArgs2.lang;
+
+    return exist(getAssetLocale(lang), key);
+  };
+
+  /**
    * $t
    *
    * @param {String} key
@@ -908,15 +937,15 @@ function Extend (Vue) {
       return '';
     }
 
-    for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-      args[_key4 - 1] = arguments[_key4];
+    for (var _len5 = arguments.length, args = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+      args[_key5 - 1] = arguments[_key5];
     }
 
-    var _parseArgs2 = parseArgs.apply(undefined, args);
+    var _parseArgs3 = parseArgs.apply(undefined, args);
 
-    var lang = _parseArgs2.lang;
-    var fallback = _parseArgs2.fallback;
-    var params = _parseArgs2.params;
+    var lang = _parseArgs3.lang;
+    var fallback = _parseArgs3.fallback;
+    var params = _parseArgs3.params;
 
     var res = null;
     if (this.$options.locales) {
@@ -942,17 +971,47 @@ function Extend (Vue) {
       return key;
     }
 
-    for (var _len5 = arguments.length, args = Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
-      args[_key5 - 2] = arguments[_key5];
+    for (var _len6 = arguments.length, args = Array(_len6 > 2 ? _len6 - 2 : 0), _key6 = 2; _key6 < _len6; _key6++) {
+      args[_key6 - 2] = arguments[_key6];
     }
 
     return fetchChoice(this.$t.apply(this, [key].concat(args)), choice);
+  };
+
+  /**
+   * $te
+   *
+   * @param {String} key
+   * @param {Array} ...args
+   * @return {Boolean}
+   *
+   */
+
+  Vue.prototype.$te = function (key) {
+    for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+      args[_key7 - 1] = arguments[_key7];
+    }
+
+    var _parseArgs4 = parseArgs.apply(undefined, args);
+
+    var lang = _parseArgs4.lang;
+
+    var found = false;
+    if (this.$options.locales) {
+      // exist component locale
+      found = exist(bind(getComponentLocale)(lang), key);
+    }
+    if (!found) {
+      found = exist(getAssetLocale(lang), key);
+    }
+    return found;
   };
 
   return Vue;
 }
 
 var langVM = void 0; // singleton
+
 
 /**
  * plugin
