@@ -191,3 +191,13 @@
 
 - **Usage:**
   Check whether key path exists. In Vue instance, If not specified component locale, check with global locale. If you specified `lang`, check the locale of `lang`.
+
+## Instance Properties
+
+### $lang
+
+- **Return**
+  The lang you set via `Vue.config.lang`
+
+- **Usage**
+  You can do some complex things if you need. Note a good design should not rely on this too much.
