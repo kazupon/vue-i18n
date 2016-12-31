@@ -77,4 +77,11 @@ describe('component locales', () => {
       assert.equal(comp1.$t('fallback', 'ja'), 'this is fallback on component')
     })
   })
+
+  describe('$lang', () => {
+    it('should be work', () => {
+      const comp1 = vm.$children[0] // component1
+      assert.equal(comp1.$lang, 'en')
+    })
+  })
 })

@@ -232,5 +232,13 @@ export default function (Vue) {
     return found
   }
 
+  Vue.mixin({
+    computed: {
+      $lang () {
+        return Vue.config.lang
+      }
+    }
+  })
+
   return Vue
 }
