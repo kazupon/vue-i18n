@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v4.9.0
- * (c) 2016 kazuya kawaguchi
+ * vue-i18n v4.10.0
+ * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
 'use strict';
@@ -9,7 +9,7 @@ var babelHelpers = {};
 babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
 } : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 babelHelpers;
 
@@ -143,8 +143,8 @@ function Override (Vue, langVM, version) {
 
     if (!this.$parent) {
       // root
-      this.$lang = langVM;
-      this._langUnwatch = this.$lang.$watch('$data', function (val, old) {
+      this._$lang = langVM;
+      this._langUnwatch = this._$lang.$watch('$data', function (val, old) {
         update(_this);
       }, { deep: true });
     }
@@ -156,7 +156,7 @@ function Override (Vue, langVM, version) {
     if (!this.$parent && this._langUnwatch) {
       this._langUnwatch();
       this._langUnwatch = null;
-      this.$lang = null;
+      this._$lang = null;
     }
 
     destroy.apply(this, arguments);
@@ -637,10 +637,10 @@ function parsePath(path) {
 }
 
 function Path (Vue) {
-  var _Vue$util = Vue.util;
-  var isObject = _Vue$util.isObject;
-  var isPlainObject = _Vue$util.isPlainObject;
-  var hasOwn = _Vue$util.hasOwn;
+  var _Vue$util = Vue.util,
+      isObject = _Vue$util.isObject,
+      isPlainObject = _Vue$util.isPlainObject,
+      hasOwn = _Vue$util.hasOwn;
 
 
   function empty(target) {
@@ -715,9 +715,9 @@ function Path (Vue) {
  */
 
 function Extend (Vue) {
-  var _Vue$util = Vue.util;
-  var isObject = _Vue$util.isObject;
-  var bind = _Vue$util.bind;
+  var _Vue$util = Vue.util,
+      isObject = _Vue$util.isObject,
+      bind = _Vue$util.bind;
 
   var format = Format(Vue);
   var getValue = Path(Vue);
@@ -878,11 +878,10 @@ function Extend (Vue) {
       return '';
     }
 
-    var _parseArgs = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs.lang;
-    var fallback = _parseArgs.fallback;
-    var params = _parseArgs.params;
+    var _parseArgs = parseArgs.apply(undefined, args),
+        lang = _parseArgs.lang,
+        fallback = _parseArgs.fallback,
+        params = _parseArgs.params;
 
     return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params));
   };
@@ -917,9 +916,8 @@ function Extend (Vue) {
       args[_key4 - 1] = arguments[_key4];
     }
 
-    var _parseArgs2 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs2.lang;
+    var _parseArgs2 = parseArgs.apply(undefined, args),
+        lang = _parseArgs2.lang;
 
     return exist(getAssetLocale(lang), key);
   };
@@ -941,11 +939,10 @@ function Extend (Vue) {
       args[_key5 - 1] = arguments[_key5];
     }
 
-    var _parseArgs3 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs3.lang;
-    var fallback = _parseArgs3.fallback;
-    var params = _parseArgs3.params;
+    var _parseArgs3 = parseArgs.apply(undefined, args),
+        lang = _parseArgs3.lang,
+        fallback = _parseArgs3.fallback,
+        params = _parseArgs3.params;
 
     var res = null;
     if (this.$options.locales) {
@@ -992,9 +989,8 @@ function Extend (Vue) {
       args[_key7 - 1] = arguments[_key7];
     }
 
-    var _parseArgs4 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs4.lang;
+    var _parseArgs4 = parseArgs.apply(undefined, args),
+        lang = _parseArgs4.lang;
 
     var found = false;
     if (this.$options.locales) {
@@ -1006,6 +1002,14 @@ function Extend (Vue) {
     }
     return found;
   };
+
+  Vue.mixin({
+    computed: {
+      $lang: function $lang() {
+        return Vue.config.lang;
+      }
+    }
+  });
 
   return Vue;
 }
@@ -1021,7 +1025,7 @@ var langVM = void 0; // singleton
  */
 
 function plugin(Vue) {
-  var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+  var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var version = Vue.version && Number(Vue.version.split('.')[0]) || -1;
 
