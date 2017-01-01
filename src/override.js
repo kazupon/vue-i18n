@@ -16,8 +16,8 @@ export default function (Vue, langVM, version) {
     init.call(this, options)
 
     if (!this.$parent) { // root
-      this.$lang = langVM
-      this._langUnwatch = this.$lang.$watch('$data', (val, old) => {
+      this._$lang = langVM
+      this._langUnwatch = this._$lang.$watch('$data', (val, old) => {
         update(this)
       }, { deep: true })
     }
@@ -29,7 +29,7 @@ export default function (Vue, langVM, version) {
     if (!this.$parent && this._langUnwatch) {
       this._langUnwatch()
       this._langUnwatch = null
-      this.$lang = null
+      this._$lang = null
     }
 
     destroy.apply(this, arguments)
