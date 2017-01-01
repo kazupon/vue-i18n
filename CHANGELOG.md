@@ -1,3 +1,18 @@
+<a name="4.10.0"></a>
+# [4.10.0](https://github.com/kazupon/vue-i18n/compare/v4.9.0...v4.10.0) (2017-01-01)
+
+
+### :star: New Features
+
+* `$lang` property for all component ([#99](https://github.com/kazupon/vue-i18n/issues/99)) by [@albert](https://github.com/albert)-zhang ([5ed69f8](https://github.com/kazupon/vue-i18n/commit/5ed69f8))
+
+
+### :up: Updates
+
+* **override:** change langVM keeping variable name ([3ec1bb2](https://github.com/kazupon/vue-i18n/commit/3ec1bb2))
+
+
+
 <a name="4.9.0"></a>
 # [4.9.0](https://github.com/kazupon/vue-i18n/compare/v4.8.0...v4.9.0) (2016-12-17)
 
