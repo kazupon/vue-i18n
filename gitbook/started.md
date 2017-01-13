@@ -46,13 +46,23 @@ Output the following:
 <p>こんにちは、世界</p>
 ```
 
-If you want to use `$t` in data property of a component, use `this.$t`:
+If you want to use `$t` in data property, methods or computed properties of a component, use `this.$t`:
 
 ```
 export defaults {
   data () {
     return {
       hello: this.$t("message.hello")
+    }
+  },
+  computed: {
+    computedHello () {
+      return this.$t("message.hello")
+    }
+  },
+  methods: {
+    sayHello () {
+      alert(this.$t("message.hello"))
     }
   }
 }
