@@ -45,3 +45,15 @@ Output the following:
 ```html
 <p>こんにちは、世界</p>
 ```
+
+If you want to use `$t` in data property of a component, use `this.$t`:
+
+```
+export defaults {
+  data () {
+    return {
+      hello: this.$t("message.hello")
+    }
+  }
+}
+```
