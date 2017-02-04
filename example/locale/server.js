@@ -5,6 +5,7 @@ const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const opn = require('opn')
 
 const app = express()
 
@@ -133,4 +134,5 @@ function onListening () {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  opn('http://localhost:' + addr.port);
 }

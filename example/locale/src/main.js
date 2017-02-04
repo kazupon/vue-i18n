@@ -7,6 +7,6 @@ import App from './App.vue'
 Vue.use(VueI18n)
 
 new Vue({
-  el: 'body',
-  components: { App }
+  el: '#app',
+  render: h => h(App)
 })
