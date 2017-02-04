@@ -1,3 +1,13 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/kazupon/vue-i18n/compare/v4.10.0...v5.0.0) (2017-02-04)
+
+
+### :boom: Breaking changes
+
+* drop vue 1.0 supporting ([4da26cf](https://github.com/kazupon/vue-i18n/commit/4da26cf)), closes [#105](https://github.com/kazupon/vue-i18n/issues/105)
+
+
+
 <a name="4.10.0"></a>
 # [4.10.0](https://github.com/kazupon/vue-i18n/compare/v4.9.0...v4.10.0) (2017-01-01)
 
