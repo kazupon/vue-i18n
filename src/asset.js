@@ -10,7 +10,7 @@ export default function (Vue, langVM) {
    */
 
   Vue.locale = (id, definition, cb) => {
-    if (definition === undefined) { // gettter
+    if (definition === undefined) { // getter
       return langVM.locales[id]
     } else { // setter
       if (definition === null) {
