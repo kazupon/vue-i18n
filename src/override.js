@@ -1,15 +1,4 @@
-export default function (Vue, langVM, version) {
-  function update (vm) {
-    if (version > 1) {
-      vm.$forceUpdate()
-    } else {
-      let i = vm._watchers.length
-      while (i--) {
-        vm._watchers[i].update(true) // shallow updates
-      }
-    }
-  }
-
+export default function (Vue, langVM) {
   // override _init
   const init = Vue.prototype._init
   Vue.prototype._init = function (options) {
@@ -18,7 +7,7 @@ export default function (Vue, langVM, version) {
     if (!this.$parent) { // root
       this._$lang = langVM
       this._langUnwatch = this._$lang.$watch('$data', (val, old) => {
-        update(this)
+        this.$forceUpdate()
       }, { deep: true })
     }
   }

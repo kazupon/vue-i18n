@@ -4,8 +4,6 @@ import locales from './fixture/locales'
 
 
 describe('i18n', () => {
-  const version = Number(Vue.version.split('.')[0])
-
   before(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
@@ -540,13 +538,8 @@ describe('i18n', () => {
           return { lang: 'en' }
         }
       }
-
-      if (version >= 2) {
-        options.render = function (h) {
-          return h('p', {}, [this.$t('message.hello', this.lang)])
-        }
-      } else {
-        options.template = '<p>{{ $t("message.hello", lang) }}</p>'
+      options.render = function (h) {
+        return h('p', {}, [this.$t('message.hello', this.lang)])
       }
 
       const vm = new Vue(options)
@@ -572,12 +565,8 @@ describe('i18n', () => {
 
     it('should translate', done => {
       const compOptions = {}
-      if (version >= 2) {
-        compOptions.render = function (h) {
-          return h('p', {}, [this.$t('message.hoge')])
-        }
-      } else {
-        compOptions.template = '<p>{{* $t("message.hoge") }}</p>'
+      compOptions.render = function (h) {
+        return h('p', {}, [this.$t('message.hoge')])
       }
 
       const options = {
@@ -585,15 +574,11 @@ describe('i18n', () => {
         components: { hoge: compOptions }
       }
 
-      if (version >= 2) {
-        options.render = function (h) {
-          return h('div', {}, [
-            h('p', {}, [this.$t('message.hello')]),
-            h('hoge', {})
-          ])
-        }
-      } else {
-        options.template = '<div><p>{{ $t("message.hello") }}</p><hoge></hoge></div>'
+      options.render = function (h) {
+        return h('div', {}, [
+          h('p', {}, [this.$t('message.hello')]),
+          h('hoge', {})
+        ])
       }
 
       const vm = new Vue(options)
@@ -651,7 +636,6 @@ describe('i18n', () => {
       })
 
       it('should translate', done => {
-        let vm
         const parentLocales = {
           en: { foo: { bar: 'hello parent' } },
           ja: { foo: { bar: 'こんにちは、親' } }
@@ -669,79 +653,45 @@ describe('i18n', () => {
           ja: { foo: { bar: 'こんにちは、子3' } }
         }
 
-        if (version >= 2) {
-          vm = new Vue({
-            render (h) {
-              return h('div', [
-                h('p', { attrs: { id: 'parent' } }, [this.$t('foo.bar')]),
-                h('child1'),
-                h('child2')
-              ])
+        const vm = new Vue({
+          render (h) {
+            return h('div', [
+              h('p', { attrs: { id: 'parent' } }, [this.$t('foo.bar')]),
+              h('child1'),
+              h('child2')
+            ])
+          },
+          locales: parentLocales,
+          components: {
+            child1: {
+              render (h) {
+                return h('div', [
+                  h('p', { attrs: { id: 'child1' } }, [this.$t('foo.bar')]),
+                  h('child3')
+                ])
+              },
+              locales: child1Locales,
+              components: {
+                child3: {
+                  render (h) {
+                    return h('div', [
+                      h('p', { attrs: { id: 'child3' } }, [this.$t('foo.bar')])
+                    ])
+                  },
+                  locales: child3Locales
+                }
+              }
             },
-            locales: parentLocales,
-            components: {
-              child1: {
-                render (h) {
-                  return h('div', [
-                    h('p', { attrs: { id: 'child1' } }, [this.$t('foo.bar')]),
-                    h('child3')
-                  ])
-                },
-                locales: child1Locales,
-                components: {
-                  child3: {
-                    render (h) {
-                      return h('div', [
-                        h('p', { attrs: { id: 'child3' } }, [this.$t('foo.bar')])
-                      ])
-                    },
-                    locales: child3Locales
-                  }
-                }
+            child2: {
+              render (h) {
+                return h('div', [
+                  h('p', { attrs: { id: 'child2' } }, [this.$t('foo.bar')])
+                ])
               },
-              child2: {
-                render (h) {
-                  return h('div', [
-                    h('p', { attrs: { id: 'child2' } }, [this.$t('foo.bar')])
-                  ])
-                },
-                locales: child2Locales
-              }
+              locales: child2Locales
             }
-          })
-        } else {
-          vm = new Vue({
-            template: `<div>
-              <p id="parent">{{ $t("foo.bar") }}</p>
-              <child1></child1>
-              <child2></child2>
-            </div>`,
-            locales: parentLocales,
-            components: {
-              child1: {
-                template: `<div>
-                  <p id="child1">{{ $t("foo.bar") }}</p>
-                  <child3></child3>
-                </div>`,
-                locales: child1Locales,
-                components: {
-                  child3: {
-                    template: `<div>
-                      <p id="child3">{{ $t("foo.bar") }}</p>
-                    </div>`,
-                    locales: child3Locales
-                  }
-                }
-              },
-              child2: {
-                template: `<div>
-                  <p id="child2">{{ $t("foo.bar") }}</p>
-                </div>`,
-                locales: child2Locales
-              }
-            }
-          })
-        }
+          }
+        })
         vm.$mount(el)
 
         const parent = vm.$el.querySelector('#parent')

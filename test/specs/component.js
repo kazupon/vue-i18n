@@ -4,8 +4,6 @@ import locales from './fixture/locales'
 
 
 describe('component locales', () => {
-  const version = Number(Vue.version.split('.')[0])
-
   before(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
@@ -31,12 +29,8 @@ describe('component locales', () => {
         }
       }
     }
-    if (version >= 2) {
-      compOptions.render = function (h) {
-        return h('p', {}, [this.$t('foo.bar.buz')])
-      }
-    } else {
-      compOptions.template = '<p>{{* $t("foo.bar.buz") }}</p>'
+    compOptions.render = function (h) {
+      return h('p', {}, [this.$t('foo.bar.buz')])
     }
 
     const options = {
@@ -44,12 +38,8 @@ describe('component locales', () => {
       components: { component1: compOptions }
     }
 
-    if (version >= 2) {
-      options.render = function (h) {
-        return h('div', {}, [h('component1', {})])
-      }
-    } else {
-      options.template = '<div><component1></component1></div>'
+    options.render = function (h) {
+      return h('div', {}, [h('component1', {})])
     }
 
     vm = new Vue(options)

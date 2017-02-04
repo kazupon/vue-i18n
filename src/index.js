@@ -22,10 +22,8 @@ function plugin (Vue, opts = {}) {
     return
   }
 
-  if (process.env.NODE_ENV !== 'production' && version < 1) {
-    warn('vue-i18n (' + plugin.version
-      + ') need to use vue version 1.0 or later (vue version: '
-      + Vue.version + ').')
+  if (process.env.NODE_ENV !== 'production' && version < 2) {
+    warn(`vue-i18n (${plugin.version}) need to use Vue 2.0 or later (Vue: ${Vue.version}).`)
     return
   }
 
@@ -33,7 +31,7 @@ function plugin (Vue, opts = {}) {
   setupLangVM(Vue, lang)
 
   Asset(Vue, langVM)
-  Override(Vue, langVM, version)
+  Override(Vue, langVM)
   Config(Vue, langVM, lang)
   Extend(Vue)
 }
