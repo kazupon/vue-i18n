@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v4.10.0
+ * vue-i18n v5.0.0
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -13,7 +13,7 @@
   babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
   } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
   };
   babelHelpers;
 
@@ -45,7 +45,7 @@
 
     Vue.locale = function (id, definition, cb) {
       if (definition === undefined) {
-        // gettter
+        // getter
         return langVM.locales[id];
       } else {
         // setter
@@ -126,18 +126,7 @@
     return p && typeof p.then === 'function';
   }
 
-  function Override (Vue, langVM, version) {
-    function update(vm) {
-      if (version > 1) {
-        vm.$forceUpdate();
-      } else {
-        var i = vm._watchers.length;
-        while (i--) {
-          vm._watchers[i].update(true); // shallow updates
-        }
-      }
-    }
-
+  function Override (Vue, langVM) {
     // override _init
     var init = Vue.prototype._init;
     Vue.prototype._init = function (options) {
@@ -149,7 +138,7 @@
         // root
         this._$lang = langVM;
         this._langUnwatch = this._$lang.$watch('$data', function (val, old) {
-          update(_this);
+          _this.$forceUpdate();
         }, { deep: true });
       }
     };
@@ -641,10 +630,10 @@
   }
 
   function Path (Vue) {
-    var _Vue$util = Vue.util,
-        isObject = _Vue$util.isObject,
-        isPlainObject = _Vue$util.isPlainObject,
-        hasOwn = _Vue$util.hasOwn;
+    var _Vue$util = Vue.util;
+    var isObject = _Vue$util.isObject;
+    var isPlainObject = _Vue$util.isPlainObject;
+    var hasOwn = _Vue$util.hasOwn;
 
 
     function empty(target) {
@@ -719,9 +708,9 @@
    */
 
   function Extend (Vue) {
-    var _Vue$util = Vue.util,
-        isObject = _Vue$util.isObject,
-        bind = _Vue$util.bind;
+    var _Vue$util = Vue.util;
+    var isObject = _Vue$util.isObject;
+    var bind = _Vue$util.bind;
 
     var format = Format(Vue);
     var getValue = Path(Vue);
@@ -882,10 +871,11 @@
         return '';
       }
 
-      var _parseArgs = parseArgs.apply(undefined, args),
-          lang = _parseArgs.lang,
-          fallback = _parseArgs.fallback,
-          params = _parseArgs.params;
+      var _parseArgs = parseArgs.apply(undefined, args);
+
+      var lang = _parseArgs.lang;
+      var fallback = _parseArgs.fallback;
+      var params = _parseArgs.params;
 
       return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params));
     };
@@ -920,8 +910,9 @@
         args[_key4 - 1] = arguments[_key4];
       }
 
-      var _parseArgs2 = parseArgs.apply(undefined, args),
-          lang = _parseArgs2.lang;
+      var _parseArgs2 = parseArgs.apply(undefined, args);
+
+      var lang = _parseArgs2.lang;
 
       return exist(getAssetLocale(lang), key);
     };
@@ -943,10 +934,11 @@
         args[_key5 - 1] = arguments[_key5];
       }
 
-      var _parseArgs3 = parseArgs.apply(undefined, args),
-          lang = _parseArgs3.lang,
-          fallback = _parseArgs3.fallback,
-          params = _parseArgs3.params;
+      var _parseArgs3 = parseArgs.apply(undefined, args);
+
+      var lang = _parseArgs3.lang;
+      var fallback = _parseArgs3.fallback;
+      var params = _parseArgs3.params;
 
       var res = null;
       if (this.$options.locales) {
@@ -993,8 +985,9 @@
         args[_key7 - 1] = arguments[_key7];
       }
 
-      var _parseArgs4 = parseArgs.apply(undefined, args),
-          lang = _parseArgs4.lang;
+      var _parseArgs4 = parseArgs.apply(undefined, args);
+
+      var lang = _parseArgs4.lang;
 
       var found = false;
       if (this.$options.locales) {
@@ -1029,7 +1022,7 @@
    */
 
   function plugin(Vue) {
-    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     var version = Vue.version && Number(Vue.version.split('.')[0]) || -1;
 
@@ -1038,8 +1031,8 @@
       return;
     }
 
-    if ('development' !== 'production' && version < 1) {
-      warn('vue-i18n (' + plugin.version + ') need to use vue version 1.0 or later (vue version: ' + Vue.version + ').');
+    if ('development' !== 'production' && version < 2) {
+      warn('vue-i18n (' + plugin.version + ') need to use Vue 2.0 or later (Vue: ' + Vue.version + ').');
       return;
     }
 
@@ -1047,7 +1040,7 @@
     setupLangVM(Vue, lang);
 
     Asset(Vue, langVM);
-    Override(Vue, langVM, version);
+    Override(Vue, langVM);
     Config(Vue, langVM, lang);
     Extend(Vue);
   }
@@ -1061,7 +1054,7 @@
     Vue.config.silent = silent;
   }
 
-  plugin.version = '4.10.0';
+  plugin.version = '5.0.0';
 
   if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(plugin);
