@@ -48,7 +48,7 @@ Output the following:
 
 If you want to use `$t` in data property, methods or computed properties of a component, use `this.$t`:
 
-```
+```javascript
 export defaults {
   data () {
     return {
