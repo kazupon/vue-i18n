@@ -1,9 +1,9 @@
 # Installation
 
 ## Compatibility
-- Vue.js `1.0.0`+ 
 - Vue.js `2.0.0-beta.1`+
 
+> :warning: For Vue.js 1.x, until v4.10.0
 
 ## Installation
 
