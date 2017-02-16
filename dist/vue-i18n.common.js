@@ -1,17 +1,9 @@
 /*!
- * vue-i18n v5.0.0
+ * vue-i18n v5.0.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
 'use strict';
-
-var babelHelpers = {};
-babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-};
-babelHelpers;
 
 /**
  * warn
@@ -21,7 +13,7 @@ babelHelpers;
  *
  */
 
-function warn(msg, err) {
+function warn (msg, err) {
   if (window.console) {
     console.warn('[vue-i18n] ' + msg);
     if (err) {
@@ -30,7 +22,7 @@ function warn(msg, err) {
   }
 }
 
-function Asset (Vue, langVM) {
+var Asset = function (Vue, langVM) {
   /**
    * Register or retrieve a global locale definition.
    *
@@ -40,18 +32,16 @@ function Asset (Vue, langVM) {
    */
 
   Vue.locale = function (id, definition, cb) {
-    if (definition === undefined) {
-      // getter
-      return langVM.locales[id];
-    } else {
-      // setter
+    if (definition === undefined) { // getter
+      return langVM.locales[id]
+    } else { // setter
       if (definition === null) {
         langVM.locales[id] = undefined;
         delete langVM.locales[id];
       } else {
         setLocale(id, definition, function (locale) {
           if (locale) {
-            langVM.locales[id] = locale;
+            langVM.$set(langVM.locales, id, locale);
           } else {
             warn('failed set `' + id + '` locale');
           }
@@ -60,54 +50,43 @@ function Asset (Vue, langVM) {
       }
     }
   };
-}
+};
 
-function setLocale(id, definition, cb) {
-  var _this = this;
 
-  if ((typeof definition === 'undefined' ? 'undefined' : babelHelpers.typeof(definition)) === 'object') {
-    // sync
+function setLocale (id, definition, cb) {
+  if (typeof definition === 'object') { // sync
     cb(definition);
   } else {
-    (function () {
-      var future = definition.call(_this);
-      if (typeof future === 'function') {
-        if (future.resolved) {
-          // cached
-          cb(future.resolved);
-        } else if (future.requested) {
-          // pool callbacks
-          future.pendingCallbacks.push(cb);
-        } else {
-          (function () {
-            future.requested = true;
-            var cbs = future.pendingCallbacks = [cb];
-            future(function (locale) {
-              // resolve
-              future.resolved = locale;
-              for (var i = 0, l = cbs.length; i < l; i++) {
-                cbs[i](locale);
-              }
-            }, function () {
-              // reject
-              cb();
-            });
-          })();
-        }
-      } else if (isPromise(future)) {
-        // promise
-        future.then(function (locale) {
-          // resolve
-          cb(locale);
-        }, function () {
-          // reject
-          cb();
-        }).catch(function (err) {
-          console.error(err);
+    var future = definition.call(this);
+    if (typeof future === 'function') {
+      if (future.resolved) {
+        // cached
+        cb(future.resolved);
+      } else if (future.requested) {
+        // pool callbacks
+        future.pendingCallbacks.push(cb);
+      } else {
+        future.requested = true;
+        var cbs = future.pendingCallbacks = [cb];
+        future(function (locale) { // resolve
+          future.resolved = locale;
+          for (var i = 0, l = cbs.length; i < l; i++) {
+            cbs[i](locale);
+          }
+        }, function () { // reject
           cb();
         });
       }
-    })();
+    } else if (isPromise(future)) { // promise
+      future.then(function (locale) { // resolve
+        cb(locale);
+      }, function () { // reject
+        cb();
+      }).catch(function (err) {
+        console.error(err);
+        cb();
+      });
+    }
   }
 }
 
@@ -118,23 +97,22 @@ function setLocale(id, definition, cb) {
  * @return {Boolean}
  */
 
-function isPromise(p) {
-  return p && typeof p.then === 'function';
+function isPromise (p) {
+  return p && typeof p.then === 'function'
 }
 
-function Override (Vue, langVM) {
+var Override = function (Vue, langVM) {
   // override _init
   var init = Vue.prototype._init;
   Vue.prototype._init = function (options) {
-    var _this = this;
+    var this$1 = this;
 
     init.call(this, options);
 
-    if (!this.$parent) {
-      // root
+    if (!this.$parent) { // root
       this._$lang = langVM;
       this._langUnwatch = this._$lang.$watch('$data', function (val, old) {
-        _this.$forceUpdate();
+        this$1.$forceUpdate();
       }, { deep: true });
     }
   };
@@ -150,13 +128,13 @@ function Override (Vue, langVM) {
 
     destroy.apply(this, arguments);
   };
-}
+};
 
 /**
  * Observer
  */
 
-var Watcher = void 0;
+var Watcher;
 /**
  * getWatcher
  *
@@ -164,16 +142,16 @@ var Watcher = void 0;
  * @return {Watcher}
  */
 
-function getWatcher(vm) {
+function getWatcher (vm) {
   if (!Watcher) {
     var unwatch = vm.$watch('__watcher__', function (a) {});
     Watcher = vm._watchers[0].constructor;
     unwatch();
   }
-  return Watcher;
+  return Watcher
 }
 
-var Dep = void 0;
+var Dep;
 /**
  * getDep
  *
@@ -181,45 +159,41 @@ var Dep = void 0;
  * @return {Dep}
  */
 
-function getDep(vm) {
+function getDep (vm) {
   if (!Dep && vm && vm._data && vm._data.__ob__ && vm._data.__ob__.dep) {
     Dep = vm._data.__ob__.dep.constructor;
   }
-  return Dep;
+  return Dep
 }
 
-var fallback = void 0; // fallback lang
+var fallback; // fallback lang
 var missingHandler = null; // missing handler
 var i18nFormatter = null; // custom formatter
 
-function Config (Vue, langVM, lang) {
-  var bind = Vue.util.bind;
-
+var Config = function (Vue, langVM, lang) {
+  var ref = Vue.util;
+  var bind = ref.bind;
   var Watcher = getWatcher(langVM);
   var Dep = getDep(langVM);
 
-  function makeComputedGetter(getter, owner) {
+  function makeComputedGetter (getter, owner) {
     var watcher = new Watcher(owner, getter, null, {
       lazy: true
     });
 
-    return function computedGetter() {
+    return function computedGetter () {
       watcher.dirty && watcher.evaluate();
       Dep && Dep.target && watcher.depend();
-      return watcher.value;
-    };
+      return watcher.value
+    }
   }
 
   // define Vue.config.lang configration
   Object.defineProperty(Vue.config, 'lang', {
     enumerable: true,
     configurable: true,
-    get: makeComputedGetter(function () {
-      return langVM.lang;
-    }, langVM),
-    set: bind(function (val) {
-      langVM.lang = val;
-    }, langVM)
+    get: makeComputedGetter(function () { return langVM.lang }, langVM),
+    set: bind(function (val) { langVM.lang = val; }, langVM)
   });
 
   // define Vue.config.fallbackLang configration
@@ -227,38 +201,26 @@ function Config (Vue, langVM, lang) {
   Object.defineProperty(Vue.config, 'fallbackLang', {
     enumerable: true,
     configurable: true,
-    get: function get() {
-      return fallback;
-    },
-    set: function set(val) {
-      fallback = val;
-    }
+    get: function () { return fallback },
+    set: function (val) { fallback = val; }
   });
 
   // define Vue.config.missingHandler configration
   Object.defineProperty(Vue.config, 'missingHandler', {
     enumerable: true,
     configurable: true,
-    get: function get() {
-      return missingHandler;
-    },
-    set: function set(val) {
-      missingHandler = val;
-    }
+    get: function () { return missingHandler },
+    set: function (val) { missingHandler = val; }
   });
 
   // define Vue.config.i18Formatter configration
   Object.defineProperty(Vue.config, 'i18nFormatter', {
     enumerable: true,
     configurable: true,
-    get: function get() {
-      return i18nFormatter;
-    },
-    set: function set(val) {
-      i18nFormatter = val;
-    }
+    get: function () { return i18nFormatter },
+    set: function (val) { i18nFormatter = val; }
   });
-}
+};
 
 /**
  * utilites
@@ -270,8 +232,8 @@ function Config (Vue, langVM, lang) {
  * @param {*} val
  * @return Boolean
  */
-function isNil(val) {
-  return val === null || val === undefined;
+function isNil (val) {
+  return val === null || val === undefined
 }
 
 /**
@@ -282,8 +244,10 @@ function isNil(val) {
 
 var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
-function Format (Vue) {
-  var hasOwn = Vue.util.hasOwn;
+
+var Format = function (Vue) {
+  var ref = Vue.util;
+  var hasOwn = ref.hasOwn;
 
   /**
    * template
@@ -293,12 +257,11 @@ function Format (Vue) {
    * @return {String}
    */
 
-  function template(string) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
+  function template (string) {
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    if (args.length === 1 && babelHelpers.typeof(args[0]) === 'object') {
+    if (args.length === 1 && typeof args[0] === 'object') {
       args = args[0];
     } else {
       args = {};
@@ -309,27 +272,28 @@ function Format (Vue) {
     }
 
     return string.replace(RE_NARGS, function (match, prefix, i, index) {
-      var result = void 0;
+      var result;
 
-      if (string[index - 1] === '{' && string[index + match.length] === '}') {
-        return i;
+      if (string[index - 1] === '{' &&
+        string[index + match.length] === '}') {
+        return i
       } else {
         result = hasOwn(args, i) ? args[i] : match;
         if (isNil(result)) {
-          return '';
+          return ''
         }
 
-        return result;
+        return result
       }
-    });
+    })
   }
 
-  return template;
-}
+  return template
+};
 
 /**
  *  Path paerser
- *  - Inspired:  
+ *  - Inspired:
  *    Vue.js Path parser
  */
 
@@ -415,8 +379,8 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
  */
 
 var literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
-function isLiteral(exp) {
-  return literalValueRE.test(exp);
+function isLiteral (exp) {
+  return literalValueRE.test(exp)
 }
 
 /**
@@ -426,10 +390,12 @@ function isLiteral(exp) {
  * @return {String | false}
  */
 
-function stripQuotes(str) {
+function stripQuotes (str) {
   var a = str.charCodeAt(0);
   var b = str.charCodeAt(str.length - 1);
-  return a === b && (a === 0x22 || a === 0x27) ? str.slice(1, -1) : str;
+  return a === b && (a === 0x22 || a === 0x27)
+    ? str.slice(1, -1)
+    : str
 }
 
 /**
@@ -439,10 +405,8 @@ function stripQuotes(str) {
  * @return {String} type
  */
 
-function getPathCharType(ch) {
-  if (ch === undefined) {
-    return 'eof';
-  }
+function getPathCharType (ch) {
+  if (ch === undefined) { return 'eof' }
 
   var code = ch.charCodeAt(0);
 
@@ -452,39 +416,34 @@ function getPathCharType(ch) {
     case 0x2E: // .
     case 0x22: // "
     case 0x27: // '
-    case 0x30:
-      // 0
-      return ch;
+    case 0x30: // 0
+      return ch
 
     case 0x5F: // _
     case 0x24: // $
-    case 0x2D:
-      // -
-      return 'ident';
+    case 0x2D: // -
+      return 'ident'
 
     case 0x20: // Space
     case 0x09: // Tab
     case 0x0A: // Newline
     case 0x0D: // Return
-    case 0xA0: // No-break space
-    case 0xFEFF: // Byte Order Mark
-    case 0x2028: // Line Separator
-    case 0x2029:
-      // Paragraph Separator
-      return 'ws';
+    case 0xA0:  // No-break space
+    case 0xFEFF:  // Byte Order Mark
+    case 0x2028:  // Line Separator
+    case 0x2029:  // Paragraph Separator
+      return 'ws'
   }
 
   // a-z, A-Z
-  if (code >= 0x61 && code <= 0x7A || code >= 0x41 && code <= 0x5A) {
-    return 'ident';
+  if ((code >= 0x61 && code <= 0x7A) || (code >= 0x41 && code <= 0x5A)) {
+    return 'ident'
   }
 
   // 1-9
-  if (code >= 0x31 && code <= 0x39) {
-    return 'number';
-  }
+  if (code >= 0x31 && code <= 0x39) { return 'number' }
 
-  return 'else';
+  return 'else'
 }
 
 /**
@@ -496,14 +455,12 @@ function getPathCharType(ch) {
  * @return {String}
  */
 
-function formatSubPath(path) {
+function formatSubPath (path) {
   var trimmed = path.trim();
   // invalid leading 0
-  if (path.charAt(0) === '0' && isNaN(path)) {
-    return false;
-  }
+  if (path.charAt(0) === '0' && isNaN(path)) { return false }
 
-  return isLiteral(trimmed) ? stripQuotes(trimmed) : '*' + trimmed;
+  return isLiteral(trimmed) ? stripQuotes(trimmed) : '*' + trimmed
 }
 
 /**
@@ -513,18 +470,12 @@ function formatSubPath(path) {
  * @return {Array|undefined}
  */
 
-function parse(path) {
+function parse (path) {
   var keys = [];
   var index = -1;
   var mode = BEFORE_PATH;
   var subPathDepth = 0;
-  var c = void 0,
-      newChar = void 0,
-      key = void 0,
-      type = void 0,
-      transition = void 0,
-      action = void 0,
-      typeMap = void 0;
+  var c, newChar, key, type, transition, action, typeMap;
 
   var actions = [];
 
@@ -557,20 +508,21 @@ function parse(path) {
       subPathDepth = 0;
       key = formatSubPath(key);
       if (key === false) {
-        return false;
+        return false
       } else {
         actions[PUSH]();
       }
     }
   };
 
-  function maybeUnescapeQuote() {
+  function maybeUnescapeQuote () {
     var nextChar = path[index + 1];
-    if (mode === IN_SINGLE_QUOTE && nextChar === "'" || mode === IN_DOUBLE_QUOTE && nextChar === '"') {
+    if ((mode === IN_SINGLE_QUOTE && nextChar === "'") ||
+      (mode === IN_DOUBLE_QUOTE && nextChar === '"')) {
       index++;
       newChar = '\\' + nextChar;
       actions[APPEND]();
-      return true;
+      return true
     }
   }
 
@@ -579,7 +531,7 @@ function parse(path) {
     c = path[index];
 
     if (c === '\\' && maybeUnescapeQuote()) {
-      continue;
+      continue
     }
 
     type = getPathCharType(c);
@@ -587,22 +539,24 @@ function parse(path) {
     transition = typeMap[type] || typeMap['else'] || ERROR;
 
     if (transition === ERROR) {
-      return; // parse error
+      return // parse error
     }
 
     mode = transition[0];
     action = actions[transition[1]];
     if (action) {
       newChar = transition[2];
-      newChar = newChar === undefined ? c : newChar;
+      newChar = newChar === undefined
+        ? c
+        : newChar;
       if (action() === false) {
-        return;
+        return
       }
     }
 
     if (mode === AFTER_PATH) {
       keys.raw = path;
-      return keys;
+      return keys
     }
   }
 }
@@ -614,7 +568,7 @@ function parse(path) {
  * @return {Array|undefined}
  */
 
-function parsePath(path) {
+function parsePath (path) {
   var hit = pathCache[path];
   if (!hit) {
     hit = parse(path);
@@ -622,39 +576,30 @@ function parsePath(path) {
       pathCache[path] = hit;
     }
   }
-  return hit;
+  return hit
 }
 
-function Path (Vue) {
-  var _Vue$util = Vue.util;
-  var isObject = _Vue$util.isObject;
-  var isPlainObject = _Vue$util.isPlainObject;
-  var hasOwn = _Vue$util.hasOwn;
+var Path = function (Vue) {
+  var ref = Vue.util;
+  var isObject = ref.isObject;
+  var isPlainObject = ref.isPlainObject;
+  var hasOwn = ref.hasOwn;
 
-
-  function empty(target) {
-    if (target === null || target === undefined) {
-      return true;
-    }
+  function empty (target) {
+    if (target === null || target === undefined) { return true }
 
     if (Array.isArray(target)) {
-      if (target.length > 0) {
-        return false;
-      }
-      if (target.length === 0) {
-        return true;
-      }
+      if (target.length > 0) { return false }
+      if (target.length === 0) { return true }
     } else if (isPlainObject(target)) {
       /* eslint-disable prefer-const */
       for (var key in target) {
-        if (hasOwn(target, key)) {
-          return false;
-        }
+        if (hasOwn(target, key)) { return false }
       }
       /* eslint-enable prefer-const */
     }
 
-    return true;
+    return true
   }
 
   /**
@@ -665,15 +610,11 @@ function Path (Vue) {
    * @return value
    */
 
-  function getValue(obj, path) {
-    if (!isObject(obj)) {
-      return null;
-    }
+  function getValue (obj, path) {
+    if (!isObject(obj)) { return null }
 
     var paths = parsePath(path);
-    if (empty(paths)) {
-      return null;
-    }
+    if (empty(paths)) { return null }
 
     var length = paths.length;
     var ret = null;
@@ -683,18 +624,18 @@ function Path (Vue) {
       var value = last[paths[i]];
       if (value === undefined) {
         last = null;
-        break;
+        break
       }
       last = value;
       i++;
     }
 
     ret = last;
-    return ret;
+    return ret
   }
 
-  return getValue;
-}
+  return getValue
+};
 
 /**
  * extend
@@ -703,18 +644,16 @@ function Path (Vue) {
  * @return {Vue}
  */
 
-function Extend (Vue) {
-  var _Vue$util = Vue.util;
-  var isObject = _Vue$util.isObject;
-  var bind = _Vue$util.bind;
-
+var Extend = function (Vue) {
+  var ref = Vue.util;
+  var isObject = ref.isObject;
+  var bind = ref.bind;
   var format = Format(Vue);
   var getValue = Path(Vue);
 
-  function parseArgs() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  function parseArgs () {
+    var args = [], len = arguments.length;
+    while ( len-- ) args[ len ] = arguments[ len ];
 
     var lang = Vue.config.lang;
     var fallback = Vue.config.fallbackLang;
@@ -734,34 +673,22 @@ function Extend (Vue) {
       }
     }
 
-    return { lang: lang, fallback: fallback, params: args };
+    return { lang: lang, fallback: fallback, params: args }
   }
 
-  function exist(locale, key) {
-    if (!locale || !key) {
-      return false;
-    }
-    return !isNil(getValue(locale, key));
+  function exist (locale, key) {
+    if (!locale || !key) { return false }
+    return !isNil(getValue(locale, key))
   }
 
-  function interpolate(locale, key, args) {
-    if (!locale) {
-      return null;
-    }
+  function interpolate (locale, key, args) {
+    if (!locale) { return null }
 
     var val = getValue(locale, key);
-    if (Array.isArray(val)) {
-      return val;
-    }
-    if (isNil(val)) {
-      val = locale[key];
-    }
-    if (isNil(val)) {
-      return null;
-    }
-    if (typeof val !== 'string') {
-      warn("Value of key '" + key + "' is not a string!");return null;
-    }
+    if (Array.isArray(val)) { return val }
+    if (isNil(val)) { val = locale[key]; }
+    if (isNil(val)) { return null }
+    if (typeof val !== 'string') { warn("Value of key '" + key + "' is not a string!"); return null }
 
     // Check for the existance of links within the translated string
     if (val.indexOf('@:') >= 0) {
@@ -780,74 +707,71 @@ function Extend (Vue) {
       }
     }
 
-    return !args ? val : Vue.config.i18nFormatter ? Vue.config.i18nFormatter.apply(null, [val].concat(args)) : format(val, args);
+    return !args
+      ? val
+      : Vue.config.i18nFormatter
+        ? Vue.config.i18nFormatter.apply(null, [val].concat(args))
+        : format(val, args)
   }
 
-  function translate(getter, lang, fallback, key, params) {
+  function translate (getter, lang, fallback, key, params) {
     var res = null;
     res = interpolate(getter(lang), key, params);
-    if (!isNil(res)) {
-      return res;
-    }
+    if (!isNil(res)) { return res }
 
     res = interpolate(getter(fallback), key, params);
     if (!isNil(res)) {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Fall back to translate the keypath "' + key + '" with "' + fallback + '" language.');
+        warn('Fall back to translate the keypath "' + key + '" with "' +
+          fallback + '" language.');
       }
-      return res;
+      return res
     } else {
-      return null;
+      return null
     }
   }
 
-  function warnDefault(lang, key, vm, result) {
-    if (!isNil(result)) {
-      return result;
-    }
+
+  function warnDefault (lang, key, vm, result) {
+    if (!isNil(result)) { return result }
     if (Vue.config.missingHandler) {
       Vue.config.missingHandler.apply(null, [lang, key, vm]);
     } else {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Cannot translate the value of keypath "' + key + '". ' + 'Use the value of keypath as default');
+        warn('Cannot translate the value of keypath "' + key + '". ' +
+          'Use the value of keypath as default');
       }
     }
-    return key;
+    return key
   }
 
-  function getAssetLocale(lang) {
-    return Vue.locale(lang);
+  function getAssetLocale (lang) {
+    return Vue.locale(lang)
   }
 
-  function getComponentLocale(lang) {
-    return this.$options.locales[lang];
+  function getComponentLocale (lang) {
+    return this.$options.locales[lang]
   }
 
-  function getOldChoiceIndexFixed(choice) {
-    return choice ? choice > 1 ? 1 : 0 : 1;
+  function getOldChoiceIndexFixed (choice) {
+    return choice ? choice > 1 ? 1 : 0 : 1
   }
 
-  function getChoiceIndex(choice, choicesLength) {
+  function getChoiceIndex (choice, choicesLength) {
     choice = Math.abs(choice);
 
-    if (choicesLength === 2) {
-      return getOldChoiceIndexFixed(choice);
-    }
+    if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
 
-    return choice ? Math.min(choice, 2) : 0;
+    return choice ? Math.min(choice, 2) : 0
   }
 
-  function fetchChoice(locale, choice) {
-    if (!locale && typeof locale !== 'string') {
-      return null;
-    }
+  function fetchChoice (locale, choice) {
+    if (!locale && typeof locale !== 'string') { return null }
     var choices = locale.split('|');
 
     choice = getChoiceIndex(choice, choices.length);
-    if (!choices[choice]) {
-      return locale;
-    }
-    return choices[choice].trim();
+    if (!choices[choice]) { return locale }
+    return choices[choice].trim()
   }
 
   /**
@@ -859,21 +783,15 @@ function Extend (Vue) {
    */
 
   Vue.t = function (key) {
-    for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-      args[_key2 - 1] = arguments[_key2];
-    }
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    if (!key) {
-      return '';
-    }
-
-    var _parseArgs = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs.lang;
-    var fallback = _parseArgs.fallback;
-    var params = _parseArgs.params;
-
-    return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params));
+    if (!key) { return '' }
+    var ref = parseArgs.apply(void 0, args);
+    var lang = ref.lang;
+    var fallback = ref.fallback;
+    var params = ref.params;
+    return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params))
   };
 
   /**
@@ -886,11 +804,10 @@ function Extend (Vue) {
    */
 
   Vue.tc = function (key, choice) {
-    for (var _len3 = arguments.length, args = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-      args[_key3 - 2] = arguments[_key3];
-    }
+    var args = [], len = arguments.length - 2;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
 
-    return fetchChoice(Vue.t.apply(Vue, [key].concat(args)), choice);
+    return fetchChoice(Vue.t.apply(Vue, [ key ].concat( args )), choice)
   };
 
   /**
@@ -902,15 +819,12 @@ function Extend (Vue) {
    */
 
   Vue.te = function (key) {
-    for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-      args[_key4 - 1] = arguments[_key4];
-    }
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    var _parseArgs2 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs2.lang;
-
-    return exist(getAssetLocale(lang), key);
+    var ref = parseArgs.apply(void 0, args);
+    var lang = ref.lang;
+    return exist(getAssetLocale(lang), key)
   };
 
   /**
@@ -922,28 +836,22 @@ function Extend (Vue) {
    */
 
   Vue.prototype.$t = function (key) {
-    if (!key) {
-      return '';
-    }
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    for (var _len5 = arguments.length, args = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-      args[_key5 - 1] = arguments[_key5];
-    }
-
-    var _parseArgs3 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs3.lang;
-    var fallback = _parseArgs3.fallback;
-    var params = _parseArgs3.params;
-
+    if (!key) { return '' }
+    var ref = parseArgs.apply(void 0, args);
+    var lang = ref.lang;
+    var fallback = ref.fallback;
+    var params = ref.params;
     var res = null;
     if (this.$options.locales) {
-      res = translate(bind(getComponentLocale, this), lang, fallback, key, params);
-      if (res) {
-        return res;
-      }
+      res = translate(
+        bind(getComponentLocale, this), lang, fallback, key, params
+      );
+      if (res) { return res }
     }
-    return warnDefault(lang, key, this, translate(getAssetLocale, lang, fallback, key, params));
+    return warnDefault(lang, key, this, translate(getAssetLocale, lang, fallback, key, params))
   };
 
   /**
@@ -956,15 +864,14 @@ function Extend (Vue) {
    */
 
   Vue.prototype.$tc = function (key, choice) {
+    var args = [], len = arguments.length - 2;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
+
     if (typeof choice !== 'number' && typeof choice !== 'undefined') {
-      return key;
+      return key
     }
-
-    for (var _len6 = arguments.length, args = Array(_len6 > 2 ? _len6 - 2 : 0), _key6 = 2; _key6 < _len6; _key6++) {
-      args[_key6 - 2] = arguments[_key6];
-    }
-
-    return fetchChoice(this.$t.apply(this, [key].concat(args)), choice);
+    return fetchChoice((ref = this).$t.apply(ref, [ key ].concat( args )), choice)
+    var ref;
   };
 
   /**
@@ -977,37 +884,33 @@ function Extend (Vue) {
    */
 
   Vue.prototype.$te = function (key) {
-    for (var _len7 = arguments.length, args = Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-      args[_key7 - 1] = arguments[_key7];
-    }
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    var _parseArgs4 = parseArgs.apply(undefined, args);
-
-    var lang = _parseArgs4.lang;
-
+    var ref = parseArgs.apply(void 0, args);
+    var lang = ref.lang;
     var found = false;
-    if (this.$options.locales) {
-      // exist component locale
+    if (this.$options.locales) { // exist component locale
       found = exist(bind(getComponentLocale)(lang), key);
     }
     if (!found) {
       found = exist(getAssetLocale(lang), key);
     }
-    return found;
+    return found
   };
 
   Vue.mixin({
     computed: {
-      $lang: function $lang() {
-        return Vue.config.lang;
+      $lang: function $lang () {
+        return Vue.config.lang
       }
     }
   });
 
-  return Vue;
-}
+  return Vue
+};
 
-var langVM = void 0; // singleton
+var langVM; // singleton
 
 
 /**
@@ -1017,19 +920,19 @@ var langVM = void 0; // singleton
  * @param {Object} opts
  */
 
-function plugin(Vue) {
-  var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+function plugin (Vue, opts) {
+  if ( opts === void 0 ) opts = {};
 
-  var version = Vue.version && Number(Vue.version.split('.')[0]) || -1;
+  var version = (Vue.version && Number(Vue.version.split('.')[0])) || -1;
 
   if (process.env.NODE_ENV !== 'production' && plugin.installed) {
     warn('already installed.');
-    return;
+    return
   }
 
   if (process.env.NODE_ENV !== 'production' && version < 2) {
-    warn('vue-i18n (' + plugin.version + ') need to use Vue 2.0 or later (Vue: ' + Vue.version + ').');
-    return;
+    warn(("vue-i18n (" + (plugin.version) + ") need to use Vue 2.0 or later (Vue: " + (Vue.version) + ")."));
+    return
   }
 
   var lang = 'en';
@@ -1041,7 +944,7 @@ function plugin(Vue) {
   Extend(Vue);
 }
 
-function setupLangVM(Vue, lang) {
+function setupLangVM (Vue, lang) {
   var silent = Vue.config.silent;
   Vue.config.silent = true;
   if (!langVM) {
