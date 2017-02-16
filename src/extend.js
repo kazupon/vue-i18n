@@ -83,8 +83,8 @@ export default function (Vue) {
     res = interpolate(getter(fallback), key, params)
     if (!isNil(res)) {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Fall back to translate the keypath "' + key + '" with "'
-          + fallback + '" language.')
+        warn('Fall back to translate the keypath "' + key + '" with "' +
+          fallback + '" language.')
       }
       return res
     } else {
@@ -99,8 +99,8 @@ export default function (Vue) {
       Vue.config.missingHandler.apply(null, [lang, key, vm])
     } else {
       if (process.env.NODE_ENV !== 'production') {
-        warn('Cannot translate the value of keypath "' + key + '". '
-          + 'Use the value of keypath as default')
+        warn('Cannot translate the value of keypath "' + key + '". ' +
+          'Use the value of keypath as default')
       }
     }
     return key
@@ -206,8 +206,9 @@ export default function (Vue) {
    */
 
   Vue.prototype.$tc = function (key, choice, ...args) {
-    if (typeof choice !== 'number'
-      && typeof choice !== 'undefined') { return key }
+    if (typeof choice !== 'number' && typeof choice !== 'undefined') {
+      return key
+    }
     return fetchChoice(this.$t(key, ...args), choice)
   }
 

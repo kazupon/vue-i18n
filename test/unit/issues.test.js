@@ -19,7 +19,7 @@ describe('issues', () => {
   describe('#35', () => {
     it('should be translated', () => {
       assert.equal(
-        vm.$t('underscore', { hello_msg: 'hello' }),
+        vm.$t('underscore', { helloMsg: 'hello' }),
         'hello world'
       )
     })
@@ -45,9 +45,9 @@ describe('issues', () => {
 
   describe('#91, #51', () => {
     it('should be translated', () => {
-      const arrayLocales = locales[Vue.config.lang].issues.array_bugs
+      const arrayLocales = locales[Vue.config.lang].issues.arrayBugs
       for (let i = 0; i < arrayLocales.length; i++) {
-        const item = vm.$t('issues.array_bugs')[i]
+        const item = vm.$t('issues.arrayBugs')[i]
         assert.equal(item, arrayLocales[i])
       }
     })

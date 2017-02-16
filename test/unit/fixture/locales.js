@@ -10,9 +10,9 @@ export default {
       },
       fallback: 'this is fallback',
       link: '@:message.hello',
-      link_end: 'This is a linked translation to @:message.hello',
-      link_within: 'Isn\'t @:message.hello we live in great?',
-      link_multiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
+      linkEnd: 'This is a linked translation to @:message.hello',
+      linkWithin: 'Isn\'t @:message.hello we live in great?',
+      linkMultiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
       'hyphen-locale': 'hello hyphen',
       '1234': 'Number-based keys are found',
       '1mixedKey': 'Mixed keys are not found.'
@@ -20,7 +20,7 @@ export default {
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
     'continue-with-new-account': 'continue with new account',
-    underscore: '{hello_msg} world',
+    underscore: '{helloMsg} world',
     plurals: {
       car: 'car | cars',
       apple: 'no apples | one apple | {count} apples',
@@ -40,7 +40,7 @@ export default {
       ]
     ],
     issues: {
-      array_bugs: ['bug1', 'bug2']
+      arrayBugs: ['bug1', 'bug2']
     }
   },
   ja: {
@@ -75,7 +75,7 @@ export default {
       ]
     ],
     issues: {
-      array_bugs: ['バグ1', 'バグ2']
+      arrayBugs: ['バグ1', 'バグ2']
     }
   }
 }

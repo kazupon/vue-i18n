@@ -1,6 +1,6 @@
 /**
  *  Path paerser
- *  - Inspired:  
+ *  - Inspired:
  *    Vue.js Path parser
  */
 
@@ -224,8 +224,8 @@ function parse (path) {
 
   function maybeUnescapeQuote () {
     const nextChar = path[index + 1]
-    if ((mode === IN_SINGLE_QUOTE && nextChar === "'")
-      || (mode === IN_DOUBLE_QUOTE && nextChar === '"')) {
+    if ((mode === IN_SINGLE_QUOTE && nextChar === "'") ||
+      (mode === IN_DOUBLE_QUOTE && nextChar === '"')) {
       index++
       newChar = '\\' + nextChar
       actions[APPEND]()
@@ -333,7 +333,7 @@ export default function (Vue) {
       last = value
       i++
     }
-    
+
     ret = last
     return ret
   }
