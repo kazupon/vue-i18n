@@ -6,6 +6,5 @@
     "waitForUpdate": true,
     "assert": true,
     "Vue": true
-  },
-  "extends": "vue"
+  }
 }
