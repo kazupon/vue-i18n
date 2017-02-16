@@ -1,19 +1,11 @@
 {
-  "globals": {
-    "describe": true,
-    "context": true,
-    "it": true,
-    "before": true,
-    "after": true,
-    "beforeEach": true,
-    "afterEach": true,
-    "process": true
+  "env": {
+    "jasmine": true
   },
-  "extends": "vue",
-  "rules": {
-    "no-inline-comments": 0,
-    "object-curly-spacing": ["error", "always"],
-    "no-multiple-empty-lines": [2, {"max": 2}],
-    "no-new": 0
-  }
+  "globals": {
+    "waitForUpdate": true,
+    "assert": true,
+    "Vue": true
+  },
+  "extends": "vue"
 }

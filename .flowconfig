@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/.*
+.*/docs/.*
+.*/test/.*
+.*/config/.*
+.*/examples/.*
+
+[include]
+
+[libs]
+decls
+
+[options]

@@ -1,10 +1,7 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import locales from './fixture/locales'
 
-
 describe('i18n', () => {
-  before(done => {
+  beforeEach(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
@@ -92,19 +89,19 @@ describe('i18n', () => {
       })
 
       describe('array keypath', () => {
-        context('basic', () => {
+        describe('basic', () => {
           it('should be translated', () => {
             assert.equal(Vue.t('errors[0]'), locales.en.errors[0])
           })
         })
 
-        context('object', () => {
+        describe('object', () => {
           it('should be translated', () => {
             assert.equal(Vue.t('errors[1].internal1'), locales.en.errors[1].internal1)
           })
         })
 
-        context('array', () => {
+        describe('array', () => {
           it('should be translated', () => {
             assert.equal(Vue.t('errors[2][0]'), locales.en.errors[2][0])
           })
@@ -113,7 +110,7 @@ describe('i18n', () => {
     })
 
     describe('format arguments', () => {
-      context('named', () => {
+      describe('named', () => {
         it('should return replaced string', () => {
           assert.equal(
             Vue.t('message.format.named', { name: 'kazupon' }),
@@ -122,7 +119,7 @@ describe('i18n', () => {
         })
       })
 
-      context('list', () => {
+      describe('list', () => {
         it('should return replaced string', () => {
           assert.equal(
             Vue.t('message.format.list', ['kazupon']),
@@ -224,7 +221,7 @@ describe('i18n', () => {
     })
 
     describe('format arguments', () => {
-      context('named', () => {
+      describe('named', () => {
         it('should return replaced string', () => {
           assert.equal(
             Vue.tc('plurals.format.named', 1, { name: 'kazupon' }),
@@ -233,7 +230,7 @@ describe('i18n', () => {
         })
       })
 
-      context('list', () => {
+      describe('list', () => {
         it('should return replaced string', () => {
           assert.equal(
             Vue.tc('plurals.format.list', 1, ['kazupon']),
@@ -345,7 +342,7 @@ describe('i18n', () => {
     })
 
     describe('format arguments', () => {
-      context('named', () => {
+      describe('named', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
           assert.equal(
@@ -355,7 +352,7 @@ describe('i18n', () => {
         })
       })
 
-      context('list', () => {
+      describe('list', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
           assert.equal(
@@ -454,7 +451,7 @@ describe('i18n', () => {
     })
 
     describe('format arguments', () => {
-      context('named', () => {
+      describe('named', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
           assert.equal(
@@ -464,7 +461,7 @@ describe('i18n', () => {
         })
       })
 
-      context('list', () => {
+      describe('list', () => {
         it('should return replaced string', () => {
           const vm = new Vue()
           assert.equal(
@@ -607,7 +604,7 @@ describe('i18n', () => {
         Vue.nextTick(done)
       })
 
-      context('ja', () => {
+      describe('ja', () => {
         it('should translate with japanese', done => {
           Vue.config.lang = 'ja'
           Vue.nextTick(() => {
@@ -616,7 +613,7 @@ describe('i18n', () => {
           })
         })
 
-        context('en', () => {
+        describe('en', () => {
           it('should translate with english', done => {
             Vue.config.lang = 'en'
             Vue.nextTick(() => {

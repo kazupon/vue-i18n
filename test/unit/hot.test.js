@@ -1,30 +1,28 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import locales from './fixture/locales'
 
 describe('hot reloading', () => {
   let el
   let orgLocale
   const expectLocale = 'the world updated'
-  before(done => {
+  beforeEach(done => {
     orgLocale = locales.en.message.hello
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
     Vue.config.lang = 'en'
+
+    el = document.createElement('div')
+    document.body.appendChild(el)
+
     Vue.nextTick(done)
   })
 
-  beforeEach(() => {
-    el = document.createElement('div')
-    document.body.appendChild(el)
-  })
-
-  after(done => {
+  afterEach(done => {
     locales.en.message.hello = orgLocale
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
+    Vue.nextTick(done)
   })
 
   it('should be reload', done => {
@@ -37,19 +35,15 @@ describe('hot reloading', () => {
     }
 
     const vm = new Vue(options)
-    Vue.nextTick(() => {
+    waitForUpdate(() => {
       assert.equal(vm.$el.textContent, locales.en.message.hello)
-
       // Update translation
       locales.en.message.hello = expectLocale
       Object.keys(locales).forEach(lang => {
         Vue.locale(lang, locales[lang])
       })
-
-      Vue.nextTick(() => {
-        assert.equal(vm.$el.textContent, expectLocale)
-        done()
-      })
-    })
+    }).then(() => {
+      assert.equal(vm.$el.textContent, expectLocale)
+    }).then(done)
   })
 })

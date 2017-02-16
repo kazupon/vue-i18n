@@ -1,19 +1,13 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import locales from './fixture/locales'
 
-
 describe('component locales', () => {
-  before(done => {
+  let vm
+  beforeEach(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
     Vue.config.lang = 'en'
-    Vue.nextTick(done)
-  })
 
-  let vm
-  beforeEach(done => {
     const el = document.createElement('div')
     const compOptions = {
       locales: {

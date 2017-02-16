@@ -1,7 +1,4 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import locales from './fixture/locales'
-
 
 describe('issues', () => {
   let vm

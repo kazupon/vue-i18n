@@ -6,7 +6,6 @@ Got a question?
 The issue list of this repo is **exclusively** for bug reports and feature requests. For simple questions, please use the following resources:
 
 - Read the docs: https://github.com/kazupon/vue-i18n/blob/dev/README.md
-- Ask in the Gitter chat room: https://gitter.im/vuejs/vue
 - Ask on the forums: http://forum.vuejs.org/
 - Look for/ask questions on stack overflow: https://stackoverflow.com/questions/ask?tags=vue-i18n
 
@@ -29,7 +28,7 @@ Remove the template from below and provide thoughtful commentary *and code sampl
 
 <!-- BUG REPORT TEMPLATE -->
 ### vue & vue-i18n version
-ex: 1.0.17, 3.1
+ex: 2.1.0, 5.0
 
 ### Reproduction Link
 <!-- A minimal JSBin, JSFiddle, Codepen, or a GitHub reprository that can reproduce the bug. -->

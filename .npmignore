@@ -2,8 +2,8 @@
 *.log
 *.swp
 *.yml
-bower.json
 coverage
+docs/_book
 config
 dist/*.map
 lib

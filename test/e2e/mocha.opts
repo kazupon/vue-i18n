@@ -1,4 +1,0 @@
---timeout 20s
---require babel-polyfill
---require mocha-generators
---require babel-register

@@ -1,9 +1,5 @@
-var pack = require('../package.json')
-var sauceConfig = {
-  testName: pack.name + ' unit tests',
-  recordScreenshots: false,
-  build: process.env.TRAVIS_JOB_ID || Date.now()
-}
+const base = require('./karma.base.conf')
+const pack = require('../package.json')
 
 /**
  * Having too many tests running concurrently on saucelabs
@@ -11,8 +7,8 @@ var sauceConfig = {
  * smaller batches.
  */
 
-var batches = [
-  // the cool kids
+const batches = [
+  // the coolkids
   {
     sl_chrome: {
       base: 'SauceLabs',
@@ -48,33 +44,54 @@ var batches = [
       browserName: 'internet explorer',
       platform: 'Windows 8.1',
       version: '11'
+    },
+    sl_edge: {
+      base: 'SauceLabs',
+      platform: 'Windows 10',
+      browserName: 'MicrosoftEdge'
     }
   },
   // mobile
   {
-    sl_ios_safari: {
+    sl_ios_safari_8: {
       base: 'SauceLabs',
       browserName: 'iphone',
-      platform: 'OS X 10.9',
-      version: '7.1'
+      version: '8.4'
     },
-    sl_android: {
+    sl_ios_safari_9: {
+      base: 'SauceLabs',
+      browserName: 'iphone',
+      version: '9.3'
+    },
+    sl_android_4_2: {
       base: 'SauceLabs',
       browserName: 'android',
-      platform: 'Linux',
       version: '4.2'
+    },
+    sl_android_5_1: {
+      base: 'SauceLabs',
+      browserName: 'android',
+      version: '5.1'
     }
   }
 ]
 
-for (var i = 0; i < 3; i++) {
-  exports['batch' + (i + 1)] = {
-    sauceLabs: sauceConfig,
-    // mobile emulators are really slow
+module.exports = config => {
+  const batch = batches[process.argv[5] || 0]
+
+  config.set(Object.assign(base, {
+    singleRun: true,
+    browsers: Object.keys(batch),
+    customLaunchers: batch,
+    reporters: process.env.CI
+      ? ['dots', 'saucelabs'] // avoid spamming CI output
+      : ['progress', 'saucelabs'],
+    sauceLabs: {
+      testName: `${pack.name} unit tests`,
+      recordScreenshots: false,
+      build: process.env.CIRCLE_BUILD_NUM || process.env.SAUCE_BUILD_ID || Date.now()
+    },
     captureTimeout: 300000,
-    browserNoActivityTimeout: 300000,
-    customLaunchers: batches[i],
-    browsers: Object.keys(batches[i]),
-    reporters: ['progress', 'saucelabs']
-  }
+    browserNoActivityTimeout: 300000
+  }))
 }

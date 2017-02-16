@@ -1,9 +1,7 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import locales from './fixture/locales'
 
 describe('custom formatter', () => {
-  before(done => {
+  beforeEach(done => {
     Object.keys(locales).forEach(lang => {
       Vue.locale(lang, locales[lang])
     })
@@ -11,7 +9,7 @@ describe('custom formatter', () => {
     Vue.nextTick(done)
   })
 
-  after(done => {
+  afterEach(done => {
     Vue.config.i18nFormatter = null
     Vue.nextTick(done)
   })

@@ -1,7 +1,3 @@
-import assert from 'power-assert'
-import Vue from 'vue'
-
-
 describe('asset', () => {
   let locale
 

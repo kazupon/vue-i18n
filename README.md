@@ -1,52 +1,31 @@
 # vue-i18n
 
-[![Build Status](https://travis-ci.org/kazupon/vue-i18n.svg?branch=master)](https://travis-ci.org/kazupon/vue-i18n)
-[![Coverage Status](https://img.shields.io/coveralls/kazupon/vue-i18n.svg)](https://coveralls.io/r/kazupon/vue-i18n?branch=master)
+[![Build Status](https://circleci.com/gh/kazupon/vue-i18n/tree/dev?style=shield)](https://circleci.com/gh/kazupon/vue-i18n/tree/dev)
+[![Coverage Status](https://codecov.io/gh/kazupon/vue-i18n/branch/dev/graph/badge.svg)](https://codecov.io/gh/kazupon/vue-i18n)
 [![NPM version](https://badge.fury.io/js/vue-i18n.svg)](http://badge.fury.io/js/vue-i18n)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/vue-i18n)](https://saucelabs.com/u/vue-i18n)
 
-
 Internationalization plugin for Vue.js
+
 
 ## :book: Documentation
 
-Docs are available [here](https://kazupon.github.io/vue-i18n).
-
-
-## :muscle: Contributing
-- Fork it !
-- Create your top branch from `dev`: `git branch my-new-topic origin/dev`
-- Commit your changes: `git commit -am 'Add some topic'`
-- Push to the branch: `git push origin my-new-topic`
-- Submit a pull request to `dev` branch of `kazupon/vue-i18n` repository !
-
-
-## :hammer: Development Setup
-
-```shell
-# install deps
-npm install
-
-# build dist files
-npm run build
-
-# lint
-npm run lint
-
-# run unit tests only
-npm run unit
-
-# run e2e tests only
-npm run e2e
-
-# lint & run all tests
-npm test
-```
+See [here](http://kazupon.github.io/vue-i18n/)
 
 
 ## :scroll: Changelog
 
-Change details for each release are documented in [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
+
+
+## :exclamation: Issues
+
+Please make sure to read the [Issue Reporting Checklist](https://github.com/kazupon/vue-i18n/blob/dev/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+
+
+## :muscle: Contribution
+
+Please make sure to read the [Contributing Guide](https://github.com/kazupon/vue-i18n/blob/dev/CONTRIBUTING.md) before making a pull request.
 
 
 ## :copyright: License

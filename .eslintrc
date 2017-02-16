@@ -1,12 +1,10 @@
 {
+  "root": true,
+  "parser": "babel-eslint",
   "extends": "vue",
+  "plugins": ["flowtype"],
   "rules": {
-    "complexity": 0,
-    "object-curly-spacing": ["error", "always"],
-    "operator-linebreak": [2, "before"],
-    "no-trailing-spaces": 0,
-    "no-inline-comments": 0,
-    "no-multiple-empty-lines": [2, {"max": 2}],
-    "no-new": 0
+    "flowtype/define-flow-type": 1,
+    "flowtype/use-flow-type": 1
   }
 }

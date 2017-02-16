@@ -1,5 +1,3 @@
-import assert from 'power-assert'
-import Vue from 'vue'
 import Path from '../../src/path'
 
 const getValue = Path(Vue)

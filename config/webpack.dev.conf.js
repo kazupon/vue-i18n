@@ -1,35 +1,28 @@
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const JasmineWebpackPlugin = require('./webpack.dev.plugin')
 
 module.exports = {
-  entry: './index.js',
+  entry: './test/unit/index.js',
   output: {
-    path: './',
-    publicPath: '/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, '/test/unit'),
+    filename: 'tests.js',
+    publicPath: '/'
   },
-  devtool: 'source-map',
   module: {
-    preLoaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader'
-    }],
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       exclude: /node_modules|vue\/dist/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015']
-      }
+      loader: 'babel-loader'
     }]
   },
-  devServer: {
-    contentBase: './',
-    port: 8080,
-    hot: true,
-    inline: true
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"'
+      }
+    }),
+    new JasmineWebpackPlugin()
+  ],
+  devtool: '#eval-source-map'
 }
