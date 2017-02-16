@@ -1,3 +1,13 @@
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/kazupon/vue-i18n/compare/v5.0.0...v5.0.1) (2017-02-16)
+
+
+### :zap: Improvements
+
+* **asset:** update locale reactivity setting ([b42fd9a](https://github.com/kazupon/vue-i18n/commit/b42fd9a))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/kazupon/vue-i18n/compare/v4.10.0...v5.0.0) (2017-02-04)
 
