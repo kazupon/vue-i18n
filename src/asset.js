@@ -19,7 +19,7 @@ export default function (Vue, langVM) {
       } else {
         setLocale(id, definition, locale => {
           if (locale) {
-            langVM.locales[id] = locale
+            langVM.$set(langVM.locales, id, locale)
           } else {
             warn('failed set `' + id + '` locale')
           }
