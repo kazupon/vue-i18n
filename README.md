@@ -1,6 +1,6 @@
 # vue-i18n
 
-[![Build Status](https://circleci.com/gh/kazupon/vue-i18n/tree/dev?style=shield)](https://circleci.com/gh/kazupon/vue-i18n/tree/dev)
+[![Build Status](https://circleci.com/gh/kazupon/vue-i18n/tree/dev.svg?style=shield)](https://circleci.com/gh/kazupon/vue-i18n/tree/dev)
 [![Coverage Status](https://codecov.io/gh/kazupon/vue-i18n/branch/dev/graph/badge.svg)](https://codecov.io/gh/kazupon/vue-i18n)
 [![NPM version](https://badge.fury.io/js/vue-i18n.svg)](http://badge.fury.io/js/vue-i18n)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/vue-i18n)](https://saucelabs.com/u/vue-i18n)
