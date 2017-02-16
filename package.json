@@ -86,7 +86,7 @@
     "url": "git+https://github.com/kazupon/vue-i18n.git"
   },
   "scripts": {
-    "build": "node config/build.js && npm run docs:build",
+    "build": "node config/build.js",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -n ./node_modules/git-commit-message-convention/convention.js",
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
