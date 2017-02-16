@@ -7,7 +7,9 @@
     <script src="../../../dist/vue-i18n.min.js"></script>
   </head>
   <body>
-    <p>{{{ $t('message.hello') }}}</p>
+    <div id="app">
+      <p v-html="$t('message.hello')"></p>
+    </div>
     <script>
       var locales = {
         en: {
@@ -20,7 +22,7 @@
       Vue.use(VueI18n)
       Vue.locale('en', locales['en'])
 
-      new Vue({ el: 'body' })
+      new Vue({ el: '#app' })
     </script>
   </body>
 </html>
