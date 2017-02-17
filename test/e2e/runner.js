@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 const spawn = require('cross-spawn')
 const httpServer = require('http-server')

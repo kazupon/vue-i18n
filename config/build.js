@@ -1,3 +1,4 @@
+'use strict'
 const fs = require('fs')
 const exist = fs.existsSync
 const mkdir = fs.mkdirSync
