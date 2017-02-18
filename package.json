@@ -61,9 +61,6 @@
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.1"
   },
-  "engines": {
-    "node": ">= 6.0"
-  },
   "files": [
     "dist/vue-i18n.js",
     "dist/vue-i18n.min.js",
