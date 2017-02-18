@@ -1,3 +1,13 @@
+<a name="5.0.2"></a>
+## [5.0.2](https://github.com/kazupon/vue-i18n/compare/v5.0.1...v5.0.2) (2017-02-18)
+
+
+### :zap: Improvements
+
+* **npm:** revert node >= 6.0 engine restriction ([#110](https://github.com/kazupon/vue-i18n/issues/110)) by [@syxolk](https://github.com/syxolk) ([92b1bd1](https://github.com/kazupon/vue-i18n/commit/92b1bd1)), closes [#109](https://github.com/kazupon/vue-i18n/issues/109)
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/kazupon/vue-i18n/compare/v5.0.0...v5.0.1) (2017-02-16)
 
