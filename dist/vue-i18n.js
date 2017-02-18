@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v5.0.1 
+ * vue-i18n v5.0.2 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -957,7 +957,7 @@ function setupLangVM (Vue, lang) {
   Vue.config.silent = silent;
 }
 
-plugin.version = '5.0.1';
+plugin.version = '5.0.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
