@@ -1,13 +1,9 @@
+/* @flow */
+
 /**
  * utilites
  */
 
-/**
- * isNil
- *
- * @param {*} val
- * @return Boolean
- */
-export function isNil (val) {
+export function isNil (val: mixed): boolean {
   return val === null || val === undefined
 }

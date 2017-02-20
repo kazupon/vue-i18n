@@ -1,3 +1,5 @@
+/* @flow */
+
 import { isNil } from './util'
 
 /**
@@ -6,10 +8,10 @@ import { isNil } from './util'
  *    https://github.com/Matt-Esch/string-template/index.js
  */
 
-const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g
+const RE_NARGS: RegExp = /(%|)\{([0-9a-zA-Z_]+)\}/g
 
 
-export default function (Vue) {
+export default function (Vue: any): Function {
   const { hasOwn } = Vue.util
 
   /**
@@ -20,7 +22,7 @@ export default function (Vue) {
    * @return {String}
    */
 
-  function template (string, ...args) {
+  function template (str: string, ...args: any): string {
     if (args.length === 1 && typeof args[0] === 'object') {
       args = args[0]
     } else {
@@ -31,11 +33,11 @@ export default function (Vue) {
       args = {}
     }
 
-    return string.replace(RE_NARGS, (match, prefix, i, index) => {
-      let result
+    return str.replace(RE_NARGS, (match, prefix, i, index) => {
+      let result: string
 
-      if (string[index - 1] === '{' &&
-        string[index + match.length] === '}') {
+      if (str[index - 1] === '{' &&
+        str[index + match.length] === '}') {
         return i
       } else {
         result = hasOwn(args, i) ? args[i] : match

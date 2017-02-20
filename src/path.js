@@ -1,3 +1,5 @@
+/* @flow */
+
 /**
  *  Path paerser
  *  - Inspired:
@@ -24,7 +26,7 @@ const IN_DOUBLE_QUOTE = 6
 const AFTER_PATH = 7
 const ERROR = 8
 
-const pathStateMachine = []
+const pathStateMachine: any = []
 
 pathStateMachine[BEFORE_PATH] = {
   'ws': [BEFORE_PATH],
@@ -80,26 +82,20 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
 
 /**
  * Check if an expression is a literal value.
- *
- * @param {String} exp
- * @return {Boolean}
  */
 
-const literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
-function isLiteral (exp) {
+const literalValueRE: RegExp = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
+function isLiteral (exp: string): boolean {
   return literalValueRE.test(exp)
 }
 
 /**
  * Strip quotes from a string
- *
- * @param {String} str
- * @return {String | false}
  */
 
-function stripQuotes (str) {
-  const a = str.charCodeAt(0)
-  const b = str.charCodeAt(str.length - 1)
+function stripQuotes (str: string): string | boolean {
+  const a: number = str.charCodeAt(0)
+  const b: number = str.charCodeAt(str.length - 1)
   return a === b && (a === 0x22 || a === 0x27)
     ? str.slice(1, -1)
     : str
@@ -107,15 +103,12 @@ function stripQuotes (str) {
 
 /**
  * Determine the type of a character in a keypath.
- *
- * @param {Char} ch
- * @return {String} type
  */
 
-function getPathCharType (ch) {
-  if (ch === undefined) { return 'eof' }
+function getPathCharType (ch: ?string): string {
+  if (ch === undefined || ch === null) { return 'eof' }
 
-  const code = ch.charCodeAt(0)
+  const code: number = ch.charCodeAt(0)
 
   switch (code) {
     case 0x5B: // [
@@ -157,13 +150,10 @@ function getPathCharType (ch) {
  * Format a subPath, return its plain form if it is
  * a literal string or number. Otherwise prepend the
  * dynamic indicator (*).
- *
- * @param {String} path
- * @return {String}
  */
 
-function formatSubPath (path) {
-  const trimmed = path.trim()
+function formatSubPath (path: string): boolean | string {
+  const trimmed: string = path.trim()
   // invalid leading 0
   if (path.charAt(0) === '0' && isNaN(path)) { return false }
 
@@ -172,19 +162,21 @@ function formatSubPath (path) {
 
 /**
  * Parse a string path into an array of segments
- *
- * @param {String} path
- * @return {Array|undefined}
  */
 
-function parse (path) {
-  const keys = []
-  let index = -1
-  let mode = BEFORE_PATH
-  let subPathDepth = 0
-  let c, newChar, key, type, transition, action, typeMap
-
-  const actions = []
+function parse (path): ?Array<string> {
+  const keys: Array<string> = []
+  let index: number = -1
+  let mode: number = BEFORE_PATH
+  let subPathDepth: number = 0
+  let c: ?string
+  let key: any
+  let newChar: any
+  let type: string
+  let transition: number
+  let action: Function
+  let typeMap: any
+  const actions: Array<Function> = []
 
   actions[PUSH] = function () {
     if (key !== undefined) {
@@ -222,8 +214,8 @@ function parse (path) {
     }
   }
 
-  function maybeUnescapeQuote () {
-    const nextChar = path[index + 1]
+  function maybeUnescapeQuote (): ?boolean {
+    const nextChar: string = path[index + 1]
     if ((mode === IN_SINGLE_QUOTE && nextChar === "'") ||
       (mode === IN_DOUBLE_QUOTE && nextChar === '"')) {
       index++
@@ -233,7 +225,7 @@ function parse (path) {
     }
   }
 
-  while (mode != null) {
+  while (mode !== null) {
     index++
     c = path[index]
 
@@ -262,7 +254,6 @@ function parse (path) {
     }
 
     if (mode === AFTER_PATH) {
-      keys.raw = path
       return keys
     }
   }
@@ -270,26 +261,23 @@ function parse (path) {
 
 /**
  * External parse that check for a cache hit first
- *
- * @param {String} path
- * @return {Array|undefined}
  */
 
-function parsePath (path) {
-  let hit = pathCache[path]
+function parsePath (path: string): Array<string> {
+  let hit: ?Array<string> = pathCache[path]
   if (!hit) {
     hit = parse(path)
     if (hit) {
       pathCache[path] = hit
     }
   }
-  return hit
+  return hit || []
 }
 
-export default function (Vue) {
+export default function (Vue: any): Function {
   const { isObject, isPlainObject, hasOwn } = Vue.util
 
-  function empty (target) {
+  function empty (target: any): boolean {
     if (target === null || target === undefined) { return true }
 
     if (Array.isArray(target)) {
@@ -308,34 +296,32 @@ export default function (Vue) {
 
   /**
    * Get value from path string
-   *
-   * @param {Object} obj
-   * @param {String} path
-   * @return value
    */
 
-  function getValue (obj, path) {
+  function getValue (obj: Object, path: string): mixed {
     if (!isObject(obj)) { return null }
 
-    const paths = parsePath(path)
-    if (empty(paths)) { return null }
-
-    const length = paths.length
-    let ret = null
-    let last = obj
-    let i = 0
-    while (i < length) {
-      const value = last[paths[i]]
-      if (value === undefined) {
-        last = null
-        break
+    const paths: Array<string> = parsePath(path)
+    if (empty(paths)) {
+      return null
+    } else {
+      const length = paths.length
+      let ret: any = null
+      let last: any = obj
+      let i = 0
+      while (i < length) {
+        const value: any = last[paths[i]]
+        if (value === undefined) {
+          last = null
+          break
+        }
+        last = value
+        i++
       }
-      last = value
-      i++
-    }
 
-    ret = last
-    return ret
+      ret = last
+      return ret
+    }
   }
 
   return getValue
