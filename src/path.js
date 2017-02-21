@@ -274,6 +274,10 @@ function parsePath (path: string): Array<string> {
   return hit || []
 }
 
+export type PathValue = | string | number | boolean | null | PathValueObject | PathValueArray
+export type PathValueObject = Dictionary<PathValue>
+export type PathValueArray = Array<PathValue>
+
 export default function (Vue: any): Function {
   const { isObject, isPlainObject, hasOwn } = Vue.util
 
@@ -295,10 +299,10 @@ export default function (Vue: any): Function {
   }
 
   /**
-   * Get value from path string
+   * Get path value from path string
    */
 
-  function getValue (obj: Object, path: string): mixed {
+  function getPathValue (obj: Object, path: string): PathValue {
     if (!isObject(obj)) { return null }
 
     const paths: Array<string> = parsePath(path)
@@ -324,6 +328,6 @@ export default function (Vue: any): Function {
     }
   }
 
-  return getValue
+  return getPathValue
 }
 

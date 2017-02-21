@@ -1,34 +1,43 @@
 import Path from '../../src/path'
 
-const getValue = Path(Vue)
+const getPathValue = Path(Vue)
 
 describe('path', () => {
   describe('primivite', () => {
-    it('should get value', () => {
-      assert.equal(getValue({ a: { b: 1 } }, 'a.b'), 1)
+    it('should get path value', () => {
+      assert.equal(getPathValue({ a: { b: 1 } }, 'a.b'), 1)
     })
   })
 
   describe('object', () => {
-    it('should get value', () => {
-      const val = getValue({ a: { b: 1 } }, 'a')
+    it('should get path value', () => {
+      const val = getPathValue({ a: { b: 1 } }, 'a')
       assert.equal(val.b, 1)
     })
   })
 
   describe('number key in object', () => {
-    it('should get value', () => {
+    it('should get path value', () => {
       assert.equal(
-        getValue({ errors: { '1': 'error number 1' } }, 'errors[1]'),
+        getPathValue({ errors: { '1': 'error number 1' } }, 'errors[1]'),
         'error number 1'
       )
     })
   })
 
-  describe('array', () => {
+  describe('array index path', () => {
     it('should get value', () => {
       assert.equal(
-        getValue({ errors: ['error number 0'] }, 'errors[0]'),
+        getPathValue({ errors: ['error number 0'] }, 'errors[0]'),
+        'error number 0'
+      )
+    })
+  })
+
+  describe('array path', () => {
+    it('should get path value', () => {
+      assert.equal(
+        getPathValue({ errors: ['error number 0'] }, 'errors')[0],
         'error number 0'
       )
     })
@@ -36,19 +45,19 @@ describe('path', () => {
 
   describe('not found', () => {
     it('should not get null', () => {
-      assert.equal(getValue({}, 'a.b'), null)
+      assert.equal(getPathValue({}, 'a.b'), null)
     })
   })
 
   describe('obj: primitive', () => {
     it('should not get null', () => {
-      assert.equal(getValue(10, 'a.b'), null)
+      assert.equal(getPathValue(10, 'a.b'), null)
     })
   })
 
   describe('obj: null', () => {
     it('should not get null', () => {
-      assert.equal(getValue(null, 'a.b'), null)
+      assert.equal(getPathValue(null, 'a.b'), null)
     })
   })
 })
