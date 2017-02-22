@@ -1,6 +1,4 @@
-import Format from '../../src/format'
-
-const format = Format(Vue)
+import { template as format } from '../../src/format'
 
 describe('format', () => {
   describe('argument', () => {

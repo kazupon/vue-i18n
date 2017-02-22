@@ -1,51 +1,43 @@
-/*
-import locales from './fixture/locales'
+import messages from './fixture/index'
 
 describe('hot reloading', () => {
   let el
+  let i18n
   let orgLocale
   const expectLocale = 'the world updated'
-  beforeEach(done => {
-    orgLocale = locales.en.message.hello
-    Object.keys(locales).forEach(lang => {
-      Vue.locale(lang, locales[lang])
+
+  beforeEach(() => {
+    orgLocale = messages.en.message.hello
+    i18n = new VueI18n({
+      locale: 'en',
+      messages
     })
-    Vue.config.lang = 'en'
 
     el = document.createElement('div')
     document.body.appendChild(el)
-
-    Vue.nextTick(done)
   })
 
-  afterEach(done => {
-    locales.en.message.hello = orgLocale
-    Object.keys(locales).forEach(lang => {
-      Vue.locale(lang, locales[lang])
-    })
-    Vue.nextTick(done)
+  afterEach(() => {
+    messages.en.message.hello = orgLocale
+    i18n.messages = messages
   })
 
   it('should be reload', done => {
-    const options = {
-      el,
-      data () { return { lang: 'en' } }
-    }
-    options.render = function (h) {
-      return h('p', {}, [this.$t('message.hello', this.lang)])
-    }
+    const vm = new Vue({
+      i18n,
+      render (h) {
+        return h('p', { ref: 'text' }, [this.$t('message.hello')])
+      }
+    }).$mount(el)
 
-    const vm = new Vue(options)
+    const { text } = vm.$refs
     waitForUpdate(() => {
-      assert.equal(vm.$el.textContent, locales.en.message.hello)
-      // Update translation
-      locales.en.message.hello = expectLocale
-      Object.keys(locales).forEach(lang => {
-        Vue.locale(lang, locales[lang])
-      })
+      assert.equal(text.textContent, messages.en.message.hello)
+      // hot reload (set reactivity messages)
+      messages.en.message.hello = expectLocale
+      i18n.messages = messages
     }).then(() => {
-      assert.equal(vm.$el.textContent, expectLocale)
+      assert.equal(text.textContent, expectLocale)
     }).then(done)
   })
 })
-*/

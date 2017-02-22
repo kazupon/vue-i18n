@@ -1,73 +1,90 @@
-/*
-import locales from './fixture/locales'
-
-describe('component locales', () => {
-  let vm
+describe('component translation', () => {
+  let vm, i18n
   beforeEach(done => {
-    Object.keys(locales).forEach(lang => {
-      Vue.locale(lang, locales[lang])
-    })
-    Vue.config.lang = 'en'
-
-    const el = document.createElement('div')
-    const compOptions = {
-      locales: {
+    i18n = new VueI18n({
+      locale: 'ja',
+      messages: {
         en: {
-          foo: {
-            bar: {
-              buz: 'hello world'
-            }
-          },
-          fallback: 'this is fallback on component'
+          who: 'root',
+          fallback: 'fallback'
         },
         ja: {
+          who: 'ルート',
+          fallback: 'フォールバック'
         }
       }
-    }
-    compOptions.render = function (h) {
-      return h('p', {}, [this.$t('foo.bar.buz')])
-    }
+    })
 
-    const options = {
-      el,
-      components: { component1: compOptions }
-    }
-
-    options.render = function (h) {
-      return h('div', {}, [h('component1', {})])
-    }
-
-    vm = new Vue(options)
+    const el = document.createElement('div')
+    vm = new Vue({
+      i18n,
+      components: {
+        child1: { // translation with component
+          i18n: {
+            locale: 'en',
+            fallbackRoot: true,
+            messages: {
+              en: { who: 'child1' },
+              ja: { who: '子1' }
+            }
+          },
+          components: {
+            'sub-child1': { // translation with root
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('p', { ref: 'fallback' }, [this.$t('fallback')]),
+              h('sub-child1', { ref: 'sub-child1' })
+            ])
+          }
+        },
+        child2: {
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')])
+            ])
+          }
+        }
+      },
+      render (h) {
+        return h('div', {}, [
+          h('p', { ref: 'who' }, [this.$t('who')]),
+          h('child1', { ref: 'child1' }),
+          h('child2', { ref: 'child2' })
+        ])
+      }
+    }).$mount(el)
     vm.$nextTick(done)
   })
 
-  describe('local', () => {
-    it('should be translated', () => {
-      const comp1 = vm.$children[0] // component1
-      assert.equal(comp1.$t('foo.bar.buz'), 'hello world')
-      assert.equal(comp1.$el.innerText, 'hello world')
-    })
-  })
+  it('should be translated', done => {
+    const root = vm.$refs.who
+    const child1 = vm.$refs.child1.$refs.who
+    const child1Fallback = vm.$refs.child1.$refs.fallback
+    const child2 = vm.$refs.child2.$refs.who
+    const subChild1 = vm.$refs.child1.$refs['sub-child1'].$refs.who
+    assert.equal(root.textContent, 'ルート')
+    assert.equal(child1.textContent, 'child1')
+    assert.equal(child1Fallback.textContent, 'フォールバック')
+    assert.equal(child2.textContent, 'ルート')
+    assert.equal(subChild1.textContent, 'ルート')
 
-  describe('global', () => {
-    it('should be translated', () => {
-      const comp1 = vm.$children[0] // component1
-      assert.equal(comp1.$t('message.hello'), 'the world')
-    })
-  })
-
-  describe('fallback', () => {
-    it('should be work', () => {
-      const comp1 = vm.$children[0] // component1
-      assert.equal(comp1.$t('fallback', 'ja'), 'this is fallback on component')
-    })
-  })
-
-  describe('$lang', () => {
-    it('should be work', () => {
-      const comp1 = vm.$children[0] // component1
-      assert.equal(comp1.$lang, 'en')
-    })
+    // change locale
+    i18n.locale = 'en'
+    vm.$refs.child1.$i18n.locale = 'ja'
+    waitForUpdate(() => {
+      assert.equal(root.textContent, 'root')
+      assert.equal(child1.textContent, '子1')
+      assert.equal(child1Fallback.textContent, 'fallback')
+      assert.equal(child2.textContent, 'root')
+      assert.equal(subChild1.textContent, 'root')
+    }).then(done)
   })
 })
-*/

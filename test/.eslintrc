@@ -5,6 +5,7 @@
   "globals": {
     "waitForUpdate": true,
     "assert": true,
-    "Vue": true
+    "Vue": true,
+    "VueI18n": true
   }
 }

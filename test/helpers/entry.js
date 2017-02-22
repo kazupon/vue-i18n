@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import plugin from '../../src/index'
+import VueI18n from '../../src/index'
 import 'babel-polyfill' // promise and etc ...
 
-Vue.use(plugin)
+Vue.use(VueI18n)
 
+window.VueI18n = VueI18n
 window.Vue = Vue

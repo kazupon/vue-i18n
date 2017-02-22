@@ -1,10 +1,14 @@
-/*
-import locales from './fixture/locales'
+import messages from './fixture/index'
 
 describe('issues', () => {
   let vm
   beforeEach(() => {
-    vm = new Vue()
+    vm = new Vue({
+      i18n: new VueI18n({
+        locale: 'en',
+        messages
+      })
+    })
   })
 
 
@@ -12,7 +16,7 @@ describe('issues', () => {
     it('should be translated', () => {
       assert.equal(
         vm.$t('continue-with-new-account'),
-        locales[Vue.config.lang]['continue-with-new-account']
+        messages[vm.$i18n.locale]['continue-with-new-account']
       )
     })
   })
@@ -30,7 +34,7 @@ describe('issues', () => {
     it('should not be occured error', () => {
       assert.equal(
         vm.$t('message[\'hello\']'),
-        locales[Vue.config.lang]['message']['hello']
+        messages[vm.$i18n.locale]['message']['hello']
       )
     })
   })
@@ -46,10 +50,10 @@ describe('issues', () => {
 
   describe('#91, #51', () => {
     it('should be translated', () => {
-      const arrayLocales = locales[Vue.config.lang].issues.arrayBugs
-      for (let i = 0; i < arrayLocales.length; i++) {
+      const arrayMessages = messages[vm.$i18n.locale].issues.arrayBugs
+      for (let i = 0; i < arrayMessages.length; i++) {
         const item = vm.$t('issues.arrayBugs')[i]
-        assert.equal(item, arrayLocales[i])
+        assert.equal(item, arrayMessages[i])
       }
     })
   })
@@ -58,13 +62,12 @@ describe('issues', () => {
     it('should be translated', () => {
       assert.equal(
         vm.$t('message.1234'),
-        locales[Vue.config.lang]['message']['1234']
+        messages[vm.$i18n.locale]['message']['1234']
       )
       assert.equal(
         vm.$t('message.1mixedKey'),
-        locales[Vue.config.lang]['message']['1mixedKey']
+        messages[vm.$i18n.locale]['message']['1mixedKey']
       )
     })
   })
 })
-*/

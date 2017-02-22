@@ -1,47 +1,47 @@
-/*
-import locales from './fixture/locales'
+import messages from './fixture/index'
 
 describe('custom formatter', () => {
-  beforeEach(done => {
-    Object.keys(locales).forEach(lang => {
-      Vue.locale(lang, locales[lang])
-    })
-    Vue.config.lang = 'en'
-    Vue.nextTick(done)
-  })
-
-  afterEach(done => {
-    Vue.config.i18nFormatter = null
-    Vue.nextTick(done)
-  })
-
-  describe('global', () => {
-    it('allows for specifying a custom formatter', done => {
-      Vue.config.i18nFormatter = (string, ...args) => {
-        assert.equal('the world', string)
-        assert.equal(1, args[0])
-        assert.equal('two', args[1])
-        assert.deepEqual({ name: 'joe' }, args[2])
-        done()
+  describe('via i18n instance API calling', () => {
+    it('should allows for specifying a custom formatter', done => {
+      class CustomFormatter {
+        format (message, args) {
+          assert.equal('the world', message)
+          assert.equal(1, args[0])
+          assert.equal('two', args[1])
+          assert.deepEqual({ name: 'joe' }, args[2])
+          done()
+        }
       }
-
-      Vue.t('message.hello', 1, 'two', { name: 'joe' })
+      const formatter = new CustomFormatter()
+      const i18n = new VueI18n({
+        locale: 'en',
+        messages,
+        formatter
+      })
+      i18n.t('message.hello', 1, 'two', { name: 'joe' })
     })
   })
 
-  describe('instance', () => {
-    it('allows for specifying a custom formatter', done => {
-      const vm = new Vue()
-      Vue.config.i18nFormatter = (string, ...args) => {
-        assert.equal('the world', string)
-        assert.equal(1, args[0])
-        assert.equal(2, args[1])
-        assert.equal(3, args[2])
-        done()
+  describe('via vue instance calling', () => {
+    it('should allows for specifying a custom formatter', done => {
+      class CustomFormatter {
+        format (message, args) {
+          assert.equal('the world', message)
+          assert.equal(1, args[0])
+          assert.equal(2, args[1])
+          assert.equal(3, args[2])
+          done()
+        }
       }
-
+      const formatter = new CustomFormatter()
+      const vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages,
+          formatter
+        })
+      })
       vm.$t('message.hello', [1, 2, 3])
     })
   })
 })
-*/

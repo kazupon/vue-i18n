@@ -1,6 +1,22 @@
 /* @flow */
 
 import { isNil } from './util'
+import { Vue } from './install'
+
+export default class BaseFormatter {
+  _options: FormatterOptions
+
+  constructor (options: FormatterOptions = {}) {
+    this._options = options
+  }
+
+  get options (): FormatterOptions { return this._options }
+  set options (options: FormatterOptions): void { this._options = options }
+
+  format (message: string, ...args: any): any {
+    return template(message, ...args)
+  }
+}
 
 /**
  *  String format template
@@ -10,45 +26,38 @@ import { isNil } from './util'
 
 const RE_NARGS: RegExp = /(%|)\{([0-9a-zA-Z_]+)\}/g
 
+/**
+ * template
+ *
+ * @param {String} string
+ * @param {Array} ...args
+ * @return {String}
+ */
 
-export default function (Vue: any): Function {
-  const { hasOwn } = Vue.util
-
-  /**
-   * template
-   *
-   * @param {String} string
-   * @param {Array} ...args
-   * @return {String}
-   */
-
-  function template (str: string, ...args: any): string {
-    if (args.length === 1 && typeof args[0] === 'object') {
-      args = args[0]
-    } else {
-      args = {}
-    }
-
-    if (!args || !args.hasOwnProperty) {
-      args = {}
-    }
-
-    return str.replace(RE_NARGS, (match, prefix, i, index) => {
-      let result: string
-
-      if (str[index - 1] === '{' &&
-        str[index + match.length] === '}') {
-        return i
-      } else {
-        result = hasOwn(args, i) ? args[i] : match
-        if (isNil(result)) {
-          return ''
-        }
-
-        return result
-      }
-    })
+export function template (str: string, ...args: any): string {
+  if (args.length === 1 && typeof args[0] === 'object') {
+    args = args[0]
+  } else {
+    args = {}
   }
 
-  return template
+  if (!args || !args.hasOwnProperty) {
+    args = {}
+  }
+
+  return str.replace(RE_NARGS, (match, prefix, i, index) => {
+    let result: string
+
+    if (str[index - 1] === '{' &&
+      str[index + match.length] === '}') {
+      return i
+    } else {
+      result = Vue.util.hasOwn(args, i) ? args[i] : match
+      if (isNil(result)) {
+        return ''
+      }
+
+      return result
+    }
+  })
 }
