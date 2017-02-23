@@ -12,7 +12,7 @@
       <component1></component1>
     </div>
     <script>
-      var locales = {
+      var messages = {
         en: {
           message: {
             hello: 'hello world'
@@ -26,25 +26,26 @@
       }
       
       Vue.use(VueI18n)
-      Vue.config.lang = 'ja'
       
-      Object.keys(locales).forEach(function (lang) {
-        Vue.locale(lang, locales[lang])
-      })
-
       new Vue({
-        el: '#app',
+        i18n: new VueI18n({
+          locale: 'ja',
+          messages: messages
+        }),
         components: {
           component1: {
             template: '<p>component1 local: {{ $t("hello") }}</p>'
               + '<p>component1 global: {{ $t("message.hello") }}</p>',
-            locales: {
-              en: { hello: 'hello component1' },
-              ja: { hello: 'こんにちは、component1' }
+            i18n: {
+              locale: 'en',
+              messages: {
+                en: { hello: 'hello component1' },
+                ja: { hello: 'こんにちは、component1' }
+              }
             }
           }
         }
-      })
+      }).$mount('#app')
     </script>
   </body>
 </html>

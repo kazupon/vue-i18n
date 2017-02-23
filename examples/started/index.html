@@ -11,7 +11,7 @@
       <p>{{ $t("message.hello") }}</p>
     </div>
     <script>
-      var locales = {
+      var messages = {
         en: {
           message: {
             hello: 'hello world'
@@ -25,13 +25,12 @@
       }
       
       Vue.use(VueI18n)
-      Vue.config.lang = 'ja'
-      
-      Object.keys(locales).forEach(function (lang) {
-        Vue.locale(lang, locales[lang])
-      })
 
-      new Vue({ el: '#app' })
+      var i18n = new VueI18n({
+        locale: 'ja',
+        messages: messages
+      })
+      new Vue({ i18n: i18n }).$mount('#app')
     </script>
   </body>
 </html>

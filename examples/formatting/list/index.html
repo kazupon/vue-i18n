@@ -11,18 +11,20 @@
       <p>{{ $t('message.hello', ["hello"]) }}</p>
     </div>
     <script>
-      var locales = {
-        en: {
-          message: {
-            hello: '{0} world'
-          }
-        }
-      }
-      
       Vue.use(VueI18n)
-      Vue.locale('en', locales['en'])
 
-      new Vue({ el: '#app' })
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              message: {
+                hello: '{0} world'
+              }
+            }
+          }
+        })
+      }).$mount('#app')
     </script>
   </body>
 </html>
