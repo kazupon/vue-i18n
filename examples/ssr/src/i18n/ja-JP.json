@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "top": "トップ",
+    "new": "新着",
+    "show": "出来事",
+    "ask": "質問",
+    "job": "求人"
+  },
+  "locales": {
+    "en-US": "EN",
+    "ja-JP": "JP"
+  },
+  "pagination": {
+    "prev": "前",
+    "more": "次"
+  },
+  "time": {
+    "ago": "前",
+    "units": {
+      "minute": "分",
+      "hour": "時間",
+      "day": "日"
+    }
+  },
+  "user": {
+    "id": "ユーザ",
+    "created": "作成日",
+    "karma": "カルマ",
+    "submissions": "投稿",
+    "comments": "コメント"
+  },
+  "item": {
+    "no_comments": "まだコメントはありません。",
+    "comments": "コメント"
+  },
+  "comment": {
+    "reply": "返信",
+    "collapsed": "を展開する"
+  }
+}

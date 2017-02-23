@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "top": "Top",
+    "new": "New",
+    "show": "Show",
+    "ask": "Ask",
+    "job": "Jobs"
+  },
+  "locales": {
+    "en-US": "EN",
+    "ja-JP": "JP"
+  },
+  "pagination": {
+    "prev": "prev",
+    "more": "more"
+  },
+  "time": {
+    "ago": "ago",
+    "units": {
+      "minute": "minute | minutes",
+      "hour": "hour | hours",
+      "day": "day | days"
+    }
+  },
+  "user": {
+    "id": "User",
+    "created": "Created",
+    "karma": "Karma",
+    "submissions": "submissions",
+    "comments": "comments"
+  },
+  "item": {
+    "no_comments": "No comments yet.",
+    "comments": "comments"
+  },
+  "comment": {
+    "reply": "reply | replies",
+    "collapsed": "collapsed"
+  }
+}
