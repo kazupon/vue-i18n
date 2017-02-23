@@ -1,3 +1,56 @@
+<a name="6.0.0-alpha.1"></a>
+# [6.0.0-alpha.1](https://github.com/kazupon/vue-i18n/compare/v5.0.2...v6.0.0-alpha.1) (2017-02-23)
+
+This is the first release of 6.0.
+In this version, we are some big breaking changes.
+
+- Recommended for: experiments, prototypes, upgrading small, non-critical apps
+- **NOT** recommended for: production use, upgrading production apps
+
+:warning: Documentation still needs to be worked on. And also, we might change some APIs and features.
+
+In the examples, please refer to this [examples](https://github.com/kazupon/vue-i18n/tree/dev/examples) directory.
+
+
+## Improvements
+- Server-Side Rendering: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)
+- Custom formatter: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/ssr)
+
+## Features
+- Formatting <sup>support</sup>
+- Pluralization <sup>support</sup>
+- Locale and KeyPath Syntax <sup>support</sup>
+- Linked translation <sup>support</sup>
+- Fallback translation <sup>support</sup>
+- Component locale <sup>support</sup>
+- Dynamic locale <sup>DEPRECATED</sup>
+- Hot reload <sup>support</sup>
+
+## API
+
+### Global Config
+- Vue.config.lang <sup>DEPRECATED, use VueI18n constructor `locale` option, or VueI18n#locale</sup>
+- Vue.config.fallbackLang <sup>DEPRECATED, use VueI18n constructor `fallbackLocale` option, or VueI18n#fallbackLocale</sup>
+- Vue.config.missingHandler <sup>DEPRECATED, use VueI18n constructor `missing` option, or VueI18n#missing</sup>
+- Vue.config.i18nFormatter <sup>DEPRECATED, use VueI18n constructor `formatter` option, or VueI18n#formatter</sup>
+
+### Global Method
+- Vue.locale <sup>DEPRECATED, use VueI18n constructor `messages` option, or VueI18n#messages</sup>
+- Vue.t <sup>DEPRECATED, use VueI18n#t</sup>
+- Vue.tc <sup>DEPRECATED, use VueI18n#tc</sup>
+- Vue.te <sup>DEPRECATED, use VueI18n#te</sup>
+
+### Constructor Options
+- locales <sup>DEPRECATED, use `messages` of `i18n` option (e.g `{ i18n: { messaes: ... } }`)</sup>
+
+### Instance Properties
+- $lang <sup>DEPRECATED, use `locale` of Vue instance property `$i18n` (e.g `vm.$i18n.locale = 'en'`) 
+
+### VueI18n class <sup>NEW</sup>
+- constructor options: See the [`I18nOptions` type](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L7-L15) of flowtype.
+- methods / properties: See the [`I18n` interface definition](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L17-L33) of flowtype.
+
+
 <a name="5.0.2"></a>
 ## [5.0.2](https://github.com/kazupon/vue-i18n/compare/v5.0.1...v5.0.2) (2017-02-18)
 

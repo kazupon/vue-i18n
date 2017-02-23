@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v5.0.2 
+ * vue-i18n v6.0.0-alpha.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -9,16 +9,10 @@
   (global.VueI18n = factory());
 }(this, (function () { 'use strict';
 
-/**
- * warn
- *
- * @param {String} msg
- * @param {Error} [err]
- *
- */
+/*  */
 
 function warn (msg, err) {
-  if (window.console) {
+  if (typeof console !== 'undefined') {
     console.warn('[vue-i18n] ' + msg);
     if (err) {
       console.warn(err.stack);
@@ -26,219 +20,196 @@ function warn (msg, err) {
   }
 }
 
-var Asset = function (Vue, langVM) {
-  /**
-   * Register or retrieve a global locale definition.
-   *
-   * @param {String} id
-   * @param {Object | Function | Promise} definition
-   * @param {Function} cb
-   */
+/*  */
 
-  Vue.locale = function (id, definition, cb) {
-    if (definition === undefined) { // getter
-      return langVM.locales[id]
-    } else { // setter
-      if (definition === null) {
-        langVM.locales[id] = undefined;
-        delete langVM.locales[id];
-      } else {
-        setLocale(id, definition, function (locale) {
-          if (locale) {
-            langVM.$set(langVM.locales, id, locale);
-          } else {
-            warn('failed set `' + id + '` locale');
-          }
-          cb && cb();
-        });
+var mixin = {
+  computed: {
+    $t: function $t () {
+      var this$1 = this;
+
+      // HACK: add dependency tracking !!
+      var locale = this.$i18n.locale;
+      var messages = this.$i18n.messages;
+      return function (key) {
+        var args = [], len = arguments.length - 1;
+        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+        return (ref = this$1.$i18n)._t.apply(ref, [ key, locale, messages, this$1 ].concat( args ))
+        var ref;
+      }
+    },
+
+    $tc: function $tc () {
+      var this$1 = this;
+
+      // HACK: add dependency tracking !!
+      var locale = this.$i18n.locale;
+      var messages = this.$i18n.messages;
+      return function (key, choice) {
+        var args = [], len = arguments.length - 2;
+        while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
+
+        return (ref = this$1.$i18n)._tc.apply(ref, [ key, locale, messages, this$1, choice ].concat( args ))
+        var ref;
+      }
+    },
+
+    $te: function $te () {
+      var this$1 = this;
+
+      // HACK: add dependency tracking !!
+      var locale = this.$i18n.locale;
+      var messages = this.$i18n.messages;
+      return function (key) {
+        var args = [], len = arguments.length - 1;
+        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+        return (ref = this$1.$i18n)._te.apply(ref, [ key, locale, messages ].concat( args ))
+        var ref;
       }
     }
-  };
-};
+  },
 
-
-function setLocale (id, definition, cb) {
-  if (typeof definition === 'object') { // sync
-    cb(definition);
-  } else {
-    var future = definition.call(this);
-    if (typeof future === 'function') {
-      if (future.resolved) {
-        // cached
-        cb(future.resolved);
-      } else if (future.requested) {
-        // pool callbacks
-        future.pendingCallbacks.push(cb);
+  beforeCreate: function beforeCreate () {
+    var options = this.$options;
+    if (options.i18n) {
+      if (options.i18n instanceof VueI18n) {
+        this.$i18n = options.i18n;
       } else {
-        future.requested = true;
-        var cbs = future.pendingCallbacks = [cb];
-        future(function (locale) { // resolve
-          future.resolved = locale;
-          for (var i = 0, l = cbs.length; i < l; i++) {
-            cbs[i](locale);
-          }
-        }, function () { // reject
-          cb();
-        });
+        // component local i18n
+        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+          options.i18n.root = this.$root.$i18n;
+        }
+        this.$i18n = new VueI18n(options.i18n);
       }
-    } else if (isPromise(future)) { // promise
-      future.then(function (locale) { // resolve
-        cb(locale);
-      }, function () { // reject
-        cb();
-      }).catch(function (err) {
-        console.error(err);
-        cb();
-      });
+    } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+      // root i18n
+      this.$i18n = this.$root.$i18n;
     }
   }
-}
-
-/**
- * Forgiving check for a promise
- *
- * @param {Object} p
- * @return {Boolean}
- */
-
-function isPromise (p) {
-  return p && typeof p.then === 'function'
-}
-
-var Override = function (Vue, langVM) {
-  // override _init
-  var init = Vue.prototype._init;
-  Vue.prototype._init = function (options) {
-    var this$1 = this;
-
-    init.call(this, options);
-
-    if (!this.$parent) { // root
-      this._$lang = langVM;
-      this._langUnwatch = this._$lang.$watch('$data', function (val, old) {
-        this$1.$forceUpdate();
-      }, { deep: true });
-    }
-  };
-
-  // override _destroy
-  var destroy = Vue.prototype._destroy;
-  Vue.prototype._destroy = function () {
-    if (!this.$parent && this._langUnwatch) {
-      this._langUnwatch();
-      this._langUnwatch = null;
-      this._$lang = null;
-    }
-
-    destroy.apply(this, arguments);
-  };
 };
 
-/**
- * Observer
- */
-
-var Watcher;
-/**
- * getWatcher
- *
- * @param {Vue} vm
- * @return {Watcher}
- */
-
-function getWatcher (vm) {
-  if (!Watcher) {
-    var unwatch = vm.$watch('__watcher__', function (a) {});
-    Watcher = vm._watchers[0].constructor;
-    unwatch();
+var Asset = function (Vue) {
+  var strats = Vue.config.optionMergeStrategies;
+  if (strats) {
+    strats.i18n = function (parent, child) {
+      if (!child) { return parent }
+      if (!parent) { return child }
+      if (!child & !parent) {
+        // TODO: should be warn
+        return {}
+      }
+      var ret = Object.create(null);
+      Vue.extend(ret, parent);
+      for (var key in child) {
+        ret[key] = child[key];
+      }
+      return ret
+    };
   }
-  return Watcher
-}
-
-var Dep;
-/**
- * getDep
- *
- * @param {Vue} vm
- * @return {Dep}
- */
-
-function getDep (vm) {
-  if (!Dep && vm && vm._data && vm._data.__ob__ && vm._data.__ob__.dep) {
-    Dep = vm._data.__ob__.dep.constructor;
-  }
-  return Dep
-}
-
-var fallback; // fallback lang
-var missingHandler = null; // missing handler
-var i18nFormatter = null; // custom formatter
-
-var Config = function (Vue, langVM, lang) {
-  var ref = Vue.util;
-  var bind = ref.bind;
-  var Watcher = getWatcher(langVM);
-  var Dep = getDep(langVM);
-
-  function makeComputedGetter (getter, owner) {
-    var watcher = new Watcher(owner, getter, null, {
-      lazy: true
-    });
-
-    return function computedGetter () {
-      watcher.dirty && watcher.evaluate();
-      Dep && Dep.target && watcher.depend();
-      return watcher.value
-    }
-  }
-
-  // define Vue.config.lang configration
-  Object.defineProperty(Vue.config, 'lang', {
-    enumerable: true,
-    configurable: true,
-    get: makeComputedGetter(function () { return langVM.lang }, langVM),
-    set: bind(function (val) { langVM.lang = val; }, langVM)
-  });
-
-  // define Vue.config.fallbackLang configration
-  fallback = lang;
-  Object.defineProperty(Vue.config, 'fallbackLang', {
-    enumerable: true,
-    configurable: true,
-    get: function () { return fallback },
-    set: function (val) { fallback = val; }
-  });
-
-  // define Vue.config.missingHandler configration
-  Object.defineProperty(Vue.config, 'missingHandler', {
-    enumerable: true,
-    configurable: true,
-    get: function () { return missingHandler },
-    set: function (val) { missingHandler = val; }
-  });
-
-  // define Vue.config.i18Formatter configration
-  Object.defineProperty(Vue.config, 'i18nFormatter', {
-    enumerable: true,
-    configurable: true,
-    get: function () { return i18nFormatter },
-    set: function (val) { i18nFormatter = val; }
-  });
 };
+
+var Vue;
+
+function install (_Vue) {
+  Vue = _Vue;
+
+  var version = (Vue.version && Number(Vue.version.split('.')[0])) || -1;
+  if ("development" !== 'production' && install.installed) {
+    warn('already installed.');
+    return
+  }
+  install.installed = true;
+
+  if ("development" !== 'production' && version < 2) {
+    warn(("vue-i18n (" + (install.version) + ") need to use Vue 2.0 or later (Vue: " + (Vue.version) + ")."));
+    return
+  }
+
+  Vue.mixin(mixin);
+
+  Asset(Vue);
+}
+
+/*  */
 
 /**
  * utilites
  */
 
-/**
- * isNil
- *
- * @param {*} val
- * @return Boolean
- */
 function isNil (val) {
   return val === null || val === undefined
 }
+
+function parseArgs () {
+  var args = [], len = arguments.length;
+  while ( len-- ) args[ len ] = arguments[ len ];
+
+  var locale = null;
+  if (args.length === 1) {
+    if (Vue.util.isObject(args[0]) || Array.isArray(args[0])) {
+      args = args[0];
+    } else if (typeof args[0] === 'string') {
+      locale = args[0];
+    }
+  } else if (args.length === 2) {
+    if (typeof args[0] === 'string') {
+      locale = args[0];
+    }
+    if (Vue.util.isObject(args[1]) || Array.isArray(args[1])) {
+      args = args[1];
+    }
+  }
+
+  return { locale: locale, params: args }
+}
+
+function getOldChoiceIndexFixed (choice) {
+  return choice
+    ? choice > 1
+      ? 1
+      : 0
+    : 1
+}
+
+function getChoiceIndex (choice, choicesLength) {
+  choice = Math.abs(choice);
+
+  if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
+
+  return choice ? Math.min(choice, 2) : 0
+}
+
+function fetchChoice (message, choice) {
+  if (!message && typeof message !== 'string') { return null }
+  var choices = message.split('|');
+
+  choice = getChoiceIndex(choice, choices.length);
+  if (!choices[choice]) { return message }
+  return choices[choice].trim()
+}
+
+/*  */
+
+var BaseFormatter = function BaseFormatter (options) {
+  if ( options === void 0 ) options = {};
+
+  this._options = options;
+};
+
+var prototypeAccessors$1 = { options: {} };
+
+prototypeAccessors$1.options.get = function () { return this._options };
+prototypeAccessors$1.options.set = function (options) { this._options = options; };
+
+BaseFormatter.prototype.format = function format (message) {
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+  return template.apply(void 0, [ message ].concat( args ))
+};
+
+Object.defineProperties( BaseFormatter.prototype, prototypeAccessors$1 );
 
 /**
  *  String format template
@@ -248,52 +219,46 @@ function isNil (val) {
 
 var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
+/**
+ * template
+ *
+ * @param {String} string
+ * @param {Array} ...args
+ * @return {String}
+ */
 
-var Format = function (Vue) {
-  var ref = Vue.util;
-  var hasOwn = ref.hasOwn;
+function template (str) {
+  var args = [], len = arguments.length - 1;
+  while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-  /**
-   * template
-   *
-   * @param {String} string
-   * @param {Array} ...args
-   * @return {String}
-   */
-
-  function template (string) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
-    if (args.length === 1 && typeof args[0] === 'object') {
-      args = args[0];
-    } else {
-      args = {};
-    }
-
-    if (!args || !args.hasOwnProperty) {
-      args = {};
-    }
-
-    return string.replace(RE_NARGS, function (match, prefix, i, index) {
-      var result;
-
-      if (string[index - 1] === '{' &&
-        string[index + match.length] === '}') {
-        return i
-      } else {
-        result = hasOwn(args, i) ? args[i] : match;
-        if (isNil(result)) {
-          return ''
-        }
-
-        return result
-      }
-    })
+  if (args.length === 1 && typeof args[0] === 'object') {
+    args = args[0];
+  } else {
+    args = {};
   }
 
-  return template
-};
+  if (!args || !args.hasOwnProperty) {
+    args = {};
+  }
+
+  return str.replace(RE_NARGS, function (match, prefix, i, index) {
+    var result;
+
+    if (str[index - 1] === '{' &&
+      str[index + match.length] === '}') {
+      return i
+    } else {
+      result = Vue.util.hasOwn(args, i) ? args[i] : match;
+      if (isNil(result)) {
+        return ''
+      }
+
+      return result
+    }
+  })
+}
+
+/*  */
 
 /**
  *  Path paerser
@@ -377,9 +342,6 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
 
 /**
  * Check if an expression is a literal value.
- *
- * @param {String} exp
- * @return {Boolean}
  */
 
 var literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
@@ -389,9 +351,6 @@ function isLiteral (exp) {
 
 /**
  * Strip quotes from a string
- *
- * @param {String} str
- * @return {String | false}
  */
 
 function stripQuotes (str) {
@@ -404,13 +363,10 @@ function stripQuotes (str) {
 
 /**
  * Determine the type of a character in a keypath.
- *
- * @param {Char} ch
- * @return {String} type
  */
 
 function getPathCharType (ch) {
-  if (ch === undefined) { return 'eof' }
+  if (ch === undefined || ch === null) { return 'eof' }
 
   var code = ch.charCodeAt(0);
 
@@ -454,9 +410,6 @@ function getPathCharType (ch) {
  * Format a subPath, return its plain form if it is
  * a literal string or number. Otherwise prepend the
  * dynamic indicator (*).
- *
- * @param {String} path
- * @return {String}
  */
 
 function formatSubPath (path) {
@@ -469,9 +422,6 @@ function formatSubPath (path) {
 
 /**
  * Parse a string path into an array of segments
- *
- * @param {String} path
- * @return {Array|undefined}
  */
 
 function parse (path) {
@@ -479,8 +429,13 @@ function parse (path) {
   var index = -1;
   var mode = BEFORE_PATH;
   var subPathDepth = 0;
-  var c, newChar, key, type, transition, action, typeMap;
-
+  var c;
+  var key;
+  var newChar;
+  var type;
+  var transition;
+  var action;
+  var typeMap;
   var actions = [];
 
   actions[PUSH] = function () {
@@ -530,7 +485,7 @@ function parse (path) {
     }
   }
 
-  while (mode != null) {
+  while (mode !== null) {
     index++;
     c = path[index];
 
@@ -559,7 +514,6 @@ function parse (path) {
     }
 
     if (mode === AFTER_PATH) {
-      keys.raw = path;
       return keys
     }
   }
@@ -567,9 +521,6 @@ function parse (path) {
 
 /**
  * External parse that check for a cache hit first
- *
- * @param {String} path
- * @return {Array|undefined}
  */
 
 function parsePath (path) {
@@ -580,8 +531,12 @@ function parsePath (path) {
       pathCache[path] = hit;
     }
   }
-  return hit
+  return hit || []
 }
+
+
+
+
 
 var Path = function (Vue) {
   var ref = Vue.util;
@@ -607,362 +562,240 @@ var Path = function (Vue) {
   }
 
   /**
-   * Get value from path string
-   *
-   * @param {Object} obj
-   * @param {String} path
-   * @return value
+   * Get path value from path string
    */
 
-  function getValue (obj, path) {
+  function getPathValue (obj, path) {
     if (!isObject(obj)) { return null }
 
     var paths = parsePath(path);
-    if (empty(paths)) { return null }
-
-    var length = paths.length;
-    var ret = null;
-    var last = obj;
-    var i = 0;
-    while (i < length) {
-      var value = last[paths[i]];
-      if (value === undefined) {
-        last = null;
-        break
+    if (empty(paths)) {
+      return null
+    } else {
+      var length = paths.length;
+      var ret = null;
+      var last = obj;
+      var i = 0;
+      while (i < length) {
+        var value = last[paths[i]];
+        if (value === undefined) {
+          last = null;
+          break
+        }
+        last = value;
+        i++;
       }
-      last = value;
-      i++;
-    }
 
-    ret = last;
-    return ret
+      ret = last;
+      return ret
+    }
   }
 
-  return getValue
+  return getPathValue
 };
 
-/**
- * extend
- *
- * @param {Vue} Vue
- * @return {Vue}
- */
+/*  */
 
-var Extend = function (Vue) {
-  var ref = Vue.util;
-  var isObject = ref.isObject;
-  var bind = ref.bind;
-  var format = Format(Vue);
-  var getValue = Path(Vue);
+var VueI18n = function VueI18n (options) {
+  if ( options === void 0 ) options = {};
 
-  function parseArgs () {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
+  var locale = options.locale || 'en-US';
+  var messages = options.messages || {};
+  this._vm = null;
+  this._fallbackLocale = options.fallbackLocale || 'en-US';
+  this._formatter = options.formatter || new BaseFormatter();
+  this._missing = options.missing;
+  this._root = options.root || null;
+  this._fallbackRoot = options.fallbackRoot || false;
 
-    var lang = Vue.config.lang;
-    var fallback = Vue.config.fallbackLang;
-
-    if (args.length === 1) {
-      if (isObject(args[0]) || Array.isArray(args[0])) {
-        args = args[0];
-      } else if (typeof args[0] === 'string') {
-        lang = args[0];
-      }
-    } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
-        lang = args[0];
-      }
-      if (isObject(args[1]) || Array.isArray(args[1])) {
-        args = args[1];
-      }
-    }
-
-    return { lang: lang, fallback: fallback, params: args }
-  }
-
-  function exist (locale, key) {
-    if (!locale || !key) { return false }
-    return !isNil(getValue(locale, key))
-  }
-
-  function interpolate (locale, key, args) {
-    if (!locale) { return null }
-
-    var val = getValue(locale, key);
-    if (Array.isArray(val)) { return val }
-    if (isNil(val)) { val = locale[key]; }
-    if (isNil(val)) { return null }
-    if (typeof val !== 'string') { warn("Value of key '" + key + "' is not a string!"); return null }
-
-    // Check for the existance of links within the translated string
-    if (val.indexOf('@:') >= 0) {
-      // Match all the links within the local
-      // We are going to replace each of
-      // them with its translation
-      var matches = val.match(/(@:[\w|.]+)/g);
-      for (var idx in matches) {
-        var link = matches[idx];
-        // Remove the leading @:
-        var linkPlaceholder = link.substr(2);
-        // Translate the link
-        var translatedstring = interpolate(locale, linkPlaceholder, args);
-        // Replace the link with the translated string
-        val = val.replace(link, translatedstring);
-      }
-    }
-
-    return !args
-      ? val
-      : Vue.config.i18nFormatter
-        ? Vue.config.i18nFormatter.apply(null, [val].concat(args))
-        : format(val, args)
-  }
-
-  function translate (getter, lang, fallback, key, params) {
-    var res = null;
-    res = interpolate(getter(lang), key, params);
-    if (!isNil(res)) { return res }
-
-    res = interpolate(getter(fallback), key, params);
-    if (!isNil(res)) {
-      {
-        warn('Fall back to translate the keypath "' + key + '" with "' +
-          fallback + '" language.');
-      }
-      return res
-    } else {
-      return null
-    }
-  }
-
-
-  function warnDefault (lang, key, vm, result) {
-    if (!isNil(result)) { return result }
-    if (Vue.config.missingHandler) {
-      Vue.config.missingHandler.apply(null, [lang, key, vm]);
-    } else {
-      {
-        warn('Cannot translate the value of keypath "' + key + '". ' +
-          'Use the value of keypath as default');
-      }
-    }
-    return key
-  }
-
-  function getAssetLocale (lang) {
-    return Vue.locale(lang)
-  }
-
-  function getComponentLocale (lang) {
-    return this.$options.locales[lang]
-  }
-
-  function getOldChoiceIndexFixed (choice) {
-    return choice ? choice > 1 ? 1 : 0 : 1
-  }
-
-  function getChoiceIndex (choice, choicesLength) {
-    choice = Math.abs(choice);
-
-    if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
-
-    return choice ? Math.min(choice, 2) : 0
-  }
-
-  function fetchChoice (locale, choice) {
-    if (!locale && typeof locale !== 'string') { return null }
-    var choices = locale.split('|');
-
-    choice = getChoiceIndex(choice, choices.length);
-    if (!choices[choice]) { return locale }
-    return choices[choice].trim()
-  }
-
-  /**
-   * Vue.t
-   *
-   * @param {String} key
-   * @param {Array} ...args
-   * @return {String}
-   */
-
-  Vue.t = function (key) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
-    if (!key) { return '' }
-    var ref = parseArgs.apply(void 0, args);
-    var lang = ref.lang;
-    var fallback = ref.fallback;
-    var params = ref.params;
-    return warnDefault(lang, key, null, translate(getAssetLocale, lang, fallback, key, params))
+  var getPathValue = Path(Vue);
+  this._getPathValue = getPathValue;
+  this._exist = function (message, key) {
+    if (!message || !key) { return false }
+    return !isNil(getPathValue(message, key))
   };
 
-  /**
-   * Vue.tc
-   *
-   * @param {String} key
-   * @param {number|undefined} choice
-   * @param {Array} ...args
-   * @return {String}
-   */
+  this._resetVM({ locale: locale, messages: messages });
+};
 
-  Vue.tc = function (key, choice) {
-    var args = [], len = arguments.length - 2;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
+var prototypeAccessors = { messages: {},locale: {},fallbackLocale: {},missing: {},formatter: {} };
 
-    return fetchChoice(Vue.t.apply(Vue, [ key ].concat( args )), choice)
-  };
+VueI18n.prototype._resetVM = function _resetVM (data) {
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  this._vm = new Vue({ data: data });
+  Vue.config.silent = silent;
+};
 
-  /**
-   * Vue.te
-   *
-   * @param {String} key
-   * @param {Array} ...args
-   * @return {Boolean}
-   */
+prototypeAccessors.messages.get = function () { return this._vm.$data.messages };
+prototypeAccessors.messages.set = function (messages) { this._vm.$set(this._vm, 'messages', messages); };
 
-  Vue.te = function (key) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+prototypeAccessors.locale.get = function () { return this._vm.$data.locale };
+prototypeAccessors.locale.set = function (locale) { this._vm.$set(this._vm, 'locale', locale); };
 
-    var ref = parseArgs.apply(void 0, args);
-    var lang = ref.lang;
-    return exist(getAssetLocale(lang), key)
-  };
+prototypeAccessors.fallbackLocale.get = function () { return this._fallbackLocale };
+prototypeAccessors.fallbackLocale.set = function (locale) { this._fallbackLocale = locale; };
 
-  /**
-   * $t
-   *
-   * @param {String} key
-   * @param {Array} ...args
-   * @return {String}
-   */
+prototypeAccessors.missing.get = function () { return this._missing };
+prototypeAccessors.missing.set = function (handler) { this._missing = handler; };
 
-  Vue.prototype.$t = function (key) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+prototypeAccessors.formatter.get = function () { return this._formatter };
+prototypeAccessors.formatter.set = function (formatter) { this._formatter = formatter; };
 
-    if (!key) { return '' }
-    var ref = parseArgs.apply(void 0, args);
-    var lang = ref.lang;
-    var fallback = ref.fallback;
-    var params = ref.params;
-    var res = null;
-    if (this.$options.locales) {
-      res = translate(
-        bind(getComponentLocale, this), lang, fallback, key, params
+VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm) {
+  if (!isNil(result)) { return result }
+  if (this.missing) {
+    this.missing.apply(null, [locale, key, vm]);
+  } else {
+    {
+      warn(
+        "Cannot translate the value of keypath '" + key + "'. " +
+        'Use the value of keypath as default.'
       );
-      if (res) { return res }
     }
-    return warnDefault(lang, key, this, translate(getAssetLocale, lang, fallback, key, params))
-  };
+  }
+  return key
+};
 
-  /**
-   * $tc
-   *
-   * @param {String} key
-   * @param {number|undefined} choice
-   * @param {Array} ...args
-   * @return {String}
-   */
+VueI18n.prototype._isFallbackRoot = function _isFallbackRoot (val) {
+  return !val && !isNil(this._root) && this._fallbackRoot
+};
 
-  Vue.prototype.$tc = function (key, choice) {
+VueI18n.prototype._interpolate = function _interpolate (message, key, args) {
+    var this$1 = this;
+
+  if (!message) { return null }
+
+  var val = this._getPathValue(message, key);
+  if (Array.isArray(val)) { return val }
+  if (isNil(val)) { val = message[key]; }
+  if (isNil(val)) { return null }
+  if (typeof val !== 'string') {
+    warn(("Value of key '" + key + "' is not a string!"));
+    return null
+  }
+
+  // Check for the existance of links within the translated string
+  if (val.indexOf('@:') >= 0) {
+    // Match all the links within the local
+    // We are going to replace each of
+    // them with its translation
+    var matches = val.match(/(@:[\w|.]+)/g);
+    for (var idx in matches) {
+      var link = matches[idx];
+      // Remove the leading @:
+      var linkPlaceholder = link.substr(2);
+      // Translate the link
+      var translatedstring = this$1._interpolate(message, linkPlaceholder, args);
+      // Replace the link with the translated string
+      val = val.replace(link, translatedstring);
+    }
+  }
+
+  return !args ? val : this._format(val, args)
+};
+
+VueI18n.prototype._format = function _format (val) {
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+  return (ref = this._formatter).format.apply(ref, [ val ].concat( args ))
+    var ref;
+};
+
+VueI18n.prototype._translate = function _translate (messages, locale, fallback, key, args) {
+  var res = null;
+  res = this._interpolate(messages[locale], key, args);
+  if (!isNil(res)) { return res }
+
+  res = this._interpolate(messages[fallback], key, args);
+  if (!isNil(res)) {
+    {
+      warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
+    }
+    return res
+  } else {
+    return null
+  }
+};
+
+VueI18n.prototype._t = function _t (key, _locale, messages, host) {
+    var args = [], len = arguments.length - 4;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 4 ];
+
+  if (!key) { return '' }
+
+  var parsedArgs = parseArgs.apply(void 0, args);
+  var locale = parsedArgs.locale || _locale;
+
+  var ret = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params);
+  if (this._isFallbackRoot(ret)) {
+      {
+      warn(("Fall back to translate the keypath '" + key + "' with root locale."));
+    }
+    if (!this._root) { throw Error('unexpected error') }
+    return (ref = this._root).t.apply(ref, [ key ].concat( args ))
+  } else {
+    return this._warnDefault(locale, key, ret, host)
+  }
+    var ref;
+};
+
+VueI18n.prototype.t = function t (key) {
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+  return (ref = this)._t.apply(ref, [ key, this.locale, this.messages, null ].concat( args ))
+    var ref;
+};
+
+VueI18n.prototype._tc = function _tc (key, _locale, messages, host, choice) {
+    var args = [], len = arguments.length - 5;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 5 ];
+
+  if (!key) { return '' }
+  if (choice !== undefined) {
+    return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( args )), choice)
+  } else {
+    return (ref$1 = this)._t.apply(ref$1, [ key, _locale, messages, host ].concat( args ))
+  }
+    var ref;
+    var ref$1;
+};
+
+VueI18n.prototype.tc = function tc (key, choice) {
     var args = [], len = arguments.length - 2;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
 
-    if (typeof choice !== 'number' && typeof choice !== 'undefined') {
-      return key
-    }
-    return fetchChoice((ref = this).$t.apply(ref, [ key ].concat( args )), choice)
+  return (ref = this)._tc.apply(ref, [ key, this.locale, this.messages, null, choice ].concat( args ))
+    var ref;
+};
+
+VueI18n.prototype._te = function _te (key, _locale, messages) {
+    var args = [], len = arguments.length - 3;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 3 ];
+
+  var locale = parseArgs.apply(void 0, args).locale || _locale;
+  return this._exist(messages[locale], key)
+};
+
+VueI18n.prototype.te = function te (key) {
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+  return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
     var ref;
   };
 
-  /**
-   * $te
-   *
-   * @param {String} key
-   * @param {Array} ...args
-   * @return {Boolean}
-   *
-   */
+Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
-  Vue.prototype.$te = function (key) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
-    var ref = parseArgs.apply(void 0, args);
-    var lang = ref.lang;
-    var found = false;
-    if (this.$options.locales) { // exist component locale
-      found = exist(bind(getComponentLocale)(lang), key);
-    }
-    if (!found) {
-      found = exist(getAssetLocale(lang), key);
-    }
-    return found
-  };
-
-  Vue.mixin({
-    computed: {
-      $lang: function $lang () {
-        return Vue.config.lang
-      }
-    }
-  });
-
-  return Vue
-};
-
-var langVM; // singleton
-
-
-/**
- * plugin
- *
- * @param {Object} Vue
- * @param {Object} opts
- */
-
-function plugin (Vue, opts) {
-  if ( opts === void 0 ) opts = {};
-
-  var version = (Vue.version && Number(Vue.version.split('.')[0])) || -1;
-
-  if ("development" !== 'production' && plugin.installed) {
-    warn('already installed.');
-    return
-  }
-
-  if ("development" !== 'production' && version < 2) {
-    warn(("vue-i18n (" + (plugin.version) + ") need to use Vue 2.0 or later (Vue: " + (Vue.version) + ")."));
-    return
-  }
-
-  var lang = 'en';
-  setupLangVM(Vue, lang);
-
-  Asset(Vue, langVM);
-  Override(Vue, langVM);
-  Config(Vue, langVM, lang);
-  Extend(Vue);
-}
-
-function setupLangVM (Vue, lang) {
-  var silent = Vue.config.silent;
-  Vue.config.silent = true;
-  if (!langVM) {
-    langVM = new Vue({ data: { lang: lang, locales: {} } });
-  }
-  Vue.config.silent = silent;
-}
-
-plugin.version = '5.0.2';
+VueI18n.install = install;
+VueI18n.version = '6.0.0-alpha.1';
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin);
+  window.Vue.use(VueI18n);
 }
 
-return plugin;
+return VueI18n;
 
 })));
