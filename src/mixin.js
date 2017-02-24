@@ -48,5 +48,9 @@ export default {
       // root i18n
       this.$i18n = this.$root.$i18n
     }
+  },
+
+  beforeDestroy () {
+    this.$i18n = null
   }
 }

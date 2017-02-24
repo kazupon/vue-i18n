@@ -85,6 +85,9 @@ describe('component translation', () => {
       assert.equal(child1Fallback.textContent, 'fallback')
       assert.equal(child2.textContent, 'root')
       assert.equal(subChild1.textContent, 'root')
+      vm.$destroy()
+    }).then(() => {
+      assert(vm.$i18n === null)
     }).then(done)
   })
 })
