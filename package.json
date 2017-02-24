@@ -65,7 +65,8 @@
     "dist/vue-i18n.js",
     "dist/vue-i18n.min.js",
     "dist/vue-i18n.common.js",
-    "src"
+    "src",
+    "decls"
   ],
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
   "jsnext:main": "src/index.js",
