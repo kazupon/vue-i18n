@@ -1,6 +1,6 @@
 /* @flow */
 
-import { isNil } from './util'
+import { isNull } from './util'
 import { Vue } from './install'
 
 export default class BaseFormatter {
@@ -53,7 +53,7 @@ export function template (str: string, ...args: any): string {
       return i
     } else {
       result = Vue.util.hasOwn(args, i) ? args[i] : match
-      if (isNil(result)) {
+      if (isNull(result)) {
         return ''
       }
 

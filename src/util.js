@@ -6,7 +6,7 @@ import { Vue } from './install'
  * utilites
  */
 
-export function isNil (val: mixed): boolean {
+export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
 

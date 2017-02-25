@@ -1,7 +1,7 @@
 /* @flow */
 
 import { install, Vue } from './install'
-import { isNil, parseArgs, fetchChoice } from './util'
+import { isNull, parseArgs, fetchChoice } from './util'
 import warn from './warn'
 import BaseFormatter from './format'
 import Path from './path'
@@ -34,7 +34,7 @@ export default class VueI18n {
     this._getPathValue = getPathValue
     this._exist = (message: Object, key: string): boolean => {
       if (!message || !key) { return false }
-      return !isNil(getPathValue(message, key))
+      return !isNull(getPathValue(message, key))
     }
 
     this._resetVM({ locale, messages })
@@ -63,7 +63,7 @@ export default class VueI18n {
   set formatter (formatter: Formatter): void { this._formatter = formatter }
 
   _warnDefault (locale: string, key: string, result: ?any, vm: ?any): ?string {
-    if (!isNil(result)) { return result }
+    if (!isNull(result)) { return result }
     if (this.missing) {
       this.missing.apply(null, [locale, key, vm])
     } else {
@@ -78,7 +78,7 @@ export default class VueI18n {
   }
 
   _isFallbackRoot (val: any): boolean {
-    return !val && !isNil(this._root) && this._fallbackRoot
+    return !val && !isNull(this._root) && this._fallbackRoot
   }
 
   _interpolate (message: Messages, key: string, args: any): any {
@@ -86,8 +86,8 @@ export default class VueI18n {
 
     let val: PathValue = this._getPathValue(message, key)
     if (Array.isArray(val)) { return val }
-    if (isNil(val)) { val = message[key] }
-    if (isNil(val)) { return null }
+    if (isNull(val)) { val = message[key] }
+    if (isNull(val)) { return null }
     if (typeof val !== 'string') {
       warn(`Value of key '${key}' is not a string!`)
       return null
@@ -120,10 +120,10 @@ export default class VueI18n {
   _translate (messages: Messages, locale: string, fallback: string, key: string, args: any): any {
     let res: any = null
     res = this._interpolate(messages[locale], key, args)
-    if (!isNil(res)) { return res }
+    if (!isNull(res)) { return res }
 
     res = this._interpolate(messages[fallback], key, args)
-    if (!isNil(res)) {
+    if (!isNull(res)) {
       if (process.env.NODE_ENV !== 'production') {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
       }
