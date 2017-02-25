@@ -11,7 +11,6 @@ export default class BaseFormatter {
   }
 
   get options (): FormatterOptions { return this._options }
-  set options (options: FormatterOptions): void { this._options = options }
 
   format (message: string, ...args: any): any {
     return template(message, ...args)
