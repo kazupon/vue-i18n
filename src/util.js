@@ -10,11 +10,12 @@ export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
 
-export function parseArgs (...args: any): Object {
-  let locale = null
+export function parseArgs (...args: Array<mixed>): Object {
+  let locale: ?string = null
+  let params: mixed = null
   if (args.length === 1) {
     if (Vue.util.isObject(args[0]) || Array.isArray(args[0])) {
-      args = args[0]
+      params = args[0]
     } else if (typeof args[0] === 'string') {
       locale = args[0]
     }
@@ -23,11 +24,11 @@ export function parseArgs (...args: any): Object {
       locale = args[0]
     }
     if (Vue.util.isObject(args[1]) || Array.isArray(args[1])) {
-      args = args[1]
+      params = args[1]
     }
   }
 
-  return { locale, params: args }
+  return { locale, params }
 }
 
 function getOldChoiceIndexFixed (choice: number): number {
@@ -46,7 +47,7 @@ function getChoiceIndex (choice: number, choicesLength: number): number {
   return choice ? Math.min(choice, 2) : 0
 }
 
-export function fetchChoice (message: any, choice: number): ?string {
+export function fetchChoice (message: string, choice: number): ?string {
   if (!message && typeof message !== 'string') { return null }
   const choices: Array<string> = message.split('|')
 
