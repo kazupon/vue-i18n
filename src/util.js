@@ -6,6 +6,15 @@ import { Vue } from './install'
  * utilites
  */
 
+export function warn (msg: string, err: ?Error): void {
+  if (typeof console !== 'undefined') {
+    console.warn('[vue-i18n] ' + msg)
+    if (err) {
+      console.warn(err.stack)
+    }
+  }
+}
+
 export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }

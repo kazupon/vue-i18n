@@ -1,8 +1,7 @@
 /* @flow */
 
 import { install, Vue } from './install'
-import { isNull, parseArgs, fetchChoice } from './util'
-import warn from './warn'
+import { warn, isNull, parseArgs, fetchChoice } from './util'
 import BaseFormatter from './format'
 import Path from './path'
 import type { PathValue } from './path'

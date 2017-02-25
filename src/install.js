@@ -1,4 +1,4 @@
-import warn from './warn'
+import { warn } from './util'
 import mixin from './mixin'
 import Asset from './asset'
 
