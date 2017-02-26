@@ -1,4 +1,4 @@
-import { isNil } from './util'
+import { isNil, hasOwn } from './util'
 
 /**
  *  String format template
@@ -10,8 +10,6 @@ const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g
 
 
 export default function (Vue) {
-  const { hasOwn } = Vue.util
-
   /**
    * template
    *

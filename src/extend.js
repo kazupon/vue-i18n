@@ -1,7 +1,7 @@
 import warn from './warn'
 import Format from './format'
 import Path from './path'
-import { isNil } from './util'
+import { isNil, isObject, bind } from './util'
 
 /**
  * extend
@@ -11,7 +11,6 @@ import { isNil } from './util'
  */
 
 export default function (Vue) {
-  const { isObject, bind } = Vue.util
   const format = Format(Vue)
   const getValue = Path(Vue)
 
