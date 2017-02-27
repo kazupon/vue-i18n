@@ -3,7 +3,8 @@
 import { install, Vue } from './install'
 import { warn, isNull, parseArgs, fetchChoice } from './util'
 import BaseFormatter from './format'
-import Path from './path'
+import getPathValue from './path'
+
 import type { PathValue } from './path'
 
 export default class VueI18n {
@@ -16,7 +17,6 @@ export default class VueI18n {
   _fallbackRoot: boolean
   _fallbackLocale: string
   _missing: ?MissingHandler
-  _getPathValue: Function
   _exist: Function
 
   constructor (options: I18nOptions = {}) {
@@ -29,8 +29,6 @@ export default class VueI18n {
     this._root = options.root || null
     this._fallbackRoot = options.fallbackRoot || false
 
-    const getPathValue: Function = Path(Vue)
-    this._getPathValue = getPathValue
     this._exist = (message: Object, key: string): boolean => {
       if (!message || !key) { return false }
       return !isNull(getPathValue(message, key))
@@ -83,7 +81,7 @@ export default class VueI18n {
   _interpolate (message: Messages, key: string, args: any): any {
     if (!message) { return null }
 
-    let val: PathValue = this._getPathValue(message, key)
+    let val: PathValue = getPathValue(message, key)
     if (Array.isArray(val)) { return val }
     if (isNull(val)) { val = message[key] }
     if (isNull(val)) { return null }

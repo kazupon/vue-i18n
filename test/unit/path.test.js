@@ -1,6 +1,4 @@
-import Path from '../../src/path'
-
-const getPathValue = Path(Vue)
+import getPathValue from '../../src/path'
 
 describe('path', () => {
   describe('primivite', () => {

@@ -1,5 +1,7 @@
 /* @flow */
 
+import { isObject, isPlainObject, hasOwn } from './util'
+
 /**
  *  Path paerser
  *  - Inspired:
@@ -278,56 +280,48 @@ export type PathValue = | string | number | boolean | null | PathValueObject | P
 export type PathValueObject = Dictionary<PathValue>
 export type PathValueArray = Array<PathValue>
 
-export default function (Vue: any): Function {
-  const { isObject, isPlainObject, hasOwn } = Vue.util
+function empty (target: any): boolean {
+  if (target === null || target === undefined) { return true }
 
-  function empty (target: any): boolean {
-    if (target === null || target === undefined) { return true }
-
-    if (Array.isArray(target)) {
-      if (target.length > 0) { return false }
-      if (target.length === 0) { return true }
-    } else if (isPlainObject(target)) {
-      /* eslint-disable prefer-const */
-      for (let key in target) {
-        if (hasOwn(target, key)) { return false }
-      }
-      /* eslint-enable prefer-const */
+  if (Array.isArray(target)) {
+    if (target.length > 0) { return false }
+    if (target.length === 0) { return true }
+  } else if (isPlainObject(target)) {
+    /* eslint-disable prefer-const */
+    for (let key in target) {
+      if (hasOwn(target, key)) { return false }
     }
-
-    return true
+    /* eslint-enable prefer-const */
   }
 
-  /**
-   * Get path value from path string
-   */
-
-  function getPathValue (obj: Object, path: string): PathValue {
-    if (!isObject(obj)) { return null }
-
-    const paths: Array<string> = parsePath(path)
-    if (empty(paths)) {
-      return null
-    } else {
-      const length = paths.length
-      let ret: any = null
-      let last: any = obj
-      let i = 0
-      while (i < length) {
-        const value: any = last[paths[i]]
-        if (value === undefined) {
-          last = null
-          break
-        }
-        last = value
-        i++
-      }
-
-      ret = last
-      return ret
-    }
-  }
-
-  return getPathValue
+  return true
 }
 
+/**
+ * Get path value from path string
+ */
+export default function getPathValue (obj: Object, path: string): PathValue {
+  if (!isObject(obj)) { return null }
+
+  const paths: Array<string> = parsePath(path)
+  if (empty(paths)) {
+    return null
+  } else {
+    const length = paths.length
+    let ret: any = null
+    let last: any = obj
+    let i = 0
+    while (i < length) {
+      const value: any = last[paths[i]]
+      if (value === undefined) {
+        last = null
+        break
+      }
+      last = value
+      i++
+    }
+
+    ret = last
+    return ret
+  }
+}

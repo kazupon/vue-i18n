@@ -1,7 +1,6 @@
 /* @flow */
 
-import { isNull } from './util'
-import { Vue } from './install'
+import { isNull, hasOwn } from './util'
 
 export default class BaseFormatter {
   _options: FormatterOptions
@@ -51,7 +50,7 @@ export function template (str: string, ...args: any): string {
       str[index + match.length] === '}') {
       return i
     } else {
-      result = Vue.util.hasOwn(args, i) ? args[i] : match
+      result = hasOwn(args, i) ? args[i] : match
       if (isNull(result)) {
         return ''
       }

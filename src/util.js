@@ -1,7 +1,5 @@
 /* @flow */
 
-import { Vue } from './install'
-
 /**
  * utilites
  */
@@ -15,6 +13,35 @@ export function warn (msg: string, err: ?Error): void {
   }
 }
 
+const hasOwnProperty = Object.prototype.hasOwnProperty
+export function hasOwn (obj: Object, key: string): boolean {
+  return hasOwnProperty.call(obj, key)
+}
+
+export function bind (fn: Function, ctx: Object): Function {
+  function boundFn (a) {
+    const l: number = arguments.length
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }
+  // record original fn length
+  boundFn._length = fn.length
+  return boundFn
+}
+
+export function isObject (obj: mixed): boolean {
+  return obj !== null && typeof obj === 'object'
+}
+
+const toString = Object.prototype.toString
+const OBJECT_STRING = '[object Object]'
+export function isPlainObject (obj: any): boolean {
+  return toString.call(obj) === OBJECT_STRING
+}
+
 export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
@@ -23,7 +50,7 @@ export function parseArgs (...args: Array<mixed>): Object {
   let locale: ?string = null
   let params: mixed = null
   if (args.length === 1) {
-    if (Vue.util.isObject(args[0]) || Array.isArray(args[0])) {
+    if (isObject(args[0]) || Array.isArray(args[0])) {
       params = args[0]
     } else if (typeof args[0] === 'string') {
       locale = args[0]
@@ -32,7 +59,7 @@ export function parseArgs (...args: Array<mixed>): Object {
     if (typeof args[0] === 'string') {
       locale = args[0]
     }
-    if (Vue.util.isObject(args[1]) || Array.isArray(args[1])) {
+    if (isObject(args[1]) || Array.isArray(args[1])) {
       params = args[1]
     }
   }
