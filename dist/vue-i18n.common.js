@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v5.0.2 
+ * vue-i18n v5.0.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -166,13 +166,83 @@ function getDep (vm) {
   return Dep
 }
 
+/**
+ * utilites
+ */
+
+/**
+ * isNil
+ *
+ * @param {*} val
+ * @return Boolean
+ */
+function isNil (val) {
+  return val === null || val === undefined
+}
+
+/**
+ * Simple bind, faster than native
+ *
+ * @param {Function} fn
+ * @param {Object} ctx
+ * @return Function
+ */
+function bind (fn, ctx) {
+  function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }
+  // record original fn length
+  boundFn._length = fn.length;
+  return boundFn
+}
+
+/**
+ * Quick object check - this is primarily used to tell
+ * Objects from primitive values when we know the value
+ * is a JSON-compliant type.
+ *
+ * @param {Object} obj
+ * @return Boolean
+ */
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+/**
+ * Strict object type check. Only returns true
+ * for plain JavaScript objects.
+ *
+ * @param {Object} obj
+ * @return Boolean
+ */
+var toString = Object.prototype.toString;
+var OBJECT_STRING = '[object Object]';
+function isPlainObject (obj) {
+  return toString.call(obj) === OBJECT_STRING
+}
+
+/**
+ * Check whether the object has the property.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @return Boolean
+ */
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwn (obj, key) {
+  return hasOwnProperty.call(obj, key)
+}
+
 var fallback; // fallback lang
 var missingHandler = null; // missing handler
 var i18nFormatter = null; // custom formatter
 
 var Config = function (Vue, langVM, lang) {
-  var ref = Vue.util;
-  var bind = ref.bind;
   var Watcher = getWatcher(langVM);
   var Dep = getDep(langVM);
 
@@ -223,20 +293,6 @@ var Config = function (Vue, langVM, lang) {
 };
 
 /**
- * utilites
- */
-
-/**
- * isNil
- *
- * @param {*} val
- * @return Boolean
- */
-function isNil (val) {
-  return val === null || val === undefined
-}
-
-/**
  *  String format template
  *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
@@ -246,9 +302,6 @@ var RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 
 
 var Format = function (Vue) {
-  var ref = Vue.util;
-  var hasOwn = ref.hasOwn;
-
   /**
    * template
    *
@@ -580,11 +633,6 @@ function parsePath (path) {
 }
 
 var Path = function (Vue) {
-  var ref = Vue.util;
-  var isObject = ref.isObject;
-  var isPlainObject = ref.isPlainObject;
-  var hasOwn = ref.hasOwn;
-
   function empty (target) {
     if (target === null || target === undefined) { return true }
 
@@ -645,9 +693,6 @@ var Path = function (Vue) {
  */
 
 var Extend = function (Vue) {
-  var ref = Vue.util;
-  var isObject = ref.isObject;
-  var bind = ref.bind;
   var format = Format(Vue);
   var getValue = Path(Vue);
 
