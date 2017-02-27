@@ -57,7 +57,7 @@
     "rollup-plugin-replace": "^1.1.1",
     "selenium-server": "2.53.1",
     "uglify-js": "^2.7.5",
-    "vue": "2.0.0",
+    "vue": "^2.2.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.1"
   },
