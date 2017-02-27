@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.1 
+ * vue-i18n v6.0.0-alpha.2 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -11,6 +11,10 @@
 
 /*  */
 
+/**
+ * utilites
+ */
+
 function warn (msg, err) {
   if (typeof console !== 'undefined') {
     console.warn('[vue-i18n] ' + msg);
@@ -18,6 +22,76 @@ function warn (msg, err) {
       console.warn(err.stack);
     }
   }
+}
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwn (obj, key) {
+  return hasOwnProperty.call(obj, key)
+}
+
+
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+var toString = Object.prototype.toString;
+var OBJECT_STRING = '[object Object]';
+function isPlainObject (obj) {
+  return toString.call(obj) === OBJECT_STRING
+}
+
+function isNull (val) {
+  return val === null || val === undefined
+}
+
+function parseArgs () {
+  var args = [], len = arguments.length;
+  while ( len-- ) args[ len ] = arguments[ len ];
+
+  var locale = null;
+  var params = null;
+  if (args.length === 1) {
+    if (isObject(args[0]) || Array.isArray(args[0])) {
+      params = args[0];
+    } else if (typeof args[0] === 'string') {
+      locale = args[0];
+    }
+  } else if (args.length === 2) {
+    if (typeof args[0] === 'string') {
+      locale = args[0];
+    }
+    if (isObject(args[1]) || Array.isArray(args[1])) {
+      params = args[1];
+    }
+  }
+
+  return { locale: locale, params: params }
+}
+
+function getOldChoiceIndexFixed (choice) {
+  return choice
+    ? choice > 1
+      ? 1
+      : 0
+    : 1
+}
+
+function getChoiceIndex (choice, choicesLength) {
+  choice = Math.abs(choice);
+
+  if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
+
+  return choice ? Math.min(choice, 2) : 0
+}
+
+function fetchChoice (message, choice) {
+  if (!message && typeof message !== 'string') { return null }
+  var choices = message.split('|');
+
+  choice = getChoiceIndex(choice, choices.length);
+  if (!choices[choice]) { return message }
+  return choices[choice].trim()
 }
 
 /*  */
@@ -86,6 +160,10 @@ var mixin = {
       // root i18n
       this.$i18n = this.$root.$i18n;
     }
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    this.$i18n = null;
   }
 };
 
@@ -93,14 +171,14 @@ var Asset = function (Vue) {
   var strats = Vue.config.optionMergeStrategies;
   if (strats) {
     strats.i18n = function (parent, child) {
+      var ret = Object.create(null);
       if (!child) { return parent }
       if (!parent) { return child }
       if (!child & !parent) {
         // TODO: should be warn
-        return {}
+        return ret
       }
-      var ret = Object.create(null);
-      Vue.extend(ret, parent);
+      Vue.util.extend(ret, parent);
       for (var key in child) {
         ret[key] = child[key];
       }
@@ -133,64 +211,6 @@ function install (_Vue) {
 
 /*  */
 
-/**
- * utilites
- */
-
-function isNil (val) {
-  return val === null || val === undefined
-}
-
-function parseArgs () {
-  var args = [], len = arguments.length;
-  while ( len-- ) args[ len ] = arguments[ len ];
-
-  var locale = null;
-  if (args.length === 1) {
-    if (Vue.util.isObject(args[0]) || Array.isArray(args[0])) {
-      args = args[0];
-    } else if (typeof args[0] === 'string') {
-      locale = args[0];
-    }
-  } else if (args.length === 2) {
-    if (typeof args[0] === 'string') {
-      locale = args[0];
-    }
-    if (Vue.util.isObject(args[1]) || Array.isArray(args[1])) {
-      args = args[1];
-    }
-  }
-
-  return { locale: locale, params: args }
-}
-
-function getOldChoiceIndexFixed (choice) {
-  return choice
-    ? choice > 1
-      ? 1
-      : 0
-    : 1
-}
-
-function getChoiceIndex (choice, choicesLength) {
-  choice = Math.abs(choice);
-
-  if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
-
-  return choice ? Math.min(choice, 2) : 0
-}
-
-function fetchChoice (message, choice) {
-  if (!message && typeof message !== 'string') { return null }
-  var choices = message.split('|');
-
-  choice = getChoiceIndex(choice, choices.length);
-  if (!choices[choice]) { return message }
-  return choices[choice].trim()
-}
-
-/*  */
-
 var BaseFormatter = function BaseFormatter (options) {
   if ( options === void 0 ) options = {};
 
@@ -200,7 +220,6 @@ var BaseFormatter = function BaseFormatter (options) {
 var prototypeAccessors$1 = { options: {} };
 
 prototypeAccessors$1.options.get = function () { return this._options };
-prototypeAccessors$1.options.set = function (options) { this._options = options; };
 
 BaseFormatter.prototype.format = function format (message) {
     var args = [], len = arguments.length - 1;
@@ -248,8 +267,8 @@ function template (str) {
       str[index + match.length] === '}') {
       return i
     } else {
-      result = Vue.util.hasOwn(args, i) ? args[i] : match;
-      if (isNil(result)) {
+      result = hasOwn(args, i) ? args[i] : match;
+      if (isNull(result)) {
         return ''
       }
 
@@ -538,61 +557,51 @@ function parsePath (path) {
 
 
 
-var Path = function (Vue) {
-  var ref = Vue.util;
-  var isObject = ref.isObject;
-  var isPlainObject = ref.isPlainObject;
-  var hasOwn = ref.hasOwn;
+function empty (target) {
+  if (target === null || target === undefined) { return true }
 
-  function empty (target) {
-    if (target === null || target === undefined) { return true }
-
-    if (Array.isArray(target)) {
-      if (target.length > 0) { return false }
-      if (target.length === 0) { return true }
-    } else if (isPlainObject(target)) {
-      /* eslint-disable prefer-const */
-      for (var key in target) {
-        if (hasOwn(target, key)) { return false }
-      }
-      /* eslint-enable prefer-const */
+  if (Array.isArray(target)) {
+    if (target.length > 0) { return false }
+    if (target.length === 0) { return true }
+  } else if (isPlainObject(target)) {
+    /* eslint-disable prefer-const */
+    for (var key in target) {
+      if (hasOwn(target, key)) { return false }
     }
-
-    return true
+    /* eslint-enable prefer-const */
   }
 
-  /**
-   * Get path value from path string
-   */
+  return true
+}
 
-  function getPathValue (obj, path) {
-    if (!isObject(obj)) { return null }
+/**
+ * Get path value from path string
+ */
+function getPathValue (obj, path) {
+  if (!isObject(obj)) { return null }
 
-    var paths = parsePath(path);
-    if (empty(paths)) {
-      return null
-    } else {
-      var length = paths.length;
-      var ret = null;
-      var last = obj;
-      var i = 0;
-      while (i < length) {
-        var value = last[paths[i]];
-        if (value === undefined) {
-          last = null;
-          break
-        }
-        last = value;
-        i++;
+  var paths = parsePath(path);
+  if (empty(paths)) {
+    return null
+  } else {
+    var length = paths.length;
+    var ret = null;
+    var last = obj;
+    var i = 0;
+    while (i < length) {
+      var value = last[paths[i]];
+      if (value === undefined) {
+        last = null;
+        break
       }
-
-      ret = last;
-      return ret
+      last = value;
+      i++;
     }
-  }
 
-  return getPathValue
-};
+    ret = last;
+    return ret
+  }
+}
 
 /*  */
 
@@ -608,11 +617,9 @@ var VueI18n = function VueI18n (options) {
   this._root = options.root || null;
   this._fallbackRoot = options.fallbackRoot || false;
 
-  var getPathValue = Path(Vue);
-  this._getPathValue = getPathValue;
   this._exist = function (message, key) {
     if (!message || !key) { return false }
-    return !isNil(getPathValue(message, key))
+    return !isNull(getPathValue(message, key))
   };
 
   this._resetVM({ locale: locale, messages: messages });
@@ -643,7 +650,7 @@ prototypeAccessors.formatter.get = function () { return this._formatter };
 prototypeAccessors.formatter.set = function (formatter) { this._formatter = formatter; };
 
 VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm) {
-  if (!isNil(result)) { return result }
+  if (!isNull(result)) { return result }
   if (this.missing) {
     this.missing.apply(null, [locale, key, vm]);
   } else {
@@ -658,7 +665,7 @@ VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm)
 };
 
 VueI18n.prototype._isFallbackRoot = function _isFallbackRoot (val) {
-  return !val && !isNil(this._root) && this._fallbackRoot
+  return !val && !isNull(this._root) && this._fallbackRoot
 };
 
 VueI18n.prototype._interpolate = function _interpolate (message, key, args) {
@@ -666,10 +673,10 @@ VueI18n.prototype._interpolate = function _interpolate (message, key, args) {
 
   if (!message) { return null }
 
-  var val = this._getPathValue(message, key);
+  var val = getPathValue(message, key);
   if (Array.isArray(val)) { return val }
-  if (isNil(val)) { val = message[key]; }
-  if (isNil(val)) { return null }
+  if (isNull(val)) { val = message[key]; }
+  if (isNull(val)) { return null }
   if (typeof val !== 'string') {
     warn(("Value of key '" + key + "' is not a string!"));
     return null
@@ -706,10 +713,10 @@ VueI18n.prototype._format = function _format (val) {
 VueI18n.prototype._translate = function _translate (messages, locale, fallback, key, args) {
   var res = null;
   res = this._interpolate(messages[locale], key, args);
-  if (!isNil(res)) { return res }
+  if (!isNull(res)) { return res }
 
   res = this._interpolate(messages[fallback], key, args);
-  if (!isNil(res)) {
+  if (!isNull(res)) {
     {
       warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
     }
@@ -730,7 +737,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
 
   var ret = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params);
   if (this._isFallbackRoot(ret)) {
-      {
+    {
       warn(("Fall back to translate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
@@ -783,14 +790,14 @@ VueI18n.prototype.te = function te (key) {
     var args = [], len = arguments.length - 1;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-  return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
+    return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
     var ref;
-  };
+};
 
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.0.0-alpha.1';
+VueI18n.version = '6.0.0-alpha.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
