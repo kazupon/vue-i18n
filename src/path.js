@@ -1,3 +1,5 @@
+import { isObject, isPlainObject, hasOwn } from './util'
+
 /**
  *  Path paerser
  *  - Inspired:
@@ -287,8 +289,6 @@ function parsePath (path) {
 }
 
 export default function (Vue) {
-  const { isObject, isPlainObject, hasOwn } = Vue.util
-
   function empty (target) {
     if (target === null || target === undefined) { return true }
 

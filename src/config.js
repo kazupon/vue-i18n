@@ -1,11 +1,11 @@
 import { getWatcher, getDep } from './observer'
+import { bind } from './util'
 
 let fallback // fallback lang
 let missingHandler = null // missing handler
 let i18nFormatter = null // custom formatter
 
 export default function (Vue, langVM, lang) {
-  const { bind } = Vue.util
   const Watcher = getWatcher(langVM)
   const Dep = getDep(langVM)
 
