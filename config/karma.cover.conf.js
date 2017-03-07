@@ -10,7 +10,11 @@ module.exports = config => {
         { type: 'text-summary', dir: '../coverage', subdir: '.' }
       ]
     },
-    singleRun: true
+    singleRun: true,
+    plugins: base.plugins.concat([
+      'karma-coverage',
+      'karma-phantomjs-launcher'
+    ])
   })
 
   config.set(options)

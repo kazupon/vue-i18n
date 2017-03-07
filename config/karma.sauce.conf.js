@@ -63,10 +63,10 @@ const batches = [
       browserName: 'iphone',
       version: '9.3'
     },
-    sl_android_4_2: {
+    sl_android_4_4: {
       base: 'SauceLabs',
       browserName: 'android',
-      version: '4.2'
+      version: '4.4'
     },
     sl_android_5_1: {
       base: 'SauceLabs',
@@ -89,9 +89,15 @@ module.exports = config => {
     sauceLabs: {
       testName: `${pack.name} unit tests`,
       recordScreenshots: false,
+      connectOptions: {
+        'no-ssl-bump-domains': 'all' // Ignore SSL error on Android emulator
+      },
       build: process.env.CIRCLE_BUILD_NUM || process.env.SAUCE_BUILD_ID || Date.now()
     },
     captureTimeout: 300000,
-    browserNoActivityTimeout: 300000
+    browserNoActivityTimeout: 300000,
+    plugins: base.plugins.concat([
+      'karma-sauce-launcher'
+    ])
   }))
 }

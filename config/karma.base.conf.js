@@ -2,10 +2,10 @@ const webpack = require('webpack')
 
 const webpackConfig = {
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      exclude: /node_modules|vue\/dist/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      exclude: /node_modules/
     }]
   },
   plugins: [
@@ -19,18 +19,21 @@ const webpackConfig = {
 }
 
 module.exports = {
-  basePath: '',
+  frameworks: ['jasmine'],
   files: [
     '../test/unit/index.js'
   ],
-  exclude: [
-  ],
-  frameworks: ['jasmine'],
   preprocessors: {
     '../test/unit/index.js': ['webpack', 'sourcemap']
   },
   webpack: webpackConfig,
   webpackMiddleware: {
     noInfo: true
-  }
+  },
+  plugins: [
+    'karma-jasmine',
+    'karma-mocha-reporter',
+    'karma-sourcemap-loader',
+    'karma-webpack'
+  ]
 }

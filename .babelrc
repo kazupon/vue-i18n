@@ -6,5 +6,8 @@
       "plugins": ["istanbul"],
       "presets": ["power-assert"]
     }
-  }
+  },
+  "ignore": [
+    "dist/*.js"
+  ]
 }
