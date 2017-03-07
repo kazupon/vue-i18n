@@ -1,4 +1,6 @@
-export default function (Vue) {
+/* @flow */
+
+export default function (Vue: typeof Vue) {
   const strats = Vue.config.optionMergeStrategies
   if (strats) {
     strats.i18n = (parent, child) => {
