@@ -1,3 +1,14 @@
+<a name="6.0.0-alpha.2"></a>
+# [6.0.0-alpha.2](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2017-02-27)
+
+
+### :zap: Improvements
+
+* **mixin:** release i18n instance ([cc362a3](https://github.com/kazupon/vue-i18n/commit/cc362a3))
+* **vue:** support vue 2.2 ([5e7bf5e](https://github.com/kazupon/vue-i18n/commit/5e7bf5e))
+
+
+
 <a name="6.0.0-alpha.1"></a>
 # [6.0.0-alpha.1](https://github.com/kazupon/vue-i18n/compare/v5.0.2...v6.0.0-alpha.1) (2017-02-23)
 
