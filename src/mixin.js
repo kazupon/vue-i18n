@@ -53,9 +53,12 @@ export default {
           options.i18n.root = this.$root.$i18n
         }
         this.$i18n = new VueI18n(options.i18n)
+        if (options.i18n.sync) {
+          this._localeWatcher = this.$i18n.watchLocale()
+        }
       } else {
         if (process.env.NODE_ENV !== 'production') {
-          warn(`Cannot be interpreted 'i18n' options.`)
+          warn(`Cannot be interpreted 'i18n' option.`)
         }
       }
     } else if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
@@ -65,6 +68,11 @@ export default {
   },
 
   destroyed () {
+    if (this._localeWatcher) {
+      this.$i18n.unwatchLocale()
+      delete this._localeWatcher
+    }
+
     this.$i18n = null
   }
 }

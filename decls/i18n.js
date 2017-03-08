@@ -11,12 +11,14 @@ declare type I18nOptions = {
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n,
-  fallbackRoot?: boolean
+  fallbackRoot?: boolean,
+  sync?: boolean
 }
 
 declare interface I18n {
   static install: () => void,
   static version: string,
+  get vm() :any,
   get locale (): string,
   set locale (locale: string): void,
   get fallbackLocale (): string,
@@ -29,7 +31,9 @@ declare interface I18n {
   set formatter (formatter: Formatter): void,
   t (key: string, ...args: any): string,
   tc (key: string, choice?: number, ...args: any): any,
-  te (key: string, ...args: any): boolean
+  te (key: string, ...args: any): boolean,
+  watchLocale (): any,
+  unwatchLocale (): boolean
 }
 
 declare type FormatterOptions = Dictionary<any>

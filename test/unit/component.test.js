@@ -46,9 +46,26 @@ describe('component translation', () => {
           }
         },
         child2: {
+          components: {
+            'sub-child2': {
+              i18n: {
+                sync: true,
+                messages: {
+                  en: { who: 'sub-child2' },
+                  ja: { who: 'サブの子2' }
+                }
+              },
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
           render (h) {
             return h('div', {}, [
-              h('p', { ref: 'who' }, [this.$t('who')])
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('sub-child2', { ref: 'sub-child2' })
             ])
           }
         }
@@ -70,11 +87,13 @@ describe('component translation', () => {
     const child1Fallback = vm.$refs.child1.$refs.fallback
     const child2 = vm.$refs.child2.$refs.who
     const subChild1 = vm.$refs.child1.$refs['sub-child1'].$refs.who
+    const subChild2 = vm.$refs.child2.$refs['sub-child2'].$refs.who
     assert.equal(root.textContent, 'ルート')
     assert.equal(child1.textContent, 'child1')
     assert.equal(child1Fallback.textContent, 'フォールバック')
     assert.equal(child2.textContent, 'ルート')
     assert.equal(subChild1.textContent, 'ルート')
+    assert.equal(subChild2.textContent, 'サブの子2')
 
     // change locale
     i18n.locale = 'en'
@@ -85,6 +104,8 @@ describe('component translation', () => {
       assert.equal(child1Fallback.textContent, 'fallback')
       assert.equal(child2.textContent, 'root')
       assert.equal(subChild1.textContent, 'root')
+      assert.equal(subChild2.textContent, 'sub-child2')
+
       vm.$destroy()
     }).then(() => {
       assert(vm.$i18n === null)
