@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.2 
+ * vue-i18n v6.0.0-alpha.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -35,6 +35,27 @@ var toString = Object.prototype.toString;
 var OBJECT_STRING = '[object Object]';
 function isPlainObject (obj) {
   return toString.call(obj) === OBJECT_STRING
+}
+
+function funcName (f) {
+  if (f.name) { return f.name }
+  var match = /^\s*function\s*([^\(]*)/im.exec(f.toString());
+  return match ? match[1] : ''
+}
+
+function ctorName (obj) {
+  var str = toString.call(obj).slice(8, -1);
+  if ((str === 'Object' || str === 'Error') && obj.constructor) {
+    return funcName(obj.constructor)
+  }
+  return str
+}
+
+function typeName (val) {
+  if (val === null) { return 'null' }
+  var type = typeof val;
+  if (type === 'object') { return ctorName(val) }
+  return type
 }
 
 function isNull (val) {
@@ -97,7 +118,10 @@ var mixin = {
     $t: function $t () {
       var this$1 = this;
 
-      // HACK: add dependency tracking !!
+      if (!this.$i18n) {
+        throw Error("Failed in $t due to not find VueI18n instance")
+      }
+      // add dependency tracking !!
       var locale = this.$i18n.locale;
       var messages = this.$i18n.messages;
       return function (key) {
@@ -112,7 +136,10 @@ var mixin = {
     $tc: function $tc () {
       var this$1 = this;
 
-      // HACK: add dependency tracking !!
+      if (!this.$i18n) {
+        throw Error("Failed in $tc due to not find VueI18n instance")
+      }
+      // add dependency tracking !!
       var locale = this.$i18n.locale;
       var messages = this.$i18n.messages;
       return function (key, choice) {
@@ -127,7 +154,10 @@ var mixin = {
     $te: function $te () {
       var this$1 = this;
 
-      // HACK: add dependency tracking !!
+      if (!this.$i18n) {
+        throw Error("Failed in $te due to not find VueI18n instance")
+      }
+      // add dependency tracking !!
       var locale = this.$i18n.locale;
       var messages = this.$i18n.messages;
       return function (key) {
@@ -143,25 +173,39 @@ var mixin = {
   beforeCreate: function beforeCreate () {
     var options = this.$options;
     if (options.i18n) {
-      if (options.i18n instanceof VueI18n) {
+      if (typeName(options.i18n) === 'VueI18n') {
         this.$i18n = options.i18n;
-      } else {
+      } else if (isPlainObject(options.i18n)) {
         // component local i18n
-        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+        if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
           options.i18n.root = this.$root.$i18n;
         }
         this.$i18n = new VueI18n(options.i18n);
+        if (options.i18n.sync) {
+          this._localeWatcher = this.$i18n.watchLocale();
+        }
+      } else {
+        if (process.env.NODE_ENV !== 'production') {
+          warn("Cannot be interpreted 'i18n' option.");
+        }
       }
-    } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+    } else if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
       // root i18n
       this.$i18n = this.$root.$i18n;
     }
   },
 
-  beforeDestroy: function beforeDestroy () {
+  destroyed: function destroyed () {
+    if (this._localeWatcher) {
+      this.$i18n.unwatchLocale();
+      delete this._localeWatcher;
+    }
+
     this.$i18n = null;
   }
 };
+
+/*  */
 
 var Asset = function (Vue) {
   var strats = Vue.config.optionMergeStrategies;
@@ -611,6 +655,7 @@ var VueI18n = function VueI18n (options) {
   this._formatter = options.formatter || new BaseFormatter();
   this._missing = options.missing;
   this._root = options.root || null;
+  this._sync = options.sync || false;
   this._fallbackRoot = options.fallbackRoot || false;
 
   this._exist = function (message, key) {
@@ -621,7 +666,7 @@ var VueI18n = function VueI18n (options) {
   this._resetVM({ locale: locale, messages: messages });
 };
 
-var prototypeAccessors = { messages: {},locale: {},fallbackLocale: {},missing: {},formatter: {} };
+var prototypeAccessors = { vm: {},messages: {},locale: {},fallbackLocale: {},missing: {},formatter: {} };
 
 VueI18n.prototype._resetVM = function _resetVM (data) {
   var silent = Vue.config.silent;
@@ -629,6 +674,26 @@ VueI18n.prototype._resetVM = function _resetVM (data) {
   this._vm = new Vue({ data: data });
   Vue.config.silent = silent;
 };
+
+VueI18n.prototype.watchLocale = function watchLocale () {
+  if (!this._sync || !this._root) { return null }
+  var target = this._vm;
+  this._watcher = this._root.vm.$watch('locale', function (val) {
+    target.$set(target, 'locale', val);
+  }, { immediate: true });
+  return this._watcher
+};
+
+VueI18n.prototype.unwatchLocale = function unwatchLocale () {
+  if (!this._sync || !this._watcher) { return false }
+  if (this._watcher) {
+    this._watcher();
+    delete this._watcher;
+  }
+  return true
+};
+
+prototypeAccessors.vm.get = function () { return this._vm };
 
 prototypeAccessors.messages.get = function () { return this._vm.$data.messages };
 prototypeAccessors.messages.set = function (messages) { this._vm.$set(this._vm, 'messages', messages); };
@@ -750,9 +815,9 @@ VueI18n.prototype.t = function t (key) {
 
   return (ref = this)._t.apply(ref, [ key, this.locale, this.messages, null ].concat( args ))
     var ref;
-};
+  };
 
-VueI18n.prototype._tc = function _tc (key, _locale, messages, host, choice) {
+  VueI18n.prototype._tc = function _tc (key, _locale, messages, host, choice) {
     var args = [], len = arguments.length - 5;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 5 ];
 
@@ -786,7 +851,7 @@ VueI18n.prototype.te = function te (key) {
     var args = [], len = arguments.length - 1;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-    return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
+  return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
     var ref;
 };
 

@@ -1,3 +1,18 @@
+<a name="6.0.0-alpha.3"></a>
+# [6.0.0-alpha.3](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2017-03-08)
+
+
+### :star: New Features
+
+* add `sync` option ([5c46c07](https://github.com/kazupon/vue-i18n/commit/5c46c07))
+
+
+### :zap: Improvements
+
+* **mixin:** add error throwings and a warning ([0e4ac39](https://github.com/kazupon/vue-i18n/commit/0e4ac39))
+
+
+
 <a name="6.0.0-alpha.2"></a>
 # [6.0.0-alpha.2](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2017-02-27)
 
