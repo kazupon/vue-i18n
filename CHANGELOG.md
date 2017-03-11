@@ -1,3 +1,8 @@
+<a name="6.0.0-alpha.4"></a>
+# [6.0.0-alpha.4](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2017-03-11)
+
+
+
 <a name="6.0.0-alpha.3"></a>
 # [6.0.0-alpha.3](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2017-03-08)
 
