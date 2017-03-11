@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.4 
+ * vue-i18n v6.0.0-alpha.5 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -35,27 +35,6 @@ var toString = Object.prototype.toString;
 var OBJECT_STRING = '[object Object]';
 function isPlainObject (obj) {
   return toString.call(obj) === OBJECT_STRING
-}
-
-function funcName (f) {
-  if (f.name) { return f.name }
-  var match = /^\s*function\s*([^\(]*)/im.exec(f.toString());
-  return match ? match[1] : ''
-}
-
-function ctorName (obj) {
-  var str = toString.call(obj).slice(8, -1);
-  if ((str === 'Object' || str === 'Error') && obj.constructor) {
-    return funcName(obj.constructor)
-  }
-  return str
-}
-
-function typeName (val) {
-  if (val === null) { return 'null' }
-  var type = typeof val;
-  if (type === 'object') { return ctorName(val) }
-  return type
 }
 
 function isNull (val) {
@@ -173,11 +152,11 @@ var mixin = {
   beforeCreate: function beforeCreate () {
     var options = this.$options;
     if (options.i18n) {
-      if (typeName(options.i18n) === 'VueI18n') {
+      if (options.i18n instanceof VueI18n) {
         this.$i18n = options.i18n;
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
-        if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
+        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n;
         }
         this.$i18n = new VueI18n(options.i18n);
@@ -189,7 +168,7 @@ var mixin = {
           warn("Cannot be interpreted 'i18n' option.");
         }
       }
-    } else if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
+    } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this.$i18n = this.$root.$i18n;
     }
