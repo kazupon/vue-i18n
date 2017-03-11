@@ -1,3 +1,13 @@
+<a name="6.0.0-alpha.5"></a>
+# [6.0.0-alpha.5](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.3...v6.0.0-alpha.5) (2017-03-11)
+
+
+### :bug: Bug Fixes
+
+* **mixin:** fix cannot create VueI18n instance error for minify production ([7eeb29f](https://github.com/kazupon/vue-i18n/commit/7eeb29f))
+
+
+
 <a name="6.0.0-alpha.4"></a>
 # [6.0.0-alpha.4](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2017-03-11)
 
