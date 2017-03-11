@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.3 
+ * vue-i18n v6.0.0-alpha.4 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -862,7 +862,7 @@ VueI18n.prototype.te = function te (key) {
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.0.0-alpha.3';
+VueI18n.version = '6.0.0-alpha.4';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);

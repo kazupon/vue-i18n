@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.3 
+ * vue-i18n v6.0.0-alpha.4 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
