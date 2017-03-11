@@ -1,7 +1,7 @@
 /* @flow */
 
 import VueI18n from './index'
-import { typeName, isPlainObject, warn } from './util'
+import { isPlainObject, warn } from './util'
 
 export default {
   computed: {
@@ -45,11 +45,11 @@ export default {
   beforeCreate () {
     const options: any = this.$options
     if (options.i18n) {
-      if (typeName(options.i18n) === 'VueI18n') {
+      if (options.i18n instanceof VueI18n) {
         this.$i18n = options.i18n
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
-        if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
+        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n
         }
         this.$i18n = new VueI18n(options.i18n)
@@ -61,7 +61,7 @@ export default {
           warn(`Cannot be interpreted 'i18n' option.`)
         }
       }
-    } else if (this.$root && this.$root.$i18n && typeName(this.$root.$i18n) === 'VueI18n') {
+    } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this.$i18n = this.$root.$i18n
     }

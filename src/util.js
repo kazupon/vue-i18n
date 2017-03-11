@@ -42,27 +42,6 @@ export function isPlainObject (obj: any): boolean {
   return toString.call(obj) === OBJECT_STRING
 }
 
-function funcName (f: Function): string {
-  if (f.name) { return f.name }
-  const match = /^\s*function\s*([^\(]*)/im.exec(f.toString())
-  return match ? match[1] : ''
-}
-
-function ctorName (obj: any): string {
-  const str = toString.call(obj).slice(8, -1)
-  if ((str === 'Object' || str === 'Error') && obj.constructor) {
-    return funcName(obj.constructor)
-  }
-  return str
-}
-
-export function typeName (val: mixed): string {
-  if (val === null) { return 'null' }
-  const type: string = typeof val
-  if (type === 'object') { return ctorName(val) }
-  return type
-}
-
 export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
