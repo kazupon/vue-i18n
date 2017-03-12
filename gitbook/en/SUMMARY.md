@@ -2,6 +2,8 @@
 
 Internationalization plugin of Vue.js
 
+> :warning: NOTE: This documentation is for vue-i18 v6.0 or later. Documentation for 5.x is [here](https://kazupon.github.io/vue-i18n/old/)
+
 * [Installation](installation.md)
 * [Getting Started](started.md)
 * [Formatting](formatting.md)
