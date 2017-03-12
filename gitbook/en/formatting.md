@@ -4,7 +4,7 @@
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     message: {
       hello: 'hello <br> world'
@@ -34,10 +34,10 @@ world</p>
 
 ## Named formatting
 
-Locale the following:
+Locale messages the following:
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     message: {
       hello: '{msg} world'
@@ -60,10 +60,10 @@ Output the following:
 
 ## List formatting
 
-Locale the following:
+Locale messages the following:
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     message: {
       hello: '{0} world'
@@ -86,10 +86,10 @@ Output the following:
 
 ## Support ruby on rails i18n format
 
-Locale the following:
+Locale messages the following:
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     message: {
       hello: '%{msg} world'
@@ -110,13 +110,43 @@ Output the following:
 <p>hello world</p>
 ```
 
-## Registering a custom formatter
+## Custom formatting
+Sometimes, you maybe need to translate with custom formatting (e.g. [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
 
-If the provided formatter doesn't meet your needs, you can also register a custom formatter,
+You can realize with custom formatter that implement [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
+
+The below custom formatter with ES2015 class syntax:
 
 ```javascript
-Vue.config.i18nFormatter = function (string, ...arguments) {
-  //...
-  //return formattedString;
+// Custom Fromatter implementaion
+class CustomFormatter {
+ constructor (options) {
+   // ...
+ }
+
+ format (message, ...args) {
+   // implement formatting logic here
+   // ...
+
+   // return the resolved message string
+   return 'resolved message string'
+ }
 }
+
+// register with `formatter` option
+const i18n = new VueI18n({
+  locale: 'en-US',
+  formatter: new CustomFormatter(/* here the constructor options */),
+  messages: {
+    'en-US': {
+      // ...
+    },
+    // ...
+  }
+})
+
+// Run!
+new Vue({ i18n }).$mount('#app')
 ```
+
+You can check [the custom formatter official example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom).
