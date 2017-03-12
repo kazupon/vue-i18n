@@ -4,8 +4,11 @@
 var Vue = require('vue')
 var VueI18n = require('vue-i18n')
 
-// ready translated locales
-var locales = {
+// install plugin
+Vue.use(VueI18n)
+
+// ready translated locale messages
+var messages = {
   en: {
     message: {
       hello: 'hello world'
@@ -18,52 +21,29 @@ var locales = {
   }
 }
 
-// install plugin
-Vue.use(VueI18n)
-
-
-// set lang
-Vue.config.lang = 'ja'
-
-// set locales
-Object.keys(locales).forEach(function (lang) {
-  Vue.locale(lang, locales[lang])
+// create VueI18n instance with options
+var i18n = new Vue18n({
+  locale: 'ja', // set locale
+  messages: messages, // set locale messages
 })
 
-// create instance
-new Vue({ el: 'body' })
+
+// create a Vue instanc with `i18n` option
+new Vue({ i18n: i18n }).$mount('#app')
 ```
 
 Template the following:
 
 ```html
-<p>{{ $t("message.hello") }}</p>
+<div id="#app">
+  <p>{{ $t("message.hello") }}</p>
+</div>
 ```
 
 Output the following:
 
 ```html
-<p>こんにちは、世界</p>
-```
-
-If you want to use `$t` in data property, methods or computed properties of a component, use `this.$t`:
-
-```javascript
-export defaults {
-  data () {
-    return {
-      hello: this.$t("message.hello")
-    }
-  },
-  computed: {
-    computedHello () {
-      return this.$t("message.hello")
-    }
-  },
-  methods: {
-    sayHello () {
-      alert(this.$t("message.hello"))
-    }
-  }
-}
+<div id="#app">
+  <p>こんにちは、世界</p>
+</div>
 ```
