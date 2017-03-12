@@ -1,17 +1,25 @@
 # Fallback translation
 
-Locale the following:
+The following locale messages that not exist `message` key in `ja` locale:
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     message: 'hello world'
   },
   ja: {
   }
 }
-Vue.config.lang = 'ja'
-Vue.config.fallbackLang = 'en'
+```
+
+When specify the `fallbackLocale` option to VueI18n constructor option, `message` key is traslated with `en` locale key:
+
+```javascript
+var i18n = new VueI18n({
+  locale: 'ja',
+  fallbackLocale: 'en',
+  messages: messages
+})
 ```
 
 Template the following:
