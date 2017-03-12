@@ -2,10 +2,10 @@
 
 You can translate with pluralization.  You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
-Locale the following:
+Locale messages the following:
 
 ```javascript
-var locales = {
+var messages = {
   en: {
     car: 'car | cars'
   }
