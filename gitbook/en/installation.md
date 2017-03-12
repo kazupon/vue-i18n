@@ -3,8 +3,6 @@
 ## Compatibility
 - Vue.js `2.0.0-beta.1`+
 
-> :warning: For Vue.js 1.x, until v4.10.0
-
 ## Installation
 
 ### CDN
@@ -34,15 +32,17 @@ jsdelivr
 
 When used in CommonJS, you must explicitly install the router via Vue.use():
 
-> :warning: if you are using `vue-router`, you must install with `Vue.use()` in advance of instance methods (`router#map`, `router#start`, ...etc).
 
 ```javascript
 var Vue = require('vue')
 var VueI18n = require('vue-i18n')
 
 Vue.use(VueI18n)
-Vue.config.lang = 'ja'
-Vue.locale('ja', { ... })
+
+var i18n = new VueI18n({
+  locale: 'ja',
+  // ...
+})
 ```
 
 You don't need to do this when using the standalone build, as it installs itself automatically.
