@@ -1,6 +1,6 @@
 # Locale and KeyPath Syntax
 
-You can use the bellow structure locale:
+You can use the bellow structure locale messsages:
 
 ```json
 {
@@ -20,7 +20,7 @@ You can use the bellow structure locale:
 }
 ```
 
-In the above locale structure,  You can translate with using below key paths.
+In the above locale messages structure,  You can translate with using below key paths.
 
 ```html
 <div id="app">
