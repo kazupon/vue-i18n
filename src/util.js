@@ -13,7 +13,7 @@ export function warn (msg: string, err: ?Error): void {
   }
 }
 
-const hasOwnProperty = Object.prototype.hasOwnProperty
+const hasOwnProperty: Function = Object.prototype.hasOwnProperty
 export function hasOwn (obj: Object, key: string): boolean {
   return hasOwnProperty.call(obj, key)
 }
@@ -36,8 +36,8 @@ export function isObject (obj: mixed): boolean {
   return obj !== null && typeof obj === 'object'
 }
 
-const toString = Object.prototype.toString
-const OBJECT_STRING = '[object Object]'
+const toString: Function = Object.prototype.toString
+const OBJECT_STRING: string = '[object Object]'
 export function isPlainObject (obj: any): boolean {
   return toString.call(obj) === OBJECT_STRING
 }

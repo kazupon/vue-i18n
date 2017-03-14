@@ -9,7 +9,7 @@ import { isObject, isPlainObject, hasOwn } from './util'
  */
 
 // cache
-const pathCache = Object.create(null)
+const pathCache: { [key: Path]: any } = Object.create(null)
 
 // actions
 const APPEND = 0
@@ -166,7 +166,7 @@ function formatSubPath (path: string): boolean | string {
  * Parse a string path into an array of segments
  */
 
-function parse (path): ?Array<string> {
+function parse (path: Path): ?Array<string> {
   const keys: Array<string> = []
   let index: number = -1
   let mode: number = BEFORE_PATH
@@ -265,7 +265,7 @@ function parse (path): ?Array<string> {
  * External parse that check for a cache hit first
  */
 
-function parsePath (path: string): Array<string> {
+function parsePath (path: Path): Array<string> {
   let hit: ?Array<string> = pathCache[path]
   if (!hit) {
     hit = parse(path)
@@ -276,8 +276,8 @@ function parsePath (path: string): Array<string> {
   return hit || []
 }
 
-export type PathValue = | string | number | boolean | null | PathValueObject | PathValueArray
-export type PathValueObject = Dictionary<PathValue>
+export type PathValue = PathValueObject | PathValueArray | string | number | boolean | null
+export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
 
 function empty (target: any): boolean {
@@ -298,17 +298,17 @@ function empty (target: any): boolean {
 /**
  * Get path value from path string
  */
-export default function getPathValue (obj: Object, path: string): PathValue {
+export default function getPathValue (obj: mixed, path: Path): PathValue {
   if (!isObject(obj)) { return null }
 
   const paths: Array<string> = parsePath(path)
   if (empty(paths)) {
     return null
   } else {
-    const length = paths.length
+    const length: number = paths.length
     let ret: any = null
     let last: any = obj
-    let i = 0
+    let i: number = 0
     while (i < length) {
       const value: any = last[paths[i]]
       if (value === undefined) {

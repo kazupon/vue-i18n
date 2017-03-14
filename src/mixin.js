@@ -5,31 +5,31 @@ import { isPlainObject, warn } from './util'
 
 export default {
   computed: {
-    $t () {
+    $t (): Function {
       if (!this.$i18n) {
         throw Error(`Failed in $t due to not find VueI18n instance`)
       }
       // add dependency tracking !!
       const locale: string = this.$i18n.locale
       const messages: Messages = this.$i18n.messages
-      return (key: string, ...args: any): string => {
+      return (key: string, ...args: any): TranslateResult => {
         return this.$i18n._t(key, locale, messages, this, ...args)
       }
     },
 
-    $tc () {
+    $tc (): Function {
       if (!this.$i18n) {
         throw Error(`Failed in $tc due to not find VueI18n instance`)
       }
       // add dependency tracking !!
       const locale: string = this.$i18n.locale
       const messages: Messages = this.$i18n.messages
-      return (key: string, choice?: number, ...args: any): string => {
+      return (key: string, choice?: number, ...args: any): TranslateResult => {
         return this.$i18n._tc(key, locale, messages, this, choice, ...args)
       }
     },
 
-    $te () {
+    $te (): Function {
       if (!this.$i18n) {
         throw Error(`Failed in $te due to not find VueI18n instance`)
       }
@@ -42,7 +42,7 @@ export default {
     }
   },
 
-  beforeCreate () {
+  beforeCreate (): void {
     const options: any = this.$options
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  destroyed () {
+  destroyed (): void {
     if (this._localeWatcher) {
       this.$i18n.unwatchLocale()
       delete this._localeWatcher

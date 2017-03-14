@@ -11,7 +11,7 @@ export default class BaseFormatter {
 
   get options (): FormatterOptions { return this._options }
 
-  format (message: string, ...args: any): any {
+  format (message: string, ...args: any): string {
     return template(message, ...args)
   }
 }

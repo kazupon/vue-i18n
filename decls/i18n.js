@@ -1,44 +1,47 @@
-declare type Dictionary<T> = { [key: string]: T }
+declare type Locale = string;
+declare type Path = string;
+declare type Message = ?string | MessageObject | MessageArray;
+declare type MessageObject = { [key: Path]: Message };
+declare type MessageArray = Array<Message>;
+declare type Messages = { [key: Locale]: MessageObject };
+declare type TranslateResult = string | Array<string>;
 
-declare type Messages = Dictionary<any>
-
-declare type MissingHandler = (locale: string, key: string, vm?: any) => void
+declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
-  locale?: string,
-  fallbackLocale?: string,
+  locale?: Locale,
+  fallbackLocale?: Locale,
   messages?: Messages,
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n,
   fallbackRoot?: boolean,
   sync?: boolean
-}
+};
 
 declare interface I18n {
   static install: () => void,
   static version: string,
   get vm() :any,
-  get locale (): string,
-  set locale (locale: string): void,
-  get fallbackLocale (): string,
-  set fallbackLocale (locale: string): void,
+  get locale (): Locale,
+  set locale (locale: Locale): void,
+  get fallbackLocale (): Locale,
+  set fallbackLocale (locale: Locale): void,
   get messages (): Messages,
   set messages (messages: Messages): void,
   get missing (): ?MissingHandler,
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
-  t (key: string, ...args: any): string,
-  tc (key: string, choice?: number, ...args: any): any,
-  te (key: string, ...args: any): boolean,
+  t (key: Path, ...args: any): TranslateResult,
+  tc (key: Path, choice?: number, ...args: any): TranslateResult,
+  te (key: Path, ...args: any): boolean,
   watchLocale (): any,
   unwatchLocale (): boolean
-}
+};
 
-declare type FormatterOptions = Dictionary<any>
+declare type FormatterOptions = { [key: string]: any };
 
 declare interface Formatter {
-  format (message: string, ...args: any): any
-}
-
+  format (message: string, ...args: any): string
+};
