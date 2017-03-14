@@ -287,11 +287,9 @@ function empty (target: any): boolean {
     if (target.length > 0) { return false }
     if (target.length === 0) { return true }
   } else if (isPlainObject(target)) {
-    /* eslint-disable prefer-const */
-    for (let key in target) {
+    for (const key in target) {
       if (hasOwn(target, key)) { return false }
     }
-    /* eslint-enable prefer-const */
   }
 
   return true
