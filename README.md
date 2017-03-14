@@ -8,7 +8,7 @@
 Internationalization plugin for Vue.js
 
 ## :warning: Release versions
-- dev version: v6.0.0-alpah~
+- dev version: v6.0.0-alpha~
 - stable version: v5.0.3 
 
 ## :book: Documentation
