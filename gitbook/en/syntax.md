@@ -1,26 +1,43 @@
-# Locale and KeyPath Syntax
+# Locale Messages Syntax
 
-You can use the bellow structure locale messsages:
+Locale Messages syntax the bellow:
+
+```javascript
+// As Flowtype defnition, Locale Messages syntax like BNF annotation
+type LocaleMessages = { [key: Locale]: LocaleMessageObject };
+type LocaleMessageObject = { [key: Path]: LocaleMessage };
+type LocaleMessageArray = LocaleMessage[];
+type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+type Locale = string;
+type Path = string;
+```
+
+Based on the above syntax, You can configure the bellow structure Locale Messages:
 
 ```json
 {
-  key1: 'this is message1', // basic
-  nested: { // nested
-    message1: 'this is nested message1'
-  },
-  errors: [ // array
-    'this is 0 error code message',
-    { // array in object
-       inernal1: 'this is internal 1 error message'
+  "en": {  // 'en' Locale
+    "key1": "this is message1", // basic
+    "nested": { // nested
+      "message1": "this is nested message1"
     },
-    [ // array in array
-       'this is nested array error 1'
+    errors: [ // array
+      "this is 0 error code message",
+      {  // array in object
+         "internal1": "this is internal 1 error message"
+      },
+      [  // array in array
+         "this is nested array error 1"
+      ]
     ]
-  ]
+  },
+  "ja": { // 'ja' Locale
+    // ...
+  }
 }
 ```
 
-In the above locale messages structure,  You can translate with using below key paths.
+In the above Locale Messages structure,  You can translate with using below key paths.
 
 ```html
 <div id="app">
