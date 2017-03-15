@@ -1,17 +1,17 @@
-declare type Locale = string;
 declare type Path = string;
-declare type Message = ?string | MessageObject | MessageArray;
-declare type MessageObject = { [key: Path]: Message };
-declare type MessageArray = Array<Message>;
-declare type Messages = { [key: Locale]: MessageObject };
-declare type TranslateResult = string | Array<string>;
+declare type Locale = string;
+declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
+declare type LocaleMessageArray = Array<LocaleMessage>;
+declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 
+declare type TranslateResult = string | Array<string>;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
   locale?: Locale,
   fallbackLocale?: Locale,
-  messages?: Messages,
+  messages?: LocaleMessages,
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n,
@@ -27,8 +27,8 @@ declare interface I18n {
   set locale (locale: Locale): void,
   get fallbackLocale (): Locale,
   set fallbackLocale (locale: Locale): void,
-  get messages (): Messages,
-  set messages (messages: Messages): void,
+  get messages (): LocaleMessages,
+  set messages (messages: LocaleMessages): void,
   get missing (): ?MissingHandler,
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,

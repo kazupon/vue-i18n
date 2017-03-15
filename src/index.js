@@ -23,7 +23,7 @@ export default class VueI18n {
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
-    const messages: Messages = options.messages || {}
+    const messages: LocaleMessages = options.messages || {}
     this._vm = null
     this._fallbackLocale = options.fallbackLocale || 'en-US'
     this._formatter = options.formatter || new BaseFormatter()
@@ -40,7 +40,7 @@ export default class VueI18n {
     this._resetVM({ locale, messages })
   }
 
-  _resetVM (data: { locale: Locale, messages: Messages }): void {
+  _resetVM (data: { locale: Locale, messages: LocaleMessages }): void {
     const silent = Vue.config.silent
     Vue.config.silent = true
     this._vm = new Vue({ data })
@@ -67,14 +67,20 @@ export default class VueI18n {
 
   get vm (): any { return this._vm }
 
-  get messages (): Messages { return this._vm.$data.messages }
-  set messages (messages: Messages): void { this._vm.$set(this._vm, 'messages', messages) }
+  get messages (): LocaleMessages { return this._vm.$data.messages }
+  set messages (messages: LocaleMessages): void {
+    this._vm.$set(this._vm, 'messages', messages)
+  }
 
   get locale (): Locale { return this._vm.$data.locale }
-  set locale (locale: Locale): void { this._vm.$set(this._vm, 'locale', locale) }
+  set locale (locale: Locale): void {
+    this._vm.$set(this._vm, 'locale', locale)
+  }
 
   get fallbackLocale (): Locale { return this._fallbackLocale }
-  set fallbackLocale (locale: Locale): void { this._fallbackLocale = locale }
+  set fallbackLocale (locale: Locale): void {
+    this._fallbackLocale = locale
+  }
 
   get missing (): ?MissingHandler { return this._missing }
   set missing (handler: MissingHandler): void { this._missing = handler }
@@ -101,7 +107,7 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
-  _interpolate (message: MessageObject, key: Path, args: any): any {
+  _interpolate (message: LocaleMessageObject, key: Path, args: any): any {
     if (!message) { return null }
 
     const pathRet: PathValue = getPathValue(message, key)
@@ -151,7 +157,7 @@ export default class VueI18n {
     return this._formatter.format(message, ...args)
   }
 
-  _translate (messages: Messages, locale: Locale, fallback: Locale, key: Path, args: any): any {
+  _translate (messages: LocaleMessages, locale: Locale, fallback: Locale, key: Path, args: any): any {
     let res: any = null
     res = this._interpolate(messages[locale], key, args)
     if (!isNull(res)) { return res }
@@ -167,7 +173,7 @@ export default class VueI18n {
     }
   }
 
-  _t (key: Path, _locale: Locale, messages: Messages, host: any, ...args: any): any {
+  _t (key: Path, _locale: Locale, messages: LocaleMessages, host: any, ...args: any): any {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...args)
@@ -189,7 +195,7 @@ export default class VueI18n {
     return this._t(key, this.locale, this.messages, null, ...args)
   }
 
-  _tc (key: Path, _locale: Locale, messages: Messages, host: any, choice?: number, ...args: any): any {
+  _tc (key: Path, _locale: Locale, messages: LocaleMessages, host: any, choice?: number, ...args: any): any {
     if (!key) { return '' }
     if (choice !== undefined) {
       return fetchChoice(this._t(key, _locale, messages, host, ...args), choice)
@@ -202,7 +208,7 @@ export default class VueI18n {
     return this._tc(key, this.locale, this.messages, null, choice, ...args)
   }
 
-  _te (key: Path, _locale: Locale, messages: Messages, ...args: any): boolean {
+  _te (key: Path, _locale: Locale, messages: LocaleMessages, ...args: any): boolean {
     const locale: Locale = parseArgs(...args).locale || _locale
     return this._exist(messages[locale], key)
   }
