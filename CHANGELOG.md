@@ -1,3 +1,13 @@
+<a name="6.0.0-alpha.6"></a>
+# [6.0.0-alpha.6](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2017-03-16)
+
+
+### :star: New Features
+
+* add 'setLocaleMessage' API ([8b71eda](https://github.com/kazupon/vue-i18n/commit/8b71eda))
+
+
+
 <a name="6.0.0-alpha.5"></a>
 # [6.0.0-alpha.5](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.3...v6.0.0-alpha.5) (2017-03-11)
 
