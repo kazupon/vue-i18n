@@ -216,6 +216,10 @@ export default class VueI18n {
   te (key: Path, ...args: any): boolean {
     return this._te(key, this.locale, this.messages, ...args)
   }
+
+  setLocaleMessage (locale: Locale, message: LocaleMessage): void {
+    this._vm.messages[locale] = message
+  }
 }
 
 VueI18n.install = install

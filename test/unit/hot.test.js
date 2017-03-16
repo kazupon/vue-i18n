@@ -3,11 +3,18 @@ import messages from './fixture/index'
 describe('hot reloading', () => {
   let el
   let i18n
-  let orgLocale
-  const expectLocale = 'the world updated'
+  let orgEnLocale
+  let orgJaLocaleMessage
+  const expectEnLocale = 'the world updated'
+  const expectJaLocaleMessage = {
+    message: {
+      hello: 'ザ・世界 -> メイド・イン・ヘブン'
+    }
+  }
 
   beforeEach(() => {
-    orgLocale = messages.en.message.hello
+    orgEnLocale = messages.en.message.hello
+    orgJaLocaleMessage = messages.ja
     i18n = new VueI18n({
       locale: 'en',
       messages
@@ -18,7 +25,8 @@ describe('hot reloading', () => {
   })
 
   afterEach(() => {
-    messages.en.message.hello = orgLocale
+    messages.en.message.hello = orgEnLocale
+    messages.ja = orgJaLocaleMessage
     i18n.messages = messages
   })
 
@@ -34,10 +42,15 @@ describe('hot reloading', () => {
     waitForUpdate(() => {
       assert.equal(text.textContent, messages.en.message.hello)
       // hot reload (set reactivity messages)
-      messages.en.message.hello = expectLocale
+      messages.en.message.hello = expectEnLocale
       i18n.messages = messages
     }).then(() => {
-      assert.equal(text.textContent, expectLocale)
+      assert.equal(text.textContent, expectEnLocale)
+      // upade locale
+      i18n.setLocaleMessage('ja', expectJaLocaleMessage)
+      i18n.locale = 'ja'
+    }).then(() => {
+      assert.equal(text.textContent, expectJaLocaleMessage.message.hello)
     }).then(done)
   })
 })

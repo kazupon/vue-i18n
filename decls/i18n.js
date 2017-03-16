@@ -33,6 +33,7 @@ declare interface I18n {
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
+  setLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...args: any): TranslateResult,
   tc (key: Path, choice?: number, ...args: any): TranslateResult,
   te (key: Path, ...args: any): boolean,
