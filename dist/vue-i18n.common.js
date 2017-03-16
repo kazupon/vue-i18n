@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0-alpha.5 
+ * vue-i18n v6.0.0-alpha.6 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -583,11 +583,9 @@ function empty (target) {
     if (target.length > 0) { return false }
     if (target.length === 0) { return true }
   } else if (isPlainObject(target)) {
-    /* eslint-disable prefer-const */
     for (var key in target) {
       if (hasOwn(target, key)) { return false }
     }
-    /* eslint-enable prefer-const */
   }
 
   return true
@@ -675,13 +673,19 @@ VueI18n.prototype.unwatchLocale = function unwatchLocale () {
 prototypeAccessors.vm.get = function () { return this._vm };
 
 prototypeAccessors.messages.get = function () { return this._vm.$data.messages };
-prototypeAccessors.messages.set = function (messages) { this._vm.$set(this._vm, 'messages', messages); };
+prototypeAccessors.messages.set = function (messages) {
+  this._vm.$set(this._vm, 'messages', messages);
+};
 
 prototypeAccessors.locale.get = function () { return this._vm.$data.locale };
-prototypeAccessors.locale.set = function (locale) { this._vm.$set(this._vm, 'locale', locale); };
+prototypeAccessors.locale.set = function (locale) {
+  this._vm.$set(this._vm, 'locale', locale);
+};
 
 prototypeAccessors.fallbackLocale.get = function () { return this._fallbackLocale };
-prototypeAccessors.fallbackLocale.set = function (locale) { this._fallbackLocale = locale; };
+prototypeAccessors.fallbackLocale.set = function (locale) {
+  this._fallbackLocale = locale;
+};
 
 prototypeAccessors.missing.get = function () { return this._missing };
 prototypeAccessors.missing.set = function (handler) { this._missing = handler; };
@@ -713,21 +717,35 @@ VueI18n.prototype._interpolate = function _interpolate (message, key, args) {
 
   if (!message) { return null }
 
-  var val = getPathValue(message, key);
-  if (Array.isArray(val)) { return val }
-  if (isNull(val)) { val = message[key]; }
-  if (isNull(val)) { return null }
-  if (typeof val !== 'string') {
-    warn(("Value of key '" + key + "' is not a string!"));
-    return null
+  var pathRet = getPathValue(message, key);
+  if (Array.isArray(pathRet)) { return pathRet }
+
+  var ret;
+  if (isNull(pathRet)) {
+    if (isPlainObject(message)) {
+      ret = message[key];
+      if (typeof ret !== 'string') {
+        warn(("Value of key '" + key + "' is not a string!"));
+        return null
+      }
+    } else {
+      return null
+    }
+  } else {
+    if (typeof pathRet === 'string') {
+      ret = pathRet;
+    } else {
+      warn(("Value of key '" + key + "' is not a string!"));
+      return null
+    }
   }
 
   // Check for the existance of links within the translated string
-  if (val.indexOf('@:') >= 0) {
+  if (ret.indexOf('@:') >= 0) {
     // Match all the links within the local
     // We are going to replace each of
     // them with its translation
-    var matches = val.match(/(@:[\w|.]+)/g);
+    var matches = ret.match(/(@:[\w|.]+)/g);
     for (var idx in matches) {
       var link = matches[idx];
       // Remove the leading @:
@@ -735,18 +753,18 @@ VueI18n.prototype._interpolate = function _interpolate (message, key, args) {
       // Translate the link
       var translatedstring = this$1._interpolate(message, linkPlaceholder, args);
       // Replace the link with the translated string
-      val = val.replace(link, translatedstring);
+      ret = ret.replace(link, translatedstring);
     }
   }
 
-  return !args ? val : this._format(val, args)
+  return !args ? ret : this._format(ret, args)
 };
 
-VueI18n.prototype._format = function _format (val) {
+VueI18n.prototype._format = function _format (message) {
     var args = [], len = arguments.length - 1;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-  return (ref = this._formatter).format.apply(ref, [ val ].concat( args ))
+  return (ref = this._formatter).format.apply(ref, [ message ].concat( args ))
     var ref;
 };
 
@@ -794,9 +812,9 @@ VueI18n.prototype.t = function t (key) {
 
   return (ref = this)._t.apply(ref, [ key, this.locale, this.messages, null ].concat( args ))
     var ref;
-  };
+};
 
-  VueI18n.prototype._tc = function _tc (key, _locale, messages, host, choice) {
+VueI18n.prototype._tc = function _tc (key, _locale, messages, host, choice) {
     var args = [], len = arguments.length - 5;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 5 ];
 
@@ -832,6 +850,10 @@ VueI18n.prototype.te = function te (key) {
 
   return (ref = this)._te.apply(ref, [ key, this.locale, this.messages ].concat( args ))
     var ref;
+};
+
+VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message) {
+  this._vm.messages[locale] = message;
 };
 
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
