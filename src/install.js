@@ -1,6 +1,5 @@
 import { warn } from './util'
 import mixin from './mixin'
-import Asset from './asset'
 
 export let Vue
 
@@ -21,5 +20,7 @@ export function install (_Vue) {
 
   Vue.mixin(mixin)
 
-  Asset(Vue)
+  // use object-based merge strategy
+  const strats = Vue.config.optionMergeStrategies
+  strats.i18n = strats.methods
 }
