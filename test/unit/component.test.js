@@ -22,7 +22,7 @@ describe('component translation', () => {
         child1: { // translation with component
           i18n: {
             locale: 'en',
-            fallbackRoot: true,
+            sync: false,
             messages: {
               en: { who: 'child1' },
               ja: { who: '子1' }
@@ -49,7 +49,6 @@ describe('component translation', () => {
           components: {
             'sub-child2': {
               i18n: {
-                sync: true,
                 messages: {
                   en: { who: 'sub-child2' },
                   ja: { who: 'サブの子2' }

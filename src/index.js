@@ -14,7 +14,7 @@ export default class VueI18n {
   _vm: any
   _formatter: Formatter
   _root: ?I18n
-  _sync: ?boolean
+  _sync: boolean
   _fallbackRoot: boolean
   _fallbackLocale: Locale
   _missing: ?MissingHandler
@@ -29,8 +29,8 @@ export default class VueI18n {
     this._formatter = options.formatter || new BaseFormatter()
     this._missing = options.missing
     this._root = options.root || null
-    this._sync = options.sync || false
-    this._fallbackRoot = options.fallbackRoot || false
+    this._sync = options.sync === undefined ? true : !!options.sync
+    this._fallbackRoot = options.fallbackRoot === undefined ? true : !!options.fallbackRoot
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }

@@ -49,7 +49,7 @@ export default {
         }
         this.$i18n = new VueI18n(options.i18n)
         defineComputed(this, options)
-        if (options.i18n.sync) {
+        if (options.i18n.sync === undefined || !!options.i18n.sync) {
           this._localeWatcher = this.$i18n.watchLocale()
         }
       } else {
