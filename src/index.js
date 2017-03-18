@@ -118,7 +118,9 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          warn(`Value of key '${key}' is not a string!`)
+          if (process.env.NODE_ENV !== 'production') {
+            warn(`Value of key '${key}' is not a string!`)
+          }
           return null
         }
       } else {
@@ -128,7 +130,9 @@ export default class VueI18n {
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
-        warn(`Value of key '${key}' is not a string!`)
+        if (process.env.NODE_ENV !== 'production') {
+          warn(`Value of key '${key}' is not a string!`)
+        }
         return null
       }
     }
