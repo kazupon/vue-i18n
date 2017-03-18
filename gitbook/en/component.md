@@ -1,50 +1,57 @@
-# Component locale
+# Component Based Translation
 
-You can translate component based.
+In general, Locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance, and it set  `i18n` option as root Vue instance. Thereby you globally can translate with using `$t` or `$tc` in the root Vue instance are composed some component. you manage  locale info for each component and it translate, it was better is convenient due to Vue is component oriented.
 
-The below locale setting example:
+The below component based translation example:
 
 ```javascript
-var locales = {
-  en: {
-    message: {
-      hello: 'hello world',
-      greeting: 'good morning'
-    }
-  },
-  ja: {
-    message: {
-      hello: 'こんにちは、世界',
-      greeting: 'おはようございます'
-    }
-  }
-}
-      
-Vue.config.lang = 'ja'
-Object.keys(locales).forEach(function (lang) {
-  Vue.locale(lang, locales[lang])
-})
-
-new Vue({
-  el: 'body',
-  components: {
-    component1: {
-      template: '<p>orverride message.hello locale in component1: {{ $t("message.hello") }}</p>'
-        + '<p>global message.greeting locale in component1: {{ $t("message.greeting") }}</p>',
-      locales: {
-        en: { message: { hello: 'hello component1' } },
-        ja: { message: { hello: 'こんにちは、component1' } }
+// setup locale info for root Vue instance
+const i18n = new VueI18n({
+  locale: 'ja',
+  messages: {
+    en: {
+      message: {
+        hello: 'hello world',
+        greeting: 'good morning'
+      }
+    },
+    ja: {
+      message: {
+        hello: 'こんにちは、世界',
+        greeting: 'おはようございます'
       }
     }
   }
 })
+
+// Define component
+const Component1 = {
+  template: `
+    <div class="container">
+     <p>Component1 locale messages: {{ $t("message.hello") }}</p>
+     <p>Fallback global locale messages: {{ $t("message.greeting") }}</p>
+   </div>`,
+  i18n: { // `i18n` option
+    messages: {
+      en: { message: { hello: 'hello component1' } },
+      ja: { message: { hello: 'こんにちは、component1' } }
+    }
+  }
+}
+      
+new Vue({
+  i18n,
+  components: {
+    Component1
+  }
+}).$mount('#app')
 ```
 
 Template the following:
 
 ```html
 <div id="app">
-  <p>global message.hello locale: {{ $t('message.hello') }}</p>
+  <p>{{ $t("message.hello") }}</p>
   <component1></component1>
 </div>
 ```
@@ -53,10 +60,14 @@ Output the following:
 
 ```html
 <div id="app">
-  <p>global message.hello locale: こんにちは、世界</p>
-  <p>orverride message.hello locale in component1: こんにちは、component1</p>
-  <p>global message.greeting locale in component1: おはようございます</p>
+  <p>こんにちは、世界</p>
+  <div class="container">
+    <p>Component1 locale messages: こんにちは、component1</p>
+    <p>Fallback global locale messages: おはよう、世界！</p>
+  </div>
 </div>
 ```
 
-> :pencil: If you set the locale of same keypath as global locale (`Vue.locale()`), in its component, `$t` is translate with component locale.
+As in the example above, if the component doesn't have the locale message, it  fallbacks and translates global locale message. Also translate it using global locale (in the above example, `locale: 'ja'`). 
+
+If you hope translate in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
