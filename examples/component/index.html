@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>component based locale</title>
+    <title>component based translation</title>
     <script src="../../node_modules/vue/dist/vue.min.js"></script>
     <script src="../../dist/vue-i18n.min.js"></script>
   </head>
@@ -12,40 +12,46 @@
       <component1></component1>
     </div>
     <script>
-      var messages = {
-        en: {
-          message: {
-            hello: 'hello world'
+      Vue.use(VueI18n)
+
+      var i18n = new VueI18n({
+        locale: 'ja',
+        messages: {
+          en: {
+            message: {
+              hello: 'hello world',
+              greeting: 'good morning, world!'
+            }
+          },
+          ja: {
+            message: {
+              hello: 'こんにちは、世界',
+              greeting: 'おはよう、世界！'
+            }
           }
-        },
-        ja: {
-          message: {
-            hello: 'こんにちは、世界'
+        }
+      })
+
+      var Component1 = {
+        template: '<div class="container">' +
+          '<p>Component1 locale messages: {{ $t("message.hello") }}</p>' +
+          '<p>Fallback global locale messages: {{ $t("message.greeting") }}</p>' +
+          '</div>',
+        i18n: {
+          messages: {
+            en: { message: { hello: 'hello component1' } },
+            ja: { message: { hello: 'こんにちは、component1' } }
           }
         }
       }
       
-      Vue.use(VueI18n)
-      
       new Vue({
-        i18n: new VueI18n({
-          locale: 'ja',
-          messages: messages
-        }),
+        i18n: i18n,
         components: {
-          component1: {
-            template: '<p>component1 local: {{ $t("hello") }}</p>'
-              + '<p>component1 global: {{ $t("message.hello") }}</p>',
-            i18n: {
-              locale: 'en',
-              messages: {
-                en: { hello: 'hello component1' },
-                ja: { hello: 'こんにちは、component1' }
-              }
-            }
-          }
+          component1: Component1
         }
       }).$mount('#app')
+    
     </script>
   </body>
 </html>
