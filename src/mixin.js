@@ -6,19 +6,23 @@ import { isPlainObject, warn } from './util'
 const $t = (vm: any): Function => {
   // add dependency tracking !!
   const locale: Locale = vm.$i18n.locale
+  /* eslint-disable no-unused-vars */
   const fallback: Locale = vm.$i18n.fallbackLocal
+  /* eslint-enable no-unused-vars */
   const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, ...args: any): TranslateResult => {
-    return vm.$i18n._t(key, locale, messages, vm, ...args)
+  return (key: string, ...values: any): TranslateResult => {
+    return vm.$i18n._t(key, locale, messages, vm, ...values)
   }
 }
 const $tc = (vm: any): Function => {
   // add dependency tracking !!
   const locale: Locale = vm.$i18n.locale
+  /* eslint-disable no-unused-vars */
   const fallback: Locale = vm.$i18n.fallbackLocal
+  /* eslint-enable no-unused-vars */
   const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, choice?: number, ...args: any): TranslateResult => {
-    return vm.$i18n._tc(key, locale, messages, vm, choice, ...args)
+  return (key: string, choice?: number, ...values: any): TranslateResult => {
+    return vm.$i18n._tc(key, locale, messages, vm, choice, ...values)
   }
 }
 const $te = (vm: any): Function => {

@@ -105,7 +105,7 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
-  _interpolate (message: LocaleMessageObject, key: Path, args: any): any {
+  _interpolate (message: LocaleMessageObject, key: Path, values: any): any {
     if (!message) { return null }
 
     const pathRet: PathValue = getPathValue(message, key)
@@ -146,17 +146,17 @@ export default class VueI18n {
         // Remove the leading @:
         const linkPlaceholder = link.substr(2)
         // Translate the link
-        const translatedstring = this._interpolate(message, linkPlaceholder, args)
+        const translatedstring = this._interpolate(message, linkPlaceholder, values)
         // Replace the link with the translated string
         ret = ret.replace(link, translatedstring)
       }
     }
 
-    return !args ? ret : this._format(ret, args)
+    return !values ? ret : this._format(ret, values)
   }
 
-  _format (message: string, ...args: any): string {
-    return this._formatter.format(message, ...args)
+  _format (message: string, ...values: any): string {
+    return this._formatter.format(message, ...values)
   }
 
   _translate (messages: LocaleMessages, locale: Locale, fallback: Locale, key: Path, args: any): any {
@@ -175,10 +175,10 @@ export default class VueI18n {
     }
   }
 
-  _t (key: Path, _locale: Locale, messages: LocaleMessages, host: any, ...args: any): any {
+  _t (key: Path, _locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
     if (!key) { return '' }
 
-    const parsedArgs = parseArgs(...args)
+    const parsedArgs = parseArgs(...values)
     const locale: Locale = parsedArgs.locale || _locale
 
     const ret: any = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params)
@@ -187,27 +187,27 @@ export default class VueI18n {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
       }
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.t(key, ...args)
+      return this._root.t(key, ...values)
     } else {
       return this._warnDefault(locale, key, ret, host)
     }
   }
 
-  t (key: Path, ...args: any): TranslateResult {
-    return this._t(key, this.locale, this.messages, null, ...args)
+  t (key: Path, ...values: any): TranslateResult {
+    return this._t(key, this.locale, this.messages, null, ...values)
   }
 
-  _tc (key: Path, _locale: Locale, messages: LocaleMessages, host: any, choice?: number, ...args: any): any {
+  _tc (key: Path, _locale: Locale, messages: LocaleMessages, host: any, choice?: number, ...values: any): any {
     if (!key) { return '' }
     if (choice !== undefined) {
-      return fetchChoice(this._t(key, _locale, messages, host, ...args), choice)
+      return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
     } else {
-      return this._t(key, _locale, messages, host, ...args)
+      return this._t(key, _locale, messages, host, ...values)
     }
   }
 
-  tc (key: Path, choice?: number, ...args: any): TranslateResult {
-    return this._tc(key, this.locale, this.messages, null, choice, ...args)
+  tc (key: Path, choice?: number, ...values: any): TranslateResult {
+    return this._tc(key, this.locale, this.messages, null, choice, ...values)
   }
 
   _te (key: Path, _locale: Locale, messages: LocaleMessages, ...args: any): boolean {

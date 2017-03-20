@@ -11,8 +11,8 @@ export default class BaseFormatter {
 
   get options (): FormatterOptions { return this._options }
 
-  format (message: string, ...args: any): string {
-    return template(message, ...args)
+  format (message: string, ...values: any): string {
+    return template(message, ...values)
   }
 }
 
@@ -28,19 +28,19 @@ const RE_NARGS: RegExp = /(%|)\{([0-9a-zA-Z_]+)\}/g
  * template
  *
  * @param {String} string
- * @param {Array} ...args
+ * @param {Array} ...values
  * @return {String}
  */
 
-export function template (str: string, ...args: any): string {
-  if (args.length === 1 && typeof args[0] === 'object') {
-    args = args[0]
+export function template (str: string, ...values: any): string {
+  if (values.length === 1 && typeof values[0] === 'object') {
+    values = values[0]
   } else {
-    args = {}
+    values = {}
   }
 
-  if (!args || !args.hasOwnProperty) {
-    args = {}
+  if (!values || !values.hasOwnProperty) {
+    values = {}
   }
 
   return str.replace(RE_NARGS, (match, prefix, i, index) => {
@@ -50,7 +50,7 @@ export function template (str: string, ...args: any): string {
       str[index + match.length] === '}') {
       return i
     } else {
-      result = hasOwn(args, i) ? args[i] : match
+      result = hasOwn(values, i) ? values[i] : match
       if (isNull(result)) {
         return ''
       }
