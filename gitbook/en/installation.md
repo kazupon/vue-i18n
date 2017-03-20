@@ -12,8 +12,8 @@ https://unpkg.com/vue-i18n/dist/vue-i18n
 Include vue-i18n after Vue and it will install itself automatically:
 
 ```html
-<script src="/path/to/vue.js"></script>
-<script src="/path/to/vue-i18n.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
 ```
 
 ### NPM
@@ -22,7 +22,7 @@ Include vue-i18n after Vue and it will install itself automatically:
 
 ### Yarn
 
-    $ yarn add vuex
+    $ yarn add vue-i18n
 
 When used with a module system, you must explicitly install the `vue-i18n` via `Vue.use()`:
 
