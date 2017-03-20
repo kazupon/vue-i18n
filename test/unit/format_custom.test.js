@@ -21,13 +21,12 @@ describe('custom formatter', () => {
 
   describe('via vue instance calling', () => {
     it('should allows for specifying a custom formatter', done => {
-      class CustomFormatter {
-        format (message, ...args) {
+      const formatter = {
+        format: (message, ...args) => {
           assert.deepEqual([1, 2, 3], args[0])
           done()
         }
       }
-      const formatter = new CustomFormatter()
       const vm = new Vue({
         i18n: new VueI18n({
           locale: 'en',
