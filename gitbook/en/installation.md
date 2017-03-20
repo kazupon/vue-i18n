@@ -1,55 +1,47 @@
 # Installation
 
-## Compatibility
-- Vue.js `2.0.0-beta.1`+
+### Compatibility Note
+- Vue.js `2.0.0`+
 
-## Installation
+### Direct Download / CDN
 
-### CDN
-unpkg
-```html
-<script src="https://unpkg.com/vue-i18n@5.0.3/dist/vue-i18n.min.js"></script>
-```
+https://unpkg.com/vue-i18n/dist/vue-i18n
 
-jsdelivr
+[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like https://unpkg.com/vue-18n@6.0.0/dist/vue-i18n.js.
+
+Include vue-i18n after Vue and it will install itself automatically:
 
 ```html
-<script src="https://cdn.jsdelivr.net/vue.i18n/5.0.3/vue-i18n.min.js"></script>
+<script src="/path/to/vue.js"></script>
+<script src="/path/to/vue-i18n.js"></script>
 ```
 
 ### NPM
 
-#### stable version
-
     $ npm install vue-i18n
 
-#### development version
+### Yarn
 
-    $ git clone https://github.com/kazupon/vue-i18n node_modules/vue-i18n
+    $ yarn add vuex
+
+When used with a module system, you must explicitly install the `vue-i18n` via `Vue.use()`:
+
+```javascript
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+
+Vue.use(VueI18n)
+```
+
+You don't need to do this when using global script tags.
+
+### Dev Build
+
+You will have to clone directly from GitHub and build `vue-i18n` yourself if
+you want to use the latest dev build.
+
+    $ git clone https://github.com/kazupon/vue-i18n.git node_modules/vue-i18n
     $ cd node_modules/vue-i18n
     $ npm install
     $ npm run build
 
-When used in CommonJS or ES2015 import, you must explicitly install the router via Vue.use():
-
-
-```javascript
-// CommonJS importing
-const Vue = require('vue')
-const VueI18n = require('vue-i18n')
-
-Vue.use(VueI18n)
-
-const i18n = new VueI18n({
-  locale: 'ja',
-  // ...
-})
-```
-
-You don't need to do this when using the standalone build, as it installs itself automatically.
-
-### YARN
-
-alernatively, using Facebook's recently released [yarn](https://yarnpkg.com) package manager.
-
-    $ yarn
