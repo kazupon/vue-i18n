@@ -1,4 +1,4 @@
-# Hot reload
+# Hot Reload
 
 You can watch for changes in translation files and hot reload changes into your application.
 
