@@ -5,7 +5,7 @@ You can translate with pluralization.  You must define the locale that have a pi
 Locale messages the following:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     car: 'car | cars'
   }

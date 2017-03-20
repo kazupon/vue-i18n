@@ -5,7 +5,7 @@ If there's a translation key that will always have the same concrete text as ano
 Locale messages the following:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: {
       the_world: 'the world',

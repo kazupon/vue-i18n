@@ -30,16 +30,17 @@ jsdelivr
     $ npm install
     $ npm run build
 
-When used in CommonJS, you must explicitly install the router via Vue.use():
+When used in CommonJS or ES2015 import, you must explicitly install the router via Vue.use():
 
 
 ```javascript
-var Vue = require('vue')
-var VueI18n = require('vue-i18n')
+// CommonJS importing
+const Vue = require('vue')
+const VueI18n = require('vue-i18n')
 
 Vue.use(VueI18n)
 
-var i18n = new VueI18n({
+const i18n = new VueI18n({
   locale: 'ja',
   // ...
 })

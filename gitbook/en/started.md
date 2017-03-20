@@ -1,14 +1,14 @@
 # Getting Started
 
 ```javascript
-var Vue = require('vue')
-var VueI18n = require('vue-i18n')
+const Vue = require('vue')
+const VueI18n = require('vue-i18n')
 
 // install plugin
 Vue.use(VueI18n)
 
 // ready translated locale messages
-var messages = {
+const messages = {
   en: {
     message: {
       hello: 'hello world'
@@ -22,14 +22,14 @@ var messages = {
 }
 
 // create VueI18n instance with options
-var i18n = new Vue18n({
+const i18n = new Vue18n({
   locale: 'ja', // set locale
   messages: messages, // set locale messages
 })
 
 
 // create a Vue instanc with `i18n` option
-new Vue({ i18n: i18n }).$mount('#app')
+new Vue({ i18n }).$mount('#app')
 ```
 
 Template the following:

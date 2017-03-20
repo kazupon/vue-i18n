@@ -3,7 +3,7 @@
 The following locale messages that not exist `message` key in `ja` locale:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: 'hello world'
   },
@@ -15,7 +15,7 @@ var messages = {
 When specify the `fallbackLocale` option to VueI18n constructor option, `message` key is traslated with `en` locale key:
 
 ```javascript
-var i18n = new VueI18n({
+const i18n = new VueI18n({
   locale: 'ja',
   fallbackLocale: 'en',
   messages: messages
