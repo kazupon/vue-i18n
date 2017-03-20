@@ -16,16 +16,15 @@ export default class VueI18n {
   _root: ?I18n
   _sync: boolean
   _fallbackRoot: boolean
-  _fallbackLocale: Locale
   _missing: ?MissingHandler
   _exist: Function
   _watcher: any
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
+    const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
     this._vm = null
-    this._fallbackLocale = options.fallbackLocale || 'en-US'
     this._formatter = options.formatter || new BaseFormatter()
     this._missing = options.missing
     this._root = options.root || null
@@ -37,10 +36,12 @@ export default class VueI18n {
       return !isNull(getPathValue(message, key))
     }
 
-    this._resetVM({ locale, messages })
+    this._initVM({ locale, fallbackLocale, messages })
   }
 
-  _resetVM (data: { locale: Locale, messages: LocaleMessages }): void {
+  _initVM (data: {
+    locale: Locale, fallbackLocale: Locale, messages: LocaleMessages
+  }): void {
     const silent = Vue.config.silent
     Vue.config.silent = true
     this._vm = new Vue({ data })
@@ -74,9 +75,9 @@ export default class VueI18n {
     this._vm.$set(this._vm, 'locale', locale)
   }
 
-  get fallbackLocale (): Locale { return this._fallbackLocale }
+  get fallbackLocale (): Locale { return this._vm.fallbackLocale }
   set fallbackLocale (locale: Locale): void {
-    this._fallbackLocale = locale
+    this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
   get missing (): ?MissingHandler { return this._missing }
