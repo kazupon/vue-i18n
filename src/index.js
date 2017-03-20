@@ -1,7 +1,7 @@
 /* @flow */
 
 import { install, Vue } from './install'
-import { warn, isNull, parseArgs, fetchChoice, isPlainObject } from './util'
+import { warn, isNull, parseArgs, fetchChoice, isPlainObject, looseClone } from './util'
 import BaseFormatter from './format'
 import getPathValue from './path'
 
@@ -67,12 +67,9 @@ export default class VueI18n {
 
   get vm (): any { return this._vm }
 
-  get messages (): LocaleMessages { return this._vm.$data.messages }
-  set messages (messages: LocaleMessages): void {
-    this._vm.$set(this._vm, 'messages', messages)
-  }
+  get messages (): LocaleMessages { return looseClone(this._vm.messages) }
 
-  get locale (): Locale { return this._vm.$data.locale }
+  get locale (): Locale { return this._vm.locale }
   set locale (locale: Locale): void {
     this._vm.$set(this._vm, 'locale', locale)
   }
@@ -219,6 +216,10 @@ export default class VueI18n {
 
   te (key: Path, ...args: any): boolean {
     return this._te(key, this.locale, this.messages, ...args)
+  }
+
+  getLocaleMessage (locale: Locale): LocaleMessage {
+    return looseClone(this._vm.messages[locale])
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessage): void {

@@ -91,3 +91,7 @@ export function fetchChoice (message: string, choice: number): ?string {
   if (!choices[choice]) { return message }
   return choices[choice].trim()
 }
+
+export function looseClone (obj: Object): Object {
+  return JSON.parse(JSON.stringify(obj))
+}

@@ -6,7 +6,7 @@ import { isPlainObject, warn } from './util'
 const $t = (vm: any): Function => {
   // add dependency tracking !!
   const locale: Locale = vm.$i18n.locale
-  const messages: LocaleMessages = vm.$i18n.messages
+  const messages: LocaleMessages = vm.$i18n.vm.messages
   return (key: string, ...args: any): TranslateResult => {
     return vm.$i18n._t(key, locale, messages, vm, ...args)
   }
@@ -14,7 +14,7 @@ const $t = (vm: any): Function => {
 const $tc = (vm: any): Function => {
   // add dependency tracking !!
   const locale: Locale = vm.$i18n.locale
-  const messages: LocaleMessages = vm.$i18n.messages
+  const messages: LocaleMessages = vm.$i18n.vm.messages
   return (key: string, choice?: number, ...args: any): TranslateResult => {
     return vm.$i18n._tc(key, locale, messages, vm, choice, ...args)
   }
@@ -22,7 +22,7 @@ const $tc = (vm: any): Function => {
 const $te = (vm: any): Function => {
   // add dependency tracking !!
   const locale: Locale = vm.$i18n.locale
-  const messages: LocaleMessages = vm.$i18n.messages
+  const messages: LocaleMessages = vm.$i18n.vm.messages
   return (key: string, ...args: any): boolean => {
     return vm.$i18n._te(key, locale, messages, ...args)
   }
