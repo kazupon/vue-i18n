@@ -1,13 +1,29 @@
 # Getting Started
 
+> We will be using [ES2015](https://github.com/lukehoban/es6features) in the code samples in the guide.
+
+
+### HTML
+
+```html
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+
+<div id="#app">
+  <p>{{ $t("message.hello") }}</p>
+</div>
+```
+
+### JavaScript
+
 ```javascript
-const Vue = require('vue')
-const VueI18n = require('vue-i18n')
+// If using a module system (e.g. via vue-cli), import Vue and VueI18n and then call Vue.use(Vue18n).
+// import Vue from 'vue'
+// import VueI18n from 'vue-i18n'
+// 
+// Vue.use(VueI18n)
 
-// install plugin
-Vue.use(VueI18n)
-
-// ready translated locale messages
+// Ready translated locale messages
 const messages = {
   en: {
     message: {
@@ -21,23 +37,17 @@ const messages = {
   }
 }
 
-// create VueI18n instance with options
+// Create VueI18n instance with options
 const i18n = new Vue18n({
   locale: 'ja', // set locale
-  messages: messages, // set locale messages
+  messages, // set locale messages
 })
 
 
-// create a Vue instanc with `i18n` option
+// Create a Vue instanc with `i18n` option
 new Vue({ i18n }).$mount('#app')
-```
 
-Template the following:
-
-```html
-<div id="#app">
-  <p>{{ $t("message.hello") }}</p>
-</div>
+// Now the app has started!
 ```
 
 Output the following:
