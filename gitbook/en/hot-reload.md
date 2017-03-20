@@ -11,7 +11,7 @@ const messages = {
 // VueI18n instance
 const i18n = new Vuei18n({
   locale: 'en',
-  mesasges: messages
+  mesasges
 })
 
 // Run app

@@ -17,7 +17,7 @@
 ### JavaScript
 
 ```javascript
-// If using a module system (e.g. via vue-cli), import Vue and VueI18n and then call Vue.use(Vue18n).
+// If using a module system (e.g. via vue-cli), import Vue and VueI18n and then call Vue.use(VueI18n).
 // import Vue from 'vue'
 // import VueI18n from 'vue-i18n'
 // 

@@ -1,4 +1,4 @@
-# Migration
+# Migrations
 
 
 ## Global Config
@@ -76,21 +76,21 @@ Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter` prope
 
   const i18n = new VueI18n({
     // ...
-    fomtter: new CustomFormatter(),
+    formatter: new CustomFormatter(),
     // ...
   })
   const app = new Vue({ i18n }).$mount('#app')
 
   // change custom formatter
   i18n.formatter = {
-    format: (message, ...values) {
+    format: (message, ...values) => {
       // something render logic
       return 'something string'
     }
   }
   // or
   app.$i18n.formatter = {
-    format: (message, ...values) {
+    format: (message, ...values) => {
       // something render logic
       return 'something string'
     }

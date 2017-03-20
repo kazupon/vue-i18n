@@ -18,7 +18,7 @@ When specify the `fallbackLocale` option to VueI18n constructor option, `message
 const i18n = new VueI18n({
   locale: 'ja',
   fallbackLocale: 'en',
-  messages: messages
+  messages
 })
 ```
 

@@ -15,5 +15,5 @@ Internationalization plugin of Vue.js
 * [Component Based Translation](component.md)
 * [Linked Translation](linked.md)
 * [Hot Reload](hot-reload.md)
-* [Migration](migration.md)
+* [Migrations](migrations.md)
 * [API References](api.md)

@@ -4,7 +4,7 @@
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: {
       hello: 'hello <br> world'
@@ -37,7 +37,7 @@ world</p>
 Locale messages the following:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: {
       hello: '{msg} world'
@@ -63,7 +63,7 @@ Output the following:
 Locale messages the following:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: {
       hello: '{0} world'
@@ -89,7 +89,7 @@ Output the following:
 Locale messages the following:
 
 ```javascript
-var messages = {
+const messages = {
   en: {
     message: {
       hello: '%{msg} world'
@@ -124,7 +124,7 @@ class CustomFormatter {
    // ...
  }
 
- format (message, ...args) {
+ format (message, ...values) {
    // implement formatting logic here
    // ...
 
