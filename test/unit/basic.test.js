@@ -543,4 +543,27 @@ describe('basic', () => {
       }).then(done)
     })
   })
+
+  describe('i18n#fallbackLocale', () => {
+    let el
+    beforeEach(() => {
+      el = document.createElement('div')
+      document.body.appendChild(el)
+    })
+
+    it('should be reactivity translate', done => {
+      const vm = new Vue({
+        el, i18n,
+        render (h) {
+          return h('p', {}, [this.$t('message.fallback1')])
+        }
+      })
+      waitForUpdate(() => {
+        assert.equal(vm.$el.textContent, 'message.fallback1')
+        i18n.fallbackLocale = 'ja' // set fallback locale
+      }).then(() => {
+        assert.equal(vm.$el.textContent, messages.ja.message.fallback1)
+      }).then(done)
+    })
+  })
 })
