@@ -34,8 +34,8 @@ declare interface I18n {
   set formatter (formatter: Formatter): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
-  t (key: Path, ...args: any): TranslateResult,
-  tc (key: Path, choice?: number, ...args: any): TranslateResult,
+  t (key: Path, ...values: any): TranslateResult,
+  tc (key: Path, choice?: number, ...values: any): TranslateResult,
   te (key: Path, ...args: any): boolean,
   watchLocale (): any,
   unwatchLocale (): boolean
@@ -44,5 +44,5 @@ declare interface I18n {
 declare type FormatterOptions = { [key: string]: any };
 
 declare interface Formatter {
-  format (message: string, ...args: any): string
+  format (message: string, ...values: any): string
 };
