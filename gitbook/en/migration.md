@@ -3,7 +3,7 @@
 
 ## Global Config
 
-### lang
+### lang <sup>replaced</sup>
 
 Use `VueI18n` class constructor `locale` option, or `VueI18n#locale` property:
 
@@ -20,7 +20,7 @@ Use `VueI18n` class constructor `locale` option, or `VueI18n#locale` property:
   app.$i18n.locale = 'ja'
   ```
 
-### fallbackLang
+### fallbackLang <sup>replaced</sup>
 
 Use `VueI18n` class constructor `fallbackLocale` option, or `VueI18n#fallbackLocale` property:
 
@@ -38,7 +38,7 @@ Use `VueI18n` class constructor `fallbackLocale` option, or `VueI18n#fallbackLoc
   app.$i18n.fallbackLocale = 'zh'
   ```
 
-### missingHandler
+### missingHandler <sup>replaced</sup>
 
 Use `VueI18n` class constructor `missing` option, or `VueI18n#missing` property:
 
@@ -62,7 +62,7 @@ Use `VueI18n` class constructor `missing` option, or `VueI18n#missing` property:
   }
   ```
 
-### i18nFormatter
+### i18nFormatter <sup>replaced</sup>
 
 Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter` property:
 
@@ -99,7 +99,7 @@ Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter` prope
 
 ## Global Methods
 
-### Vue.locale
+### Vue.locale <sup>replaced</sup>
 
 Use `VueI18n` class constructor `messages` option, or `VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage` method:
 
@@ -131,7 +131,7 @@ Use `VueI18n` class constructor `messages` option, or `VueI18n#GetLocaleMessage`
   app.$i18n.setLocaleMessage('ja', ja)
   ```
 
-### Vue.t
+### Vue.t <sup>replaced</sup>
 
 Use `VueI18n#t` method:
 
@@ -149,7 +149,7 @@ Use `VueI18n#t` method:
   i18n.t('greeting', { name: 'kazupon' }) // -> hi kazupon
   ```
 
-### Vue.tc
+### Vue.tc <sup>replaced</sup>
 
 Use `VueI18n#tc` method:
 
@@ -168,7 +168,7 @@ Use `VueI18n#tc` method:
   i18n.tc('apple', count, { count }) // -> 10 apples
   ```
 
-### Vue.te
+### Vue.te <sup>replaced</sup>
 
 Use `VueI18n#te` method:
 
@@ -190,7 +190,7 @@ Use `VueI18n#te` method:
 
 ## Constructor Options
 
-### locales
+### locales <sup>replaced</sup>
 
 Use `messages` of `VueI18n` class constructor option, or `messages` of `i18n` option (for Component option):
 
@@ -219,7 +219,7 @@ Use `messages` of `VueI18n` class constructor option, or `messages` of `i18n` op
 
 ## Instance Properties
 
-### $lang
+### $lang <sup>replaced</sup>
 
 Use `VueI18n#locale` property:
 
@@ -234,4 +234,53 @@ Use `VueI18n#locale` property:
   i18n.locale = 'ja'
   // or
   app.$i18n.locale = 'ja'
+  ```
+
+## Dynamic Locale <sup>removed</sup>
+
+If you need to dynamic set locale messages, you should implement the below:
+
+  ```javascript
+  const i18n = new VueI18n({
+    locale: 'en'
+  })
+  const app = new Vue({
+    i18n,
+    data: {
+      loading: ''
+    }
+  }).$mount('#app')
+
+  function loadLocaleMessage (locale, cb) {
+    return fetch('/locales/' + locale, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => {
+      return res.json()
+    }).then((json) => {
+      if (Object.keys(json).length === 0) {
+        return Promise.reject(new Error('locale empty !!'))
+      } else {
+        return Promise.resolve(json)
+      }
+    }).then(function (message) {
+      cb(null, message)
+    }).catch(function (error) {
+      cb(error)
+    })
+  }
+
+  app.loading = 'loading ...'
+  loadLocaleMessage('en', (err, message) => {
+    if (err) {
+      app.loading = ''
+      console.error(err)
+      return
+    }
+    i18n.setLocaleMessage('en', message)
+    app.loading = ''
+  })
   ```
