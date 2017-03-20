@@ -40,14 +40,14 @@ export default {
     const options: any = this.$options
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
-        this.$i18n = options.i18n
+        this._i18n = options.i18n
         defineComputed(this, options)
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n
         }
-        this.$i18n = new VueI18n(options.i18n)
+        this._i18n = new VueI18n(options.i18n)
         defineComputed(this, options)
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
           this._localeWatcher = this.$i18n.watchLocale()
@@ -59,19 +59,19 @@ export default {
       }
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
-      this.$i18n = this.$root.$i18n
+      this._i18n = this.$root.$i18n
       defineComputed(this, options)
     }
   },
 
   beforeDestroy (): void {
-    if (!this.$i18n) { return }
+    if (!this._i18n) { return }
 
     if (this._localeWatcher) {
       this.$i18n.unwatchLocale()
       delete this._localeWatcher
     }
 
-    this.$i18n = null
+    this._i18n = null
   }
 }

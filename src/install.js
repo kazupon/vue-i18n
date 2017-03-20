@@ -18,6 +18,10 @@ export function install (_Vue) {
     return
   }
 
+  Object.defineProperty(Vue.prototype, '$i18n', {
+    get () { return this._i18n }
+  })
+
   Vue.mixin(mixin)
 
   // use object-based merge strategy
