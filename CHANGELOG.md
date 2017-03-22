@@ -1,3 +1,30 @@
+<a name="6.0.0-beta.1"></a>
+# [6.0.0-beta.1](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.6...v6.0.0-beta.1) (2017-03-22)
+
+
+### :boom: Breaking changes
+
+* change `fallbackRoot` and `sync` option default `true` value ([0890b44](https://github.com/kazupon/vue-i18n/commit/0890b44))
+* remove messages settter, and add getLocaleMessage API ([0f0914d](https://github.com/kazupon/vue-i18n/commit/0f0914d))
+
+
+### :bug: Bug Fixes
+
+* **mixin:** fix computed props errors ([a6b7e37](https://github.com/kazupon/vue-i18n/commit/a6b7e37))
+
+
+### :up: Updates
+
+* **flowtype:** argument names ([cf14425](https://github.com/kazupon/vue-i18n/commit/cf14425))
+
+
+### :zap: Improvements
+
+* **fallbackLocale:** support reactivity ([ed758be](https://github.com/kazupon/vue-i18n/commit/ed758be))
+* **warn:** suppress warning messages for production ([6e417d2](https://github.com/kazupon/vue-i18n/commit/6e417d2))
+
+
+
 <a name="6.0.0-alpha.6"></a>
 # [6.0.0-alpha.6](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2017-03-16)
 
