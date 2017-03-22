@@ -101,7 +101,7 @@ Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter` prope
 
 ### Vue.locale <sup>replaced</sup>
 
-Use `VueI18n` class constructor `messages` option, or `VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage` method:
+Use `VueI18n` class constructor `messages` option, or `VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage` methods:
 
   ```javascript
   const i18n = new VueI18n({
@@ -241,14 +241,10 @@ Use `VueI18n#locale` property:
 If you need to dynamic set locale messages, you should implement the below:
 
   ```javascript
-  const i18n = new VueI18n({
-    locale: 'en'
-  })
+  const i18n = new VueI18n({ locale: 'en' })
   const app = new Vue({
     i18n,
-    data: {
-      loading: ''
-    }
+    data: { loading: '' }
   }).$mount('#app')
 
   function loadLocaleMessage (locale, cb) {
@@ -266,9 +262,9 @@ If you need to dynamic set locale messages, you should implement the below:
       } else {
         return Promise.resolve(json)
       }
-    }).then(function (message) {
+    }).then((message) => {
       cb(null, message)
-    }).catch(function (error) {
+    }).catch((error) => {
       cb(error)
     })
   }

@@ -16,4 +16,4 @@ Internationalization plugin of Vue.js
 * [Linked Translation](linked.md)
 * [Hot Reload](hot-reload.md)
 * [Migrations](migrations.md)
-* [API References](api.md)
+* [API References](api.md) (NOTE: WIP :construction:)
