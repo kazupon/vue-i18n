@@ -21,6 +21,12 @@ const entries = {
     format: 'cjs',
     banner
   },
+  esm: {
+    entry: 'src/index.js',
+    dest: `dist/${pack.name}.esm.js`,
+    format: 'es',
+    banner
+  },
   production: {
     entry: 'src/index.js',
     dest: `dist/${pack.name}.min.js`,
@@ -52,12 +58,11 @@ function genConfig (opts) {
     ]
   }
 
+  const replacePluginOptions = { '__VERSION__': pack.version }
   if (opts.env) {
-    config.plugins.push(replace({
-      'process.env.NODE_ENV': JSON.stringify(opts.env),
-      '__VERSION__': pack.version
-    }))
+    replacePluginOptions['process.env.NODE_ENV'] = JSON.stringify(opts.env)
   }
+  config.plugins.push(replace(replacePluginOptions))
 
   return config
 }
