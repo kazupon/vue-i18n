@@ -69,7 +69,6 @@
     "decls"
   ],
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
-  "jsnext:main": "src/index.js",
   "keywords": [
     "i18n",
     "internationalization",
@@ -79,6 +78,7 @@
   ],
   "license": "MIT",
   "main": "dist/vue-i18n.common.js",
+  "module": "dist/vue-i18n.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kazupon/vue-i18n.git"
@@ -103,5 +103,6 @@
     "test:cover": "BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
     "test:unit": "BABEL_ENV=test karma start config/karma.unit.conf.js"
-  }
+  },
+  "unpkg": "dist/vue-i18n.js"
 }
