@@ -184,7 +184,7 @@ Use `VueI18n#te` method:
   })
 
   i18n.te('hello') // -> true
-  i18n.te('hallo') // -> false
+  i18n.te('hallo', 'ja') // -> false
   i18n.te('hello') // -> true
   ```
 
