@@ -44,6 +44,8 @@ function defineComputed (vm: any, options: any): void {
 export default {
   beforeCreate (): void {
     const options: any = this.$options
+    options.i18n = options.i18n || (options.__i18n ? {} : null)
+
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
         this._i18n = options.i18n
@@ -53,8 +55,21 @@ export default {
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n
         }
+
+        // init locale messages via custom blocks
+        if (options.__i18n) {
+          try {
+            options.i18n.messages = JSON.parse(options.__i18n)
+          } catch (e) {
+            if (process.env.NODE_ENV !== 'production') {
+              warn(`Cannot parse locale messages via custom blocks.`)
+            }
+          }
+        }
+
         this._i18n = new VueI18n(options.i18n)
         defineComputed(this, options)
+
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
           this._localeWatcher = this.$i18n.watchLocale()
         }
