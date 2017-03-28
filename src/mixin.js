@@ -4,33 +4,39 @@ import VueI18n from './index'
 import { isPlainObject, warn } from './util'
 
 const $t = (vm: any): Function => {
-  // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
-  /* eslint-disable no-unused-vars */
-  const fallback: Locale = vm.$i18n.fallbackLocal
-  /* eslint-enable no-unused-vars */
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, ...values: any): TranslateResult => {
-    return vm.$i18n._t(key, locale, messages, vm, ...values)
+  if (vm.$i18n) {
+    // add dependency tracking !!
+    const locale: Locale = vm.$i18n.locale
+    /* eslint-disable no-unused-vars */
+    const fallback: Locale = vm.$i18n.fallbackLocal
+    /* eslint-enable no-unused-vars */
+    const messages: LocaleMessages = vm.$i18n.vm.messages
+    return (key: string, ...values: any): TranslateResult => {
+      return vm.$i18n._t(key, locale, messages, vm, ...values)
+    }
   }
 }
 const $tc = (vm: any): Function => {
-  // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
-  /* eslint-disable no-unused-vars */
-  const fallback: Locale = vm.$i18n.fallbackLocal
-  /* eslint-enable no-unused-vars */
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, choice?: number, ...values: any): TranslateResult => {
-    return vm.$i18n._tc(key, locale, messages, vm, choice, ...values)
+  if (vm.$i18n) {
+    // add dependency tracking !!
+    const locale: Locale = vm.$i18n.locale
+    /* eslint-disable no-unused-vars */
+    const fallback: Locale = vm.$i18n.fallbackLocal
+    /* eslint-enable no-unused-vars */
+    const messages: LocaleMessages = vm.$i18n.vm.messages
+    return (key: string, choice?: number, ...values: any): TranslateResult => {
+      return vm.$i18n._tc(key, locale, messages, vm, choice, ...values)
+    }
   }
 }
 const $te = (vm: any): Function => {
-  // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, ...args: any): boolean => {
-    return vm.$i18n._te(key, locale, messages, ...args)
+  if (vm.$i18n) {
+    // add dependency tracking !!
+    const locale: Locale = vm.$i18n.locale
+    const messages: LocaleMessages = vm.$i18n.vm.messages
+    return (key: string, ...args: any): boolean => {
+      return vm.$i18n._te(key, locale, messages, ...args)
+    }
   }
 }
 
