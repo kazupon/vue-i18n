@@ -16,9 +16,6 @@ module.exports = {
         options: {
           loaders: {
             i18n: '@kazupon/vue-i18n-loader'
-          },
-          preLoaders: {
-            yaml: 'yaml-loader'
           }
           // other vue-loader options go here
         }
