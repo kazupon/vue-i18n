@@ -1,9 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
-const JasmineWebpackPlugin = require('./webpack.dev.plugin')
 
 module.exports = {
-  entry: './test/unit/index.js',
+  entry: 'mocha-loader!./test/unit/index.js',
   output: {
     path: path.resolve(__dirname, '/test/unit'),
     filename: 'tests.js',
@@ -21,8 +20,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: '"development"'
       }
-    }),
-    new JasmineWebpackPlugin()
+    })
   ],
   devtool: '#eval-source-map'
 }

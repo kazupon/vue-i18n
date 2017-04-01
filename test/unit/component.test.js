@@ -97,7 +97,7 @@ describe('component translation', () => {
     // change locale
     i18n.locale = 'en'
     vm.$refs.child1.$i18n.locale = 'ja'
-    waitForUpdate(() => {
+    nextTick(() => {
       assert.equal(root.textContent, 'root')
       assert.equal(child1.textContent, '子1')
       assert.equal(child1Fallback.textContent, 'fallback')

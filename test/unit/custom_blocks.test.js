@@ -32,7 +32,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      waitForUpdate(() => {
+      nextTick(() => {
         assert.equal(vm.$refs.child.$refs.who.textContent, '子')
         i18n.locale = 'en'
       }).then(() => {
@@ -60,7 +60,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      waitForUpdate(() => {
+      nextTick(() => {
         assert.equal(vm.$refs.child.$refs.who.textContent, 'ルート')
         i18n.locale = 'en'
       }).then(() => {

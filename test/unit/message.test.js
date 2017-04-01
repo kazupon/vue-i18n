@@ -39,7 +39,7 @@ describe('message', () => {
     }).$mount(el)
 
     const { text } = vm.$refs
-    waitForUpdate(() => {
+    nextTick(() => {
       assert.equal(text.textContent, messages.en.message.hello)
       // hot reload (set reactivity messages)
       messages.en.message.hello = expectEnLocale

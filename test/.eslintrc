@@ -1,9 +1,11 @@
 {
   "env": {
-    "jasmine": true
+    "mocha": true
   },
   "globals": {
     "waitForUpdate": true,
+    "nextTick": true,
+    "delay": true,
     "assert": true,
     "Vue": true,
     "VueI18n": true

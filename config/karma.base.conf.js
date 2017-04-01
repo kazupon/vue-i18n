@@ -19,7 +19,7 @@ const webpackConfig = {
 }
 
 module.exports = {
-  frameworks: ['jasmine'],
+  frameworks: ['mocha', 'phantomjs-shim'],
   files: [
     '../test/unit/index.js'
   ],
@@ -31,8 +31,9 @@ module.exports = {
     noInfo: true
   },
   plugins: [
-    'karma-jasmine',
+    'karma-mocha',
     'karma-mocha-reporter',
+    'karma-phantomjs-shim',
     'karma-sourcemap-loader',
     'karma-webpack'
   ]
