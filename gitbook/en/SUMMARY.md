@@ -13,6 +13,7 @@ Internationalization plugin of Vue.js
 * [Locale Messages Syntax](syntax.md)
 * [Fallback Translation](fallback.md)
 * [Component Based Translation](component.md)
+* [Single File Component](sfc.md)
 * [Linked Translation](linked.md)
 * [Hot Reload](hot-reload.md)
 * [Migrations](migrations.md)
