@@ -26,7 +26,7 @@ export default class VueI18n {
     const messages: LocaleMessages = options.messages || {}
     this._vm = null
     this._formatter = options.formatter || new BaseFormatter()
-    this._missing = options.missing
+    this._missing = options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
     this._fallbackRoot = options.fallbackRoot === undefined ? true : !!options.fallbackRoot
@@ -210,13 +210,13 @@ export default class VueI18n {
     return this._tc(key, this.locale, this.messages, null, choice, ...values)
   }
 
-  _te (key: Path, _locale: Locale, messages: LocaleMessages, ...args: any): boolean {
-    const locale: Locale = parseArgs(...args).locale || _locale
-    return this._exist(messages[locale], key)
+  _te (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): boolean {
+    const _locale: Locale = parseArgs(...args).locale || locale
+    return this._exist(messages[_locale], key)
   }
 
-  te (key: Path, ...args: any): boolean {
-    return this._te(key, this.locale, this.messages, ...args)
+  te (key: Path, locale?: Locale): boolean {
+    return this._te(key, this.locale, this.messages, [locale])
   }
 
   getLocaleMessage (locale: Locale): LocaleMessage {

@@ -22,7 +22,7 @@ declare type I18nOptions = {
 declare interface I18n {
   static install: () => void,
   static version: string,
-  get vm() :any,
+  get vm (): any,
   get locale (): Locale,
   set locale (locale: Locale): void,
   get fallbackLocale (): Locale,
@@ -36,9 +36,7 @@ declare interface I18n {
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
-  te (key: Path, ...args: any): boolean,
-  watchLocale (): any,
-  unwatchLocale (): boolean
+  te (key: Path, locale?: Locale): boolean
 };
 
 declare type FormatterOptions = { [key: string]: any };

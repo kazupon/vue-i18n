@@ -27,10 +27,10 @@ const $tc = (vm: any): Function => {
 }
 const $te = (vm: any): Function => {
   // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
+  const _locale: Locale = vm.$i18n.locale
   const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, ...args: any): boolean => {
-    return vm.$i18n._te(key, locale, messages, ...args)
+  return (key: string, locale?: Locale): boolean => {
+    return vm.$i18n._te(key, _locale, messages, [locale])
   }
 }
 
