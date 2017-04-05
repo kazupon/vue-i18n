@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Locale Messages Syntax · GitBook</title>
+        <title>Single File Component · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="fallback.html" />
+    <link rel="next" href="linked.html" />
     
     
-    <link rel="prev" href="pluralization.html" />
+    <link rel="prev" href="component.html" />
     
 
     </head>
@@ -184,7 +184,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="syntax.html">
+        <li class="chapter " data-level="1.8" data-path="syntax.html">
             
                 <a href="syntax.html">
             
@@ -223,7 +223,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="sfc.html">
+        <li class="chapter active" data-level="1.11" data-path="sfc.html">
             
                 <a href="sfc.html">
             
@@ -318,7 +318,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Locale Messages Syntax</a>
+        <a href="." >Single File Component</a>
     </h1>
 </div>
 
@@ -333,57 +333,85 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="locale-messages-syntax">Locale Messages Syntax</h1><p>Locale Messages syntax the bellow:</p><pre><code class="lang-javascript"><span class="hljs-comment">// As Flowtype defnition, Locale Messages syntax like BNF annotation</span>
-type LocaleMessages = { [key: Locale]: LocaleMessageObject };
-type LocaleMessageObject = { [key: Path]: LocaleMessage };
-type LocaleMessageArray = LocaleMessage[];
-type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
-type Locale = string;
-type Path = string;</code></pre>
-<p>Based on the above syntax, You can configure the bellow structure Locale Messages:</p><pre><code class="lang-json">{
-  <span class="hljs-string">&quot;en&quot;</span>: {  <span class="hljs-comment">// &apos;en&apos; Locale</span>
-    <span class="hljs-string">&quot;key1&quot;</span>: <span class="hljs-string">&quot;this is message1&quot;</span>, <span class="hljs-comment">// basic</span>
-    <span class="hljs-string">&quot;nested&quot;</span>: { <span class="hljs-comment">// nested</span>
-      <span class="hljs-string">&quot;message1&quot;</span>: <span class="hljs-string">&quot;this is nested message1&quot;</span>
-    },
-    errors: [ <span class="hljs-comment">// array</span>
-      <span class="hljs-string">&quot;this is 0 error code message&quot;</span>,
-      {  <span class="hljs-comment">// array in object</span>
-         <span class="hljs-string">&quot;internal1&quot;</span>: <span class="hljs-string">&quot;this is internal 1 error message&quot;</span>
+                                <h1 id="single-file-component">Single File Component</h1><p>If you are building Vue component or Vue application with using single file components, you can manage the locale messages <code>i18n</code> custom block.</p><p>The below <code>App.vue</code> in <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank">single file component example</a>:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+{
+  &quot;en&quot;: {
+    &quot;hello&quot;: &quot;hello world!&quot;
+  },
+  &quot;ja&quot;: {
+    &quot;hello&quot;: &quot;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&#xFF01;&quot;
+  }
+}
+<span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;locale&quot;</span>&gt;</span>locale<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;locale&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span>en<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span>ja<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>message: {{ $t(&apos;hello&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  name: <span class="hljs-string">&apos;app&apos;</span>,
+  data () { <span class="hljs-keyword">return</span> { locale: <span class="hljs-string">&apos;en&apos;</span> } },
+  watch: {
+    locale (val) {
+      <span class="hljs-keyword">this</span>.$i18n.locale = val
+    }
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+<p>You need to use <code>vue-loader</code> due to use <code>i18n</code> custom block, and the below Webpack configration is required:</p><pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-built_in">module</span>: {
+    rules: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue-loader&apos;</span>,
+        options: {
+          loaders: {
+            <span class="hljs-comment">// you need to specify `i18n` loaders key with `vue-i18n-loader` (https://github.com/kazupon/vue-i18n-loader)</span>
+            i18n: <span class="hljs-string">&apos;@kazupon/vue-i18n-loader&apos;</span>
+          }
+        }
       },
-      [  <span class="hljs-comment">// array in array</span>
-         <span class="hljs-string">&quot;this is nested array error 1&quot;</span>
-      ]
+      <span class="hljs-comment">// ...</span>
     ]
   },
-  <span class="hljs-string">&quot;ja&quot;</span>: { <span class="hljs-comment">// &apos;ja&apos; Locale</span>
-    <span class="hljs-comment">// ...</span>
-  }
+  <span class="hljs-comment">// ...</span>
 }</code></pre>
-<p>In the above Locale Messages structure,  You can translate with using below key paths.</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;key1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;nested.message1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[1].internal1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[2][0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Ouput the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is 0 error code message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is internal 1 error message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested array error 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p><code>i18n</code> custom block need to specify <code>JSON</code> format, also you can use <code>YAML</code> format by using pre-loader feature of <code>vue-loader</code>.</p><p>the below <code>i18n</code> custom block of <code>YAML</code> format:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+en:
+  hello: &quot;hello world!&quot;
+ja:
+  hello: &quot;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&#xFF01;&quot;
+<span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span></code></pre>
+<p>Webpack conf the below:</p><pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-built_in">module</span>: {
+    rules: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue-loader&apos;</span>,
+        options: {
+          preloaders: {
+            i18n: <span class="hljs-string">&apos;yaml-loader&apos;</span>
+          },
+          loaders: {
+            i18n: <span class="hljs-string">&apos;@kazupon/vue-i18n-loader&apos;</span>
+          }
+        }
+      },
+      <span class="hljs-comment">// ...</span>
+    ]
+  },
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
 
                                 
                                 </section>
@@ -411,12 +439,12 @@ type Path = string;</code></pre>
 
             
                 
-                <a href="pluralization.html" class="navigation navigation-prev " aria-label="Previous page: Pluralization">
+                <a href="component.html" class="navigation navigation-prev " aria-label="Previous page: Component Based Translation">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="fallback.html" class="navigation navigation-next " aria-label="Next page: Fallback Translation">
+                <a href="linked.html" class="navigation navigation-next " aria-label="Next page: Linked Translation">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -427,7 +455,7 @@ type Path = string;</code></pre>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Locale Messages Syntax","level":"1.8","depth":1,"next":{"title":"Fallback Translation","level":"1.9","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"previous":{"title":"Pluralization","level":"1.7","depth":1,"path":"pluralization.md","ref":"pluralization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"syntax.md","mtime":"2017-03-27T17:56:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-05T17:24:36.048Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Single File Component","level":"1.11","depth":1,"next":{"title":"Linked Translation","level":"1.12","depth":1,"path":"linked.md","ref":"linked.md","articles":[]},"previous":{"title":"Component Based Translation","level":"1.10","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2017-04-05T17:20:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-05T17:24:36.048Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>

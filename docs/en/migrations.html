@@ -223,7 +223,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="linked.html">
+        <li class="chapter " data-level="1.11" data-path="sfc.html">
+            
+                <a href="sfc.html">
+            
+                    
+                    Single File Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="linked.html">
             
                 <a href="linked.html">
             
@@ -236,7 +249,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="hot-reload.html">
+        <li class="chapter " data-level="1.13" data-path="hot-reload.html">
             
                 <a href="hot-reload.html">
             
@@ -249,7 +262,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.13" data-path="migrations.html">
+        <li class="chapter active" data-level="1.14" data-path="migrations.html">
             
                 <a href="migrations.html">
             
@@ -262,7 +275,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="api.html">
+        <li class="chapter " data-level="1.15" data-path="api.html">
             
                 <a href="api.html">
             
@@ -445,7 +458,7 @@
   })
 
   i18n.te(<span class="hljs-string">&apos;hello&apos;</span>) <span class="hljs-comment">// -&gt; true</span>
-  i18n.te(<span class="hljs-string">&apos;hallo&apos;</span>) <span class="hljs-comment">// -&gt; false</span>
+  i18n.te(<span class="hljs-string">&apos;hallo&apos;</span>, <span class="hljs-string">&apos;ja&apos;</span>) <span class="hljs-comment">// -&gt; false</span>
   i18n.te(<span class="hljs-string">&apos;hello&apos;</span>) <span class="hljs-comment">// -&gt; true</span></code></pre>
 <h2 id="constructor-options">Constructor Options</h2><h3 id="locales-replaced">locales <sup>replaced</sup></h3><p>Use <code>messages</code> of <code>VueI18n</code> class constructor option, or <code>messages</code> of <code>i18n</code> option (for Component option):</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
     locale: <span class="hljs-string">&apos;en&apos;</span>,
@@ -558,7 +571,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Migrations","level":"1.13","depth":1,"next":{"title":"API References","level":"1.14","depth":1,"path":"api.md","ref":"api.md","articles":[]},"previous":{"title":"Hot Reload","level":"1.12","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.1"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"migrations.md","mtime":"2017-03-22T02:07:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-03-22T02:25:12.842Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Migrations","level":"1.14","depth":1,"next":{"title":"API References","level":"1.15","depth":1,"path":"api.md","ref":"api.md","articles":[]},"previous":{"title":"Hot Reload","level":"1.13","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"migrations.md","mtime":"2017-04-05T17:20:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-05T17:24:36.048Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
