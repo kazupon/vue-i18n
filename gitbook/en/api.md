@@ -1,205 +1,267 @@
 # API References
 
-WIP :construction:, Please wating ... :bow:
+## Injected computed properties
 
-## Global Config
-
-### lang
-
-- **Type:** `String`
-
-- **Default:** `en`
-
-- **Usage:**
-
-  Get or set a translation language code. Default by `en` string value.
-
-  ```javascript
-  Vue.config.lang = 'ja'
-  ```
-
-### fallbackLang
-
-- **Type:** `String`
-
-- **Default:** `en`
-
-- **Usage:**
-
-  Get or set a translation fallback language code. Default by `en` string value.
-
-  ```javascript
-  Vue.config.fallbackLang = 'ja'
-  ```
-
-### missingHandler
+### $t
 
 - **Type:** `Function`
 
-- **Default:** `null`
+- **Return:**
 
-- **Usage:**
+  The `Function` that have some arguments the below:
 
-  Assign a handler for translation missing. The handler gets called with the translation target language, translation key and the Vue instance.
+  - **Arguments:**
+    - `{Path} key`: required
+    - `{Locale} locale`: optional
+    - `{Array | Object} values`: optional
 
-  If mssingHandler is assigned, and occured translation missing, it's not warned.
+  - **Return:** `string`
 
-  ```javascript
-  Vue.config.missingHandler = function (lang, key, vm) {
-    // handle translation missing
-  }
-  ```
+  Translate the locale message of `key`. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you specified `locale`, translate the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
 
-### i18nFormatter
+### $tc
 
 - **Type:** `Function`
 
+- **Return:**
+
+  The `Function` that have some arguments the below:
+
+  - **Arguments:**
+    - `{Path} key`: required
+    - `{number} choice`: optional, default 1
+    - `{string | Array | Object} values`: optional
+  
+  - **Return:** `string`
+
+  Translate the locale message of `key` with pluralization. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you will specify string value to `values`, translate the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
+
+### $te
+
+- **Type:** `Function`
+
+- **Return:**
+
+  The `Function` that have some arguments the below:
+
+  - **Arguments:**
+    - `{Path} key`: required
+    - `{Locale} locale`: optional
+  
+  - **Return:** `boolean`
+
+  Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
+
+
+## `VueI18n` class
+
+`Vuei18n` class implement [`I18n` interface](#type-definitions-for-flowtype).
+
+### Constructor Options
+
+You can specify the below some options of [`I18nOptions` constructor options](#type-definitions-for-flowtype).
+
+#### locale
+
+- **Type:** `Locale`
+
+- **Default:** `'en-US'`
+
+The locale of translation.
+
+#### fallbackLocale
+
+- **Type:** `Locale`
+
+- **Default:** `'en-US'`
+
+The locale of fallback translation.
+
+#### messages
+
+- **Type:** `LocaleMessages`
+
+- **Default:** `{}`
+
+The locale messages of translation.
+
+#### formatter
+
+- **Type:** `Formatter`
+
+- **Default:** Built in formatter
+
+The formatter that implemented with `Formatter` interface.
+
+#### missing
+
+- **Type:** `MissingHandler`
+
 - **Default:** `null`
 
-- **Usage:**
+A hander for translation missing. The handler gets called with the translation target locale, translation path key and the Vue instance.
 
-  Assign a customer message formatter.
+If missing hander is assigned, and occured translation missing, it's not warned.
 
-  ```javascript
-  Vue.config.i18nFormatter = function (string, ...arguments) {
-    //...
-    //return formattedString;
-  }
-  ```
+#### fallbackRoot
 
+- **Type:** `Boolean`
 
-## Global Methods
+- **Default:** `true`
 
-### Vue.locale ( lang, [locale], [cb] )
+In the component translation, whether to fall back to root level (global) translation  when translation fails.
 
-- **Arguments:**
-    - `{String} lang`
-    - `{Object | Function} [locale]`
-    - `{Function} [cb]`
-- **Return:**
-    - locale function or object
+If `false`, it's warned, and is returned the key.
 
-- **Usage:**
+#### sync
 
-  Register or retrieve a locale
+- **Type:** `Boolean`
 
-  ```javascript
-  // register locale with object
-  Vue.locale('en', { message: 'hello' })
+- **Default:** `true`
 
-  // register with external locale
-  Vue.locale('ja', function () {
-    return fetch('/locales/ja', {
-      method: 'get',
-      // ...
-    }).then(function (json) {
-      return Promise.resolve(json)
-    }).catch(function (error) {
-      return Promise.reject()
-    })
-  }, function () {
-    Vue.config.lang = 'ja'
-  })
-  ```
+Whether synchronize the root level locale to the component translation locale.
 
-### Vue.t( keypath, [lang], [arguments] )
+If `false`, regardless of the root level locale, translate for each component locale.
 
-- **Arguments:**
-  - `{String} keypath`
-  - `{String} [lang]`
-  - `{Array | Object [arguments]`
+### Properties
 
-- **Return:**
-  Translated string
+#### locale
 
-- **Usage:**
-  This is the same as the `$t` method. This is translate function for global locale only. more detail see [$t](#tkeypath-lang-arguments).
+- **Type:** `Locale`
 
-### Vue.tc( keypath, [choice], [arguments] )
+- **Read/Write**
 
-- **Arguments:**
-  - `{String} keypath`
-  - `{Number} [choice] - default: 1`
-  - `{String | Array | Object [arguments]`
+The locale of translation.
 
-- **Return:**
-  Translated pluralization string
+#### fallbackLocale
 
-- **Usage:**
-  This is the same as the `$tc` method. This is translate pluralization function for global locale only. more detail see [$tc](#tc-keypath-choice-arguments-).
+- **Type:** `Locale`
 
-### Vue.te(keypath, [lang])
+- **Read/Write**
+
+The locale of fallback translation.
+
+#### messages
+
+- **Type:** `LocaleMessages`
+
+- **Read only**
+
+The locale messages of translation.
+
+#### missing
+
+- **Type:** `MissingHandler`
+
+- **Read/Write**
+
+A hander for translation missing.
+
+#### formatter
+
+- **Type:** `Formatter`
+
+- **Read/Write**
+
+The formatter that implemented with `Formatter` interface.
+
+### methods
+
+#### getLocaleMessage( locale )
 
 - **Arguments:**
-  - `{String} keypath`
-  - `{String} [lang]`
+  - `{Locale} locale`
 
-- **Return:**
-  Whether keypath exists, boolean value
+- **Return:** `LocaleMessage`
 
-- **Usage:**
-  Check whether key path exists in global locale. If you specified `lang`, check the locale of `lang`.
+Get the locale message of `locale`.
 
-## Constructor Options
-
-### locales
-
-- **Type:** `Object`
-
-- **Details:**
-
-  A locale definition object to be made available to the Vue instance only.
-
-- **See also:**
-  - [$t](#tkeypath-lang-arguments)
-
-## Instance Methods
-
-### $t(keypath, [lang], [arguments])
+#### setLocaleMessage( locale, message )
 
 - **Arguments:**
-  - `{String} keypath`
-  - `{String} [lang]`
-  - `{Array | Object [arguments]`
+  - `{Locale} locale`
+  - `{LocaleMessage} message`
 
-- **Return:**
-  Translated string
+Set the locale message of `locale`.
 
-- **Usage:**
-  Translate the locale of `keypath`. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you specified `lang`, translate the locale of `lang`. If you specified `keypath` of list / named formatting local, you must specify `arguments` too. For `arguments` more details see [Formatting](formatting.md).
-
-### $tc( keypath, [choice], [arguments] )
+#### t( key, [locale], [values] )
 
 - **Arguments:**
-  - `{String} keypath`
-  - `{Number} [choice] - default: 1`
-  - `{String | Array | Object [arguments]`
+  - `{Path} key`: required
+  - `{Locale} locale`: optional
+  - `{Array | Object} values`: optional
 
-- **Return:**
-  Translated pluralization string
+- **Return:**: `string`
 
-- **Usage:**
+  This is the same as the `Function` returned with `$t` computed property. More detail see [$t](#$t).
 
-  Translate the locale of `keypath` with pluralization. Translate in preferentially component locale than global locale. If not specified component locale, translate with global locale. If you will specify String value to `arguments`, translate the locale of value. If you wll specify Array or Object value to `arguments`, you must specify with `arguments` of [$t](#tkeypath-lang-arguments).
-
-### $te(keypath, [lang])
+#### tc( key, [choice], [values] )
 
 - **Arguments:**
-  - `{String} keypath`
-  - `{String} [lang]`
+  - `{Path} key`: required
+  - `{number} choice`: optional, default `1`
+  - `{string | Array | Object} values`: optional
 
-- **Return:**
-  Whether keypath exists, boolean value
+- **Return:** `string`
 
-- **Usage:**
-  Check whether key path exists. In Vue instance, If not specified component locale, check with global locale. If you specified `lang`, check the locale of `lang`.
+  This is the same as the `Function` returned `$tc` computed property. More detail see [$tc](#$tc).
 
-## Instance Properties
+#### te( key, [locale] )
 
-### $lang
+- **Arguments:**
+  - `{string} key`: required
+  - `{Locale} locale`: optional
 
-- **Return**
-  The lang you set via `Vue.config.lang`
+- **Return:** `boolean`
 
-- **Usage**
-  You can do some complex things if you need. Note a good design should not rely on this too much.
+  Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
+
+## Type Definitions for FlowType
+
+```
+declare type Path = string;
+declare type Locale = string;
+declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
+declare type LocaleMessageArray = Array<LocaleMessage>;
+declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
+declare type TranslateResult = string | Array<string>;
+declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
+
+declare type I18nOptions = {
+  locale?: Locale,
+  fallbackLocale?: Locale,
+  messages?: LocaleMessages,
+  formatter?: Formatter,
+  missing?: MissingHandler,
+  root?: I18n,
+  fallbackRoot?: boolean,
+  sync?: boolean
+};
+
+declare interface I18n {
+  static install: () => void,
+  static version: string,
+  get vm () :any,
+  get locale (): Locale,
+  set locale (locale: Locale): void,
+  get fallbackLocale (): Locale,
+  set fallbackLocale (locale: Locale): void,
+  get messages (): LocaleMessages,
+  get missing (): ?MissingHandler,
+  set missing (handler: MissingHandler): void,
+  get formatter (): Formatter,
+  set formatter (formatter: Formatter): void,
+  getLocaleMessage (locale: Locale): LocaleMessage,
+  setLocaleMessage (locale: Locale, message: LocaleMessage): void,
+  t (key: Path, ...values: any): TranslateResult,
+  tc (key: Path, choice?: number, ...values: any): TranslateResult,
+  te (key: Path, locale?: Locale): boolean
+};
+
+declare type FormatterOptions = { [key: string]: any };
+
+declare interface Formatter {
+  format (message: string, ...values: any): string
+};
+```
