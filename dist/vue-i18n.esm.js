@@ -3,8 +3,6 @@
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
-'use strict';
-
 /*  */
 
 /**
@@ -864,4 +862,4 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
 }
 
-module.exports = VueI18n;
+export default VueI18n;
