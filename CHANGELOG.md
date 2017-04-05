@@ -1,3 +1,27 @@
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/kazupon/vue-i18n/compare/v6.0.0-beta.1...v6.0.0) (2017-04-05)
+
+:tada: :tada: :tada:
+
+See the [docs](https://kazupon.github.io/vue-i18n/en/)
+
+### :zap: Improvements
+
+- Server-Side Rendering: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)
+- Custom formatter: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/ssr)
+
+
+### :star: NEW Features
+
+- Single File Components: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc)
+
+
+### :boom: Breaking changes
+
+- API
+- Dynamic locale <sup>DEPRECATED</sup>
+
+
 <a name="6.0.0-beta.1"></a>
 # [6.0.0-beta.1](https://github.com/kazupon/vue-i18n/compare/v6.0.0-alpha.6...v6.0.0-beta.1) (2017-03-22)
 

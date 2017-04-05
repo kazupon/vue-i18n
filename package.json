@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n",
   "description": "Internationalization plugin for Vue.js",
-  "version": "6.0.0-beta.1",
+  "version": "6.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -68,6 +68,7 @@
     "dist/vue-i18n.js",
     "dist/vue-i18n.min.js",
     "dist/vue-i18n.common.js",
+    "dist/vue-i18n.esm.js",
     "src",
     "decls"
   ],
