@@ -1,5 +1,26 @@
 # API References
 
+
+## Vue Constructor Options
+
+### i18n
+
+- **Type:** `I18nOptions`
+
+Component based translation option. 
+
+- **See also:** [`VueI18n` class constructor options](#constructor-options)
+
+
+## Vue Static Properties
+
+### version
+
+- **Type:** `string`
+
+vue-i18n version.
+
+
 ## Injected computed properties
 
 ### $t
@@ -51,6 +72,19 @@
   - **Return:** `boolean`
 
   Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
+
+
+## Injected properties
+
+### $i18n
+
+- **Type:** `I18n`
+
+- **Read only**
+
+Get a `VueI18n` instance. If you are specify.
+
+If you have specified an `i18n` option at component options, you will be able to get a `VueI18n` instance at the component, Otherwise, you will be able get root `VueI18n` instance.
 
 
 ## `VueI18n` class
@@ -216,6 +250,7 @@ Set the locale message of `locale`.
 
   Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
 
+
 ## Type Definitions for FlowType
 
 ```
@@ -234,15 +269,15 @@ declare type I18nOptions = {
   messages?: LocaleMessages,
   formatter?: Formatter,
   missing?: MissingHandler,
-  root?: I18n,
+  root?: I18n, // for internal
   fallbackRoot?: boolean,
   sync?: boolean
 };
 
 declare interface I18n {
-  static install: () => void,
+  static install: () => void, // for Vue plugin interface
   static version: string,
-  get vm () :any,
+  get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
   get fallbackLocale (): Locale,
