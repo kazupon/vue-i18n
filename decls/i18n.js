@@ -14,15 +14,15 @@ declare type I18nOptions = {
   messages?: LocaleMessages,
   formatter?: Formatter,
   missing?: MissingHandler,
-  root?: I18n,
+  root?: I18n, // for internal
   fallbackRoot?: boolean,
   sync?: boolean
 };
 
 declare interface I18n {
-  static install: () => void,
+  static install: () => void, // for Vue plugin interface
   static version: string,
-  get vm (): any,
+  get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
   get fallbackLocale (): Locale,
