@@ -331,7 +331,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="api-references">API References</h1><h2 id="injected-computed-properties">Injected computed properties</h2><h3 id="t">$t</h3><ul><li><p><strong>Type:</strong> <code>Function</code></p></li>
+                                <h1 id="api-references">API References</h1><h2 id="vue-constructor-options">Vue Constructor Options</h2><h3 id="i18n">i18n</h3><ul><li><strong>Type:</strong> <code>I18nOptions</code>
+</li></ul>
+<p>Component based translation option.</p><ul><li><strong>See also:</strong> <a href="#constructor-options"><code>VueI18n</code> class constructor options</a>
+</li></ul>
+<h2 id="vue-static-properties">Vue Static Properties</h2><h3 id="version">version</h3><ul><li><strong>Type:</strong> <code>string</code>
+</li></ul>
+<p>vue-i18n version.</p><h2 id="injected-computed-properties">Injected computed properties</h2><h3 id="t">$t</h3><ul><li><p><strong>Type:</strong> <code>Function</code></p></li>
 <li><p><strong>Return:</strong></p><p>The <code>Function</code> that have some arguments the below:</p><ul><li><p><strong>Arguments:</strong></p><ul><li><code>{Path} key</code>: required
 </li>
 <li><code>{Locale} locale</code>: optional
@@ -359,7 +365,9 @@
 </li>
 <li><p><strong>Return:</strong> <code>boolean</code></p></li></ul>
 </li></ul>
-<p>Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified <code>locale</code>, check the locale messages of <code>locale</code>.</p><h2 id="vuei18n-class"><code>VueI18n</code> class</h2><p><code>Vuei18n</code> class implement <a href="#type-definitions-for-flowtype"><code>I18n</code> interface</a>.</p><h3 id="constructor-options">Constructor Options</h3><p>You can specify the below some options of <a href="#type-definitions-for-flowtype"><code>I18nOptions</code> constructor options</a>.</p><h4 id="locale">locale</h4><ul><li><p><strong>Type:</strong> <code>Locale</code></p></li>
+<p>Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified <code>locale</code>, check the locale messages of <code>locale</code>.</p><h2 id="injected-properties">Injected properties</h2><h3 id="i18n">$i18n</h3><ul><li><p><strong>Type:</strong> <code>I18n</code></p></li>
+<li><p><strong>Read only</strong></p></li></ul>
+<p>Get a <code>VueI18n</code> instance. If you are specify.</p><p>If you have specified an <code>i18n</code> option at component options, you will be able to get a <code>VueI18n</code> instance at the component, Otherwise, you will be able get root <code>VueI18n</code> instance.</p><h2 id="vuei18n-class"><code>VueI18n</code> class</h2><p><code>Vuei18n</code> class implement <a href="#type-definitions-for-flowtype"><code>I18n</code> interface</a>.</p><h3 id="constructor-options">Constructor Options</h3><p>You can specify the below some options of <a href="#type-definitions-for-flowtype"><code>I18nOptions</code> constructor options</a>.</p><h4 id="locale">locale</h4><ul><li><p><strong>Type:</strong> <code>Locale</code></p></li>
 <li><p><strong>Default:</strong> <code>&apos;en-US&apos;</code></p></li></ul>
 <p>The locale of translation.</p><h4 id="fallbacklocale">fallbackLocale</h4><ul><li><p><strong>Type:</strong> <code>Locale</code></p></li>
 <li><p><strong>Default:</strong> <code>&apos;en-US&apos;</code></p></li></ul>
@@ -430,15 +438,15 @@ declare type I18nOptions = {
   messages?: LocaleMessages,
   formatter?: Formatter,
   missing?: MissingHandler,
-  root?: I18n,
+  root?: I18n, // for internal
   fallbackRoot?: boolean,
   sync?: boolean
 };
 
 declare interface I18n {
-  static install: () =&gt; void,
+  static install: () =&gt; void, // for Vue plugin interface
   static version: string,
-  get vm () :any,
+  get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
   get fallbackLocale (): Locale,
@@ -499,7 +507,7 @@ declare interface Formatter {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.15","depth":1,"previous":{"title":"Migrations","level":"1.14","depth":1,"path":"migrations.md","ref":"migrations.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"api.md","mtime":"2017-04-05T17:20:42.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-05T17:24:36.048Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"API References","level":"1.15","depth":1,"previous":{"title":"Migrations","level":"1.14","depth":1,"path":"migrations.md","ref":"migrations.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"api.md","mtime":"2017-04-06T02:17:51.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-06T02:18:02.147Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -514,10 +522,6 @@ declare interface Formatter {
     
         
         <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
