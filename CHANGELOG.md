@@ -7,8 +7,8 @@ See the [docs](https://kazupon.github.io/vue-i18n/en/)
 
 ### :zap: Improvements
 
-- Server-Side Rendering: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)
-- Custom formatter: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/ssr)
+- Server-Side Rendering: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/ssr)
+- Custom formatter: [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)
 
 
 ### :star: NEW Features
