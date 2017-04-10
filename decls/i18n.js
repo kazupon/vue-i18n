@@ -16,7 +16,8 @@ declare type I18nOptions = {
   missing?: MissingHandler,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
-  sync?: boolean
+  sync?: boolean,
+  silentTranslationWarn?: boolean
 };
 
 declare interface I18n {
@@ -32,6 +33,8 @@ declare interface I18n {
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
+  get silentTranslationWarn (): boolean,
+  set silentTranslationWarn (silent: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,

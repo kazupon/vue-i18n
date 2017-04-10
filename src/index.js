@@ -19,6 +19,7 @@ export default class VueI18n {
   _missing: ?MissingHandler
   _exist: Function
   _watcher: any
+  _silentTranslationWarn: boolean
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
@@ -29,7 +30,12 @@ export default class VueI18n {
     this._missing = options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
-    this._fallbackRoot = options.fallbackRoot === undefined ? true : !!options.fallbackRoot
+    this._fallbackRoot = options.fallbackRoot === undefined 
+      ? true 
+      : !!options.fallbackRoot
+    this._silentTranslationWarn = options.silentTranslationWarn === undefined 
+      ? false
+      : !!options.silentTranslationWarn
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -86,12 +92,15 @@ export default class VueI18n {
   get formatter (): Formatter { return this._formatter }
   set formatter (formatter: Formatter): void { this._formatter = formatter }
 
+  get silentTranslationWarn (): boolean { return this._silentTranslationWarn }
+  set silentTranslationWarn (silent: boolean): void { this._silentTranslationWarn = silent }
+
   _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any): ?string {
     if (!isNull(result)) { return result }
     if (this.missing) {
       this.missing.apply(null, [locale, key, vm])
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(
           `Cannot translate the value of keypath '${key}'. ` +
           'Use the value of keypath as default.'
@@ -116,7 +125,7 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          if (process.env.NODE_ENV !== 'production') {
+          if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
             warn(`Value of key '${key}' is not a string!`)
           }
           return null
@@ -128,7 +137,7 @@ export default class VueI18n {
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
-        if (process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
           warn(`Value of key '${key}' is not a string!`)
         }
         return null
@@ -166,7 +175,7 @@ export default class VueI18n {
 
     res = this._interpolate(messages[fallback], key, args)
     if (!isNull(res)) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
       }
       return res
@@ -183,7 +192,7 @@ export default class VueI18n {
 
     const ret: any = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
       }
       if (!this._root) { throw Error('unexpected error') }
