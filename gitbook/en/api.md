@@ -159,6 +159,16 @@ Whether synchronize the root level locale to the component translation locale.
 
 If `false`, regardless of the root level locale, translate for each component locale.
 
+### silentTranslationWarn
+
+- **Type:** `Boolean`
+
+- **Default:** `false`
+
+Whether suppress warnings outputted when translation fails.
+
+If `true`, supress translation fail warnings.
+
 ### Properties
 
 #### locale
@@ -200,6 +210,14 @@ A hander for translation missing.
 - **Read/Write**
 
 The formatter that implemented with `Formatter` interface.
+
+#### silentTranslationWarn
+
+- **Type:** `boolean`
+
+- **Read/Write**
+
+Whether suppress warnings outputted when translation fails.
 
 ### methods
 
@@ -273,7 +291,8 @@ declare type I18nOptions = {
   missing?: MissingHandler,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
-  sync?: boolean
+  sync?: boolean,
+  silentTranslationWarn?: boolean
 };
 
 declare interface I18n {
@@ -289,6 +308,8 @@ declare interface I18n {
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
+  get silentTranslationWarn (): boolean,
+  set silentTranslationWarn (silent: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,
