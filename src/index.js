@@ -30,10 +30,10 @@ export default class VueI18n {
     this._missing = options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
-    this._fallbackRoot = options.fallbackRoot === undefined 
-      ? true 
+    this._fallbackRoot = options.fallbackRoot === undefined
+      ? true
       : !!options.fallbackRoot
-    this._silentTranslationWarn = options.silentTranslationWarn === undefined 
+    this._silentTranslationWarn = options.silentTranslationWarn === undefined
       ? false
       : !!options.silentTranslationWarn
 
