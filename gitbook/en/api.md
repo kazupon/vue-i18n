@@ -21,7 +21,9 @@ Component based translation option.
 vue-i18n version.
 
 
-## Injected computed properties
+## Vue injected computed properties
+
+> :warning: NOTE: In `data` option or `beforeCreate` hook, you cannot use the these computed properties due to not initialize. You need to use [`t`](#t-key-locale-values-) / [`tc`](#tc-key-choice-values-) / [`te`](#te-key-locale-) method of `$i18n` property (`VueI18n` Instance).
 
 ### $t
 
