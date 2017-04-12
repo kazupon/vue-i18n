@@ -22,7 +22,7 @@ const app = new Vue({
   router,
   store,
   i18n,
-  ...App
+  render: h => h(App)
 })
 
 // expose the app, the router and the store.
