@@ -1,4 +1,5 @@
 import { warn } from './util'
+import extend from './extend'
 import mixin from './mixin'
 
 export let Vue
@@ -22,6 +23,7 @@ export function install (_Vue) {
     get () { return this._i18n }
   })
 
+  extend(Vue)
   Vue.mixin(mixin)
 
   // use object-based merge strategy

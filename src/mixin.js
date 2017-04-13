@@ -3,44 +3,6 @@
 import VueI18n from './index'
 import { isPlainObject, warn } from './util'
 
-const $t = (vm: any): Function => {
-  // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
-  /* eslint-disable no-unused-vars */
-  const fallback: Locale = vm.$i18n.fallbackLocal
-  /* eslint-enable no-unused-vars */
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, ...values: any): TranslateResult => {
-    return vm.$i18n._t(key, locale, messages, vm, ...values)
-  }
-}
-const $tc = (vm: any): Function => {
-  // add dependency tracking !!
-  const locale: Locale = vm.$i18n.locale
-  /* eslint-disable no-unused-vars */
-  const fallback: Locale = vm.$i18n.fallbackLocal
-  /* eslint-enable no-unused-vars */
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, choice?: number, ...values: any): TranslateResult => {
-    return vm.$i18n._tc(key, locale, messages, vm, choice, ...values)
-  }
-}
-const $te = (vm: any): Function => {
-  // add dependency tracking !!
-  const _locale: Locale = vm.$i18n.locale
-  const messages: LocaleMessages = vm.$i18n.vm.messages
-  return (key: string, locale?: Locale): boolean => {
-    return vm.$i18n._te(key, _locale, messages, [locale])
-  }
-}
-
-function defineComputed (vm: any, options: any): void {
-  options.computed = options.computed || {}
-  options.computed.$t = () => $t(vm)
-  options.computed.$tc = () => $tc(vm)
-  options.computed.$te = () => $te(vm)
-}
-
 export default {
   beforeCreate (): void {
     const options: any = this.$options
@@ -49,7 +11,7 @@ export default {
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
         this._i18n = options.i18n
-        defineComputed(this, options)
+        this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
@@ -69,10 +31,10 @@ export default {
         }
 
         this._i18n = new VueI18n(options.i18n)
-        defineComputed(this, options)
+        this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
-          this._localeWatcher = this.$i18n.watchLocale()
+          this._localeWatcher = this.$i18n.watchLocale(() => this.$forceUpdate())
         }
       } else {
         if (process.env.NODE_ENV !== 'production') {
@@ -82,15 +44,20 @@ export default {
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this._i18n = this.$root.$i18n
-      defineComputed(this, options)
+      this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
     }
   },
 
   beforeDestroy (): void {
     if (!this._i18n) { return }
 
+    if (this._i18nWatcher) {
+      this._i18n.unwatchI18nData()
+      delete this._i18nWatcher
+    }
+
     if (this._localeWatcher) {
-      this.$i18n.unwatchLocale()
+      this._i18n.unwatchLocale()
       delete this._localeWatcher
     }
 

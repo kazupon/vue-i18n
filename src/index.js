@@ -19,6 +19,7 @@ export default class VueI18n {
   _missing: ?MissingHandler
   _exist: Function
   _watcher: any
+  _i18nWatcher: Function
   _silentTranslationWarn: boolean
 
   constructor (options: I18nOptions = {}) {
@@ -54,11 +55,27 @@ export default class VueI18n {
     Vue.config.silent = silent
   }
 
-  watchLocale (): any {
+  watchI18nData (fn: Function): Function {
+    this._i18nWatcher = this._vm.$watch('$data', () => {
+      fn && fn()
+    }, { deep: true })
+    return this._i18nWatcher
+  }
+
+  unwatchI18nData (): boolean {
+    if (this._i18nWatcher) {
+      this._i18nWatcher()
+      delete this._i18nWatcher
+    }
+    return true
+  }
+
+  watchLocale (fn: Function): ?Function {
     if (!this._sync || !this._root) { return null }
     const target: any = this._vm
     this._watcher = this._root.vm.$watch('locale', (val) => {
       target.$set(target, 'locale', val)
+      fn && fn()
     }, { immediate: true })
     return this._watcher
   }
