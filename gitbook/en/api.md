@@ -21,57 +21,37 @@ Component based translation option.
 vue-i18n version.
 
 
-## Vue injected computed properties
-
-> :warning: NOTE: In `data` option or `beforeCreate` hook, you cannot use the these computed properties due to not initialize. You need to use [`t`](#t-key-locale-values-) / [`tc`](#tc-key-choice-values-) / [`te`](#te-key-locale-) method of `$i18n` property (`VueI18n` Instance).
+## Vue injected methods
 
 ### $t
 
-- **Type:** `Function`
+- **Arguments:**
+  - `{Path} key`: required
+  - `{Locale} locale`: optional
+  - `{Array | Object} values`: optional
 
-- **Return:**
-
-  The `Function` that have some arguments the below:
-
-  - **Arguments:**
-    - `{Path} key`: required
-    - `{Locale} locale`: optional
-    - `{Array | Object} values`: optional
-
-  - **Return:** `string`
+- **Return:** `string`
 
   Translate the locale message of `key`. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you specified `locale`, translate the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
 
 ### $tc
 
-- **Type:** `Function`
+- **Arguments:**
+  - `{Path} key`: required
+  - `{number} choice`: optional, default 1
+  - `{string | Array | Object} values`: optional
 
-- **Return:**
-
-  The `Function` that have some arguments the below:
-
-  - **Arguments:**
-    - `{Path} key`: required
-    - `{number} choice`: optional, default 1
-    - `{string | Array | Object} values`: optional
-  
-  - **Return:** `string`
+- **Return:** `string`
 
   Translate the locale message of `key` with pluralization. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you will specify string value to `values`, translate the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
 ### $te
 
-- **Type:** `Function`
+- **Arguments:**
+  - `{Path} key`: required
+  - `{Locale} locale`: optional
 
-- **Return:**
-
-  The `Function` that have some arguments the below:
-
-  - **Arguments:**
-    - `{Path} key`: required
-    - `{Locale} locale`: optional
-  
-  - **Return:** `boolean`
+- **Return:** `boolean`
 
   Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
