@@ -37,6 +37,7 @@ declare interface I18n {
   set silentTranslationWarn (silent: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
+  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
   te (key: Path, locale?: Locale): boolean
