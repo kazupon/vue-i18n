@@ -1,3 +1,19 @@
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/kazupon/vue-i18n/compare/v6.0.0...v6.1.0) (2017-04-14)
+
+
+### :star: New Features
+
+* **api:** add 'mergeLocaleMessage' method ([ef21621](https://github.com/kazupon/vue-i18n/commit/ef21621)), closes [#131](https://github.com/kazupon/vue-i18n/issues/131)
+* **silent:** add silent translation missing option ([29b3a17](https://github.com/kazupon/vue-i18n/commit/29b3a17)), closes [#139](https://github.com/kazupon/vue-i18n/issues/139)
+
+
+### :zap: Improvements
+
+* change to method from computed property ([9135a59](https://github.com/kazupon/vue-i18n/commit/9135a59)), closes [#141](https://github.com/kazupon/vue-i18n/issues/141)
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/kazupon/vue-i18n/compare/v6.0.0-beta.1...v6.0.0) (2017-04-05)
 
