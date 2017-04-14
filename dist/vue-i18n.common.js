@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.0.0 
+ * vue-i18n v6.1.0 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -96,65 +96,47 @@ function looseClone (obj) {
 
 /*  */
 
-var $t = function (vm) {
-  // add dependency tracking !!
-  var locale = vm.$i18n.locale;
-  /* eslint-disable no-unused-vars */
-  var fallback = vm.$i18n.fallbackLocal;
-  /* eslint-enable no-unused-vars */
-  var messages = vm.$i18n.vm.messages;
-  return function (key) {
+function extend (Vue) {
+  Vue.prototype.$t = function (key) {
     var values = [], len = arguments.length - 1;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
 
-    return (ref = vm.$i18n)._t.apply(ref, [ key, locale, messages, vm ].concat( values ))
-    var ref;
-  }
-};
-var $tc = function (vm) {
-  // add dependency tracking !!
-  var locale = vm.$i18n.locale;
-  /* eslint-disable no-unused-vars */
-  var fallback = vm.$i18n.fallbackLocal;
-  /* eslint-enable no-unused-vars */
-  var messages = vm.$i18n.vm.messages;
-  return function (key, choice) {
+    var i18n = this.$i18n;
+    return i18n._t.apply(i18n, [ key, i18n.locale, i18n.messages, this ].concat( values ))
+  };
+
+  Vue.prototype.$tc = function (key, choice) {
     var values = [], len = arguments.length - 2;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
 
-    return (ref = vm.$i18n)._tc.apply(ref, [ key, locale, messages, vm, choice ].concat( values ))
-    var ref;
-  }
-};
-var $te = function (vm) {
-  // add dependency tracking !!
-  var _locale = vm.$i18n.locale;
-  var messages = vm.$i18n.vm.messages;
-  return function (key, locale) {
-    return vm.$i18n._te(key, _locale, messages, [locale])
-  }
-};
+    var i18n = this.$i18n;
+    return i18n._tc.apply(i18n, [ key, i18n.locale, i18n.messages, this, choice ].concat( values ))
+  };
 
-function defineComputed (vm, options) {
-  options.computed = options.computed || {};
-  options.computed.$t = function () { return $t(vm); };
-  options.computed.$tc = function () { return $tc(vm); };
-  options.computed.$te = function () { return $te(vm); };
+  Vue.prototype.$te = function (key, locale) {
+    var i18n = this.$i18n;
+    return i18n._te(key, i18n.locale, i18n.messages, [locale])
+  };
 }
+
+/*  */
 
 var mixin = {
   beforeCreate: function beforeCreate () {
+    var this$1 = this;
+
     var options = this.$options;
     options.i18n = options.i18n || (options.__i18n ? {} : null);
 
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
         this._i18n = options.i18n;
-        defineComputed(this, options);
+        this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n;
+          options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
         }
 
         // init locale messages via custom blocks
@@ -169,10 +151,10 @@ var mixin = {
         }
 
         this._i18n = new VueI18n(options.i18n);
-        defineComputed(this, options);
+        this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
-          this._localeWatcher = this.$i18n.watchLocale();
+          this._localeWatcher = this.$i18n.watchLocale(function () { return this$1.$forceUpdate(); });
         }
       } else {
         if (process.env.NODE_ENV !== 'production') {
@@ -182,15 +164,20 @@ var mixin = {
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this._i18n = this.$root.$i18n;
-      defineComputed(this, options);
+      this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
     }
   },
 
   beforeDestroy: function beforeDestroy () {
     if (!this._i18n) { return }
 
+    if (this._i18nWatcher) {
+      this._i18n.unwatchI18nData();
+      delete this._i18nWatcher;
+    }
+
     if (this._localeWatcher) {
-      this.$i18n.unwatchLocale();
+      this._i18n.unwatchLocale();
       delete this._localeWatcher;
     }
 
@@ -219,6 +206,7 @@ function install (_Vue) {
     get: function get () { return this._i18n }
   });
 
+  extend(Vue);
   Vue.mixin(mixin);
 
   // use object-based merge strategy
@@ -631,7 +619,12 @@ var VueI18n = function VueI18n (options) {
   this._missing = options.missing || null;
   this._root = options.root || null;
   this._sync = options.sync === undefined ? true : !!options.sync;
-  this._fallbackRoot = options.fallbackRoot === undefined ? true : !!options.fallbackRoot;
+  this._fallbackRoot = options.fallbackRoot === undefined
+    ? true
+    : !!options.fallbackRoot;
+  this._silentTranslationWarn = options.silentTranslationWarn === undefined
+    ? false
+    : !!options.silentTranslationWarn;
 
   this._exist = function (message, key) {
     if (!message || !key) { return false }
@@ -641,7 +634,7 @@ var VueI18n = function VueI18n (options) {
   this._initVM({ locale: locale, fallbackLocale: fallbackLocale, messages: messages });
 };
 
-var prototypeAccessors = { vm: {},messages: {},locale: {},fallbackLocale: {},missing: {},formatter: {} };
+var prototypeAccessors = { vm: {},messages: {},locale: {},fallbackLocale: {},missing: {},formatter: {},silentTranslationWarn: {} };
 
 VueI18n.prototype._initVM = function _initVM (data) {
   var silent = Vue.config.silent;
@@ -650,11 +643,27 @@ VueI18n.prototype._initVM = function _initVM (data) {
   Vue.config.silent = silent;
 };
 
-VueI18n.prototype.watchLocale = function watchLocale () {
+VueI18n.prototype.watchI18nData = function watchI18nData (fn) {
+  this._i18nWatcher = this._vm.$watch('$data', function () {
+    fn && fn();
+  }, { deep: true });
+  return this._i18nWatcher
+};
+
+VueI18n.prototype.unwatchI18nData = function unwatchI18nData () {
+  if (this._i18nWatcher) {
+    this._i18nWatcher();
+    delete this._i18nWatcher;
+  }
+  return true
+};
+
+VueI18n.prototype.watchLocale = function watchLocale (fn) {
   if (!this._sync || !this._root) { return null }
   var target = this._vm;
   this._watcher = this._root.vm.$watch('locale', function (val) {
     target.$set(target, 'locale', val);
+    fn && fn();
   }, { immediate: true });
   return this._watcher
 };
@@ -688,12 +697,15 @@ prototypeAccessors.missing.set = function (handler) { this._missing = handler; }
 prototypeAccessors.formatter.get = function () { return this._formatter };
 prototypeAccessors.formatter.set = function (formatter) { this._formatter = formatter; };
 
+prototypeAccessors.silentTranslationWarn.get = function () { return this._silentTranslationWarn };
+prototypeAccessors.silentTranslationWarn.set = function (silent) { this._silentTranslationWarn = silent; };
+
 VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm) {
   if (!isNull(result)) { return result }
   if (this.missing) {
     this.missing.apply(null, [locale, key, vm]);
   } else {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(
         "Cannot translate the value of keypath '" + key + "'. " +
         'Use the value of keypath as default.'
@@ -720,7 +732,7 @@ VueI18n.prototype._interpolate = function _interpolate (message, key, values) {
     if (isPlainObject(message)) {
       ret = message[key];
       if (typeof ret !== 'string') {
-        if (process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
           warn(("Value of key '" + key + "' is not a string!"));
         }
         return null
@@ -732,7 +744,7 @@ VueI18n.prototype._interpolate = function _interpolate (message, key, values) {
     if (typeof pathRet === 'string') {
       ret = pathRet;
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(("Value of key '" + key + "' is not a string!"));
       }
       return null
@@ -774,7 +786,7 @@ VueI18n.prototype._translate = function _translate (messages, locale, fallback, 
 
   res = this._interpolate(messages[fallback], key, args);
   if (!isNull(res)) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
     }
     return res
@@ -794,7 +806,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
 
   var ret = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params);
   if (this._isFallbackRoot(ret)) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to translate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
@@ -855,10 +867,14 @@ VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message)
   this._vm.messages[locale] = message;
 };
 
+VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
+  this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message);
+};
+
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.0.0';
+VueI18n.version = '6.1.0';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
