@@ -208,7 +208,7 @@ Whether suppress warnings outputted when translation fails.
 
 - **Return:** `LocaleMessage`
 
-Get the locale message of `locale`.
+Get the locale message of locale.
 
 #### setLocaleMessage( locale, message )
 
@@ -216,7 +216,15 @@ Get the locale message of `locale`.
   - `{Locale} locale`
   - `{LocaleMessage} message`
 
-Set the locale message of `locale`.
+Set the locale message of locale.
+
+#### mergeLocaleMessage( locale, message ) 
+
+- **Arguments:**
+  - `{Locale} locale`
+  - `{LocaleMessage} message`
+
+Merge the registered locale messages with the locale message of locale.
 
 #### t( key, [locale], [values] )
 
@@ -292,6 +300,7 @@ declare interface I18n {
   set silentTranslationWarn (silent: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
+  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
   te (key: Path, locale?: Locale): boolean
