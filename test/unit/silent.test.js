@@ -1,35 +1,23 @@
 describe('silent', () => {
-  it('should be suppressed translate warnings', done => {
-    const el = document.createElement('div')
+  it('should be suppressed translate warnings', () => {
     const vm = new Vue({
       i18n: new VueI18n({
         locale: 'en',
-        silentTranslationWarn: true
-      }),
-      components: {
-        child1: { // translation with component
-          i18n: {
-            locale: 'en',
-            messages: {
-              en: { who: 'child1' },
-              ja: { who: '子1' }
-            }
-          },
-          render (h) { return h('div', {}, []) }
+        silentTranslationWarn: true,
+        messages: {
+          en: { who: 'root' },
+          ja: { who: 'ルート' }
         }
-      },
-      render (h) {
-        return h('div', {}, [
-          h('p', { ref: 'who' }, [this.$t('who')]),
-          h('child1', { ref: 'child1' })
-        ])
-      }
-    }).$mount(el)
+      })
+    })
 
-    const child1 = vm.$refs.child1
-    nextTick(() => {
-      vm.$t('foo.bar.buz')
-      child1.$t('foo.bar.buz')
-    }).then(done)
+    const spy = sinon.spy(console, 'warn')
+    vm.$t('foo.bar.buz')
+    assert(spy.notCalled === true)
+
+    // change
+    vm.$i18n.silentTranslationWarn = false
+    vm.$t('foo.bar.buz')
+    assert(spy.callCount === 2)
   })
 })
