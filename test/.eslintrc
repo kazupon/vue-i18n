@@ -8,6 +8,7 @@
     "nextTick": true,
     "delay": true,
     "assert": true,
+    "sinon": true,
     "Vue": true,
     "VueI18n": true
   }

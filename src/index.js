@@ -253,7 +253,7 @@ export default class VueI18n {
     this._vm.messages[locale] = message
   }
 
-  mergeLocaleMessage(locale: Locale, message: LocaleMessage): void {
+  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void {
     this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message)
   }
 }
