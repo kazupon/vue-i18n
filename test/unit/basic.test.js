@@ -280,6 +280,10 @@ describe('basic', () => {
       it('should return false', () => {
         assert(i18n.te('message.hallo') === false)
       })
+
+      it('should return false with locale', () => {
+        assert(i18n.te('message.hello', 'xx') === false)
+      })
     })
   })
 
@@ -517,6 +521,11 @@ describe('basic', () => {
       it('should return false', () => {
         const vm = new Vue({ i18n })
         assert(vm.$te('message.hallo') === false)
+      })
+
+      it('should return false with locale', () => {
+        const vm = new Vue({ i18n })
+        assert(vm.$te('message.hello', 'xx') === false)
       })
     })
   })

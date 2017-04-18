@@ -13,6 +13,6 @@ export default function extend (Vue: any): void {
 
   Vue.prototype.$te = function (key: Path, locale?: Locale): boolean {
     const i18n = this.$i18n
-    return i18n._te(key, i18n.locale, i18n.messages, [locale])
+    return i18n._te(key, i18n.locale, i18n.messages, locale)
   }
 }

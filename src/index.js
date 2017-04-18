@@ -242,7 +242,7 @@ export default class VueI18n {
   }
 
   te (key: Path, locale?: Locale): boolean {
-    return this._te(key, this.locale, this.messages, [locale])
+    return this._te(key, this.locale, this.messages, locale)
   }
 
   getLocaleMessage (locale: Locale): LocaleMessage {
