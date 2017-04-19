@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>datetime localization</title>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../../dist/vue-i18n.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <select v-model="locale">
+        <option>en-US</option>
+        <option>ja-JP</option>
+      </select>
+      <p>{{ $t('current_datetime')}}: {{ $d(now, 'long') }}</p>
+    </div>
+    <script>
+      var messages = {
+        'en-US': {
+          current_datetime: 'current datetime'
+        },
+        'ja-JP': {
+          current_datetime: '現在の日時'
+        }
+      }
+      var dateTimeFormats = {
+        'en-US': {
+          long: {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+          }
+        },
+        'ja-JP': {
+          long: {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: true,
+          }
+        }
+      }
+      
+      Vue.use(VueI18n)
+
+      var initial = 'ja-JP'
+      var i18n = new VueI18n({
+        locale: initial,
+        messages: messages,
+        dateTimeFormats: dateTimeFormats
+      })
+
+      var vm = new Vue({
+        i18n: i18n,
+        data: {
+          locale: initial,
+          now: new Date()
+        },
+        watch: {
+          locale: function (val) {
+            this.$i18n.locale = val
+          }
+        }
+      }).$mount('#app')
+      
+      setInterval(function () {
+        vm.now = new Date()
+      }, 1000)
+    </script>
+  </body>
+</html>
