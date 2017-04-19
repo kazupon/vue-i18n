@@ -1,5 +1,7 @@
 # Locale Messages Syntax
 
+## Structure
+
 Locale Messages syntax the bellow:
 
 ```javascript
@@ -69,4 +71,34 @@ Ouput the following:
   <!-- array in array -->
   <p>this is nested array error 1</p>
 </div>
+```
+
+## Linked Locale Messages
+
+If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
+
+Locale messages the bellow:
+
+```javascript
+const messages = {
+  en: {
+    message: {
+      the_world: 'the world',
+      dio: 'DIO:',
+      linked: '@:message.dio @:message.the_world !!!!'
+    }
+  }
+}
+```
+
+Template the bellow:
+
+```html
+<p>{{ $t('message.linked') }}</p>
+```
+
+Output the bellow:
+
+```html
+<p>DIO: the world !!!!</p>
 ```
