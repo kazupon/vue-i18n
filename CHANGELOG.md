@@ -1,3 +1,13 @@
+<a name="6.1.1"></a>
+## [6.1.1](https://github.com/kazupon/vue-i18n/compare/v6.1.0...v6.1.1) (2017-04-19)
+
+
+### :bug: Bug Fixes
+
+* **te:** Fix `te()` that always uses `this.locale`, even when `locale` supplied ([#147](https://github.com/kazupon/vue-i18n/issues/147)) by [@aicest](https://github.com/aicest) ([bf15eeb](https://github.com/kazupon/vue-i18n/commit/bf15eeb)), closes [#147](https://github.com/kazupon/vue-i18n/issues/147)
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/kazupon/vue-i18n/compare/v6.0.0...v6.1.0) (2017-04-14)
 
