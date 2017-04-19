@@ -1,6 +1,7 @@
 import dateTimeFormats from './fixture/datetime'
 
-describe('datetime format', () => {
+const desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
+desc('datetime format', () => {
   describe('getDateTimeFormat / setDateTimeFormat', () => {
     it('should be worked', done => {
       const i18n = new VueI18n({
