@@ -1,6 +1,6 @@
-# Hot Reload
+# Hot reloading
 
-You can watch for changes in translation files and hot reload changes into your application.
+You can watch for changes in localization files and hot reload changes into your application.
 
 ```javascript
 // Something locale messages
@@ -25,7 +25,7 @@ if (module.hot) {
   module.hot.accept(['./en', './ja'], function () {
     i18n.setLocaleMessage('en', require('./en').default)
     i18n.setLocaleMessage('ja', require('./ja').default)
-    // Or the bellow hot updates via $i18n property
+    // Or the following hot updates via $i18n property
     // app.$i18n.setLocaleMessage('en', require('./en').default)
     // app.$i18n.setLocaleMessage('ja', require('./ja').default)
   })

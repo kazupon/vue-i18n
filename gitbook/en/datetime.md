@@ -1,8 +1,8 @@
-# DateTime Localization
+# DateTime localization
 
 You can localize the datetime with your definition formats.
 
-DateTime formats the bellow:
+DateTime formats the below:
 
 ```javascript
 const dateTimeFormats = {
@@ -38,7 +38,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Template the bellow:
+Template the below:
 
 ```html
 <div id="app">
@@ -47,7 +47,7 @@ Template the bellow:
 </div>
 ```
 
-Output the bellow:
+Output the below:
 
 ```html
 <div id="app">

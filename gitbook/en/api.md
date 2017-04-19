@@ -1,34 +1,34 @@
-# API References
+# API references
 
 
-## Vue Constructor Options
+## Vue constructor options
 
 ### i18n
 
 - **Type:** `I18nOptions`
 
-Component based translation option. 
+  Component based localization option. 
 
 - **See also:** [`VueI18n` class constructor options](#constructor-options)
 
 
-## Vue Static Properties
+## Vue static properties
 
 ### version
 
 - **Type:** `string`
 
-vue-i18n version.
+  vue-i18n version.
 
 ### availabilities
 
 - **Type:** `IntlAvailability`
 
-Whether the following internationalization features are available:
+  Whether the following internationalization features are available:
 
 - `{boolean} dateTimeFormat`: locale sensitive datetime formatting
 
-The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
+  The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ## Vue injected methods
 
@@ -41,7 +41,7 @@ The above internationalization features are depends on [the browser environmens]
 
 - **Return:** `string`
 
-  Translate the locale message of `key`. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you specified `locale`, translate the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
+  Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
 
 ### $tc
 
@@ -52,7 +52,7 @@ The above internationalization features are depends on [the browser environmens]
 
 - **Return:** `string`
 
-  Translate the locale message of `key` with pluralization. Translate in preferentially component locale messages than global locale messages. If not specified component locale messages, translate with global locale messages. If you will specify string value to `values`, translate the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
+  Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
 ### $te
 
@@ -86,9 +86,9 @@ The above internationalization features are depends on [the browser environmens]
 
 - **Read only**
 
-Get a `VueI18n` instance. If you are specify.
+  Get a `VueI18n` instance. If you are specify.
 
-If you have specified an `i18n` option at component options, you will be able to get a `VueI18n` instance at the component, Otherwise, you will be able get root `VueI18n` instance.
+  If you have specified an `i18n` option at component options, you will be able to get a `VueI18n` instance at the component, Otherwise, you will be able get root `VueI18n` instance.
 
 
 ## `VueI18n` class
@@ -105,7 +105,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 - **Default:** `'en-US'`
 
-The locale of translation.
+  The locale of localization.
 
 #### fallbackLocale
 
@@ -113,7 +113,7 @@ The locale of translation.
 
 - **Default:** `'en-US'`
 
-The locale of fallback translation.
+  The locale of fallback localization.
 
 #### messages
 
@@ -121,7 +121,7 @@ The locale of fallback translation.
 
 - **Default:** `{}`
 
-The locale messages of translation.
+  The locale messages of localization.
 
 #### dateTimeFormats
 
@@ -129,7 +129,7 @@ The locale messages of translation.
 
 - **Default:** `{}`
 
-The datetime formats of localization.
+  The datetime formats of localization.
 
 - **See also:** [`DateTimeFormats` type](#type-definitions-for-flowtype).
 
@@ -139,7 +139,7 @@ The datetime formats of localization.
 
 - **Default:** Built in formatter
 
-The formatter that implemented with `Formatter` interface.
+  The formatter that implemented with `Formatter` interface.
 
 #### missing
 
@@ -147,9 +147,9 @@ The formatter that implemented with `Formatter` interface.
 
 - **Default:** `null`
 
-A hander for translation missing. The handler gets called with the translation target locale, translation path key and the Vue instance.
+  A hander for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
 
-If missing hander is assigned, and occured translation missing, it's not warned.
+  If missing hander is assigned, and occured localization missing, it's not warned.
 
 #### fallbackRoot
 
@@ -157,9 +157,9 @@ If missing hander is assigned, and occured translation missing, it's not warned.
 
 - **Default:** `true`
 
-In the component translation, whether to fall back to root level (global) translation  when translation fails.
+  In the component localization, whether to fall back to root level (global) localization when localization fails.
 
-If `false`, it's warned, and is returned the key.
+  If `false`, it's warned, and is returned the key.
 
 #### sync
 
@@ -167,9 +167,9 @@ If `false`, it's warned, and is returned the key.
 
 - **Default:** `true`
 
-Whether synchronize the root level locale to the component translation locale.
+  Whether synchronize the root level locale to the component localization locale.
 
-If `false`, regardless of the root level locale, translate for each component locale.
+  If `false`, regardless of the root level locale, localize for each component locale.
 
 ### silentTranslationWarn
 
@@ -177,9 +177,9 @@ If `false`, regardless of the root level locale, translate for each component lo
 
 - **Default:** `false`
 
-Whether suppress warnings outputted when translation fails.
+  Whether suppress warnings outputted when localization fails.
 
-If `true`, supress translation fail warnings.
+  If `true`, supress localization fail warnings.
 
 ### Properties
 
@@ -189,7 +189,7 @@ If `true`, supress translation fail warnings.
 
 - **Read/Write**
 
-The locale of translation.
+  The locale of localization.
 
 #### fallbackLocale
 
@@ -197,7 +197,7 @@ The locale of translation.
 
 - **Read/Write**
 
-The locale of fallback translation.
+  The locale of fallback localization.
 
 #### messages
 
@@ -205,7 +205,7 @@ The locale of fallback translation.
 
 - **Read only**
 
-The locale messages of translation.
+  The locale messages of localization.
 
 #### dateTimeFormats
 
@@ -213,7 +213,7 @@ The locale messages of translation.
 
 - **Read only**
 
-The datetime formats of localization.
+  The datetime formats of localization.
 
 #### missing
 
@@ -221,7 +221,7 @@ The datetime formats of localization.
 
 - **Read/Write**
 
-A hander for translation missing.
+  A hander for localization missing.
 
 #### formatter
 
@@ -229,7 +229,7 @@ A hander for translation missing.
 
 - **Read/Write**
 
-The formatter that implemented with `Formatter` interface.
+  The formatter that implemented with `Formatter` interface.
 
 #### silentTranslationWarn
 
@@ -237,9 +237,9 @@ The formatter that implemented with `Formatter` interface.
 
 - **Read/Write**
 
-Whether suppress warnings outputted when translation fails.
+  Whether suppress warnings outputted when localization fails.
 
-### methods
+### Methods
 
 #### getLocaleMessage( locale )
 
@@ -248,7 +248,7 @@ Whether suppress warnings outputted when translation fails.
 
 - **Return:** `LocaleMessage`
 
-Get the locale message of locale.
+  Get the locale message of locale.
 
 #### setLocaleMessage( locale, message )
 
@@ -256,7 +256,7 @@ Get the locale message of locale.
   - `{Locale} locale`
   - `{LocaleMessage} message`
 
-Set the locale message of locale.
+  Set the locale message of locale.
 
 #### mergeLocaleMessage( locale, message ) 
 
@@ -264,7 +264,7 @@ Set the locale message of locale.
   - `{Locale} locale`
   - `{LocaleMessage} message`
 
-Merge the registered locale messages with the locale message of locale.
+  Merge the registered locale messages with the locale message of locale.
 
 #### t( key, [locale], [values] )
 
@@ -305,7 +305,7 @@ Merge the registered locale messages with the locale message of locale.
 
 - **Return:** `DateTimeFormat`
 
-Get the datetime format of locale.
+  Get the datetime format of locale.
 
 #### setDateTimeFormat ( locale, format )
 
@@ -313,7 +313,7 @@ Get the datetime format of locale.
   - `{Locale} locale`
   - `{DateTimeFormat} format`
 
-Set the datetime format of locale.
+  Set the datetime format of locale.
 
 #### mergeDateTimeFormat ( locale, format ) 
 
@@ -321,7 +321,7 @@ Set the datetime format of locale.
   - `{Locale} locale`
   - `{DateTimeFormat} format`
 
-Merge the registered datetime formats with the datetime format of locale.
+  Merge the registered datetime formats with the datetime format of locale.
 
 #### d( value, [key], [locale] )
 
@@ -332,10 +332,10 @@ Merge the registered datetime formats with the datetime format of locale.
 
 - **Return:** `string`
 
-This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
+  This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
 
 
-## Type Definitions for FlowType
+## Type definitions for flowType
 
 ```
 declare type Path = string;

@@ -1,7 +1,7 @@
 # Migrations
 
 
-## Global Config
+## Global config
 
 ### lang <sup>replaced</sup>
 
@@ -97,7 +97,7 @@ Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter` prope
   }
   ```
 
-## Global Methods
+## Global methods
 
 ### Vue.locale <sup>replaced</sup>
 
@@ -188,7 +188,7 @@ Use `VueI18n#te` method:
   i18n.te('hello') // -> true
   ```
 
-## Constructor Options
+## Constructor options
 
 ### locales <sup>replaced</sup>
 
@@ -217,7 +217,7 @@ Use `messages` of `VueI18n` class constructor option, or `messages` of `i18n` op
   }
   ```
 
-## Instance Properties
+## Instance properties
 
 ### $lang <sup>replaced</sup>
 
@@ -236,7 +236,7 @@ Use `VueI18n#locale` property:
   app.$i18n.locale = 'ja'
   ```
 
-## Dynamic Locale <sup>removed</sup>
+## Dynamic locale <sup>removed</sup>
 
 If you need to dynamic set locale messages, you should implement the below:
 

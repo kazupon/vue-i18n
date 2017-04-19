@@ -2,7 +2,7 @@
 
 You can translate with pluralization.  You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
-Locale messages the following:
+Locale messages the below:
 
 ```javascript
 const messages = {
@@ -12,14 +12,14 @@ const messages = {
 }
 ```
 
-Template the following:
+Template the below:
 
 ```html
 <p>{{ $tc('car', 1) }}</p>
 <p>{{ $tc('car', 2) }}</p>
 ```
 
-Output the following:
+Output the below:
 
 ```html
 <p>car</p>

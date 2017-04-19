@@ -13,18 +13,13 @@ const messages = {
 }
 ```
 
-Template the following for Vue 1 (notice the triple brackets):
-```html
-<p>{{{ $t('message.hello') }}}</p>
-```
-
-Or for Vue 2 (triple brackets are deprecated in vue 2.0 and replaced by v-html):
+Template the below:
 
 ```html
 <p v-html="$t('message.hello')"></p>
 ```
 
-Output the following (instead of the message pre formatted)
+Output the below (instead of the message pre formatted)
 
 ```html
 <p>hello
@@ -34,7 +29,7 @@ world</p>
 
 ## Named formatting
 
-Locale messages the following:
+Locale messages the below:
 
 ```javascript
 const messages = {
@@ -46,13 +41,13 @@ const messages = {
 }
 ```
 
-Template the following:
+Template the below:
 
 ```html
 <p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
 ```
 
-Output the following:
+Output the below:
 
 ```html
 <p>hello world</p>
@@ -60,7 +55,7 @@ Output the following:
 
 ## List formatting
 
-Locale messages the following:
+Locale messages the below:
 
 ```javascript
 const messages = {
@@ -72,13 +67,13 @@ const messages = {
 }
 ```
 
-Template the following:
+Template the below:
 
 ```html
 <p>{{ $t('message.hello', ['hello']) }}</p>
 ```
 
-Output the following:
+Output the below:
 
 ```html
 <p>hello world</p>
@@ -86,7 +81,7 @@ Output the following:
 
 ## Support ruby on rails i18n format
 
-Locale messages the following:
+Locale messages the below:
 
 ```javascript
 const messages = {
@@ -98,13 +93,13 @@ const messages = {
 }
 ```
 
-Template the following:
+Template the below:
 
 ```html
 <p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
 ```
 
-Output the following:
+Output the below:
 
 ```html
 <p>hello world</p>
@@ -115,7 +110,7 @@ Sometimes, you maybe need to translate with custom formatting (e.g. [ICU message
 
 You can realize with custom formatter that implement [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
 
-The below custom formatter with ES2015 class syntax:
+The following custom formatter with ES2015 class syntax:
 
 ```javascript
 // Custom Fromatter implementaion

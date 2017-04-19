@@ -1,8 +1,8 @@
-# Locale Messages Syntax
+# Locale messages syntax
 
 ## Structure
 
-Locale Messages syntax the bellow:
+Locale Messages syntax the below:
 
 ```javascript
 // As Flowtype defnition, Locale Messages syntax like BNF annotation
@@ -14,7 +14,7 @@ type Locale = string;
 type Path = string;
 ```
 
-Based on the above syntax, You can configure the bellow structure Locale Messages:
+Based on the above syntax, You can configure the following structure Locale Messages:
 
 ```json
 {
@@ -73,11 +73,11 @@ Ouput the following:
 </div>
 ```
 
-## Linked Locale Messages
+## Linked locale messages
 
 If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
 
-Locale messages the bellow:
+Locale messages the below:
 
 ```javascript
 const messages = {
@@ -91,13 +91,13 @@ const messages = {
 }
 ```
 
-Template the bellow:
+Template the below:
 
 ```html
 <p>{{ $t('message.linked') }}</p>
 ```
 
-Output the bellow:
+Output the below:
 
 ```html
 <p>DIO: the world !!!!</p>

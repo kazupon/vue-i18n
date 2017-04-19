@@ -1,8 +1,8 @@
-# Single File Component
+# Single file component
 
 If you are building Vue component or Vue application with using single file components, you can manage the locale messages `i18n` custom block.
 
-The `App.vue` below in [single file component example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
+The following in [single file component example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
 ```html
 <i18n>
@@ -40,7 +40,7 @@ export default {
 </script>
 ```
 
-You need to use `vue-loader` due to use `i18n` custom block, and the Webpack configration below is required:
+You need to use `vue-loader` due to use `i18n` custom blocks, and the Webpack configration below is required:
 
 ```js
 module.exports = {
@@ -64,9 +64,9 @@ module.exports = {
 }
 ```
 
-`i18n` custom block need to specify `JSON` format, also you can use `YAML` format by using pre-loader feature of `vue-loader`.
+`i18n` custom blocks need to specify `JSON` format, also you can use `YAML` format by using pre-loader feature of `vue-loader`.
 
-the `i18n` custom block below of `YAML` format:
+the `i18n` custom blocks below of `YAML` format:
 
 ```html
 <i18n>
@@ -77,7 +77,7 @@ ja:
 </i18n>
 ```
 
-Webpack conf below:
+Webpack conf the below:
 
 ```js
 module.exports = {

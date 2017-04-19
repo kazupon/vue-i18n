@@ -1,8 +1,8 @@
-# Component Based Translation
+# Component based localization
 
-In general, Locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance, and it set  `i18n` option as root Vue instance. Thereby you globally can translate with using `$t` or `$tc` in the root Vue instance are composed some component. you manage  locale info for each component and it translate, it was better is convenient due to Vue is component oriented.
+In general, Locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance, and it set  `i18n` option as root Vue instance. Thereby you globally can localize with using `$t` or `$tc` in the root Vue instance are composed some component. you manage  locale info for each component and it localize, it was better is convenient due to Vue is component oriented.
 
-The below component based translation example:
+The following component based localization example:
 
 ```javascript
 // setup locale info for root Vue instance
@@ -47,7 +47,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Template the following:
+Template the below:
 
 ```html
 <div id="app">
@@ -56,7 +56,7 @@ Template the following:
 </div>
 ```
 
-Output the following:
+Output the below:
 
 ```html
 <div id="app">
@@ -68,6 +68,6 @@ Output the following:
 </div>
 ```
 
-As in the example above, if the component doesn't have the locale message, it  fallbacks and translates global locale message. Also translate it using global locale (in the above example, `locale: 'ja'`). 
+As in the example above, if the component doesn't have the locale message, it  fallbacks and localizes global locale message. Also localize it using global locale (in the above example, `locale: 'ja'`). 
 
-If you hope translate in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
+If you hope localize in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
