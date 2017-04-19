@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.1.0 
+ * vue-i18n v6.1.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -119,7 +119,7 @@ function extend (Vue) {
 
   Vue.prototype.$te = function (key, locale) {
     var i18n = this.$i18n;
-    return i18n._te(key, i18n.locale, i18n.messages, [locale])
+    return i18n._te(key, i18n.locale, i18n.messages, locale)
   };
 }
 
@@ -860,7 +860,7 @@ VueI18n.prototype._te = function _te (key, locale, messages) {
 };
 
 VueI18n.prototype.te = function te (key, locale) {
-  return this._te(key, this.locale, this.messages, [locale])
+  return this._te(key, this.locale, this.messages, locale)
 };
 
 VueI18n.prototype.getLocaleMessage = function getLocaleMessage (locale) {
@@ -878,7 +878,7 @@ VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, mess
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.1.0';
+VueI18n.version = '6.1.1';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
