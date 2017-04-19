@@ -95,3 +95,6 @@ export function fetchChoice (message: string, choice: number): ?string {
 export function looseClone (obj: Object): Object {
   return JSON.parse(JSON.stringify(obj))
 }
+
+export const canUseDateTimeFormat: boolean =
+  typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined'

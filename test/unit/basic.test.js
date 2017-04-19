@@ -1,4 +1,5 @@
 import messages from './fixture/index'
+import dateTimeFormats from './fixture/datetime'
 
 describe('basic', () => {
   let i18n
@@ -573,6 +574,57 @@ describe('basic', () => {
       }).then(() => {
         assert.equal(vm.$el.textContent, messages.ja.message.fallback1)
       }).then(done)
+    })
+  })
+
+  const desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
+  desc('i18n#d', () => {
+    let dt
+    beforeEach(() => {
+      i18n = new VueI18n({
+        locale: 'en-US',
+        fallbackLocale: 'ja-JP',
+        dateTimeFormats
+      })
+      dt = new Date(Date.UTC(2012, 11, 20, 3, 0, 0))
+    })
+
+    describe('arguments nothing', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.d(dt), '12/20/2012')
+      })
+    })
+
+    describe('number value', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.d(dt.getTime()), '12/20/2012')
+      })
+    })
+
+    describe('key argument', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.d(dt, 'short'), '12/20/2012, 12:00 PM')
+      })
+    })
+
+    describe('locale argument', () => {
+      describe('with second argument', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.d(dt, 'short', 'ja-JP'), '2012/12/20 12:00')
+        })
+      })
+
+      describe('with object argument', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.d(dt, { key: 'short', locale: 'ja-JP' }), '2012/12/20 12:00')
+        })
+      })
+    })
+
+    describe('fallback', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.d(dt, 'long'), '2012/12/20 12:00:00')
+      })
     })
   })
 })
