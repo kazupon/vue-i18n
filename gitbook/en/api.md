@@ -20,6 +20,15 @@ Component based translation option.
 
 vue-i18n version.
 
+### availabilities
+
+- **Type:** `IntlAvailability`
+
+Whether the following internationalization features are available:
+
+- `{boolean} dateTimeFormat`: locale sensitive datetime formatting
+
+The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ## Vue injected methods
 
@@ -55,6 +64,19 @@ vue-i18n version.
 
   Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
+
+### $d
+
+- **Arguments:**
+  - `{number | Date} value`: required
+  - `{string | Object} key`: optional
+  - `{string | Object} locale`: optional
+
+- **Return:** `string`
+
+  Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+
+  If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
 ## Injected properties
 
@@ -100,6 +122,16 @@ The locale of fallback translation.
 - **Default:** `{}`
 
 The locale messages of translation.
+
+#### dateTimeFormats
+
+- **Type:** `DateTimeFormats`
+
+- **Default:** `{}`
+
+The datetime formats of localization.
+
+- **See also:** [`DateTimeFormats` type](#type-definitions-for-flowtype).
 
 #### formatter
 
@@ -174,6 +206,14 @@ The locale of fallback translation.
 - **Read only**
 
 The locale messages of translation.
+
+#### dateTimeFormats
+
+- **Type:** `DateTimeFormats`
+
+- **Read only**
+
+The datetime formats of localization.
 
 #### missing
 
@@ -258,6 +298,42 @@ Merge the registered locale messages with the locale message of locale.
 
   Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
 
+#### getDateTimeFormat ( locale )
+
+- **Arguments:**
+  - `{Locale} locale`
+
+- **Return:** `DateTimeFormat`
+
+Get the datetime format of locale.
+
+#### setDateTimeFormat ( locale, format )
+
+- **Arguments:**
+  - `{Locale} locale`
+  - `{DateTimeFormat} format`
+
+Set the datetime format of locale.
+
+#### mergeDateTimeFormat ( locale, format ) 
+
+- **Arguments:**
+  - `{Locale} locale`
+  - `{DateTimeFormat} format`
+
+Merge the registered datetime formats with the datetime format of locale.
+
+#### d( value, [key], [locale] )
+
+- **Arguments:**
+  - `{number | Date} value`: required
+  - `{string | Object} key`: optional
+  - `{string | Object} locale`: optional
+
+- **Return:** `string`
+
+This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
+
 
 ## Type Definitions for FlowType
 
@@ -268,13 +344,36 @@ declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
 declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
 declare type LocaleMessageArray = Array<LocaleMessage>;
 declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
+
+// This options is the same as Intl.DateTimeFormat constructor options:
+// http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor
+declare type DateTimeFormatOptions = {
+  year?: 'numeric' | '2-digit',
+  month?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long',
+  day?: 'numeric' | '2-digit',
+  hour?: 'numeric' | '2-digit',
+  minute?: 'numeric' | '2-digit',
+  second?: 'numeric' | '2-digit',
+  weekday?: 'narrow' | 'short' | 'long',
+  hour12?: boolean,
+  era?: 'narrow' | 'short' | 'long',
+  timeZone?: string, // IANA time zone
+  timeZoneName?: 'short' | 'long',
+  localeMatcher?: 'lookup' | 'best fit',
+  formatMatcher?: 'basic' | 'best fit'
+};
+declare type DateTimeFormat = { [key: string]: DateTimeFormatOptions };
+declare type DateTimeFormats = { [key: Locale]: DateTimeFormat };
+
 declare type TranslateResult = string | Array<string>;
+declare type DateTimeFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
   locale?: Locale,
   fallbackLocale?: Locale,
   messages?: LocaleMessages,
+  dateTimeFormats?: DateTimeFormats,
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n, // for internal
@@ -283,9 +382,14 @@ declare type I18nOptions = {
   silentTranslationWarn?: boolean
 };
 
+declare type IntlAvailability = {
+  dateTimeFormat: boolean
+};
+
 declare interface I18n {
   static install: () => void, // for Vue plugin interface
   static version: string,
+  static availabilities: IntlAvailability,
   get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
@@ -303,7 +407,11 @@ declare interface I18n {
   mergeLocaleMessage (locale: Locale, message: LocaleMessage): void,
   t (key: Path, ...values: any): TranslateResult,
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
-  te (key: Path, locale?: Locale): boolean
+  te (key: Path, locale?: Locale): boolean,
+  getDateTimeFormat (locale: Locale): DateTimeFormat,
+  setDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
+  mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
+  d (value: number | Date, ...args: any): DateTimeFormatResult
 };
 
 declare type FormatterOptions = { [key: string]: any };

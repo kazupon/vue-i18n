@@ -10,6 +10,7 @@ Internationalization plugin of Vue.js
 * [Getting Started](started.md)
 * [Formatting](formatting.md)
 * [Pluralization](pluralization.md)
+* [DateTime Localization](datetime.md)
 * [Locale Messages Syntax](syntax.md)
 * [Fallback Translation](fallback.md)
 * [Component Based Translation](component.md)
