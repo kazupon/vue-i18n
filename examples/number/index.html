@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>number localization</title>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../../dist/vue-i18n.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.ja,Intl.~locale.en"></script>
+  </head>
+  <body>
+    <div id="app">
+      <select v-model="locale">
+        <option value="en-US">en-US</option>
+        <option value="ja-JP">ja-JP</option>
+      </select>
+      <p>{{ $t('money') }}: {{ $n(money, 'currency') }}</p>
+    </div>
+    <script>
+      var messages = {
+        'en-US': {
+          money: 'Money'
+        },
+        'ja-JP': {
+          money: 'お金'
+        }
+      }
+      var numberFormats = {
+        'en-US': {
+          currency: {
+            style: 'currency', currency: 'USD'
+          }
+        },
+        'ja-JP': {
+          currency: {
+            style: 'currency', currency: 'JPY', currencyDisplay: 'symbol'
+          }
+        }
+      }
+      
+      Vue.use(VueI18n)
+
+      var initial = 'ja-JP'
+      var i18n = new VueI18n({
+        locale: initial,
+        messages: messages,
+        numberFormats: numberFormats
+      })
+
+      var vm = new Vue({
+        i18n: i18n,
+        data: {
+          locale: initial,
+          money: 1000
+        },
+        watch: {
+          locale: function (val) {
+            this.$i18n.locale = val
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
