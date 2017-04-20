@@ -16,9 +16,8 @@ export default function extend (Vue: any): void {
     return i18n._te(key, i18n.locale, i18n.messages, locale)
   }
 
-  Vue.prototype.$d = function (value: Date, ...args: any): DateTimeFormatResult {
-    const i18n = this.$i18n
-    return i18n.d(value, ...args)
+  Vue.prototype.$d = function (value: number | Date, ...args: any): DateTimeFormatResult {
+    return this.$i18n.d(value, ...args)
   }
 
   Vue.prototype.$n = function (value: number, ...args: any): NumberFormatResult {
