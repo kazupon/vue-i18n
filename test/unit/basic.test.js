@@ -1,5 +1,6 @@
 import messages from './fixture/index'
 import dateTimeFormats from './fixture/datetime'
+import numberFormats from './fixture/number'
 
 describe('basic', () => {
   let i18n
@@ -624,6 +625,50 @@ describe('basic', () => {
     describe('fallback', () => {
       it('should be formatted', () => {
         assert.equal(i18n.d(dt, 'long'), '2012/12/20 12:00:00')
+      })
+    })
+  })
+
+  desc('i18n#n', () => {
+    let money
+    beforeEach(() => {
+      i18n = new VueI18n({
+        locale: 'en-US',
+        fallbackLocale: 'ja-JP',
+        numberFormats
+      })
+      money = 10100
+    })
+
+    describe('arguments nothing', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.n(money), '10,100')
+      })
+    })
+
+    describe('key argument', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.n(money, 'currency'), '$10,100.00')
+      })
+    })
+
+    describe('locale argument', () => {
+      describe('with second argument', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, 'currency', 'ja-JP'), '￥10,100')
+        })
+      })
+
+      describe('with object argument', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, { key: 'currency', locale: 'ja-JP' }), '￥10,100')
+        })
+      })
+    })
+
+    describe('fallback', () => {
+      it('should be formatted', () => {
+        assert.equal(i18n.n(0.9, 'percent'), '90%')
       })
     })
   })

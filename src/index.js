@@ -9,7 +9,8 @@ import {
   isPlainObject,
   isObject,
   looseClone,
-  canUseDateTimeFormat
+  canUseDateTimeFormat,
+  canUseNumberFormat
 } from './util'
 import BaseFormatter from './format'
 import getPathValue from './path'
@@ -32,12 +33,14 @@ export default class VueI18n {
   _i18nWatcher: Function
   _silentTranslationWarn: boolean
   _dateTimeFormatters: Object
+  _numberFormatters: Object
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
     const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
+    const numberFormats = options.numberFormats || {}
     this._vm = null
     this._formatter = options.formatter || new BaseFormatter()
     this._missing = options.missing || null
@@ -50,20 +53,28 @@ export default class VueI18n {
       ? false
       : !!options.silentTranslationWarn
     this._dateTimeFormatters = {}
+    this._numberFormatters = {}
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
       return !isNull(getPathValue(message, key))
     }
 
-    this._initVM({ locale, fallbackLocale, messages, dateTimeFormats })
+    this._initVM({
+      locale,
+      fallbackLocale,
+      messages,
+      dateTimeFormats,
+      numberFormats
+    })
   }
 
   _initVM (data: {
     locale: Locale,
     fallbackLocale: Locale,
     messages: LocaleMessages,
-    dateTimeFormats: DateTimeFormats
+    dateTimeFormats: DateTimeFormats,
+    numberFormats: NumberFormats
   }): void {
     const silent = Vue.config.silent
     Vue.config.silent = true
@@ -109,6 +120,7 @@ export default class VueI18n {
 
   get messages (): LocaleMessages { return looseClone(this._vm.messages) }
   get dateTimeFormats (): DateTimeFormats { return looseClone(this._vm.dateTimeFormats) }
+  get numberFormats (): NumberFormats { return looseClone(this._vm.numberFormats) }
 
   get locale (): Locale { return this._vm.locale }
   set locale (locale: Locale): void {
@@ -342,10 +354,80 @@ export default class VueI18n {
 
     return this._d(value, locale, key)
   }
+
+  getNumberFormat (locale: Locale): NumberFormat {
+    return looseClone(this._vm.numberFormats[locale])
+  }
+
+  setNumberFormat (locale: Locale, format: NumberFormat): void {
+    this._vm.numberFormats[locale] = format
+  }
+
+  mergeNumberFormat (locale: Locale, format: NumberFormat): void {
+    this._vm.numberFormats[locale] = Vue.util.extend(this.getNumberFormat(locale), format)
+  }
+
+  _n (value: number, _locale: Locale, key: ?string): NumberFormatResult {
+    if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
+      warn('Cannot format a Date value due to not support Intl.NumberFormat.')
+      return ''
+    }
+
+    let ret = ''
+    const numberFormats = this.numberFormats
+    if (key) {
+      let locale: Locale = _locale
+      if (isNull(numberFormats[_locale][key])) {
+        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+          warn(`Fall back to the numberFormat of key '${key}' with '${this.fallbackLocale}' locale.`)
+        }
+        locale = this.fallbackLocale
+      }
+      const id = `${locale}__${key}`
+      let formatter = this._numberFormatters[id]
+      const format = numberFormats[locale][key]
+      if (!formatter) {
+        formatter = this._numberFormatters[id] = Intl.NumberFormat(locale, format)
+      }
+      ret = formatter.format(value)
+    } else {
+      ret = Intl.NumberFormat(_locale).format(value)
+    }
+
+    return ret
+  }
+
+  n (value: number, ...args: any): NumberFormatResult {
+    let locale: Locale = this.locale
+    let key: ?string = null
+
+    if (args.length === 1) {
+      if (typeof args[0] === 'string') {
+        key = args[0]
+      } else if (isObject(args[0])) {
+        if (args[0].locale) {
+          locale = args[0].locale
+        }
+        if (args[0].key) {
+          key = args[0].key
+        }
+      }
+    } else if (args.length === 2) {
+      if (typeof args[0] === 'string') {
+        key = args[0]
+      }
+      if (typeof args[1] === 'string') {
+        locale = args[1]
+      }
+    }
+
+    return this._n(value, locale, key)
+  }
 }
 
 VueI18n.availabilities = {
-  dateTimeFormat: canUseDateTimeFormat
+  dateTimeFormat: canUseDateTimeFormat,
+  numberFormat: canUseNumberFormat
 }
 VueI18n.install = install
 VueI18n.version = '__VERSION__'

@@ -20,4 +20,8 @@ export default function extend (Vue: any): void {
     const i18n = this.$i18n
     return i18n.d(value, ...args)
   }
+
+  Vue.prototype.$n = function (value: number, ...args: any): NumberFormatResult {
+    return this.$i18n.n(value, ...args)
+  }
 }

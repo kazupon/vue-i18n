@@ -98,3 +98,6 @@ export function looseClone (obj: Object): Object {
 
 export const canUseDateTimeFormat: boolean =
   typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined'
+
+export const canUseNumberFormat: boolean =
+  typeof Intl !== 'undefined' && typeof Intl.NumberFormat !== 'undefined'
