@@ -11,6 +11,7 @@ Internationalization plugin of Vue.js
 * [Formatting](formatting.md)
 * [Pluralization](pluralization.md)
 * [DateTime localization](datetime.md)
+* [Number localization](number.md)
 * [Locale messages syntax](messages.md)
 * [Fallback localization](fallback.md)
 * [Component based localization](component.md)

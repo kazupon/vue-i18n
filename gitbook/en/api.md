@@ -27,6 +27,7 @@
   Whether the following internationalization features are available:
 
 - `{boolean} dateTimeFormat`: locale sensitive datetime formatting
+- `{boolean} numberFormat`: locale sensitive number formatting
 
   The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
@@ -64,7 +65,6 @@
 
   Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
-
 ### $d
 
 - **Arguments:**
@@ -77,6 +77,20 @@
   Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
 
   If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+
+### $n
+
+- **Arguments:**
+  - `{number} value`: required
+  - `{string | Object} key`: optional
+  - `{string | Object} locale`: optional
+
+- **Return:** `string`
+
+  Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+
+  If the number format of `key` not exist in `numberFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+
 
 ## Injected properties
 
@@ -132,6 +146,16 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
   The datetime formats of localization.
 
 - **See also:** [`DateTimeFormats` type](#type-definitions-for-flowtype).
+
+#### numberFormats
+
+- **Type:** `NumberFormats`
+
+- **Default:** `{}`
+
+  The number formats of localization.
+
+- **See also:** [`NumberFormats` type](#type-definitions-for-flowtype).
 
 #### formatter
 
@@ -214,6 +238,14 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 - **Read only**
 
   The datetime formats of localization.
+
+#### numberFormats
+
+- **Type:** `NumberFormats`
+
+- **Read only**
+
+  The number formats of localization.
 
 #### missing
 
@@ -334,6 +366,42 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
   This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
 
+#### getNumberFormat ( locale )
+
+- **Arguments:**
+  - `{Locale} locale`
+
+- **Return:** `NumberFormat`
+
+  Get the number format of locale.
+
+#### setNumberFormat ( locale, format )
+
+- **Arguments:**
+  - `{Locale} locale`
+  - `{NumberFormat} format`
+
+  Set the number format of locale.
+
+#### mergeNumberFormat ( locale, format ) 
+
+- **Arguments:**
+  - `{Locale} locale`
+  - `{NumberFormat} format`
+
+  Merge the registered number formats with the number format of locale.
+
+#### n( value, [key], [locale] )
+
+- **Arguments:**
+  - `{number} value`: required
+  - `{string | Object} key`: optional
+  - `{string | Object} locale`: optional
+
+- **Return:** `string`
+
+  This is the same as `$n` method of Vue instance method. More detail see [$n](#$n).
+
 
 ## Type definitions for flowType
 
@@ -365,8 +433,27 @@ declare type DateTimeFormatOptions = {
 declare type DateTimeFormat = { [key: string]: DateTimeFormatOptions };
 declare type DateTimeFormats = { [key: Locale]: DateTimeFormat };
 
+// This options is the same as Intl.NumberFormat constructor options:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
+declare type NumberFormatOptions = {
+  style?: 'decimal' | 'currency' | 'percent',
+  currency?: string, // ISO 4217 currency codes
+  currencyDisplay?: 'symbol' | 'code' | 'name',
+  useGrouping?: boolean,
+  minimumIntegerDigits?: number,
+  minimumFractionDigits?: number,
+  maximumFractionDigits?: number,
+  minimumSignificantDigits?: number,
+  maximumSignificantDigits?: number,
+  localeMatcher?: 'lookup' | 'best fit',
+  formatMatcher?: 'basic' | 'best fit'
+};
+declare type NumberFormat = { [key: string]: NumberFormatOptions };
+declare type NumberFormats = { [key: Locale]: NumberFormat };
+
 declare type TranslateResult = string | Array<string>;
 declare type DateTimeFormatResult = string;
+declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
@@ -374,6 +461,7 @@ declare type I18nOptions = {
   fallbackLocale?: Locale,
   messages?: LocaleMessages,
   dateTimeFormats?: DateTimeFormats,
+  numberFormats?: NumberFormats,
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n, // for internal
@@ -383,7 +471,8 @@ declare type I18nOptions = {
 };
 
 declare type IntlAvailability = {
-  dateTimeFormat: boolean
+  dateTimeFormat: boolean,
+  numberFormat: boolean
 };
 
 declare interface I18n {
@@ -411,7 +500,11 @@ declare interface I18n {
   getDateTimeFormat (locale: Locale): DateTimeFormat,
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
-  d (value: number | Date, ...args: any): DateTimeFormatResult
+  d (value: number | Date, ...args: any): DateTimeFormatResult,
+  getNumberFormat (locale: Locale): NumberFormat,
+  setNumberFormat (locale: Locale, format: NumberFormat): void,
+  mergeNumberFormat (locale: Locale, format: NumberFormat): void,
+  n (value: number, ...args: any): NumberFormatResult
 };
 
 declare type FormatterOptions = { [key: string]: any };
