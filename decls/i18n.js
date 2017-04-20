@@ -27,8 +27,27 @@ declare type DateTimeFormatOptions = {
 declare type DateTimeFormat = { [key: string]: DateTimeFormatOptions };
 declare type DateTimeFormats = { [key: Locale]: DateTimeFormat };
 
+// This options is the same as Intl.NumberFormat constructor options:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
+declare type NumberFormatOptions = {
+  style?: 'decimal' | 'currency' | 'percent',
+  currency?: string, // ISO 4217 currency codes
+  currencyDisplay?: 'symbol' | 'code' | 'name',
+  useGrouping?: boolean,
+  minimumIntegerDigits?: number,
+  minimumFractionDigits?: number,
+  maximumFractionDigits?: number,
+  minimumSignificantDigits?: number,
+  maximumSignificantDigits?: number,
+  localeMatcher?: 'lookup' | 'best fit',
+  formatMatcher?: 'basic' | 'best fit'
+};
+declare type NumberFormat = { [key: string]: NumberFormatOptions };
+declare type NumberFormats = { [key: Locale]: NumberFormat };
+
 declare type TranslateResult = string | Array<string>;
 declare type DateTimeFormatResult = string;
+declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
@@ -36,6 +55,7 @@ declare type I18nOptions = {
   fallbackLocale?: Locale,
   messages?: LocaleMessages,
   dateTimeFormats?: DateTimeFormats,
+  numberFormats?: NumberFormats,
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n, // for internal
@@ -45,7 +65,8 @@ declare type I18nOptions = {
 };
 
 declare type IntlAvailability = {
-  dateTimeFormat: boolean
+  dateTimeFormat: boolean,
+  numberFormat: boolean
 };
 
 declare interface I18n {
@@ -74,7 +95,11 @@ declare interface I18n {
   getDateTimeFormat (locale: Locale): DateTimeFormat,
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
-  d (value: number | Date, ...args: any): DateTimeFormatResult
+  d (value: number | Date, ...args: any): DateTimeFormatResult,
+  getNumberFormat (locale: Locale): NumberFormat,
+  setNumberFormat (locale: Locale, format: NumberFormat): void,
+  mergeNumberFormat (locale: Locale, format: NumberFormat): void,
+  n (value: number, ...args: any): NumberFormatResult
 };
 
 declare type FormatterOptions = { [key: string]: any };
