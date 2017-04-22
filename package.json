@@ -34,6 +34,7 @@
     "gitbook-cli": "^2.3.0",
     "html-webpack-plugin": "^2.19.0",
     "http-server": "^0.9.0",
+    "intl": "^1.2.5",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",
