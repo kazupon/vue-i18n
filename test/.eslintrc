@@ -4,6 +4,7 @@
     "mocha": true
   },
   "globals": {
+    "isWebkit": true,
     "waitForUpdate": true,
     "nextTick": true,
     "delay": true,
