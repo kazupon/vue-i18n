@@ -31,7 +31,8 @@ desc('number format', () => {
         assert.deepEqual(i18n.getNumberFormat('zh-CN'), zhFormat)
         i18n.locale = 'zh-CN'
       }).then(() => {
-        assert.equal(text.textContent, '101.00人民币')
+        // NOTE: avoid webkit (safari/phantomjs) & Intl polyfill wired localization...
+        assert.equal(text.textContent, isWebkit ? 'CNY101.00' : '101.00人民币')
       }).then(done)
     })
   })

@@ -578,7 +578,7 @@ describe('basic', () => {
     })
   })
 
-  const desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
+  let desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
   desc('i18n#d', () => {
     let dt
     beforeEach(() => {
@@ -604,7 +604,11 @@ describe('basic', () => {
 
     describe('key argument', () => {
       it('should be formatted', () => {
-        assert.equal(i18n.d(dt, 'short'), '12/20/2012, 12:00 PM')
+        // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+        assert.equal(
+          i18n.d(dt, 'short'),
+          isWebkit ? '12/20/2012, 12:00' : '12/20/2012, 12:00 PM'
+        )
       })
     })
 
@@ -629,6 +633,7 @@ describe('basic', () => {
     })
   })
 
+  desc = VueI18n.availabilities.numberFormat ? describe : describe.skip
   desc('i18n#n', () => {
     let money
     beforeEach(() => {
