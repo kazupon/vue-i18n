@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const intlPlugin = require('./karma-intl-plugin')
 
 const webpackConfig = {
   module: {
@@ -19,7 +20,7 @@ const webpackConfig = {
 }
 
 module.exports = {
-  frameworks: ['mocha', 'phantomjs-shim'],
+  frameworks: ['mocha', 'phantomjs-shim', 'intl-shim'],
   files: [
     '../test/unit/index.js'
   ],
@@ -35,6 +36,7 @@ module.exports = {
     'karma-mocha-reporter',
     'karma-phantomjs-shim',
     'karma-sourcemap-loader',
-    'karma-webpack'
+    'karma-webpack',
+    intlPlugin,
   ]
 }
