@@ -607,7 +607,7 @@ describe('basic', () => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
         assert.equal(
           i18n.d(dt, 'short'),
-          isWebkit ? '12/20/2012, 12:00' : '12/20/2012, 12:00 PM'
+          isWebkit ? '12/19/2012, 10:00' : '12/19/2012, 10:00 PM'
         )
       })
     })
