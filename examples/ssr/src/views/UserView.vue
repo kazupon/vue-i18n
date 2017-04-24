@@ -4,7 +4,7 @@
     <template v-if="user">
       <h1>{{ $t('user.id') }} : {{ user.id }}</h1>
       <ul class="meta">
-        <li><span class="label">{{ $t('user.created') }}:</span> {{ user.created | timeAgo($tc) }} {{ $t('time.ago') }}</li>
+        <li><span class="label">{{ $t('user.created') }}:</span> {{ time }}</li>
         <li><span class="label">{{ $t('user.karma') }}:</span> {{user.karma}}</li>
         <li v-if="user.about" v-html="user.about" class="about"></li>
       </ul>
@@ -18,6 +18,7 @@
 
 <script>
 import Spinner from '../components/Spinner.vue'
+import { timeAgo } from '../util'
 
 function fetchUser (store) {
   return store.dispatch('FETCH_USER', {
@@ -31,6 +32,10 @@ export default {
   computed: {
     user () {
       return this.$store.state.users[this.$route.params.id]
+    },
+    time () {
+      const { value, unit } = timeAgo(this.user.created)
+      return `${value} ${this.$tc('time.units.' + unit, value)} ${this.$t('time.ago')}`
     }
   },
   preFetch: fetchUser,

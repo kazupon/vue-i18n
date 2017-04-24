@@ -11,7 +11,7 @@
         <p class="meta">
           {{ item.score }} points
           | by <router-link :to="'/user/' + item.by">{{ item.by }}</router-link>
-          {{ item.time | timeAgo($tc) }} {{ $t('time.ago') }}
+          {{ time }}
         </p>
       </div>
       <div class="item-view-comments">
@@ -30,6 +30,7 @@
 <script>
 import Spinner from '../components/Spinner.vue'
 import Comment from '../components/Comment.vue'
+import { timeAgo } from '../util'
 
 function fetchItem (store) {
   return store.dispatch('FETCH_ITEMS', {
@@ -66,6 +67,10 @@ export default {
   computed: {
     item () {
       return this.$store.state.items[this.$route.params.id]
+    },
+    time () {
+      const { value, unit } = timeAgo(this.item.time)
+      return `${value} ${this.$tc('time.units.' + unit, value)} ${this.$t('time.ago')}`
     }
   },
   // on the server, only fetch the item itself

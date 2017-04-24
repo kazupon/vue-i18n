@@ -2,7 +2,7 @@
   <li v-if="comment" class="comment">
     <div class="by">
       <router-link :to="'/user/' + comment.by">{{ comment.by }}</router-link>
-      {{ comment.time | timeAgo($tc) }} {{ $t('time.ago') }}
+      {{ time }}
     </div>
     <div class="text" v-html="comment.text"></div>
     <div class="toggle" :class="{ open }" v-if="comment.kids && comment.kids.length">
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { timeAgo } from '../util'
+
 export default {
   name: 'comment',
   props: ['id'],
@@ -30,6 +32,10 @@ export default {
   computed: {
     comment () {
       return this.$store.state.items[this.id]
+    },
+    time () {
+      const { value, unit } = timeAgo(this.comment.time)
+      return `${value} ${this.$tc('time.units.' + unit, value)} ${this.$t('time.ago')}`
     }
   },
   methods: {

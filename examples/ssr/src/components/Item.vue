@@ -16,7 +16,7 @@
         by <router-link :to="'/user/' + item.by">{{ item.by }}</router-link>
       </span>
       <span class="time">
-        {{ item.time | timeAgo($tc) }} {{ $t('time.ago') }}
+        {{ time }}
       </span>
       <span v-if="item.type !== 'job'" class="comments-link">
         | <router-link :to="'/item/' + item.id">{{ item.descendants }} {{ $t('item.comments') }}</router-link>
@@ -27,11 +27,17 @@
 </template>
 
 <script>
-import { timeAgo } from '../filters'
+import { timeAgo } from '../util'
 
 export default {
   name: 'news-item',
   props: ['item'],
+  computed: {
+    time () {
+      const { value, unit } = timeAgo(this.item.time)
+      return `${value} ${this.$tc('time.units.' + unit, value)} ${this.$t('time.ago')}`
+    }
+  },
   // https://github.com/vuejs/vue/blob/next/packages/vue-server-renderer/README.md#component-caching
   serverCacheKey: ({ item: { id, __lastUpdated, time }}) => {
     return `${id}::${__lastUpdated}::${time}`
