@@ -22,6 +22,10 @@ if (!isWebkit) {
   formats['en-US']['short']['timeZone'] = 'America/New_York'
   formats['ja-JP']['short']['timeZone'] = 'Asia/Tokyo'
   formats['ja-JP']['long']['timeZone'] = 'Asia/Tokyo'
+} else {
+  formats['en-US']['short']['timeZone'] = 'UTC'
+  formats['ja-JP']['short']['timeZone'] = 'UTC'
+  formats['ja-JP']['long']['timeZone'] = 'UTC'
 }
 
 export default formats
