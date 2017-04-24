@@ -26,6 +26,10 @@ desc('datetime format', () => {
           hour: '2-digit', minute: '2-digit'
         }
       }
+
+      // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+      if (isWebkit) { zhFormat['short']['timeZone'] = 'UTC' }
+
       nextTick(() => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
         assert.equal(
@@ -39,7 +43,7 @@ desc('datetime format', () => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
         assert.equal(
           text.textContent,
-          isWebkit ? '2012/12/20 12:00' : '2012/12/20 下午12:00'
+          isWebkit ? '2012/12/20 03:00' : '2012/12/20 下午12:00'
         )
       }).then(done)
     })
