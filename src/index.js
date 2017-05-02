@@ -41,6 +41,7 @@ export default class VueI18n {
     const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
+
     this._vm = null
     this._formatter = options.formatter || new BaseFormatter()
     this._missing = options.missing || null
@@ -160,7 +161,12 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
-  _interpolate (message: LocaleMessageObject, key: Path, values: any): any {
+  _interpolate (
+    message: LocaleMessageObject,
+    key: Path,
+    interpolateMode: string,
+    values: any
+  ): any {
     if (!message) { return null }
 
     const pathRet: PathValue = getPathValue(message, key)
@@ -197,26 +203,38 @@ export default class VueI18n {
       // them with its translation
       const matches: any = ret.match(/(@:[\w|.]+)/g)
       for (const idx in matches) {
-        const link = matches[idx]
+        const link: string = matches[idx]
         // Remove the leading @:
-        const linkPlaceholder = link.substr(2)
+        const linkPlaceholder: string = link.substr(2)
         // Translate the link
-        const translatedstring = this._interpolate(message, linkPlaceholder, values)
-        // Replace the link with the translated string
-        ret = ret.replace(link, translatedstring)
+        const translated: any = this._interpolate(message, linkPlaceholder, interpolateMode, values)
+        if (interpolateMode === 'raw') {
+          return translated
+        }
+        // Replace the link with the translated
+        ret = ret.replace(link, translated)
       }
     }
 
-    return !values ? ret : this._format(ret, values)
+    return !values ? ret : this._render(ret, interpolateMode, values)
   }
 
-  _format (message: string, ...values: any): string {
-    return this._formatter.format(message, ...values)
+  _render (message: string, interpolateMode: string, values: any): any {
+    const ret = this._formatter.format(message, values)
+    // if interpolateMode is **not** 'string' ('row'),
+    // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
+    return interpolateMode === 'string' ? ret.join('') : ret
   }
 
-  _translate (messages: LocaleMessages, locale: Locale, fallback: Locale, key: Path, args: any): any {
-    let res: any = null
-    res = this._interpolate(messages[locale], key, args)
+  _translate (
+    messages: LocaleMessages,
+    locale: Locale,
+    fallback: Locale,
+    key: Path,
+    interpolateMode: string,
+    args: any
+  ): any {
+    let res: any = this._interpolate(messages[locale], key, interpolateMode, args)
     if (!isNull(res)) { return res }
 
     res = this._interpolate(messages[fallback], key, args)
@@ -236,7 +254,7 @@ export default class VueI18n {
     const parsedArgs = parseArgs(...values)
     const locale: Locale = parsedArgs.locale || _locale
 
-    const ret: any = this._translate(messages, locale, this.fallbackLocale, key, parsedArgs.params)
+    const ret: any = this._translate(messages, locale, this.fallbackLocale, key, 'string', parsedArgs.params)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
@@ -252,7 +270,46 @@ export default class VueI18n {
     return this._t(key, this.locale, this.messages, null, ...values)
   }
 
-  _tc (key: Path, _locale: Locale, messages: LocaleMessages, host: any, choice?: number, ...values: any): any {
+  _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
+    const ret: any = 
+      this._translate(messages, locale, this.fallbackLocale, key, 'raw', values)
+    if (this._isFallbackRoot(ret)) {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+        warn(`Fall back to interpolate the keypath '${key}' with root locale.`)
+      }
+      if (!this._root) { throw Error('unexpected error') }
+      return this._root.i(key, ...values)
+    } else {
+      return this._warnDefault(locale, key, ret, host)
+    }
+  }
+
+  i (key: Path, ...values: any): TranslateResult {
+    if (!key) { return '' }
+
+    let locale: Locale = this.locale
+    let index: number = 0
+    if (typeof values[0] === 'string') {
+      locale = values[0]
+      index = 1
+    }
+
+    const params: Array<any> = []
+    for (let i = index; i < values.length; i++) {
+      params.push(values[i])
+    }
+
+    return this._i(key, locale, this.messages, null, ...params)
+  }
+
+  _tc (
+    key: Path,
+    _locale: Locale,
+    messages: LocaleMessages,
+    host: any,
+    choice?: number,
+    ...values: any
+  ): any {
     if (!key) { return '' }
     if (choice !== undefined) {
       return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
