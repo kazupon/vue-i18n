@@ -6,7 +6,7 @@ const messages = {
     link: '@:premitive'
   },
   ja: {
-    text: '一: {0}',
+    text: '一: {0}'
   }
 }
 const components = {
@@ -112,7 +112,7 @@ describe('component interpolation', () => {
         }).$mount(el)
         nextTick(() => {
           assert.equal(
-            vm.$el.innerHTML, 
+            vm.$el.innerHTML,
             'root: <p>1</p>, component: <div>root: <p>2</p>, component: <p>nested</p></div>'
           )
         }).then(done)

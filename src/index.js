@@ -271,7 +271,7 @@ export default class VueI18n {
   }
 
   _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
-    const ret: any = 
+    const ret: any =
       this._translate(messages, locale, this.fallbackLocale, key, 'raw', values)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {

@@ -1,4 +1,4 @@
-import { template as format, parse, compile } from '../../src/format'
+import { parse, compile } from '../../src/format'
 
 describe('parse', () => {
   describe('list', () => {
