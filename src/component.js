@@ -17,7 +17,9 @@ export default {
   render (h: Function, { props, children, parent }: Object) {
     const i18n = parent.$i18n
     if (!i18n) {
-      warn('Cannot find VueI18n instance!')
+      if (process.env.NODE_ENV !== 'production') {
+        warn('Cannot find VueI18n instance!')
+      }
       return children
     }
 
