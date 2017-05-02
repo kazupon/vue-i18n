@@ -106,5 +106,5 @@ declare interface I18n {
 declare type FormatterOptions = { [key: string]: any };
 
 declare interface Formatter {
-  format (message: string, values: any): any
+  interpolate (message: string, values: any): Array<any>
 };
