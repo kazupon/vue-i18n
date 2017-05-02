@@ -1,61 +1,117 @@
 /* @flow */
 
-import { isNull, hasOwn } from './util'
+import { warn, isObject } from './util'
 
 export default class BaseFormatter {
   _options: FormatterOptions
+  _caches: { [key: string]: Array<Token> }
 
   constructor (options: FormatterOptions = {}) {
     this._options = options
+    this._caches = Object.create(null)
   }
 
   get options (): FormatterOptions { return this._options }
 
-  format (message: string, ...values: any): string {
-    return template(message, ...values)
+  format (message: string, values: any): any {
+    let tokens: Array<Token> = this._caches[message]
+    if (!tokens) {
+      tokens = parse(message)
+      this._caches[message] = tokens
+    }
+    return compile(tokens, values)
   }
 }
 
-/**
- *  String format template
- *  - Inspired:
- *    https://github.com/Matt-Esch/string-template/index.js
- */
+type Token = {
+  type: 'text' | 'named' | 'list' | 'unknown',
+  value: string
+}
 
-const RE_NARGS: RegExp = /(%|)\{([0-9a-zA-Z_]+)\}/g
+const RE_TOKEN_LIST_VALUE: RegExp = /^(\d)+/
+const RE_TOKEN_NAMED_VALUE: RegExp = /^(\w)+/
 
-/**
- * template
- *
- * @param {String} string
- * @param {Array} ...values
- * @return {String}
- */
+export function parse (format: string): Array<Token> {
+  const tokens: Array<Token> = []
+  let position: number = 0
 
-export function template (str: string, ...values: any): string {
-  if (values.length === 1 && typeof values[0] === 'object') {
-    values = values[0]
-  } else {
-    values = {}
-  }
-
-  if (!values || !values.hasOwnProperty) {
-    values = {}
-  }
-
-  return str.replace(RE_NARGS, (match, prefix, i, index) => {
-    let result: string
-
-    if (str[index - 1] === '{' &&
-      str[index + match.length] === '}') {
-      return i
-    } else {
-      result = hasOwn(values, i) ? values[i] : match
-      if (isNull(result)) {
-        return ''
+  let text: string = ''
+  while (position < format.length) {
+    let char: string = format[position++]
+    if (char === '{') {
+      if (text) {
+        tokens.push({ type: 'text', value: text })
       }
 
-      return result
+      text = ''
+      let sub: string = ''
+      char = format[position++]
+      while (char !== '}') {
+        sub += char
+        char = format[position++]
+      }
+
+      const type = RE_TOKEN_LIST_VALUE.test(sub)
+        ? 'list'
+        : RE_TOKEN_NAMED_VALUE.test(sub)
+          ? 'named'
+          : 'unknown' 
+      tokens.push({ value: sub, type })
+    } else if (char === '%') {
+      // when found rails i18n syntax, skip text capture
+    } else {
+      text += char
     }
-  })
+  }
+
+  text && tokens.push({ type: 'text', value: text })
+
+  return tokens
+}
+
+export function compile (tokens: Array<Token>, values: Object | Array<any>): Array<any> {
+  const compiled: Array<any> = []
+  let index: number = 0
+
+  const mode: string = Array.isArray(values)
+    ? 'list'
+    : isObject(values)
+      ? 'named'
+      : 'unknown'
+  if (mode === 'unknown') { return compiled }
+
+  while (index < tokens.length) {
+    const token: Token = tokens[index]
+    switch (token.type) {
+      case 'text':
+        compiled.push(token.value)
+        break
+      case 'list':
+        if (mode === 'list') {
+          compiled.push(values[parseInt(token.value, 10)])
+        } else {
+          if (process.env.NODE_ENV !== 'production') {
+            warn(`Type of token '${token.type}' and format of value '${mode}' don't match!`)
+          }
+        }
+        break
+      case 'named':
+        if (mode === 'named') {
+          compiled.push((values: any)[token.value])
+        } else {
+          if (process.env.NODE_ENV !== 'production') {
+            warn(`Type of token '${token.type}' and format of value '${mode}' don't match!`)
+          }
+        }
+        break
+      case 'unknown':
+        if (process.env.NODE_ENV !== 'production') {
+          warn(`Detect 'unknown' type of token!`)
+        }
+        break
+    }
+    index++
+  }
+
+  return compiled
 }

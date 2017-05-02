@@ -1,91 +1,89 @@
-import { template as format } from '../../src/format'
+import { template as format, parse, compile } from '../../src/format'
 
-describe('format', () => {
-  describe('argument', () => {
-    describe('Object', () => {
-      describe('default delimiter', () => {
-        it('should be replace with object value', () => {
-          const template = 'name: {name}, email: {email}'
-          assert.equal(format(template, {
-            name: 'kazupon', email: 'foo@domain.com'
-          }), 'name: kazupon, email: foo@domain.com')
-        })
-      })
-
-      describe('RoR delimiter', () => {
-        it('should be replace with object value', () => {
-          const template = 'name: %{name}, email: %{email}'
-          assert.equal(format(template, {
-            name: 'kazupon', email: 'foo@domain.com'
-          }), 'name: kazupon, email: foo@domain.com')
-        })
-      })
-
-      describe('missing', () => {
-        it('should be replace with as is', () => {
-          const template = 'name: {name}, email: {email}'
-          assert.equal(format(template, {
-            name: 'kazupon'
-          }), 'name: kazupon, email: {email}')
-        })
-      })
-    })
-
-    describe('Array', () => {
-      it('should be replace with array value', () => {
-        const template = 'name: {0}, email: {1}'
-        assert.equal(
-          format(template, ['kazupon', 'foo@domain.com']),
-          'name: kazupon, email: foo@domain.com'
-        )
-      })
-    })
-
-    describe('null', () => {
-      it('should be replace with empty', () => {
-        const template = 'name: {0}, email: {1}'
-        assert.equal(format(template, null), 'name: {0}, email: {1}')
-      })
-    })
-
-    describe('undefined', () => {
-      it('should be replace with empty', () => {
-        const template = 'name: {0}, email: {1}'
-        assert.equal(format(template, undefined), 'name: {0}, email: {1}')
-      })
-    })
-
-    describe('not specify', () => {
-      it('should be replace with empty', () => {
-        const template = 'name: {0}, email: {1}'
-        assert.equal(format(template), 'name: {0}, email: {1}')
-      })
+describe('parse', () => {
+  describe('list', () => {
+    it('should be parsed', () => {
+      const tokens = parse('name: {0}, email: {1}')
+      assert(tokens.length === 4)
+      assert.equal(tokens[0].type, 'text')
+      assert.equal(tokens[0].value, 'name: ')
+      assert.equal(tokens[1].type, 'list')
+      assert.equal(tokens[1].value, '0')
+      assert.equal(tokens[2].type, 'text')
+      assert.equal(tokens[2].value, ', email: ')
+      assert.equal(tokens[3].type, 'list')
+      assert.equal(tokens[3].value, '1')
     })
   })
 
-
-  describe('argument data', () => {
-    describe('primivive', () => {
-      it('should be replace with primivive value', () => {
-        const template = 'a: {0}, b: {1}'
-        assert.equal(format(template, [1, 2]), 'a: 1, b: 2')
-      })
+  describe('named', () => {
+    it('should be parsed', () => {
+      const tokens = parse('name: {name}, email: {email}')
+      assert(tokens.length === 4)
+      assert.equal(tokens[0].type, 'text')
+      assert.equal(tokens[0].value, 'name: ')
+      assert.equal(tokens[1].type, 'named')
+      assert.equal(tokens[1].value, 'name')
+      assert.equal(tokens[2].type, 'text')
+      assert.equal(tokens[2].value, ', email: ')
+      assert.equal(tokens[3].type, 'named')
+      assert.equal(tokens[3].value, 'email')
     })
+  })
 
-    describe('null', () => {
-      it('should be replace with empty string', () => {
-        const template = 'name: {0}, email: {1}'
-        assert.equal(format(template, [null, null]), 'name: , email: ')
-      })
+  describe('rails i18n format syntax', () => {
+    it('should be parsed', () => {
+      const tokens = parse('name: %{name}, email: %{email}')
+      assert(tokens.length === 4)
+      assert.equal(tokens[0].type, 'text')
+      assert.equal(tokens[0].value, 'name: ')
+      assert.equal(tokens[1].type, 'named')
+      assert.equal(tokens[1].value, 'name')
+      assert.equal(tokens[2].type, 'text')
+      assert.equal(tokens[2].value, ', email: ')
+      assert.equal(tokens[3].type, 'named')
+      assert.equal(tokens[3].value, 'email')
     })
+  })
 
-    describe('undefined', () => {
-      it('should be replace with empty string', () => {
-        const template = 'name: {name}, email: {email}'
-        assert.equal(format(template, {
-          name: undefined, email: undefined
-        }), 'name: , email: ')
-      })
+  describe('not support format', () => {
+    it('should be parsed', () => {
+      const tokens = parse('name: { name1}, email: {%email}')
+      assert(tokens.length === 4)
+      assert.equal(tokens[0].type, 'text')
+      assert.equal(tokens[0].value, 'name: ')
+      assert.equal(tokens[1].type, 'unknown')
+      assert.equal(tokens[1].value, ' name1')
+      assert.equal(tokens[2].type, 'text')
+      assert.equal(tokens[2].value, ', email: ')
+      assert.equal(tokens[3].type, 'unknown')
+      assert.equal(tokens[3].value, '%email')
+    })
+  })
+})
+
+describe('compile', () => {
+  describe('list token', () => {
+    it('should be compiled', () => {
+      const tokens = parse('name: {0}, age: {1}')
+      const compiled = compile(tokens, ['kazupon', '0x20'])
+      assert(compiled.length === 4)
+      assert.equal(compiled[0], 'name: ')
+      assert.equal(compiled[1], 'kazupon')
+      assert.equal(compiled[2], ', age: ')
+      assert.equal(compiled[3], '0x20')
+    })
+  })
+
+  describe('named token', () => {
+    it('should be compiled', () => {
+      const tokens = parse('name: {name}, age: {age}')
+      const compiled = compile(tokens, { name: 'kazupon', age: '0x20' })
+      assert(compiled.length === 4)
+      assert.equal(compiled[0], 'name: ')
+      assert.equal(compiled[1], 'kazupon')
+      assert.equal(compiled[2], ', age: ')
+      assert.equal(compiled[3], '0x20')
     })
   })
 })
