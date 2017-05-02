@@ -13,7 +13,7 @@ export default class BaseFormatter {
 
   get options (): FormatterOptions { return this._options }
 
-  format (message: string, values: any): any {
+  interpolate (message: string, values: any): Array<any> {
     let tokens: Array<Token> = this._caches[message]
     if (!tokens) {
       tokens = parse(message)

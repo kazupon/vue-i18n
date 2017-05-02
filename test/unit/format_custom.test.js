@@ -4,8 +4,8 @@ describe('custom formatter', () => {
   describe('via i18n instance API calling', () => {
     it('should allows for specifying a custom formatter', done => {
       class CustomFormatter {
-        format (message, ...args) {
-          assert.deepEqual({ name: 'joe' }, args[0])
+        interpolate (message, values) {
+          assert.deepEqual({ name: 'joe' }, values)
           done()
         }
       }
@@ -22,8 +22,8 @@ describe('custom formatter', () => {
   describe('via vue instance calling', () => {
     it('should allows for specifying a custom formatter', done => {
       const formatter = {
-        format: (message, ...args) => {
-          assert.deepEqual([1, 2, 3], args[0])
+        interpolate: (message, values) => {
+          assert.deepEqual([1, 2, 3], values)
           done()
         }
       }

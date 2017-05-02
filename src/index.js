@@ -220,7 +220,7 @@ export default class VueI18n {
   }
 
   _render (message: string, interpolateMode: string, values: any): any {
-    const ret = this._formatter.format(message, values)
+    const ret = this._formatter.interpolate(message, values)
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
     return interpolateMode === 'string' ? ret.join('') : ret
