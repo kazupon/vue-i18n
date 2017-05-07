@@ -38,7 +38,7 @@ describe('component interpolation', () => {
         const vm = new Vue({
           i18n,
           render (h) {
-            return h('i18n', { props: { path: 'text' } }, [ this._v('1') ])
+            return h('i18n', { props: { path: 'text' } }, [this._v('1')])
           }
         }).$mount(el)
         nextTick(() => {
