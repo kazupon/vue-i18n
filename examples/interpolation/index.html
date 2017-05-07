@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>component interpolation</title>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../../dist/vue-i18n.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+        <div class="usernam">
+          <label for="username">username:</label>
+          <input id="username" type="text" value="username">
+        </div>
+        <div class="email">
+          <label for="email">email:</label>
+          <input id="email" type="text" value="foo@bar.com">
+        </div>
+        <div class="agreement">
+          <input id="tos" type="checkbox">
+          <i18n path="term" tag="label" for="tos">
+            <a :href="url" target="_blank">{{ $t('tos') }}</a>
+          </i18n>
+        </div>
+        <input type="submit" value="submit">
+      </form>
+    </div>
+    <script>
+      var messages = {
+        en: {
+          tos: 'Term of Service',
+          term: 'I accept xxx {0}.'
+        },
+        ja: {
+          tos: '利用規約',
+          term: '私は xxx の{0}に同意します。'
+        }
+      }
+      
+      Vue.use(VueI18n)
+      
+      var i18n = new VueI18n({
+        locale: 'en',
+        messages: messages
+      })
+      new Vue({
+        i18n: i18n,
+        data: {
+          url: '/term'
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
