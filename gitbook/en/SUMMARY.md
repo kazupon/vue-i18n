@@ -15,6 +15,7 @@ Internationalization plugin of Vue.js
 * [Locale messages syntax](messages.md)
 * [Fallback localization](fallback.md)
 * [Component based localization](component.md)
+* [Component interpolation](interpolation.md)
 * [Single file components](sfc.md)
 * [Hot reloading](hot-reload.md)
 * [Migrations](migrations.md)
