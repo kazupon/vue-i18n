@@ -1,5 +1,7 @@
 # Number localization
 
+> :new: 7.0+
+
 You can localize the number with your definition formats.
 
 Number formats the below:

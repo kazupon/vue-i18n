@@ -1,5 +1,7 @@
 # DateTime localization
 
+> :new: 7.0+
+
 You can localize the datetime with your definition formats.
 
 DateTime formats the below:

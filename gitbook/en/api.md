@@ -22,6 +22,8 @@
 
 ### availabilities
 
+> :new: 7.0+
+
 - **Type:** `IntlAvailability`
 
   Whether the following internationalization features are available:
@@ -67,10 +69,12 @@
 
 ### $d
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{number | Date} value`: required
-  - `{string | Object} key`: optional
-  - `{string | Object} locale`: optional
+  - `{Path | Object} key`: optional
+  - `{Locale | Object} locale`: optional
 
 - **Return:** `string`
 
@@ -80,10 +84,12 @@
 
 ### $n
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{number} value`: required
-  - `{string | Object} key`: optional
-  - `{string | Object} locale`: optional
+  - `{Path | Object} key`: optional
+  - `{Locale | Object} locale`: optional
 
 - **Return:** `string`
 
@@ -139,6 +145,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### dateTimeFormats
 
+> :new: 7.0+
+
 - **Type:** `DateTimeFormats`
 
 - **Default:** `{}`
@@ -148,6 +156,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 - **See also:** [`DateTimeFormats` type](#type-definitions-for-flowtype).
 
 #### numberFormats
+
+> :new: 7.0+
 
 - **Type:** `NumberFormats`
 
@@ -197,6 +207,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 ### silentTranslationWarn
 
+> 6.1+
+
 - **Type:** `Boolean`
 
 - **Default:** `false`
@@ -233,6 +245,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### dateTimeFormats
 
+> :new: 7.0+
+
 - **Type:** `DateTimeFormats`
 
 - **Read only**
@@ -240,6 +254,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
   The datetime formats of localization.
 
 #### numberFormats
+
+> :new: 7.0+
 
 - **Type:** `NumberFormats`
 
@@ -264,6 +280,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
   The formatter that implemented with `Formatter` interface.
 
 #### silentTranslationWarn
+
+> 6.1+
 
 - **Type:** `boolean`
 
@@ -292,6 +310,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### mergeLocaleMessage( locale, message ) 
 
+> 6.1+
+
 - **Arguments:**
   - `{Locale} locale`
   - `{LocaleMessage} message`
@@ -308,6 +328,18 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 - **Return:**: `string`
 
   This is the same as the `Function` returned with `$t` computed property. More detail see [$t](#$t).
+
+#### i( key, [locale], [values] )
+
+> :new: 7.0+
+
+- **Arguments:**
+  - `{Path} key`: required
+  - `{Locale} locale`: optional
+  - `{Array} values`: optional
+
+- **Return:**: `Array`
+
 
 #### tc( key, [choice], [values] )
 
@@ -332,6 +364,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### getDateTimeFormat ( locale )
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{Locale} locale`
 
@@ -341,6 +375,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### setDateTimeFormat ( locale, format )
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{Locale} locale`
   - `{DateTimeFormat} format`
@@ -348,6 +384,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
   Set the datetime format of locale.
 
 #### mergeDateTimeFormat ( locale, format ) 
+
+> :new: 7.0+
 
 - **Arguments:**
   - `{Locale} locale`
@@ -357,16 +395,20 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### d( value, [key], [locale] )
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{number | Date} value`: required
-  - `{string | Object} key`: optional
-  - `{string | Object} locale`: optional
+  - `{Path | Object} key`: optional
+  - `{Locale | Object} locale`: optional
 
 - **Return:** `string`
 
   This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
 
 #### getNumberFormat ( locale )
+
+> :new: 7.0+
 
 - **Arguments:**
   - `{Locale} locale`
@@ -377,6 +419,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### setNumberFormat ( locale, format )
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{Locale} locale`
   - `{NumberFormat} format`
@@ -384,6 +428,8 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
   Set the number format of locale.
 
 #### mergeNumberFormat ( locale, format ) 
+
+> :new: 7.0+
 
 - **Arguments:**
   - `{Locale} locale`
@@ -393,14 +439,68 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 #### n( value, [key], [locale] )
 
+> :new: 7.0+
+
 - **Arguments:**
   - `{number} value`: required
-  - `{string | Object} key`: optional
-  - `{string | Object} locale`: optional
+  - `{Path | Object} key`: optional
+  - `{Locale | Object} locale`: optional
 
 - **Return:** `string`
 
   This is the same as `$n` method of Vue instance method. More detail see [$n](#$n).
+
+
+## `i18n` functional component
+
+> :new: 7.0+
+
+### Props:
+
+- `path {Path}`: required
+- `locale {Locale}`: optional
+- `tag {string}`: optional, default `span`
+
+### Usage:
+
+```html
+<div id="app">
+  <!-- ... -->
+  <i18n path="term" tag="label" for="tos">
+    <a :href="url" target="_blank">{{ $t('tos') }}</a>
+  </i18n>
+  <!-- ... -->
+</div>
+```
+
+
+```javascript
+const messages = {
+  en: {
+    tos: 'Term of Service',
+    term: 'I accept xxx {0}.'
+  },
+  ja: {
+    tos: '利用規約',
+    term: '私は xxx の{0}に同意します。'
+  }
+}
+
+const i18n = new VueI18n({
+  locale: 'en',
+  messages
+})
+new Vue({
+  i18n,
+  data: {
+    url: '/term'
+  }
+}).$mount('#app')
+```
+
+### See also:
+
+[Component interpolation](./interpolation.md)
 
 
 ## Type definitions for flowType
@@ -413,6 +513,7 @@ declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
 declare type LocaleMessageArray = Array<LocaleMessage>;
 declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 
+// 7.0+
 // This options is the same as Intl.DateTimeFormat constructor options:
 // http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor
 declare type DateTimeFormatOptions = {
@@ -433,6 +534,7 @@ declare type DateTimeFormatOptions = {
 declare type DateTimeFormat = { [key: string]: DateTimeFormatOptions };
 declare type DateTimeFormats = { [key: Locale]: DateTimeFormat };
 
+// 7.0+
 // This options is the same as Intl.NumberFormat constructor options:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
 declare type NumberFormatOptions = {
@@ -448,29 +550,29 @@ declare type NumberFormatOptions = {
   localeMatcher?: 'lookup' | 'best fit',
   formatMatcher?: 'basic' | 'best fit'
 };
-declare type NumberFormat = { [key: string]: NumberFormatOptions };
-declare type NumberFormats = { [key: Locale]: NumberFormat };
+declare type NumberFormat = { [key: string]: NumberFormatOptions }; // 7.0+
+declare type NumberFormats = { [key: Locale]: NumberFormat }; // 7.0+
 
-declare type TranslateResult = string | Array<string>;
-declare type DateTimeFormatResult = string;
-declare type NumberFormatResult = string;
+declare type TranslateResult = string | Array<any>;
+declare type DateTimeFormatResult = string; // 7.0+
+declare type NumberFormatResult = string; // 7.0+
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
 
 declare type I18nOptions = {
   locale?: Locale,
   fallbackLocale?: Locale,
   messages?: LocaleMessages,
-  dateTimeFormats?: DateTimeFormats,
-  numberFormats?: NumberFormats,
+  dateTimeFormats?: DateTimeFormats, // 7.0+
+  numberFormats?: NumberFormats, // 7.0+
   formatter?: Formatter,
   missing?: MissingHandler,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
   sync?: boolean,
-  silentTranslationWarn?: boolean
+  silentTranslationWarn?: boolean // 6.1+
 };
 
-declare type IntlAvailability = {
+declare type IntlAvailability = { // 7.0+
   dateTimeFormat: boolean,
   numberFormat: boolean
 };
@@ -478,7 +580,7 @@ declare type IntlAvailability = {
 declare interface I18n {
   static install: () => void, // for Vue plugin interface
   static version: string,
-  static availabilities: IntlAvailability,
+  static availabilities: IntlAvailability, // 7.0+
   get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
@@ -493,23 +595,24 @@ declare interface I18n {
   set silentTranslationWarn (silent: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessage,
   setLocaleMessage (locale: Locale, message: LocaleMessage): void,
-  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void,
+  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void, // 6.1+
   t (key: Path, ...values: any): TranslateResult,
+  i (key: Path, ...values: any): TranslateResult, // 7.0+
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
   te (key: Path, locale?: Locale): boolean,
-  getDateTimeFormat (locale: Locale): DateTimeFormat,
-  setDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
-  mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
-  d (value: number | Date, ...args: any): DateTimeFormatResult,
-  getNumberFormat (locale: Locale): NumberFormat,
-  setNumberFormat (locale: Locale, format: NumberFormat): void,
-  mergeNumberFormat (locale: Locale, format: NumberFormat): void,
-  n (value: number, ...args: any): NumberFormatResult
+  getDateTimeFormat (locale: Locale): DateTimeFormat, // 7.0+
+  setDateTimeFormat (locale: Locale, format: DateTimeFormat): void, // 7.0+
+  mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void, // 7.0+
+  d (value: number | Date, ...args: any): DateTimeFormatResult, // 7.0+
+  getNumberFormat (locale: Locale): NumberFormat, // 7.0+
+  setNumberFormat (locale: Locale, format: NumberFormat): void, // 7.0+
+  mergeNumberFormat (locale: Locale, format: NumberFormat): void, // 7.0+
+  n (value: number, ...args: any): NumberFormatResult // 7.0+
 };
 
 declare type FormatterOptions = { [key: string]: any };
 
 declare interface Formatter {
-  format (message: string, ...values: any): string
+  interpolate (message: string, values: any): Array<any>
 };
 ```

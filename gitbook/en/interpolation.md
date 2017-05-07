@@ -1,6 +1,6 @@
 # Component interpolation
 
-> :new: 7.0
+> :new: 7.0+
 
 Sometimes, we need to localize with locale message that was included HTML tag or component. For example:
 
