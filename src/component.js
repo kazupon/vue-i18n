@@ -6,6 +6,10 @@ export default {
   name: 'i18n',
   functional: true,
   props: {
+    tag: {
+      type: String,
+      default: 'span'
+    },
     path: {
       type: String,
       required: true
@@ -14,7 +18,7 @@ export default {
       type: String
     }
   },
-  render (h: Function, { props, children, parent }: Object) {
+  render (h: Function, { props, data, children, parent }: Object) {
     const i18n = parent.$i18n
     if (!i18n) {
       if (process.env.NODE_ENV !== 'production') {
@@ -30,6 +34,6 @@ export default {
     locale && params.push(locale)
     children.forEach(child => params.push(child))
 
-    return i18n.i(path, ...params)
+    return h(props.tag, data, i18n.i(path, ...params))
   }
 }

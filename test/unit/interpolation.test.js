@@ -2,8 +2,10 @@ const messages = {
   en: {
     text: 'one: {0}',
     premitive: 'one: {0}, two: {1}',
-    component: 'root: {0}, component: {1}',
-    link: '@:premitive'
+    component: 'element: {0}, component: {1}',
+    link: '@:premitive',
+    term: 'I accept xxx {0}.',
+    tos: 'Term of service'
   },
   ja: {
     text: '一: {0}'
@@ -36,11 +38,7 @@ describe('component interpolation', () => {
         const vm = new Vue({
           i18n,
           render (h) {
-            return h('p', {}, [
-              h('i18n', { props: { path: 'text' } }, [
-                this._v('1')
-              ])
-            ])
+            return h('i18n', { props: { path: 'text' } }, [ this._v('1') ])
           }
         }).$mount(el)
         nextTick(() => {
@@ -55,11 +53,9 @@ describe('component interpolation', () => {
         const vm = new Vue({
           i18n,
           render (h) {
-            return h('div', {}, [
-              h('i18n', { props: { path: 'premitive' } }, [
-                h('p', ['1']),
-                h('p', ['2'])
-              ])
+            return h('i18n', { props: { path: 'premitive' } }, [
+              h('p', ['1']),
+              h('p', ['2'])
             ])
           }
         }).$mount(el)
@@ -76,16 +72,14 @@ describe('component interpolation', () => {
           i18n,
           components,
           render (h) {
-            return h('div', {}, [
-              h('i18n', { props: { path: 'component' } }, [
-                h('p', ['1']),
-                h('comp', { props: { msg: 'foo' } })
-              ])
+            return h('i18n', { props: { path: 'component' } }, [
+              h('p', ['1']),
+              h('comp', { props: { msg: 'foo' } })
             ])
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'root: <p>1</p>, component: <p>foo</p>')
+          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
     })
@@ -97,14 +91,12 @@ describe('component interpolation', () => {
           i18n,
           components,
           render (h) {
-            return h('div', {}, [
-              h('i18n', { props: { path: 'component' } }, [
-                h('p', ['1']),
-                h('div', {}, [
-                  h('i18n', { props: { path: 'component' } }, [
-                    h('p', ['2']),
-                    h('comp', { props: { msg: 'nested' } })
-                  ])
+            return h('i18n', { props: { path: 'component' } }, [
+              h('p', ['1']),
+              h('div', {}, [
+                h('i18n', { class: 'nested', props: { tag: 'div', path: 'component' } }, [
+                  h('p', ['2']),
+                  h('comp', { props: { msg: 'nested' } })
                 ])
               ])
             ])
@@ -113,7 +105,7 @@ describe('component interpolation', () => {
         nextTick(() => {
           assert.equal(
             vm.$el.innerHTML,
-            'root: <p>1</p>, component: <div>root: <p>2</p>, component: <p>nested</p></div>'
+            'element: <p>1</p>, component: <div><div class="nested">element: <p>2</p>, component: <p>nested</p></div></div>'
           )
         }).then(done)
       })
@@ -126,11 +118,9 @@ describe('component interpolation', () => {
       const vm = new Vue({
         i18n,
         render (h) {
-          return h('p', {}, [
-            h('i18n', { props: { path: 'link' } }, [
-              h('p', ['1']),
-              h('p', ['2'])
-            ])
+          return h('i18n', { props: { path: 'link' } }, [
+            h('p', ['1']),
+            h('p', ['2'])
           ])
         }
       }).$mount(el)
@@ -146,15 +136,33 @@ describe('component interpolation', () => {
       const vm = new Vue({
         i18n,
         render (h) {
-          return h('p', {}, [
-            h('i18n', { props: { path: 'text', locale: 'ja' } }, [
-              this._v('1')
-            ])
+          return h('i18n', { props: { path: 'text', locale: 'ja' } }, [
+            this._v('1')
           ])
         }
       }).$mount(el)
       nextTick(() => {
         assert.equal(vm.$el.textContent, '一: 1')
+      }).then(done)
+    })
+  })
+
+  describe('included translation locale message', () => {
+    it('should be interpolated', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'term' } }, [
+            h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+          ])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.equal(
+          vm.$el.innerHTML,
+          'I accept xxx <a href=\"/term\">Term of service</a>.'
+        )
       }).then(done)
     })
   })
