@@ -10,7 +10,7 @@
         <router-link to="/show">{{ $t('navigation.show') }}</router-link>
         <router-link to="/ask">{{ $t('navigation.ask') }}</router-link>
         <router-link to="/job">{{ $t('navigation.job') }}</router-link>
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
+        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">
           Built with Vue.js
         </a>
         <a class="locale" href="javascript:void(0);"
@@ -110,8 +110,6 @@ a
     padding 15px 30px
 
 @media (max-width 600px)
-  body
-    font-size 14px
   .header
     .inner
       padding 15px
