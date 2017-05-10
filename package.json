@@ -24,6 +24,7 @@
     "conventional-changelog-cli": "^1.2.0",
     "conventional-github-releaser": "^1.1.3",
     "cross-spawn": "^5.0.1",
+    "dtslint": "^0.1.2",
     "eslint": "^3.14.1",
     "eslint-config-vue": "^2.0.2",
     "eslint-loader": "^1.6.1",
@@ -72,6 +73,7 @@
     "dist/vue-i18n.common.js",
     "dist/vue-i18n.esm.js",
     "src",
+    "types",
     "decls"
   ],
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
@@ -85,6 +87,7 @@
   "license": "MIT",
   "main": "dist/vue-i18n.common.js",
   "module": "dist/vue-i18n.esm.js",
+  "types": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kazupon/vue-i18n.git"
@@ -99,13 +102,14 @@
     "docs:build": "node config/version.js && gitbook build ./gitbook ./docs",
     "docs:install": "gitbook install ./gitbook",
     "flow": "flow check",
+    "dtslint": "dtslint types",
     "lint": "eslint src test config",
     "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
     "sauce": "npm run sauce:coolkids && npm run sauce:ie && npm run sauce:mobile",
     "sauce:coolkids": "karma start config/karma.sauce.conf.js -- 0",
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
-    "test": "npm run lint && npm run flow && npm run test:cover && npm run test:e2e -- --env phantomjs",
+    "test": "npm run lint && npm run flow && npm run dtslint && npm run test:cover && npm run test:e2e -- --env phantomjs",
     "test:cover": "BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
     "test:unit": "BABEL_ENV=test karma start config/karma.unit.conf.js"
