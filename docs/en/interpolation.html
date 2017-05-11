@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Component based localization · GitBook</title>
+        <title>Component interpolation · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="interpolation.html" />
+    <link rel="next" href="sfc.html" />
     
     
-    <link rel="prev" href="fallback.html" />
+    <link rel="prev" href="component.html" />
     
 
     </head>
@@ -236,7 +236,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.12" data-path="component.html">
+        <li class="chapter " data-level="1.12" data-path="component.html">
             
                 <a href="component.html">
             
@@ -249,7 +249,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="interpolation.html">
+        <li class="chapter active" data-level="1.13" data-path="interpolation.html">
             
                 <a href="interpolation.html">
             
@@ -344,7 +344,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Component based localization</a>
+        <a href="." >Component interpolation</a>
     </h1>
 </div>
 
@@ -359,58 +359,51 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="component-based-localization">Component based localization</h1><p>In general, Locale info (e.g. <code>locale</code>,<code>messages</code>, etc) is set as constructor option of <code>VueI18n</code> instance, and it set  <code>i18n</code> option as root Vue instance. Thereby you globally can localize with using <code>$t</code> or <code>$tc</code> in the root Vue instance are composed some component. you manage  locale info for each component and it localize, it was better is convenient due to Vue is component oriented.</p><p>The following component based localization example:</p><pre><code class="lang-javascript"><span class="hljs-comment">// setup locale info for root Vue instance</span>
-<span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-  locale: <span class="hljs-string">&apos;ja&apos;</span>,
-  messages: {
-    en: {
-      message: {
-        hello: <span class="hljs-string">&apos;hello world&apos;</span>,
-        greeting: <span class="hljs-string">&apos;good morning&apos;</span>
-      }
-    },
-    ja: {
-      message: {
-        hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&apos;</span>,
-        greeting: <span class="hljs-string">&apos;&#x304A;&#x306F;&#x3088;&#x3046;&#x3054;&#x3056;&#x3044;&#x307E;&#x3059;&apos;</span>
-      }
-    }
+                                <h1 id="component-interpolation">Component interpolation</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p></blockquote><p>Sometimes, we need to localize with locale message that was included HTML tag or component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>In the above message, if you use with <code>$t</code>, probably you may try to compose the following locale messages:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
+  en: {
+    term1: <span class="hljs-string">&apos;I Accept xxx\&apos;s&apos;</span>,
+    term2: <span class="hljs-string">&apos;Terms of Service Agreement&apos;</span>
   }
-})
-
-<span class="hljs-comment">// Define component</span>
-<span class="hljs-keyword">const</span> Component1 = {
-  template: <span class="hljs-string">`
-    &lt;div class=&quot;container&quot;&gt;
-     &lt;p&gt;Component1 locale messages: {{ $t(&quot;message.hello&quot;) }}&lt;/p&gt;
-     &lt;p&gt;Fallback global locale messages: {{ $t(&quot;message.greeting&quot;) }}&lt;/p&gt;
-   &lt;/div&gt;`</span>,
-  i18n: { <span class="hljs-comment">// `i18n` option</span>
-    messages: {
-      en: { message: { hello: <span class="hljs-string">&apos;hello component1&apos;</span> } },
-      ja: { message: { hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;component1&apos;</span> } }
-    }
+}</code></pre>
+<p>And in the following, you may try to implement in template:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;term1&apos;) }}<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>{{ $t(&apos;term2&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>output:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>This is very cumbersome, and if you configure the <code>&lt;a&gt;</code> tag in a locale message, there is a possibility XSS vulnerabilities due to localize with <code>v-html=&quot;$t(&apos;term&apos;)&quot;</code>.</p><p>You can avoid it with using <code>i18n</code> functional component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">i18n</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;term&quot;</span> <span class="hljs-attr">tag</span>=<span class="hljs-string">&quot;label&quot;</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>{{ $t(&apos;tos&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
+  en: {
+    tos: <span class="hljs-string">&apos;Term of Service&apos;</span>,
+    term: <span class="hljs-string">&apos;I accept xxx {0}.&apos;</span>
+  },
+  ja: {
+    tos: <span class="hljs-string">&apos;&#x5229;&#x7528;&#x898F;&#x7D04;&apos;</span>,
+    term: <span class="hljs-string">&apos;&#x79C1;&#x306F; xxx &#x306E;{0}&#x306B;&#x540C;&#x610F;&#x3057;&#x307E;&#x3059;&#x3002;&apos;</span>
   }
 }
 
+<span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
+  locale: <span class="hljs-string">&apos;en&apos;</span>,
+  messages
+})
 <span class="hljs-keyword">new</span> Vue({
   i18n,
-  components: {
-    Component1
+  data: {
+    url: <span class="hljs-string">&apos;/term&apos;</span>
   }
 }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
-<p>Template the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&quot;message.hello&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">component1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component1</span>&gt;</span>
+<p>the following ouput:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
+    I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>Term of Service<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Output the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Component1 locale messages: &#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;component1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Fallback global locale messages: &#x304A;&#x306F;&#x3088;&#x3046;&#x3001;&#x4E16;&#x754C;&#xFF01;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>As in the example above, if the component doesn&apos;t have the locale message, it  fallbacks and localizes global locale message. Also localize it using global locale (in the above example, <code>locale: &apos;ja&apos;</code>).</p><p>If you hope localize in the component locale, you can realize with <code>sync: false</code> and <code>locale</code> in <code>i18n</code> option.</p>
+<p>About the above example, see the <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation" target="_blank">example</a></p><p>The children of <code>i18n</code> functional component is interpolated with locale message of <code>path</code> prop. In the above example, <code>&lt;a :href=&quot;url&quot; target=&quot;_blank&quot;&gt;{{ $t(&apos;tos&apos;) }}&lt;/a&gt;</code> is interplated with <code>term</code> locale message.</p><p>The component interpolations follows the <strong>list formatting</strong>. The named formatting is not support. The children of <code>i18n</code> functional component is interpolated with order of list formatting.</p>
                                 
                                 </section>
                             
@@ -437,12 +430,12 @@
 
             
                 
-                <a href="fallback.html" class="navigation navigation-prev " aria-label="Previous page: Fallback localization">
+                <a href="component.html" class="navigation navigation-prev " aria-label="Previous page: Component based localization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="interpolation.html" class="navigation navigation-next " aria-label="Next page: Component interpolation">
+                <a href="sfc.html" class="navigation navigation-next " aria-label="Next page: Single file components">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -453,7 +446,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Component based localization","level":"1.12","depth":1,"next":{"title":"Component interpolation","level":"1.13","depth":1,"path":"interpolation.md","ref":"interpolation.md","articles":[]},"previous":{"title":"Fallback localization","level":"1.11","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"component.md","mtime":"2017-04-19T09:41:55.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-05-11T16:15:52.026Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Component interpolation","level":"1.13","depth":1,"next":{"title":"Single file components","level":"1.14","depth":1,"path":"sfc.md","ref":"sfc.md","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"interpolation.md","mtime":"2017-05-07T15:59:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-05-11T16:15:52.026Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>

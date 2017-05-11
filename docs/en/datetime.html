@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Locale Messages Syntax · GitBook</title>
+        <title>DateTime localization · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,7 +61,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="fallback.html" />
+    <link rel="next" href="number.html" />
     
     
     <link rel="prev" href="pluralization.html" />
@@ -150,7 +150,7 @@
                 <a href="started.html">
             
                     
-                    Getting Started
+                    Getting started
             
                 </a>
             
@@ -184,12 +184,12 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="syntax.html">
+        <li class="chapter active" data-level="1.8" data-path="datetime.html">
             
-                <a href="syntax.html">
+                <a href="datetime.html">
             
                     
-                    Locale Messages Syntax
+                    DateTime localization
             
                 </a>
             
@@ -197,12 +197,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="fallback.html">
+        <li class="chapter " data-level="1.9" data-path="number.html">
+            
+                <a href="number.html">
+            
+                    
+                    Number localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="messages.html">
+            
+                <a href="messages.html">
+            
+                    
+                    Locale messages syntax
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="fallback.html">
             
                 <a href="fallback.html">
             
                     
-                    Fallback Translation
+                    Fallback localization
             
                 </a>
             
@@ -210,12 +236,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="component.html">
+        <li class="chapter " data-level="1.12" data-path="component.html">
             
                 <a href="component.html">
             
                     
-                    Component Based Translation
+                    Component based localization
             
                 </a>
             
@@ -223,12 +249,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="sfc.html">
+        <li class="chapter " data-level="1.13" data-path="interpolation.html">
+            
+                <a href="interpolation.html">
+            
+                    
+                    Component interpolation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="sfc.html">
             
                 <a href="sfc.html">
             
                     
-                    Single File Component
+                    Single file components
             
                 </a>
             
@@ -236,25 +275,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="linked.html">
-            
-                <a href="linked.html">
-            
-                    
-                    Linked Translation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="hot-reload.html">
+        <li class="chapter " data-level="1.15" data-path="hot-reload.html">
             
                 <a href="hot-reload.html">
             
                     
-                    Hot Reload
+                    Hot reloading
             
                 </a>
             
@@ -262,7 +288,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="migrations.html">
+        <li class="chapter " data-level="1.16" data-path="migrations.html">
             
                 <a href="migrations.html">
             
@@ -275,12 +301,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="api.html">
+        <li class="chapter " data-level="1.17" data-path="api.html">
             
                 <a href="api.html">
             
                     
-                    API References
+                    API references
             
                 </a>
             
@@ -318,7 +344,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Locale Messages Syntax</a>
+        <a href="." >DateTime localization</a>
     </h1>
 </div>
 
@@ -333,56 +359,37 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="locale-messages-syntax">Locale Messages Syntax</h1><p>Locale Messages syntax the bellow:</p><pre><code class="lang-javascript"><span class="hljs-comment">// As Flowtype defnition, Locale Messages syntax like BNF annotation</span>
-type LocaleMessages = { [key: Locale]: LocaleMessageObject };
-type LocaleMessageObject = { [key: Path]: LocaleMessage };
-type LocaleMessageArray = LocaleMessage[];
-type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
-type Locale = string;
-type Path = string;</code></pre>
-<p>Based on the above syntax, You can configure the bellow structure Locale Messages:</p><pre><code class="lang-json">{
-  <span class="hljs-string">&quot;en&quot;</span>: {  <span class="hljs-comment">// &apos;en&apos; Locale</span>
-    <span class="hljs-string">&quot;key1&quot;</span>: <span class="hljs-string">&quot;this is message1&quot;</span>, <span class="hljs-comment">// basic</span>
-    <span class="hljs-string">&quot;nested&quot;</span>: { <span class="hljs-comment">// nested</span>
-      <span class="hljs-string">&quot;message1&quot;</span>: <span class="hljs-string">&quot;this is nested message1&quot;</span>
+                                <h1 id="datetime-localization">DateTime localization</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p></blockquote><p>You can localize the datetime with your definition formats.</p><p>DateTime formats the below:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> dateTimeFormats = {
+  <span class="hljs-string">&apos;en-US&apos;</span>: {
+    short: {
+      year: <span class="hljs-string">&apos;numeric&apos;</span>, month: <span class="hljs-string">&apos;short&apos;</span>, day: <span class="hljs-string">&apos;numeric&apos;</span>
     },
-    errors: [ <span class="hljs-comment">// array</span>
-      <span class="hljs-string">&quot;this is 0 error code message&quot;</span>,
-      {  <span class="hljs-comment">// array in object</span>
-         <span class="hljs-string">&quot;internal1&quot;</span>: <span class="hljs-string">&quot;this is internal 1 error message&quot;</span>
-      },
-      [  <span class="hljs-comment">// array in array</span>
-         <span class="hljs-string">&quot;this is nested array error 1&quot;</span>
-      ]
-    ]
+    long: {
+      year: <span class="hljs-string">&apos;numeric&apos;</span>, month: <span class="hljs-string">&apos;short&apos;</span>, day: <span class="hljs-string">&apos;numeric&apos;</span>,
+      weekday: <span class="hljs-string">&apos;short&apos;</span>, hour: <span class="hljs-string">&apos;numeric&apos;</span>, minute: <span class="hljs-string">&apos;numeric&apos;</span>
+    }
   },
-  <span class="hljs-string">&quot;ja&quot;</span>: { <span class="hljs-comment">// &apos;ja&apos; Locale</span>
-    <span class="hljs-comment">// ...</span>
+  <span class="hljs-string">&apos;ja-JP&apos;</span>: {
+    short: {
+      year: <span class="hljs-string">&apos;numeric&apos;</span>, month: <span class="hljs-string">&apos;short&apos;</span>, day: <span class="hljs-string">&apos;numeric&apos;</span>
+    },
+    long: {
+      year: <span class="hljs-string">&apos;numeric&apos;</span>, month: <span class="hljs-string">&apos;short&apos;</span>, day: <span class="hljs-string">&apos;numeric&apos;</span>,
+      weekday: <span class="hljs-string">&apos;short&apos;</span>, hour: <span class="hljs-string">&apos;numeric&apos;</span>, minute: <span class="hljs-string">&apos;numeric&apos;</span>, hour12: <span class="hljs-literal">true</span>
+    }
   }
 }</code></pre>
-<p>In the above Locale Messages structure,  You can translate with using below key paths.</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;key1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;nested.message1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[1].internal1&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;errors[2][0]&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<p>As the Above, You can define the datetime format with named (e.g. <code>short</code>, <code>long</code>, etc), and you need to use <a href="http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor" target="_blank">the options with ECMA-402 Intl.DateTimeFormat</a></p><p>After that like the locale messages, You need to specify the <code>dateTimeFormats</code> option of <code>VueI18n</code> constructor:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+  i18n,
+  dateTimeFormats
+}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
+<p>Template the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $d(new Date(), &apos;short&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $d(new Date(), &apos;long&apos;, &apos;ja-JP&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Ouput the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- basic --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- nested --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested message1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is 0 error code message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- object in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is internal 1 error message<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- array in array --&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this is nested array error 1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<p>Output the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Apr 19, 2017<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>2017&#x5E74;4&#x6708;19&#x65E5;(&#x6C34;) &#x5348;&#x524D;2:19<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
 
                                 
@@ -416,7 +423,7 @@ type Path = string;</code></pre>
                 </a>
                 
                 
-                <a href="fallback.html" class="navigation navigation-next " aria-label="Next page: Fallback Translation">
+                <a href="number.html" class="navigation navigation-next " aria-label="Next page: Number localization">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -427,7 +434,7 @@ type Path = string;</code></pre>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Locale Messages Syntax","level":"1.8","depth":1,"next":{"title":"Fallback Translation","level":"1.9","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"previous":{"title":"Pluralization","level":"1.7","depth":1,"path":"pluralization.md","ref":"pluralization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"syntax.md","mtime":"2017-03-27T17:56:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-19T08:32:51.056Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"DateTime localization","level":"1.8","depth":1,"next":{"title":"Number localization","level":"1.9","depth":1,"path":"number.md","ref":"number.md","articles":[]},"previous":{"title":"Pluralization","level":"1.7","depth":1,"path":"pluralization.md","ref":"pluralization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"datetime.md","mtime":"2017-05-07T15:59:46.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-05-11T16:15:52.026Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>

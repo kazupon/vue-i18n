@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Linked Translation · GitBook</title>
+        <title>Number localization · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="hot-reload.html" />
+    <link rel="next" href="messages.html" />
     
     
-    <link rel="prev" href="sfc.html" />
+    <link rel="prev" href="datetime.html" />
     
 
     </head>
@@ -150,7 +150,7 @@
                 <a href="started.html">
             
                     
-                    Getting Started
+                    Getting started
             
                 </a>
             
@@ -184,12 +184,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="syntax.html">
+        <li class="chapter " data-level="1.8" data-path="datetime.html">
             
-                <a href="syntax.html">
+                <a href="datetime.html">
             
                     
-                    Locale Messages Syntax
+                    DateTime localization
             
                 </a>
             
@@ -197,12 +197,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="fallback.html">
+        <li class="chapter active" data-level="1.9" data-path="number.html">
+            
+                <a href="number.html">
+            
+                    
+                    Number localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="messages.html">
+            
+                <a href="messages.html">
+            
+                    
+                    Locale messages syntax
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="fallback.html">
             
                 <a href="fallback.html">
             
                     
-                    Fallback Translation
+                    Fallback localization
             
                 </a>
             
@@ -210,12 +236,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="component.html">
+        <li class="chapter " data-level="1.12" data-path="component.html">
             
                 <a href="component.html">
             
                     
-                    Component Based Translation
+                    Component based localization
             
                 </a>
             
@@ -223,12 +249,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="sfc.html">
+        <li class="chapter " data-level="1.13" data-path="interpolation.html">
+            
+                <a href="interpolation.html">
+            
+                    
+                    Component interpolation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="sfc.html">
             
                 <a href="sfc.html">
             
                     
-                    Single File Component
+                    Single file components
             
                 </a>
             
@@ -236,25 +275,12 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.12" data-path="linked.html">
-            
-                <a href="linked.html">
-            
-                    
-                    Linked Translation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.13" data-path="hot-reload.html">
+        <li class="chapter " data-level="1.15" data-path="hot-reload.html">
             
                 <a href="hot-reload.html">
             
                     
-                    Hot Reload
+                    Hot reloading
             
                 </a>
             
@@ -262,7 +288,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="migrations.html">
+        <li class="chapter " data-level="1.16" data-path="migrations.html">
             
                 <a href="migrations.html">
             
@@ -275,12 +301,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="api.html">
+        <li class="chapter " data-level="1.17" data-path="api.html">
             
                 <a href="api.html">
             
                     
-                    API References
+                    API references
             
                 </a>
             
@@ -318,7 +344,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Linked Translation</a>
+        <a href="." >Number localization</a>
     </h1>
 </div>
 
@@ -333,17 +359,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="linked-translation">Linked Translation</h1><p>If there&apos;s a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an <code>@:</code> sign followed by the full name of the translation key including the namespace you want to link to.</p><p>Locale messages the following:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
-  en: {
-    message: {
-      the_world: <span class="hljs-string">&apos;the world&apos;</span>,
-      dio: <span class="hljs-string">&apos;DIO:&apos;</span>,
-      linked: <span class="hljs-string">&apos;@:message.dio @:message.the_world !!!!&apos;</span>
+                                <h1 id="number-localization">Number localization</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p></blockquote><p>You can localize the number with your definition formats.</p><p>Number formats the below:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> numberFormats = {
+  <span class="hljs-string">&apos;en-US&apos;</span>: {
+    currency: {
+      style: <span class="hljs-string">&apos;currency&apos;</span>, currency: <span class="hljs-string">&apos;USD&apos;</span>
+    }
+  },
+  <span class="hljs-string">&apos;ja-JP&apos;</span>: {
+    currency: {
+      style: <span class="hljs-string">&apos;currency&apos;</span>, currency: <span class="hljs-string">&apos;JPY&apos;</span>, currencyDisplay: <span class="hljs-string">&apos;symbol&apos;</span>
     }
   }
 }</code></pre>
-<p>Template the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;message.linked&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
-<p>Output the following:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>DIO: the world !!!!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>As the Above, You can define the number format with named (e.g. <code>currency</code>, etc), and you need to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat" target="_blank">the options with ECMA-402 Intl.NumberFormat</a></p><p>After that like the locale messages, You need to specify the <code>numberFormats</code> option of <code>VueI18n</code> constructor:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+  i18n,
+  numberFormats
+}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
+<p>Template the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $n(100, &apos;currency&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $n(100, &apos;currency&apos;, &apos;ja-JP&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>Output the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>$100.00<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#xFFE5;100<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
 
                                 
                                 </section>
@@ -371,12 +410,12 @@
 
             
                 
-                <a href="sfc.html" class="navigation navigation-prev " aria-label="Previous page: Single File Component">
+                <a href="datetime.html" class="navigation navigation-prev " aria-label="Previous page: DateTime localization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="hot-reload.html" class="navigation navigation-next " aria-label="Next page: Hot Reload">
+                <a href="messages.html" class="navigation navigation-next " aria-label="Next page: Locale messages syntax">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -387,7 +426,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Linked Translation","level":"1.12","depth":1,"next":{"title":"Hot Reload","level":"1.13","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"previous":{"title":"Single File Component","level":"1.11","depth":1,"path":"sfc.md","ref":"sfc.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"linked.md","mtime":"2017-03-27T17:56:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-04-19T08:32:51.056Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Number localization","level":"1.9","depth":1,"next":{"title":"Locale messages syntax","level":"1.10","depth":1,"path":"messages.md","ref":"messages.md","articles":[]},"previous":{"title":"DateTime localization","level":"1.8","depth":1,"path":"datetime.md","ref":"datetime.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"number.md","mtime":"2017-05-07T16:00:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-05-11T16:15:52.026Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
