@@ -1,3 +1,33 @@
+<a name="7.0.0-beta.1"></a>
+# [7.0.0-beta.1](https://github.com/kazupon/vue-i18n/compare/v6.1.1...v7.0.0-beta.1) (2017-05-11)
+
+### :star: New Features
+
+* **datetime localization:** add datetime localization ([3282075](https://github.com/kazupon/vue-i18n/commit/3282075))
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/datetime.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/datetime)
+* **number localization:** add number localization ([87ee7b3](https://github.com/kazupon/vue-i18n/commit/87ee7b3))
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/number.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/number)
+* **component interpolation:** ([23f7d34](https://github.com/kazupon/vue-i18n/commit/23f7d34)), closes [#145](https://github.com/kazupon/vue-i18n/issues/145) [#144](https://github.com/kazupon/vue-i18n/issues/144) [#37](https://github.com/kazupon/vue-i18n/issues/37)
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/interpolation.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
+* **typescript:** add TypeScript type definitions ([#161](https://github.com/kazupon/vue-i18n/issues/161)) by [@aicest](https://github.com/aicest) ([61cebca](https://github.com/kazupon/vue-i18n/commit/61cebca))
+    * [type definitions](https://github.com/kazupon/vue-i18n/blob/dev/types/index.d.ts)
+
+
+### :boom: Breaking changes
+
+* **format:** re-impelement formatter ([a8c046d](https://github.com/kazupon/vue-i18n/commit/a8c046d))
+* **formatter:** change method name ([6eed51c](https://github.com/kazupon/vue-i18n/commit/6eed51c))
+* **flowtype:** fix locale message related type changing ([c30d576](https://github.com/kazupon/vue-i18n/commit/c30d576))
+
+
+### :bug: Bug Fixes
+
+* **examples:** fix ssr demo ([059034f](https://github.com/kazupon/vue-i18n/commit/059034f)), closes [#151](https://github.com/kazupon/vue-i18n/issues/151)
+
+
 <a name="6.1.1"></a>
 ## [6.1.1](https://github.com/kazupon/vue-i18n/compare/v6.1.0...v6.1.1) (2017-04-19)
 
