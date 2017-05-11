@@ -331,15 +331,15 @@ export default class VueI18n {
     return this._te(key, this.locale, this.messages, locale)
   }
 
-  getLocaleMessage (locale: Locale): LocaleMessage {
+  getLocaleMessage (locale: Locale): LocaleMessageObject {
     return looseClone(this._vm.messages[locale])
   }
 
-  setLocaleMessage (locale: Locale, message: LocaleMessage): void {
+  setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     this._vm.messages[locale] = message
   }
 
-  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void {
+  mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message)
   }
 

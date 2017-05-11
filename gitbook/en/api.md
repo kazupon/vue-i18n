@@ -296,7 +296,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 - **Arguments:**
   - `{Locale} locale`
 
-- **Return:** `LocaleMessage`
+- **Return:** `LocaleMessageObject`
 
   Get the locale message of locale.
 
@@ -304,7 +304,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 - **Arguments:**
   - `{Locale} locale`
-  - `{LocaleMessage} message`
+  - `{LocaleMessageObject} message`
 
   Set the locale message of locale.
 
@@ -314,7 +314,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
 - **Arguments:**
   - `{Locale} locale`
-  - `{LocaleMessage} message`
+  - `{LocaleMessageObject} message`
 
   Merge the registered locale messages with the locale message of locale.
 
@@ -593,9 +593,9 @@ declare interface I18n {
   set formatter (formatter: Formatter): void,
   get silentTranslationWarn (): boolean,
   set silentTranslationWarn (silent: boolean): void,
-  getLocaleMessage (locale: Locale): LocaleMessage,
-  setLocaleMessage (locale: Locale, message: LocaleMessage): void,
-  mergeLocaleMessage (locale: Locale, message: LocaleMessage): void, // 6.1+
+  getLocaleMessage (locale: Locale): LocaleMessageObject,
+  setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
+  mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void, // 6.1+
   t (key: Path, ...values: any): TranslateResult,
   i (key: Path, ...values: any): TranslateResult, // 7.0+
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
