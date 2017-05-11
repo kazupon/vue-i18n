@@ -113,11 +113,11 @@
 
 ## `VueI18n` class
 
-`Vuei18n` class implement [`I18n` interface](#type-definitions-for-flowtype).
+`Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Constructor Options
 
-You can specify the below some options of [`I18nOptions` constructor options](#type-definitions-for-flowtype).
+You can specify the below some options of `I18nOptions` constructor options of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### locale
 
@@ -153,7 +153,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
   The datetime formats of localization.
 
-- **See also:** [`DateTimeFormats` type](#type-definitions-for-flowtype).
+- **See also:** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
@@ -165,7 +165,7 @@ You can specify the below some options of [`I18nOptions` constructor options](#t
 
   The number formats of localization.
 
-- **See also:** [`NumberFormats` type](#type-definitions-for-flowtype).
+- **See also:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### formatter
 
@@ -502,117 +502,3 @@ new Vue({
 
 [Component interpolation](./interpolation.md)
 
-
-## Type definitions for flowType
-
-```
-declare type Path = string;
-declare type Locale = string;
-declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
-declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
-declare type LocaleMessageArray = Array<LocaleMessage>;
-declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
-
-// 7.0+
-// This options is the same as Intl.DateTimeFormat constructor options:
-// http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor
-declare type DateTimeFormatOptions = {
-  year?: 'numeric' | '2-digit',
-  month?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long',
-  day?: 'numeric' | '2-digit',
-  hour?: 'numeric' | '2-digit',
-  minute?: 'numeric' | '2-digit',
-  second?: 'numeric' | '2-digit',
-  weekday?: 'narrow' | 'short' | 'long',
-  hour12?: boolean,
-  era?: 'narrow' | 'short' | 'long',
-  timeZone?: string, // IANA time zone
-  timeZoneName?: 'short' | 'long',
-  localeMatcher?: 'lookup' | 'best fit',
-  formatMatcher?: 'basic' | 'best fit'
-};
-declare type DateTimeFormat = { [key: string]: DateTimeFormatOptions };
-declare type DateTimeFormats = { [key: Locale]: DateTimeFormat };
-
-// 7.0+
-// This options is the same as Intl.NumberFormat constructor options:
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-declare type NumberFormatOptions = {
-  style?: 'decimal' | 'currency' | 'percent',
-  currency?: string, // ISO 4217 currency codes
-  currencyDisplay?: 'symbol' | 'code' | 'name',
-  useGrouping?: boolean,
-  minimumIntegerDigits?: number,
-  minimumFractionDigits?: number,
-  maximumFractionDigits?: number,
-  minimumSignificantDigits?: number,
-  maximumSignificantDigits?: number,
-  localeMatcher?: 'lookup' | 'best fit',
-  formatMatcher?: 'basic' | 'best fit'
-};
-declare type NumberFormat = { [key: string]: NumberFormatOptions }; // 7.0+
-declare type NumberFormats = { [key: Locale]: NumberFormat }; // 7.0+
-
-declare type TranslateResult = string | Array<any>;
-declare type DateTimeFormatResult = string; // 7.0+
-declare type NumberFormatResult = string; // 7.0+
-declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
-
-declare type I18nOptions = {
-  locale?: Locale,
-  fallbackLocale?: Locale,
-  messages?: LocaleMessages,
-  dateTimeFormats?: DateTimeFormats, // 7.0+
-  numberFormats?: NumberFormats, // 7.0+
-  formatter?: Formatter,
-  missing?: MissingHandler,
-  root?: I18n, // for internal
-  fallbackRoot?: boolean,
-  sync?: boolean,
-  silentTranslationWarn?: boolean // 6.1+
-};
-
-declare type IntlAvailability = { // 7.0+
-  dateTimeFormat: boolean,
-  numberFormat: boolean
-};
-
-declare interface I18n {
-  static install: () => void, // for Vue plugin interface
-  static version: string,
-  static availabilities: IntlAvailability, // 7.0+
-  get vm (): any, // for internal
-  get locale (): Locale,
-  set locale (locale: Locale): void,
-  get fallbackLocale (): Locale,
-  set fallbackLocale (locale: Locale): void,
-  get messages (): LocaleMessages,
-  get missing (): ?MissingHandler,
-  set missing (handler: MissingHandler): void,
-  get formatter (): Formatter,
-  set formatter (formatter: Formatter): void,
-  get silentTranslationWarn (): boolean,
-  set silentTranslationWarn (silent: boolean): void,
-  getLocaleMessage (locale: Locale): LocaleMessageObject,
-  setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
-  mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void, // 6.1+
-  t (key: Path, ...values: any): TranslateResult,
-  i (key: Path, ...values: any): TranslateResult, // 7.0+
-  tc (key: Path, choice?: number, ...values: any): TranslateResult,
-  te (key: Path, locale?: Locale): boolean,
-  getDateTimeFormat (locale: Locale): DateTimeFormat, // 7.0+
-  setDateTimeFormat (locale: Locale, format: DateTimeFormat): void, // 7.0+
-  mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void, // 7.0+
-  d (value: number | Date, ...args: any): DateTimeFormatResult, // 7.0+
-  getNumberFormat (locale: Locale): NumberFormat, // 7.0+
-  setNumberFormat (locale: Locale, format: NumberFormat): void, // 7.0+
-  mergeNumberFormat (locale: Locale, format: NumberFormat): void, // 7.0+
-  n (value: number, ...args: any): NumberFormatResult // 7.0+
-};
-
-declare type FormatterOptions = { [key: string]: any };
-
-declare interface Formatter {
-  interpolate (message: string, values: any): Array<any>
-};
-```
