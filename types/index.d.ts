@@ -47,7 +47,7 @@ declare namespace VueI18n {
   type NumberFormatResult = string;
 
   interface Formatter {
-    format(message: string, values: Values): any[];
+    interpolate(message: string, values: Values): any[];
   }
 
   type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => void;

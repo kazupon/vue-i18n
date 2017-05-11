@@ -51,7 +51,7 @@ const i18n = new VueI18n({
     }
   },
   formatter: {
-    format(message, values) {
+    interpolate(message, values) {
       return [message];
     },
   },
