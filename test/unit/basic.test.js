@@ -92,6 +92,12 @@ describe('basic', () => {
       })
 
       describe('array keypath', () => {
+        describe('not specify index', () => {
+          it('should return key string', () => {
+            assert.equal(i18n.t('errors'), 'errors')
+          })
+        })
+
         describe('basic', () => {
           it('should be translated', () => {
             assert.equal(i18n.t('errors[0]'), messages.en.errors[0])
