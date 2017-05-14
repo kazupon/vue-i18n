@@ -13,7 +13,7 @@ import {
   canUseNumberFormat
 } from './util'
 import BaseFormatter from './format'
-import getPathValue from './path'
+import I18nPath from './path'
 
 import type { PathValue } from './path'
 
@@ -34,6 +34,7 @@ export default class VueI18n {
   _silentTranslationWarn: boolean
   _dateTimeFormatters: Object
   _numberFormatters: Object
+  _path: I18nPath
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
@@ -55,10 +56,11 @@ export default class VueI18n {
       : !!options.silentTranslationWarn
     this._dateTimeFormatters = {}
     this._numberFormatters = {}
+    this._path = new I18nPath()
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
-      return !isNull(getPathValue(message, key))
+      return !isNull(this._path.getPathValue(message, key))
     }
 
     this._initVM({
@@ -169,7 +171,7 @@ export default class VueI18n {
   ): any {
     if (!message) { return null }
 
-    const pathRet: PathValue = getPathValue(message, key)
+    const pathRet: PathValue = this._path.getPathValue(message, key)
     if (Array.isArray(pathRet)) { return pathRet }
 
     let ret: mixed

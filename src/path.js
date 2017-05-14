@@ -8,9 +8,6 @@ import { isObject, isPlainObject, hasOwn } from './util'
  *    Vue.js Path parser
  */
 
-// cache
-const pathCache: { [key: Path]: any } = Object.create(null)
-
 // actions
 const APPEND = 0
 const PUSH = 1
@@ -261,21 +258,6 @@ function parse (path: Path): ?Array<string> {
   }
 }
 
-/**
- * External parse that check for a cache hit first
- */
-
-function parsePath (path: Path): Array<string> {
-  let hit: ?Array<string> = pathCache[path]
-  if (!hit) {
-    hit = parse(path)
-    if (hit) {
-      pathCache[path] = hit
-    }
-  }
-  return hit || []
-}
-
 export type PathValue = PathValueObject | PathValueArray | string | number | boolean | null
 export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
@@ -295,31 +277,53 @@ function empty (target: any): boolean {
   return true
 }
 
-/**
- * Get path value from path string
- */
-export default function getPathValue (obj: mixed, path: Path): PathValue {
-  if (!isObject(obj)) { return null }
+export default class I18nPath {
+  _cache: Object
 
-  const paths: Array<string> = parsePath(path)
-  if (empty(paths)) {
-    return null
-  } else {
-    const length: number = paths.length
-    let ret: any = null
-    let last: any = obj
-    let i: number = 0
-    while (i < length) {
-      const value: any = last[paths[i]]
-      if (value === undefined) {
-        last = null
-        break
+  constructor () {
+    this._cache = Object.create(null)
+  }
+
+  /**
+   * External parse that check for a cache hit first
+   */
+  parsePath (path: Path): Array<string> {
+    let hit: ?Array<string> = this._cache[path]
+    if (!hit) {
+      hit = parse(path)
+      if (hit) {
+        this._cache[path] = hit
       }
-      last = value
-      i++
     }
+    return hit || []
+  }
 
-    ret = last
-    return ret
+  /**
+   * Get path value from path string
+   */
+  getPathValue (obj: mixed, path: Path): PathValue {
+    if (!isObject(obj)) { return null }
+
+    const paths: Array<string> = this.parsePath(path)
+    if (empty(paths)) {
+      return null
+    } else {
+      const length: number = paths.length
+      let ret: any = null
+      let last: any = obj
+      let i: number = 0
+      while (i < length) {
+        const value: any = last[paths[i]]
+        if (value === undefined) {
+          last = null
+          break
+        }
+        last = value
+        i++
+      }
+
+      ret = last
+      return ret
+    }
   }
 }
