@@ -5,10 +5,12 @@ import jp from './ja-JP.json'
 
 Vue.use(VueI18n)
 
-export default new VueI18n({
-  locale: 'en-US',
-  messages: {
-    'en-US': en,
-    'ja-JP': jp
-  }
-})
+export function createI18n () {
+  return new VueI18n({
+    locale: 'en-US',
+    messages: {
+      'en-US': en,
+      'ja-JP': jp
+    }
+  })
+}

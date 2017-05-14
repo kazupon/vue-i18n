@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import { createStore } from './store'
 import { createRouter } from './router'
-import i18n from './i18n'
+import { createI18n } from './i18n'
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
@@ -21,6 +21,7 @@ export function createApp () {
   // create store and router instances
   const store = createStore()
   const router = createRouter()
+  const i18n = createI18n()
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
