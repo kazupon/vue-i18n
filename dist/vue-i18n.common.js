@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.0-beta.1 
+ * vue-i18n v7.0.0-beta.2 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -400,9 +400,6 @@ function compile (tokens, values) {
  *    Vue.js Path parser
  */
 
-// cache
-var pathCache = Object.create(null);
-
 // actions
 var APPEND = 0;
 var PUSH = 1;
@@ -653,21 +650,6 @@ function parse$1 (path) {
   }
 }
 
-/**
- * External parse that check for a cache hit first
- */
-
-function parsePath (path) {
-  var hit = pathCache[path];
-  if (!hit) {
-    hit = parse$1(path);
-    if (hit) {
-      pathCache[path] = hit;
-    }
-  }
-  return hit || []
-}
-
 
 
 
@@ -687,13 +669,31 @@ function empty (target) {
   return true
 }
 
+var I18nPath = function I18nPath () {
+  this._cache = Object.create(null);
+};
+
+/**
+ * External parse that check for a cache hit first
+ */
+I18nPath.prototype.parsePath = function parsePath (path) {
+  var hit = this._cache[path];
+  if (!hit) {
+    hit = parse$1(path);
+    if (hit) {
+      this._cache[path] = hit;
+    }
+  }
+  return hit || []
+};
+
 /**
  * Get path value from path string
  */
-function getPathValue (obj, path) {
+I18nPath.prototype.getPathValue = function getPathValue (obj, path) {
   if (!isObject(obj)) { return null }
 
-  var paths = parsePath(path);
+  var paths = this.parsePath(path);
   if (empty(paths)) {
     return null
   } else {
@@ -714,11 +714,12 @@ function getPathValue (obj, path) {
     ret = last;
     return ret
   }
-}
+};
 
 /*  */
 
 var VueI18n = function VueI18n (options) {
+  var this$1 = this;
   if ( options === void 0 ) options = {};
 
   var locale = options.locale || 'en-US';
@@ -740,10 +741,11 @@ var VueI18n = function VueI18n (options) {
     : !!options.silentTranslationWarn;
   this._dateTimeFormatters = {};
   this._numberFormatters = {};
+  this._path = new I18nPath();
 
   this._exist = function (message, key) {
     if (!message || !key) { return false }
-    return !isNull(getPathValue(message, key))
+    return !isNull(this$1._path.getPathValue(message, key))
   };
 
   this._initVM({
@@ -852,7 +854,7 @@ VueI18n.prototype._interpolate = function _interpolate (
 
   if (!message) { return null }
 
-  var pathRet = getPathValue(message, key);
+  var pathRet = this._path.getPathValue(message, key);
   if (Array.isArray(pathRet)) { return pathRet }
 
   var ret;
@@ -970,8 +972,8 @@ VueI18n.prototype._i = function _i (key, locale, messages, host) {
   if (this._isFallbackRoot(ret)) {
     if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
-    }
-    if (!this._root) { throw Error('unexpected error') }
+      }
+      if (!this._root) { throw Error('unexpected error') }
     return (ref = this._root).i.apply(ref, [ key ].concat( values ))
   } else {
     return this._warnDefault(locale, key, ret, host)
@@ -1046,11 +1048,11 @@ VueI18n.prototype.getLocaleMessage = function getLocaleMessage (locale) {
 };
 
 VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message) {
-    this._vm.messages[locale] = message;
-  };
+  this._vm.messages[locale] = message;
+};
 
   VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
-  this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message);
+    this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message);
 };
 
 VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
@@ -1071,7 +1073,7 @@ VueI18n.prototype._d = function _d (value, _locale, key) {
     return ''
   }
 
-  var ret = '';
+    var ret = '';
   var dateTimeFormats = this.dateTimeFormats;
   if (key) {
     var locale = _locale;
@@ -1187,10 +1189,10 @@ VueI18n.prototype.n = function n (value) {
     }
   } else if (args.length === 2) {
     if (typeof args[0] === 'string') {
-        key = args[0];
-      }
-      if (typeof args[1] === 'string') {
-      locale = args[1];
+      key = args[0];
+    }
+    if (typeof args[1] === 'string') {
+        locale = args[1];
     }
   }
 
@@ -1204,7 +1206,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.0-beta.1';
+VueI18n.version = '7.0.0-beta.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
