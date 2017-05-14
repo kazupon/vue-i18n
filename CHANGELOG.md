@@ -1,3 +1,14 @@
+<a name="7.0.0-beta.2"></a>
+# [7.0.0-beta.2](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.1...v7.0.0-beta.2) (2017-05-14)
+
+
+### :zap: Improvements
+
+* **path:** tweak for ssr ([eb21921](https://github.com/kazupon/vue-i18n/commit/eb21921))
+* **typescript:** change custom formatter method name ([c5f043f](https://github.com/kazupon/vue-i18n/commit/c5f043f))
+
+
+
 <a name="7.0.0-beta.1"></a>
 # [7.0.0-beta.1](https://github.com/kazupon/vue-i18n/compare/v6.1.1...v7.0.0-beta.1) (2017-05-11)
 
