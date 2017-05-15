@@ -1,3 +1,8 @@
+<a name="6.1.2"></a>
+## [6.1.2](https://github.com/kazupon/vue-i18n/compare/v6.1.1...v6.1.2) (2017-05-15)
+
+
+
 <a name="6.1.1"></a>
 ## [6.1.1](https://github.com/kazupon/vue-i18n/compare/v6.1.0...v6.1.1) (2017-04-19)
 
