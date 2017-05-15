@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD
- * vue-i18n v7.0.0-beta.2 
-=======
- * vue-i18n v6.1.3 
->>>>>>> master
+ * vue-i18n v7.0.0-beta.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -937,7 +933,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
       warn(("Fall back to translate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
-      return (ref = this._root).t.apply(ref, [ key ].concat( values ))
+    return (ref = this._root).t.apply(ref, [ key ].concat( values ))
   } else {
     return this._warnDefault(locale, key, ret, host)
   }
@@ -961,8 +957,8 @@ VueI18n.prototype._i = function _i (key, locale, messages, host) {
   if (this._isFallbackRoot(ret)) {
     if ("development" !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
-      }
-      if (!this._root) { throw Error('unexpected error') }
+    }
+    if (!this._root) { throw Error('unexpected error') }
     return (ref = this._root).i.apply(ref, [ key ].concat( values ))
   } else {
     return this._warnDefault(locale, key, ret, host)
@@ -1040,8 +1036,8 @@ VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message)
   this._vm.messages[locale] = message;
 };
 
-  VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
-    this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message);
+VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
+  this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message);
 };
 
 VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
@@ -1062,7 +1058,7 @@ VueI18n.prototype._d = function _d (value, _locale, key) {
     return ''
   }
 
-    var ret = '';
+  var ret = '';
   var dateTimeFormats = this.dateTimeFormats;
   if (key) {
     var locale = _locale;
@@ -1166,10 +1162,10 @@ VueI18n.prototype.n = function n (value) {
   var key = null;
 
   if (args.length === 1) {
-    if (typeof args[0] === 'string') {
+      if (typeof args[0] === 'string') {
       key = args[0];
     } else if (isObject(args[0])) {
-      if (args[0].locale) {
+        if (args[0].locale) {
         locale = args[0].locale;
       }
       if (args[0].key) {
@@ -1181,7 +1177,7 @@ VueI18n.prototype.n = function n (value) {
       key = args[0];
     }
     if (typeof args[1] === 'string') {
-        locale = args[1];
+      locale = args[1];
     }
   }
 
@@ -1195,11 +1191,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-<<<<<<< HEAD
-VueI18n.version = '7.0.0-beta.2';
-=======
-VueI18n.version = '6.1.3';
->>>>>>> master
+VueI18n.version = '7.0.0-beta.3';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
