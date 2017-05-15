@@ -86,37 +86,18 @@ export default class VueI18n {
   }
 
   watchI18nData (fn: Function): Function {
-    this._i18nWatcher = this._vm.$watch('$data', () => {
+    return this._vm.$watch('$data', () => {
       fn && fn()
     }, { deep: true })
-    return this._i18nWatcher
-  }
-
-  unwatchI18nData (): boolean {
-    if (this._i18nWatcher) {
-      this._i18nWatcher()
-      delete this._i18nWatcher
-    }
-    return true
   }
 
   watchLocale (fn: Function): ?Function {
     if (!this._sync || !this._root) { return null }
     const target: any = this._vm
-    this._watcher = this._root.vm.$watch('locale', (val) => {
+    return this._root.vm.$watch('locale', (val) => {
       target.$set(target, 'locale', val)
       fn && fn()
     }, { immediate: true })
-    return this._watcher
-  }
-
-  unwatchLocale (): boolean {
-    if (!this._sync || !this._watcher) { return false }
-    if (this._watcher) {
-      this._watcher()
-      delete this._watcher
-    }
-    return true
   }
 
   get vm (): any { return this._vm }
