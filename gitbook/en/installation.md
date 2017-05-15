@@ -7,7 +7,7 @@
 
 https://unpkg.com/vue-i18n/dist/vue-i18n
 
-[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like https://unpkg.com/vue-i18n@6.1.1/dist/vue-i18n.js
+[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like https://unpkg.com/vue-i18n@6.1.2/dist/vue-i18n.js
 
 Include vue-i18n after Vue and it will install itself automatically:
 
