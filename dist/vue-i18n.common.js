@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.1.1 
+ * vue-i18n v6.1.2 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -874,7 +874,7 @@ VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, mess
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.1.1';
+VueI18n.version = '6.1.2';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
