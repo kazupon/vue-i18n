@@ -1,3 +1,13 @@
+<a name="6.1.3"></a>
+## [6.1.3](https://github.com/kazupon/vue-i18n/compare/v6.1.1...v6.1.3) (2017-05-15)
+
+
+### :bug: Bug Fixes
+
+* fix memory leaks ([95be4ea](https://github.com/kazupon/vue-i18n/commit/95be4ea)), closes [#162](https://github.com/kazupon/vue-i18n/issues/162)
+
+
+
 <a name="6.1.2"></a>
 ## [6.1.2](https://github.com/kazupon/vue-i18n/compare/v6.1.1...v6.1.2) (2017-05-15)
 
