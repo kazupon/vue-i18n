@@ -52,12 +52,12 @@ export default {
     if (!this._i18n) { return }
 
     if (this._i18nWatcher) {
-      this._i18n.unwatchI18nData()
+      this._i18nWatcher()
       delete this._i18nWatcher
     }
 
     if (this._localeWatcher) {
-      this._i18n.unwatchLocale()
+      this._localeWatcher()
       delete this._localeWatcher
     }
 
