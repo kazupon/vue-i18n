@@ -1,3 +1,11 @@
+<a name="7.0.0-beta.3"></a>
+# [7.0.0-beta.3](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.2...v7.0.0-beta.3) (2017-05-15)
+
+### :up: Updates
+
+* bring back from bug fix ([95be4ea](https://github.com/kazupon/vue-i18n/commit/95be4ea))
+
+
 <a name="7.0.0-beta.2"></a>
 # [7.0.0-beta.2](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.1...v7.0.0-beta.2) (2017-05-14)
 
