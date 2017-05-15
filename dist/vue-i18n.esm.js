@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v6.1.2 
+ * vue-i18n v6.1.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -170,12 +170,12 @@ var mixin = {
     if (!this._i18n) { return }
 
     if (this._i18nWatcher) {
-      this._i18n.unwatchI18nData();
+      this._i18nWatcher();
       delete this._i18nWatcher;
     }
 
     if (this._localeWatcher) {
-      this._i18n.unwatchLocale();
+      this._localeWatcher();
       delete this._localeWatcher;
     }
 
@@ -642,37 +642,18 @@ VueI18n.prototype._initVM = function _initVM (data) {
 };
 
 VueI18n.prototype.watchI18nData = function watchI18nData (fn) {
-  this._i18nWatcher = this._vm.$watch('$data', function () {
+  return this._vm.$watch('$data', function () {
     fn && fn();
-  }, { deep: true });
-  return this._i18nWatcher
-};
-
-VueI18n.prototype.unwatchI18nData = function unwatchI18nData () {
-  if (this._i18nWatcher) {
-    this._i18nWatcher();
-    delete this._i18nWatcher;
-  }
-  return true
+  }, { deep: true })
 };
 
 VueI18n.prototype.watchLocale = function watchLocale (fn) {
   if (!this._sync || !this._root) { return null }
   var target = this._vm;
-  this._watcher = this._root.vm.$watch('locale', function (val) {
+  return this._root.vm.$watch('locale', function (val) {
     target.$set(target, 'locale', val);
     fn && fn();
-  }, { immediate: true });
-  return this._watcher
-};
-
-VueI18n.prototype.unwatchLocale = function unwatchLocale () {
-  if (!this._sync || !this._watcher) { return false }
-  if (this._watcher) {
-    this._watcher();
-    delete this._watcher;
-  }
-  return true
+  }, { immediate: true })
 };
 
 prototypeAccessors.vm.get = function () { return this._vm };
@@ -808,7 +789,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
       warn(("Fall back to translate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
-    return (ref = this._root).t.apply(ref, [ key ].concat( values ))
+      return (ref = this._root).t.apply(ref, [ key ].concat( values ))
   } else {
     return this._warnDefault(locale, key, ret, host)
   }
@@ -872,7 +853,7 @@ VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, mess
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
 VueI18n.install = install;
-VueI18n.version = '6.1.2';
+VueI18n.version = '6.1.3';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
