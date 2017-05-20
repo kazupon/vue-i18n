@@ -88,7 +88,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preloaders: {
+          preLoaders: {
             i18n: 'yaml-loader'
           },
           loaders: {
