@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.0-beta.3 
+ * vue-i18n v7.0.0-beta.4 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -998,7 +998,7 @@ VueI18n.prototype._tc = function _tc (
   if (choice !== undefined) {
     return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
   } else {
-    return (ref$1 = this)._t.apply(ref$1, [ key, _locale, messages, host ].concat( values ))
+    return fetchChoice((ref$1 = this)._t.apply(ref$1, [ key, _locale, messages, host ].concat( values )), 1)
   }
     var ref;
     var ref$1;
@@ -1012,11 +1012,11 @@ VueI18n.prototype.tc = function tc (key, choice) {
     var ref;
 };
 
-VueI18n.prototype._te = function _te (key, locale, messages) {
+  VueI18n.prototype._te = function _te (key, locale, messages) {
     var args = [], len = arguments.length - 3;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 3 ];
 
-  var _locale = parseArgs.apply(void 0, args).locale || locale;
+    var _locale = parseArgs.apply(void 0, args).locale || locale;
   return this._exist(messages[_locale], key)
 };
 
@@ -1157,11 +1157,11 @@ VueI18n.prototype.n = function n (value) {
   var locale = this.locale;
   var key = null;
 
-  if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+    if (args.length === 1) {
+    if (typeof args[0] === 'string') {
       key = args[0];
     } else if (isObject(args[0])) {
-        if (args[0].locale) {
+      if (args[0].locale) {
         locale = args[0].locale;
       }
       if (args[0].key) {
@@ -1187,7 +1187,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.0-beta.3';
+VueI18n.version = '7.0.0-beta.4';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
