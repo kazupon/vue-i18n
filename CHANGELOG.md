@@ -1,3 +1,13 @@
+<a name="7.0.0-beta.4"></a>
+# [7.0.0-beta.4](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.3...v7.0.0-beta.4) (2017-05-23)
+
+
+### :bug: Bug Fixes
+
+* **pluralization:** fix default choice ([240cfed](https://github.com/kazupon/vue-i18n/commit/240cfed)), closes [#164](https://github.com/kazupon/vue-i18n/issues/164)
+
+
+
 <a name="7.0.0-beta.3"></a>
 # [7.0.0-beta.3](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.2...v7.0.0-beta.3) (2017-05-15)
 
