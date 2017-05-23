@@ -297,7 +297,7 @@ export default class VueI18n {
     if (choice !== undefined) {
       return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
     } else {
-      return this._t(key, _locale, messages, host, ...values)
+      return fetchChoice(this._t(key, _locale, messages, host, ...values), 1)
     }
   }
 

@@ -158,6 +158,12 @@ describe('basic', () => {
   })
 
   describe('i18n#tc', () => {
+    describe('default choice', () => {
+      it('should be choice singluar', () => {
+        assert.equal(i18n.tc('plurals.apple'), 'one apple')
+      })
+    })
+
     describe('split plural with zero choice', () => {
       it('should allow a zero choice, a one choice and a plural choice', () => {
         const count = 10
