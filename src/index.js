@@ -294,11 +294,10 @@ export default class VueI18n {
     ...values: any
   ): any {
     if (!key) { return '' }
-    if (choice !== undefined) {
-      return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
-    } else {
-      return fetchChoice(this._t(key, _locale, messages, host, ...values), 1)
+    if (choice === undefined) {
+      choice = 1
     }
+    return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {
