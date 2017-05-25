@@ -102,9 +102,9 @@ export default class VueI18n {
 
   get vm (): any { return this._vm }
 
-  get messages (): LocaleMessages { return looseClone(this._vm.messages) }
-  get dateTimeFormats (): DateTimeFormats { return looseClone(this._vm.dateTimeFormats) }
-  get numberFormats (): NumberFormats { return looseClone(this._vm.numberFormats) }
+  get messages (): LocaleMessages { return looseClone(this._getMessages()) }
+  get dateTimeFormats (): DateTimeFormats { return looseClone(this._getDateTimeFormats()) }
+  get numberFormats (): NumberFormats { return looseClone(this._getNumberFormats()) }
 
   get locale (): Locale { return this._vm.locale }
   set locale (locale: Locale): void {
@@ -124,6 +124,10 @@ export default class VueI18n {
 
   get silentTranslationWarn (): boolean { return this._silentTranslationWarn }
   set silentTranslationWarn (silent: boolean): void { this._silentTranslationWarn = silent }
+
+  _getMessages (): LocaleMessages { return this._vm.messages }
+  _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
+  _getNumberFormats (): NumberFormats { return this._vm.numberFormats }
 
   _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any): ?string {
     if (!isNull(result)) { return result }
@@ -250,7 +254,7 @@ export default class VueI18n {
   }
 
   t (key: Path, ...values: any): TranslateResult {
-    return this._t(key, this.locale, this.messages, null, ...values)
+    return this._t(key, this.locale, this._getMessages(), null, ...values)
   }
 
   _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
@@ -282,7 +286,7 @@ export default class VueI18n {
       params.push(values[i])
     }
 
-    return this._i(key, locale, this.messages, null, ...params)
+    return this._i(key, locale, this._getMessages(), null, ...params)
   }
 
   _tc (
@@ -301,7 +305,7 @@ export default class VueI18n {
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {
-    return this._tc(key, this.locale, this.messages, null, choice, ...values)
+    return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
   }
 
   _te (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): boolean {
@@ -310,7 +314,7 @@ export default class VueI18n {
   }
 
   te (key: Path, locale?: Locale): boolean {
-    return this._te(key, this.locale, this.messages, locale)
+    return this._te(key, this.locale, this._getMessages(), locale)
   }
 
   getLocaleMessage (locale: Locale): LocaleMessageObject {
@@ -344,7 +348,7 @@ export default class VueI18n {
     }
 
     let ret = ''
-    const dateTimeFormats = this.dateTimeFormats
+    const dateTimeFormats = this._getDateTimeFormats()
     if (key) {
       let locale: Locale = _locale
       if (isNull(dateTimeFormats[_locale][key])) {
@@ -413,7 +417,7 @@ export default class VueI18n {
     }
 
     let ret = ''
-    const numberFormats = this.numberFormats
+    const numberFormats = this._getNumberFormats()
     if (key) {
       let locale: Locale = _locale
       if (isNull(numberFormats[_locale][key])) {
