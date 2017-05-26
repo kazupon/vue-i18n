@@ -103,8 +103,6 @@ declare interface I18n {
   n (value: number, ...args: any): NumberFormatResult
 };
 
-declare type FormatterOptions = { [key: string]: any };
-
 declare interface Formatter {
   interpolate (message: string, values: any): Array<any>
 };
