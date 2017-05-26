@@ -109,7 +109,7 @@
     "sauce:coolkids": "karma start config/karma.sauce.conf.js -- 0",
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
-    "test": "npm run lint && npm run flow && npm run dtslint && npm run test:cover && npm run test:e2e -- --env phantomjs",
+    "test": "npm run lint && npm run flow && npm run test:cover && npm run test:e2e -- --env phantomjs",
     "test:cover": "BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
     "test:unit": "BABEL_ENV=test karma start config/karma.unit.conf.js"
