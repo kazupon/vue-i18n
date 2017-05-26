@@ -1,3 +1,18 @@
+<a name="7.0.0-rc.1"></a>
+# [7.0.0-rc.1](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.4...v7.0.0-rc.1) (2017-05-26)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* fix translation performance issue ([6032a51](https://github.com/kazupon/vue-i18n/commit/6032a51)), closes [#165](https://github.com/kazupon/vue-i18n/issues/165)
+
+
+### :up: Updates
+
+* **flowtype:** remove unneccesary type ([eb60156](https://github.com/kazupon/vue-i18n/commit/eb60156))
+
+
+
 <a name="7.0.0-beta.4"></a>
 # [7.0.0-beta.4](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.3...v7.0.0-beta.4) (2017-05-23)
 
