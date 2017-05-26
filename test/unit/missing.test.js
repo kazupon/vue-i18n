@@ -31,4 +31,23 @@ describe('missing', () => {
       vm.$t('foo.bar.buz')
     })
   })
+
+  describe('i18n missing getter/setter', () => {
+    it('should be worked', done => {
+      const missing = (locale, key) => {
+        assert(false)
+      }
+      const i18n = new VueI18n({
+        locale: 'en',
+        missing
+      })
+
+      assert.equal(missing, i18n.missing)
+
+      i18n.missing = (locale, key, vm) => {
+        done()
+      }
+      i18n.t('foo.bar.buz')
+    })
+  })
 })

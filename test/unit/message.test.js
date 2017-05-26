@@ -30,6 +30,12 @@ describe('message', () => {
     i18n.setLocaleMessage('ja', orgJaLocaleMessage)
   })
 
+  describe('messages', () => {
+    it('should be workd', () => {
+      assert.deepEqual(messages, i18n.messages)
+    })
+  })
+
   describe('getLocaleMessage / setLocaleMessage', () => {
     it('should be worked', done => {
       const vm = new Vue({

@@ -3,15 +3,11 @@
 import { warn, isObject } from './util'
 
 export default class BaseFormatter {
-  _options: FormatterOptions
   _caches: { [key: string]: Array<Token> }
 
-  constructor (options: FormatterOptions = {}) {
-    this._options = options
+  constructor () {
     this._caches = Object.create(null)
   }
-
-  get options (): FormatterOptions { return this._options }
 
   interpolate (message: string, values: any): Array<any> {
     let tokens: Array<Token> = this._caches[message]

@@ -92,6 +92,7 @@ export default class VueI18n {
   }
 
   watchLocale (fn: Function): ?Function {
+    /* istanbul ignore if */
     if (!this._sync || !this._root) { return null }
     const target: any = this._vm
     return this._root.vm.$watch('locale', (val) => {
@@ -161,6 +162,7 @@ export default class VueI18n {
 
     let ret: mixed
     if (isNull(pathRet)) {
+      /* istanbul ignore else */
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
@@ -173,6 +175,7 @@ export default class VueI18n {
         return null
       }
     } else {
+      /* istanbul ignore else */
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
@@ -246,6 +249,7 @@ export default class VueI18n {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
       }
+      /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
       return this._root.t(key, ...values)
     } else {
@@ -272,6 +276,7 @@ export default class VueI18n {
   }
 
   i (key: Path, ...values: any): TranslateResult {
+    /* istanbul ignore if */
     if (!key) { return '' }
 
     let locale: Locale = this.locale
@@ -342,6 +347,7 @@ export default class VueI18n {
   }
 
   _d (value: number | Date, _locale: Locale, key: ?string): DateTimeFormatResult {
+    /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.dateTimeFormat) {
       warn('Cannot format a Date value due to not support Intl.DateTimeFormat.')
       return ''
@@ -411,6 +417,7 @@ export default class VueI18n {
   }
 
   _n (value: number, _locale: Locale, key: ?string): NumberFormatResult {
+    /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
       warn('Cannot format a Date value due to not support Intl.NumberFormat.')
       return ''
@@ -475,6 +482,7 @@ VueI18n.availabilities = {
 VueI18n.install = install
 VueI18n.version = '__VERSION__'
 
+/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n)
 }

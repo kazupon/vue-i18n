@@ -1,6 +1,6 @@
 /* @flow */
 
-import { isObject, isPlainObject, hasOwn } from './util'
+import { isObject } from './util'
 
 /**
  *  Path paerser
@@ -263,18 +263,12 @@ export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
 
 function empty (target: any): boolean {
-  if (target === null || target === undefined) { return true }
-
+  /* istanbul ignore else */
   if (Array.isArray(target)) {
-    if (target.length > 0) { return false }
-    if (target.length === 0) { return true }
-  } else if (isPlainObject(target)) {
-    for (const key in target) {
-      if (hasOwn(target, key)) { return false }
-    }
+    return target.length === 0
+  } else {
+    return false
   }
-
-  return true
 }
 
 export default class I18nPath {

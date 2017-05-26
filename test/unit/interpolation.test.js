@@ -1,3 +1,5 @@
+import Component from '../../src/component'
+
 const messages = {
   en: {
     text: 'one: {0}',
@@ -5,7 +7,8 @@ const messages = {
     component: 'element: {0}, component: {1}',
     link: '@:premitive',
     term: 'I accept xxx {0}.',
-    tos: 'Term of service'
+    tos: 'Term of service',
+    fallback: 'fallback from {0}'
   },
   ja: {
     text: '一: {0}'
@@ -18,6 +21,16 @@ const components = {
     },
     render (h) {
       return h('p', [this.msg])
+    }
+  },
+  fallback: {
+    i18n: {
+      locale: 'en'
+    },
+    render (h) {
+      return h('i18n', { props: { path: 'fallback' } }, [
+        h('p', ['child'])
+      ])
     }
   }
 }
@@ -80,6 +93,22 @@ describe('component interpolation', () => {
         }).$mount(el)
         nextTick(() => {
           assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+        }).then(done)
+      })
+    })
+
+    describe('fallback', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          components,
+          render (h) {
+            return h('fallback')
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.innerHTML, 'fallback from <p>child</p>')
         }).then(done)
       })
     })
@@ -164,6 +193,18 @@ describe('component interpolation', () => {
           'I accept xxx <a href=\"/term\">Term of service</a>.'
         )
       }).then(done)
+    })
+  })
+
+  describe('warnning in render', () => {
+    it('should be warned', () => {
+      const spy = sinon.spy(console, 'warn')
+
+      Component.render(() => {}, { children: [], parent: {} })
+      assert(spy.notCalled === false)
+      assert(spy.callCount === 1)
+
+      spy.restore()
     })
   })
 })

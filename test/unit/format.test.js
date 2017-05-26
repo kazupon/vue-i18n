@@ -86,4 +86,42 @@ describe('compile', () => {
       assert.equal(compiled[3], '0x20')
     })
   })
+
+  describe('unknown token', () => {
+    it('should be compiled', () => {
+      const spy = sinon.spy(console, 'warn')
+
+      const tokens = parse('name: { name1}, email: {%email}')
+      const compiled = compile(tokens, ['kazupon', '0x20'])
+      assert(compiled.length === 2)
+      assert.equal(compiled[0], 'name: ')
+      assert.equal(compiled[1], ', email: ')
+
+      assert(spy.notCalled === false)
+      assert(spy.callCount === 2)
+      spy.restore()
+    })
+  })
+
+  describe('values unknown mode', () => {
+    it('should be compiled with empty', () => {
+      const compiled = compile([], 1)
+      assert.deepEqual(compiled, [])
+    })
+  })
+
+  describe('unmatch values mode', () => {
+    it('should be warned', () => {
+      const spy = sinon.spy(console, 'warn')
+
+      const tokens1 = parse('name: {0}, age: {1}') // list tokens
+      compile(tokens1, { name: 'kazupon', age: '0x20' }) // named values
+      const tokens2 = parse('name: {name}, age: {age}') // named tokens
+      compile(tokens2, ['kazupon', '0x20']) // list values
+
+      assert(spy.notCalled === false)
+      assert(spy.callCount === 4)
+      spy.restore()
+    })
+  })
 })

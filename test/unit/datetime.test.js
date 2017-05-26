@@ -2,6 +2,18 @@ import dateTimeFormats from './fixture/datetime'
 
 const desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
 desc('datetime format', () => {
+  describe('dateTimeFormats', () => {
+    it('should be worked', done => {
+      const i18n = new VueI18n({
+        locale: 'en-US',
+        dateTimeFormats
+      })
+      nextTick(() => {
+        assert.deepEqual(dateTimeFormats, i18n.dateTimeFormats)
+      }).then(done)
+    })
+  })
+
   describe('getDateTimeFormat / setDateTimeFormat', () => {
     it('should be worked', done => {
       const i18n = new VueI18n({

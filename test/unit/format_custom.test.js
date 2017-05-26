@@ -37,4 +37,23 @@ describe('custom formatter', () => {
       vm.$t('message.hello', [1, 2, 3])
     })
   })
+
+  describe('i18n format getter/settter', () => {
+    it('should be worked', done => {
+      const i18n = new VueI18n({
+        locale: 'en',
+        messages
+      })
+
+      assert(i18n.formatter.constructor.name === 'BaseFormatter')
+      const formatter = {
+        interpolate: (message, values) => {
+          assert.deepEqual([1, 2, 3], values)
+          done()
+        }
+      }
+      i18n.formatter = formatter
+      i18n.t('message.hello', [1, 2, 3])
+    })
+  })
 })

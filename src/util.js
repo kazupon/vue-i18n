@@ -7,29 +7,11 @@
 export function warn (msg: string, err: ?Error): void {
   if (typeof console !== 'undefined') {
     console.warn('[vue-i18n] ' + msg)
+    /* istanbul ignore if */
     if (err) {
       console.warn(err.stack)
     }
   }
-}
-
-const hasOwnProperty: Function = Object.prototype.hasOwnProperty
-export function hasOwn (obj: Object, key: string): boolean {
-  return hasOwnProperty.call(obj, key)
-}
-
-export function bind (fn: Function, ctx: Object): Function {
-  function boundFn (a) {
-    const l: number = arguments.length
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }
-  // record original fn length
-  boundFn._length = fn.length
-  return boundFn
 }
 
 export function isObject (obj: mixed): boolean {
@@ -59,6 +41,7 @@ export function parseArgs (...args: Array<mixed>): Object {
     if (typeof args[0] === 'string') {
       locale = args[0]
     }
+    /* istanbul ignore if */
     if (isObject(args[1]) || Array.isArray(args[1])) {
       params = args[1]
     }
@@ -84,6 +67,7 @@ function getChoiceIndex (choice: number, choicesLength: number): number {
 }
 
 export function fetchChoice (message: string, choice: number): ?string {
+  /* istanbul ignore if */
   if (!message && typeof message !== 'string') { return null }
   const choices: Array<string> = message.split('|')
 

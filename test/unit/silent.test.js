@@ -19,5 +19,7 @@ describe('silent', () => {
     vm.$i18n.silentTranslationWarn = false
     vm.$t('foo.bar.buz')
     assert(spy.callCount === 2)
+
+    spy.restore()
   })
 })
