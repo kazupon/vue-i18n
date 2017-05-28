@@ -236,7 +236,9 @@ Use `VueI18n#locale` property:
   app.$i18n.locale = 'ja'
   ```
 
-## Dynamic locale <sup>removed</sup>
+## Features
+
+### Dynamic locale <sup>removed</sup>
 
 If you need to dynamic set locale messages, you should implement the below:
 
