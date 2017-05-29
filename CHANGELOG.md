@@ -1,3 +1,49 @@
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/kazupon/vue-i18n/compare/v7.0.0-rc.1...v7.0.0) (2017-05-29)
+
+:tada: :tada: :tada:
+
+See the [docs](https://kazupon.github.io/vue-i18n/en/)
+
+
+### :star: New Features
+
+* **datetime localization:**
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/datetime.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/datetime)
+* **number localization:**
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/number.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/number)
+* **component interpolation:**
+    * [documentation](https://github.com/kazupon/vue-i18n/blob/dev/gitbook/en/interpolation.md)
+    * [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
+* **typescript:**
+    * [type definitions](https://github.com/kazupon/vue-i18n/blob/dev/types/index.d.ts)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* fix translation performance issue ([6032a51](https://github.com/kazupon/vue-i18n/commit/6032a51))
+
+
+### :zap: Improvements
+
+* **path:** tweak for ssr
+
+
+### :boom: Breaking changes
+
+* **format:** re-impelement formatter
+* **formatter:** change method nam
+* **flowtype:** fix locale message related type changing and remove underscore type
+
+
+### :bug: Bug Fixes
+
+* **examples:** fix ssr demo ([059034f](https://github.com/kazupon/vue-i18n/commit/059034f))
+* **pluralization:** fix default choice ([240cfed](https://github.com/kazupon/vue-i18n/commit/240cfed))
+
+
 <a name="7.0.0-rc.1"></a>
 # [7.0.0-rc.1](https://github.com/kazupon/vue-i18n/compare/v7.0.0-beta.4...v7.0.0-rc.1) (2017-05-26)
 
