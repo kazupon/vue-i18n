@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.0-rc.1 
+ * vue-i18n v7.0.0 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -1183,7 +1183,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.0-rc.1';
+VueI18n.version = '7.0.0';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
