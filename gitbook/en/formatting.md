@@ -2,7 +2,7 @@
 
 ## HTML formatting
 
-> :warning: NOTE: Dynamically localization arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. We recommended that use [component interpolcation](./interpolation.md) feature.
+> :warning: NOTE: Dynamically localization arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. We recommended that use [component interpolation](./interpolation.md) feature.
 
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
