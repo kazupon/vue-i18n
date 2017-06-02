@@ -1,18 +1,27 @@
+import dateTimeFormats from './fixture/datetime'
+import numberFormats from './fixture/number'
+
 describe('component translation', () => {
   let vm, i18n
+  const dt = new Date(Date.UTC(2012, 11, 20, 3, 0, 0))
+  const money = 101
+  const messages = {
+    'en-US': {
+      who: 'root',
+      fallback: 'fallback'
+    },
+    'ja-JP': {
+      who: 'ルート',
+      fallback: 'フォールバック'
+    }
+  }
+
   beforeEach(done => {
     i18n = new VueI18n({
-      locale: 'ja',
-      messages: {
-        en: {
-          who: 'root',
-          fallback: 'fallback'
-        },
-        ja: {
-          who: 'ルート',
-          fallback: 'フォールバック'
-        }
-      }
+      locale: 'ja-JP',
+      messages,
+      dateTimeFormats,
+      numberFormats
     })
 
     const el = document.createElement('div')
@@ -21,11 +30,11 @@ describe('component translation', () => {
       components: {
         child1: { // translation with component
           i18n: {
-            locale: 'en',
+            locale: 'en-US',
             sync: false,
             messages: {
-              en: { who: 'child1' },
-              ja: { who: '子1' }
+              'en-US': { who: 'child1' },
+              'ja-JP': { who: '子1' }
             }
           },
           components: {
@@ -41,6 +50,8 @@ describe('component translation', () => {
             return h('div', {}, [
               h('p', { ref: 'who' }, [this.$t('who')]),
               h('p', { ref: 'fallback' }, [this.$t('fallback')]),
+              h('p', { ref: 'datetime' }, [this.$d(dt, 'short')]),
+              h('p', { ref: 'number' }, [this.$n(money, 'currency')]),
               h('sub-child1', { ref: 'sub-child1' })
             ])
           }
@@ -50,8 +61,8 @@ describe('component translation', () => {
             'sub-child2': {
               i18n: {
                 messages: {
-                  en: { who: 'sub-child2' },
-                  ja: { who: 'サブの子2' }
+                  'en-US': { who: 'sub-child2' },
+                  'ja-JP': { who: 'サブの子2' }
                 }
               },
               render (h) {
@@ -84,23 +95,35 @@ describe('component translation', () => {
     const root = vm.$refs.who
     const child1 = vm.$refs.child1.$refs.who
     const child1Fallback = vm.$refs.child1.$refs.fallback
+    const child1DateTime = vm.$refs.child1.$refs.datetime
+    const child1Number = vm.$refs.child1.$refs.number
     const child2 = vm.$refs.child2.$refs.who
     const subChild1 = vm.$refs.child1.$refs['sub-child1'].$refs.who
     const subChild2 = vm.$refs.child2.$refs['sub-child2'].$refs.who
     assert.equal(root.textContent, 'ルート')
     assert.equal(child1.textContent, 'child1')
     assert.equal(child1Fallback.textContent, 'フォールバック')
+    assert.equal(
+      child1DateTime.textContent,
+      isWebkit ? '12/20/2012, 03:00' : '12/19/2012, 10:00 PM'
+    )
+    assert.equal(child1Number.textContent, '$101.00')
     assert.equal(child2.textContent, 'ルート')
     assert.equal(subChild1.textContent, 'ルート')
     assert.equal(subChild2.textContent, 'サブの子2')
 
     // change locale
-    i18n.locale = 'en'
-    vm.$refs.child1.$i18n.locale = 'ja'
+    i18n.locale = 'en-US'
+    vm.$refs.child1.$i18n.locale = 'ja-JP'
     nextTick(() => {
       assert.equal(root.textContent, 'root')
       assert.equal(child1.textContent, '子1')
       assert.equal(child1Fallback.textContent, 'fallback')
+      assert.equal(
+        child1DateTime.textContent,
+        isWebkit ? '2012/12/20 3:00' : '2012/12/20 12:00'
+      )
+      assert.equal(child1Number.textContent, '￥101')
       assert.equal(child2.textContent, 'root')
       assert.equal(subChild1.textContent, 'root')
       assert.equal(subChild2.textContent, 'sub-child2')

@@ -346,35 +346,61 @@ export default class VueI18n {
     this._vm.dateTimeFormats[locale] = Vue.util.extend(this.getDateTimeFormat(locale), format)
   }
 
-  _d (value: number | Date, _locale: Locale, key: ?string): DateTimeFormatResult {
+  _localizeDateTime (
+    value: number | Date,
+    locale: Locale,
+    fallback: Locale,
+    dateTimeFormats: DateTimeFormats,
+    key: ?string
+  ): ?DateTimeFormatResult {
+    let _locale: Locale = locale
+    let formats: DateTimeFormat = dateTimeFormats[_locale]
+
+    // fallback locale
+    if (isNull(formats) || isNull(formats[key])) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(`Fall back to '${fallback}' datetime formats from '${locale} datetime formats.`)
+      }
+      _locale = fallback
+      formats = dateTimeFormats[_locale]
+    }
+
+    if (isNull(formats) || isNull(formats[key])) {
+      return null
+    } else {
+      const format: ?DateTimeFormatOptions = formats[key]
+      const id = `${_locale}__${key}`
+      let formatter = this._dateTimeFormatters[id]
+      if (!formatter) {
+        formatter = this._dateTimeFormatters[id] = new Intl.DateTimeFormat(_locale, format)
+      }
+      return formatter.format(value)
+    }
+  }
+
+  _d (value: number | Date, locale: Locale, key: ?string): DateTimeFormatResult {
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.dateTimeFormat) {
       warn('Cannot format a Date value due to not support Intl.DateTimeFormat.')
       return ''
     }
 
-    let ret = ''
-    const dateTimeFormats = this._getDateTimeFormats()
-    if (key) {
-      let locale: Locale = _locale
-      if (isNull(dateTimeFormats[_locale][key])) {
-        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-          warn(`Fall back to the dateTimeFormat of key '${key}' with '${this.fallbackLocale}' locale.`)
-        }
-        locale = this.fallbackLocale
-      }
-      const id = `${locale}__${key}`
-      let formatter = this._dateTimeFormatters[id]
-      const format = dateTimeFormats[locale][key]
-      if (!formatter) {
-        formatter = this._dateTimeFormatters[id] = Intl.DateTimeFormat(locale, format)
-      }
-      ret = formatter.format(value)
-    } else {
-      ret = Intl.DateTimeFormat(_locale).format(value)
+    if (!key) {
+      return new Intl.DateTimeFormat(locale).format(value)
     }
 
-    return ret
+    const ret: ?DateTimeFormatResult =
+      this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key)
+    if (this._isFallbackRoot(ret)) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(`Fall back to datetime localization of root: key '${key}' .`)
+      }
+      /* istanbul ignore if */
+      if (!this._root) { throw Error('unexpected error') }
+      return this._root.d(value, key, locale)
+    } else {
+      return ret
+    }
   }
 
   d (value: number | Date, ...args: any): DateTimeFormatResult {
@@ -416,35 +442,61 @@ export default class VueI18n {
     this._vm.numberFormats[locale] = Vue.util.extend(this.getNumberFormat(locale), format)
   }
 
-  _n (value: number, _locale: Locale, key: ?string): NumberFormatResult {
+  _localizeNumber (
+    value: number,
+    locale: Locale,
+    fallback: Locale,
+    numberFormats: NumberFormats,
+    key: string
+  ): ?NumberFormatResult {
+    let _locale: Locale = locale
+    let formats: NumberFormat = numberFormats[_locale]
+
+    // fallback locale
+    if (isNull(formats) || isNull(formats[key])) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(`Fall back to '${fallback}' number formats from '${locale} number formats.`)
+      }
+      _locale = fallback
+      formats = numberFormats[_locale]
+    }
+
+    if (isNull(formats) || isNull(formats[key])) {
+      return null
+    } else {
+      const format: ?NumberFormatOptions = formats[key]
+      const id = `${_locale}__${key}`
+      let formatter = this._numberFormatters[id]
+      if (!formatter) {
+        formatter = this._numberFormatters[id] = new Intl.NumberFormat(_locale, format)
+      }
+      return formatter.format(value)
+    }
+  }
+
+  _n (value: number, locale: Locale, key: ?string): NumberFormatResult {
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
       warn('Cannot format a Date value due to not support Intl.NumberFormat.')
       return ''
     }
 
-    let ret = ''
-    const numberFormats = this._getNumberFormats()
-    if (key) {
-      let locale: Locale = _locale
-      if (isNull(numberFormats[_locale][key])) {
-        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-          warn(`Fall back to the numberFormat of key '${key}' with '${this.fallbackLocale}' locale.`)
-        }
-        locale = this.fallbackLocale
-      }
-      const id = `${locale}__${key}`
-      let formatter = this._numberFormatters[id]
-      const format = numberFormats[locale][key]
-      if (!formatter) {
-        formatter = this._numberFormatters[id] = Intl.NumberFormat(locale, format)
-      }
-      ret = formatter.format(value)
-    } else {
-      ret = Intl.NumberFormat(_locale).format(value)
+    if (!key) {
+      return new Intl.NumberFormat(locale).format(value)
     }
 
-    return ret
+    const ret: ?NumberFormatResult =
+      this._localizeNumber(value, locale, this.fallbackLocale, this._getNumberFormats(), key)
+    if (this._isFallbackRoot(ret)) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn(`Fall back to number localization of root: key '${key}' .`)
+      }
+      /* istanbul ignore if */
+      if (!this._root) { throw Error('unexpected error') }
+      return this._root.n(value, key, locale)
+    } else {
+      return ret
+    }
   }
 
   n (value: number, ...args: any): NumberFormatResult {
