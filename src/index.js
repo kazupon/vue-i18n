@@ -351,7 +351,7 @@ export default class VueI18n {
     locale: Locale,
     fallback: Locale,
     dateTimeFormats: DateTimeFormats,
-    key: ?string
+    key: string
   ): ?DateTimeFormatResult {
     let _locale: Locale = locale
     let formats: DateTimeFormat = dateTimeFormats[_locale]
@@ -399,7 +399,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.d(value, key, locale)
     } else {
-      return ret
+      return ret || ''
     }
   }
 
@@ -495,7 +495,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.n(value, key, locale)
     } else {
-      return ret
+      return ret || ''
     }
   }
 
