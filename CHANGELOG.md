@@ -1,3 +1,15 @@
+<a name="7.0.1"></a>
+## [7.0.1](https://github.com/kazupon/vue-i18n/compare/v7.0.0...v7.0.1) (2017-06-04)
+
+
+### :bug: Bug Fixes
+
+* fix cannat single file component translation ([687d406](https://github.com/kazupon/vue-i18n/commit/687d406)), closes [#169](https://github.com/kazupon/vue-i18n/issues/169)
+* fix cannnot resolve linked localization with component interpolation ([c973619](https://github.com/kazupon/vue-i18n/commit/c973619)), closes [#171](https://github.com/kazupon/vue-i18n/issues/171)
+* fix datetime and number fallback localization ([be9e1bd](https://github.com/kazupon/vue-i18n/commit/be9e1bd)), closes [#168](https://github.com/kazupon/vue-i18n/issues/168)
+* fix linked translation with using hyphen or underscore keypath ([6e9f151](https://github.com/kazupon/vue-i18n/commit/6e9f151)), closes [#170](https://github.com/kazupon/vue-i18n/issues/170)
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/kazupon/vue-i18n/compare/v7.0.0-rc.1...v7.0.0) (2017-05-29)
 
