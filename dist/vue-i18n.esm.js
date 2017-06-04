@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.0 
+ * vue-i18n v7.0.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -146,6 +146,19 @@ var mixin = {
 
     if (options.i18n) {
       if (options.i18n instanceof VueI18n) {
+        // init locale messages via custom blocks
+        if (options.__i18n) {
+          try {
+            var localeMessages = JSON.parse(options.__i18n);
+            Object.keys(localeMessages).forEach(function (locale) {
+              options.i18n.mergeLocaleMessage(locale, localeMessages[locale]);
+            });
+          } catch (e) {
+            if (process.env.NODE_ENV !== 'production') {
+              warn("Cannot parse locale messages via custom blocks.");
+            }
+          }
+        }
         this._i18n = options.i18n;
         this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
       } else if (isPlainObject(options.i18n)) {
@@ -855,16 +868,17 @@ VueI18n.prototype._interpolate = function _interpolate (
     // Match all the links within the local
     // We are going to replace each of
     // them with its translation
-    var matches = ret.match(/(@:[\w|.]+)/g);
+    var matches = ret.match(/(@:[\w\-_|.]+)/g);
     for (var idx in matches) {
       var link = matches[idx];
       // Remove the leading @:
       var linkPlaceholder = link.substr(2);
       // Translate the link
-      var translated = this$1._interpolate(message, linkPlaceholder, interpolateMode, values);
-      if (interpolateMode === 'raw') {
-        return translated
-      }
+      var translated = this$1._interpolate(
+        message, linkPlaceholder,
+        interpolateMode === 'raw' ? 'string' : interpolateMode,
+        interpolateMode === 'raw' ? undefined : values
+      );
       // Replace the link with the translated
       ret = ret.replace(link, translated);
     }
@@ -931,13 +945,13 @@ VueI18n.prototype.t = function t (key) {
 
   return (ref = this)._t.apply(ref, [ key, this.locale, this._getMessages(), null ].concat( values ))
     var ref;
-};
+  };
 
-VueI18n.prototype._i = function _i (key, locale, messages, host) {
+  VueI18n.prototype._i = function _i (key, locale, messages, host) {
     var values = [], len = arguments.length - 4;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 4 ];
 
-    var ret =
+  var ret =
     this._translate(messages, locale, this.fallbackLocale, key, 'raw', values);
   if (this._isFallbackRoot(ret)) {
     if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
@@ -1010,9 +1024,9 @@ VueI18n.prototype._te = function _te (key, locale, messages) {
 
 VueI18n.prototype.te = function te (key, locale) {
   return this._te(key, this.locale, this._getMessages(), locale)
-  };
+};
 
-  VueI18n.prototype.getLocaleMessage = function getLocaleMessage (locale) {
+VueI18n.prototype.getLocaleMessage = function getLocaleMessage (locale) {
   return looseClone(this._vm.messages[locale])
 };
 
@@ -1034,37 +1048,63 @@ VueI18n.prototype.setDateTimeFormat = function setDateTimeFormat (locale, format
 
 VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, format) {
   this._vm.dateTimeFormats[locale] = Vue.util.extend(this.getDateTimeFormat(locale), format);
+  };
+
+  VueI18n.prototype._localizeDateTime = function _localizeDateTime (
+  value,
+    locale,
+    fallback,
+  dateTimeFormats,
+  key
+) {
+  var _locale = locale;
+  var formats = dateTimeFormats[_locale];
+
+  // fallback locale
+  if (isNull(formats) || isNull(formats[key])) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + " datetime formats."));
+    }
+    _locale = fallback;
+    formats = dateTimeFormats[_locale];
+  }
+
+  if (isNull(formats) || isNull(formats[key])) {
+    return null
+  } else {
+    var format = formats[key];
+    var id = _locale + "__" + key;
+    var formatter = this._dateTimeFormatters[id];
+    if (!formatter) {
+      formatter = this._dateTimeFormatters[id] = new Intl.DateTimeFormat(_locale, format);
+    }
+    return formatter.format(value)
+  }
 };
 
-VueI18n.prototype._d = function _d (value, _locale, key) {
+VueI18n.prototype._d = function _d (value, locale, key) {
   /* istanbul ignore if */
   if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.dateTimeFormat) {
     warn('Cannot format a Date value due to not support Intl.DateTimeFormat.');
     return ''
   }
 
-  var ret = '';
-  var dateTimeFormats = this._getDateTimeFormats();
-  if (key) {
-    var locale = _locale;
-    if (isNull(dateTimeFormats[_locale][key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(("Fall back to the dateTimeFormat of key '" + key + "' with '" + (this.fallbackLocale) + "' locale."));
-      }
-      locale = this.fallbackLocale;
-    }
-    var id = locale + "__" + key;
-    var formatter = this._dateTimeFormatters[id];
-    var format = dateTimeFormats[locale][key];
-    if (!formatter) {
-      formatter = this._dateTimeFormatters[id] = Intl.DateTimeFormat(locale, format);
-    }
-    ret = formatter.format(value);
-  } else {
-    ret = Intl.DateTimeFormat(_locale).format(value);
+  if (!key) {
+    return new Intl.DateTimeFormat(locale).format(value)
   }
 
-  return ret
+  var ret =
+    this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key);
+  if (this._isFallbackRoot(ret)) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn(("Fall back to datetime localization of root: key '" + key + "' ."));
+    }
+    /* istanbul ignore if */
+    if (!this._root) { throw Error('unexpected error') }
+    return this._root.d(value, key, locale)
+  } else {
+    return ret || ''
+  }
 };
 
 VueI18n.prototype.d = function d (value) {
@@ -1109,35 +1149,61 @@ VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format
   this._vm.numberFormats[locale] = Vue.util.extend(this.getNumberFormat(locale), format);
 };
 
-VueI18n.prototype._n = function _n (value, _locale, key) {
+VueI18n.prototype._localizeNumber = function _localizeNumber (
+  value,
+  locale,
+  fallback,
+  numberFormats,
+  key
+) {
+  var _locale = locale;
+  var formats = numberFormats[_locale];
+
+  // fallback locale
+  if (isNull(formats) || isNull(formats[key])) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn(("Fall back to '" + fallback + "' number formats from '" + locale + " number formats."));
+    }
+    _locale = fallback;
+    formats = numberFormats[_locale];
+  }
+
+  if (isNull(formats) || isNull(formats[key])) {
+    return null
+  } else {
+    var format = formats[key];
+    var id = _locale + "__" + key;
+    var formatter = this._numberFormatters[id];
+    if (!formatter) {
+      formatter = this._numberFormatters[id] = new Intl.NumberFormat(_locale, format);
+      }
+    return formatter.format(value)
+  }
+};
+
+  VueI18n.prototype._n = function _n (value, locale, key) {
   /* istanbul ignore if */
   if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
     warn('Cannot format a Date value due to not support Intl.NumberFormat.');
     return ''
   }
 
-  var ret = '';
-  var numberFormats = this._getNumberFormats();
-  if (key) {
-    var locale = _locale;
-    if (isNull(numberFormats[_locale][key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(("Fall back to the numberFormat of key '" + key + "' with '" + (this.fallbackLocale) + "' locale."));
-      }
-      locale = this.fallbackLocale;
-    }
-    var id = locale + "__" + key;
-    var formatter = this._numberFormatters[id];
-    var format = numberFormats[locale][key];
-    if (!formatter) {
-      formatter = this._numberFormatters[id] = Intl.NumberFormat(locale, format);
-    }
-    ret = formatter.format(value);
-  } else {
-    ret = Intl.NumberFormat(_locale).format(value);
+  if (!key) {
+    return new Intl.NumberFormat(locale).format(value)
   }
 
-  return ret
+  var ret =
+    this._localizeNumber(value, locale, this.fallbackLocale, this._getNumberFormats(), key);
+  if (this._isFallbackRoot(ret)) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn(("Fall back to number localization of root: key '" + key + "' ."));
+    }
+    /* istanbul ignore if */
+    if (!this._root) { throw Error('unexpected error') }
+    return this._root.n(value, key, locale)
+  } else {
+    return ret || ''
+  }
 };
 
 VueI18n.prototype.n = function n (value) {
@@ -1152,12 +1218,12 @@ VueI18n.prototype.n = function n (value) {
       key = args[0];
     } else if (isObject(args[0])) {
       if (args[0].locale) {
-        locale = args[0].locale;
-        }
-        if (args[0].key) {
-        key = args[0].key;
+          locale = args[0].locale;
       }
+      if (args[0].key) {
+          key = args[0].key;
       }
+    }
   } else if (args.length === 2) {
     if (typeof args[0] === 'string') {
       key = args[0];
@@ -1177,7 +1243,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.0';
+VueI18n.version = '7.0.1';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
