@@ -197,10 +197,11 @@ export default class VueI18n {
         // Remove the leading @:
         const linkPlaceholder: string = link.substr(2)
         // Translate the link
-        const translated: any = this._interpolate(message, linkPlaceholder, interpolateMode, values)
-        if (interpolateMode === 'raw') {
-          return translated
-        }
+        const translated: any = this._interpolate(
+          message, linkPlaceholder,
+          interpolateMode === 'raw' ? 'string' : interpolateMode,
+          interpolateMode === 'raw' ? undefined : values
+        )
         // Replace the link with the translated
         ret = ret.replace(link, translated)
       }

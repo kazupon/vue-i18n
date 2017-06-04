@@ -1,14 +1,13 @@
 import messages from './fixture/index'
 
 describe('issues', () => {
-  let vm
+  let vm, i18n
   beforeEach(() => {
-    vm = new Vue({
-      i18n: new VueI18n({
-        locale: 'en',
-        messages
-      })
+    i18n = new VueI18n({
+      locale: 'en',
+      messages
     })
+    vm = new Vue({ i18n })
   })
 
 
@@ -81,12 +80,7 @@ describe('issues', () => {
           return h('p', { ref: 'custom' }, [this.$t('custom')])
         }
       })
-      const vm = new Component({
-        i18n: new VueI18n({
-          locale: 'en',
-          messages
-        })
-      }).$mount()
+      const vm = new Component({ i18n }).$mount()
       nextTick(() => {
         assert.equal(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
@@ -97,6 +91,26 @@ describe('issues', () => {
     it('should be translated', () => {
       assert.equal(vm.$i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
       assert.equal(vm.$i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
+    })
+  })
+
+  describe('#171', () => {
+    it('should be translated', done => {
+      vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'message.linkList' } }, [
+            h('strong', [this.$t('underscore_hello')]),
+            h('strong', [this.$t('message.link')])
+          ])
+        }
+      }).$mount()
+      nextTick(() => {
+        assert.equal(
+          vm.$el.innerHTML,
+          'the world: <strong>underscore the wolrd</strong> <strong>the world</strong>'
+        )
+      }).then(done)
     })
   })
 })

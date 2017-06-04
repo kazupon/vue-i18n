@@ -15,6 +15,7 @@ export default {
       linkMultiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
       linkHyphen: '@:hyphen-hello',
       linkUnderscore: '@:underscore_hello',
+      linkList: '@:message.hello: {0} {1}',
       'hyphen-locale': 'hello hyphen',
       '1234': 'Number-based keys are found',
       '1mixedKey': 'Mixed keys are not found.'
@@ -23,7 +24,9 @@ export default {
     'Hello {0}': 'Hello {0}',
     'continue-with-new-account': 'continue with new account',
     'hyphen-hello': 'hyphen the wolrd',
+    /* eslint-disable */
     underscore_hello: 'underscore the wolrd',
+    /* eslint-enable */
     underscore: '{helloMsg} world',
     plurals: {
       car: 'car | cars',
