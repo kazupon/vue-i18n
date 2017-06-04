@@ -13,6 +13,8 @@ export default {
       linkEnd: 'This is a linked translation to @:message.hello',
       linkWithin: 'Isn\'t @:message.hello we live in great?',
       linkMultiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
+      linkHyphen: '@:hyphen-hello',
+      linkUnderscore: '@:underscore_hello',
       'hyphen-locale': 'hello hyphen',
       '1234': 'Number-based keys are found',
       '1mixedKey': 'Mixed keys are not found.'
@@ -20,6 +22,8 @@ export default {
     'hello world': 'Hello World',
     'Hello {0}': 'Hello {0}',
     'continue-with-new-account': 'continue with new account',
+    'hyphen-hello': 'hyphen the wolrd',
+    underscore_hello: 'underscore the wolrd',
     underscore: '{helloMsg} world',
     plurals: {
       car: 'car | cars',

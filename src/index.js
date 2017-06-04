@@ -191,7 +191,7 @@ export default class VueI18n {
       // Match all the links within the local
       // We are going to replace each of
       // them with its translation
-      const matches: any = ret.match(/(@:[\w|.]+)/g)
+      const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
       for (const idx in matches) {
         const link: string = matches[idx]
         // Remove the leading @:

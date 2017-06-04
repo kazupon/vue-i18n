@@ -92,4 +92,11 @@ describe('issues', () => {
       }).then(done)
     })
   })
+
+  describe('#170', () => {
+    it('should be translated', () => {
+      assert.equal(vm.$i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
+      assert.equal(vm.$i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
+    })
+  })
 })
