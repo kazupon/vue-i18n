@@ -1,12 +1,12 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "extends": "vue",
   "plugins": ["flowtype"],
+  "extends": [
+    "plugin:vue-libs/recommended",
+    "plugin:flowtype/recommended"
+  ],
   "rules": {
     "object-curly-spacing": ["error", "always"],
-    "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 1 }],
-    "flowtype/define-flow-type": 1,
-    "flowtype/use-flow-type": 1
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 1 }]
   }
 }
