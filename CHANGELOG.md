@@ -1,3 +1,13 @@
+<a name="7.0.2"></a>
+## [7.0.2](https://github.com/kazupon/vue-i18n/compare/v7.0.1...v7.0.2) (2017-06-10)
+
+
+### :bug: Bug Fixes
+
+* **sfc:** fix cannot parse custom block locale messages ([32eb3a7](https://github.com/kazupon/vue-i18n/commit/32eb3a7)), closes [#173](https://github.com/kazupon/vue-i18n/issues/173)
+
+
+
 <a name="7.0.1"></a>
 ## [7.0.1](https://github.com/kazupon/vue-i18n/compare/v7.0.0...v7.0.1) (2017-06-04)
 
