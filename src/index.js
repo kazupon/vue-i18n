@@ -336,7 +336,7 @@ export default class VueI18n {
   }
 
   getDateTimeFormat (locale: Locale): DateTimeFormat {
-    return looseClone(this._vm.dateTimeFormats[locale])
+    return looseClone(this._vm.dateTimeFormats[locale] || {})
   }
 
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
@@ -344,7 +344,7 @@ export default class VueI18n {
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
-    this._vm.dateTimeFormats[locale] = Vue.util.extend(this.getDateTimeFormat(locale), format)
+    this._vm.dateTimeFormats[locale] = Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format)
   }
 
   _localizeDateTime (
@@ -432,7 +432,7 @@ export default class VueI18n {
   }
 
   getNumberFormat (locale: Locale): NumberFormat {
-    return looseClone(this._vm.numberFormats[locale])
+    return looseClone(this._vm.numberFormats[locale] || {})
   }
 
   setNumberFormat (locale: Locale, format: NumberFormat): void {
@@ -440,7 +440,7 @@ export default class VueI18n {
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
-    this._vm.numberFormats[locale] = Vue.util.extend(this.getNumberFormat(locale), format)
+    this._vm.numberFormats[locale] = Vue.util.extend(this._vm.numberFormats[locale] || {}, format)
   }
 
   _localizeNumber (
