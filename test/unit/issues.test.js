@@ -113,4 +113,23 @@ describe('issues', () => {
       }).then(done)
     })
   })
+
+  describe('#173', () => {
+    it('should be translated', done => {
+      const Component = Vue.extend({
+        __i18n: JSON.stringify({
+          en: { custom: 'custom block!' }
+        }),
+        render (h) {
+          return h('p', { ref: 'custom' }, [this.$t('custom')])
+        }
+      })
+      const vm = new Component({
+        i18n: new VueI18n({ locale: 'en' })
+      }).$mount()
+      nextTick(() => {
+        assert.equal(vm.$refs.custom.textContent, 'custom block!')
+      }).then(done)
+    })
+  })
 })

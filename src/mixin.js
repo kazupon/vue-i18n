@@ -19,7 +19,7 @@ export default {
             })
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
-              warn(`Cannot parse locale messages via custom blocks.`)
+              warn(`Cannot parse locale messages via custom blocks.`, e)
             }
           }
         }
@@ -38,7 +38,7 @@ export default {
             options.i18n.messages = JSON.parse(options.__i18n)
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
-              warn(`Cannot parse locale messages via custom blocks.`)
+              warn(`Cannot parse locale messages via custom blocks.`, e)
             }
           }
         }

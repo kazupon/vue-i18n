@@ -324,7 +324,7 @@ export default class VueI18n {
   }
 
   getLocaleMessage (locale: Locale): LocaleMessageObject {
-    return looseClone(this._vm.messages[locale])
+    return looseClone(this._vm.messages[locale] || {})
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
@@ -332,7 +332,7 @@ export default class VueI18n {
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
-    this._vm.messages[locale] = Vue.util.extend(this.getLocaleMessage(locale), message)
+    this._vm.messages[locale] = Vue.util.extend(this._vm.messages[locale] || {}, message)
   }
 
   getDateTimeFormat (locale: Locale): DateTimeFormat {
