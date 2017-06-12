@@ -15,7 +15,7 @@ Reporting a bug?
 
 - Check if the issue is reproducible with the latest stable version of Vue. If you are using a pre-release, please indicate the specific version you are using.
 
-- It is recommended that you make a JSFiddle/JSBin/Codepen to demonstrate your issue. You could start with [this template](http://jsfiddle.net/t4kdoqj7/) that already includes the latest version of Vue & Vue-i18n.
+- It is recommended that you make a JSFiddle/JSBin/Codepen to demonstrate your issue. You could start with [this template](http://jsfiddle.net/qegsr2pn/) that already includes the latest version of Vue & Vue-i18n.
 
 - For bugs that involves build setups, you can create a reproduction repository with steps in the README.
 

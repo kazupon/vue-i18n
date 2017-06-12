@@ -16,7 +16,7 @@
 
 - It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues with no clear repro steps will not be triaged. If an issue labeled "need repro" receives no further input from the issue author for more than 5 days, it will be closed.
 
-- It is recommended that you make a JSFiddle/JSBin/Codepen to demonstrate your issue. You could start based with [this template](http://jsfiddle.net/5sH6A/) that already includes the latest version of Vue.
+- It is recommended that you make a JSFiddle/JSBin/Codepen to demonstrate your issue. You could start based with [this template](http://jsfiddle.net/qegsr2pn/) that already includes the latest version of Vue.
 
 - For bugs that involves build setups, you can create a reproduction repository with steps in the README.
 
@@ -78,4 +78,3 @@ After cloning the repo, run:
 There are some other scripts available in the `scripts` section of the `package.json` file.
 
 The default test script will do the following: lint with ESLint -> type check with Flow -> unit tests with coverage -> e2e tests. **Please make sure to have this pass successfully before submitting a PR.** Although the same tests will be run against your PR on the CI server, it is better to have it working locally beforehand.
-
