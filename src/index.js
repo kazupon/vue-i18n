@@ -150,8 +150,10 @@ export default class VueI18n {
   }
 
   _interpolate (
+    locale: Locale,
     message: LocaleMessageObject,
     key: Path,
+    host: any,
     interpolateMode: string,
     values: any
   ): any {
@@ -188,26 +190,56 @@ export default class VueI18n {
 
     // Check for the existance of links within the translated string
     if (ret.indexOf('@:') >= 0) {
-      // Match all the links within the local
-      // We are going to replace each of
-      // them with its translation
-      const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
-      for (const idx in matches) {
-        const link: string = matches[idx]
-        // Remove the leading @:
-        const linkPlaceholder: string = link.substr(2)
-        // Translate the link
-        const translated: any = this._interpolate(
-          message, linkPlaceholder,
-          interpolateMode === 'raw' ? 'string' : interpolateMode,
-          interpolateMode === 'raw' ? undefined : values
-        )
-        // Replace the link with the translated
-        ret = ret.replace(link, translated)
-      }
+      ret = this._link(locale, message, ret, host, interpolateMode, values)
     }
 
     return !values ? ret : this._render(ret, interpolateMode, values)
+  }
+
+  _link (
+    locale: Locale,
+    message: LocaleMessageObject,
+    str: string,
+    host: any,
+    interpolateMode: string,
+    values: any
+  ): any {
+    let ret: string = str
+
+    // Match all the links within the local
+    // We are going to replace each of
+    // them with its translation
+    const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
+    for (const idx in matches) {
+      const link: string = matches[idx]
+      // Remove the leading @:
+      const linkPlaceholder: string = link.substr(2)
+      // Translate the link
+      let translated: any = this._interpolate(
+        locale, message, linkPlaceholder, host,
+        interpolateMode === 'raw' ? 'string' : interpolateMode,
+        interpolateMode === 'raw' ? undefined : values
+      )
+
+      if (this._isFallbackRoot(translated)) {
+        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+          warn(`Fall back to translate the link placeholder '${linkPlaceholder}' with root locale.`)
+        }
+        /* istanbul ignore if */
+        if (!this._root) { throw Error('unexpected error') }
+        const root: any = this._root
+        translated = root._translate(
+          root._getMessages(), root.locale, root.fallbackLocale,
+          linkPlaceholder, host, interpolateMode, values
+        )
+      }
+      translated = this._warnDefault(locale, linkPlaceholder, translated, host)
+
+      // Replace the link with the translated
+      ret = !translated ? ret : ret.replace(link, translated)
+    }
+
+    return ret
   }
 
   _render (message: string, interpolateMode: string, values: any): any {
@@ -222,13 +254,15 @@ export default class VueI18n {
     locale: Locale,
     fallback: Locale,
     key: Path,
+    host: any,
     interpolateMode: string,
     args: any
   ): any {
-    let res: any = this._interpolate(messages[locale], key, interpolateMode, args)
+    let res: any =
+      this._interpolate(locale, messages[locale], key, host, interpolateMode, args)
     if (!isNull(res)) { return res }
 
-    res = this._interpolate(messages[fallback], key, args)
+    res = this._interpolate(fallback, messages[fallback], key, host, args)
     if (!isNull(res)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
@@ -245,7 +279,10 @@ export default class VueI18n {
     const parsedArgs = parseArgs(...values)
     const locale: Locale = parsedArgs.locale || _locale
 
-    const ret: any = this._translate(messages, locale, this.fallbackLocale, key, 'string', parsedArgs.params)
+    const ret: any = this._translate(
+      messages, locale, this.fallbackLocale, key,
+      host, 'string', parsedArgs.params
+    )
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
@@ -264,7 +301,7 @@ export default class VueI18n {
 
   _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
     const ret: any =
-      this._translate(messages, locale, this.fallbackLocale, key, 'raw', values)
+      this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to interpolate the keypath '${key}' with root locale.`)

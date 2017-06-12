@@ -114,6 +114,38 @@ describe('issues', () => {
     })
   })
 
+  describe('#172', () => {
+    it('should be translated', done => {
+      vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: { 'company-name': 'billy-bob\'s fine steaks.' }
+          }
+        }),
+        components: {
+          comp: {
+            __i18n: JSON.stringify({
+              en: { title: '@:company-name - yeee hawwww!!!' }
+            }),
+            render (h) {
+              return h('p', { ref: 'title' }, [this.$t('title')])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [h('comp', { ref: 'comp' })])
+        }
+      }).$mount()
+      nextTick(() => {
+        assert.equal(
+          vm.$refs.comp.$refs.title.textContent,
+          'billy-bob\'s fine steaks. - yeee hawwww!!!'
+        )
+      }).then(done)
+    })
+  })
+
   describe('#173', () => {
     it('should be translated', done => {
       const Component = Vue.extend({
