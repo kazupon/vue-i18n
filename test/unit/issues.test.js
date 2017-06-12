@@ -204,4 +204,41 @@ describe('issues', () => {
       }).then(done)
     })
   })
+
+  describe('#176', () => {
+    it('should be translated', done => {
+      vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'xx',
+          fallbackLocale: 'en',
+          messages: {
+            en: {
+              'alpha': '[EN] alpha {gustav} value',
+              'bravo': '[EN] bravo {gustav} value',
+              'charlie': '[EN] charlie {0} value',
+              'delta': '[EN] delta {0} value'
+            },
+            xx: {
+              'bravo': '[XX] bravo {gustav} value',
+              'delta': '[XX] delta {0} value'
+            }
+          }
+        }),
+        render (h) {
+          return h('div', [
+            h('p', { ref: 'el1' }, [this.$t('alpha', { gustav: 'injected' })]),
+            h('p', { ref: 'el2' }, [this.$t('bravo', { gustav: 'injected' })]),
+            h('p', { ref: 'el3' }, [this.$t('charlie', ['injected'])]),
+            h('p', { ref: 'el4' }, [this.$t('delta', ['injected'])])
+          ])
+        }
+      }).$mount()
+      nextTick(() => {
+        assert.equal(vm.$refs.el1.textContent, '[EN] alpha injected value')
+        assert.equal(vm.$refs.el2.textContent, '[XX] bravo injected value')
+        assert.equal(vm.$refs.el3.textContent, '[EN] charlie injected value')
+        assert.equal(vm.$refs.el4.textContent, '[XX] delta injected value')
+      }).then(done)
+    })
+  })
 })

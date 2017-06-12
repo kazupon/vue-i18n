@@ -262,7 +262,7 @@ export default class VueI18n {
       this._interpolate(locale, messages[locale], key, host, interpolateMode, args)
     if (!isNull(res)) { return res }
 
-    res = this._interpolate(fallback, messages[fallback], key, host, args)
+    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args)
     if (!isNull(res)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
