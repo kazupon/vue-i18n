@@ -29,6 +29,7 @@ export default {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n
+          options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn
         }
 

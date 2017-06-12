@@ -132,4 +132,44 @@ describe('issues', () => {
       }).then(done)
     })
   })
+
+  describe('#174', () => {
+    it('should be fallback', done => {
+      vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          fallbackLocale: 'ja',
+          messages: {
+            en: {},
+            ja: { msg: 'メッセージ' }
+          }
+        }),
+        components: {
+          comp: {
+            i18n: {
+              messages: {
+                en: {},
+                ja: { hello: 'こんにちは' }
+              }
+            },
+            render (h) {
+              return h('div', [
+                h('p', { ref: 'el1' }, [this.$t('hello')]),
+                h('p', { ref: 'el2' }, [this.$t('msg')])
+              ])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [h('comp', { ref: 'comp' })])
+        }
+      }).$mount()
+      const el1 = vm.$refs.comp.$refs.el1
+      const el2 = vm.$refs.comp.$refs.el2
+      nextTick(() => {
+        assert.equal(el1.textContent, 'こんにちは')
+        assert.equal(el2.textContent, 'メッセージ')
+      }).then(done)
+    })
+  })
 })
