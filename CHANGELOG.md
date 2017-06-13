@@ -1,3 +1,15 @@
+<a name="7.0.3"></a>
+## [7.0.3](https://github.com/kazupon/vue-i18n/compare/v7.0.2...v7.0.3) (2017-06-13)
+
+
+### :bug: Bug Fixes
+
+* **fallback:** fix cannot fallabck localization ([694e6f2](https://github.com/kazupon/vue-i18n/commit/694e6f2)), closes [#176](https://github.com/kazupon/vue-i18n/issues/176)
+* **fallback:** fix fallback locale issue ([d9ceddc](https://github.com/kazupon/vue-i18n/commit/d9ceddc)), closes [#174](https://github.com/kazupon/vue-i18n/issues/174)
+* **linked:** fix cannot fallback linked localization ([0c572f3](https://github.com/kazupon/vue-i18n/commit/0c572f3)), closes [#172](https://github.com/kazupon/vue-i18n/issues/172)
+
+
+
 <a name="7.0.2"></a>
 ## [7.0.2](https://github.com/kazupon/vue-i18n/compare/v7.0.1...v7.0.2) (2017-06-10)
 
