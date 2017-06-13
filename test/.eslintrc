@@ -4,7 +4,7 @@
     "mocha": true
   },
   "globals": {
-    "isWebkit": true,
+    "isChrome": true,
     "waitForUpdate": true,
     "nextTick": true,
     "delay": true,
