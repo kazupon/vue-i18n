@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.2 
+ * vue-i18n v7.0.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -171,6 +171,7 @@ var mixin = {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n;
+          options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
         }
 
@@ -831,13 +832,13 @@ VueI18n.prototype._isFallbackRoot = function _isFallbackRoot (val) {
 };
 
 VueI18n.prototype._interpolate = function _interpolate (
+  locale,
   message,
   key,
+  host,
   interpolateMode,
   values
 ) {
-    var this$1 = this;
-
   if (!message) { return null }
 
   var pathRet = this._path.getPathValue(message, key);
@@ -871,26 +872,58 @@ VueI18n.prototype._interpolate = function _interpolate (
 
   // Check for the existance of links within the translated string
   if (ret.indexOf('@:') >= 0) {
-    // Match all the links within the local
-    // We are going to replace each of
-    // them with its translation
-    var matches = ret.match(/(@:[\w\-_|.]+)/g);
-    for (var idx in matches) {
-      var link = matches[idx];
-      // Remove the leading @:
-      var linkPlaceholder = link.substr(2);
-      // Translate the link
-      var translated = this$1._interpolate(
-        message, linkPlaceholder,
-        interpolateMode === 'raw' ? 'string' : interpolateMode,
-        interpolateMode === 'raw' ? undefined : values
-      );
-      // Replace the link with the translated
-      ret = ret.replace(link, translated);
-    }
+    ret = this._link(locale, message, ret, host, interpolateMode, values);
   }
 
   return !values ? ret : this._render(ret, interpolateMode, values)
+};
+
+VueI18n.prototype._link = function _link (
+  locale,
+  message,
+  str,
+  host,
+  interpolateMode,
+  values
+) {
+    var this$1 = this;
+
+  var ret = str;
+
+  // Match all the links within the local
+  // We are going to replace each of
+  // them with its translation
+  var matches = ret.match(/(@:[\w\-_|.]+)/g);
+  for (var idx in matches) {
+    var link = matches[idx];
+    // Remove the leading @:
+    var linkPlaceholder = link.substr(2);
+    // Translate the link
+    var translated = this$1._interpolate(
+      locale, message, linkPlaceholder, host,
+      interpolateMode === 'raw' ? 'string' : interpolateMode,
+      interpolateMode === 'raw' ? undefined : values
+    );
+
+    if (this$1._isFallbackRoot(translated)) {
+      if ("development" !== 'production' && !this$1._silentTranslationWarn) {
+        warn(("Fall back to translate the link placeholder '" + linkPlaceholder + "' with root locale."));
+      }
+      /* istanbul ignore if */
+      if (!this$1._root) { throw Error('unexpected error') }
+      var root = this$1._root;
+      translated = root._translate(
+        root._getMessages(), root.locale, root.fallbackLocale,
+        linkPlaceholder, host, interpolateMode, values
+      );
+    }
+    translated = this$1._warnDefault(locale, linkPlaceholder, translated, host);
+
+    // Replace the link with the translated
+    ret = !translated ? ret : ret.replace(link, translated);
+  }
+
+  return ret
 };
 
 VueI18n.prototype._render = function _render (message, interpolateMode, values) {
@@ -905,13 +938,15 @@ VueI18n.prototype._translate = function _translate (
   locale,
   fallback,
   key,
+  host,
   interpolateMode,
   args
 ) {
-  var res = this._interpolate(messages[locale], key, interpolateMode, args);
+  var res =
+    this._interpolate(locale, messages[locale], key, host, interpolateMode, args);
   if (!isNull(res)) { return res }
 
-  res = this._interpolate(messages[fallback], key, args);
+  res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args);
   if (!isNull(res)) {
     if ("development" !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
@@ -931,7 +966,10 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
   var parsedArgs = parseArgs.apply(void 0, values);
   var locale = parsedArgs.locale || _locale;
 
-  var ret = this._translate(messages, locale, this.fallbackLocale, key, 'string', parsedArgs.params);
+  var ret = this._translate(
+    messages, locale, this.fallbackLocale, key,
+    host, 'string', parsedArgs.params
+  );
   if (this._isFallbackRoot(ret)) {
     if ("development" !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to translate the keypath '" + key + "' with root locale."));
@@ -951,14 +989,14 @@ VueI18n.prototype.t = function t (key) {
 
   return (ref = this)._t.apply(ref, [ key, this.locale, this._getMessages(), null ].concat( values ))
     var ref;
-  };
+};
 
-  VueI18n.prototype._i = function _i (key, locale, messages, host) {
+VueI18n.prototype._i = function _i (key, locale, messages, host) {
     var values = [], len = arguments.length - 4;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 4 ];
 
   var ret =
-    this._translate(messages, locale, this.fallbackLocale, key, 'raw', values);
+    this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values);
   if (this._isFallbackRoot(ret)) {
     if ("development" !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
@@ -975,7 +1013,7 @@ VueI18n.prototype.i = function i (key) {
     var values = [], len = arguments.length - 1;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
 
-  /* istanbul ignore if */
+    /* istanbul ignore if */
   if (!key) { return '' }
 
   var locale = this.locale;
@@ -1018,9 +1056,9 @@ VueI18n.prototype.tc = function tc (key, choice) {
 
   return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
     var ref;
-};
+  };
 
-VueI18n.prototype._te = function _te (key, locale, messages) {
+  VueI18n.prototype._te = function _te (key, locale, messages) {
     var args = [], len = arguments.length - 3;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 3 ];
 
@@ -1057,7 +1095,7 @@ VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, fo
 };
 
 VueI18n.prototype._localizeDateTime = function _localizeDateTime (
-    value,
+  value,
   locale,
   fallback,
   dateTimeFormats,
@@ -1103,7 +1141,7 @@ VueI18n.prototype._d = function _d (value, locale, key) {
     this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key);
   if (this._isFallbackRoot(ret)) {
     {
-      warn(("Fall back to datetime localization of root: key '" + key + "' ."));
+        warn(("Fall back to datetime localization of root: key '" + key + "' ."));
     }
     /* istanbul ignore if */
     if (!this._root) { throw Error('unexpected error') }
@@ -1209,10 +1247,10 @@ VueI18n.prototype._n = function _n (value, locale, key) {
     return this._root.n(value, key, locale)
   } else {
     return ret || ''
-  }
-};
+    }
+  };
 
-VueI18n.prototype.n = function n (value) {
+  VueI18n.prototype.n = function n (value) {
     var args = [], len = arguments.length - 1;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
@@ -1220,13 +1258,13 @@ VueI18n.prototype.n = function n (value) {
   var key = null;
 
   if (args.length === 1) {
-    if (typeof args[0] === 'string') {
+      if (typeof args[0] === 'string') {
       key = args[0];
     } else if (isObject(args[0])) {
-        if (args[0].locale) {
+      if (args[0].locale) {
         locale = args[0].locale;
       }
-        if (args[0].key) {
+      if (args[0].key) {
         key = args[0].key;
       }
     }
@@ -1249,7 +1287,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.2';
+VueI18n.version = '7.0.3';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
