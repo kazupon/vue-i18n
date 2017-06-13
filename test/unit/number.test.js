@@ -44,7 +44,7 @@ desc('number format', () => {
         i18n.locale = 'zh-CN'
       }).then(() => {
         // NOTE: avoid webkit (safari/phantomjs) & Intl polyfill wired localization...
-        assert.equal(text.textContent, isWebkit ? 'CNY101.00' : '101.00人民币')
+        isChrome && assert.equal(text.textContent, '101.00人民币')
       }).then(done)
     })
   })

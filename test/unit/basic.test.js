@@ -609,44 +609,32 @@ describe('basic', () => {
     })
 
     describe('key argument', () => {
-      it('should be formatted', () => {
-        // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-        assert.equal(
-          i18n.d(dt, 'short'),
-          isWebkit ? '12/20/2012, 03:00' : '12/19/2012, 10:00 PM'
-        )
+      // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+      isChrome && it('should be formatted', () => {
+        assert.equal(i18n.d(dt, 'short'), '12/19/2012, 10:00 PM')
       })
     })
 
     describe('locale argument', () => {
       describe('with second argument', () => {
-        it('should be formatted', () => {
-          // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-          assert.equal(
-            i18n.d(dt, 'short', 'ja-JP'),
-            isWebkit ? '2012/12/20 3:00' : '2012/12/20 12:00'
-          )
+        // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+        isChrome && it('should be formatted', () => {
+          assert.equal(i18n.d(dt, 'short', 'ja-JP'), '2012/12/20 12:00')
         })
       })
 
       describe('with object argument', () => {
-        it('should be formatted', () => {
-          // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-          assert.equal(
-            i18n.d(dt, { key: 'short', locale: 'ja-JP' }),
-            isWebkit ? '2012/12/20 3:00' : '2012/12/20 12:00'
-          )
+        // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+        isChrome && it('should be formatted', () => {
+          assert.equal(i18n.d(dt, { key: 'short', locale: 'ja-JP' }), '2012/12/20 12:00')
         })
       })
     })
 
     describe('fallback', () => {
-      it('should be formatted', () => {
-        // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-        assert.equal(
-          i18n.d(dt, 'long'),
-          isWebkit ? '2012/12/20 3:00:00' : '2012/12/20 12:00:00'
-        )
+      // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
+      isChrome && it('should be formatted', () => {
+        assert.equal(i18n.d(dt, 'long'), '2012/12/20 12:00:00')
       })
     })
   })

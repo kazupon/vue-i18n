@@ -43,6 +43,7 @@ describe('custom blocks', () => {
 
   describe('invalid json string', () => {
     it('should be fallbacked translation', done => {
+      const spy = sinon.spy(console, 'warn')
       const el = document.createElement('div')
       const vm = new Vue({
         i18n,
@@ -65,6 +66,7 @@ describe('custom blocks', () => {
         i18n.locale = 'en'
       }).then(() => {
         assert.equal(vm.$refs.child.$refs.who.textContent, 'root')
+        spy.restore()
       }).then(done)
     })
   })

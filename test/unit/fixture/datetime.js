@@ -18,7 +18,7 @@ const formats = {
 }
 
 // NOTE: avoid webkit(phatomjs/safari) & Intl timeZone don't support...
-if (!isWebkit) {
+if (isChrome) {
   formats['en-US']['short']['timeZone'] = 'America/New_York'
   formats['ja-JP']['short']['timeZone'] = 'Asia/Tokyo'
   formats['ja-JP']['long']['timeZone'] = 'Asia/Tokyo'
