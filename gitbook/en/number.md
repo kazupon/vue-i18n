@@ -26,9 +26,12 @@ As the Above, You can define the number format with named (e.g. `currency`, etc)
 After that like the locale messages, You need to specify the `numberFormats` option of `VueI18n` constructor:
 
 ```javascript
-new Vue({
-  i18n,
+const i18n = new VueI18n({
   numberFormats
+})
+
+new Vue({
+  i18n
 }).$mount('#app')
 ```
 

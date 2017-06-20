@@ -34,9 +34,12 @@ As the Above, You can define the datetime format with named (e.g. `short`, `long
 After that like the locale messages, You need to specify the `dateTimeFormats` option of `VueI18n` constructor:
 
 ```javascript
-new Vue({
-  i18n,
+const i18n = new VueI18n({
   dateTimeFormats
+})
+
+new Vue({
+  i18n
 }).$mount('#app')
 ```
 
