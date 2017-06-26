@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Single file components · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Single file components · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -501,7 +501,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="single-file-component">Single file component</h1><p>If you are building Vue component or Vue application with using single file components, you can manage the locale messages <code>i18n</code> custom block.</p><p>The following in <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank">single file component example</a>:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+                                <h1 id="single-file-component">Single file component</h1>
+<p>If you are building Vue component or Vue application with using single file components, you can manage the locale messages <code>i18n</code> custom block.</p>
+<p>The following in <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank">single file component example</a>:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
 {
   &quot;en&quot;: {
     &quot;hello&quot;: &quot;hello world!&quot;
@@ -533,8 +536,10 @@
     }
   }
 }
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<p>You need to use <code>vue-loader</code> due to use <code>i18n</code> custom blocks, and the Webpack configration below is required:</p><pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>You need to use <code>vue-loader</code> due to use <code>i18n</code> custom blocks, and the Webpack configration below is required:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
   <span class="hljs-comment">// ...</span>
   <span class="hljs-built_in">module</span>: {
     rules: [
@@ -552,14 +557,19 @@
     ]
   },
   <span class="hljs-comment">// ...</span>
-}</code></pre>
-<p><code>i18n</code> custom blocks need to specify <code>JSON</code> format, also you can use <code>YAML</code> format by using pre-loader feature of <code>vue-loader</code>.</p><p>the <code>i18n</code> custom blocks below of <code>YAML</code> format:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+}
+</code></pre>
+<p><code>i18n</code> custom blocks need to specify <code>JSON</code> format, also you can use <code>YAML</code> format by using pre-loader feature of <code>vue-loader</code>.</p>
+<p>the <code>i18n</code> custom blocks below of <code>YAML</code> format:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
 en:
   hello: &quot;hello world!&quot;
 ja:
   hello: &quot;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&#xFF01;&quot;
-<span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span></code></pre>
-<p>Webpack conf the below:</p><pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+<span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
+</code></pre>
+<p>Webpack conf the below:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
   <span class="hljs-comment">// ...</span>
   <span class="hljs-built_in">module</span>: {
     rules: [
@@ -579,7 +589,8 @@ ja:
     ]
   },
   <span class="hljs-comment">// ...</span>
-}</code></pre>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -623,7 +634,7 @@ ja:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.14","depth":1,"next":{"title":"Hot reloading","level":"1.15","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"previous":{"title":"Component interpolation","level":"1.13","depth":1,"path":"interpolation.md","ref":"interpolation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-06-13T16:26:24.362Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.14","depth":1,"next":{"title":"Hot reloading","level":"1.15","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"previous":{"title":"Component interpolation","level":"1.13","depth":1,"path":"interpolation.md","ref":"interpolation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2017-06-26T14:46:32.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-26T15:34:56.916Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
