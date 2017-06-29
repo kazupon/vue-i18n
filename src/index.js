@@ -211,6 +211,11 @@ export default class VueI18n {
     // them with its translation
     const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
     for (const idx in matches) {
+      // ie compatible: filter custom array
+      // prototype method
+      if (!matches.hasOwnProperty(idx)) {
+        continue
+      }
       const link: string = matches[idx]
       // Remove the leading @:
       const linkPlaceholder: string = link.substr(2)
