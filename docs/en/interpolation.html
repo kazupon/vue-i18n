@@ -1,0 +1,635 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <title>Component interpolation · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="sfc.html" />
+    
+    
+    <link rel="prev" href="component.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <a target="_blank" href="https://kazupon.github.io/vue-i18n/old/">
+            
+                    
+                    Looking for 5.x Docs?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <a target="_blank" href="https://github.com/kazupon/vue-i18n/releases">
+            
+                    
+                    Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="started.html">
+            
+                <a href="started.html">
+            
+                    
+                    Getting started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="formatting.html">
+            
+                <a href="formatting.html">
+            
+                    
+                    Formatting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="pluralization.html">
+            
+                <a href="pluralization.html">
+            
+                    
+                    Pluralization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="datetime.html">
+            
+                <a href="datetime.html">
+            
+                    
+                    DateTime localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="number.html">
+            
+                <a href="number.html">
+            
+                    
+                    Number localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="messages.html">
+            
+                <a href="messages.html">
+            
+                    
+                    Locale messages syntax
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="fallback.html">
+            
+                <a href="fallback.html">
+            
+                    
+                    Fallback localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="component.html">
+            
+                <a href="component.html">
+            
+                    
+                    Component based localization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.13" data-path="interpolation.html">
+            
+                <a href="interpolation.html">
+            
+                    
+                    Component interpolation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="sfc.html">
+            
+                <a href="sfc.html">
+            
+                    
+                    Single file components
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="hot-reload.html">
+            
+                <a href="hot-reload.html">
+            
+                    
+                    Hot reloading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="migrations.html">
+            
+                <a href="migrations.html">
+            
+                    
+                    Migrations
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="migrations.html">
+            
+                <a href="migrations.html#global-config">
+            
+                    
+                    Global config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="migrations.html">
+            
+                <a href="migrations.html#global-methods">
+            
+                    
+                    Global methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="migrations.html">
+            
+                <a href="migrations.html#constructor-options">
+            
+                    
+                    Constructor options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.4" data-path="migrations.html">
+            
+                <a href="migrations.html#instance-properties">
+            
+                    
+                    Instance properties
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.5" data-path="migrations.html">
+            
+                <a href="migrations.html#features">
+            
+                    
+                    Features
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="api.html">
+            
+                <a href="api.html">
+            
+                    
+                    API references
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="api.html">
+            
+                <a href="api.html#vue-constructor-options">
+            
+                    
+                    Vue constructor options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="api.html">
+            
+                <a href="api.html#vue-static-properties">
+            
+                    
+                    Vue static properties
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="api.html">
+            
+                <a href="api.html#vue-injected-methods">
+            
+                    
+                    Vue injected methods
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="api.html">
+            
+                <a href="api.html#injected-properties">
+            
+                    
+                    Injected properties
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5" data-path="api.html">
+            
+                <a href="api.html#vuei18n-class">
+            
+                    
+                    VueI18n class
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Component interpolation</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="component-interpolation">Component interpolation</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p></blockquote><p>Sometimes, we need to localize with locale message that was included HTML tag or component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>In the above message, if you use with <code>$t</code>, probably you may try to compose the following locale messages:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
+  en: {
+    term1: <span class="hljs-string">&apos;I Accept xxx\&apos;s&apos;</span>,
+    term2: <span class="hljs-string">&apos;Terms of Service Agreement&apos;</span>
+  }
+}</code></pre>
+<p>And in the following, you may try to implement in template:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;term1&apos;) }}<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>{{ $t(&apos;term2&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>output:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+<p>This is very cumbersome, and if you configure the <code>&lt;a&gt;</code> tag in a locale message, there is a possibility XSS vulnerabilities due to localize with <code>v-html=&quot;$t(&apos;term&apos;)&quot;</code>.</p><p>You can avoid it with using <code>i18n</code> functional component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">i18n</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;term&quot;</span> <span class="hljs-attr">tag</span>=<span class="hljs-string">&quot;label&quot;</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>{{ $t(&apos;tos&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
+  en: {
+    tos: <span class="hljs-string">&apos;Term of Service&apos;</span>,
+    term: <span class="hljs-string">&apos;I accept xxx {0}.&apos;</span>
+  },
+  ja: {
+    tos: <span class="hljs-string">&apos;&#x5229;&#x7528;&#x898F;&#x7D04;&apos;</span>,
+    term: <span class="hljs-string">&apos;&#x79C1;&#x306F; xxx &#x306E;{0}&#x306B;&#x540C;&#x610F;&#x3057;&#x307E;&#x3059;&#x3002;&apos;</span>
+  }
+}
+
+<span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
+  locale: <span class="hljs-string">&apos;en&apos;</span>,
+  messages
+})
+<span class="hljs-keyword">new</span> Vue({
+  i18n,
+  data: {
+    url: <span class="hljs-string">&apos;/term&apos;</span>
+  }
+}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
+<p>the following ouput:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
+    I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>Term of Service<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>.
+  <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>About the above example, see the <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation" target="_blank">example</a></p><p>The children of <code>i18n</code> functional component is interpolated with locale message of <code>path</code> prop. In the above example, <code>&lt;a :href=&quot;url&quot; target=&quot;_blank&quot;&gt;{{ $t(&apos;tos&apos;) }}&lt;/a&gt;</code> is interplated with <code>term</code> locale message.</p><p>The component interpolations follows the <strong>list formatting</strong>. The named formatting is not support. The children of <code>i18n</code> functional component is interpolated with order of list formatting.</p>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="component.html" class="navigation navigation-prev " aria-label="Previous page: Component based localization">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="sfc.html" class="navigation navigation-next " aria-label="Next page: Single file components">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Component interpolation","level":"1.13","depth":1,"next":{"title":"Single file components","level":"1.14","depth":1,"path":"sfc.md","ref":"sfc.md","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"interpolation.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-06-30T11:23:28.013Z"},"basePath":".","book":{"language":"en"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
