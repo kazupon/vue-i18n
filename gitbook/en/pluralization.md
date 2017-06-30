@@ -15,8 +15,8 @@ const messages = {
 Template the below:
 
 ```html
+<p>{{ $tc('car', 0) }}</p>
 <p>{{ $tc('car', 1) }}</p>
-<p>{{ $tc('car', 2) }}</p>
 ```
 
 Output the below:

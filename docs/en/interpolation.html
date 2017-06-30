@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Component interpolation · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Component interpolation · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -501,22 +501,37 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="component-interpolation">Component interpolation</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p></blockquote><p>Sometimes, we need to localize with locale message that was included HTML tag or component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
-<p>In the above message, if you use with <code>$t</code>, probably you may try to compose the following locale messages:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
+                                <h1 id="component-interpolation">Component interpolation</h1>
+<blockquote>
+<p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.0+</p>
+</blockquote>
+<p>Sometimes, we need to localize with locale message that was included HTML tag or component. For example:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>In the above message, if you use with <code>$t</code>, probably you may try to compose the following locale messages:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
   en: {
     term1: <span class="hljs-string">&apos;I Accept xxx\&apos;s&apos;</span>,
     term2: <span class="hljs-string">&apos;Terms of Service Agreement&apos;</span>
   }
-}</code></pre>
-<p>And in the following, you may try to implement in template:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;term1&apos;) }}<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>{{ $t(&apos;term2&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
-<p>output:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
-<p>This is very cumbersome, and if you configure the <code>&lt;a&gt;</code> tag in a locale message, there is a possibility XSS vulnerabilities due to localize with <code>v-html=&quot;$t(&apos;term&apos;)&quot;</code>.</p><p>You can avoid it with using <code>i18n</code> functional component. For example:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+}
+</code></pre>
+<p>And in the following, you may try to implement in template:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&apos;term1&apos;) }}<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>{{ $t(&apos;term2&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>output:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span>&gt;</span>Terms of Service Agreement<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>This is very cumbersome, and if you configure the <code>&lt;a&gt;</code> tag in a locale message, there is a possibility XSS vulnerabilities due to localize with <code>v-html=&quot;$t(&apos;term&apos;)&quot;</code>.</p>
+<p>You can avoid it with using <code>i18n</code> functional component. For example:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- ... --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">i18n</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;term&quot;</span> <span class="hljs-attr">tag</span>=<span class="hljs-string">&quot;label&quot;</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>{{ $t(&apos;tos&apos;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- ... --&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
 <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> messages = {
   en: {
     tos: <span class="hljs-string">&apos;Term of Service&apos;</span>,
@@ -537,15 +552,21 @@
   data: {
     url: <span class="hljs-string">&apos;/term&apos;</span>
   }
-}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
-<p>the following ouput:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
+</code></pre>
+<p>the following ouput:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- ... --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tos&quot;</span>&gt;</span>
     I accept xxx <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/term&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>Term of Service<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>.
   <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- ... --&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>About the above example, see the <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation" target="_blank">example</a></p><p>The children of <code>i18n</code> functional component is interpolated with locale message of <code>path</code> prop. In the above example, <code>&lt;a :href=&quot;url&quot; target=&quot;_blank&quot;&gt;{{ $t(&apos;tos&apos;) }}&lt;/a&gt;</code> is interplated with <code>term</code> locale message.</p><p>The component interpolations follows the <strong>list formatting</strong>. The named formatting is not support. The children of <code>i18n</code> functional component is interpolated with order of list formatting.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>About the above example, see the <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation" target="_blank">example</a></p>
+<p>The children of <code>i18n</code> functional component is interpolated with locale message of <code>path</code> prop. In the above example, <code>&lt;a :href=&quot;url&quot; target=&quot;_blank&quot;&gt;{{ $t(&apos;tos&apos;) }}&lt;/a&gt;</code> is interplated with <code>term</code> locale message.</p>
+<p>The component interpolations follows the <strong>list formatting</strong>. The named formatting is not support. The children of <code>i18n</code> functional component is interpolated with order of list formatting.</p>
+
                                 
                                 </section>
                             
@@ -588,7 +609,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Component interpolation","level":"1.13","depth":1,"next":{"title":"Single file components","level":"1.14","depth":1,"path":"sfc.md","ref":"sfc.md","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"interpolation.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-06-13T16:26:24.362Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Component interpolation","level":"1.13","depth":1,"next":{"title":"Single file components","level":"1.14","depth":1,"path":"sfc.md","ref":"sfc.md","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"interpolation.md","mtime":"2017-06-26T14:46:32.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-26T15:34:56.916Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
