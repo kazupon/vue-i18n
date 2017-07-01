@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.3 
+ * vue-i18n v7.0.4 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -88,6 +88,15 @@ function looseClone (obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
+function remove (arr, item) {
+  if (arr.length) {
+    var index = arr.indexOf(item);
+    if (index > -1) {
+      return arr.splice(index, 1)
+    }
+  }
+}
+
 var canUseDateTimeFormat =
   typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined';
 
@@ -139,8 +148,6 @@ function extend (Vue) {
 
 var mixin = {
   beforeCreate: function beforeCreate () {
-    var this$1 = this;
-
     var options = this.$options;
     options.i18n = options.i18n || (options.__i18n ? {} : null);
 
@@ -160,7 +167,9 @@ var mixin = {
           }
         }
         this._i18n = options.i18n;
-        this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
+        this._i18nWatcher = this._i18n.watchI18nData();
+        this._i18n.subscribeDataChanging(this);
+        this._subscribing = true;
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
@@ -181,10 +190,12 @@ var mixin = {
         }
 
         this._i18n = new VueI18n(options.i18n);
-        this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
+        this._i18nWatcher = this._i18n.watchI18nData();
+        this._i18n.subscribeDataChanging(this);
+        this._subscribing = true;
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
-          this._localeWatcher = this.$i18n.watchLocale(function () { return this$1.$forceUpdate(); });
+          this._localeWatcher = this.$i18n.watchLocale();
         }
       } else {
         if (process.env.NODE_ENV !== 'production') {
@@ -194,12 +205,18 @@ var mixin = {
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this._i18n = this.$root.$i18n;
-      this._i18nWatcher = this._i18n.watchI18nData(function () { return this$1.$forceUpdate(); });
+      this._i18n.subscribeDataChanging(this);
+      this._subscribing = true;
     }
   },
 
   beforeDestroy: function beforeDestroy () {
     if (!this._i18n) { return }
+
+    if (this._subscribing) {
+      this._i18n.unsubscribeDataChanging(this);
+      delete this._subscribing;
+    }
 
     if (this._i18nWatcher) {
       this._i18nWatcher();
@@ -737,6 +754,7 @@ var VueI18n = function VueI18n (options) {
   this._dateTimeFormatters = {};
   this._numberFormatters = {};
   this._path = new I18nPath();
+  this._dataListeners = [];
 
   this._exist = function (message, key) {
     if (!message || !key) { return false }
@@ -761,19 +779,33 @@ VueI18n.prototype._initVM = function _initVM (data) {
   Vue.config.silent = silent;
 };
 
-VueI18n.prototype.watchI18nData = function watchI18nData (fn) {
+VueI18n.prototype.subscribeDataChanging = function subscribeDataChanging (vm) {
+  this._dataListeners.push(vm);
+};
+
+VueI18n.prototype.unsubscribeDataChanging = function unsubscribeDataChanging (vm) {
+  remove(this._dataListeners, vm);
+};
+
+VueI18n.prototype.watchI18nData = function watchI18nData () {
+  var self = this;
   return this._vm.$watch('$data', function () {
-    fn && fn();
+    var i = self._dataListeners.length;
+    while (i--) {
+      Vue.nextTick(function () {
+        self._dataListeners[i] && self._dataListeners[i].$forceUpdate();
+      });
+    }
   }, { deep: true })
 };
 
-VueI18n.prototype.watchLocale = function watchLocale (fn) {
+VueI18n.prototype.watchLocale = function watchLocale () {
   /* istanbul ignore if */
   if (!this._sync || !this._root) { return null }
   var target = this._vm;
   return this._root.vm.$watch('locale', function (val) {
     target.$set(target, 'locale', val);
-    fn && fn();
+    target.$forceUpdate();
   }, { immediate: true })
 };
 
@@ -889,6 +921,11 @@ VueI18n.prototype._link = function _link (
   // them with its translation
   var matches = ret.match(/(@:[\w\-_|.]+)/g);
   for (var idx in matches) {
+    // ie compatible: filter custom array
+    // prototype method
+    if (!matches.hasOwnProperty(idx)) {
+      continue
+    }
     var link = matches[idx];
     // Remove the leading @:
     var linkPlaceholder = link.substr(2);
@@ -958,7 +995,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
   if (!key) { return '' }
 
   var parsedArgs = parseArgs.apply(void 0, values);
-  var locale = parsedArgs.locale || _locale;
+    var locale = parsedArgs.locale || _locale;
 
   var ret = this._translate(
     messages, locale, this.fallbackLocale, key,
@@ -1007,7 +1044,7 @@ VueI18n.prototype.i = function i (key) {
     var values = [], len = arguments.length - 1;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
 
-    /* istanbul ignore if */
+  /* istanbul ignore if */
   if (!key) { return '' }
 
   var locale = this.locale;
@@ -1020,9 +1057,9 @@ VueI18n.prototype.i = function i (key) {
   var params = [];
   for (var i = index; i < values.length; i++) {
     params.push(values[i]);
-  }
+    }
 
-  return (ref = this)._i.apply(ref, [ key, locale, this._getMessages(), null ].concat( params ))
+    return (ref = this)._i.apply(ref, [ key, locale, this._getMessages(), null ].concat( params ))
     var ref;
 };
 
@@ -1050,9 +1087,9 @@ VueI18n.prototype.tc = function tc (key, choice) {
 
   return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
     var ref;
-  };
+};
 
-  VueI18n.prototype._te = function _te (key, locale, messages) {
+VueI18n.prototype._te = function _te (key, locale, messages) {
     var args = [], len = arguments.length - 3;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 3 ];
 
@@ -1135,7 +1172,7 @@ VueI18n.prototype._d = function _d (value, locale, key) {
     this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key);
   if (this._isFallbackRoot(ret)) {
     if (process.env.NODE_ENV !== 'production') {
-        warn(("Fall back to datetime localization of root: key '" + key + "' ."));
+      warn(("Fall back to datetime localization of root: key '" + key + "' ."));
     }
     /* istanbul ignore if */
     if (!this._root) { throw Error('unexpected error') }
@@ -1158,13 +1195,13 @@ VueI18n.prototype.d = function d (value) {
     } else if (isObject(args[0])) {
       if (args[0].locale) {
         locale = args[0].locale;
-      }
-      if (args[0].key) {
+        }
+        if (args[0].key) {
         key = args[0].key;
       }
     }
   } else if (args.length === 2) {
-    if (typeof args[0] === 'string') {
+      if (typeof args[0] === 'string') {
       key = args[0];
     }
     if (typeof args[1] === 'string') {
@@ -1241,10 +1278,10 @@ VueI18n.prototype._n = function _n (value, locale, key) {
     return this._root.n(value, key, locale)
   } else {
     return ret || ''
-    }
-  };
+  }
+};
 
-  VueI18n.prototype.n = function n (value) {
+VueI18n.prototype.n = function n (value) {
     var args = [], len = arguments.length - 1;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
@@ -1252,7 +1289,7 @@ VueI18n.prototype._n = function _n (value, locale, key) {
   var key = null;
 
   if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+    if (typeof args[0] === 'string') {
       key = args[0];
     } else if (isObject(args[0])) {
       if (args[0].locale) {
@@ -1268,10 +1305,10 @@ VueI18n.prototype._n = function _n (value, locale, key) {
     }
     if (typeof args[1] === 'string') {
       locale = args[1];
+      }
     }
-  }
 
-  return this._n(value, locale, key)
+    return this._n(value, locale, key)
 };
 
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
@@ -1281,7 +1318,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.3';
+VueI18n.version = '7.0.4';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
