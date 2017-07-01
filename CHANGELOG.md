@@ -1,3 +1,18 @@
+<a name="7.0.4"></a>
+## [7.0.4](https://github.com/kazupon/vue-i18n/compare/v7.0.3...v7.0.4) (2017-07-01)
+
+
+### :bug: Bug Fixes
+
+* **link:** fix ie traverse custom Array.prototype method ([#188](https://github.com/kazupon/vue-i18n/issues/188)) by [@632781460](https://github.com/632781460) ([d3b308b](https://github.com/kazupon/vue-i18n/commit/d3b308b)), closes [#188](https://github.com/kazupon/vue-i18n/issues/188)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* fix blocking at beforeDestroy ([570b215](https://github.com/kazupon/vue-i18n/commit/570b215)), closes [#187](https://github.com/kazupon/vue-i18n/issues/187)
+
+
+
 <a name="7.0.3"></a>
 ## [7.0.3](https://github.com/kazupon/vue-i18n/compare/v7.0.2...v7.0.3) (2017-06-13)
 
