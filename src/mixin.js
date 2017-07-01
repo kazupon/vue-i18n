@@ -24,7 +24,9 @@ export default {
           }
         }
         this._i18n = options.i18n
-        this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
+        this._i18nWatcher = this._i18n.watchI18nData()
+        this._i18n.subscribeDataChanging(this)
+        this._subscribing = true
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
@@ -45,10 +47,12 @@ export default {
         }
 
         this._i18n = new VueI18n(options.i18n)
-        this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
+        this._i18nWatcher = this._i18n.watchI18nData()
+        this._i18n.subscribeDataChanging(this)
+        this._subscribing = true
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
-          this._localeWatcher = this.$i18n.watchLocale(() => this.$forceUpdate())
+          this._localeWatcher = this.$i18n.watchLocale()
         }
       } else {
         if (process.env.NODE_ENV !== 'production') {
@@ -58,12 +62,18 @@ export default {
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this._i18n = this.$root.$i18n
-      this._i18nWatcher = this._i18n.watchI18nData(() => this.$forceUpdate())
+      this._i18n.subscribeDataChanging(this)
+      this._subscribing = true
     }
   },
 
   beforeDestroy (): void {
     if (!this._i18n) { return }
+
+    if (this._subscribing) {
+      this._i18n.unsubscribeDataChanging(this)
+      delete this._subscribing
+    }
 
     if (this._i18nWatcher) {
       this._i18nWatcher()

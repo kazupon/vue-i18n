@@ -9,6 +9,7 @@ import {
   isPlainObject,
   isObject,
   looseClone,
+  remove,
   canUseDateTimeFormat,
   canUseNumberFormat
 } from './util'
@@ -35,6 +36,7 @@ export default class VueI18n {
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
+  _dataListeners: Array<any>
 
   constructor (options: I18nOptions = {}) {
     const locale: Locale = options.locale || 'en-US'
@@ -57,6 +59,7 @@ export default class VueI18n {
     this._dateTimeFormatters = {}
     this._numberFormatters = {}
     this._path = new I18nPath()
+    this._dataListeners = []
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -85,19 +88,33 @@ export default class VueI18n {
     Vue.config.silent = silent
   }
 
-  watchI18nData (fn: Function): Function {
+  subscribeDataChanging (vm: any): void {
+    this._dataListeners.push(vm)
+  }
+
+  unsubscribeDataChanging (vm: any): void {
+    remove(this._dataListeners, vm)
+  }
+
+  watchI18nData (): Function {
+    const self = this
     return this._vm.$watch('$data', () => {
-      fn && fn()
+      let i = self._dataListeners.length
+      while (i--) {
+        Vue.nextTick(() => {
+          self._dataListeners[i] && self._dataListeners[i].$forceUpdate()
+        })
+      }
     }, { deep: true })
   }
 
-  watchLocale (fn: Function): ?Function {
+  watchLocale (): ?Function {
     /* istanbul ignore if */
     if (!this._sync || !this._root) { return null }
     const target: any = this._vm
     return this._root.vm.$watch('locale', (val) => {
       target.$set(target, 'locale', val)
-      fn && fn()
+      target.$forceUpdate()
     }, { immediate: true })
   }
 
