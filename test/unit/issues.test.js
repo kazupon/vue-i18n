@@ -1,4 +1,5 @@
 import messages from './fixture/index'
+import { parse } from '../../src/format'
 
 describe('issues', () => {
   let vm, i18n
@@ -239,6 +240,17 @@ describe('issues', () => {
         assert.equal(vm.$refs.el3.textContent, '[EN] charlie injected value')
         assert.equal(vm.$refs.el4.textContent, '[XX] delta injected value')
       }).then(done)
+    })
+  })
+
+  describe('#191', () => {
+    it('should be parsed', () => {
+      const tokens = parse('{deposit}% PREPAYMENT')
+      assert(tokens.length === 2)
+      assert.equal(tokens[0].type, 'named')
+      assert.equal(tokens[0].value, 'deposit')
+      assert.equal(tokens[1].type, 'text')
+      assert.equal(tokens[1].value, '% PREPAYMENT')
     })
   })
 })
