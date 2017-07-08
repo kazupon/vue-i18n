@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.4 
+ * vue-i18n v7.0.5 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -355,6 +355,9 @@ function parse (format) {
       tokens.push({ value: sub, type: type });
     } else if (char === '%') {
       // when found rails i18n syntax, skip text capture
+      if (format[(position)] !== '{') {
+        text += char;
+      }
     } else {
       text += char;
     }
@@ -1320,7 +1323,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.4';
+VueI18n.version = '7.0.5';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
