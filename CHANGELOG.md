@@ -1,3 +1,13 @@
+<a name="7.0.5"></a>
+## [7.0.5](https://github.com/kazupon/vue-i18n/compare/v7.0.4...v7.0.5) (2017-07-08)
+
+
+### :bug: Bug Fixes
+
+* **format:** fix cannot collectly parse percent ([fc71eda](https://github.com/kazupon/vue-i18n/commit/fc71eda)), closes [#191](https://github.com/kazupon/vue-i18n/issues/191)
+
+
+
 <a name="7.0.4"></a>
 ## [7.0.4](https://github.com/kazupon/vue-i18n/compare/v7.0.3...v7.0.4) (2017-07-01)
 
