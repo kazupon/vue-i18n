@@ -1,3 +1,13 @@
+<a name="7.1.0"></a>
+# [7.1.0](https://github.com/kazupon/vue-i18n/compare/v7.0.5...v7.1.0) (2017-07-30)
+
+
+### :zap: Improvements
+
+* **custom-block:** support multiple custom blocks ([ab955a5](https://github.com/kazupon/vue-i18n/commit/ab955a5)), closes [#189](https://github.com/kazupon/vue-i18n/issues/189)
+
+
+
 <a name="7.0.5"></a>
 ## [7.0.5](https://github.com/kazupon/vue-i18n/compare/v7.0.4...v7.0.5) (2017-07-08)
 
