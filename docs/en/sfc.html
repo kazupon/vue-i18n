@@ -501,7 +501,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="single-file-component">Single file component</h1><p>If you are building Vue component or Vue application with using single file components, you can manage the locale messages <code>i18n</code> custom block.</p><p>The following in <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank">single file component example</a>:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+                                <h1 id="single-file-components">Single file components</h1><h2 id="basic-usage">Basic Usage</h2><p>If you are building Vue component or Vue application with using single file components, you can manage the locale messages <code>i18n</code> custom block.</p><p>The following in <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank">single file components example</a>:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
 {
   &quot;en&quot;: {
     &quot;hello&quot;: &quot;hello world!&quot;
@@ -553,7 +553,7 @@
   },
   <span class="hljs-comment">// ...</span>
 }</code></pre>
-<p><code>i18n</code> custom blocks need to specify <code>JSON</code> format, also you can use <code>YAML</code> format by using pre-loader feature of <code>vue-loader</code>.</p><p>the <code>i18n</code> custom blocks below of <code>YAML</code> format:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+<h2 id="yaml-loading">YAML loading</h2><p><code>i18n</code> custom blocks need to specify <code>JSON</code> format, also you can use <code>YAML</code> format by using pre-loader feature of <code>vue-loader</code>.</p><p>the <code>i18n</code> custom blocks below of <code>YAML</code> format:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
 en:
   hello: &quot;hello world!&quot;
 ja:
@@ -580,7 +580,18 @@ ja:
   },
   <span class="hljs-comment">// ...</span>
 }</code></pre>
-
+<h2 id="multiple-custom-blocks">Multiple custom blocks</h2><p>you can be used the locale messages with multiple <code>i18n</code> custom block.</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">i18n</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&apos;./common/locales.json&apos;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">i18n</span>&gt;</span>
+{
+  &quot;en&quot;: {
+    &quot;hello&quot;: &quot;hello world!&quot;
+  },
+  &quot;ja&quot;: {
+    &quot;hello&quot;: &quot;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&#xFF01;&quot;
+  }
+}
+<span class="hljs-tag">&lt;/<span class="hljs-name">i18n</span>&gt;</span></code></pre>
+<p>In the above, first custom block load the common locale message with <code>src</code> attribute, second custom block load the locale messge that defined only at single file component. These locale messages will be merged as locale message of component.</p><p>In this way, multiple custom blocks useful when want to be used as module.</p>
                                 
                                 </section>
                             
@@ -623,7 +634,7 @@ ja:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.14","depth":1,"next":{"title":"Hot reloading","level":"1.15","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"previous":{"title":"Component interpolation","level":"1.13","depth":1,"path":"interpolation.md","ref":"interpolation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-07-08T17:24:46.997Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.14","depth":1,"next":{"title":"Hot reloading","level":"1.15","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"previous":{"title":"Component interpolation","level":"1.13","depth":1,"path":"interpolation.md","ref":"interpolation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2017-07-30T17:28:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-07-30T17:28:57.736Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
