@@ -1,4 +1,6 @@
 machine:
+  timezone:
+    Asia/Tokyo
   node:
     version: 7
 dependencies:
