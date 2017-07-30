@@ -1,8 +1,10 @@
-# Single file component
+# Single file components
+
+## Basic Usage
 
 If you are building Vue component or Vue application with using single file components, you can manage the locale messages `i18n` custom block.
 
-The following in [single file component example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
+The following in [single file components example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
 ```html
 <i18n>
@@ -64,6 +66,8 @@ module.exports = {
 }
 ```
 
+## YAML loading
+
 `i18n` custom blocks need to specify `JSON` format, also you can use `YAML` format by using pre-loader feature of `vue-loader`.
 
 the `i18n` custom blocks below of `YAML` format:
@@ -102,3 +106,25 @@ module.exports = {
   // ...
 }
 ```
+
+## Multiple custom blocks
+
+you can be used the locale messages with multiple `i18n` custom block.
+
+```html
+<i18n src='./common/locales.json'></i18n>
+<i18n>
+{
+  "en": {
+    "hello": "hello world!"
+  },
+  "ja": {
+    "hello": "こんにちは、世界！"
+  }
+}
+</i18n>
+```
+
+In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale messge that defined only at single file component. These locale messages will be merged as locale message of component.
+
+In this way, multiple custom blocks useful when want to be used as module.
