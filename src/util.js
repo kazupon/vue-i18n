@@ -89,6 +89,31 @@ export function remove (arr: Array<any>, item: any): Array<any> | void {
   }
 }
 
+const hasOwnProperty = Object.prototype.hasOwnProperty
+export function hasOwn (obj: Object | Array<*>, key: string): boolean {
+  return hasOwnProperty.call(obj, key)
+}
+
+export function merge (target: Object): Object {
+  const output = Object(target)
+  for (let i = 1; i < arguments.length; i++) {
+    const source = arguments[i]
+    if (source !== undefined && source !== null) {
+      let key
+      for (key in source) {
+        if (hasOwn(source, key)) {
+          if (isObject(source[key])) {
+            output[key] = merge(output[key], source[key])
+          } else {
+            output[key] = source[key]
+          }
+        }
+      }
+    }
+  }
+  return output
+}
+
 export const canUseDateTimeFormat: boolean =
   typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined'
 

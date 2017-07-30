@@ -74,9 +74,9 @@ describe('issues', () => {
   describe('#169', () => {
     it('should be translated', done => {
       const Component = Vue.extend({
-        __i18n: JSON.stringify({
+        __i18n: [JSON.stringify({
           en: { custom: 'custom block!' }
-        }),
+        })],
         render (h) {
           return h('p', { ref: 'custom' }, [this.$t('custom')])
         }
@@ -126,9 +126,9 @@ describe('issues', () => {
         }),
         components: {
           comp: {
-            __i18n: JSON.stringify({
+            __i18n: [JSON.stringify({
               en: { title: '@:company-name - yeee hawwww!!!' }
-            }),
+            })],
             render (h) {
               return h('p', { ref: 'title' }, [this.$t('title')])
             }
@@ -150,9 +150,9 @@ describe('issues', () => {
   describe('#173', () => {
     it('should be translated', done => {
       const Component = Vue.extend({
-        __i18n: JSON.stringify({
+        __i18n: [JSON.stringify({
           en: { custom: 'custom block!' }
-        }),
+        })],
         render (h) {
           return h('p', { ref: 'custom' }, [this.$t('custom')])
         }

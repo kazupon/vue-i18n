@@ -17,10 +17,10 @@ describe('custom blocks', () => {
         i18n,
         components: {
           child: {
-            __i18n: JSON.stringify({
+            __i18n: [JSON.stringify({
               en: { who: 'child' },
               ja: { who: '子' }
-            }),
+            })],
             render (h) {
               return h('div', {}, [
                 h('p', { ref: 'who' }, [this.$t('who')])

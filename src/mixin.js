@@ -1,7 +1,7 @@
 /* @flow */
 
 import VueI18n from './index'
-import { isPlainObject, warn } from './util'
+import { isPlainObject, warn, merge } from './util'
 
 export default {
   beforeCreate (): void {
@@ -13,7 +13,10 @@ export default {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            const localeMessages = JSON.parse(options.__i18n)
+            let localeMessages = {}
+            options.__i18n.forEach(resource => {
+              localeMessages = merge(localeMessages, JSON.parse(resource))
+            })
             Object.keys(localeMessages).forEach((locale: Locale) => {
               options.i18n.mergeLocaleMessage(locale, localeMessages[locale])
             })
@@ -38,7 +41,11 @@ export default {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            options.i18n.messages = JSON.parse(options.__i18n)
+            let localeMessages = {}
+            options.__i18n.forEach(resource => {
+              localeMessages = merge(localeMessages, JSON.parse(resource))
+            })
+            options.i18n.messages = localeMessages
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
               warn(`Cannot parse locale messages via custom blocks.`, e)
