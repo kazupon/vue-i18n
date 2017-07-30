@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.0.5 
+ * vue-i18n v7.1.0 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -99,6 +99,33 @@ function remove (arr, item) {
   }
 }
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwn (obj, key) {
+  return hasOwnProperty.call(obj, key)
+}
+
+function merge (target) {
+  var arguments$1 = arguments;
+
+  var output = Object(target);
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments$1[i];
+    if (source !== undefined && source !== null) {
+      var key = (void 0);
+      for (key in source) {
+        if (hasOwn(source, key)) {
+          if (isObject(source[key])) {
+            output[key] = merge(output[key], source[key]);
+          } else {
+            output[key] = source[key];
+          }
+        }
+      }
+    }
+  }
+  return output
+}
+
 var canUseDateTimeFormat =
   typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined';
 
@@ -158,7 +185,10 @@ var mixin = {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            var localeMessages = JSON.parse(options.__i18n);
+            var localeMessages = {};
+            options.__i18n.forEach(function (resource) {
+              localeMessages = merge(localeMessages, JSON.parse(resource));
+            });
             Object.keys(localeMessages).forEach(function (locale) {
               options.i18n.mergeLocaleMessage(locale, localeMessages[locale]);
             });
@@ -183,7 +213,11 @@ var mixin = {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            options.i18n.messages = JSON.parse(options.__i18n);
+            var localeMessages$1 = {};
+            options.__i18n.forEach(function (resource) {
+              localeMessages$1 = merge(localeMessages$1, JSON.parse(resource));
+            });
+            options.i18n.messages = localeMessages$1;
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
               warn("Cannot parse locale messages via custom blocks.", e);
@@ -1323,7 +1357,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.0.5';
+VueI18n.version = '7.1.0';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
