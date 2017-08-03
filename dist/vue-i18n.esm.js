@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.1.0 
+ * vue-i18n v7.1.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -239,6 +239,11 @@ var mixin = {
     } else if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
       // root i18n
       this._i18n = this.$root.$i18n;
+      this._i18n.subscribeDataChanging(this);
+      this._subscribing = true;
+    } else if (options.parent && options.parent.$i18n && options.parent.$i18n instanceof VueI18n) {
+      // parent i18n
+      this._i18n = options.parent.$i18n;
       this._i18n.subscribeDataChanging(this);
       this._subscribing = true;
     }
@@ -1355,7 +1360,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.1.0';
+VueI18n.version = '7.1.1';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
