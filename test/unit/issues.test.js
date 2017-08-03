@@ -253,4 +253,36 @@ describe('issues', () => {
       assert.equal(tokens[1].value, '% PREPAYMENT')
     })
   })
+
+  describe('#203', () => {
+    it('should be translated', done => {
+      const App = {
+        render (h) {
+          return h('p', { ref: 'app' }, [this.$t('hello')])
+        }
+      }
+      vm = new Vue({
+        render (h) {
+          return h({
+            components: { App },
+            render (h) { return h('app') },
+            i18n: new VueI18n({
+              locale: 'en',
+              messages: {
+                en: {
+                  'hello': 'hello 203'
+                },
+                ja: {
+                  'hello': 'こんにちは 203'
+                }
+              }
+            })
+          })
+        }
+      }).$mount()
+      nextTick(() => {
+        assert.equal(vm.$el.innerHTML, 'hello 203')
+      }).then(done)
+    })
+  })
 })

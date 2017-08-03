@@ -71,6 +71,11 @@ export default {
       this._i18n = this.$root.$i18n
       this._i18n.subscribeDataChanging(this)
       this._subscribing = true
+    } else if (options.parent && options.parent.$i18n && options.parent.$i18n instanceof VueI18n) {
+      // parent i18n
+      this._i18n = options.parent.$i18n
+      this._i18n.subscribeDataChanging(this)
+      this._subscribing = true
     }
   },
 
