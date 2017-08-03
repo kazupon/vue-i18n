@@ -1,3 +1,13 @@
+<a name="7.1.1"></a>
+## [7.1.1](https://github.com/kazupon/vue-i18n/compare/v7.1.0...v7.1.1) (2017-08-03)
+
+
+### :bug: Bug Fixes
+
+* **mixin:** fix cannot setup VueI18n instance ([13585a4](https://github.com/kazupon/vue-i18n/commit/13585a4)), closes [#203](https://github.com/kazupon/vue-i18n/issues/203)
+
+
+
 <a name="7.1.0"></a>
 # [7.1.0](https://github.com/kazupon/vue-i18n/compare/v7.0.5...v7.1.0) (2017-07-30)
 
