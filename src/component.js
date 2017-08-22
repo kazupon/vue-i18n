@@ -33,7 +33,7 @@ export default {
     const params: Array<any> = []
     locale && params.push(locale)
     children.forEach(child => {
-      if (child.tag) {
+      if (child.tag || child.text.trim()) {
         params.push(child)
       }
     })
