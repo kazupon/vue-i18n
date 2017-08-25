@@ -1,3 +1,13 @@
+<a name="7.1.2"></a>
+## [7.1.2](https://github.com/kazupon/vue-i18n/compare/v7.1.1...v7.1.2) (2017-08-25)
+
+
+### :zap: Improvements
+
+* **interpolation:** skip non-element VNode in interpolation ([#211](https://github.com/kazupon/vue-i18n/issues/211)) by [@myst729](https://github.com/myst729) ([6be1756](https://github.com/kazupon/vue-i18n/commit/6be1756))
+
+
+
 <a name="7.1.1"></a>
 ## [7.1.1](https://github.com/kazupon/vue-i18n/compare/v7.1.0...v7.1.1) (2017-08-03)
 
