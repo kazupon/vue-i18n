@@ -32,7 +32,11 @@ export default {
 
     const params: Array<any> = []
     locale && params.push(locale)
-    children.forEach(child => params.push(child))
+    children.forEach(child => {
+      if (child.tag || child.text.trim()) {
+        params.push(child)
+      }
+    })
 
     return h(props.tag, data, i18n.i(path, ...params))
   }
