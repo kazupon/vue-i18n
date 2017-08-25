@@ -12,27 +12,6 @@
 - **See also:** [`VueI18n` class constructor options](#constructor-options)
 
 
-## Vue static properties
-
-### version
-
-- **Type:** `string`
-
-  vue-i18n version.
-
-### availabilities
-
-> :new: 7.0+
-
-- **Type:** `IntlAvailability`
-
-  Whether the following internationalization features are available:
-
-- `{boolean} dateTimeFormat`: locale sensitive datetime formatting
-- `{boolean} numberFormat`: locale sensitive number formatting
-
-  The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
-
 ## Vue injected methods
 
 ### $t
@@ -114,6 +93,27 @@
 ## `VueI18n` class
 
 `Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+
+### Static properties
+
+#### version
+
+- **Type:** `string`
+
+  vue-i18n version.
+
+#### availabilities
+
+> :new: 7.0+
+
+- **Type:** `IntlAvailability`
+
+  Whether the following internationalization features are available:
+
+- `{boolean} dateTimeFormat`: locale sensitive datetime formatting
+- `{boolean} numberFormat`: locale sensitive number formatting
+
+  The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ### Constructor Options
 
