@@ -3,9 +3,9 @@ import Component from '../../src/component'
 const messages = {
   en: {
     text: 'one: {0}',
-    premitive: 'one: {0}, two: {1}',
+    primitive: 'one: {0}, two: {1}',
     component: 'element: {0}, component: {1}',
-    link: '@:premitive',
+    link: '@:primitive',
     term: 'I accept xxx {0}.',
     tos: 'Term of service',
     fallback: 'fallback from {0}'
@@ -60,13 +60,13 @@ describe('component interpolation', () => {
       })
     })
 
-    describe('premitive nodes', () => {
+    describe('primitive nodes', () => {
       it('should be interpolated', done => {
         const el = document.createElement('div')
         const vm = new Vue({
           i18n,
           render (h) {
-            return h('i18n', { props: { path: 'premitive' } }, [
+            return h('i18n', { props: { path: 'primitive' } }, [
               h('p', ['1']),
               h('p', ['2'])
             ])
