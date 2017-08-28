@@ -1,3 +1,13 @@
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/kazupon/vue-i18n/compare/v7.1.2...v7.2.0) (2017-08-28)
+
+
+### :star: New Features
+
+* **interpolation:** list formatting refactor and places/place feature ([#218](https://github.com/kazupon/vue-i18n/issues/218)) by [@myst729](https://github.com/myst729) ([0f0f3ff](https://github.com/kazupon/vue-i18n/commit/0f0f3ff))
+
+
+
 <a name="7.1.2"></a>
 ## [7.1.2](https://github.com/kazupon/vue-i18n/compare/v7.1.1...v7.1.2) (2017-08-25)
 
