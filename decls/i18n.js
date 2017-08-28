@@ -90,7 +90,7 @@ declare interface I18n {
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
   t (key: Path, ...values: any): TranslateResult,
-  i (key: Path, ...values: any): TranslateResult,
+  i (key: Path, locale: Locale, values: Object): TranslateResult,
   tc (key: Path, choice?: number, ...values: any): TranslateResult,
   te (key: Path, locale?: Locale): boolean,
   getDateTimeFormat (locale: Locale): DateTimeFormat,
