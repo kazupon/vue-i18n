@@ -1,9 +1,10 @@
 # API references
 
+## Extension of Vue
 
-## Vue constructor options
+### Vue constructor options
 
-### i18n
+#### i18n
 
 - **Type:** `I18nOptions`
 
@@ -12,9 +13,9 @@
 - **See also:** [`VueI18n` class constructor options](#constructor-options)
 
 
-## Vue injected methods
+### Vue injected methods
 
-### $t
+#### $t
 
 - **Arguments:**
   - `{Path} key`: required
@@ -25,7 +26,7 @@
 
   Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
 
-### $tc
+#### $tc
 
 - **Arguments:**
   - `{Path} key`: required
@@ -36,7 +37,7 @@
 
   Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
-### $te
+#### $te
 
 - **Arguments:**
   - `{Path} key`: required
@@ -46,7 +47,7 @@
 
   Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
-### $d
+#### $d
 
 > :new: 7.0+
 
@@ -61,7 +62,7 @@
 
   If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
-### $n
+#### $n
 
 > :new: 7.0+
 
@@ -77,9 +78,9 @@
   If the number format of `key` not exist in `numberFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
 
-## Injected properties
+### Injected properties
 
-### $i18n
+#### $i18n
 
 - **Type:** `I18n`
 
@@ -115,7 +116,7 @@
 
   The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
-### Constructor Options
+### Constructor options
 
 You can specify the below some options of `I18nOptions` constructor options of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
