@@ -110,17 +110,27 @@ describe('compile', () => {
     })
   })
 
+  describe('list token with named value', () => {
+    it('should be compiled', () => {
+      const tokens = parse('name: {0}, age: {1}') // list tokens
+      const compiled = compile(tokens, { '0': 'kazupon', '1': '0x20' }) // named values
+      assert(compiled.length === 4)
+      assert.equal(compiled[0], 'name: ')
+      assert.equal(compiled[1], 'kazupon')
+      assert.equal(compiled[2], ', age: ')
+      assert.equal(compiled[3], '0x20')
+    })
+  })
+
   describe('unmatch values mode', () => {
     it('should be warned', () => {
       const spy = sinon.spy(console, 'warn')
 
-      const tokens1 = parse('name: {0}, age: {1}') // list tokens
-      compile(tokens1, { name: 'kazupon', age: '0x20' }) // named values
-      const tokens2 = parse('name: {name}, age: {age}') // named tokens
-      compile(tokens2, ['kazupon', '0x20']) // list values
+      const tokens = parse('name: {name}, age: {age}') // named tokens
+      compile(tokens, ['kazupon', '0x20']) // list values
 
       assert(spy.notCalled === false)
-      assert(spy.callCount === 4)
+      assert(spy.callCount === 2)
       spy.restore()
     })
   })

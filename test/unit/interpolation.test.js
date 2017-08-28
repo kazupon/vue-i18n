@@ -3,9 +3,10 @@ import Component from '../../src/component'
 const messages = {
   en: {
     text: 'one: {0}',
-    premitive: 'one: {0}, two: {1}',
+    primitive: 'one: {0}, two: {1}',
     component: 'element: {0}, component: {1}',
-    link: '@:premitive',
+    mixed: 'text: {x}, component: {y}',
+    link: '@:primitive',
     term: 'I accept xxx {0}.',
     tos: 'Term of service',
     fallback: 'fallback from {0}'
@@ -60,13 +61,13 @@ describe('component interpolation', () => {
       })
     })
 
-    describe('premitive nodes', () => {
+    describe('primitive nodes', () => {
       it('should be interpolated', done => {
         const el = document.createElement('div')
         const vm = new Vue({
           i18n,
           render (h) {
-            return h('i18n', { props: { path: 'premitive' } }, [
+            return h('i18n', { props: { path: 'primitive' } }, [
               h('p', ['1']),
               h('p', ['2'])
             ])
@@ -93,6 +94,99 @@ describe('component interpolation', () => {
         }).$mount(el)
         nextTick(() => {
           assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+        }).then(done)
+      })
+    })
+
+    describe('places prop', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'text', places: [1] } })
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.textContent, 'one: 1')
+        }).then(done)
+      })
+    })
+
+    describe('place prop on all children', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          components,
+          render (h) {
+            return h('i18n', { props: { path: 'component' } }, [
+              h('p', { props: { place: 0 } }, ['1']),
+              h('comp', { props: { place: 1, msg: 'foo' } })
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+        }).then(done)
+      })
+    })
+
+    describe('place prop on some children', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          components,
+          render (h) {
+            return h('i18n', { props: { path: 'component' } }, [
+              h('p', { props: { place: 1 } }, ['1']),
+              h('comp', { props: { msg: 'foo' } })
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+        }).then(done)
+      })
+    })
+
+    describe('places and place mixed', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          components,
+          render (h) {
+            return h('i18n', { props: { path: 'mixed', places: { 'x': 'foo' } } }, [
+              h('comp', { props: { msg: 'bar' }, attrs: { place: 'y' } })
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.innerHTML, 'text: foo, component: <p place="y">bar</p>')
+        }).then(done)
+      })
+    })
+
+    describe('places set, place not set on all children', () => {
+      it('should be warned', done => {
+        const spy = sinon.spy(console, 'warn')
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          components,
+          render (h) {
+            return h('i18n', { props: { path: 'mixed', places: { 'x': 'foo' } } }, [
+              h('comp', { props: { msg: 'bar' } })
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.equal(vm.$el.innerHTML, 'text: foo, component: ')
+          assert(spy.notCalled === false)
+          assert(spy.callCount === 1)
+          spy.restore()
         }).then(done)
       })
     })

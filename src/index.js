@@ -321,7 +321,7 @@ export default class VueI18n {
     return this._t(key, this.locale, this._getMessages(), null, ...values)
   }
 
-  _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
+  _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, values: Object): any {
     const ret: any =
       this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values)
     if (this._isFallbackRoot(ret)) {
@@ -329,29 +329,21 @@ export default class VueI18n {
         warn(`Fall back to interpolate the keypath '${key}' with root locale.`)
       }
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.i(key, ...values)
+      return this._root.i(key, locale, values)
     } else {
       return this._warnDefault(locale, key, ret, host)
     }
   }
 
-  i (key: Path, ...values: any): TranslateResult {
+  i (key: Path, locale: Locale, values: Object): TranslateResult {
     /* istanbul ignore if */
     if (!key) { return '' }
 
-    let locale: Locale = this.locale
-    let index: number = 0
-    if (typeof values[0] === 'string') {
-      locale = values[0]
-      index = 1
+    if (typeof locale !== 'string') {
+      locale = this.locale
     }
 
-    const params: Array<any> = []
-    for (let i = index; i < values.length; i++) {
-      params.push(values[i])
-    }
-
-    return this._i(key, locale, this._getMessages(), null, ...params)
+    return this._i(key, locale, this._getMessages(), null, values)
   }
 
   _tc (

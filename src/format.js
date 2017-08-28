@@ -86,13 +86,7 @@ export function compile (tokens: Array<Token>, values: Object | Array<any>): Arr
         compiled.push(token.value)
         break
       case 'list':
-        if (mode === 'list') {
-          compiled.push(values[parseInt(token.value, 10)])
-        } else {
-          if (process.env.NODE_ENV !== 'production') {
-            warn(`Type of token '${token.type}' and format of value '${mode}' don't match!`)
-          }
-        }
+        compiled.push(values[parseInt(token.value, 10)])
         break
       case 'named':
         if (mode === 'named') {

@@ -82,6 +82,18 @@ Output the below:
 <p>hello world</p>
 ```
 
+List formatting also accepts array-like object:
+
+```html
+<p>{{ $t('message.hello', {'0': 'hello'}) }}</p>
+```
+
+Output the below:
+
+```html
+<p>hello world</p>
+```
+
 ## Support ruby on rails i18n format
 
 Locale messages the below:
