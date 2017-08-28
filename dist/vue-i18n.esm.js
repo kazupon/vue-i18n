@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.1.2 
+ * vue-i18n v7.2.0 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -287,6 +287,9 @@ var component = {
     },
     locale: {
       type: String
+    },
+    places: {
+      type: [Array, Object]
     }
   },
   render: function render (h, ref) {
@@ -296,6 +299,11 @@ var component = {
     var parent = ref.parent;
 
     var i18n = parent.$i18n;
+
+    children = (children || []).filter(function (child) {
+      return child.tag || (child.text = child.text.trim())
+    });
+
     if (!i18n) {
       if (process.env.NODE_ENV !== 'production') {
         warn('Cannot find VueI18n instance!');
@@ -306,15 +314,42 @@ var component = {
     var path = props.path;
     var locale = props.locale;
 
-    var params = [];
-    locale && params.push(locale);
-    children.forEach(function (child) {
-      if (child.tag || child.text.trim()) {
-        params.push(child);
+    var params = {};
+    var places = props.places || {};
+
+    var hasPlaces = Array.isArray(places)
+      ? places.length > 0
+      : Object.keys(places).length > 0;
+
+    var everyPlace = children.every(function (child) {
+      if (child.data && child.data.attrs) {
+        var place = child.data.attrs.place;
+        return (typeof place !== 'undefined') && place !== ''
       }
     });
 
-    return h(props.tag, data, i18n.i.apply(i18n, [ path ].concat( params )))
+    if (hasPlaces && children.length > 0 && !everyPlace) {
+      warn('If places prop is set, all child elements must have place prop set.');
+    }
+
+    if (Array.isArray(places)) {
+      places.forEach(function (el, i) {
+        params[i] = el;
+      });
+    } else {
+      Object.keys(places).forEach(function (key) {
+        params[key] = places[key];
+      });
+    }
+
+    children.forEach(function (child, i) {
+      var key = everyPlace
+        ? ("" + (child.data.attrs.place))
+        : ("" + i);
+      params[key] = child;
+    });
+
+    return h(props.tag, data, i18n.i(path, locale, params))
   }
 };
 
@@ -427,13 +462,7 @@ function compile (tokens, values) {
         compiled.push(token.value);
         break
       case 'list':
-        if (mode === 'list') {
-          compiled.push(values[parseInt(token.value, 10)]);
-        } else {
-          if (process.env.NODE_ENV !== 'production') {
-            warn(("Type of token '" + (token.type) + "' and format of value '" + mode + "' don't match!"));
-          }
-        }
+        compiled.push(values[parseInt(token.value, 10)]);
         break
       case 'named':
         if (mode === 'named') {
@@ -1068,10 +1097,7 @@ VueI18n.prototype.t = function t (key) {
     var ref;
 };
 
-VueI18n.prototype._i = function _i (key, locale, messages, host) {
-    var values = [], len = arguments.length - 4;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 4 ];
-
+VueI18n.prototype._i = function _i (key, locale, messages, host, values) {
   var ret =
     this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values);
   if (this._isFallbackRoot(ret)) {
@@ -1079,47 +1105,34 @@ VueI18n.prototype._i = function _i (key, locale, messages, host) {
       warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
-    return (ref = this._root).i.apply(ref, [ key ].concat( values ))
+    return this._root.i(key, locale, values)
   } else {
     return this._warnDefault(locale, key, ret, host)
   }
-    var ref;
 };
 
-VueI18n.prototype.i = function i (key) {
-    var values = [], len = arguments.length - 1;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
-
+VueI18n.prototype.i = function i (key, locale, values) {
   /* istanbul ignore if */
   if (!key) { return '' }
 
-  var locale = this.locale;
-  var index = 0;
-  if (typeof values[0] === 'string') {
-    locale = values[0];
-    index = 1;
+  if (typeof locale !== 'string') {
+    locale = this.locale;
   }
 
-  var params = [];
-  for (var i = index; i < values.length; i++) {
-    params.push(values[i]);
-    }
-
-    return (ref = this)._i.apply(ref, [ key, locale, this._getMessages(), null ].concat( params ))
-    var ref;
+  return this._i(key, locale, this._getMessages(), null, values)
 };
 
 VueI18n.prototype._tc = function _tc (
   key,
   _locale,
   messages,
-  host,
-  choice
+    host,
+    choice
 ) {
     var values = [], len = arguments.length - 5;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 5 ];
 
-  if (!key) { return '' }
+    if (!key) { return '' }
   if (choice === undefined) {
     choice = 1;
   }
@@ -1155,7 +1168,7 @@ VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message)
   this._vm.messages[locale] = message;
 };
 
-VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
+  VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
   this._vm.messages[locale] = Vue.util.extend(this._vm.messages[locale] || {}, message);
 };
 
@@ -1241,16 +1254,16 @@ VueI18n.prototype.d = function d (value) {
     } else if (isObject(args[0])) {
       if (args[0].locale) {
         locale = args[0].locale;
-        }
-        if (args[0].key) {
+      }
+      if (args[0].key) {
         key = args[0].key;
       }
     }
   } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
-      key = args[0];
-    }
-    if (typeof args[1] === 'string') {
+    if (typeof args[0] === 'string') {
+        key = args[0];
+      }
+      if (typeof args[1] === 'string') {
       locale = args[1];
     }
   }
@@ -1351,10 +1364,10 @@ VueI18n.prototype.n = function n (value) {
     }
     if (typeof args[1] === 'string') {
       locale = args[1];
-      }
     }
+  }
 
-    return this._n(value, locale, key)
+  return this._n(value, locale, key)
 };
 
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
@@ -1364,7 +1377,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.1.2';
+VueI18n.version = '7.2.0';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
