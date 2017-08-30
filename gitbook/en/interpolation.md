@@ -1,5 +1,7 @@
 # Component interpolation
 
+## Basic Usage
+
 > :new: 7.0+
 
 Sometimes, we need to localize with locale message that was included HTML tag or component. For example:
@@ -86,6 +88,10 @@ About the above example, see the [example](https://github.com/kazupon/vue-i18n/t
 The children of `i18n` functional component is interpolated with locale message of `path` prop. In the above example, `<a :href="url" target="_blank">{{ $t('tos') }}</a>` is interplated with `term` locale message.
 
 In above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their orders of appearance.
+
+## Advanced Usage
+
+> :new: 7.2+
 
 > :warning: NOTE: In `i18n` component, text content consists of only white spaces will be omitted.
 

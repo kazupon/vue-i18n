@@ -452,17 +452,20 @@ You can specify the below some options of `I18nOptions` constructor options of [
   This is the same as `$n` method of Vue instance method. More detail see [$n](#$n).
 
 
-## `i18n` functional component
+## Components
+
+### i18n functional component
 
 > :new: 7.0+
 
-### Props:
+#### Props:
 
-- `path {Path}`: required
-- `locale {Locale}`: optional
+- `path {Path}`: required, keypath of locale messages
+- `locale {Locale}`: optional, locale
 - `tag {string}`: optional, default `span`
+- `places {Array | Object}`: optional (7.2+)
 
-### Usage:
+#### Usage:
 
 ```html
 <div id="app">
@@ -499,7 +502,24 @@ new Vue({
 }).$mount('#app')
 ```
 
-### See also:
+#### See also:
 
 [Component interpolation](./interpolation.md)
 
+
+## Special Attributes
+
+### place
+
+> :new: 7.2+
+
+
+#### Expects: `{number | string}`
+
+Used on component interpolation to indicate which index of list formatting or key of named formatting.
+
+For detailed usage, see the guide section linked below.
+
+#### See also:
+
+[Component interpolation](./interpolation.md)
