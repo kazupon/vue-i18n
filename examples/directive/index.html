@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>custom directive example</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../dist/vue-i18n.js"></script>
+  </head>
+  <body>
+    <div id="string-syntax">
+      <p v-t="'hello'"></p>
+      <p v-t="path"></p>
+    </div>
+    <div id="object-syntax">
+      <p v-t="{ path: 'hello', locale: 'ja', args: { name: 'kazupon' } }"></p>
+      <p v-t="{ path: path, args: { name: nickName } }"></p>
+    </div>
+    <script>
+      // string syntax example
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: { hello: 'hi there!' },
+            ja: { hello: 'こんにちは！' }
+          }
+        }),
+        data: { path: 'hello' }
+      }).$mount('#string-syntax')
+
+      // object syntax example
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: { hello: 'hi {name}!' },
+            ja: { hello: 'こんにちは、{name}！' }
+          }
+        }),
+        computed: {
+          nickName () { return 'kazupon' }
+        },
+        data: { path: 'hello' }
+      }).$mount('#object-syntax')
+    </script>
+  </body>
+</html>
