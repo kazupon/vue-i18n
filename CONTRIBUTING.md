@@ -8,6 +8,8 @@
 
 - The issue list of this repo is **exclusively** for bug reports and feature requests. Non-conforming issues will be closed immediately.
 
+  - For simple beginner questions, you can get quick answers from [`#vue-i18n` channel of Discord](https://chat.vuejs.org/)
+
   - For more complicated questions, you can use [the official forum](http://forum.vuejs.org/) or StackOverflow. Make sure to provide enough information when asking your questions - this makes it easier for others to help you!
 
 - Try to search for your issue, it may have already been answered or even fixed in the development branch.

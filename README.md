@@ -1,4 +1,4 @@
-# vue-i18n
+# :globe_with_meridians: vue-i18n
 
 [![Build Status](https://circleci.com/gh/kazupon/vue-i18n/tree/dev.svg?style=shield)](https://circleci.com/gh/kazupon/vue-i18n/tree/dev)
 [![Coverage Status](https://codecov.io/gh/kazupon/vue-i18n/branch/dev/graph/badge.svg)](https://codecov.io/gh/kazupon/vue-i18n)
