@@ -14,7 +14,7 @@ export function warn (msg: string, err: ?Error): void {
   }
 }
 
-export function isObject (obj: mixed): boolean {
+export function isObject (obj: mixed): boolean %checks {
   return obj !== null && typeof obj === 'object'
 }
 
@@ -112,6 +112,39 @@ export function merge (target: Object): Object {
     }
   }
   return output
+}
+
+export function looseEqual (a: any, b: any): boolean {
+  if (a === b) { return true }
+  const isObjectA: boolean = isObject(a)
+  const isObjectB: boolean = isObject(b)
+  if (isObjectA && isObjectB) {
+    try {
+      const isArrayA: boolean = Array.isArray(a)
+      const isArrayB: boolean = Array.isArray(b)
+      if (isArrayA && isArrayB) {
+        return a.length === b.length && a.every((e: any, i: number): boolean => {
+          return looseEqual(e, b[i])
+        })
+      } else if (!isArrayA && !isArrayB) {
+        const keysA: Array<string> = Object.keys(a)
+        const keysB: Array<string> = Object.keys(b)
+        return keysA.length === keysB.length && keysA.every((key: string): boolean => {
+          return looseEqual(a[key], b[key])
+        })
+      } else {
+        /* istanbul ignore next */
+        return false
+      }
+    } catch (e) {
+      /* istanbul ignore next */
+      return false
+    }
+  } else if (!isObjectA && !isObjectB) {
+    return String(a) === String(b)
+  } else {
+    return false
+  }
 }
 
 export const canUseDateTimeFormat: boolean =

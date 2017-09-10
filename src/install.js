@@ -2,6 +2,7 @@ import { warn } from './util'
 import extend from './extend'
 import mixin from './mixin'
 import component from './component'
+import { bind, update } from './directive'
 
 export let Vue
 
@@ -28,6 +29,7 @@ export function install (_Vue) {
 
   extend(Vue)
   Vue.mixin(mixin)
+  Vue.directive('t', { bind, update })
   Vue.component(component.name, component)
 
   // use object-based merge strategy
