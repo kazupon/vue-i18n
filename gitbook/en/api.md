@@ -328,7 +328,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Return:**: `string`
 
-  This is the same as the `Function` returned with `$t` computed property. More detail see [$t](#$t).
+  This is the same as the `Function` returned with `$t` method. More detail see [$t](#$t).
 
 #### i( key, [locale], [values] )
 
@@ -351,7 +351,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Return:** `string`
 
-  This is the same as the `Function` returned `$tc` computed property. More detail see [$tc](#$tc).
+  This is the same as the `Function` returned `$tc` method. More detail see [$tc](#$tc).
 
 #### te( key, [locale] )
 
@@ -450,6 +450,41 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Return:** `string`
 
   This is the same as `$n` method of Vue instance method. More detail see [$n](#$n).
+
+## Directives
+
+> :new: 7.3+
+
+### v-t
+
+- **Expects:** `string | Object`
+
+- **Details:**
+  
+  Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages.
+  If you can be used object syntax, you need to specify as the object key the following params:
+
+  - path: required, key of locale messags
+  - locale: optional, locale
+  - args: optional, for list or named formatting
+
+- **Examples:**
+
+  ```html
+  <!-- string syntax: literal --> 
+  <p v-t="'foo.bar'"></p>
+
+  <!-- string syntax: binding via data or computed props --> 
+  <p v-t="msg"></p>
+
+  <!-- object syntax: literal -->
+  <p v-t="{ path: 'hi', locale: 'ja', args: { name: 'kazupon' } }"></p>
+
+  <!-- object syntax: binding via data or computed props -->
+  <p v-t="{ path: greeting, args: { name: fullName } }"></p>
+  ```
+
+- **See also:** [Custom directive localization](./directive.md)
 
 
 ## Components
