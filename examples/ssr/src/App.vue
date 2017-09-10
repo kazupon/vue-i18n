@@ -10,13 +10,13 @@
         <router-link to="/show">{{ $t('navigation.show') }}</router-link>
         <router-link to="/ask">{{ $t('navigation.ask') }}</router-link>
         <router-link to="/job">{{ $t('navigation.job') }}</router-link>
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">
-          Built with Vue.js
+        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener" v-t="'navigation.powered'">
         </a>
         <a class="locale" href="javascript:void(0);"
            v-for="locale in locales"
            :class="{ active: $i18n.locale === locale }"
-           @click="$i18n.locale = locale">{{ $t('locales.' + locale) }}</a>
+           v-t="'locales.' + locale"
+           @click="$i18n.locale = locale"></a>
       </nav>
     </header>
     <transition name="fade" mode="out-in">

@@ -4,7 +4,8 @@
     "new": "New",
     "show": "Show",
     "ask": "Ask",
-    "job": "Jobs"
+    "job": "Jobs",
+    "powered": "Built with Vue.js"
   },
   "locales": {
     "en-US": "EN",

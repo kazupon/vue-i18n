@@ -7,6 +7,7 @@ const compression = require('compression')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
+const { directive } = require('vue-i18n-extensions')
 
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -30,7 +31,10 @@ function createRenderer (bundle, options) {
     // this is only needed when vue-server-renderer is npm-linked
     basedir: resolve('./dist'),
     // recommended for performance
-    runInNewContext: false
+    runInNewContext: false,
+    directives: {
+      t: directive
+    }
   }))
 }
 

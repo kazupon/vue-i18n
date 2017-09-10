@@ -4,7 +4,8 @@
     "new": "新着",
     "show": "出来事",
     "ask": "質問",
-    "job": "求人"
+    "job": "求人",
+    "powered": "Build with Vue.js"
   },
   "locales": {
     "en-US": "EN",
