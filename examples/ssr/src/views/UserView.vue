@@ -4,7 +4,7 @@
       <h1>{{ $t('user.id') }} : {{ user.id }}</h1>
       <ul class="meta">
         <li><span class="label">{{ $t('user.created') }}:</span> {{ time }}</li>
-        <li><span class="label">{{ $t('user.karma') }}:</span> {{user.karma}}</li>
+        <li><span class="label">{{ $t('user.karma') }}:</span> {{user.karma }}</li>
         <li v-if="user.about" v-html="user.about" class="about"></li>
       </ul>
       <p class="links">
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { setTitle } from '../util/title'
 import { timeAgo } from '../util'
 
 export default {

@@ -4,6 +4,7 @@ const LRU = require('lru-cache')
 const express = require('express')
 const favicon = require('serve-favicon')
 const compression = require('compression')
+const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
 
@@ -55,7 +56,7 @@ if (isProd) {
 }
 
 const serve = (path, cache) => express.static(resolve(path), {
-  maxAge: cache && isProd ? 60 * 60 * 24 * 30 : 0
+  maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 })
 
 app.use(compression({ threshold: 0 }))
@@ -65,17 +66,13 @@ app.use('/public', serve('./public', true))
 app.use('/manifest.json', serve('./manifest.json', true))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
-// https://www.nginx.com/blog/benefits-of-microcaching-nginx/
-const microCache = LRU({
-  max: 100,
-  maxAge: 1000
-})
-
 // since this app has no user-specific content, every page is micro-cacheable.
 // if your app involves user-specific content, you need to implement custom
 // logic to determine whether a request is cacheable based on its url and
 // headers.
-const isCacheable = req => useMicroCache
+// 1-second microcache.
+// https://www.nginx.com/blog/benefits-of-microcaching-nginx/
+app.use(microcache.cacheSeconds(1, () => useMicroCache))
 
 function render (req, res) {
   const s = Date.now()
@@ -84,24 +81,15 @@ function render (req, res) {
   res.setHeader("Server", serverInfo)
 
   const handleError = err => {
-    if (err && err.code === 404) {
-      res.status(404).end('404 | Page Not Found')
+    if (err.url) {
+      res.redirect(err.url)
+    } else if (err.code === 404) {
+      res.status(404).send('404 | Page Not Found')
     } else {
       // Render Error Page or Redirect
-      res.status(500).end('500 | Internal Server Error')
+      res.status(500).send('500 | Internal Server Error')
       console.error(`error during render : ${req.url}`)
       console.error(err.stack)
-    }
-  }
-
-  const cacheable = isCacheable(req)
-  if (cacheable) {
-    const hit = microCache.get(req.url)
-    if (hit) {
-      if (!isProd) {
-        console.log(`cache hit!`)
-      }
-      return res.end(hit)
     }
   }
 
@@ -113,10 +101,7 @@ function render (req, res) {
     if (err) {
       return handleError(err)
     }
-    res.end(html)
-    if (cacheable) {
-      microCache.set(req.url, html)
-    }
+    res.send(html)
     if (!isProd) {
       console.log(`whole request: ${Date.now() - s}ms`)
     }

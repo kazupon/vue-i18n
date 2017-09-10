@@ -38,7 +38,7 @@ export default {
       return `${value} ${this.$tc('time.units.' + unit, value)} ${this.$t('time.ago')}`
     }
   },
-  // https://github.com/vuejs/vue/tree/dev/packages/vue-server-renderer#component-caching
+  // http://ssr.vuejs.org/en/caching.html#component-level-caching
   serverCacheKey: ({ item: { id, __lastUpdated, time }}) => {
     return `${id}::${__lastUpdated}::${time}`
   }

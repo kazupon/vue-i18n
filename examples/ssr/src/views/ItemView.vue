@@ -16,7 +16,7 @@
       </div>
       <div class="item-view-comments">
         <p class="item-view-comments-header">
-          {{ item.kids ? item.descendants + ' ' + $t('item.comments') : $t('item.no_comments')}}
+          {{ item.kids ? item.descendants + ' ' + $t('item.comments') : $t('item.no_comments') }}
           <spinner :show="loading"></spinner>
         </p>
         <ul v-if="!loading" class="comment-children">
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { setTitle } from '../util/title'
 import Spinner from '../components/Spinner.vue'
 import Comment from '../components/Comment.vue'
 import { timeAgo } from '../util'
