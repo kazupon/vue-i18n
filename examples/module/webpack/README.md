@@ -1,6 +1,6 @@
-# vue-i18n-extensions-module-using-example
+# vue-i18n-extensions-module-using-example-for-webpack
 
-> vue-i18n-extentions module using example
+> vue-i18n-extentions module using example for webpack
 
 ## Build Setup
 

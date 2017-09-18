@@ -1,0 +1,27 @@
+{
+  "name": "vue-i18n-extensions-module-using-example-for-rollup",
+  "description": "vue-i18n-extensions module using example for rollup",
+  "version": "1.0.0",
+  "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
+  "dependencies": {
+    "vue": "^2.4.4"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.5",
+    "rollup": "^0.50.0",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-vue": "^2.4.2",
+    "serve": "^6.1.0",
+    "vue-i18n-extensions": "github:kazupon/vue-i18n-extensions#b1fa1d9219d4ea9255e5e7a73bd9d57bdff260f4"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "dev": "cross-env NODE_ENV=development rollup -c && serve --open ./dist",
+    "postinstall": "npm link ../../../"
+  }
+}

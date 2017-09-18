@@ -1,14 +1,8 @@
 {
-  "name": "vue-i18n-extensions-module-using-example",
-  "description": "vue-i18n-extentions module using example",
+  "name": "vue-i18n-extensions-module-using-example-for-webpack",
+  "description": "vue-i18n-extentions module using example for webpack",
   "version": "1.0.0",
   "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
-  "private": true,
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "postinstall": "npm link ../../"
-  },
   "dependencies": {
     "vue": "^2.4.2"
   },
@@ -24,5 +18,11 @@
     "vue-template-compiler": "^2.4.2",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
+  },
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "postinstall": "npm link ../../../"
   }
 }
