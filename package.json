@@ -59,7 +59,7 @@
     "selenium-server": "2.53.1",
     "sinon": "^2.1.0",
     "uglify-js": "^2.7.5",
-    "vue": "^2.2.0",
+    "vue": "^2.4.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.1"
   },
