@@ -1,0 +1,21 @@
+{
+  "name": "vue-i18n-peformance-comparison-example",
+  "description": "vue-i18n performance comparison example",
+  "version": "1.0.0",
+  "main": "./index.js",
+  "private": true,
+  "scripts": {
+    "setup": "cd plain && npm i && cd ../method && npm i && cd ../directive && npm i && cd ../compiler && npm i && cd ../",
+    "setup:clean": "cd plain && rm -rf ./node_modules ./package-lock.json && cd ../method && rm -rf ./node_modules ./package-lock.json && cd ../directive && rm -rf ./node_modules ./package-lock.json && cd ../compiler && rm -rf ./node_modules ./package-lock.json && cd ../",
+    "build": "cd plain && npm run build && cd ../method && npm run build && cd ../directive && npm run build && cd ../compiler && npm run build && cd ../",
+    "perform": "node ./index.js",
+    "serve": "serve ./",
+    "clean": "rm -rf ./generate/*.json ./generate/*.png"
+  },
+  "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^0.10.2",
+    "serve": "^6.1.0"
+  }
+}

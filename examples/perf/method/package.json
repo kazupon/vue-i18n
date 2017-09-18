@@ -1,0 +1,28 @@
+{
+  "name": "vue-i18n-with-method",
+  "description": "A Vue.js project",
+  "version": "1.0.0",
+  "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "postinstall": "npm link ../../../"
+  },
+  "dependencies": {
+    "vue": "^2.4.2",
+    "js-beautify": "1.6.14"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-env": "^1.5.1",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "vue-loader": "^12.1.0",
+    "vue-template-compiler": "^2.4.2",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
