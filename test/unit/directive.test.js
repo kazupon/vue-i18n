@@ -29,6 +29,10 @@ describe('custom directive', () => {
         nextTick(() => {
           assert.equal(vm.$refs.text.textContent, messages.en.message.hello)
           assert.equal(vm.$refs.text._vt, messages.en.message.hello)
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.equal(vm.$refs.text.textContent, messages.en.message.hello)
+          assert.equal(vm.$refs.text._vt, messages.en.message.hello)
         }).then(done)
       })
     })
@@ -49,8 +53,12 @@ describe('custom directive', () => {
             }] })
           }
         })
+        const expected = 'こんにちは kazupon, ごきげんいかが？'
         nextTick(() => {
-          const expected = 'こんにちは kazupon, ごきげんいかが？'
+          assert.equal(vm.$refs.text.textContent, expected)
+          assert.equal(vm.$refs.text._vt, expected)
+          vm.$forceUpdate()
+        }).then(() => {
           assert.equal(vm.$refs.text.textContent, expected)
           assert.equal(vm.$refs.text._vt, expected)
         }).then(done)
