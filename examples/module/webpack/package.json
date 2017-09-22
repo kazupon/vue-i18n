@@ -13,7 +13,7 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
-    "vue-i18n-extensions": "github:kazupon/vue-i18n-extensions#b1fa1d9219d4ea9255e5e7a73bd9d57bdff260f4",
+    "vue-i18n-extensions": "^0.1.0",
     "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.4.2",
     "webpack": "^2.6.1",

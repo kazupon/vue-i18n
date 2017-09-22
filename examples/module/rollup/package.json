@@ -15,7 +15,7 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-vue": "^2.4.2",
     "serve": "^6.1.0",
-    "vue-i18n-extensions": "github:kazupon/vue-i18n-extensions#b1fa1d9219d4ea9255e5e7a73bd9d57bdff260f4"
+    "vue-i18n-extensions": "^0.1.0"
   },
   "license": "MIT",
   "private": true,

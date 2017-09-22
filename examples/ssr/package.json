@@ -36,7 +36,7 @@
     "vue-loader": "^13.0.1",
     "vue-style-loader": "^3.0.0",
     "vue-template-compiler": "^2.4.2",
-    "vue-i18n-extensions": "github:kazupon/vue-i18n-extensions#b1fa1d9219d4ea9255e5e7a73bd9d57bdff260f4",
+    "vue-i18n-extensions": "^0.1.0",
     "webpack": "^3.2.0",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.1",
