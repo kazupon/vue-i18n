@@ -42,7 +42,7 @@ module.exports = {
       // inject `compilerModules` to vue-loader options
       config.module.rules.forEach(rule => {
         if (rule.loader === 'vue-loader') {
-          rule.options.compilerModules = i18nExtensions.module(i18n)
+          rule.options.compilerModules = [i18nExtensions.module(i18n)]
         }
       })
     }

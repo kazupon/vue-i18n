@@ -1,6 +1,6 @@
-# nuxt
+# vue-i18n-extensions-module-using-example-for-nuxt
 
-> Nuxt.js project
+> vue-i18n-extentions module using example for Nuxt.js
 
 ## Build Setup
 

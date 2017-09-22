@@ -1,7 +1,7 @@
 {
-  "name": "nuxt",
+  "name": "vue-i18n-extensions-module-using-example-for-nuxt",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "description": "vue-i18n-extentions module using example for Nuxt.js",
   "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
   "private": true,
   "scripts": {
