@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.2.0 
+ * vue-i18n v7.3.0 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -122,6 +122,39 @@ function merge (target) {
     }
   }
   return output
+}
+
+function looseEqual (a, b) {
+  if (a === b) { return true }
+  var isObjectA = isObject(a);
+  var isObjectB = isObject(b);
+  if (isObjectA && isObjectB) {
+    try {
+      var isArrayA = Array.isArray(a);
+      var isArrayB = Array.isArray(b);
+      if (isArrayA && isArrayB) {
+        return a.length === b.length && a.every(function (e, i) {
+          return looseEqual(e, b[i])
+        })
+      } else if (!isArrayA && !isArrayB) {
+        var keysA = Object.keys(a);
+        var keysB = Object.keys(b);
+        return keysA.length === keysB.length && keysA.every(function (key) {
+          return looseEqual(a[key], b[key])
+        })
+      } else {
+        /* istanbul ignore next */
+        return false
+      }
+    } catch (e) {
+      /* istanbul ignore next */
+      return false
+    }
+  } else if (!isObjectA && !isObjectB) {
+    return String(a) === String(b)
+  } else {
+    return false
+  }
 }
 
 var canUseDateTimeFormat =
@@ -353,6 +386,77 @@ var component = {
   }
 };
 
+/*  */
+
+function bind (el, binding, vnode) {
+  t$1(el, binding, vnode);
+}
+
+function update (el, binding, vnode, oldVNode) {
+  if (looseEqual(binding.value, binding.oldValue)) { return }
+
+  t$1(el, binding, vnode);
+}
+
+function t$1 (el, binding, vnode) {
+  var value = binding.value;
+
+  var ref = parseValue(value);
+  var path = ref.path;
+  var locale = ref.locale;
+  var args = ref.args;
+  if (!path && !locale && !args) {
+    warn('not support value type');
+    return
+  }
+
+  var vm = vnode.context;
+  if (!vm) {
+    warn('not exist Vue instance in VNode context');
+    return
+  }
+
+  if (!vm.$i18n) {
+    warn('not exist VueI18n instance in Vue instance');
+    return
+  }
+
+  if (!path) {
+    warn('required `path` in v-t directive');
+    return
+  }
+
+  el._vt = el.textContent = (ref$1 = vm.$i18n).t.apply(ref$1, [ path ].concat( makeParams(locale, args) ));
+  var ref$1;
+}
+
+function parseValue (value) {
+  var path;
+  var locale;
+  var args;
+
+  if (typeof value === 'string') {
+    path = value;
+  } else if (isPlainObject(value)) {
+    path = value.path;
+    locale = value.locale;
+    args = value.args;
+  }
+
+  return { path: path, locale: locale, args: args }
+}
+
+function makeParams (locale, args) {
+  var params = [];
+
+  locale && params.push(locale);
+  if (args && (Array.isArray(args) || isPlainObject(args))) {
+    params.push(args);
+  }
+
+  return params
+}
+
 var Vue;
 
 function install (_Vue) {
@@ -378,6 +482,7 @@ function install (_Vue) {
 
   extend(Vue);
   Vue.mixin(mixin);
+  Vue.directive('t', { bind: bind, update: update });
   Vue.component(component.name, component);
 
   // use object-based merge strategy
@@ -1377,7 +1482,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.2.0';
+VueI18n.version = '7.3.0';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
