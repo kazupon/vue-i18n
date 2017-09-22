@@ -1,3 +1,18 @@
+<a name="7.3.0"></a>
+# [7.3.0](https://github.com/kazupon/vue-i18n/compare/v7.2.0...v7.3.0) (2017-09-22)
+
+
+### :star: New Features
+
+* **directives:** support v-t custom directive (welcome back!) ([af9a2e7](https://github.com/kazupon/vue-i18n/commit/af9a2e7))
+
+
+### :up: Updates
+
+* **typing:** fix flowtype ([fa06f44](https://github.com/kazupon/vue-i18n/commit/fa06f44))
+
+
+
 <a name="7.2.0"></a>
 # [7.2.0](https://github.com/kazupon/vue-i18n/compare/v7.1.2...v7.2.0) (2017-08-28)
 
