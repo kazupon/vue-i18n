@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Migrations · GitBook</title>
+        <title>Custom directive localization · GitBook</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="migrations.html" />
+    <link rel="next" href="directive.html" />
     
     
-    <link rel="prev" href="hot-reload.html" />
+    <link rel="prev" href="component.html" />
     
 
     </head>
@@ -352,7 +352,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="directive.html">
+        <li class="chapter active" data-level="1.13" data-path="directive.html">
             
                 <a href="directive.html">
             
@@ -526,7 +526,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.17" data-path="migrations.html">
+        <li class="chapter " data-level="1.17" data-path="migrations.html">
             
                 <a href="migrations.html">
             
@@ -884,7 +884,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Migrations</a>
+        <a href="." >Custom directive localization</a>
     </h1>
 </div>
 
@@ -899,202 +899,50 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="migrations">Migrations</h1><h2 id="global-config">Global config</h2><h3 id="lang-replaced">lang <sup>replaced</sup></h3><p>Use <code>VueI18n</code> class constructor <code>locale</code> option, or <code>VueI18n#locale</code> property:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    locale: <span class="hljs-string">&apos;en&apos;</span>,
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// change locale</span>
-  i18n.locale = <span class="hljs-string">&apos;ja&apos;</span>
-  <span class="hljs-comment">// or</span>
-  app.$i18n.locale = <span class="hljs-string">&apos;ja&apos;</span></code></pre>
-<h3 id="fallbacklang-replaced">fallbackLang <sup>replaced</sup></h3><p>Use <code>VueI18n</code> class constructor <code>fallbackLocale</code> option, or <code>VueI18n#fallbackLocale</code> property:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    locale: <span class="hljs-string">&apos;ja&apos;</span>,
-    fallbackLocale: <span class="hljs-string">&apos;en&apos;</span>,
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// change fallback locale</span>
-  i18n.fallbackLocale = <span class="hljs-string">&apos;zh&apos;</span>
-  <span class="hljs-comment">// or</span>
-  app.$i18n.fallbackLocale = <span class="hljs-string">&apos;zh&apos;</span></code></pre>
-<h3 id="missinghandler-replaced">missingHandler <sup>replaced</sup></h3><p>Use <code>VueI18n</code> class constructor <code>missing</code> option, or <code>VueI18n#missing</code> property:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    <span class="hljs-comment">// ...</span>
-    missing: (locale, key, vm) =&gt; {
-      <span class="hljs-comment">// handle translation missing</span>
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// change missing handler</span>
-  i18n.missing = (locale, key, vm) =&gt; {
-    <span class="hljs-comment">// handle translation missing</span>
-  }
-  <span class="hljs-comment">// or</span>
-  app.$i18n.missing = (locale, key, vm) =&gt; {
-    <span class="hljs-comment">// handle translation missing</span>
-  }</code></pre>
-<h3 id="i18nformatter-replaced">i18nFormatter <sup>replaced</sup></h3><p>Use <code>VueI18n</code> class constructor <code>formatter</code> option, or <code>VueI18n#formatter</code> property:</p><pre><code class="lang-javascript">  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomFormatter</span> </span>{
-    format (message, ...values) {
-      <span class="hljs-comment">// something render logic</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;something string&apos;</span>
-    }
-  }
-
-  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    <span class="hljs-comment">// ...</span>
-    formatter: <span class="hljs-keyword">new</span> CustomFormatter(),
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// change custom formatter</span>
-  i18n.formatter = {
-    format: (message, ...values) =&gt; {
-      <span class="hljs-comment">// something render logic</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;something string&apos;</span>
-    }
-  }
-  <span class="hljs-comment">// or</span>
-  app.$i18n.formatter = {
-    format: (message, ...values) =&gt; {
-      <span class="hljs-comment">// something render logic</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;something string&apos;</span>
-    }
-  }</code></pre>
-<h2 id="global-methods">Global methods</h2><h3 id="vuelocale-replaced">Vue.locale <sup>replaced</sup></h3><p>Use <code>VueI18n</code> class constructor <code>messages</code> option, or <code>VueI18n#GetLocaleMessage</code> / <code>VueI18n#setLocaleMessage</code> methods:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    <span class="hljs-comment">// ...</span>
-    messages: {
-      en: {
-        hello: <span class="hljs-string">&apos;hello world&apos;</span>,
-        <span class="hljs-comment">// ...</span>
-      },
-      ja: {
-        hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;&apos;</span>,
-        <span class="hljs-comment">// ...</span>
-      }
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// get locale message</span>
-  <span class="hljs-keyword">const</span> en = i18n.getLocaleMessage(<span class="hljs-string">&apos;en&apos;</span>)
-  en.greeting = <span class="hljs-string">&apos;hi!&apos;</span>
-  <span class="hljs-comment">// set locale message</span>
-  i18n.setLocaleMessage(<span class="hljs-string">&apos;en&apos;</span>, en)
-  <span class="hljs-comment">// or</span>
-  <span class="hljs-keyword">const</span> ja = app.$i18n.getLocaleMessage(<span class="hljs-string">&apos;ja&apos;</span>)
-  ja.greeting = <span class="hljs-string">&apos;&#x3084;&#x3042;&#xFF01;&apos;</span>
-  app.$i18n.setLocaleMessage(<span class="hljs-string">&apos;ja&apos;</span>, ja)</code></pre>
-<h3 id="vuet-replaced">Vue.t <sup>replaced</sup></h3><p>Use <code>VueI18n#t</code> method:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
+                                <h1 id="custom-directive-localization">Custom directive localization</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.3+</p></blockquote><p>You can be translated not only with <code>v-t</code> custom directive, but also with <code>$t</code> method.</p><h2 id="string-syntax">String syntax</h2><p>You can be passed the keypath of locale messages with string syntax.</p><p>Javascript:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+  i18n: <span class="hljs-keyword">new</span> VueI18n({
     locale: <span class="hljs-string">&apos;en&apos;</span>,
     messages: {
-      en: {
-        greeting: <span class="hljs-string">&apos;hi {name}&apos;</span>
-      }
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-
-  i18n.t(<span class="hljs-string">&apos;greeting&apos;</span>, { name: <span class="hljs-string">&apos;kazupon&apos;</span> }) <span class="hljs-comment">// -&gt; hi kazupon</span></code></pre>
-<h3 id="vuetc-replaced">Vue.tc <sup>replaced</sup></h3><p>Use <code>VueI18n#tc</code> method:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    locale: <span class="hljs-string">&apos;en&apos;</span>,
-    messages: {
-      en: {
-        apple: <span class="hljs-string">&apos;no apples | one apple | {count} apples&apos;</span>
-      }
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-
-  <span class="hljs-keyword">const</span> count = <span class="hljs-number">10</span>
-  i18n.tc(<span class="hljs-string">&apos;apple&apos;</span>, count, { count }) <span class="hljs-comment">// -&gt; 10 apples</span></code></pre>
-<h3 id="vuete-replaced">Vue.te <sup>replaced</sup></h3><p>Use <code>VueI18n#te</code> method:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    locale: <span class="hljs-string">&apos;en&apos;</span>,
-    messages: {
-      en: {
-        hello: <span class="hljs-string">&apos;hello world&apos;</span>
-      }
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-
-  i18n.te(<span class="hljs-string">&apos;hello&apos;</span>) <span class="hljs-comment">// -&gt; true</span>
-  i18n.te(<span class="hljs-string">&apos;hallo&apos;</span>, <span class="hljs-string">&apos;ja&apos;</span>) <span class="hljs-comment">// -&gt; false</span>
-  i18n.te(<span class="hljs-string">&apos;hello&apos;</span>) <span class="hljs-comment">// -&gt; true</span></code></pre>
-<h2 id="constructor-options">Constructor options</h2><h3 id="locales-replaced">locales <sup>replaced</sup></h3><p>Use <code>messages</code> of <code>VueI18n</code> class constructor option, or <code>messages</code> of <code>i18n</code> option (for Component option):</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
-    locale: <span class="hljs-string">&apos;en&apos;</span>,
-    messages: {
-      en: {
-        greeting: <span class="hljs-string">&apos;hi {name}&apos;</span>
-      }
-    },
-    <span class="hljs-comment">// ...</span>
-  })
-
-  <span class="hljs-comment">// for Component</span>
-  <span class="hljs-keyword">const</span> Component1 = {
-    i18n: {
-      messages: {
-        en: {
-          title: <span class="hljs-string">&apos;Title1&apos;</span>
-        }
-      }
+      en: { hello: <span class="hljs-string">&apos;hi there!&apos;</span> },
+      ja: { hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#xFF01;&apos;</span> }
     }
-  }</code></pre>
-<h2 id="instance-properties">Instance properties</h2><h3 id="lang-replaced">$lang <sup>replaced</sup></h3><p>Use <code>VueI18n#locale</code> property:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
+  }),
+  data: { path: <span class="hljs-string">&apos;hello&apos;</span> }
+}).$mount(<span class="hljs-string">&apos;#string-syntax&apos;</span>)</code></pre>
+<p>Templates:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- string literal --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;&apos;hello&apos;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- keypath biniding via data --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;path&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>Outputs:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi there!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi there!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<h2 id="object-syntax">Object syntax</h2><p>You can be used with object syntax.</p><p>Javascript:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+  i18n: <span class="hljs-keyword">new</span> VueI18n({
     locale: <span class="hljs-string">&apos;en&apos;</span>,
-    <span class="hljs-comment">// ...</span>
-  })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({ i18n }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-comment">// change locale</span>
-  i18n.locale = <span class="hljs-string">&apos;ja&apos;</span>
-  <span class="hljs-comment">// or</span>
-  app.$i18n.locale = <span class="hljs-string">&apos;ja&apos;</span></code></pre>
-<h2 id="features">Features</h2><h3 id="dynamic-locale-removed">Dynamic locale <sup>removed</sup></h3><p>If you need to dynamic set locale messages, you should implement the below:</p><pre><code class="lang-javascript">  <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({ locale: <span class="hljs-string">&apos;en&apos;</span> })
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({
-    i18n,
-    data: { loading: <span class="hljs-string">&apos;&apos;</span> }
-  }).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadLocaleMessage</span> (<span class="hljs-params">locale, cb</span>) </span>{
-    <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">&apos;/locales/&apos;</span> + locale, {
-      method: <span class="hljs-string">&apos;get&apos;</span>,
-      headers: {
-        <span class="hljs-string">&apos;Accept&apos;</span>: <span class="hljs-string">&apos;application/json&apos;</span>,
-        <span class="hljs-string">&apos;Content-Type&apos;</span>: <span class="hljs-string">&apos;application/json&apos;</span>
-      }
-    }).then((res) =&gt; {
-      <span class="hljs-keyword">return</span> res.json()
-    }).then((json) =&gt; {
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.keys(json).length === <span class="hljs-number">0</span>) {
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;locale empty !!&apos;</span>))
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(json)
-      }
-    }).then((message) =&gt; {
-      cb(<span class="hljs-literal">null</span>, message)
-    }).catch((error) =&gt; {
-      cb(error)
-    })
-  }
-
-  app.loading = <span class="hljs-string">&apos;loading ...&apos;</span>
-  loadLocaleMessage(<span class="hljs-string">&apos;en&apos;</span>, (err, message) =&gt; {
-    <span class="hljs-keyword">if</span> (err) {
-      app.loading = <span class="hljs-string">&apos;&apos;</span>
-      <span class="hljs-built_in">console</span>.error(err)
-      <span class="hljs-keyword">return</span>
+    messages: {
+      en: { hello: <span class="hljs-string">&apos;hi {name}!&apos;</span> },
+      ja: { hello: <span class="hljs-string">&apos;&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;{name}&#xFF01;&apos;</span> }
     }
-    i18n.setLocaleMessage(<span class="hljs-string">&apos;en&apos;</span>, message)
-    app.loading = <span class="hljs-string">&apos;&apos;</span>
-  })</code></pre>
-
+  }),
+  computed: {
+    nickName () { <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;kazupon&apos;</span> }
+  },
+  data: { path: <span class="hljs-string">&apos;hello&apos;</span> }
+}).$mount(<span class="hljs-string">&apos;#object-syntax&apos;</span>)</code></pre>
+<p>Templates:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- literal --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;{ path: &apos;hello&apos;, locale: &apos;ja&apos;, args: { name: &apos;kazupon&apos; } }&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- data biniding via data --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;{ path: path, args: { name: nickName } }&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<p>Outputs:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;kazupon&#xFF01;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi kazupon!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+<h2 id="t-vs-v-t"><code>$t</code> vs <code>v-t</code></h2><h3 id="t"><code>$t</code></h3><p><code>$t</code> is extended Vue instance method. There are the following pros and cons.</p><h4 id="pros">Pros</h4><p>You can be <strong>flexibly</strong> used it with mustash syntax <code>{{}}</code> in templates and also computed props and methods in Vue instance.</p><h4 id="cons">Cons</h4><p><code>$t</code> is executed <strong>everytime</strong> when occured re-render, so it does have a translation costs.</p><h3 id="v-t"><code>v-t</code></h3><p><code>v-t</code> is custom directive. There are the following pros and cons.</p><h4 id="pros">Pros</h4><p><code>v-t</code> is <strong>high performance</strong> than <code>$t</code> method due to it&apos;s cached with custom directive, when was translated once. And also pre-translation is possible with Vue compiler module which was provided by <a href="https://github.com/kazupon/vue-i18n-extensions" target="_blank"><code>vue-i18n-extentions</code></a>. therefore it&apos; made be possible to <strong>more optimize</strong> performance.</p><h4 id="cons">Cons</h4><p><code>v-t</code> can not be flexibly used like <code>$t</code>, it&apos;s rather <strong>complexity</strong>. The translated contents with <code>v-t</code> is inserted to <code>textContent</code> of element. And also when you use server-side rendering, you need to set <a href="https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side" target="_blank">custom direcitve</a> to <code>directives</code> option of <code>createRenderer</code> function.</p>
                                 
                                 </section>
                             
@@ -1121,12 +969,12 @@
 
             
                 
-                <a href="hot-reload.html" class="navigation navigation-prev " aria-label="Previous page: Hot reloading">
+                <a href="component.html" class="navigation navigation-prev " aria-label="Previous page: Component based localization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="migrations.html#global-config" class="navigation navigation-next " aria-label="Next page: Global config">
+                <a href="directive.html#string-syntax" class="navigation navigation-next " aria-label="Next page: String Syntax">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1137,7 +985,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Migrations","level":"1.17","depth":1,"next":{"title":"Global config","level":"1.17.1","depth":2,"anchor":"#global-config","path":"migrations.md","ref":"migrations.md#global-config","articles":[]},"previous":{"title":"Hot reloading","level":"1.16","depth":1,"path":"hot-reload.md","ref":"hot-reload.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"migrations.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-09-22T15:12:16.564Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Custom directive localization","level":"1.13","depth":1,"next":{"title":"String Syntax","level":"1.13.1","depth":2,"anchor":"#string-syntax","path":"directive.md","ref":"directive.md#string-syntax","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"directive.md","mtime":"2017-09-22T15:11:15.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-09-22T15:12:16.564Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
