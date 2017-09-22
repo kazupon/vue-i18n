@@ -54,6 +54,6 @@
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules",
     "dev": "node server",
     "start": "cross-env NODE_ENV=production node server",
-    "postinstall": "npm link ../../"
+    "postinstall": "npm link ../../../"
   }
 }
