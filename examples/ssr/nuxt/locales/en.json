@@ -1,0 +1,10 @@
+{
+  "title": {
+    "main": "ssr-for-nuxt",
+    "sub": "Server-Side Rendering for Nuxt.js"
+  },
+  "links": {
+    "docs": "Documentation",
+    "github": "GitHub"
+  }
+}
