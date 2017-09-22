@@ -1,0 +1,10 @@
+{
+  "title": {
+    "main": "nuxt",
+    "sub": "Nuxt.js プロジェクト"
+  },
+  "links": {
+    "docs": "ドキュメント",
+    "github": "GitHub"
+  }
+}
