@@ -65,6 +65,39 @@ describe('custom directive', () => {
       })
     })
 
+    describe('locale reactivity', () => {
+      it('should be translated', done => {
+        let expected = ''
+        const vm = createVM({
+          i18n,
+          data: {
+            msgPath: 'message.format.named'
+          },
+          render (h) {
+            // <p ref="text" v-t="{ path: msgPath, args: { name: 'kazupon' } }"></p>
+            return h('p', { ref: 'text', directives: [{
+              name: 't', rawName: 'v-t',
+              value: ({ path: this.msgPath, args: { name: 'kazupon' } }),
+              expression: "{ path: msgPath, args: { name: 'kazupon' } }"
+            }] })
+          }
+        })
+        nextTick(() => {
+          expected = 'Hello kazupon, how are you?'
+          assert.equal(vm.$refs.text.textContent, expected)
+          assert.equal(vm.$refs.text._vt, expected)
+          assert.equal(vm.$refs.text._locale, 'en')
+          vm.$i18n.locale = 'ja' // change locale
+          vm.$forceUpdate()
+        }).then(() => {
+          expected = 'こんにちは kazupon, ごきげんいかが？'
+          assert.equal(vm.$refs.text.textContent, expected)
+          assert.equal(vm.$refs.text._vt, expected)
+          assert.equal(vm.$refs.text._locale, 'ja')
+        }).then(done)
+      })
+    })
+
     describe('not support warning', () => {
       it('should be warned', done => {
         const spy = sinon.spy(console, 'warn')
