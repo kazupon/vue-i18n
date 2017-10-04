@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.3.0 
+ * vue-i18n v7.3.1 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -389,13 +389,37 @@ var component = {
 /*  */
 
 function bind (el, binding, vnode) {
+  if (!assert(el, vnode)) { return }
+
   t$1(el, binding, vnode);
 }
 
 function update (el, binding, vnode, oldVNode) {
-  if (looseEqual(binding.value, binding.oldValue)) { return }
+  if (!assert(el, vnode)) { return }
+
+  if (localeEqual(el, vnode) && looseEqual(binding.value, binding.oldValue)) { return }
 
   t$1(el, binding, vnode);
+}
+
+function assert (el, vnode) {
+  var vm = vnode.context;
+  if (!vm) {
+    warn('not exist Vue instance in VNode context');
+    return false
+  }
+
+  if (!vm.$i18n) {
+    warn('not exist VueI18n instance in Vue instance');
+    return false
+  }
+
+  return true
+}
+
+function localeEqual (el, vnode) {
+  var vm = vnode.context;
+  return el._locale === vm.$i18n.locale
 }
 
 function t$1 (el, binding, vnode) {
@@ -410,23 +434,14 @@ function t$1 (el, binding, vnode) {
     return
   }
 
-  var vm = vnode.context;
-  if (!vm) {
-    warn('not exist Vue instance in VNode context');
-    return
-  }
-
-  if (!vm.$i18n) {
-    warn('not exist VueI18n instance in Vue instance');
-    return
-  }
-
   if (!path) {
     warn('required `path` in v-t directive');
     return
   }
 
+  var vm = vnode.context;
   el._vt = el.textContent = (ref$1 = vm.$i18n).t.apply(ref$1, [ path ].concat( makeParams(locale, args) ));
+  el._locale = vm.$i18n.locale;
   var ref$1;
 }
 
@@ -1482,7 +1497,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.3.0';
+VueI18n.version = '7.3.1';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
