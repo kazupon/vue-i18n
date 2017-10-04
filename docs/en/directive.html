@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Custom directive localization · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Custom directive localization · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         
         
         
@@ -899,7 +899,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="custom-directive-localization">Custom directive localization</h1><blockquote><p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.3+</p></blockquote><p>You can be translated not only with <code>v-t</code> custom directive, but also with <code>$t</code> method.</p><h2 id="string-syntax">String syntax</h2><p>You can be passed the keypath of locale messages with string syntax.</p><p>Javascript:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+                                <h1 id="custom-directive-localization">Custom directive localization</h1>
+<blockquote>
+<p><img align="absmiddle" alt=":new:" class="emoji" src="../gitbook/gitbook-plugin-advanced-emoji/emojis/new.png" title=":new:"> 7.3+</p>
+</blockquote>
+<p>You can be translated not only with <code>v-t</code> custom directive, but also with <code>$t</code> method.</p>
+<h2 id="string-syntax">String syntax</h2>
+<p>You can be passed the keypath of locale messages with string syntax.</p>
+<p>Javascript:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
   i18n: <span class="hljs-keyword">new</span> VueI18n({
     locale: <span class="hljs-string">&apos;en&apos;</span>,
     messages: {
@@ -908,18 +916,26 @@
     }
   }),
   data: { path: <span class="hljs-string">&apos;hello&apos;</span> }
-}).$mount(<span class="hljs-string">&apos;#string-syntax&apos;</span>)</code></pre>
-<p>Templates:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
+}).$mount(<span class="hljs-string">&apos;#string-syntax&apos;</span>)
+</code></pre>
+<p>Templates:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- string literal --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;&apos;hello&apos;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- keypath biniding via data --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;path&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Outputs:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;string-syntax&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi there!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi there!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<h2 id="object-syntax">Object syntax</h2><p>You can be used with object syntax.</p><p>Javascript:</p><pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h2 id="object-syntax">Object syntax</h2>
+<p>You can be used with object syntax.</p>
+<p>Javascript:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">new</span> Vue({
   i18n: <span class="hljs-keyword">new</span> VueI18n({
     locale: <span class="hljs-string">&apos;en&apos;</span>,
     messages: {
@@ -931,18 +947,36 @@
     nickName () { <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;kazupon&apos;</span> }
   },
   data: { path: <span class="hljs-string">&apos;hello&apos;</span> }
-}).$mount(<span class="hljs-string">&apos;#object-syntax&apos;</span>)</code></pre>
-<p>Templates:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
+}).$mount(<span class="hljs-string">&apos;#object-syntax&apos;</span>)
+</code></pre>
+<p>Templates:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- literal --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;{ path: &apos;hello&apos;, locale: &apos;ja&apos;, args: { name: &apos;kazupon&apos; } }&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- data biniding via data --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;{ path: path, args: { name: nickName } }&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Outputs:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;object-syntax&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;kazupon&#xFF01;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>hi kazupon!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<h2 id="t-vs-v-t"><code>$t</code> vs <code>v-t</code></h2><h3 id="t"><code>$t</code></h3><p><code>$t</code> is extended Vue instance method. There are the following pros and cons.</p><h4 id="pros">Pros</h4><p>You can be <strong>flexibly</strong> used it with mustash syntax <code>{{}}</code> in templates and also computed props and methods in Vue instance.</p><h4 id="cons">Cons</h4><p><code>$t</code> is executed <strong>everytime</strong> when occured re-render, so it does have a translation costs.</p><h3 id="v-t"><code>v-t</code></h3><p><code>v-t</code> is custom directive. There are the following pros and cons.</p><h4 id="pros">Pros</h4><p><code>v-t</code> is <strong>high performance</strong> than <code>$t</code> method due to it&apos;s cached with custom directive, when was translated once. And also pre-translation is possible with Vue compiler module which was provided by <a href="https://github.com/kazupon/vue-i18n-extensions" target="_blank"><code>vue-i18n-extentions</code></a>. therefore it&apos; made be possible to <strong>more optimize</strong> performance.</p><h4 id="cons">Cons</h4><p><code>v-t</code> can not be flexibly used like <code>$t</code>, it&apos;s rather <strong>complexity</strong>. The translated contents with <code>v-t</code> is inserted to <code>textContent</code> of element. And also when you use server-side rendering, you need to set <a href="https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side" target="_blank">custom direcitve</a> to <code>directives</code> option of <code>createRenderer</code> function.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h2 id="t-vs-v-t"><code>$t</code> vs <code>v-t</code></h2>
+<h3 id="t"><code>$t</code></h3>
+<p><code>$t</code> is extended Vue instance method. There are the following pros and cons.</p>
+<h4 id="pros">Pros</h4>
+<p>You can be <strong>flexibly</strong> used it with mustash syntax <code>{{}}</code> in templates and also computed props and methods in Vue instance.</p>
+<h4 id="cons">Cons</h4>
+<p><code>$t</code> is executed <strong>everytime</strong> when occured re-render, so it does have a translation costs.</p>
+<h3 id="v-t"><code>v-t</code></h3>
+<p><code>v-t</code> is custom directive. There are the following pros and cons.</p>
+<h4 id="pros">Pros</h4>
+<p><code>v-t</code> is <strong>high performance</strong> than <code>$t</code> method due to it&apos;s cached with custom directive, when was translated once. And also pre-translation is possible with Vue compiler module which was provided by <a href="https://github.com/kazupon/vue-i18n-extensions" target="_blank"><code>vue-i18n-extentions</code></a>. therefore it&apos; made be possible to <strong>more optimize</strong> performance.</p>
+<h4 id="cons">Cons</h4>
+<p><code>v-t</code> can not be flexibly used like <code>$t</code>, it&apos;s rather <strong>complexity</strong>. The translated contents with <code>v-t</code> is inserted to <code>textContent</code> of element. And also when you use server-side rendering, you need to set <a href="https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side" target="_blank">custom direcitve</a> to <code>directives</code> option of <code>createRenderer</code> function.</p>
+
                                 
                                 </section>
                             
@@ -985,7 +1019,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Custom directive localization","level":"1.13","depth":1,"next":{"title":"String Syntax","level":"1.13.1","depth":2,"anchor":"#string-syntax","path":"directive.md","ref":"directive.md#string-syntax","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"directive.md","mtime":"2017-09-22T15:11:15.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-09-22T15:12:16.564Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Custom directive localization","level":"1.13","depth":1,"next":{"title":"String Syntax","level":"1.13.1","depth":2,"anchor":"#string-syntax","path":"directive.md","ref":"directive.md#string-syntax","articles":[]},"previous":{"title":"Component based localization","level":"1.12","depth":1,"path":"component.md","ref":"component.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"directive.md","mtime":"2017-09-22T15:11:15.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-04T01:18:27.926Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -1000,10 +1034,6 @@
     
         
         <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

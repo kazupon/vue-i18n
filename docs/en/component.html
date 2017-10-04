@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="en" >
     <head>
-        <title>Component based localization · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Component based localization · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.3">
         
         
         
@@ -899,7 +899,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="component-based-localization">Component based localization</h1><p>In general, Locale info (e.g. <code>locale</code>,<code>messages</code>, etc) is set as constructor option of <code>VueI18n</code> instance, and it set  <code>i18n</code> option as root Vue instance. Thereby you globally can localize with using <code>$t</code> or <code>$tc</code> in the root Vue instance are composed some component. you manage  locale info for each component and it localize, it was better is convenient due to Vue is component oriented.</p><p>The following component based localization example:</p><pre><code class="lang-javascript"><span class="hljs-comment">// setup locale info for root Vue instance</span>
+                                <h1 id="component-based-localization">Component based localization</h1>
+<p>In general, Locale info (e.g. <code>locale</code>,<code>messages</code>, etc) is set as constructor option of <code>VueI18n</code> instance, and it set  <code>i18n</code> option as root Vue instance. Thereby you globally can localize with using <code>$t</code> or <code>$tc</code> in the root Vue instance are composed some component. you manage  locale info for each component and it localize, it was better is convenient due to Vue is component oriented.</p>
+<p>The following component based localization example:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// setup locale info for root Vue instance</span>
 <span class="hljs-keyword">const</span> i18n = <span class="hljs-keyword">new</span> VueI18n({
   locale: <span class="hljs-string">&apos;ja&apos;</span>,
   messages: {
@@ -938,19 +941,26 @@
   components: {
     Component1
   }
-}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)</code></pre>
-<p>Template the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+}).$mount(<span class="hljs-string">&apos;#app&apos;</span>)
+</code></pre>
+<p>Template the below:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ $t(&quot;message.hello&quot;) }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">component1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component1</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>Output the below:</p><pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>Output the below:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;&#x4E16;&#x754C;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Component1 locale messages: &#x3053;&#x3093;&#x306B;&#x3061;&#x306F;&#x3001;component1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Fallback global locale messages: &#x304A;&#x306F;&#x3088;&#x3046;&#x3001;&#x4E16;&#x754C;&#xFF01;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-<p>As in the example above, if the component doesn&apos;t have the locale message, it  fallbacks and localizes global locale message. Also localize it using global locale (in the above example, <code>locale: &apos;ja&apos;</code>).</p><p>If you hope localize in the component locale, you can realize with <code>sync: false</code> and <code>locale</code> in <code>i18n</code> option.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>As in the example above, if the component doesn&apos;t have the locale message, it  fallbacks and localizes global locale message. Also localize it using global locale (in the above example, <code>locale: &apos;ja&apos;</code>). </p>
+<p>If you hope localize in the component locale, you can realize with <code>sync: false</code> and <code>locale</code> in <code>i18n</code> option.</p>
+
                                 
                                 </section>
                             
@@ -993,7 +1003,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Component based localization","level":"1.12","depth":1,"next":{"title":"Custom directive localization","level":"1.13","depth":1,"path":"directive.md","ref":"directive.md","articles":[{"title":"String Syntax","level":"1.13.1","depth":2,"anchor":"#string-syntax","path":"directive.md","ref":"directive.md#string-syntax","articles":[]},{"title":"Object Syntax","level":"1.13.2","depth":2,"anchor":"#object-syntax","path":"directive.md","ref":"directive.md#object-syntax","articles":[]},{"title":"$t vs v-t","level":"1.13.3","depth":2,"anchor":"#t-vs-v-t","path":"directive.md","ref":"directive.md#t-vs-v-t","articles":[]}]},"previous":{"title":"Fallback localization","level":"1.11","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"component.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2017-09-22T15:12:16.564Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Component based localization","level":"1.12","depth":1,"next":{"title":"Custom directive localization","level":"1.13","depth":1,"path":"directive.md","ref":"directive.md","articles":[{"title":"String Syntax","level":"1.13.1","depth":2,"anchor":"#string-syntax","path":"directive.md","ref":"directive.md#string-syntax","articles":[]},{"title":"Object Syntax","level":"1.13.2","depth":2,"anchor":"#object-syntax","path":"directive.md","ref":"directive.md#object-syntax","articles":[]},{"title":"$t vs v-t","level":"1.13.3","depth":2,"anchor":"#t-vs-v-t","path":"directive.md","ref":"directive.md#t-vs-v-t","articles":[]}]},"previous":{"title":"Fallback localization","level":"1.11","depth":1,"path":"fallback.md","ref":"fallback.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"component.md","mtime":"2017-05-29T14:28:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-04T01:18:27.926Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -1008,10 +1018,6 @@
     
         
         <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
