@@ -100,7 +100,7 @@ You can be **flexibly** used it with mustash syntax `{{}}` in templates and also
 `v-t` is custom directive. There are the following pros and cons.
 
 #### Pros
-`v-t` is **high performance** than `$t` method due to it's cached with custom directive, when was translated once. And also pre-translation is possible with Vue compiler module which was provided by [`vue-i18n-extentions`](https://github.com/kazupon/vue-i18n-extensions). therefore it' made be possible to **more optimize** performance.
+`v-t` has a **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extentions`](https://github.com/kazupon/vue-i18n-extensions). Therefore it's possible to make **more performance optimizations**.
 
 #### Cons
-`v-t` can not be flexibly used like `$t`, it's rather **complexity**. The translated contents with `v-t` is inserted to `textContent` of element. And also when you use server-side rendering, you need to set [custom direcitve](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of `createRenderer` function.
+`v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of  the `createRenderer` function.
