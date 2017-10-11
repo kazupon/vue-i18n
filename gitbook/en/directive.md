@@ -2,11 +2,11 @@
 
 > :new: 7.3+
 
-You can be translated not only with `v-t` custom directive, but also with `$t` method.
+You can translate not only with `v-t` custom directive, but also with `$t` method.
 
 ## String syntax
 
-You can be passed the keypath of locale messages with string syntax.
+You can pass the keypath of locale messages with string syntax.
 
 Javascript:
 
@@ -45,7 +45,7 @@ Outputs:
 
 ## Object syntax
 
-You can be used with object syntax.
+You can use it with object syntax.
 
 Javascript:
 
@@ -88,19 +88,19 @@ Outputs:
 ## `$t` vs `v-t`
 
 ### `$t`
-`$t` is extended Vue instance method. There are the following pros and cons.
+`$t` is extended Vue instance method. Following are the pros and cons.
 
 #### Pros
-You can be **flexibly** used it with mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
+You can **flexibly** use it with mustache syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
 #### Cons
 `$t` is executed **everytime** when occured re-render, so it does have a translation costs.
 
 ### `v-t`
-`v-t` is custom directive. There are the following pros and cons.
+`v-t` is custom directive. Following are the pros and cons.
 
 #### Pros
-`v-t` has a **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extentions`](https://github.com/kazupon/vue-i18n-extensions). Therefore it's possible to make **more performance optimizations**.
+`v-t` has **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extentions`](https://github.com/kazupon/vue-i18n-extensions). Therefore it's possible to make **more performance optimizations**.
 
 #### Cons
 `v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of  the `createRenderer` function.
