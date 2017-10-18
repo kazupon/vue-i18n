@@ -132,7 +132,8 @@ mix.webpackConfig({
         ]
     },
     // ...
-});```
+});
+```
 
 ## YAML loading
 
