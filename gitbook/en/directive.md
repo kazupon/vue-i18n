@@ -45,7 +45,7 @@ Outputs:
 
 ## Object syntax
 
-You can use it with object syntax.
+You can use object syntax.
 
 Javascript:
 
@@ -88,16 +88,16 @@ Outputs:
 ## `$t` vs `v-t`
 
 ### `$t`
-`$t` is extended Vue instance method. Following are the pros and cons.
+`$t` is extended Vue instance method. It has the following pros and cons:
 
 #### Pros
-You can **flexibly** use it with mustache syntax `{{}}` in templates and also computed props and methods in Vue instance.
+You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
 #### Cons
-`$t` is executed **everytime** when occured re-render, so it does have a translation costs.
+`$t` is executed **everytime** when re-render occures, so it does have a translation costs.
 
 ### `v-t`
-`v-t` is custom directive. Following are the pros and cons.
+`v-t` is a custom directive. It has the following pros and cons:
 
 #### Pros
 `v-t` has **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extentions`](https://github.com/kazupon/vue-i18n-extensions). Therefore it's possible to make **more performance optimizations**.
