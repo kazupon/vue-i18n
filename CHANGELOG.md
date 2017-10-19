@@ -1,3 +1,13 @@
+<a name="7.3.2"></a>
+## [7.3.2](https://github.com/kazupon/vue-i18n/compare/v7.3.1...v7.3.2) (2017-10-19)
+
+
+### :zap: Improvements
+
+* **typescript:** fix import problem of vue2.5 because of the types update ([#238](https://github.com/kazupon/vue-i18n/issues/238)) by [@peterchealse](https://github.com/peterchealse) ([cb98347](https://github.com/kazupon/vue-i18n/commit/cb98347)), closes [#238](https://github.com/kazupon/vue-i18n/issues/238)
+
+
+
 <a name="7.3.1"></a>
 ## [7.3.1](https://github.com/kazupon/vue-i18n/compare/v7.3.0...v7.3.1) (2017-10-04)
 
