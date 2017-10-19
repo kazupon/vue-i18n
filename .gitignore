@@ -6,6 +6,7 @@ test/e2e/report
 test/e2e/screenshots
 node_modules
 .DS_Store
+.vscode
 *.log
 *.swp
 *~
