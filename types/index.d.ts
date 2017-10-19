@@ -1,4 +1,4 @@
-import * as Vue from 'vue';
+import Vue from 'vue';
 import { PluginFunction } from 'vue';
 
 declare namespace VueI18n {
