@@ -24,7 +24,7 @@ Include vue-i18n after Vue and it will install itself automatically:
 
     $ yarn add vue-i18n
 
-When used with a module system, you must explicitly install the `vue-i18n` via `Vue.use()`:
+When using with a module system, you must explicitly install the `vue-i18n` via `Vue.use()`:
 
 ```javascript
 import Vue from 'vue'
