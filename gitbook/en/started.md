@@ -44,7 +44,7 @@ const i18n = new VueI18n({
 })
 
 
-// Create a Vue instanc with `i18n` option
+// Create a Vue instance with `i18n` option
 new Vue({ i18n }).$mount('#app')
 
 // Now the app has started!
