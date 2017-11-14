@@ -34,6 +34,7 @@ Internationalization plugin of Vue.js
   * [YAML loading](sfc.md#yaml-loading)
   * [Multiple custom blocks](sfc.md#multiple-custom-blocks)
 * [Hot reloading](hot-reload.md)
+* [Lazy loading](lazy-loading.md)
 * [Migrations](migrations.md)
   * [Global config](migrations.md#global-config)
   * [Global methods](migrations.md#global-methods)
