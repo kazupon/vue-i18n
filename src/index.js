@@ -150,7 +150,10 @@ export default class VueI18n {
   _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any): ?string {
     if (!isNull(result)) { return result }
     if (this.missing) {
-      this.missing.apply(null, [locale, key, vm])
+      const missingResult = this.missing.call(null, locale, key, vm)
+      if (typeof missingResult === 'string') {
+        return missingResult
+      }
     } else {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(
