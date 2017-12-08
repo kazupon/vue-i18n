@@ -129,4 +129,4 @@ declare module 'vue/types/options' {
   }
 }
 
-export = VueI18n;
+export default VueI18n;
