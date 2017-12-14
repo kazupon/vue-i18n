@@ -2,8 +2,10 @@ machine:
   timezone:
     Asia/Tokyo
   node:
-    version: 7
+    version: 8.2.0
 dependencies:
+  pre:
+    - npm install -g npm@5.2.0
   override:
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
