@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginFunction } from 'vue';
+import Vue, { PluginFunction } from 'vue';
 
 declare namespace VueI18n {
   type Path = string;

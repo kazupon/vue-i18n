@@ -24,7 +24,6 @@
     "conventional-changelog-cli": "^1.2.0",
     "conventional-github-releaser": "^1.1.3",
     "cross-spawn": "^5.0.1",
-    "dtslint": "^0.1.2",
     "eslint": "^3.14.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-flowtype": "^2.30.0",
@@ -58,6 +57,7 @@
     "rollup-plugin-replace": "^1.1.1",
     "selenium-server": "2.53.1",
     "sinon": "^2.1.0",
+    "typescript": "^2.4.1",
     "uglify-js": "^2.7.5",
     "vue": "^2.4.0",
     "webpack": "^2.2.0",
@@ -69,7 +69,7 @@
     "dist/vue-i18n.common.js",
     "dist/vue-i18n.esm.js",
     "src",
-    "types",
+    "types/*.d.ts",
     "decls"
   ],
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
@@ -98,7 +98,6 @@
     "docs:build": "node config/version.js && gitbook build ./gitbook ./docs",
     "docs:install": "gitbook install ./gitbook",
     "flow": "flow check",
-    "dtslint": "dtslint types",
     "lint": "eslint src test config",
     "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
     "sauce": "npm run sauce:coolkids && npm run sauce:ie && npm run sauce:mobile",
@@ -108,6 +107,7 @@
     "test": "npm run lint && npm run flow && npm run test:cover && npm run test:e2e",
     "test:cover": "BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
+    "test:types": "tsc -p types",
     "test:unit": "BABEL_ENV=test karma start config/karma.unit.conf.js"
   },
   "unpkg": "dist/vue-i18n.js"

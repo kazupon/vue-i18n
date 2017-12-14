@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "module": "es2015",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noEmit": true
+  },
+  "include": [
+    "**/*.d.ts"
+  ]
+	/*,
+  "compilerOptions": {
     "module": "commonjs",
     "lib": [
       "es6"
@@ -17,4 +28,5 @@
     "noEmit": true,
     "forceConsistentCasingInFileNames": true
   }
+	*/
 }
