@@ -1,3 +1,13 @@
+<a name="7.3.3"></a>
+## [7.3.3](https://github.com/kazupon/vue-i18n/compare/v7.3.2...v7.3.3) (2017-12-19)
+
+
+### :bug: Bug Fixes
+
+* **extend:** Fix this not found [#259](https://github.com/kazupon/vue-i18n/issues/259) ([#260](https://github.com/kazupon/vue-i18n/issues/260)) by [@lzxb](https://github.com/lzxb) ([c29007e](https://github.com/kazupon/vue-i18n/commit/c29007e)), closes [#259](https://github.com/kazupon/vue-i18n/issues/259) [#260](https://github.com/kazupon/vue-i18n/issues/260)
+* **types:** fix using old export ([#263](https://github.com/kazupon/vue-i18n/issues/263)) by [@jmigual](https://github.com/jmigual) ([b295fee](https://github.com/kazupon/vue-i18n/commit/b295fee)), closes [#263](https://github.com/kazupon/vue-i18n/issues/263)
+
+
 <a name="7.3.2"></a>
 ## [7.3.2](https://github.com/kazupon/vue-i18n/compare/v7.3.1...v7.3.2) (2017-10-19)
 
