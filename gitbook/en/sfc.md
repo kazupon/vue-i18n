@@ -41,8 +41,17 @@ export default {
 }
 </script>
 ```
+## Installing vue-i18n-loader
 
-You need to use `vue-loader` due to use `i18n` custom blocks, and the Webpack configration below is required:
+You need to install `vue-loader` and `vue-i18n-loader` due to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
+
+```
+$ npm i --save-dev @kazupon/vue-i18n-loader
+```
+
+## Webpack
+
+For Webpack the configration below is required:
 
 ```js
 module.exports = {
