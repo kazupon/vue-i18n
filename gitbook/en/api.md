@@ -31,11 +31,12 @@
 - **Arguments:**
   - `{Path} key`: required
   - `{number} choice`: optional, default 1
+  - `{Locale} locale`: optional
   - `{string | Array | Object} values`: optional
 
 - **Return:** `string`
 
-  Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
+  Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
 #### $te
 
