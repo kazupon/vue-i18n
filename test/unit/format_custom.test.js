@@ -38,6 +38,49 @@ describe('custom formatter', () => {
     })
   })
 
+  describe('via vue instance calling (mounted)', () => {
+    let el
+
+    beforeEach(done => {
+      el = document.createElement('div')
+      done()
+    })
+
+    it('should be inherited by components', done => {
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          formatter: {
+            interpolate: (message, values) => {
+              assert.deepEqual({ name: 'user' }, values)
+              done()
+              return ['pass']
+            }
+          }
+        }),
+        components: {
+          'child-1': {
+            render (h) {
+              return h('div', {}, [
+                h('p', {}, [this.$t('message', { name: 'user' })])
+              ])
+            },
+            i18n: {
+              messages: {
+                en: { message: 'hello {name}' }
+              }
+            }
+          }
+        },
+        render (h) {
+          return h('div', {}, [
+            h('child-1')
+          ])
+        }
+      }).$mount(el)
+    })
+  })
+
   describe('i18n format getter/settter', () => {
     it('should be worked', done => {
       const i18n = new VueI18n({
