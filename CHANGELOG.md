@@ -1,3 +1,13 @@
+<a name="7.3.4"></a>
+## [7.3.4](https://github.com/kazupon/vue-i18n/compare/v7.3.3...v7.3.4) (2018-01-07)
+
+
+### :bug: Bug Fixes
+
+* **formatter:** Inherit formatter ([#269](https://github.com/kazupon/vue-i18n/issues/269)) by [@podkot](https://github.com/podkot) ([26a33ad](https://github.com/kazupon/vue-i18n/commit/26a33ad))
+
+
+
 <a name="7.3.3"></a>
 ## [7.3.3](https://github.com/kazupon/vue-i18n/compare/v7.3.2...v7.3.3) (2017-12-19)
 
