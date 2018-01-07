@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v7.3.3 
- * (c) 2017 kazuya kawaguchi
+ * vue-i18n v7.3.4 
+ * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -274,6 +274,7 @@ var mixin = {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
           options.i18n.root = this.$root.$i18n;
+          options.i18n.formatter = this.$root.$i18n.formatter;
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
         }
@@ -1534,7 +1535,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.3.3';
+VueI18n.version = '7.3.4';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
