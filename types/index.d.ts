@@ -71,9 +71,7 @@ declare namespace VueI18n {
   }
 }
 
-declare class VueI18n {
-  constructor(options?: VueI18n.I18nOptions)
-
+export declare interface IVueI18n {
   readonly messages: VueI18n.LocaleMessages;
   readonly dateTimeFormats: VueI18n.DateTimeFormats;
   readonly numberFormats: VueI18n.NumberFormats;
@@ -83,37 +81,51 @@ declare class VueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   silentTranslationWarn: boolean;
+}
 
-  t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
-  t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
-  tc(key: VueI18n.Path, choice?: VueI18n.Choice, values?: VueI18n.Values): string;
-  tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, values?: VueI18n.Values): string;
-  te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
-  d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
-  d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
-  n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
-  n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
-
-  getLocaleMessage(locale: VueI18n.Locale): VueI18n.LocaleMessageObject;
-  setLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
-  mergeLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
-
-  getDateTimeFormat(locale: VueI18n.Locale): VueI18n.DateTimeFormat;
-  setDateTimeFormat(locale: VueI18n.Locale, format: VueI18n.DateTimeFormat): void;
-  mergeDateTimeFormat(locale: VueI18n.Locale, format: VueI18n.DateTimeFormat): void;
-
-  getNumberFormat(locale: VueI18n.Locale): VueI18n.NumberFormat;
-  setNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
-  mergeNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
-
-  static install: PluginFunction<never>;
-  static version: string;
-  static availabilities: VueI18n.IntlAvailability;
+declare class VueI18n {
+    constructor(options?: VueI18n.I18nOptions)
+  
+    readonly messages: VueI18n.LocaleMessages;
+    readonly dateTimeFormats: VueI18n.DateTimeFormats;
+    readonly numberFormats: VueI18n.NumberFormats;
+  
+    locale: VueI18n.Locale;
+    fallbackLocale: VueI18n.Locale;
+    missing: VueI18n.MissingHandler;
+    formatter: VueI18n.Formatter;
+    silentTranslationWarn: boolean;
+  
+    t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
+    t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
+    tc(key: VueI18n.Path, choice?: VueI18n.Choice, values?: VueI18n.Values): string;
+    tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, values?: VueI18n.Values): string;
+    te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
+    d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
+    d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
+    n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
+    n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
+  
+    getLocaleMessage(locale: VueI18n.Locale): VueI18n.LocaleMessageObject;
+    setLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
+    mergeLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
+  
+    getDateTimeFormat(locale: VueI18n.Locale): VueI18n.DateTimeFormat;
+    setDateTimeFormat(locale: VueI18n.Locale, format: VueI18n.DateTimeFormat): void;
+    mergeDateTimeFormat(locale: VueI18n.Locale, format: VueI18n.DateTimeFormat): void;
+  
+    getNumberFormat(locale: VueI18n.Locale): VueI18n.NumberFormat;
+    setNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
+    mergeNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
+  
+    static install: PluginFunction<never>;
+    static version: string;
+    static availabilities: VueI18n.IntlAvailability;
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    readonly $i18n: VueI18n;
+    readonly $i18n: VueI18n & IVueI18n;
     $t: typeof VueI18n.prototype.t;
     $tc: typeof VueI18n.prototype.tc;
     $te: typeof VueI18n.prototype.te;
