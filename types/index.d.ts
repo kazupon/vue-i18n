@@ -71,6 +71,18 @@ declare namespace VueI18n {
   }
 }
 
+export declare interface IVueI18n {
+  readonly messages: VueI18n.LocaleMessages;
+  readonly dateTimeFormats: VueI18n.DateTimeFormats;
+  readonly numberFormats: VueI18n.NumberFormats;
+
+  locale: VueI18n.Locale;
+  fallbackLocale: VueI18n.Locale;
+  missing: VueI18n.MissingHandler;
+  formatter: VueI18n.Formatter;
+  silentTranslationWarn: boolean;
+}
+
 declare class VueI18n {
   constructor(options?: VueI18n.I18nOptions)
 
@@ -113,7 +125,7 @@ declare class VueI18n {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    readonly $i18n: VueI18n;
+    readonly $i18n: VueI18n & IVueI18n;
     $t: typeof VueI18n.prototype.t;
     $tc: typeof VueI18n.prototype.tc;
     $te: typeof VueI18n.prototype.te;
