@@ -1,3 +1,13 @@
+<a name="7.4.0"></a>
+# [7.4.0](https://github.com/kazupon/vue-i18n/compare/v7.3.4...v7.4.0) (2018-01-10)
+
+
+### :star: New Features
+
+* **typescript:** Allow module augmentation ([#273](https://github.com/kazupon/vue-i18n/issues/273)) by [@CKGrafico](https://github.com/CKGrafico) ([4371344](https://github.com/kazupon/vue-i18n/commit/4371344))
+
+
+
 <a name="7.3.4"></a>
 ## [7.3.4](https://github.com/kazupon/vue-i18n/compare/v7.3.3...v7.3.4) (2018-01-07)
 
