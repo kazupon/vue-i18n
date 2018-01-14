@@ -465,7 +465,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages.
   If you can be used object syntax, you need to specify as the object key the following params:
 
-  - path: required, key of locale messags
+  - path: required, key of locale messages
   - locale: optional, locale
   - args: optional, for list or named formatting
 
