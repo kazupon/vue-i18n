@@ -22,7 +22,7 @@
   - `{Locale} locale`: optional
   - `{Array | Object} values`: optional
 
-- **Return:** `string`
+- **Return:** `TranslateResult`
 
   Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](formatting.md).
 
@@ -34,7 +34,7 @@
   - `{Locale} locale`: optional
   - `{string | Array | Object} values`: optional
 
-- **Return:** `string`
+- **Return:** `TranslateResult`
 
   Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
@@ -57,7 +57,7 @@
   - `{Path | Object} key`: optional
   - `{Locale | Object} locale`: optional
 
-- **Return:** `string`
+- **Return:** `DateTimeFormatResult`
 
   Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
 
@@ -72,7 +72,7 @@
   - `{Path | Object} key`: optional
   - `{Locale | Object} locale`: optional
 
-- **Return:** `string`
+- **Return:** `NumberFormatResult`
 
   Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
 
@@ -327,7 +327,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - `{Locale} locale`: optional
   - `{Array | Object} values`: optional
 
-- **Return:**: `string`
+- **Return:**: `TranslateResult`
 
   This is the same as the `Function` returned with `$t` method. More detail see [$t](#$t).
 
@@ -340,7 +340,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - `{Locale} locale`: optional
   - `{Array} values`: optional
 
-- **Return:**: `Array`
+- **Return:**: `TranslateResult`
 
 
 #### tc( key, [choice], [values] )
@@ -350,7 +350,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - `{number} choice`: optional, default `1`
   - `{string | Array | Object} values`: optional
 
-- **Return:** `string`
+- **Return:** `TranslateResult`
 
   This is the same as the `Function` returned `$tc` method. More detail see [$tc](#$tc).
 
@@ -404,7 +404,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - `{Path | Object} key`: optional
   - `{Locale | Object} locale`: optional
 
-- **Return:** `string`
+- **Return:** `DateTimeFormatResult`
 
   This is the same as `$d` method of Vue instance method. More detail see [$d](#$d).
 
@@ -448,7 +448,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - `{Path | Object} key`: optional
   - `{Locale | Object} locale`: optional
 
-- **Return:** `string`
+- **Return:** `NumberFormatResult`
 
   This is the same as `$n` method of Vue instance method. More detail see [$n](#$n).
 
