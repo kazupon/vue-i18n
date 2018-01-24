@@ -17,6 +17,22 @@ describe('custom formatter', () => {
       })
       i18n.t('message.hello', 'ja', { name: 'joe' })
     })
+
+    it('should interpolate messages without values', done => {
+      class CustomFormatter {
+        interpolate (message, values) {
+          assert(values === null)
+          done()
+        }
+      }
+      const formatter = new CustomFormatter()
+      const i18n = new VueI18n({
+        locale: 'en',
+        messages,
+        formatter
+      })
+      i18n.t('message.hello')
+    })
   })
 
   describe('via vue instance calling', () => {
