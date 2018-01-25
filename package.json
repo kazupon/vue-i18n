@@ -23,6 +23,7 @@
     "chromedriver": "^2.27.2",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-github-releaser": "^1.1.3",
+    "cross-env": "^5.1.3",
     "cross-spawn": "^5.0.1",
     "eslint": "^3.14.1",
     "eslint-loader": "^1.6.1",
@@ -93,7 +94,7 @@
     "changelog": "conventional-changelog -i CHANGELOG.md -s -n ./node_modules/git-commit-message-convention/convention.js",
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
-    "dev": "BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
+    "dev": "cross-env BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
     "docs": "gitbook serve ./gitbook ./docs",
     "docs:build": "node config/version.js && gitbook build ./gitbook ./docs",
     "docs:install": "gitbook install ./gitbook",
@@ -105,10 +106,10 @@
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
     "test": "npm run lint && npm run flow && npm run test:types && npm run test:cover && npm run test:e2e",
-    "test:cover": "BABEL_ENV=test karma start config/karma.cover.conf.js",
+    "test:cover": "cross-env BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
     "test:types": "tsc -p types",
-    "test:unit": "BABEL_ENV=test karma start config/karma.unit.conf.js"
+    "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js"
   },
   "unpkg": "dist/vue-i18n.js"
 }
