@@ -210,7 +210,7 @@ export default class VueI18n {
       ret = this._link(locale, message, ret, host, interpolateMode, values)
     }
 
-    return !values ? ret : this._render(ret, interpolateMode, values)
+    return this._render(ret, interpolateMode, values)
   }
 
   _link (

@@ -10,6 +10,9 @@ export default class BaseFormatter {
   }
 
   interpolate (message: string, values: any): Array<any> {
+    if (!values) {
+      return [message]
+    }
     let tokens: Array<Token> = this._caches[message]
     if (!tokens) {
       tokens = parse(message)
