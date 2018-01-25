@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.4.0 
+ * vue-i18n v7.4.1 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -546,6 +546,9 @@ var BaseFormatter = function BaseFormatter () {
 };
 
 BaseFormatter.prototype.interpolate = function interpolate (message, values) {
+  if (!values) {
+    return [message]
+  }
   var tokens = this._caches[message];
   if (!tokens) {
     tokens = parse(message);
@@ -1069,8 +1072,8 @@ VueI18n.prototype._getNumberFormats = function _getNumberFormats () { return thi
 
 VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm) {
   if (!isNull(result)) { return result }
-  if (this.missing) {
-    this.missing.apply(null, [locale, key, vm]);
+  if (this._missing) {
+    this._missing.apply(null, [locale, key, vm]);
   } else {
     if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(
@@ -1130,7 +1133,7 @@ VueI18n.prototype._interpolate = function _interpolate (
     ret = this._link(locale, message, ret, host, interpolateMode, values);
   }
 
-  return !values ? ret : this._render(ret, interpolateMode, values)
+  return this._render(ret, interpolateMode, values)
 };
 
 VueI18n.prototype._link = function _link (
@@ -1224,7 +1227,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
   if (!key) { return '' }
 
   var parsedArgs = parseArgs.apply(void 0, values);
-    var locale = parsedArgs.locale || _locale;
+  var locale = parsedArgs.locale || _locale;
 
   var ret = this._translate(
     messages, locale, this.fallbackLocale, key,
@@ -1280,14 +1283,14 @@ VueI18n.prototype._tc = function _tc (
   key,
   _locale,
   messages,
-    host,
-    choice
+  host,
+  choice
 ) {
     var values = [], len = arguments.length - 5;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 5 ];
 
-    if (!key) { return '' }
-  if (choice === undefined) {
+  if (!key) { return '' }
+    if (choice === undefined) {
     choice = 1;
   }
   return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
@@ -1322,8 +1325,8 @@ VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message)
   this._vm.messages[locale] = message;
 };
 
-  VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
-  this._vm.messages[locale] = Vue.util.extend(this._vm.messages[locale] || {}, message);
+VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
+  this._vm.$set(this._vm.messages, locale, Vue.util.extend(this._vm.messages[locale] || {}, message));
 };
 
 VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
@@ -1335,7 +1338,7 @@ VueI18n.prototype.setDateTimeFormat = function setDateTimeFormat (locale, format
 };
 
 VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, format) {
-  this._vm.dateTimeFormats[locale] = Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format);
+  this._vm.$set(this._vm.dateTimeFormats, locale, Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format));
 };
 
 VueI18n.prototype._localizeDateTime = function _localizeDateTime (
@@ -1414,13 +1417,13 @@ VueI18n.prototype.d = function d (value) {
       }
     }
   } else if (args.length === 2) {
-    if (typeof args[0] === 'string') {
+      if (typeof args[0] === 'string') {
         key = args[0];
-      }
-      if (typeof args[1] === 'string') {
-      locale = args[1];
     }
-  }
+    if (typeof args[1] === 'string') {
+      locale = args[1];
+      }
+    }
 
   return this._d(value, locale, key)
 };
@@ -1434,7 +1437,7 @@ VueI18n.prototype.setNumberFormat = function setNumberFormat (locale, format) {
 };
 
 VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format) {
-  this._vm.numberFormats[locale] = Vue.util.extend(this._vm.numberFormats[locale] || {}, format);
+  this._vm.$set(this._vm.numberFormats, locale, Vue.util.extend(this._vm.numberFormats[locale] || {}, format));
 };
 
 VueI18n.prototype._localizeNumber = function _localizeNumber (
@@ -1531,7 +1534,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.4.0';
+VueI18n.version = '7.4.1';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
