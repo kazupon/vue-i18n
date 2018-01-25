@@ -1,3 +1,18 @@
+<a name="7.4.1"></a>
+## [7.4.1](https://github.com/kazupon/vue-i18n/compare/v7.4.0...v7.4.1) (2018-01-25)
+
+
+### :bug: Bug Fixes
+
+* fix cannot react ([2a8ea1c](https://github.com/kazupon/vue-i18n/commit/2a8ea1c)), closes [#261](https://github.com/kazupon/vue-i18n/issues/261)
+
+
+### :zap: Improvements
+
+* **formatter:** interpolate messages without values ([#282](https://github.com/kazupon/vue-i18n/issues/282)) by [@cb8](https://github.com/cb8) ([b792ce2](https://github.com/kazupon/vue-i18n/commit/b792ce2))
+
+
+
 <a name="7.4.0"></a>
 # [7.4.0](https://github.com/kazupon/vue-i18n/compare/v7.3.4...v7.4.0) (2018-01-10)
 
