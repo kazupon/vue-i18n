@@ -25,7 +25,7 @@ Based on the above syntax, You can configure the following structure Locale Mess
     },
     errors: [ // array
       "this is 0 error code message",
-      {  // array in object
+      {  // object in array
          "internal1": "this is internal 1 error message"
       },
       [  // array in array
