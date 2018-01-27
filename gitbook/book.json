@@ -1,5 +1,6 @@
 {
   "gitbook": "3.x.x",
+  "title": "vue-i18n",
   "root": "./",
   "plugins": [
     "edit-link",
@@ -23,4 +24,3 @@
     }
   }
 }
-
