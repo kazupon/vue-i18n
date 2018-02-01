@@ -39,6 +39,13 @@ export default class VueI18n {
   _dataListeners: Array<any>
 
   constructor (options: I18nOptions = {}) {
+    // Auto install if it is not done yet and `window` has `Vue`.
+    // To allow users to avoid auto-installation in some cases,
+    // this code should be placed here. See #290
+    if (!Vue && typeof window !== 'undefined' && window.Vue) {
+      install(window.Vue)
+    }
+
     const locale: Locale = options.locale || 'en-US'
     const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
@@ -585,8 +592,3 @@ VueI18n.availabilities = {
 }
 VueI18n.install = install
 VueI18n.version = '__VERSION__'
-
-/* istanbul ignore if */
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(VueI18n)
-}
