@@ -1,3 +1,13 @@
+<a name="7.4.2"></a>
+## [7.4.2](https://github.com/kazupon/vue-i18n/compare/v7.4.1...v7.4.2) (2018-02-01)
+
+
+### :zap: Improvements
+
+* **index:** Fixes global auto installation ([#291](https://github.com/kazupon/vue-i18n/issues/291)) by [@emileber](https://github.com/emileber) ([2f016ff](https://github.com/kazupon/vue-i18n/commit/2f016ff)), closes [#291](https://github.com/kazupon/vue-i18n/issues/291)
+
+
+
 <a name="7.4.1"></a>
 ## [7.4.1](https://github.com/kazupon/vue-i18n/compare/v7.4.0...v7.4.1) (2018-01-25)
 
