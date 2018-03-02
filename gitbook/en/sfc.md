@@ -75,7 +75,7 @@ module.exports = {
 }
 ```
 
-## Vue-Cli 3.0
+## Vue CLI 3.0 (beta)
 
 [Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
