@@ -51,7 +51,7 @@ $ npm i --save-dev @kazupon/vue-i18n-loader
 
 ## Webpack
 
-For Webpack the configration below is required:
+For Webpack the configuration below is required:
 
 ```js
 module.exports = {
@@ -74,6 +74,35 @@ module.exports = {
   // ...
 }
 ```
+
+## Vue-Cli 3.0
+
+[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
+
+In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
+
+```js
+const merge = require('deepmerge')
+
+module.exports = {
+  chainWebpack: config => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options =>
+        merge(options, {
+          loaders: {
+            i18n: '@kazupon/vue-i18n-loader'
+          }
+        })
+      )
+  }
+}
+```
+
+_Don't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
+
+If you want to read more about modifying the existing configuration [click here](https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md).
 
 ## Laravel-Mix
 
