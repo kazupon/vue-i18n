@@ -77,7 +77,7 @@ module.exports = {
 
 ## Vue-Cli 3.0
 
-[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag in the `single file components` we need to modify the existing configuration.
+[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
 In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
 
@@ -100,7 +100,7 @@ module.exports = {
 }
 ```
 
-_Don't forget to install deepmerge! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
+_Don't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
 
 If you want to read more about modifying the existing configuration [click here](https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md).
 
