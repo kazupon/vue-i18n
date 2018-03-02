@@ -51,7 +51,7 @@ $ npm i --save-dev @kazupon/vue-i18n-loader
 
 ## Webpack
 
-For Webpack the configration below is required:
+For Webpack the configuration below is required:
 
 ```js
 module.exports = {
