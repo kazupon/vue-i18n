@@ -975,7 +975,7 @@
   <span class="hljs-comment">// ...</span>
 }
 </code></pre>
-<h2 id="vue-cli-30">Vue-Cli 3.0</h2>
+<h2 id="vue-cli-30-beta">Vue CLI 3.0 (beta)</h2>
 <p><a href="https://github.com/vuejs/vue-cli" target="_blank">Vue-cli 3.0</a> hides the webpack configuration, so, if we want to add support to the <code>&lt;i18n&gt;</code> tag inside a single file component we need to modify the existing configuration.</p>
 <p>In order to do that we have to create a <code>vue.config.js</code> at the root of our project. Once done that, we have to include the following:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> merge = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;deepmerge&apos;</span>)
@@ -1154,7 +1154,7 @@ ja:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.15","depth":1,"next":{"title":"Basic Usage","level":"1.15.1","depth":2,"anchor":"#basic-usage","path":"sfc.md","ref":"sfc.md#basic-usage","articles":[]},"previous":{"title":"Advanced Usage","level":"1.14.2","depth":2,"anchor":"#advanced-usage","path":"interpolation.md","ref":"interpolation.md#advanced-usage","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"livereload":{},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-i18n","language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2018-03-02T11:32:21.142Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-02T11:30:38.479Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"Single file components","level":"1.15","depth":1,"next":{"title":"Basic Usage","level":"1.15.1","depth":2,"anchor":"#basic-usage","path":"sfc.md","ref":"sfc.md#basic-usage","articles":[]},"previous":{"title":"Advanced Usage","level":"1.14.2","depth":2,"anchor":"#advanced-usage","path":"interpolation.md","ref":"interpolation.md#advanced-usage","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-i18n","language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"sfc.md","mtime":"2018-03-02T14:51:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-02T14:51:56.386Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
@@ -1169,10 +1169,6 @@ ja:
     
         
         <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
