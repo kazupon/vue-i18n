@@ -441,7 +441,7 @@ export default class VueI18n {
   _d (value: number | Date, locale: Locale, key: ?string): DateTimeFormatResult {
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.dateTimeFormat) {
-      warn('Cannot format a Date value due to not support Intl.DateTimeFormat.')
+      warn('Cannot format a Date value due to not supported Intl.DateTimeFormat.')
       return ''
     }
 
@@ -537,7 +537,7 @@ export default class VueI18n {
   _n (value: number, locale: Locale, key: ?string): NumberFormatResult {
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
-      warn('Cannot format a Date value due to not support Intl.NumberFormat.')
+      warn('Cannot format a Number value due to not supported Intl.NumberFormat.')
       return ''
     }
 

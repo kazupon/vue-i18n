@@ -8,7 +8,7 @@
 
 - **Type:** `I18nOptions`
 
-  Component based localization option. 
+  Component based localization option.
 
 - **See also:** [`VueI18n` class constructor options](#constructor-options)
 
@@ -70,7 +70,7 @@
 - **Arguments:**
   - `{number} value`: required
   - `{Path | Object} key`: optional
-  - `{Locale | Object} locale`: optional
+  - `{Locale} locale`: optional
 
 - **Return:** `NumberFormatResult`
 
@@ -310,7 +310,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the locale message of locale.
 
-#### mergeLocaleMessage( locale, message ) 
+#### mergeLocaleMessage( locale, message )
 
 > 6.1+
 
@@ -385,7 +385,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the datetime format of locale.
 
-#### mergeDateTimeFormat ( locale, format ) 
+#### mergeDateTimeFormat ( locale, format )
 
 > :new: 7.0+
 
@@ -429,7 +429,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the number format of locale.
 
-#### mergeNumberFormat ( locale, format ) 
+#### mergeNumberFormat ( locale, format )
 
 > :new: 7.0+
 
@@ -446,7 +446,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Arguments:**
   - `{number} value`: required
   - `{Path | Object} key`: optional
-  - `{Locale | Object} locale`: optional
+  - `{Locale} locale`: optional
 
 - **Return:** `NumberFormatResult`
 
@@ -461,7 +461,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Expects:** `string | Object`
 
 - **Details:**
-  
+
   Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages.
   If you can be used object syntax, you need to specify as the object key the following params:
 
@@ -472,10 +472,10 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Examples:**
 
   ```html
-  <!-- string syntax: literal --> 
+  <!-- string syntax: literal -->
   <p v-t="'foo.bar'"></p>
 
-  <!-- string syntax: binding via data or computed props --> 
+  <!-- string syntax: binding via data or computed props -->
   <p v-t="msg"></p>
 
   <!-- object syntax: literal -->
