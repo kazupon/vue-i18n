@@ -461,7 +461,6 @@ function t$1 (el, binding, vnode) {
   var path = ref.path;
   var locale = ref.locale;
   var args = ref.args;
-  var choice = ref.choice;
   if (!path && !locale && !args) {
     warn('not support value type');
     return
@@ -473,21 +472,15 @@ function t$1 (el, binding, vnode) {
   }
 
   var vm = vnode.context;
-  if (choice) {
-    el._vt = el.textContent = (ref$1 = vm.$i18n).tc.apply(ref$1, [ path, choice ].concat( makeParams(locale, args) ));
-  } else {
-    el._vt = el.textContent = (ref$2 = vm.$i18n).t.apply(ref$2, [ path ].concat( makeParams(locale, args) ));
-  }
+  el._vt = el.textContent = (ref$1 = vm.$i18n).t.apply(ref$1, [ path ].concat( makeParams(locale, args) ));
   el._locale = vm.$i18n.locale;
   var ref$1;
-  var ref$2;
 }
 
 function parseValue (value) {
   var path;
   var locale;
   var args;
-  var choice;
 
   if (typeof value === 'string') {
     path = value;
@@ -495,10 +488,9 @@ function parseValue (value) {
     path = value.path;
     locale = value.locale;
     args = value.args;
-    choice = value.choice;
   }
 
-  return { path: path, locale: locale, args: args, choice: choice }
+  return { path: path, locale: locale, args: args }
 }
 
 function makeParams (locale, args) {
@@ -1317,13 +1309,13 @@ VueI18n.prototype.tc = function tc (key, choice) {
 
   return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
     var ref;
-};
+  };
 
-VueI18n.prototype._te = function _te (key, locale, messages) {
+  VueI18n.prototype._te = function _te (key, locale, messages) {
     var args = [], len = arguments.length - 3;
     while ( len-- > 0 ) args[ len ] = arguments[ len + 3 ];
 
-  var _locale = parseArgs.apply(void 0, args).locale || locale;
+    var _locale = parseArgs.apply(void 0, args).locale || locale;
   return this._exist(messages[_locale], key)
 };
 
@@ -1348,8 +1340,8 @@ VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
 };
 
 VueI18n.prototype.setDateTimeFormat = function setDateTimeFormat (locale, format) {
-  this._vm.dateTimeFormats[locale] = format;
-};
+    this._vm.dateTimeFormats[locale] = format;
+  };
 
 VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, format) {
   this._vm.$set(this._vm.dateTimeFormats, locale, Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format));
@@ -1447,10 +1439,10 @@ VueI18n.prototype.getNumberFormat = function getNumberFormat (locale) {
 };
 
 VueI18n.prototype.setNumberFormat = function setNumberFormat (locale, format) {
-  this._vm.numberFormats[locale] = format;
-  };
+    this._vm.numberFormats[locale] = format;
+};
 
-  VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format) {
+VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format) {
   this._vm.$set(this._vm.numberFormats, locale, Vue.util.extend(this._vm.numberFormats[locale] || {}, format));
 };
 
