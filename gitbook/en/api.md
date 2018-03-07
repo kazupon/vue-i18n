@@ -59,7 +59,7 @@
 
 - **Return:** `DateTimeFormatResult`
 
-  Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+  Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
   If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
@@ -74,10 +74,26 @@
 
 - **Return:** `NumberFormatResult`
 
-  Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+  Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
   If the number format of `key` not exist in `numberFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
+  If the second `key` argument specified as an object, it should have the following properties:
+  - `key {Path}`: optional, number format
+  - `locale {Locale}`: optional, locale
+  - `style {string}`: optional, number format option
+  - `currency {string}`: optional, number format option
+  - `currencyDisplay {string}`: optional, number format option
+  - `useGrouping {string}`: optional, number format option
+  - `minimumIntegerDigits {string}`: optional, number format option
+  - `minimumFractionDigits {string}`: optional, number format option
+  - `maximumFractionDigits {string}`: optional, number format option
+  - `minimumSignificantDigits {string}`: optional, number format option
+  - `maximumSignificantDigits {string}`: optional, number format option
+  - `localeMatcher {string}`: optional, number format option
+  - `formatMatcher {string}`: optional, number format option
+
+  Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
 ### Injected properties
 
