@@ -8,7 +8,7 @@
 
 - **Type:** `I18nOptions`
 
-  Component based localization option. 
+  Component based localization option.
 
 - **See also:** [`VueI18n` class constructor options](#constructor-options)
 
@@ -59,7 +59,7 @@
 
 - **Return:** `DateTimeFormatResult`
 
-  Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+  Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
   If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
@@ -70,14 +70,30 @@
 - **Arguments:**
   - `{number} value`: required
   - `{Path | Object} key`: optional
-  - `{Locale | Object} locale`: optional
+  - `{Locale} locale`: optional
 
 - **Return:** `NumberFormatResult`
 
-  Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, Localized in preferentially it than `locale` option of `VueI18n` constructor.
+  Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
   If the number format of `key` not exist in `numberFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
+  If the second `key` argument specified as an object, it should have the following properties:
+  - `key {Path}`: optional, number format
+  - `locale {Locale}`: optional, locale
+  - `style {string}`: optional, number format option
+  - `currency {string}`: optional, number format option
+  - `currencyDisplay {string}`: optional, number format option
+  - `useGrouping {string}`: optional, number format option
+  - `minimumIntegerDigits {string}`: optional, number format option
+  - `minimumFractionDigits {string}`: optional, number format option
+  - `maximumFractionDigits {string}`: optional, number format option
+  - `minimumSignificantDigits {string}`: optional, number format option
+  - `maximumSignificantDigits {string}`: optional, number format option
+  - `localeMatcher {string}`: optional, number format option
+  - `formatMatcher {string}`: optional, number format option
+
+  Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
 ### Injected properties
 
@@ -310,7 +326,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the locale message of locale.
 
-#### mergeLocaleMessage( locale, message ) 
+#### mergeLocaleMessage( locale, message )
 
 > 6.1+
 
@@ -385,7 +401,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the datetime format of locale.
 
-#### mergeDateTimeFormat ( locale, format ) 
+#### mergeDateTimeFormat ( locale, format )
 
 > :new: 7.0+
 
@@ -429,7 +445,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   Set the number format of locale.
 
-#### mergeNumberFormat ( locale, format ) 
+#### mergeNumberFormat ( locale, format )
 
 > :new: 7.0+
 
@@ -446,7 +462,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Arguments:**
   - `{number} value`: required
   - `{Path | Object} key`: optional
-  - `{Locale | Object} locale`: optional
+  - `{Locale} locale`: optional
 
 - **Return:** `NumberFormatResult`
 
@@ -461,7 +477,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Expects:** `string | Object`
 
 - **Details:**
-  
+
   Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages.
   If you can be used object syntax, you need to specify as the object key the following params:
 
@@ -472,10 +488,10 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Examples:**
 
   ```html
-  <!-- string syntax: literal --> 
+  <!-- string syntax: literal -->
   <p v-t="'foo.bar'"></p>
 
-  <!-- string syntax: binding via data or computed props --> 
+  <!-- string syntax: binding via data or computed props -->
   <p v-t="msg"></p>
 
   <!-- object syntax: literal -->

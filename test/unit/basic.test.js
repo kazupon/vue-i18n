@@ -677,6 +677,30 @@ describe('basic', () => {
       })
     })
 
+    describe('explicit options argument', () => {
+      describe('without key', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, { style: 'currency', currency: 'JPY' }), '¥10,100')
+        })
+
+        it('should respect other number options', () => {
+          const options = { style: 'currency', currency: 'EUR', currencyDisplay: 'code' }
+          assert.equal(i18n.n(money, options), 'EUR10,100.00')
+        })
+      })
+
+      describe('with key', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, { key: 'currency', currency: 'JPY' }), '¥10,100')
+        })
+
+        it('should respect other number options', () => {
+          const options = { key: 'currency', currency: 'EUR', currencyDisplay: 'code' }
+          assert.equal(i18n.n(money, options), 'EUR10,100.00')
+        })
+      })
+    })
+
     describe('fallback', () => {
       it('should be formatted', () => {
         assert.equal(i18n.n(0.9, 'percent'), '90%')
