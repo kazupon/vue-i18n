@@ -50,4 +50,28 @@ describe('missing', () => {
       i18n.t('foo.bar.buz')
     })
   })
+
+  describe('i18n missing values', () => {
+    it('should receive the values for interpolation', done => {
+      const testValues = {
+        foo: 'bar',
+        num: 1234
+      }
+
+      const missing = (locale, key, vm, values) => {
+        assert.equal('en', locale)
+        assert.equal('cannot.find', key)
+        assert.equal('bar', values.foo)
+        assert.equal(1234, values.num)
+        done()
+      }
+
+      const i18n = new VueI18n({
+        locale: 'en',
+        missing
+      })
+
+      i18n.t('cannot.find', testValues)
+    })
+  })
 })
