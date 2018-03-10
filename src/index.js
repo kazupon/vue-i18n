@@ -169,10 +169,10 @@ export default class VueI18n {
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
   _getNumberFormats (): NumberFormats { return this._vm.numberFormats }
 
-  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any): ?string {
+  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any): ?string {
     if (!isNull(result)) { return result }
     if (this._missing) {
-      this._missing.apply(null, [locale, key, vm])
+      this._missing.apply(null, [locale, key, vm, values])
     } else {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(
@@ -277,7 +277,10 @@ export default class VueI18n {
           linkPlaceholder, host, interpolateMode, values
         )
       }
-      translated = this._warnDefault(locale, linkPlaceholder, translated, host)
+      translated = this._warnDefault(
+        locale, linkPlaceholder, translated, host,
+        Array.isArray(values) ? values : [values]
+      )
 
       // Replace the link with the translated
       ret = !translated ? ret : ret.replace(link, translated)
@@ -335,7 +338,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host)
+      return this._warnDefault(locale, key, ret, host, values)
     }
   }
 
@@ -353,7 +356,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host)
+      return this._warnDefault(locale, key, ret, host, [values])
     }
   }
 
