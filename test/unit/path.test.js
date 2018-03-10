@@ -3,7 +3,7 @@ import I18nPath from '../../src/path'
 describe('path', () => {
   const path = new I18nPath()
 
-  describe('primivite', () => {
+  describe('primitive', () => {
     it('should get path value', () => {
       assert.equal(path.getPathValue({ a: { b: 1 } }, 'a.b'), 1)
     })
