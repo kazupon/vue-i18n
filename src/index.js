@@ -277,7 +277,10 @@ export default class VueI18n {
           linkPlaceholder, host, interpolateMode, values
         )
       }
-      translated = this._warnDefault(locale, linkPlaceholder, translated, host, values)
+      translated = this._warnDefault(
+        locale, linkPlaceholder, translated, host,
+        Array.isArray(values) ? values : [values]
+      )
 
       // Replace the link with the translated
       ret = !translated ? ret : ret.replace(link, translated)
@@ -353,7 +356,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values)
+      return this._warnDefault(locale, key, ret, host, [values])
     }
   }
 

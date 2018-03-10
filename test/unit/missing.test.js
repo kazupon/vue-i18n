@@ -61,8 +61,9 @@ describe('missing', () => {
       const missing = (locale, key, vm, values) => {
         assert.equal('en', locale)
         assert.equal('cannot.find', key)
-        assert.equal('bar', values.foo)
-        assert.equal(1234, values.num)
+        // `values` is normalized to be an array.
+        assert.equal('bar', values[0].foo)
+        assert.equal(1234, values[0].num)
         done()
       }
 
