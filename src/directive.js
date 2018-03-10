@@ -39,7 +39,7 @@ function localeEqual (el: any, vnode: any): boolean {
 function t (el: any, binding: Object, vnode: any): void {
   const value: any = binding.value
 
-  const { path, locale, args } = parseValue(value)
+  const { path, locale, args, choice } = parseValue(value)
   if (!path && !locale && !args) {
     warn('not support value type')
     return
@@ -51,7 +51,11 @@ function t (el: any, binding: Object, vnode: any): void {
   }
 
   const vm: any = vnode.context
-  el._vt = el.textContent = vm.$i18n.t(path, ...makeParams(locale, args))
+  if (choice) {
+    el._vt = el.textContent = vm.$i18n.tc(path, choice, ...makeParams(locale, args))
+  } else {
+    el._vt = el.textContent = vm.$i18n.t(path, ...makeParams(locale, args))
+  }
   el._locale = vm.$i18n.locale
 }
 
@@ -59,6 +63,7 @@ function parseValue (value: any): Object {
   let path: ?string
   let locale: ?Locale
   let args: any
+  let choice: ?number
 
   if (typeof value === 'string') {
     path = value
@@ -66,9 +71,10 @@ function parseValue (value: any): Object {
     path = value.path
     locale = value.locale
     args = value.args
+    choice = value.choice
   }
 
-  return { path, locale, args }
+  return { path, locale, args, choice }
 }
 
 function makeParams (locale: Locale, args: any): Array<any> {

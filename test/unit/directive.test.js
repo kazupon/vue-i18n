@@ -157,5 +157,47 @@ describe('custom directive', () => {
         }).then(done)
       })
     })
+
+    describe('pluralize', () => {
+      it('should be singular', done => {
+        const vm = createVM({
+          i18n,
+          render (h) {
+            // <p ref="text" v-t="{path: 'plurals.car', choice: 1}"></p>
+            return h('p', { ref: 'text', directives: [{
+              name: 't', rawName: 'v-t', value: ({ path: 'plurals.car', choice: 1 }), expression: { path: 'plurals.car', choice: 1 }
+            }] })
+          }
+        })
+        nextTick(() => {
+          assert.equal(vm.$refs.text.textContent, 'car')
+          assert.equal(vm.$refs.text._vt, 'car')
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.equal(vm.$refs.text.textContent, 'car')
+          assert.equal(vm.$refs.text._vt, 'car')
+        }).then(done)
+      })
+
+      it('should be plural', done => {
+        const vm = createVM({
+          i18n,
+          render (h) {
+            // <p ref="text" v-t="{path: 'plurals.car', choice: 2}"></p>
+            return h('p', { ref: 'text', directives: [{
+              name: 't', rawName: 'v-t', value: ({ path: 'plurals.car', choice: 2 }), expression: { path: 'plurals.car', choice: 2 }
+            }] })
+          }
+        })
+        nextTick(() => {
+          assert.equal(vm.$refs.text.textContent, 'cars')
+          assert.equal(vm.$refs.text._vt, 'cars')
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.equal(vm.$refs.text.textContent, 'cars')
+          assert.equal(vm.$refs.text._vt, 'cars')
+        }).then(done)
+      })
+    })
   })
 })
