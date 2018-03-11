@@ -91,6 +91,12 @@ describe('basic', () => {
         })
       })
 
+      describe('object keypath', () => {
+        it('should be translated', () => {
+          assert.equal(i18n.t('message.format'), messages.en.message.format)
+        })
+      })
+
       describe('array keypath', () => {
         describe('basic', () => {
           it('should be translated', () => {
@@ -98,13 +104,13 @@ describe('basic', () => {
           })
         })
 
-        describe('object', () => {
+        describe('object attribute', () => {
           it('should be translated', () => {
             assert.equal(i18n.t('errors[1].internal1'), messages.en.errors[1].internal1)
           })
         })
 
-        describe('parent object', () => {
+        describe('object', () => {
           it('should be translated', () => {
             assert.equal(i18n.t('errors[1]'), messages.en.errors[1])
           })
