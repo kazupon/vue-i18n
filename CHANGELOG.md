@@ -1,3 +1,21 @@
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/kazupon/vue-i18n/compare/v7.4.2...v7.5.0) (2018-03-11)
+
+
+### :star: New Features
+
+* **directive:** Add pluralization feature to directive ([#304](https://github.com/kazupon/vue-i18n/issues/304)) by [@SirLamer](https://github.com/SirLamer) ([8378859](https://github.com/kazupon/vue-i18n/commit/8378859))
+
+
+### :zap: Improvements
+
+* **flow:** update TranslateResult type interface ([59f4658](https://github.com/kazupon/vue-i18n/commit/59f4658))
+* **index:** support object localization ([#311](https://github.com/kazupon/vue-i18n/issues/311)) by [@manniL](https://github.com/manniL) ([99e5006](https://github.com/kazupon/vue-i18n/commit/99e5006))
+* **missing:** Add interpolation values to missing handler ([#308](https://github.com/kazupon/vue-i18n/issues/308)) by [@sebwas](https://github.com/sebwas) ([b912d8a](https://github.com/kazupon/vue-i18n/commit/b912d8a))
+* **numberformat:** Explicit number format options ([#305](https://github.com/kazupon/vue-i18n/issues/305)) by [@bponomarenko](https://github.com/bponomarenko) ([aa07450](https://github.com/kazupon/vue-i18n/commit/aa07450))
+
+
+
 <a name="7.4.2"></a>
 ## [7.4.2](https://github.com/kazupon/vue-i18n/compare/v7.4.1...v7.4.2) (2018-02-01)
 
