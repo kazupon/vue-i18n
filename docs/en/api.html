@@ -918,7 +918,7 @@
 <h4 id="i18n">i18n</h4>
 <ul>
 <li><p><strong>Type:</strong> <code>I18nOptions</code></p>
-<p>Component based localization option. </p>
+<p>Component based localization option.</p>
 </li>
 <li><p><strong>See also:</strong> <a href="#constructor-options"><code>VueI18n</code> class constructor options</a></p>
 </li>
@@ -976,7 +976,7 @@
 </ul>
 </li>
 <li><p><strong>Return:</strong> <code>DateTimeFormatResult</code></p>
-<p>Localize the datetime of <code>value</code> with datetime format of <code>key</code>. The datetime format of <code>key</code> need to register to <code>dateTimeFormats</code> option of <code>VueI18n</code> class, and depend on <code>locale</code> option of <code>VueI18n</code> constructor. If you will specify <code>locale</code> argument, Localized in preferentially it than <code>locale</code> option of <code>VueI18n</code> constructor.</p>
+<p>Localize the datetime of <code>value</code> with datetime format of <code>key</code>. The datetime format of <code>key</code> need to register to <code>dateTimeFormats</code> option of <code>VueI18n</code> class, and depend on <code>locale</code> option of <code>VueI18n</code> constructor. If you will specify <code>locale</code> argument, it will have priority over <code>locale</code> option of <code>VueI18n</code> constructor.</p>
 <p>If the datetime format of <code>key</code> not exist in <code>dateTimeFormats</code> option,  fallback to depened on <code>fallbackLocale</code> option of <code>VueI18n</code> constructor.</p>
 </li>
 </ul>
@@ -989,12 +989,29 @@
 <ul>
 <li><code>{number} value</code>: required</li>
 <li><code>{Path | Object} key</code>: optional</li>
-<li><code>{Locale | Object} locale</code>: optional</li>
+<li><code>{Locale} locale</code>: optional</li>
 </ul>
 </li>
 <li><p><strong>Return:</strong> <code>NumberFormatResult</code></p>
-<p>Localize the number of <code>value</code> with number format of <code>key</code>. The number format of <code>key</code> need to register to <code>numberFormats</code> option of <code>VueI18n</code> class, and depend on <code>locale</code> option of <code>VueI18n</code> constructor. If you will specify <code>locale</code> argument, Localized in preferentially it than <code>locale</code> option of <code>VueI18n</code> constructor.</p>
+<p>Localize the number of <code>value</code> with number format of <code>key</code>. The number format of <code>key</code> need to register to <code>numberFormats</code> option of <code>VueI18n</code> class, and depend on <code>locale</code> option of <code>VueI18n</code> constructor. If you will specify <code>locale</code> argument, it will have priority over <code>locale</code> option of <code>VueI18n</code> constructor.</p>
 <p>If the number format of <code>key</code> not exist in <code>numberFormats</code> option,  fallback to depened on <code>fallbackLocale</code> option of <code>VueI18n</code> constructor.</p>
+<p>If the second <code>key</code> argument specified as an object, it should have the following properties:</p>
+<ul>
+<li><code>key {Path}</code>: optional, number format</li>
+<li><code>locale {Locale}</code>: optional, locale</li>
+<li><code>style {string}</code>: optional, number format option</li>
+<li><code>currency {string}</code>: optional, number format option</li>
+<li><code>currencyDisplay {string}</code>: optional, number format option</li>
+<li><code>useGrouping {string}</code>: optional, number format option</li>
+<li><code>minimumIntegerDigits {string}</code>: optional, number format option</li>
+<li><code>minimumFractionDigits {string}</code>: optional, number format option</li>
+<li><code>maximumFractionDigits {string}</code>: optional, number format option</li>
+<li><code>minimumSignificantDigits {string}</code>: optional, number format option</li>
+<li><code>maximumSignificantDigits {string}</code>: optional, number format option</li>
+<li><code>localeMatcher {string}</code>: optional, number format option</li>
+<li><code>formatMatcher {string}</code>: optional, number format option</li>
+</ul>
+<p>Any specified number format options will have priority over <code>numberFormats</code> of <code>VueI18n</code> constructor.</p>
 </li>
 </ul>
 <h3 id="injected-properties">Injected properties</h3>
@@ -1396,7 +1413,7 @@
 <ul>
 <li><code>{number} value</code>: required</li>
 <li><code>{Path | Object} key</code>: optional</li>
-<li><code>{Locale | Object} locale</code>: optional</li>
+<li><code>{Locale} locale</code>: optional</li>
 </ul>
 </li>
 <li><p><strong>Return:</strong> <code>NumberFormatResult</code></p>
@@ -1421,10 +1438,10 @@ If you can be used object syntax, you need to specify as the object key the foll
 </ul>
 </li>
 <li><p><strong>Examples:</strong></p>
-<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- string syntax: literal --&gt;</span> 
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- string syntax: literal --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;&apos;foo.bar&apos;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-<span class="hljs-comment">&lt;!-- string syntax: binding via data or computed props --&gt;</span> 
+<span class="hljs-comment">&lt;!-- string syntax: binding via data or computed props --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-t</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
 <span class="hljs-comment">&lt;!-- object syntax: literal --&gt;</span>
@@ -1535,7 +1552,7 @@ If you can be used object syntax, you need to specify as the object key the foll
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API references","level":"1.19","depth":1,"next":{"title":"Extension of Vue","level":"1.19.1","depth":2,"anchor":"#extension-of-vue","path":"api.md","ref":"api.md#extension-of-vue","articles":[{"title":"Vue constructor options","level":"1.19.1.1","depth":3,"anchor":"#vue-constructor-options","path":"api.md","ref":"api.md#vue-constructor-options","articles":[]},{"title":"Vue injected methods","level":"1.19.1.2","depth":3,"anchor":"#vue-injected-methods","path":"api.md","ref":"api.md#vue-injected-methods","articles":[]},{"title":"Injected properties","level":"1.19.1.3","depth":3,"anchor":"#injected-properties","path":"api.md","ref":"api.md#injected-properties","articles":[]}]},"previous":{"title":"Features","level":"1.18.5","depth":2,"anchor":"#features","path":"migrations.md","ref":"migrations.md#features","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-i18n","language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"api.md","mtime":"2018-01-25T09:10:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-02T14:51:56.386Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"API references","level":"1.19","depth":1,"next":{"title":"Extension of Vue","level":"1.19.1","depth":2,"anchor":"#extension-of-vue","path":"api.md","ref":"api.md#extension-of-vue","articles":[{"title":"Vue constructor options","level":"1.19.1.1","depth":3,"anchor":"#vue-constructor-options","path":"api.md","ref":"api.md#vue-constructor-options","articles":[]},{"title":"Vue injected methods","level":"1.19.1.2","depth":3,"anchor":"#vue-injected-methods","path":"api.md","ref":"api.md#vue-injected-methods","articles":[]},{"title":"Injected properties","level":"1.19.1.3","depth":3,"anchor":"#injected-properties","path":"api.md","ref":"api.md#injected-properties","articles":[]}]},"previous":{"title":"Features","level":"1.18.5","depth":2,"anchor":"#features","path":"migrations.md","ref":"migrations.md#features","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git","-fontsettings","github","advanced-emoji@0.2.2"],"root":"./","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/kazupon/vue-i18n/"},"search":{},"theme-vuejs":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/kazupon/vue-i18n/tree/dev/gitbook"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-i18n","language":"en","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"api.md","mtime":"2018-03-11T04:16:36.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-11T04:17:12.951Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
