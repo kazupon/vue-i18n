@@ -104,6 +104,12 @@ describe('basic', () => {
           })
         })
 
+        describe('parent object', () => {
+          it('should be translated', () => {
+            assert.equal(i18n.t('errors[1]'), messages.en.errors[1])
+          })
+        })
+
         describe('array', () => {
           it('should be translated', () => {
             assert.equal(i18n.t('errors[2][0]'), messages.en.errors[2][0])
@@ -402,7 +408,6 @@ describe('basic', () => {
       })
     })
   })
-
 
   describe('$tc', () => {
     describe('en locale', () => {

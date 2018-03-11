@@ -199,7 +199,7 @@ export default class VueI18n {
     if (!message) { return null }
 
     const pathRet: PathValue = this._path.getPathValue(message, key)
-    if (Array.isArray(pathRet)) { return pathRet }
+    if (Array.isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
 
     let ret: mixed
     if (isNull(pathRet)) {
