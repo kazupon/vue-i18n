@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { PluginFunction } from 'vue';
+import Vue, { PluginFunction } from 'vue';
 
 declare namespace VueI18n {
   type Path = string;
@@ -10,7 +9,7 @@ declare namespace VueI18n {
   interface LocaleMessageObject { [key: string]: LocaleMessage; }
   interface LocaleMessageArray { [index: number]: LocaleMessage; }
   interface LocaleMessages { [key: string]: LocaleMessageObject; }
-  type TranslateResult = string | LocaleMessageArray;
+  type TranslateResult = string | LocaleMessages;
   interface DateTimeFormatOptions {
     year?: string;
     month?: string;
@@ -47,7 +46,7 @@ declare namespace VueI18n {
   type NumberFormatResult = string;
 
   interface Formatter {
-    interpolate(message: string, values: Values): any[];
+    interpolate(message: string, values?: Values): any[];
   }
 
   type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => void;
@@ -70,6 +69,18 @@ declare namespace VueI18n {
     sync?: boolean;
     silentTranslationWarn?: boolean;
   }
+}
+
+export declare interface IVueI18n {
+  readonly messages: VueI18n.LocaleMessages;
+  readonly dateTimeFormats: VueI18n.DateTimeFormats;
+  readonly numberFormats: VueI18n.NumberFormats;
+
+  locale: VueI18n.Locale;
+  fallbackLocale: VueI18n.Locale;
+  missing: VueI18n.MissingHandler;
+  formatter: VueI18n.Formatter;
+  silentTranslationWarn: boolean;
 }
 
 declare class VueI18n {
@@ -114,7 +125,7 @@ declare class VueI18n {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    readonly $i18n: VueI18n;
+    readonly $i18n: VueI18n & IVueI18n;
     $t: typeof VueI18n.prototype.t;
     $tc: typeof VueI18n.prototype.tc;
     $te: typeof VueI18n.prototype.te;
@@ -129,4 +140,4 @@ declare module 'vue/types/options' {
   }
 }
 
-export = VueI18n;
+export default VueI18n;

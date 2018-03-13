@@ -1,7 +1,10 @@
-import * as Vue from 'vue';
-import * as VueI18n from 'vue-i18n';
-import { ComponentOptions } from 'vue';
+import Vue, { ComponentOptions } from 'vue';
+import VueI18n from "../index";
 
+/*
+import * as VueI18n from 'vue-i18n';
+import * as Vue from 'vue';
+*/
 /**
  * VueI18n.install
  */

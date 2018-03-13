@@ -91,6 +91,12 @@ describe('basic', () => {
         })
       })
 
+      describe('object keypath', () => {
+        it('should be translated', () => {
+          assert.equal(i18n.t('message.format'), messages.en.message.format)
+        })
+      })
+
       describe('array keypath', () => {
         describe('basic', () => {
           it('should be translated', () => {
@@ -98,9 +104,15 @@ describe('basic', () => {
           })
         })
 
-        describe('object', () => {
+        describe('object attribute', () => {
           it('should be translated', () => {
             assert.equal(i18n.t('errors[1].internal1'), messages.en.errors[1].internal1)
+          })
+        })
+
+        describe('object', () => {
+          it('should be translated', () => {
+            assert.equal(i18n.t('errors[1]'), messages.en.errors[1])
           })
         })
 
@@ -403,7 +415,6 @@ describe('basic', () => {
     })
   })
 
-
   describe('$tc', () => {
     describe('en locale', () => {
       it('should translate plural english', () => {
@@ -673,6 +684,30 @@ describe('basic', () => {
       describe('with object argument', () => {
         it('should be formatted', () => {
           assert.equal(i18n.n(money, { key: 'currency', locale: 'ja-JP' }), '￥10,100')
+        })
+      })
+    })
+
+    describe('explicit options argument', () => {
+      describe('without key', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, { style: 'currency', currency: 'JPY' }), '¥10,100')
+        })
+
+        it('should respect other number options', () => {
+          const options = { style: 'currency', currency: 'EUR', currencyDisplay: 'code' }
+          assert.equal(i18n.n(money, options), 'EUR10,100.00')
+        })
+      })
+
+      describe('with key', () => {
+        it('should be formatted', () => {
+          assert.equal(i18n.n(money, { key: 'currency', currency: 'JPY' }), '¥10,100')
+        })
+
+        it('should respect other number options', () => {
+          const options = { key: 'currency', currency: 'EUR', currencyDisplay: 'code' }
+          assert.equal(i18n.n(money, options), 'EUR10,100.00')
         })
       })
     })

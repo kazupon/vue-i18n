@@ -1,3 +1,76 @@
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/kazupon/vue-i18n/compare/v7.4.2...v7.5.0) (2018-03-11)
+
+
+### :star: New Features
+
+* **directive:** Add pluralization feature to directive ([#304](https://github.com/kazupon/vue-i18n/issues/304)) by [@SirLamer](https://github.com/SirLamer) ([8378859](https://github.com/kazupon/vue-i18n/commit/8378859))
+
+
+### :zap: Improvements
+
+* **flow:** update TranslateResult type interface ([59f4658](https://github.com/kazupon/vue-i18n/commit/59f4658))
+* **index:** support object localization ([#311](https://github.com/kazupon/vue-i18n/issues/311)) by [@manniL](https://github.com/manniL) ([99e5006](https://github.com/kazupon/vue-i18n/commit/99e5006))
+* **missing:** Add interpolation values to missing handler ([#308](https://github.com/kazupon/vue-i18n/issues/308)) by [@sebwas](https://github.com/sebwas) ([b912d8a](https://github.com/kazupon/vue-i18n/commit/b912d8a))
+* **numberformat:** Explicit number format options ([#305](https://github.com/kazupon/vue-i18n/issues/305)) by [@bponomarenko](https://github.com/bponomarenko) ([aa07450](https://github.com/kazupon/vue-i18n/commit/aa07450))
+
+
+
+<a name="7.4.2"></a>
+## [7.4.2](https://github.com/kazupon/vue-i18n/compare/v7.4.1...v7.4.2) (2018-02-01)
+
+
+### :zap: Improvements
+
+* **index:** Fixes global auto installation ([#291](https://github.com/kazupon/vue-i18n/issues/291)) by [@emileber](https://github.com/emileber) ([2f016ff](https://github.com/kazupon/vue-i18n/commit/2f016ff)), closes [#291](https://github.com/kazupon/vue-i18n/issues/291)
+
+
+
+<a name="7.4.1"></a>
+## [7.4.1](https://github.com/kazupon/vue-i18n/compare/v7.4.0...v7.4.1) (2018-01-25)
+
+
+### :bug: Bug Fixes
+
+* fix cannot react ([2a8ea1c](https://github.com/kazupon/vue-i18n/commit/2a8ea1c)), closes [#261](https://github.com/kazupon/vue-i18n/issues/261)
+
+
+### :zap: Improvements
+
+* **formatter:** interpolate messages without values ([#282](https://github.com/kazupon/vue-i18n/issues/282)) by [@cb8](https://github.com/cb8) ([b792ce2](https://github.com/kazupon/vue-i18n/commit/b792ce2))
+
+
+
+<a name="7.4.0"></a>
+# [7.4.0](https://github.com/kazupon/vue-i18n/compare/v7.3.4...v7.4.0) (2018-01-10)
+
+
+### :star: New Features
+
+* **typescript:** Allow module augmentation ([#273](https://github.com/kazupon/vue-i18n/issues/273)) by [@CKGrafico](https://github.com/CKGrafico) ([4371344](https://github.com/kazupon/vue-i18n/commit/4371344))
+
+
+
+<a name="7.3.4"></a>
+## [7.3.4](https://github.com/kazupon/vue-i18n/compare/v7.3.3...v7.3.4) (2018-01-07)
+
+
+### :bug: Bug Fixes
+
+* **formatter:** Inherit formatter ([#269](https://github.com/kazupon/vue-i18n/issues/269)) by [@podkot](https://github.com/podkot) ([26a33ad](https://github.com/kazupon/vue-i18n/commit/26a33ad))
+
+
+
+<a name="7.3.3"></a>
+## [7.3.3](https://github.com/kazupon/vue-i18n/compare/v7.3.2...v7.3.3) (2017-12-19)
+
+
+### :bug: Bug Fixes
+
+* **extend:** Fix this not found [#259](https://github.com/kazupon/vue-i18n/issues/259) ([#260](https://github.com/kazupon/vue-i18n/issues/260)) by [@lzxb](https://github.com/lzxb) ([c29007e](https://github.com/kazupon/vue-i18n/commit/c29007e)), closes [#259](https://github.com/kazupon/vue-i18n/issues/259) [#260](https://github.com/kazupon/vue-i18n/issues/260)
+* **types:** fix using old export ([#263](https://github.com/kazupon/vue-i18n/issues/263)) by [@jmigual](https://github.com/jmigual) ([b295fee](https://github.com/kazupon/vue-i18n/commit/b295fee)), closes [#263](https://github.com/kazupon/vue-i18n/issues/263)
+
+
 <a name="7.3.2"></a>
 ## [7.3.2](https://github.com/kazupon/vue-i18n/compare/v7.3.1...v7.3.2) (2017-10-19)
 

@@ -14,7 +14,7 @@ See [here](http://kazupon.github.io/vue-i18n/)
 
 ## :scroll: Changelog
 
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
 ## :exclamation: Issues

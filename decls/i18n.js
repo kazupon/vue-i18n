@@ -45,7 +45,7 @@ declare type NumberFormatOptions = {
 declare type NumberFormat = { [key: string]: NumberFormatOptions };
 declare type NumberFormats = { [key: Locale]: NumberFormat };
 
-declare type TranslateResult = string | Array<any>;
+declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
@@ -104,5 +104,5 @@ declare interface I18n {
 };
 
 declare interface Formatter {
-  interpolate (message: string, values: any): Array<any>
+  interpolate (message: string, values?: any): Array<any>
 };
