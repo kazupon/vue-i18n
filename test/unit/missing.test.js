@@ -75,4 +75,18 @@ describe('missing', () => {
       i18n.t('cannot.find', testValues)
     })
   })
+
+  describe('missing handler return', () => {
+    it('should be returned missing handler', done => {
+      const i18n = new VueI18n({
+        locale: 'en',
+        missing: (locale, key, vm) => {
+          return key
+        }
+      })
+
+      assert.equal(i18n.t('foo.bar.buz'), 'foo.bar.buz')
+      done()
+    })
+  })
 })
