@@ -1,3 +1,14 @@
+<a name="7.6.0"></a>
+# [7.6.0](https://github.com/kazupon/vue-i18n/compare/v7.5.0...v7.6.0) (2018-03-13)
+
+
+### :zap: Improvements
+
+* **index:** support retunable missing handler ([#256](https://github.com/kazupon/vue-i18n/issues/256)) by [@houd1ni](https://github.com/houd1ni) ([9fbe467](https://github.com/kazupon/vue-i18n/commit/9fbe467))
+* **typescript:** update TranslateResult type interface ([dffc678](https://github.com/kazupon/vue-i18n/commit/dffc678))
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/kazupon/vue-i18n/compare/v7.4.2...v7.5.0) (2018-03-11)
 
