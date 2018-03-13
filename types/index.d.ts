@@ -9,7 +9,7 @@ declare namespace VueI18n {
   interface LocaleMessageObject { [key: string]: LocaleMessage; }
   interface LocaleMessageArray { [index: number]: LocaleMessage; }
   interface LocaleMessages { [key: string]: LocaleMessageObject; }
-  type TranslateResult = string | LocaleMessageArray;
+  type TranslateResult = string | LocaleMessages;
   interface DateTimeFormatOptions {
     year?: string;
     month?: string;
