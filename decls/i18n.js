@@ -48,7 +48,7 @@ declare type NumberFormats = { [key: Locale]: NumberFormat };
 declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
-declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => void;
+declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => string | void;
 
 declare type I18nOptions = {
   locale?: Locale,

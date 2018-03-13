@@ -49,7 +49,7 @@ declare namespace VueI18n {
     interpolate(message: string, values?: Values): any[];
   }
 
-  type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => void;
+  type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => string | void;
 
   interface IntlAvailability {
     dateTimeFormat: boolean;
