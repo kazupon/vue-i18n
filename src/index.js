@@ -407,7 +407,7 @@ export default class VueI18n {
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
-    this._vm.messages[locale] = message
+    this._vm.$set(this._vm.messages, locale, message)
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
@@ -419,7 +419,7 @@ export default class VueI18n {
   }
 
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
-    this._vm.dateTimeFormats[locale] = format
+    this._vm.$set(this._vm.dateTimeFormats, locale, format)
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
@@ -515,7 +515,7 @@ export default class VueI18n {
   }
 
   setNumberFormat (locale: Locale, format: NumberFormat): void {
-    this._vm.numberFormats[locale] = format
+    this._vm.$set(this._vm.numberFormats, locale, format)
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
