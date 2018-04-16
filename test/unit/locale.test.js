@@ -1,6 +1,4 @@
 import messages from './fixture/index'
-import dateTimeFormats from './fixture/datetime'
-import numberFormats from './fixture/number'
 
 describe('locale', () => {
   let i18n
