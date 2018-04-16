@@ -403,7 +403,7 @@ export default class VueI18n {
     return this._te(key, this.locale, this._getMessages(), locale)
   }
 
-  _resolveLocale (key: Path, locale: Locale, messages: LocaleMessages): String {
+  _resolveLocale (key: Path, locale: Locale, messages: LocaleMessages): Locale {
     return this._exist(messages[locale], key) ? locale : locale.substr(0, 2)
   }
 
