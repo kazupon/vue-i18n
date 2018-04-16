@@ -327,7 +327,7 @@ export default class VueI18n {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)
-    const locale: Locale = parsedArgs.locale || _locale
+    const locale: Locale = this._resolveLocale(key, parsedArgs.locale || _locale, messages)
 
     const ret: any = this._translate(
       messages, locale, this.fallbackLocale, key,
@@ -350,16 +350,17 @@ export default class VueI18n {
   }
 
   _i (key: Path, locale: Locale, messages: LocaleMessages, host: any, values: Object): any {
+    const _locale = this._resolveLocale(key, locale, messages)
     const ret: any =
-      this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values)
+      this._translate(messages, _locale, this.fallbackLocale, key, host, 'raw', values)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to interpolate the keypath '${key}' with root locale.`)
       }
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.i(key, locale, values)
+      return this._root.i(key, _locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, [values])
+      return this._warnDefault(_locale, key, ret, host, [values])
     }
   }
 
@@ -394,12 +395,16 @@ export default class VueI18n {
   }
 
   _te (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): boolean {
-    const _locale: Locale = parseArgs(...args).locale || locale
+    const _locale: Locale = this._resolveLocale(key, parseArgs(...args).locale || locale, messages)
     return this._exist(messages[_locale], key)
   }
 
   te (key: Path, locale?: Locale): boolean {
     return this._te(key, this.locale, this._getMessages(), locale)
+  }
+
+  _resolveLocale(key: Path, locale: Locale, messages: LocaleMessages) {
+    return this._exist(messages[locale], key) ? locale : locale.substr(0, 2)
   }
 
   getLocaleMessage (locale: Locale): LocaleMessageObject {
