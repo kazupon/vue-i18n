@@ -101,8 +101,8 @@ declare class VueI18n {
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
   tc(key: VueI18n.Path, choice?: VueI18n.Choice, values?: VueI18n.Values): string;
   tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, values?: VueI18n.Values): string;
-  td(key: VueI18n.Path, defaultValue: VueI18n.defaultValue, values?: VueI18n.Values): string;
-  td(key: VueI18n.Path, defaultValue: VueI18n.defaultValue, locale: VueI18n.Locale, values?: VueI18n.Values): string;
+  td(key: VueI18n.Path, defaultValue: VueI18n.DefaultValue, values?: VueI18n.Values): string;
+  td(key: VueI18n.Path, defaultValue: VueI18n.DefaultValue, locale: VueI18n.Locale, values?: VueI18n.Values): string;
   te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
   d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
   d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
