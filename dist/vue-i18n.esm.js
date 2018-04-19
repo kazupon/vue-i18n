@@ -1116,6 +1116,24 @@ VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm,
   return key
 };
 
+VueI18n.prototype._checkDefault = function _checkDefault (locale, key, result, vm, values, defaultValue) {
+  if (!isNull(result)) { return result }
+  if (this._missing) {
+    var missingRet = this._missing.apply(null, [locale, key, vm, values]);
+    if (typeof missingRet === 'string') {
+      return missingRet
+    }
+  } else {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+      warn(
+        "Cannot translate the value of keypath '" + key + "'. " +
+        'Use the default value.'
+      );
+    }
+  }
+  return defaultValue
+};
+
 VueI18n.prototype._isFallbackRoot = function _isFallbackRoot (val) {
   return !val && !isNull(this._root) && this._fallbackRoot
 };
@@ -1338,6 +1356,49 @@ VueI18n.prototype.tc = function tc (key, choice) {
   return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
     var ref;
 };
+
+
+VueI18n.prototype._td = function _td (
+  key,
+  _locale,
+  messages,
+  host,
+  defaultValue
+) {
+  var values = [], len = arguments.length - 5;
+  while ( len-- > 0 ) values[ len ] = arguments[ len + 5 ];
+
+  if (!key) { return '' }
+
+  var parsedArgs = parseArgs.apply(void 0, values);
+  var locale = parsedArgs.locale || _locale;
+
+  var ret = this._translate(
+    messages, locale, this.fallbackLocale, key,
+    host, 'string', parsedArgs.params
+  );
+  if (this._isFallbackRoot(ret)) {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+      warn(("Fall back to translate the keypath '" + key + "' with root locale."));
+    }
+
+    if (!this._root) { throw Error('unexpected error') }
+    return (ref = this._root).t.apply(ref, [ key ].concat( values ))
+  } else {
+    return this._checkDefault(locale, key, ret, host, values, defaultValue)
+  }
+
+  var ref;
+};
+
+VueI18n.prototype.td = function td (key, defaultValue) {
+  var values = [], len = arguments.length - 2;
+  while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
+
+  return (ref = this)._td.apply(ref, [ key, this.locale, this._getMessages(), null, defaultValue ].concat( values ))
+  var ref;
+};
+
 
 VueI18n.prototype._te = function _te (key, locale, messages) {
     var args = [], len = arguments.length - 3;

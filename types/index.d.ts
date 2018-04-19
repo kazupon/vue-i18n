@@ -5,6 +5,7 @@ declare namespace VueI18n {
   type Locale = string;
   type Values = any[] | { [key: string]: any };
   type Choice = number;
+  type DefaultValue = string;
   type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
   interface LocaleMessageObject { [key: string]: LocaleMessage; }
   interface LocaleMessageArray { [index: number]: LocaleMessage; }
@@ -100,6 +101,8 @@ declare class VueI18n {
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
   tc(key: VueI18n.Path, choice?: VueI18n.Choice, values?: VueI18n.Values): string;
   tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, values?: VueI18n.Values): string;
+  td(key: VueI18n.Path, defaultValue: VueI18n.defaultValue, values?: VueI18n.Values): string;
+  td(key: VueI18n.Path, defaultValue: VueI18n.defaultValue, locale: VueI18n.Locale, values?: VueI18n.Values): string;
   te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
   d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
   d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
@@ -128,6 +131,7 @@ declare module 'vue/types/vue' {
     readonly $i18n: VueI18n & IVueI18n;
     $t: typeof VueI18n.prototype.t;
     $tc: typeof VueI18n.prototype.tc;
+    $td: typeof VueI18n.prototype.td;
     $te: typeof VueI18n.prototype.te;
     $d: typeof VueI18n.prototype.d;
     $n: typeof VueI18n.prototype.n;
