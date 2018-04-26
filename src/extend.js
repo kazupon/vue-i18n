@@ -20,6 +20,15 @@ export default function extend (Vue: any): void {
     }
   })
   // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$td', {
+    get () {
+      return (key: Path, defaultValue?: any, ...values: any): TranslateResult => {
+        const i18n = this.$i18n
+        return i18n._td(key, i18n.locale, i18n._getMessages(), this, defaultValue, ...values)
+      }
+    }
+  })
+  // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$te', {
     get () {
       return (key: Path, locale?: Locale): boolean => {
