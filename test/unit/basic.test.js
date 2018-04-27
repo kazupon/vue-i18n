@@ -307,6 +307,39 @@ describe('basic', () => {
     })
   })
 
+  
+  describe('i18n#td', () => {
+    describe('existing key', () => {
+      it('should return matched message with the key', () => {
+        assert.equal(i18n.td('message.hello', 'Default'), messages.en.message.hello)
+      })
+      
+      it('should return matched message with the key (named)', () => {
+        assert.equal(i18n.td('message.format.named', 'Default', {name : 'connie'}), 'Hello connie, how are you?')
+      })
+      
+      it('should return matched message with the key (list)', () => {
+        assert.equal(i18n.td('message.format.list', 'Default', ['connie']), 'Hello connie, how are you?')
+      })
+    })
+
+    describe('not existing key', () => {
+      it('should return User Default Message', () => {
+        assert.equal(i18n.td('message.helloNotExisting', 'Default'), 'Default')
+      })
+      
+      it('should return User Default Message', () => {
+        assert.equal(i18n.td('message.helloNotExisting', 'Named Default', {named : 'connie'}), 'Named Default')
+      })
+      
+      it('should return User Default Message', () => {
+        assert.equal(i18n.td('message.helloNotExisting', 'List Default', ['connie']), 'List Default')
+      })
+      
+    })
+  })
+  
+  
   describe('$t', () => {
     describe('en locale', () => {
       it('should translate an english', () => {
@@ -549,6 +582,43 @@ describe('basic', () => {
     })
   })
 
+  
+  describe('$td', () => {
+    describe('existing key', () => {
+      it('should return matched message with the key', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$td('message.hello', 'Default'), messages.en.message.hello)
+      })
+
+      it('should return matched message with the key (named)', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$td('message.format.named', 'Default', {name : 'connie'}), 'Hello connie, how are you?')
+      })
+      
+      it('should return matched message with the key (list)', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$td('message.format.list', 'Default', ['connie']), 'Hello connie, how are you?')
+      })
+    })
+
+    describe('not existing key', () => {
+      it('should return User Default Message', () => {
+        const vm = new Vue({ i18n })
+        assert(vm.$td('message.helloNotExisting', 'Default'), 'Default')
+      })
+      
+      it('should return User Default Message', () => {
+        const vm = new Vue({ i18n })
+        assert(vm.$td('message.helloNotExisting', 'Named Default', {name : 'connie'}), 'Named Default')
+      })
+      
+      it('should return User Default Message', () => {
+        const vm = new Vue({ i18n })
+        assert(vm.$td('message.helloNotExisting', 'List Default', ['connie']), 'List Default')
+      })
+    })
+  })
+  
   describe('i18n#locale', () => {
     let el
     beforeEach(() => {

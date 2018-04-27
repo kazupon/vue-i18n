@@ -304,11 +304,13 @@ describe('issues', () => {
       const $t = vm.$t
       const $tc = vm.$t
       const $te = vm.$t
+      const $td = vm.$t
       const $d = vm.$t
       const $n = vm.$t
       assert.equal($t('hello'), 'hello #259')
       assert.equal($tc('hello'), 'hello #259')
       assert.equal($te('hello'), 'hello #259')
+      assert.equal($td('hello'), 'hello #259')
       assert.equal($d('hello'), 'hello #259')
       assert.equal($n('hello'), 'hello #259')
       done()
