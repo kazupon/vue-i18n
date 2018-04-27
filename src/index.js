@@ -410,7 +410,7 @@ export default class VueI18n {
     return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
   }
 
-  _td (key: Path, _locale: Locale, messages: LocaleMessages, host: any, defaultValue: any,  ...values: any): any {
+  _td (key: Path, _locale: Locale, messages: LocaleMessages, host: any, defaultValue: any, ...values: any): any {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)
@@ -435,7 +435,7 @@ export default class VueI18n {
   td (key: Path, defaultValue: any, ...values: any): TranslateResult {
     return this._td(key, this.locale, this._getMessages(), null, defaultValue, ...values)
   }
-  
+
   _te (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): boolean {
     const _locale: Locale = parseArgs(...args).locale || locale
     return this._exist(messages[_locale], key)
