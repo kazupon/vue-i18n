@@ -403,7 +403,7 @@ export default class VueI18n {
   ): any {
     if (!key) { return '' }
     if (defaultValue === undefined) {
-      defaultValue = ''
+      defaultValue = key
     }
     var translated = this._t(key, _locale, messages, host, ...values)
     if (translated === key) {

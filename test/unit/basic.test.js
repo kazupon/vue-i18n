@@ -315,12 +315,21 @@ describe('basic', () => {
       it('should return matched message with the key in Japanese', () => {
         assert.equal(i18n.td('message.hello', 'Default', 'ja'), messages.ja.message.hello)
       })
+      it('should return matched message with the key in locale (no default value)', () => {
+        assert.equal(i18n.td('message.hello'), messages.en.message.hello)
+      })
       describe('existing key with default value and space to be replaced', () => {
         it('should return replaced message (named)', () => {
           assert.equal(i18n.td('message.format.named', 'Default', { name: 'connie' }), 'Hello connie, how are you?')
         })
+        it('should return replaced message in Japanese (named)', () => {
+          assert.equal(i18n.td('message.format.named', 'Default', 'ja', { name: 'connie' }), 'こんにちは connie, ごきげんいかが？')
+        })
         it('should return replaced message (list)', () => {
           assert.equal(i18n.td('message.format.list', 'Default', ['connie']), 'Hello connie, how are you?')
+        })
+        it('should return replaced message in Japanese (list)', () => {
+          assert.equal(i18n.td('message.format.list', 'Default', 'ja', ['connie']), 'こんにちは connie, ごきげんいかが？')
         })
       })
     })
@@ -331,6 +340,9 @@ describe('basic', () => {
       })
       it('should return User Default Message (include locale)', () => {
         assert.equal(i18n.td('message.helloNotExisting', 'Default', 'ja'), 'Default')
+      })
+      it('should return key (no default value)', () => {
+        assert.equal(i18n.td('message.helloNotExisting'), 'message.helloNotExisting')
       })
       describe('should return User Default Message', () => {
         it('should return User Default Message', () => {
@@ -595,6 +607,10 @@ describe('basic', () => {
         const vm = new Vue({ i18n })
         assert.equal(vm.$td('message.hello', 'Default', 'ja'), messages.ja.message.hello)
       })
+      it('should return matched message with the key (no default value)', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$td('message.hello'), messages.en.message.hello)
+      })
       describe('existing key with default value and space to be replaced', () => {
         it('should return replaced message (named)', () => {
           const vm = new Vue({ i18n })
@@ -620,9 +636,13 @@ describe('basic', () => {
         const vm = new Vue({ i18n })
         assert(vm.$td('message.helloNotExisting', 'Default'), 'Default')
       })
-      it('should return matched message with the key in Japanese', () => {
+      it('should return User Default Message (include locale)', () => {
         const vm = new Vue({ i18n })
         assert.equal(vm.$td('message.helloNotExisting', 'Default', 'ja'), 'Default')
+      })
+      it('should return key with the key (no default value) ', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$td('message.helloNotExisting'), 'message.helloNotExisting')
       })
       describe('existing key with default value and space to be replaced', () => {
         it('should return User Default Message', () => {
