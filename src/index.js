@@ -187,23 +187,6 @@ export default class VueI18n {
     return key
   }
 
-  _checkDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any, defaultValue: any): ?string {
-    if (!isNull(result)) { return result }
-    if (this._missing) {
-      const missingRet = this._missing.apply(null, [locale, key, vm, values])
-      if (typeof missingRet === 'string') {
-        return missingRet
-      }
-    } else {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(
-          `Cannot translate the value of keypath '${key}'. ` +
-          'Use the default value.'
-        )
-      }
-    }
-    return defaultValue
-  }
   _isFallbackRoot (val: any): boolean {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
@@ -410,26 +393,23 @@ export default class VueI18n {
     return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
   }
 
-  _td (key: Path, _locale: Locale, messages: LocaleMessages, host: any, defaultValue: any, ...values: any): any {
+  _td (
+    key: Path,
+    _locale: Locale,
+    messages: LocaleMessages,
+    host: any,
+    defaultValue: any,
+    ...values: any
+  ): any {
     if (!key) { return '' }
-
-    const parsedArgs = parseArgs(...values)
-    const locale: Locale = parsedArgs.locale || _locale
-
-    const ret: any = this._translate(
-      messages, locale, this.fallbackLocale, key,
-      host, 'string', parsedArgs.params
-    )
-    if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(`Fall back to translate the keypath '${key}' with root locale.`)
-      }
-      /* istanbul ignore if */
-      if (!this._root) { throw Error('unexpected error') }
-      return this._root.t(key, ...values)
-    } else {
-      return this._checkDefault(locale, key, ret, host, values, defaultValue)
+    if (defaultValue === undefined) {
+      defaultValue = ''
     }
+    var translated = this._t(key, _locale, messages, host, ...values)
+    if (translated === key) {
+      translated = defaultValue
+    }
+    return translated
   }
 
   td (key: Path, defaultValue: any, ...values: any): TranslateResult {
