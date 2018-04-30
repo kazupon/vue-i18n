@@ -88,7 +88,7 @@ i18n.t;
 i18n.tc;
 // $ExpectType (key: string, locale?: string | undefined) => boolean
 i18n.te;
-// $ExpectType { (key: string, defaultValue?: string | undefined, values?: { [key: string]: any; } | undefined): string; (key: string, choice: number, locale: string, values?: { [key: string]: any; } | undefined): string; }
+// $ExpectType { (key: string, defaultValue?: string | undefined, values?: { [key: string]: any; } | undefined): string; (key: string, defaultValue: string, locale: string, values?: { [key: string]: any; } | undefined): string; }
 i18n.td;
 // tslint:disable-next-line:max-line-length
 // $ExpectType { (value: number | Date, key?: string | undefined, locale?: string | undefined): string; (value: number | Date, args?: { [key: string]: string; } | undefined): string; }
@@ -120,12 +120,12 @@ vm.$tc(key, 1, locale, {});         // $ExpectType string
 vm.$te(key);                        // $ExpectType boolean
 vm.$te(key, locale);                // $ExpectType boolean
 vm.$td(key);                        // $ExpectType string
-vm.$td(key, 'x');                     // $ExpectType string
-vm.$td(key, 'x', []);                 // $ExpectType string
-vm.$td(key, 'x', {});                 // $ExpectType string
-vm.$td(key, 'x', locale);             // $ExpectType string
-vm.$td(key, 'x', locale, []);         // $ExpectType string
-vm.$td(key, 'x', locale, {});         // $ExpectType string
+vm.$td(key, 'x');                   // $ExpectType string
+vm.$td(key, 'x', []);               // $ExpectType string
+vm.$td(key, 'x', {});               // $ExpectType string
+vm.$td(key, 'x', locale);           // $ExpectType string
+vm.$td(key, 'x', locale, []);       // $ExpectType string
+vm.$td(key, 'x', locale, {});       // $ExpectType string
 vm.$d(1, key);                      // $ExpectType string
 vm.$d(1, key, locale);              // $ExpectType string
 vm.$d(new Date(), { key, locale }); // $ExpectType string

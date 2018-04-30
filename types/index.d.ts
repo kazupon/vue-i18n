@@ -101,9 +101,9 @@ declare class VueI18n {
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
   tc(key: VueI18n.Path, choice?: VueI18n.Choice, values?: VueI18n.Values): string;
   tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, values?: VueI18n.Values): string;
-  td(key: VueI18n.Path, defaultValue: VueI18n.DefaultValue, values?: VueI18n.Values): string;
-  td(key: VueI18n.Path, defaultValue: VueI18n.DefaultValue, locale: VueI18n.Locale, values?: VueI18n.Values): string;
   te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
+  td(key: VueI18n.Path, defaultValue?: VueI18n.DefaultValue, values?: VueI18n.Values): string;
+  td(key: VueI18n.Path, defaultValue: VueI18n.DefaultValue, locale: VueI18n.Locale, values?: VueI18n.Values): string;
   d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
   d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
   n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
@@ -131,8 +131,8 @@ declare module 'vue/types/vue' {
     readonly $i18n: VueI18n & IVueI18n;
     $t: typeof VueI18n.prototype.t;
     $tc: typeof VueI18n.prototype.tc;
-    $td: typeof VueI18n.prototype.td;
     $te: typeof VueI18n.prototype.te;
+    $td: typeof VueI18n.prototype.td;
     $d: typeof VueI18n.prototype.d;
     $n: typeof VueI18n.prototype.n;
   }
