@@ -1,8 +1,8 @@
 # Pluralization
 
-You can translate with pluralization.  You must define a locale that has a pipe `|` separator, and define plurals separated by a `|` pipe.
+You can translate with pluralization.  You must define a locale string that has a pipe `|` separator, and define plurals separated by a `|` pipe.
 
-Locale messages the below:
+Make your your local strings like this:
 
 ```javascript
 const messages = {
@@ -12,8 +12,9 @@ const messages = {
   }
 }
 ```
+Where the format is `0 things | 1 thing | more than 1 thing`.
 
-Template the below:
+Your template needs to use `$tc()`, not `$t()`:
 
 ```html
 <p>{{ $tc('car', 1) }}</p>
@@ -23,8 +24,9 @@ Template the below:
 <p>{{ $tc('apple', 1) }}</p>
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
 ```
+Note that if you need to pass in a variable, you might have to pass it in twice like in the last example above.
 
-Output the below:
+This will output the following HTML:
 
 ```html
 <p>car</p>
