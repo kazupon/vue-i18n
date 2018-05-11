@@ -136,7 +136,11 @@ declare module 'vue/types/vue' {
 
 declare module 'vue/types/options' {
   interface ComponentOptions<V extends Vue> {
-    i18n?: VueI18n;
+    i18n?: {
+      messages?: VueI18n.LocaleMessages;
+      dateTimeFormats?: VueI18n.DateTimeFormats;
+      numberFormats?: VueI18n.NumberFormats;
+    };
   }
 }
 
