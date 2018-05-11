@@ -53,6 +53,28 @@ $ npm i --save-dev @kazupon/vue-i18n-loader
 
 For Webpack the configuration below is required:
 
+for vue-loader v15:
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        resourceQuery: /blockType=i18n/,
+        loader: '@kazupon/vue-i18n-loader'
+      }
+      // ...
+    ]
+  },
+  // ...
+}
+```
+
+for vue-loader v14:
 ```js
 module.exports = {
   // ...
@@ -190,6 +212,31 @@ ja:
 
 Webpack conf the below:
 
+for vue-loader v15:
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        resourceQuery: /blockType=i18n/,
+        use: [
+          {loader: '@kazupon/vue-i18n-loader'},
+          {loader: 'yaml-loader'}
+        ]
+      }
+      // ...
+    ]
+  },
+  // ...
+}
+```
+
+for vue-loader v14:
 ```js
 module.exports = {
   // ...
