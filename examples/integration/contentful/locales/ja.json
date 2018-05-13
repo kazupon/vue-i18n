@@ -1,0 +1,25 @@
+{
+  "components": {
+    "language": {
+      "current": "現在の言語コード: {language}"
+    },
+    "navigation": {
+      "menu": {
+        "blog": "ブログ一覧",
+        "index": "インデックス"
+      }
+    }
+  },
+  "pages": {
+    "top": {
+      "recently": "最近の記事"
+    },
+    "blog": {
+      "title": "ブログ一覧",
+      "subtitle": "全ての記事 ({count})"
+    },
+    "tags": {
+      "subtitle": "#{tag} でタグ付けされた全ての記事 ({count})"
+    }
+  }
+}
