@@ -85,7 +85,7 @@ the following ouput:
 
 About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
 
-The children of `i18n` functional component is interpolated with locale message of `path` prop. In the above example, `<a :href="url" target="_blank">{{ $t('tos') }}</a>` is interplated with `term` locale message.
+The children of `i18n` functional component is interpolated with locale message of `path` prop. In the above example, `<a :href="url" target="_blank">{{ $t('tos') }}</a>` is interpolated with `term` locale message.
 
 In above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their orders of appearance.
 
