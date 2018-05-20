@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.6.0 
+ * vue-i18n v7.7.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -1358,7 +1358,7 @@ VueI18n.prototype.getLocaleMessage = function getLocaleMessage (locale) {
 };
 
 VueI18n.prototype.setLocaleMessage = function setLocaleMessage (locale, message) {
-  this._vm.messages[locale] = message;
+  this._vm.$set(this._vm.messages, locale, message);
 };
 
 VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
@@ -1370,7 +1370,7 @@ VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
 };
 
 VueI18n.prototype.setDateTimeFormat = function setDateTimeFormat (locale, format) {
-  this._vm.dateTimeFormats[locale] = format;
+  this._vm.$set(this._vm.dateTimeFormats, locale, format);
 };
 
 VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, format) {
@@ -1392,8 +1392,8 @@ VueI18n.prototype._localizeDateTime = function _localizeDateTime (
     if (process.env.NODE_ENV !== 'production') {
       warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + " datetime formats."));
       }
-    _locale = fallback;
-      formats = dateTimeFormats[_locale];
+      _locale = fallback;
+    formats = dateTimeFormats[_locale];
   }
 
   if (isNull(formats) || isNull(formats[key])) {
@@ -1469,7 +1469,7 @@ VueI18n.prototype.getNumberFormat = function getNumberFormat (locale) {
 };
 
 VueI18n.prototype.setNumberFormat = function setNumberFormat (locale, format) {
-  this._vm.numberFormats[locale] = format;
+  this._vm.$set(this._vm.numberFormats, locale, format);
 };
 
 VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format) {
@@ -1491,12 +1491,12 @@ VueI18n.prototype._localizeNumber = function _localizeNumber (
   if (isNull(formats) || isNull(formats[key])) {
     if (process.env.NODE_ENV !== 'production') {
       warn(("Fall back to '" + fallback + "' number formats from '" + locale + " number formats."));
-      }
-      _locale = fallback;
+    }
+    _locale = fallback;
     formats = numberFormats[_locale];
-  }
+    }
 
-  if (isNull(formats) || isNull(formats[key])) {
+    if (isNull(formats) || isNull(formats[key])) {
     return null
   } else {
     var format = formats[key];
@@ -1589,6 +1589,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.6.0';
+VueI18n.version = '7.7.0';
 
 module.exports = VueI18n;
