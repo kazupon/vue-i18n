@@ -1,3 +1,14 @@
+<a name="7.7.0"></a>
+# [7.7.0](https://github.com/kazupon/vue-i18n/compare/v7.6.0...v7.7.0) (2018-05-20)
+
+
+### :zap: Improvements
+
+* **index:** resource reactivity ([887a137](https://github.com/kazupon/vue-i18n/commit/887a137)), closes [#253](https://github.com/kazupon/vue-i18n/issues/253)
+* **typescript:** Fix typings in components ([#344](https://github.com/kazupon/vue-i18n/issues/344)) by [@Demivan](https://github.com/Demivan) ([2402893](https://github.com/kazupon/vue-i18n/commit/2402893)), closes [#344](https://github.com/kazupon/vue-i18n/issues/344)
+
+
+
 <a name="7.6.0"></a>
 # [7.6.0](https://github.com/kazupon/vue-i18n/compare/v7.5.0...v7.6.0) (2018-03-13)
 
