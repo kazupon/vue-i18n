@@ -1,7 +1,5 @@
-<h1 align="center">vue-i18n</h1>
-
 <p align="center"><img width="128px" height="112px" src="./assets/vue-i18n-logo.png" alt="Vue I18n logo"></p>
-
+<h1 align="center">vue-i18n</h1>
 <p align="center">
   <a href="https://circleci.com/gh/kazupon/vue-i18n/tree/dev"><img src="https://circleci.com/gh/kazupon/vue-i18n/tree/dev.svg?style=shield" alt="Build Status"></a>
   <a href="https://codecov.io/gh/kazupon/vue-i18n"><img src="https://codecov.io/gh/kazupon/vue-i18n/branch/dev/graph/badge.svg" alt="Coverage Status"></a>
