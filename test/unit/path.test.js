@@ -9,6 +9,12 @@ describe('path', () => {
     })
   })
 
+  describe('string key with dots', () => {
+    it('should get path value', () => {
+      assert.equal(path.getPathValue({ 'a.b': 1 }, 'a.b'), 1)
+    })
+  })
+
   describe('object', () => {
     it('should get path value', () => {
       const val = path.getPathValue({ a: { b: 1 } }, 'a')

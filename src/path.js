@@ -298,6 +298,10 @@ export default class I18nPath {
   getPathValue (obj: mixed, path: Path): PathValue {
     if (!isObject(obj)) { return null }
 
+    if (obj[path] !== undefined) {
+      return (obj[path]: any)
+    }
+
     const paths: Array<string> = this.parsePath(path)
     if (empty(paths)) {
       return null
