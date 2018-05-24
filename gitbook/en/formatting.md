@@ -128,7 +128,7 @@ You can realize with custom formatter that implement [Formatter Interface](https
 The following custom formatter with ES2015 class syntax:
 
 ```javascript
-// Custom Fromatter implementaion
+// Custom Formatter implementaion
 class CustomFormatter {
  constructor (options) {
    // ...
