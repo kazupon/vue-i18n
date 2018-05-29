@@ -6,6 +6,8 @@ export default function extend (Vue: any): void {
     get () {
       return (key: Path, ...values: any): TranslateResult => {
         const i18n = this.$i18n
+        // issue https://github.com/kazupon/vue-i18n/issues/355
+        if (!i18n) return
         return i18n._t(key, i18n.locale, i18n._getMessages(), this, ...values)
       }
     }
@@ -15,6 +17,8 @@ export default function extend (Vue: any): void {
     get () {
       return (key: Path, choice?: number, ...values: any): TranslateResult => {
         const i18n = this.$i18n
+        // issue https://github.com/kazupon/vue-i18n/issues/355
+        if (!i18n) return
         return i18n._tc(key, i18n.locale, i18n._getMessages(), this, choice, ...values)
       }
     }
@@ -24,6 +28,8 @@ export default function extend (Vue: any): void {
     get () {
       return (key: Path, locale?: Locale): boolean => {
         const i18n = this.$i18n
+        // issue https://github.com/kazupon/vue-i18n/issues/355
+        if (!i18n) return
         return i18n._te(key, i18n.locale, i18n._getMessages(), locale)
       }
     }
@@ -32,6 +38,8 @@ export default function extend (Vue: any): void {
   Object.defineProperty(Vue.prototype, '$d', {
     get () {
       return (value: number | Date, ...args: any): DateTimeFormatResult => {
+        // issue https://github.com/kazupon/vue-i18n/issues/355
+        if (!this.$i18n) return
         return this.$i18n.d(value, ...args)
       }
     }
@@ -40,6 +48,8 @@ export default function extend (Vue: any): void {
   Object.defineProperty(Vue.prototype, '$n', {
     get () {
       return (value: number, ...args: any): NumberFormatResult => {
+        // issue https://github.com/kazupon/vue-i18n/issues/355
+        if (!this.$i18n) return
         return this.$i18n.n(value, ...args)
       }
     }
