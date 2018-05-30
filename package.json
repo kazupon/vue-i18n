@@ -96,6 +96,7 @@
     "coverage": "cat ./coverage/lcov.info",
     "dev": "cross-env BABEL_ENV=test webpack-serve --hot --open --content ./test/unit/ --config config/webpack.dev.conf.js",
     "docs:dev": "vuepress dev vuepress",
+    "docs:clean": "rm -rf docs/**",
     "docs:build": "node config/version.js && vuepress build vuepress -d docs",
     "flow": "flow check",
     "lint": "eslint --fix src test config",
