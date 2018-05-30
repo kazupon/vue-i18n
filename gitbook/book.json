@@ -1,0 +1,26 @@
+{
+  "gitbook": "3.x.x",
+  "title": "vue-i18n",
+  "root": "./",
+  "plugins": [
+    "edit-link",
+    "theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git", "-fontsettings",
+    "github",
+    "advanced-emoji@0.2.2"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/kazupon/vue-i18n/tree/dev/gitbook",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/kazupon/vue-i18n/"
+    }
+  },
+  "links": {
+    "sharing": {
+      "facebook": false,
+      "twitter": false
+    }
+  }
+}
