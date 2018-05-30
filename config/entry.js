@@ -47,11 +47,13 @@ const entries = {
 
 function genConfig (opts) {
   const config = {
-    entry: opts.entry,
-    dest: opts.dest,
-    format: opts.format,
-    banner: opts.banner,
-    moduleName,
+    input: opts.entry,
+    output: {
+      file: opts.dest,
+      name: moduleName,
+      format: opts.format,
+      banner: opts.banner
+    },
     plugins: [
       flow(),
       buble()
