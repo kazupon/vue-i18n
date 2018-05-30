@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/vue-i18n/',
   locales: {
     '/': {
       lang: 'en-US',
