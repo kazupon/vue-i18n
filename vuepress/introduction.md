@@ -1,11 +1,12 @@
-# vue-i18n documentation
+# Introduction
 
-Internationalization plugin of Vue.js
+VueI18n is internationalization plugin of Vue.js
 
-> :warning:
-NOTE: This documentation is for vue-i18n v6.0 or later.
+:::warning Notice
+:warning: This documentation is for VueI18n v6.0 or later.
+:::
 
-  * [Looking for 5.x Docs?](https://kazupon.github.io/vue-i18n/old/)
+  * [Looking for 5.x Docs?](/5.x/en/)
   * [Release Notes](https://github.com/kazupon/vue-i18n/releases)
   * [Installation](installation.md)
   * [Getting started](started.md)

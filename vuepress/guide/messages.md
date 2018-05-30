@@ -14,8 +14,7 @@ type Locale = string;
 type Path = string;
 ```
 
-Based on the above syntax, You can configure the following structure Locale
-Messages:
+Based on the above syntax, You can configure the following structure Locale Messages:
 
 ```json 
 {
@@ -40,8 +39,7 @@ Messages:
 }
 ```
 
-In the above Locale Messages structure, You can translate with using below key
-paths.
+In the above Locale Messages structure, You can translate with using below key paths.
 
 ```html
 <div id="app">
@@ -77,10 +75,7 @@ Ouput the following:
 
 ## Linked locale messages
 
-If there's a translation key that will always have the same concrete text as
-another one you can just link to it. To link to another translation key, all
-you have to do is to prefix its contents with an `@:` sign followed by the
-full name of the translation key including the namespace you want to link to.
+If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
 
 Locale messages the below:
 

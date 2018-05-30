@@ -12,8 +12,7 @@ const messages = {
 }
 ```
 
-When specify the `fallbackLocale` option to VueI18n constructor option,
-`message` key is localized with `en` locale key:
+When specify the `fallbackLocale` option to VueI18n constructor option, `message` key is localized with `en` locale key:
 
 ```js
 const i18n = new VueI18n({

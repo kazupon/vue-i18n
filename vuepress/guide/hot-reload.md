@@ -1,7 +1,6 @@
 # Hot reloading
 
-You can watch for changes in localization files and hot reload changes into
-your application.
+You can watch for changes in localization files and hot reload changes into your application.
 
 ```js
 // Something locale messages

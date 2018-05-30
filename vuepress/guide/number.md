@@ -1,6 +1,8 @@
 # Number localization
 
-> :new: 7.0+
+:::tip Support Version
+:new: 7.0+
+:::
 
 You can localize the number with your definition formats.
 
@@ -21,13 +23,9 @@ const numberFormats = {
  }
 ```
 
-As the Above, You can define the number format with named (e.g. `currency`,
-etc), and you need to use [the options with ECMA-402
-Intl.NumberFormat](https://developer.mozilla.org/en-
-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
+As the Above, You can define the number format with named (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en- US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
 
-After that like the locale messages, You need to specify the `numberFormats`
-option of `VueI18n` constructor:
+After that like the locale messages, You need to specify the `numberFormats` option of `VueI18n` constructor:
 
 ```js 
  const i18n = new VueI18n({

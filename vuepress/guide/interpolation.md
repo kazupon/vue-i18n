@@ -2,17 +2,17 @@
 
 ## Basic Usage
 
-> :new:
+:::tip Support Version
+:new: 7.0+
+:::
 
-Sometimes, we need to localize with locale message that was included HTML tag
-or component. For example:
+Sometimes, we need to localize with locale message that was included HTML tag or component. For example:
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-In the above message, if you use with `$t`, probably you may try to compose
-the following locale messages:
+In the above message, if you use with `$t`, probably you may try to compose the following locale messages:
 
 ```js
 const messages = {
@@ -25,11 +25,9 @@ const messages = {
 
 And in the following, you may try to implement in template:
 
-::: v-pre
 ```html
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
 ```
-:::
 
 output:
 
@@ -37,14 +35,12 @@ output:
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-This is very cumbersome, and if you configure the `<a>` tag in a locale
-message, there is a possibility XSS vulnerabilities due to localize with
+This is very cumbersome, and if you configure the `<a>` tag in a locale message, there is a possibility XSS vulnerabilities due to localize with
 `v-html="$t('term')"`.
 
 You can avoid it with using `i18n` functional component. For example:
 
-::: v-pre
-```js
+```html
 <div id="app">
   <!-- ... -->
   <i18n path="term" tag="label" for="tos">
@@ -52,9 +48,8 @@ You can avoid it with using `i18n` functional component. For example:
   </i18n>
   <!-- ... -->
 </div>
-
-
-
+```
+```js
 const messages = {
   en: {
     tos: 'Term of Service',
@@ -77,7 +72,6 @@ new Vue({
   }
 }).$mount('#app')
 ```
-:::
 
 the following ouput:
 
@@ -91,34 +85,28 @@ the following ouput:
 </div>
 ```
 
-About the above example, see the
-[example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
+About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
 
-::: v-pre
-The children of `i18n` functional component is interpolated with locale
-message of `path` prop. In the above example, `<a :href="url"
-target="_blank">{{ $t('tos') }}</a>` is interplated with `term` locale
-message.
+The children of `i18n` functional component is interpolated with locale message of `path` prop. In the above example, 
+:::v-pre
+`<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
+is interplated with `term` locale message.
 
-In above example, the component interpolation follows the **list formatting**.
-The children of `i18n` functional component are interpolated by their orders
-of appearance.
+In above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their orders of appearance.
 
 ## Advanced Usage
 
-> :new:
-
->
-
-> :warning:
-NOTE: In `i18n` component, text content consists of only white spaces will be
-omitted.
+:::tip Support Version
+:new: 7.2+
+:::
+:::warning Notice
+:warning: In `i18n` component, text content consists of only white spaces will be omitted.
+:::
 
 Named formatting is supported with the help of `place` attribute. For example:
 
-::: v-pre
-```js
+```html
 <div id="app">
   <!-- ... -->
   <i18n path="info" tag="p">
@@ -127,9 +115,8 @@ Named formatting is supported with the help of `place` attribute. For example:
   </i18n>
   <!-- ... -->
 </div>
-
-
-
+```
+```js
 const messages = {
   en: {
     info: 'You can {action} until {limit} minutes from departure.',
@@ -152,7 +139,6 @@ new Vue({
   }
 }).$mount('#app')
 ```
-:::
 
 Outputs:
 
@@ -166,14 +152,12 @@ Outputs:
 </div>
 ```
 
-> :warning:
-NOTE: To use named formatting, all children of `i18n` component must have
-`place` attribute set. Otherwise it will fallback to list formatting.
+:::warning Notice
+:warning: To use named formatting, all children of `i18n` component must have `place` attribute set. Otherwise it will fallback to list formatting.
+:::
 
-If you still want to interpolate text content in named formatting, you could
-define `places` property on `i18n` component. For example:
+If you still want to interpolate text content in named formatting, you could define `places` property on `i18n` component. For example:
 
-::: v-pre
 ```html
 <div id="app">
   <!-- ... -->
@@ -183,7 +167,6 @@ define `places` property on `i18n` component. For example:
   <!-- ... -->
 </div>
 ```
-:::
 
 Outputs:
 

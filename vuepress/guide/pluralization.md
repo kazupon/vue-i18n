@@ -1,7 +1,6 @@
 # Pluralization
 
-You can translate with pluralization. You must define the locale that have a
-pipe `|` separator, and define plurals in pipe separator.
+You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
 Locale messages the below:
     

@@ -1,6 +1,8 @@
 # Custom directive localization
 
-> :new:
+:::tip Support Version
+:new: 7.3+
+:::
 
 You can translate not only with `v-t` custom directive, but also with `$t`
 method.
@@ -10,7 +12,6 @@ method.
 You can pass the keypath of locale messages with string syntax.
 
 Javascript:
-
 
 ```js
 new Vue({
@@ -95,13 +96,11 @@ Outputs:
 
 #### Pros
 
-You can **flexibly** use mustash syntax `{{}}` in templates and also computed
-props and methods in Vue instance.
+You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
 #### Cons
 
-`$t` is executed **everytime** when re-render occures, so it does have a
-translation costs.
+`$t` is executed **everytime** when re-render occures, so it does have a translation costs.
 
 ### `v-t`
 
@@ -109,17 +108,10 @@ translation costs.
 
 #### Pros
 
-`v-t` has **better performance** than the `$t` method due to its cache with
-the custom directive, when translated once. Also, pre-translation is possible
-with the Vue compiler module which was provided by
-[`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions).
+`v-t` has **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions).
+
 Therefore it's possible to make **more performance optimizations**.
 
 #### Cons
 
-`v-t` can not be flexibly used like `$t`, it's rather **complex**. The
-translated content with `v-t` is inserted into the `textContent` of the
-element. Also, when you use server-side rendering, you need to set the [custom
-directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-
-custom-directive-for-server-side) to `directives` option of the
-`createRenderer` function.
+`v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t- custom-directive-for-server-side) to `directives` option of the `createRenderer` function.

@@ -1,3 +1,7 @@
+---
+sidebar: auto
+---
+
 # API references
 
 ## Extension of Vue
@@ -23,12 +27,7 @@ Component based localization option.
     * `{Array | Object} values`: optional
   * **Return:** `TranslateResult`
 
-Localize the locale message of `key`. Localize in preferentially component
-locale messages than global locale messages. If not specified component locale
-messages, localize with global locale messages. If you specified `locale`,
-localize the locale messages of `locale`. If you specified `key` of list /
-named formatting local messages, you must specify `values` too. For `values`
-more details see [Formatting](formatting.md).
+Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
 
 #### $tc
 
@@ -40,13 +39,7 @@ more details see [Formatting](formatting.md).
     * `{string | Array | Object} values`: optional
   * **Return:** `TranslateResult`
 
-Localize the locale message of `key` with pluralization. Localize in
-preferentially component locale messages than global locale messages. If not
-specified component locale messages, localize with global locale messages. If
-you specified `locale`, localize the locale messages of `locale`. If you will
-specify string value to `values`, localize the locale messages of value. If
-you will specify Array or Object value to `values`, you must specify with
-`values` of $t.
+Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of $t.
 
 #### $te
 
@@ -56,9 +49,7 @@ you will specify Array or Object value to `values`, you must specify with
     * `{Locale} locale`: optional
   * **Return:** `boolean`
 
-Check whether key exists. In Vue instance, If not specified component locale
-messages, check with global locale messages. If you specified `locale`, check
-the locale messages of `locale`.
+Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
 #### $d
 
@@ -71,14 +62,9 @@ the locale messages of `locale`.
     * `{Locale | Object} locale`: optional
   * **Return:** `DateTimeFormatResult`
 
-Localize the datetime of `value` with datetime format of `key`. The datetime
-format of `key` need to register to `dateTimeFormats` option of `VueI18n`
-class, and depend on `locale` option of `VueI18n` constructor. If you will
-specify `locale` argument, it will have priority over `locale` option of
-`VueI18n` constructor.
+Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
-If the datetime format of `key` not exist in `dateTimeFormats` option,
-fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+If the datetime format of `key` not exist in `dateTimeFormats` option, fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
 #### $n
 
@@ -91,17 +77,11 @@ fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
     * `{Locale} locale`: optional
   * **Return:** `NumberFormatResult`
 
-Localize the number of `value` with number format of `key`. The number format
-of `key` need to register to `numberFormats` option of `VueI18n` class, and
-depend on `locale` option of `VueI18n` constructor. If you will specify
-`locale` argument, it will have priority over `locale` option of `VueI18n`
-constructor.
+Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
-If the number format of `key` not exist in `numberFormats` option, fallback to
-depened on `fallbackLocale` option of `VueI18n` constructor.
+If the number format of `key` not exist in `numberFormats` option, fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
 
-If the second `key` argument specified as an object, it should have the
-following properties:
+If the second `key` argument specified as an object, it should have the following properties:
 
 * `key {Path}`: optional, number format
 * `locale {Locale}`: optional, locale
@@ -117,8 +97,7 @@ following properties:
 * `localeMatcher {string}`: optional, number format option
 * `formatMatcher {string}`: optional, number format option
 
-Any specified number format options will have priority over `numberFormats` of
-`VueI18n` constructor.
+Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
 ### Injected properties
 
@@ -130,14 +109,11 @@ Any specified number format options will have priority over `numberFormats` of
 
 Get a `VueI18n` instance. If you are specify.
 
-If you have specified an `i18n` option at component options, you will be able
-to get a `VueI18n` instance at the component, Otherwise, you will be able get
-root `VueI18n` instance.
+If you have specified an `i18n` option at component options, you will be able to get a `VueI18n` instance at the component, Otherwise, you will be able get root `VueI18n` instance.
 
 ## `VueI18n` class
 
-`Vuei18n` class implement `I18n` interface of [flowtype
-definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+`Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Static properties
 
@@ -159,15 +135,11 @@ Whether the following internationalization features are available:
 
   * `{boolean} numberFormat`: locale sensitive number formatting
 
-The above internationalization features are depends on [the browser
-environmens](http://kangax.github.io/compat-table/esintl/), due to implement
-with ECMAScript Internationalization API (ECMA-402).
+The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ### Constructor options
 
-You can specify the below some options of `I18nOptions` constructor options of
-[flowtype
-definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+You can specify the below some options of `I18nOptions` constructor options of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### locale
 
@@ -231,11 +203,9 @@ The formatter that implemented with `Formatter` interface.
 
   * **Default:** `null`
 
-A hander for localization missing. The handler gets called with the
-localization target locale, localization path key and the Vue instance.
+A hander for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
 
-If missing hander is assigned, and occured localization missing, it's not
-warned.
+If missing hander is assigned, and occured localization missing, it's not warned.
 
 #### fallbackRoot
 
@@ -243,8 +213,7 @@ warned.
 
   * **Default:** `true`
 
-In the component localization, whether to fall back to root level (global)
-localization when localization fails.
+In the component localization, whether to fall back to root level (global) localization when localization fails.
 
 If `false`, it's warned, and is returned the key.
 
@@ -254,11 +223,9 @@ If `false`, it's warned, and is returned the key.
 
   * **Default:** `true`
 
-Whether synchronize the root level locale to the component localization
-locale.
+Whether synchronize the root level locale to the component localization locale.
 
-If `false`, regardless of the root level locale, localize for each component
-locale.
+If `false`, regardless of the root level locale, localize for each component locale.
 
 ### silentTranslationWarn
 
@@ -384,8 +351,7 @@ Merge the registered locale messages with the locale message of locale.
     * `{Array | Object} values`: optional
   * **Return:** : `TranslateResult`
 
-This is the same as the `Function` returned with `$t` method. More detail see
-$t.
+This is the same as the `Function` returned with `$t` method. More detail see $t.
 
 #### i( key, [locale], [values] )
 
@@ -417,8 +383,7 @@ This is the same as the `Function` returned `$tc` method. More detail see $tc.
     * `{Locale} locale`: optional
   * **Return:** `boolean`
 
-Check whether key path exists in global locale message. If you specified
-`locale`, check the locale message of `locale`.
+Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
 
 #### getDateTimeFormat ( locale )
 
@@ -522,31 +487,27 @@ This is the same as `$n` method of Vue instance method. More detail see $n.
 
   * **Details:**
 
-Update the element `textContent` that localized with locale messages. You can
-use string syntax or object syntax. string syntax can be specified as a
-keypath of locale messages. If you can be used object syntax, you need to
-specify as the object key the following params:
+Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
 
     * path: required, key of locale messages
     * locale: optional, locale
     * args: optional, for list or named formatting
   * **Examples:**
-
 ```html    
-         <!-- string syntax: literal -->
-    <p v-t="'foo.bar'"></p>
-    
-    <!-- string syntax: binding via data or computed props -->
-    <p v-t="msg"></p>
-    
-    <!-- object syntax: literal -->
-    <p v-t="{ path: 'hi', locale: 'ja', args: { name: 'kazupon' } }"></p>
-    
-    <!-- object syntax: binding via data or computed props -->
-    <p v-t="{ path: greeting, args: { name: fullName } }"></p>
+<!-- string syntax: literal -->
+<p v-t="'foo.bar'"></p>
+
+<!-- string syntax: binding via data or computed props -->
+<p v-t="msg"></p>
+
+<!-- object syntax: literal -->
+<p v-t="{ path: 'hi', locale: 'ja', args: { name: 'kazupon' } }"></p>
+
+<!-- object syntax: binding via data or computed props -->
+<p v-t="{ path: greeting, args: { name: fullName } }"></p>
 ```
 
-  * **See also:** [Custom directive localization](directive.md)
+  * **See also:** [Custom directive localization](../guide/directive.md)
 
 ## Components
 
@@ -563,43 +524,42 @@ specify as the object key the following params:
 
 #### Usage:
 
-```javascript    
-     <div id="app">
-      <!-- ... -->
-      <i18n path="term" tag="label" for="tos">
-        <a :href="url" target="_blank">{{ $t('tos') }}</a>
-      </i18n>
-      <!-- ... -->
-    </div>
-    
-    
-    
-    const messages = {
-      en: {
-        tos: 'Term of Service',
-        term: 'I accept xxx {0}.'
-      },
-      ja: {
-        tos: '利用規約',
-        term: '私は xxx の{0}に同意します。'
-      }
-    }
-    
-    const i18n = new VueI18n({
-      locale: 'en',
-      messages
-    })
-    new Vue({
-      i18n,
-      data: {
-        url: '/term'
-      }
-    }).$mount('#app')
+```html
+<div id="app">
+  <!-- ... -->
+  <i18n path="term" tag="label" for="tos">
+    <a :href="url" target="_blank">{{ $t('tos') }}</a>
+  </i18n>
+  <!-- ... -->
+</div>
+```
+```js
+const messages = {
+  en: {
+    tos: 'Term of Service',
+    term: 'I accept xxx {0}.'
+  },
+  ja: {
+    tos: '利用規約',
+    term: '私は xxx の{0}に同意します。'
+  }
+}
+
+const i18n = new VueI18n({
+  locale: 'en',
+  messages
+})
+new Vue({
+  i18n,
+  data: {
+    url: '/term'
+  }
+}).$mount('#app')
 ```    
 
 #### See also:
 
-[Component interpolation](interpolation.md)
+[Component interpolation](../guide/interpolation.md)
 
 ## Special Attributes
 
@@ -609,12 +569,10 @@ specify as the object key the following params:
 
 #### Expects: `{number | string}`
 
-Used on component interpolation to indicate which index of list formatting or
-key of named formatting.
+Used on component interpolation to indicate which index of list formatting or key of named formatting.
 
 For detailed usage, see the guide section linked below.
 
 #### See also:
 
-[Component interpolation](interpolation.md)
-
+[Component interpolation](../guide/interpolation.md)

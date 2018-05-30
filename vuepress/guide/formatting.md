@@ -1,15 +1,14 @@
-  # Formatting
+# Formatting
 
 ## HTML formatting
 
-> :warning:
-NOTE: Dynamically localization arbitrary HTML on your website can be very
-dangerous because it can easily lead to XSS vulnerabilities. Only use HTML
-interpolation on trusted content and never on user-provided content. We
-recommended that use [component interpolation](interpolation.md) feature.
+:::warning Notice
+:warning: Dynamically localization arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. 
 
-In some cases you might want to rendered your translation as an HTML message
-and not a static string.
+We recommended that use [component interpolation](interpolation.md) feature.  
+:::
+
+In some cases you might want to rendered your translation as an HTML message and not a static string.
 
     
 ```js  
@@ -132,11 +131,9 @@ Output the below:
 
 ## Custom formatting
 
-Sometimes, you maybe need to translate with custom formatting (e.g. [ICU
-message syntax](http://userguide.icu-project.org/formatparse/messages)).
+Sometimes, you maybe need to translate with custom formatting (e.g. [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
 
-You can realize with custom formatter that implement [Formatter
-Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
+You can realize with custom formatter that implement [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
 
 The following custom formatter with ES2015 class syntax:
 
@@ -200,6 +197,4 @@ const i18n = new VueI18n({
 new Vue({ i18n }).$mount('#app')
 ```
 
-You can check [the custom formatter official
-example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom).
-
+You can check [the custom formatter official example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom).
