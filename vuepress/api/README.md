@@ -351,7 +351,7 @@ Merge the registered locale messages with the locale message of locale.
     * `{Array | Object} values`: optional
   * **Return:** : `TranslateResult`
 
-This is the same as the `Function` returned with `$t` method. More detail see $t.
+This is the same as the `Function` returned with `$t` method. More detail see [$t](#t).
 
 #### i( key, [locale], [values] )
 
@@ -373,7 +373,7 @@ This is the same as the `Function` returned with `$t` method. More detail see $t
     * `{string | Array | Object} values`: optional
   * **Return:** `TranslateResult`
 
-This is the same as the `Function` returned `$tc` method. More detail see $tc.
+This is the same as the `Function` returned `$tc` method. More detail see [$tc](#tc).
 
 #### te( key, [locale] )
 
@@ -429,7 +429,7 @@ Merge the registered datetime formats with the datetime format of locale.
     * `{Locale | Object} locale`: optional
   * **Return:** `DateTimeFormatResult`
 
-This is the same as `$d` method of Vue instance method. More detail see $d.
+This is the same as `$d` method of Vue instance method. More detail see [$d](#d).
 
 #### getNumberFormat ( locale )
 
@@ -475,7 +475,7 @@ Merge the registered number formats with the number format of locale.
     * `{Locale} locale`: optional
   * **Return:** `NumberFormatResult`
 
-This is the same as `$n` method of Vue instance method. More detail see $n.
+This is the same as `$n` method of Vue instance method. More detail see [$n](#n).
 
 ## Directives
 
@@ -493,7 +493,7 @@ Update the element `textContent` that localized with locale messages. You can us
     * locale: optional, locale
     * args: optional, for list or named formatting
   * **Examples:**
-```html    
+```html
 <!-- string syntax: literal -->
 <p v-t="'foo.bar'"></p>
 
@@ -555,7 +555,7 @@ new Vue({
     url: '/term'
   }
 }).$mount('#app')
-```    
+```
 
 #### See also:
 
