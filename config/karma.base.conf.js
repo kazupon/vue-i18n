@@ -9,13 +9,6 @@ const webpackConfig = {
       exclude: /node_modules/
     }]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"'
-      }
-    })
-  ],
   devtool: '#inline-source-map'
 }
 
@@ -27,7 +20,9 @@ module.exports = {
   preprocessors: {
     '../test/unit/index.js': ['webpack', 'sourcemap']
   },
-  webpack: webpackConfig,
+  webpack: Object.assign({
+    mode: 'development',
+  }, webpackConfig),
   webpackMiddleware: {
     noInfo: true
   },
