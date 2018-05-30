@@ -1,61 +1,18 @@
 # Introduction
 
-VueI18n is internationalization plugin of Vue.js
-
 :::warning Notice
 :warning: This documentation is for VueI18n v6.0 or later.
 :::
 
-  * [Looking for 5.x Docs?](/5.x/en/)
-  * [Release Notes](https://github.com/kazupon/vue-i18n/releases)
-  * [Installation](installation.md)
-  * [Getting started](started.md)
-  * [Formatting](formatting.md)
-    * [HTML formatting](formatting.md#md-formatting)
-    * [Named formatting](formatting.md#named-formatting)
-    * [List formatting](formatting.md#list-formatting)
-    * [Support ruby on rails i18n format](formatting.md#support-ruby-on-rails-i18n-format)
-    * [Custom formatting](formatting.md#custom-formatting)
-  * [Pluralization](pluralization.md)
-  * [DateTime localization](datetime.md)
-  * [Number localization](number.md)
-  * [Locale messages syntax](messages.md)
-    * [Structure](messages.md#structure)
-    * [Linked locale messages](messages.md#linked-locale-messages)
-  * [Fallback localization](fallback.md)
-  * [Component based localization](component.md)
-  * [Custom directive localization](directive.md)
-    * [String Syntax](directive.md#string-syntax)
-    * [Object Syntax](directive.md#object-syntax)
-    * [$t vs v-t](directive.md#t-vs-v-t)
-  * [Component interpolation](interpolation.md)
-    * [Basic Usage](interpolation.md#basic-usage)
-    * [Advanced Usage](interpolation.md#advanced-usage)
-  * [Single file components](sfc.md)
-    * [Basic Usage](sfc.md#basic-usage)
-    * [YAML loading](sfc.md#yaml-loading)
-    * [Multiple custom blocks](sfc.md#multiple-custom-blocks)
-  * [Hot reloading](hot-reload.md)
-  * [Lazy loading](lazy-loading.md)
-  * [Migrations](migrations.md)
-    * [Global config](migrations.md#global-config)
-    * [Global methods](migrations.md#global-methods)
-    * [Constructor options](migrations.md#constructor-options)
-    * [Instance properties](migrations.md#instance-properties)
-    * [Features](migrations.md#features)
-  * [API references](api.md)
-    * [Extension of Vue](api.md#extension-of-vue)
-      * [Vue constructor options](api.md#vue-constructor-options)
-      * [Vue injected methods](api.md#vue-injected-methods)
-      * [Injected properties](api.md#injected-properties)
-    * [VueI18n class](api.md#vuei18n-class)
-      * [Static properties](api.md#static-properties)
-      * [Constructor options](api.md#constructor-options)
-      * [Properties](api.md#properties)
-      * [Methods](api.md#methods)
-    * [Directives](api.md#directives)
-      * [v-t](api.md#v-t)
-    * [Components](api.md#components)
-      * [i18n](api.md#i18n-functional-component)
-    * [Special Attributes](api.md#special-attributes)
-      * [place](api.md#place)
+VueI18n is internationalization plugin of Vue.js. It easily integrates some localization features to your Vue.js Application. Features indcludes:
+
+- Various formats localization
+- Pluralization
+- DateTime localization
+- Number localization
+- Component based localization
+- Component interpolation
+- Fallback localization
+- ... etc
+
+Let' play [Get Started](./guide/started.md)!
