@@ -114,4 +114,4 @@ Therefore it's possible to make **more performance optimizations**.
 
 #### Cons
 
-`v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t- custom-directive-for-server-side) to `directives` option of the `createRenderer` function.
+`v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of the `createRenderer` function.
