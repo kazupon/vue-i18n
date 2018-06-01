@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.7.0 
+ * vue-i18n v7.8.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -184,7 +184,7 @@ function extend (Vue) {
   });
   // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$tc', {
-    get: function get$1 () {
+    get: function get () {
       var this$1 = this;
 
       return function (key, choice) {
@@ -198,7 +198,7 @@ function extend (Vue) {
   });
   // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$te', {
-    get: function get$2 () {
+    get: function get () {
       var this$1 = this;
 
       return function (key, locale) {
@@ -209,29 +209,29 @@ function extend (Vue) {
   });
   // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$d', {
-    get: function get$3 () {
+    get: function get () {
       var this$1 = this;
 
       return function (value) {
+        var ref;
+
         var args = [], len = arguments.length - 1;
         while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
         return (ref = this$1.$i18n).d.apply(ref, [ value ].concat( args ))
-        var ref;
       }
     }
   });
   // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$n', {
-    get: function get$4 () {
+    get: function get () {
       var this$1 = this;
 
       return function (value) {
+        var ref;
+
         var args = [], len = arguments.length - 1;
         while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
         return (ref = this$1.$i18n).n.apply(ref, [ value ].concat( args ))
-        var ref;
       }
     }
   });
@@ -336,7 +336,7 @@ var mixin = {
 
     this._i18n = null;
   }
-};
+}
 
 /*  */
 
@@ -418,14 +418,14 @@ var component = {
 
     return h(props.tag, data, i18n.i(path, locale, params))
   }
-};
+}
 
 /*  */
 
 function bind (el, binding, vnode) {
   if (!assert(el, vnode)) { return }
 
-  t$1(el, binding, vnode);
+  t(el, binding, vnode);
 }
 
 function update (el, binding, vnode, oldVNode) {
@@ -433,7 +433,7 @@ function update (el, binding, vnode, oldVNode) {
 
   if (localeEqual(el, vnode) && looseEqual(binding.value, binding.oldValue)) { return }
 
-  t$1(el, binding, vnode);
+  t(el, binding, vnode);
 }
 
 function assert (el, vnode) {
@@ -456,7 +456,9 @@ function localeEqual (el, vnode) {
   return el._locale === vm.$i18n.locale
 }
 
-function t$1 (el, binding, vnode) {
+function t (el, binding, vnode) {
+  var ref$1, ref$2;
+
   var value = binding.value;
 
   var ref = parseValue(value);
@@ -481,8 +483,6 @@ function t$1 (el, binding, vnode) {
     el._vt = el.textContent = (ref$2 = vm.$i18n).t.apply(ref$2, [ path ].concat( makeParams(locale, args) ));
   }
   el._locale = vm.$i18n.locale;
-  var ref$1;
-  var ref$2;
 }
 
 function parseValue (value) {
@@ -564,6 +564,8 @@ BaseFormatter.prototype.interpolate = function interpolate (message, values) {
   }
   return compile(tokens, values)
 };
+
+
 
 var RE_TOKEN_LIST_VALUE = /^(\d)+/;
 var RE_TOKEN_NAMED_VALUE = /^(\w)+/;
@@ -970,6 +972,8 @@ I18nPath.prototype.getPathValue = function getPathValue (obj, path) {
 
 /*  */
 
+
+
 var numberFormatKeys = [
   'style',
   'currency',
@@ -1032,7 +1036,7 @@ var VueI18n = function VueI18n (options) {
   });
 };
 
-var prototypeAccessors = { vm: {},messages: {},dateTimeFormats: {},numberFormats: {},locale: {},fallbackLocale: {},missing: {},formatter: {},silentTranslationWarn: {} };
+var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true } };
 
 VueI18n.prototype._initVM = function _initVM (data) {
   var silent = Vue.config.silent;
@@ -1257,9 +1261,10 @@ VueI18n.prototype._translate = function _translate (
 };
 
 VueI18n.prototype._t = function _t (key, _locale, messages, host) {
+    var ref;
+
     var values = [], len = arguments.length - 4;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 4 ];
-
   if (!key) { return '' }
 
   var parsedArgs = parseArgs.apply(void 0, values);
@@ -1279,22 +1284,21 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
   } else {
     return this._warnDefault(locale, key, ret, host, values)
   }
-    var ref;
 };
 
 VueI18n.prototype.t = function t (key) {
+    var ref;
+
     var values = [], len = arguments.length - 1;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
-
   return (ref = this)._t.apply(ref, [ key, this.locale, this._getMessages(), null ].concat( values ))
-    var ref;
 };
 
 VueI18n.prototype._i = function _i (key, locale, messages, host, values) {
   var ret =
     this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values);
   if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
     }
     if (!this._root) { throw Error('unexpected error') }
@@ -1322,23 +1326,23 @@ VueI18n.prototype._tc = function _tc (
   host,
   choice
 ) {
+    var ref;
+
     var values = [], len = arguments.length - 5;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 5 ];
-
   if (!key) { return '' }
   if (choice === undefined) {
     choice = 1;
   }
   return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
-    var ref;
 };
 
 VueI18n.prototype.tc = function tc (key, choice) {
+    var ref;
+
     var values = [], len = arguments.length - 2;
     while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
-
   return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
-    var ref;
 };
 
 VueI18n.prototype._te = function _te (key, locale, messages) {
@@ -1391,8 +1395,8 @@ VueI18n.prototype._localizeDateTime = function _localizeDateTime (
   if (isNull(formats) || isNull(formats[key])) {
     if (process.env.NODE_ENV !== 'production') {
       warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + " datetime formats."));
-      }
-      _locale = fallback;
+    }
+    _locale = fallback;
     formats = dateTimeFormats[_locale];
   }
 
@@ -1494,9 +1498,9 @@ VueI18n.prototype._localizeNumber = function _localizeNumber (
     }
     _locale = fallback;
     formats = numberFormats[_locale];
-    }
+  }
 
-    if (isNull(formats) || isNull(formats[key])) {
+  if (isNull(formats) || isNull(formats[key])) {
     return null
   } else {
     var format = formats[key];
@@ -1563,9 +1567,10 @@ VueI18n.prototype.n = function n (value) {
 
       // Filter out number format options only
       options = Object.keys(args[0]).reduce(function (acc, key) {
-        if (numberFormatKeys.includes(key)) {
           var obj;
-            return Object.assign({}, acc, ( obj = {}, obj[key] = args[0][key], obj ))
+
+        if (numberFormatKeys.includes(key)) {
+          return Object.assign({}, acc, ( obj = {}, obj[key] = args[0][key], obj ))
         }
         return acc
       }, null);
@@ -1589,6 +1594,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.7.0';
+VueI18n.version = '7.8.0';
 
 module.exports = VueI18n;
