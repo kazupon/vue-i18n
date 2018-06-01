@@ -1,3 +1,13 @@
+<a name="7.8.0"></a>
+# [7.8.0](https://github.com/kazupon/vue-i18n/compare/v7.7.0...v7.8.0) (2018-06-01)
+
+
+### :zap: Improvements
+
+* **typescript:** add type exportings ([a7cb8da](https://github.com/kazupon/vue-i18n/commit/a7cb8da))
+
+
+
 <a name="7.7.0"></a>
 # [7.7.0](https://github.com/kazupon/vue-i18n/compare/v7.6.0...v7.7.0) (2018-05-20)
 
