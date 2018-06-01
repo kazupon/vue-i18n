@@ -71,6 +71,28 @@ declare namespace VueI18n {
   }
 }
 
+export type Path = VueI18n.Path;
+export type Locale = VueI18n.Locale;
+export type Values = VueI18n.Values;
+export type Choice = VueI18n.Choice;
+export type LocaleMessage = VueI18n.LocaleMessage;
+export type LocaleMessageObject = VueI18n.LocaleMessageObject;
+export type LocaleMessageArray = VueI18n.LocaleMessageArray;
+export type LocaleMessages = VueI18n.LocaleMessages;
+export type TranslateResult = VueI18n.TranslateResult;
+export type DateTimeFormatOptions = VueI18n.DateTimeFormatOptions;
+export type DateTimeFormat = VueI18n.DateTimeFormat;
+export type DateTimeFormats = VueI18n.DateTimeFormats;
+export type DateTimeFormatResult = VueI18n.DateTimeFormatResult;
+export type NumberFormatOptions = VueI18n.NumberFormatOptions;
+export type NumberFormat = VueI18n.NumberFormat;
+export type NumberFormats = VueI18n.NumberFormats;
+export type NumberFormatResult = VueI18n.NumberFormatResult;
+export type Formatter = VueI18n.Formatter;
+export type MissingHandler = VueI18n.MissingHandler;
+export type IntlAvailability = VueI18n.IntlAvailability;
+export type I18nOptions = VueI18n.I18nOptions;
+
 export declare interface IVueI18n {
   readonly messages: VueI18n.LocaleMessages;
   readonly dateTimeFormats: VueI18n.DateTimeFormats;
