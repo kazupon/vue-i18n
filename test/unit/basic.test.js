@@ -59,7 +59,7 @@ describe('basic', () => {
       })
 
       it('should support nested path contains chinese', () => {
-        assert.equal(i18n.t('嵌套.中文'), messages.ja['嵌套']['中文'])
+        assert.equal(i18n.t('嵌套.中文', 'ja'), messages.ja['嵌套']['中文'])
       })
     })
 
