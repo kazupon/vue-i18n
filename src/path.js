@@ -1,6 +1,6 @@
 /* @flow */
 
-import { isObject } from './util'
+import { isObject, isChineseCharacter } from './util'
 
 /**
  *  Path paerser
@@ -136,6 +136,11 @@ function getPathCharType (ch: ?string): string {
 
   // a-z, A-Z
   if ((code >= 0x61 && code <= 0x7A) || (code >= 0x41 && code <= 0x5A)) {
+    return 'ident'
+  }
+
+  // chinese
+  if (isChineseCharacter(ch)) {
     return 'ident'
   }
 
