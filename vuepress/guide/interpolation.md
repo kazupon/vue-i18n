@@ -91,7 +91,7 @@ The children of `i18n` functional component is interpolated with locale message 
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
-is interplated with `term` locale message.
+is interpolated with `term` locale message.
 
 In above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their orders of appearance.
 
