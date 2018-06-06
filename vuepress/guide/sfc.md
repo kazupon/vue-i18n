@@ -107,71 +107,26 @@ If you want to read more about modifying the existing configuration [click here]
 
 ## Laravel-Mix
 
-Laravel mix has its own rules for .vue files. To add the `vue-i18n-loader`, add the following to webpack.mix.js
+As of [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) of Laravel-mix, you can add custom rules via mix.extend(). Laravel mix already has its own rules for handling .vue files. To add the `vue-i18n-loader`, add the following to `webpack.mix.js`
 
 ```js
-mix.webpackConfig({
-  // ...
-  module: {
-    rules: [
-      {
-        // Rules are copied from laravel-mix@1.5.1 /src/builder/webpack-rules.js and manually merged with the ia8n-loader. Make sure to update the rules to the latest found in webpack-rules.js
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        exclude: /bower_components/,
-        options: {
-          // extractCSS: Config.extractVueStyles,
-          loaders: Config.extractVueStyles ? {
-            js: {
-              loader: 'babel-loader',
-              options: Config.babel()
-            },
-
-            scss: vueExtractPlugin.extract({
-              use: 'css-loader!sass-loader',
-              fallback: 'vue-style-loader'
-            }),
-
-            sass: vueExtractPlugin.extract({
-              use: 'css-loader!sass-loader?indentedSyntax',
-              fallback: 'vue-style-loader'
-            }),
-
-            css: vueExtractPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader'
-            }),
-
-            stylus: vueExtractPlugin.extract({
-              use: 'css-loader!stylus-loader?paths[]=node_modules',
-              fallback: 'vue-style-loader'
-            }),
-
-            less: vueExtractPlugin.extract({
-              use: 'css-loader!less-loader',
-              fallback: 'vue-style-loader'
-            }),
-
-            i18n: '@kazupon/vue-i18n-loader',
-          } : {
-            js: {
-              loader: 'babel-loader',
-              options: Config.babel()
-            },
-
-            i18n: '@kazupon/vue-i18n-loader',
-          },
-          postcss: Config.postCss,
-          preLoaders: Config.vue.preLoaders,
-          postLoaders: Config.vue.postLoaders,
-          esModule: Config.vue.esModule
+// The below code will inject i18n Kazupon/vue-18-loader as a loader for .vue files.
+mix.extend( 'i18n', function( webpackConfig, ...args ) {
+    webpackConfig.module.rules.forEach( ( module ) => {
+        // Search for the "vue-loader" component, which handles .vue files.
+        if( module.loader !== 'vue-loader' ) {
+            return;
         }
-      },
-      // ...
-    ]
-  },
-  // ...
-});
+
+        // Within this module, add the vue-i18n-loader for the i18n tag.
+        module.options.loaders.i18n = '@kazupon/vue-i18n-loader';
+    } );
+} );
+
+// Make sure to call .i18n() before .js(..., ...)
+mix.i18n()
+   .js( 'resources/assets/js/App.js', 'public/js/app.js' )
+   ...
 ``` 
 
 ## YAML loading
