@@ -74,3 +74,20 @@ Outputs the following:
 As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: `locale: 'ja'`).
 
 If you hope localize in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
+
+## Translation in functional component
+
+When using a functional component, all the data (including props, children, slots, parent, etc.) is passed through `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
+
+```html
+...
+<div>
+  <a
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer">
+    <img src="" :alt="parent.$t('message.hello')">
+  </a>
+</div>
+...
+```
