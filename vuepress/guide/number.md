@@ -23,7 +23,7 @@ const numberFormats = {
  }
 ```
 
-As the Above, You can define the number format with named (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en- US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
+As the Above, You can define the number format with named (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
 
 After that like the locale messages, You need to specify the `numberFormats` option of `VueI18n` constructor:
 
