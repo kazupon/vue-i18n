@@ -36,7 +36,7 @@ export const i18n = new VueI18n({
   messages // set locale messages
 })
 
-const loadedLanguages = ['en'] // our default language that is prelaoded 
+const loadedLanguages = ['en'] // our default language that is preloaded 
 
 function setI18nLanguage (lang) {
   i18n.locale = lang
