@@ -192,3 +192,30 @@ you can be used the locale messages with multiple `i18n` custom block.
 In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale messge that defined only at single file component. These locale messages will be merged as locale message of component.
 
 In this way, multiple custom blocks useful when want to be used as module.
+
+## Scoped style
+
+When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) for styling a nested translation. For example:
+
+```html
+...
+<template>
+  <div class="parent">
+    <p>message: {{ $t('hello') }}</p>
+  </div>
+</template>
+...
+<!-- Won't work-->
+<style scoped>
+.parent p {
+  color: #42b883;
+}
+</style>
+
+<!-- Will work -->
+<style>
+.parent >>> p {
+  color: #42b883;
+}
+</style>
+```
