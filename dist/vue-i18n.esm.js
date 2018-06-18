@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.8.0 
+ * vue-i18n v7.8.1 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -434,6 +434,16 @@ function update (el, binding, vnode, oldVNode) {
   t(el, binding, vnode);
 }
 
+function unbind (el, binding, vnode, oldVNode) {
+  if (!assert(el, vnode)) { return }
+
+  el.textContent = '';
+  el._vt = undefined;
+  delete el['_vt'];
+  el._locale = undefined;
+  delete el['_locale'];
+}
+
 function assert (el, vnode) {
   var vm = vnode.context;
   if (!vm) {
@@ -537,7 +547,7 @@ function install (_Vue) {
 
   extend(Vue);
   Vue.mixin(mixin);
-  Vue.directive('t', { bind: bind, update: update });
+  Vue.directive('t', { bind: bind, update: update, unbind: unbind });
   Vue.component(component.name, component);
 
   // use object-based merge strategy
@@ -1592,6 +1602,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.8.0';
+VueI18n.version = '7.8.1';
 
 export default VueI18n;
