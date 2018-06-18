@@ -1,3 +1,13 @@
+<a name="7.8.1"></a>
+## [7.8.1](https://github.com/kazupon/vue-i18n/compare/v7.8.0...v7.8.1) (2018-06-18)
+
+
+### :bug: Bug Fixes
+
+* **directive:** fix cannot unbind bug ([105888d](https://github.com/kazupon/vue-i18n/commit/105888d)), closes [#377](https://github.com/kazupon/vue-i18n/issues/377)
+
+
+
 <a name="7.8.0"></a>
 # [7.8.0](https://github.com/kazupon/vue-i18n/compare/v7.7.0...v7.8.0) (2018-06-01)
 
