@@ -16,6 +16,16 @@ export function update (el: any, binding: Object, vnode: any, oldVNode: any): vo
   t(el, binding, vnode)
 }
 
+export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): void {
+  if (!assert(el, vnode)) { return }
+
+  el.textContent = ''
+  el._vt = undefined
+  delete el['_vt']
+  el._locale = undefined
+  delete el['_locale']
+}
+
 function assert (el: any, vnode: any): boolean {
   const vm: any = vnode.context
   if (!vm) {
