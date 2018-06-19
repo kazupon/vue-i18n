@@ -219,3 +219,27 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 }
 </style>
 ```
+
+## Custom blocks in functional component
+
+If the single file components have the template using a functional component, and you had been defined `i18n` custom blocks, note you cannot localize using locale messages.
+
+For example, the following code cannot lolicize with the locale message of `i18n` custom block.
+
+```html
+<i18n>
+{
+  "en": {
+    "hello": "hello world"
+  },
+  "ja": {
+    "hello": "こんにちは、世界"
+  }
+}
+</i18n>
+
+<template functional>
+  <!-- 'hello' of locale messages of parent instance -->
+  <p>{{ parent.$t('hello') }}</p>
+</template>
+```
