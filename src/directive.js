@@ -17,7 +17,11 @@ export function update (el: any, binding: Object, vnode: any, oldVNode: any): vo
 }
 
 export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): void {
-  if (!assert(el, vnode)) { return }
+  const vm: any = vnode.context
+  if (!vm) {
+    warn('not exist Vue instance in VNode context')
+    return
+  }
 
   el.textContent = ''
   el._vt = undefined
