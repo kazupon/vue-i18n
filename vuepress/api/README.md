@@ -29,6 +29,10 @@ Component based localization option.
 
 Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
 
+:::danger Tip
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
+:::
+
 #### $tc
 
   * **Arguments:**
@@ -41,6 +45,10 @@ Localize the locale message of `key`. Localize in preferentially component local
 
 Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of $t.
 
+:::danger Tip
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $tc = this.$tc.bind(this)`).
+:::
+
 #### $te
 
   * **Arguments:**
@@ -50,6 +58,10 @@ Localize the locale message of `key` with pluralization. Localize in preferentia
   * **Return:** `boolean`
 
 Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
+
+:::danger Tip
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $te = this.$te.bind(this)`).
+:::
 
 #### $d
 
@@ -65,6 +77,10 @@ Check whether key exists. In Vue instance, If not specified component locale mes
 Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
 If the datetime format of `key` not exist in `dateTimeFormats` option, fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+
+:::danger Tip
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
+:::
 
 #### $n
 
@@ -98,6 +114,10 @@ If the second `key` argument specified as an object, it should have the followin
 * `formatMatcher {string}`: optional, number format option
 
 Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
+
+:::danger Tip
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
+:::
 
 ### Injected properties
 
