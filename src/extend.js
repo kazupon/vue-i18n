@@ -1,6 +1,7 @@
 /* @flow */
 
 export default function extend (Vue: any): void {
+  // $FlowFixMe
   Object.defineProperty(Vue.prototype, '$i18n', {
     get () { return this._i18n }
   })
