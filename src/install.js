@@ -23,10 +23,6 @@ export function install (_Vue) {
     return
   }
 
-  Object.defineProperty(Vue.prototype, '$i18n', {
-    get () { return this._i18n }
-  })
-
   extend(Vue)
   Vue.mixin(mixin)
   Vue.directive('t', { bind, update, unbind })

@@ -287,35 +287,6 @@ describe('issues', () => {
     })
   })
 
-  describe('#259', () => {
-    it('this points to the right', done => {
-      const vm = new Vue({
-        i18n: new VueI18n({
-          locale: 'en',
-          messages: {
-            en: {
-              'hello': 'hello #259'
-            },
-            ja: {
-              'hello': 'こんにちは #259'
-            }
-          }
-        })
-      })
-      const $t = vm.$t
-      const $tc = vm.$t
-      const $te = vm.$t
-      const $d = vm.$t
-      const $n = vm.$t
-      assert.equal($t('hello'), 'hello #259')
-      assert.equal($tc('hello'), 'hello #259')
-      assert.equal($te('hello'), 'hello #259')
-      assert.equal($d('hello'), 'hello #259')
-      assert.equal($n('hello'), 'hello #259')
-      done()
-    })
-  })
-
   describe('#377', () => {
     it('should be destroyed', done => {
       const el = document.createElement('div')
