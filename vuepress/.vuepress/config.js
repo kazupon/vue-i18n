@@ -55,6 +55,7 @@ module.exports = {
               '/guide/interpolation.md',
               '/guide/sfc.md',
               '/guide/hot-reload.md',
+              '/guide/locale.md',
               '/guide/lazy-loading.md',
               '/guide/migrations.md'
             ]
