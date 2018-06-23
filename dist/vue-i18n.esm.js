@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v7.8.1 
+ * vue-i18n v8.0.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -167,72 +167,46 @@ var canUseNumberFormat =
 
 function extend (Vue) {
   // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$t', {
-    get: function get () {
-      var this$1 = this;
-
-      return function (key) {
-        var values = [], len = arguments.length - 1;
-        while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
-
-        var i18n = this$1.$i18n;
-        return i18n._t.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this$1 ].concat( values ))
-      }
-    }
+  Object.defineProperty(Vue.prototype, '$i18n', {
+    get: function get () { return this._i18n }
   });
-  // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$tc', {
-    get: function get () {
-      var this$1 = this;
 
-      return function (key, choice) {
-        var values = [], len = arguments.length - 2;
-        while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
+  Vue.prototype.$t = function (key) {
+    var values = [], len = arguments.length - 1;
+    while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
 
-        var i18n = this$1.$i18n;
-        return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this$1, choice ].concat( values ))
-      }
-    }
-  });
-  // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$te', {
-    get: function get () {
-      var this$1 = this;
+    var i18n = this.$i18n;
+    return i18n._t.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this ].concat( values ))
+  };
 
-      return function (key, locale) {
-        var i18n = this$1.$i18n;
-        return i18n._te(key, i18n.locale, i18n._getMessages(), locale)
-      }
-    }
-  });
-  // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$d', {
-    get: function get () {
-      var this$1 = this;
+  Vue.prototype.$tc = function (key, choice) {
+    var values = [], len = arguments.length - 2;
+    while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
 
-      return function (value) {
-        var ref;
+    var i18n = this.$i18n;
+    return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this, choice ].concat( values ))
+  };
 
-        var args = [], len = arguments.length - 1;
-        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-        return (ref = this$1.$i18n).d.apply(ref, [ value ].concat( args ))
-      }
-    }
-  });
-  // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$n', {
-    get: function get () {
-      var this$1 = this;
+  Vue.prototype.$te = function (key, locale) {
+    var i18n = this.$i18n;
+    return i18n._te(key, i18n.locale, i18n._getMessages(), locale)
+  };
 
-      return function (value) {
-        var ref;
+  Vue.prototype.$d = function (value) {
+    var ref;
 
-        var args = [], len = arguments.length - 1;
-        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-        return (ref = this$1.$i18n).n.apply(ref, [ value ].concat( args ))
-      }
-    }
-  });
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+    return (ref = this.$i18n).d.apply(ref, [ value ].concat( args ))
+  };
+
+  Vue.prototype.$n = function (value) {
+    var ref;
+
+    var args = [], len = arguments.length - 1;
+    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+    return (ref = this.$i18n).n.apply(ref, [ value ].concat( args ))
+  };
 }
 
 /*  */
@@ -435,7 +409,11 @@ function update (el, binding, vnode, oldVNode) {
 }
 
 function unbind (el, binding, vnode, oldVNode) {
-  if (!assert(el, vnode)) { return }
+  var vm = vnode.context;
+  if (!vm) {
+    warn('not exist Vue instance in VNode context');
+    return
+  }
 
   el.textContent = '';
   el._vt = undefined;
@@ -540,10 +518,6 @@ function install (_Vue) {
     warn(("vue-i18n (" + (install.version) + ") need to use Vue 2.0 or later (Vue: " + (Vue.version) + ")."));
     return
   }
-
-  Object.defineProperty(Vue.prototype, '$i18n', {
-    get: function get () { return this._i18n }
-  });
 
   extend(Vue);
   Vue.mixin(mixin);
@@ -1602,6 +1576,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.8.1';
+VueI18n.version = '8.0.0';
 
 export default VueI18n;
