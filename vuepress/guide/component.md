@@ -2,7 +2,7 @@
 
 In general, locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance and it sets `i18n` option as root Vue instance.
 
-Therefore you can globally translate with using `$t` or `$tc` in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vues component oriented design.
+Therefore you can globally translate with using `$t` or `$tc` in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vue components oriented design.
 
 Component based localization example:
 
@@ -33,7 +33,7 @@ const Component1 = {
      <p>Component1 locale messages: {{ $t("message.hello") }}</p>
      <p>Fallback global locale messages: {{ $t("message.greeting") }}</p>
    </div>`,
-  i18n: { // `i18n` option
+  i18n: { // `i18n` option, setup locale info for component
     messages: {
       en: { message: { hello: 'hello component1' } },
       ja: { message: { hello: 'こんにちは、component1' } }
