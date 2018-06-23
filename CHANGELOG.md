@@ -1,3 +1,35 @@
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/kazupon/vue-i18n/compare/v7.8.1...v8.0.0) (2018-06-23)
+
+
+### :boom: Breaking changes
+
+* **extend:** fix this context binding ([aa0e831](https://github.com/kazupon/vue-i18n/commit/aa0e831)), closes [#306](https://github.com/kazupon/vue-i18n/issues/306) [#286](https://github.com/kazupon/vue-i18n/issues/286) [#260](https://github.com/kazupon/vue-i18n/issues/260) [#260](https://github.com/kazupon/vue-i18n/issues/260)
+
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
+
+```js
+export default {
+  data () {
+    const $t = this.$t.bind(this)
+    return { msg: $t('msg') }
+  }
+}
+```
+
+see the [API docs](https://kazupon.github.io/vue-i18n/api/)
+
+### :bug: Bug Fixes
+
+* bug(directive): fix guard checking at unbind ([c74888c](https://github.com/kazupon/vue-i18n/commit/c74888c)), closes [#340](https://github.com/kazupon/vue-i18n/issues/340)
+
+
+### NOTE
+
+* extend: 
+
+
+
 <a name="7.8.1"></a>
 ## [7.8.1](https://github.com/kazupon/vue-i18n/compare/v7.8.0...v7.8.1) (2018-06-18)
 
