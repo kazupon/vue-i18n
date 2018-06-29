@@ -1,5 +1,6 @@
 import messages from './fixture/index'
 import { parse } from '../../src/format'
+const compiler = require('vue-template-compiler')
 
 describe('issues', () => {
   let vm, i18n
@@ -286,34 +287,47 @@ describe('issues', () => {
     })
   })
 
-  describe('#259', () => {
-    it('this points to the right', (done) => {
+  describe('#377', () => {
+    it('should be destroyed', done => {
+      const el = document.createElement('div')
+      const template = `<div id="app">
+        <p>TIMEOUT : {{ timeout }}</p>
+        <div ref="el1" v-if="!timeout">
+          <span v-t="'SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE'"></span>
+        </div>
+        <div ref="el2" v-if="timeout">
+          <span class="">{{ $t('CANNOT_REPRODUCE_WITHOUT_THIS') }}</span>
+        </div>
+      </div>`
+      const { render, staticRenderFns } = compiler.compileToFunctions(template)
       const vm = new Vue({
-        i18n: new VueI18n({
-          locale: 'en',
-          messages: {
-            en: {
-              'hello': 'hello #259'
-            },
-            ja: {
-              'hello': 'こんにちは #259'
-            }
+        i18n: new VueI18n({ locale: 'id' }),
+        data () {
+          return { timeout: false }
+        },
+        methods: {
+          startLoading: function () {
+            this.timeout = true
+            setTimeout(() => {
+              this.timeout = false
+            }, 100)
           }
+        },
+        render,
+        staticRenderFns
+      }).$mount(el)
+
+      Vue.nextTick(() => {
+        assert.equal(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
+        vm.startLoading()
+        delay(50).then(() => {
+          assert.equal(vm.$refs.el2.outerHTML, '<div><span>CANNOT_REPRODUCE_WITHOUT_THIS</span></div>')
+          delay(60).then(() => {
+            assert.equal(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
+            done()
+          })
         })
       })
-      const $t = vm.$t
-      const $tc = vm.$t
-      const $te = vm.$t
-      const $td = vm.$t
-      const $d = vm.$t
-      const $n = vm.$t
-      assert.equal($t('hello'), 'hello #259')
-      assert.equal($tc('hello'), 'hello #259')
-      assert.equal($te('hello'), 'hello #259')
-      assert.equal($td('hello'), 'hello #259')
-      assert.equal($d('hello'), 'hello #259')
-      assert.equal($n('hello'), 'hello #259')
-      done()
     })
   })
 })

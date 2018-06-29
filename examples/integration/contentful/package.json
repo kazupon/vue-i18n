@@ -1,0 +1,46 @@
+{
+  "name": "contentful-blog-in-5-min",
+  "version": "1.1.1",
+  "description": "A static blog based on Contentful",
+  "author": "stefan judis <stefanjudis@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "contentful": "^4.3.0",
+    "contentful-management": "^3.4.0",
+    "nuxt": "^1.0.0-rc4",
+    "vue-i18n": "^7.6.0",
+    "vue-markdown": "^2.1.3"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "deploy": "nuxt generate && now dist",
+    "import-data": "node ./bin/download-content-model.js && contentful-import --content-file ./data/blog/contentful-export.json"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "contentful-import": "^4.5.4",
+    "cz-conventional-changelog": "^2.0.0",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1",
+    "gh-pages": "^1.0.0",
+    "listr": "^0.12.0",
+    "node-fetch": "^1.7.3",
+    "now": "^5.3.0",
+    "rimraf": "^2.6.1",
+    "tar": "^4.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

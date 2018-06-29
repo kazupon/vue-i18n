@@ -1,0 +1,25 @@
+{
+  "components": {
+    "language": {
+      "current": "Current language code: {language}"
+    },
+    "navigation": {
+      "menu": {
+        "blog": "Blog Articles",
+        "index": "Index"
+      }
+    }
+  },
+  "pages": {
+    "top": {
+      "recently": "Recent articles"
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "All articles ({count})"
+    },
+    "tags": {
+      "subtitle": "All articles tagged #{tag} ({count})"
+    }
+  }
+}

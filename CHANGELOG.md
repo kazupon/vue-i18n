@@ -1,3 +1,66 @@
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/kazupon/vue-i18n/compare/v7.8.1...v8.0.0) (2018-06-23)
+
+
+### :boom: Breaking changes
+
+* **extend:** fix this context binding ([aa0e831](https://github.com/kazupon/vue-i18n/commit/aa0e831)), closes [#306](https://github.com/kazupon/vue-i18n/issues/306) [#286](https://github.com/kazupon/vue-i18n/issues/286) [#260](https://github.com/kazupon/vue-i18n/issues/260) [#260](https://github.com/kazupon/vue-i18n/issues/260)
+
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
+
+```js
+export default {
+  data () {
+    const $t = this.$t.bind(this)
+    return { msg: $t('msg') }
+  }
+}
+```
+
+see the [API docs](https://kazupon.github.io/vue-i18n/api/)
+
+### :bug: Bug Fixes
+
+* bug(directive): fix guard checking at unbind ([c74888c](https://github.com/kazupon/vue-i18n/commit/c74888c)), closes [#340](https://github.com/kazupon/vue-i18n/issues/340)
+
+
+### NOTE
+
+* extend: 
+
+
+
+<a name="7.8.1"></a>
+## [7.8.1](https://github.com/kazupon/vue-i18n/compare/v7.8.0...v7.8.1) (2018-06-18)
+
+
+### :bug: Bug Fixes
+
+* **directive:** fix cannot unbind bug ([105888d](https://github.com/kazupon/vue-i18n/commit/105888d)), closes [#377](https://github.com/kazupon/vue-i18n/issues/377)
+
+
+
+<a name="7.8.0"></a>
+# [7.8.0](https://github.com/kazupon/vue-i18n/compare/v7.7.0...v7.8.0) (2018-06-01)
+
+
+### :zap: Improvements
+
+* **typescript:** add type exportings ([a7cb8da](https://github.com/kazupon/vue-i18n/commit/a7cb8da))
+
+
+
+<a name="7.7.0"></a>
+# [7.7.0](https://github.com/kazupon/vue-i18n/compare/v7.6.0...v7.7.0) (2018-05-20)
+
+
+### :zap: Improvements
+
+* **index:** resource reactivity ([887a137](https://github.com/kazupon/vue-i18n/commit/887a137)), closes [#253](https://github.com/kazupon/vue-i18n/issues/253)
+* **typescript:** Fix typings in components ([#344](https://github.com/kazupon/vue-i18n/issues/344)) by [@Demivan](https://github.com/Demivan) ([2402893](https://github.com/kazupon/vue-i18n/commit/2402893)), closes [#344](https://github.com/kazupon/vue-i18n/issues/344)
+
+
+
 <a name="7.6.0"></a>
 # [7.6.0](https://github.com/kazupon/vue-i18n/compare/v7.5.0...v7.6.0) (2018-03-13)
 

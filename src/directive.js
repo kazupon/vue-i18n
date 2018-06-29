@@ -16,6 +16,20 @@ export function update (el: any, binding: Object, vnode: any, oldVNode: any): vo
   t(el, binding, vnode)
 }
 
+export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): void {
+  const vm: any = vnode.context
+  if (!vm) {
+    warn('not exist Vue instance in VNode context')
+    return
+  }
+
+  el.textContent = ''
+  el._vt = undefined
+  delete el['_vt']
+  el._locale = undefined
+  delete el['_locale']
+}
+
 function assert (el: any, vnode: any): boolean {
   const vm: any = vnode.context
   if (!vm) {

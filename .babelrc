@@ -1,6 +1,11 @@
 {
-  "presets": ["es2015", "flow-vue"],
-  "plugins": ["babel-plugin-espower"],
+  "presets": ["@vue/app"],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-flow",
+    "@babel/plugin-transform-flow-strip-types",
+    "babel-plugin-espower"
+  ],
   "env": {
     "test": {
       "plugins": ["istanbul"],

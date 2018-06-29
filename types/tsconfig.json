@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "lib": ["esnext", "dom"]
   },
   "include": [
     "**/*.d.ts"
