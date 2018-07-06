@@ -54,6 +54,28 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 For Webpack the configuration below is required:
 
+for vue-loader v15:
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        resourceQuery: /blockType=i18n/,
+        loader: '@kazupon/vue-i18n-loader'
+      }
+      // ...
+    ]
+  },
+  // ...
+}
+```
+
+for vue-loader v14:
 ```js
 module.exports = {
   // ...
@@ -78,10 +100,25 @@ module.exports = {
 
 ## Vue CLI 3.0 (beta)
 
-[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.  
+[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
-In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following: 
+In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
 
+for vue-loader v15:
+```js
+module.exports = {
+  chainWebpack: config => {
+    config.module
+      .rule("i18n")
+      .resourceQuery(/blockType=i18n/)
+      .use("i18n")
+        .loader("@kazupon/vue-i18n-loader")
+        .end();
+  }
+}
+```
+
+for vue-loader v14:
 ```js
 const merge = require('deepmerge')
 
@@ -100,10 +137,9 @@ module.exports = {
   }
 }
 ```
-
 _Don 't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
 
-If you want to read more about modifying the existing configuration [click here](https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md).
+If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/guide/webpack.html).
 
 ## Laravel-Mix
 
@@ -127,7 +163,7 @@ mix.extend( 'i18n', function( webpackConfig, ...args ) {
 mix.i18n()
    .js( 'resources/assets/js/App.js', 'public/js/app.js' )
    ...
-``` 
+```
 
 ## YAML loading
 
@@ -189,7 +225,7 @@ you can be used the locale messages with multiple `i18n` custom block.
 </i18n>
 ```
 
-In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale messge that defined only at single file component. These locale messages will be merged as locale message of component.
+In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale message that defined only at single file component. These locale messages will be merged as locale message of component.
 
 In this way, multiple custom blocks useful when want to be used as module.
 
@@ -224,7 +260,7 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 
 If the single file components have the template using a functional component, and you had been defined `i18n` custom blocks, note you cannot localize using locale messages.
 
-For example, the following code cannot lolicize with the locale message of `i18n` custom block.
+For example, the following code cannot localize with the locale message of `i18n` custom block.
 
 ```html
 <i18n>
