@@ -31,6 +31,10 @@ module.exports = {
             link: '/api/'
           },
           {
+            text: 'CLI Plugin',
+            link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+          },
+          {
             text: 'Release Notes',
             link: 'https://github.com/kazupon/vue-i18n/releases'
           }
