@@ -26,13 +26,13 @@ For each the component, `VueI18n` instance injected at Root Vue instance is refe
 example:
 
 ```html
-<tempalte>
+<template>
   <div class="locale-changer">
     <select v-model="$i18n.locale">
-      <option v-for="lang in langs" :value="lang">{{ lang }}</option>
+      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
     </select>
   </div>
-</tempalte>
+</template>
 
 <script>
 export default {
