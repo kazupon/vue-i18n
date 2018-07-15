@@ -35,6 +35,10 @@ module.exports = {
             link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
           },
           {
+            text: 'Patreon',
+            link: 'https://www.patreon.com/kazupon'
+          },
+          {
             text: 'Release Notes',
             link: 'https://github.com/kazupon/vue-i18n/releases'
           }
