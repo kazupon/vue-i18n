@@ -3,8 +3,8 @@ module.exports = {
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'VueI18n',
-      description: 'VueI18n is internationalization plugin for Vue.js'
+      title: 'Vue I18n',
+      description: 'Vue I18n is internationalization plugin for Vue.js'
     }
   },
   head: [

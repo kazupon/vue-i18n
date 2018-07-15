@@ -1,10 +1,10 @@
 # Introduction
 
 :::warning Notice
-:warning: This documentation is for VueI18n v6.0 or later.
+:warning: This documentation is for Vue I18n v6.0 or later.
 :::
 
-VueI18n is internationalization plugin of Vue.js. It easily integrates some localization features to your Vue.js Application. Features includes:
+Vue I18n is internationalization plugin of Vue.js. It easily integrates some localization features to your Vue.js Application. Features includes:
 
 - Various formats localization
 - Pluralization
