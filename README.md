@@ -9,6 +9,12 @@
 
 <p align="center">Internationalization plugin for Vue.js</p>
 
+<p align="center">
+  <a href="https://www.patreon.com/kazupon" target="_blank">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
+  </a>
+</p>
+
 <br/>
 
 ## :book: Documentation
