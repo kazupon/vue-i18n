@@ -51,4 +51,4 @@ You don't need to do this when using the standalone build, as it installs itself
 
 alernatively, using Facebook's recently released [yarn](https://yarnpkg.com) package manager.
 
-    $ yarn
+    $ yarn add vue-i18n
