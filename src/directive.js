@@ -19,7 +19,7 @@ export function update (el: any, binding: Object, vnode: any, oldVNode: any): vo
 export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): void {
   const vm: any = vnode.context
   if (!vm) {
-    warn('not exist Vue instance in VNode context')
+    warn('Vue instance does not exists in VNode context')
     return
   }
 
@@ -33,12 +33,12 @@ export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): vo
 function assert (el: any, vnode: any): boolean {
   const vm: any = vnode.context
   if (!vm) {
-    warn('not exist Vue instance in VNode context')
+    warn('Vue instance doest not exists in VNode context')
     return false
   }
 
   if (!vm.$i18n) {
-    warn('not exist VueI18n instance in Vue instance')
+    warn('VueI18n instance does not exists in Vue instance')
     return false
   }
 
@@ -55,12 +55,12 @@ function t (el: any, binding: Object, vnode: any): void {
 
   const { path, locale, args, choice } = parseValue(value)
   if (!path && !locale && !args) {
-    warn('not support value type')
+    warn('value type not supported')
     return
   }
 
   if (!path) {
-    warn('required `path` in v-t directive')
+    warn('`path` is required in v-t directive')
     return
   }
 

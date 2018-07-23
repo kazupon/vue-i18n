@@ -417,7 +417,7 @@
   function unbind (el, binding, vnode, oldVNode) {
     var vm = vnode.context;
     if (!vm) {
-      warn('not exist Vue instance in VNode context');
+      warn('Vue instance does not exists in VNode context');
       return
     }
 
@@ -431,12 +431,12 @@
   function assert (el, vnode) {
     var vm = vnode.context;
     if (!vm) {
-      warn('not exist Vue instance in VNode context');
+      warn('Vue instance does not exists in VNode context');
       return false
     }
 
     if (!vm.$i18n) {
-      warn('not exist VueI18n instance in Vue instance');
+      warn('VueI18n instance does not exists in Vue instance');
       return false
     }
 
