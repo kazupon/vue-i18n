@@ -16,8 +16,9 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=100.0)
 
 ## $50
+- 38elements
 
-[Currently vacant. It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=50.0)
+[It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=50.0)
 
 ## $20
 - Shinya Katayama
