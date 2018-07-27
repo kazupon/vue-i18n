@@ -66,7 +66,7 @@ Outputs the following:
   <p>こんにちは、世界</p>
   <div class="container">
     <p>Component1 locale messages: こんにちは、component1</p>
-    <p>Fallback global locale messages: おはよう、世界！</p>
+    <p>Fallback global locale messages: おはようございます</p>
   </div>
 </div>
 ```
