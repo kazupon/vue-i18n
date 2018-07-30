@@ -1,8 +1,8 @@
 # Locale changing
 
-Normally, Root Vue instance as the starting point, for all child components, it localize with `locale` option of `VueI18n` class.
+Normally, using the root Vue instance as the starting point, all child components are localized using the `locale` property of the `VueI18n` class as a reference.
 
-Sometimes, you might dynamically change the locale. In that case, change the `locale` property of the `VueI18n` instance.
+Sometimes you might want to dynamically change the locale. In that case you can change the value of the `locale` property of the `VueI18n` instance.
 
 
 ```js
@@ -21,9 +21,9 @@ new Vue({
 i18n.locale = 'en'
 ```
 
-For each the component, `VueI18n` instance injected at Root Vue instance is referenced as `$i18n` property, so you can change with it.
+Each component contains a `VueI18n` instance referenced as the `$i18n` property that can also be used to change the locale.
 
-example:
+Example:
 
 ```html
 <template>
@@ -45,5 +45,5 @@ export default {
 ```
 
 :::warning Notice
-:warning: For components with using `sync: false`, locale changing is ignored it.
+:warning: Locale changing is ignored for components that use `sync: false`.
 :::
