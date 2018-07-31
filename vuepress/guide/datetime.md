@@ -31,7 +31,7 @@ const dateTimeFormats = {
 }
 ```
 
-As the Above, You can define the datetime format with named (e.g. `short`, `long`, etc), and you need to use [the options with ECMA-402 Intl.DateTimeFormat](http://www.ecma-international.org/ecma-402/2.0/#sec-intl- datetimeformat-constructor)
+As the Above, You can define the datetime format with named (e.g. `short`, `long`, etc), and you need to use [the options with ECMA-402 Intl.DateTimeFormat](http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor)
 
 After that like the locale messages, You need to specify the `dateTimeFormats` option of `VueI18n` constructor:
 
