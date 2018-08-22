@@ -160,7 +160,7 @@ class CustomFormatter {
      //   - $t('hello', { name: 'kazupon' }) -> passed values: Object `{ name: 'kazupon' }` 
      //   - $t('hello', ['kazupon']) -> passed values: Array `['kazupon']`
      //   - `i18n` functional component (component interpolcation)
-     //     <i18 path="hello">
+     //     <i18n path="hello">
      //       <p>kazupon</p>
      //       <p>how are you?</p>
      //     </i18n>
