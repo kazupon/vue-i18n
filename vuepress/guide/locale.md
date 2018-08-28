@@ -17,7 +17,7 @@ new Vue({
   ...
 }).$mount('#app')
 
-// cheange other locale
+// change other locale
 i18n.locale = 'en'
 ```
 
