@@ -1,3 +1,18 @@
+<a name="8.1.0"></a>
+# [8.1.0](https://github.com/kazupon/vue-i18n/compare/v8.0.0...v8.1.0) (2018-09-03)
+
+
+### :bug: Bug Fixes
+
+* **install:** add support for Vue.extend vue-i18n instance ([#420](https://github.com/kazupon/vue-i18n/issues/420)) by [@jaredzhu1993](https://github.com/jaredzhu1993) ([a60ea8b](https://github.com/kazupon/vue-i18n/commit/a60ea8b)), closes [#420](https://github.com/kazupon/vue-i18n/issues/420)
+
+
+### :zap: Improvements
+
+* **warnings:** make warning messages clearer ([#396](https://github.com/kazupon/vue-i18n/issues/396)) by [@kimuraz](https://github.com/kimuraz) ([79eee1b](https://github.com/kazupon/vue-i18n/commit/79eee1b)), closes [#396](https://github.com/kazupon/vue-i18n/issues/396)
+
+
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/kazupon/vue-i18n/compare/v7.8.1...v8.0.0) (2018-06-23)
 
