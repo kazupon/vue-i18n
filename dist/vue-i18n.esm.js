@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.0.0 
+ * vue-i18n v8.1.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -411,7 +411,7 @@ function update (el, binding, vnode, oldVNode) {
 function unbind (el, binding, vnode, oldVNode) {
   var vm = vnode.context;
   if (!vm) {
-    warn('not exist Vue instance in VNode context');
+    warn('Vue instance does not exists in VNode context');
     return
   }
 
@@ -425,12 +425,12 @@ function unbind (el, binding, vnode, oldVNode) {
 function assert (el, vnode) {
   var vm = vnode.context;
   if (!vm) {
-    warn('not exist Vue instance in VNode context');
+    warn('Vue instance doest not exists in VNode context');
     return false
   }
 
   if (!vm.$i18n) {
-    warn('not exist VueI18n instance in Vue instance');
+    warn('VueI18n instance does not exists in Vue instance');
     return false
   }
 
@@ -453,12 +453,12 @@ function t (el, binding, vnode) {
   var args = ref.args;
   var choice = ref.choice;
   if (!path && !locale && !args) {
-    warn('not support value type');
+    warn('value type not supported');
     return
   }
 
   if (!path) {
-    warn('required `path` in v-t directive');
+    warn('`path` is required in v-t directive');
     return
   }
 
@@ -524,9 +524,13 @@ function install (_Vue) {
   Vue.directive('t', { bind: bind, update: update, unbind: unbind });
   Vue.component(component.name, component);
 
-  // use object-based merge strategy
+  // use simple mergeStrategies to prevent i18n instance lose '__proto__'
   var strats = Vue.config.optionMergeStrategies;
-  strats.i18n = strats.methods;
+  strats.i18n = function (parentVal, childVal) {
+    return childVal === undefined
+      ? parentVal
+      : childVal
+  };
 }
 
 /*  */
@@ -1576,6 +1580,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '8.0.0';
+VueI18n.version = '8.1.0';
 
 export default VueI18n;

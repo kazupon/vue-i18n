@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.0.0 
+ * vue-i18n v8.1.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -431,7 +431,7 @@
   function assert (el, vnode) {
     var vm = vnode.context;
     if (!vm) {
-      warn('Vue instance does not exists in VNode context');
+      warn('Vue instance doest not exists in VNode context');
       return false
     }
 
@@ -459,12 +459,12 @@
     var args = ref.args;
     var choice = ref.choice;
     if (!path && !locale && !args) {
-      warn('not support value type');
+      warn('value type not supported');
       return
     }
 
     if (!path) {
-      warn('required `path` in v-t directive');
+      warn('`path` is required in v-t directive');
       return
     }
 
@@ -530,9 +530,13 @@
     Vue.directive('t', { bind: bind, update: update, unbind: unbind });
     Vue.component(component.name, component);
 
-    // use object-based merge strategy
+    // use simple mergeStrategies to prevent i18n instance lose '__proto__'
     var strats = Vue.config.optionMergeStrategies;
-    strats.i18n = strats.methods;
+    strats.i18n = function (parentVal, childVal) {
+      return childVal === undefined
+        ? parentVal
+        : childVal
+    };
   }
 
   /*  */
@@ -1582,7 +1586,7 @@
     numberFormat: canUseNumberFormat
   };
   VueI18n.install = install;
-  VueI18n.version = '8.0.0';
+  VueI18n.version = '8.1.0';
 
   return VueI18n;
 
