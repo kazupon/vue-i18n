@@ -255,6 +255,19 @@ describe('issues', () => {
     })
   })
 
+  describe('#200', () => {
+    it('should be translated', () => {
+      const el = document.createElement('div')
+      const Constructor = Vue.extend({ i18n })
+      const vm = new Constructor({
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$t('message.hello')])
+        }
+      }).$mount(el)
+      assert.equal(vm.$refs.text.textContent, messages.en.message.hello)
+    })
+  })
+
   describe('#203', () => {
     it('should be translated', done => {
       const App = {
