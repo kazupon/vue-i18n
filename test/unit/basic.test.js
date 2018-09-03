@@ -595,6 +595,19 @@ describe('basic', () => {
     })
   })
 
+  describe('i18n#Vue.extend({ i18n })', () => {
+    it('should be translated', () => {
+      const el = document.createElement('div')
+      const Constructor = Vue.extend({ i18n })
+      const vm = new Constructor({
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$t('message.hello')])
+        }
+      }).$mount(el)
+      assert.equal(vm.$refs.text.textContent, messages.en.message.hello)
+    })
+  })
+
   let desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
   desc('i18n#d', () => {
     let dt

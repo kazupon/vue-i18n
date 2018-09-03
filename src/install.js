@@ -28,7 +28,11 @@ export function install (_Vue) {
   Vue.directive('t', { bind, update, unbind })
   Vue.component(component.name, component)
 
-  // use object-based merge strategy
+  // use simple mergeStrategies to prevent i18n instance lose '__proto__'
   const strats = Vue.config.optionMergeStrategies
-  strats.i18n = strats.methods
+  strats.i18n = function (parentVal, childVal) {
+    return childVal === undefined
+      ? parentVal
+      : childVal
+  }
 }
