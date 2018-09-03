@@ -50,6 +50,6 @@ You will have to clone directly from GitHub and build `vue-i18n` yourself if you
 ```sh
 git clone https://github.com/kazupon/vue-i18n.git node_modules/vue-i18n
 cd node_modules/vue-i18n
-npm install
-npm run build 
+npm install # or `yarn`
+npm run build  # or `yarn run build`
 ```
