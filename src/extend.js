@@ -2,9 +2,11 @@
 
 export default function extend (Vue: any): void {
   // $FlowFixMe
-  Object.defineProperty(Vue.prototype, '$i18n', {
-    get () { return this._i18n }
-  })
+  if (!Vue.prototype.hasOwnProperty('$i18n')) {
+    Object.defineProperty(Vue.prototype, '$i18n', {
+      get () { return this._i18n }
+    })
+  }
 
   Vue.prototype.$t = function (key: Path, ...values: any): TranslateResult {
     const i18n = this.$i18n
