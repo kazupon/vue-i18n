@@ -20,18 +20,18 @@ Based on the above syntax, You can configure the following structure Locale Mess
 {
   "en": {  // 'en' Locale
     "key1": "this is message1", // basic
-      "nested": { // nested
-        "message1": "this is nested message1"
-      },
-      "errors": [ // array
-        "this is 0 error code message",
+    "nested": { // nested
+      "message1": "this is nested message1"
+    },
+    "errors": [ // array
+      "this is 0 error code message",
       {  // object in array
         "internal1": "this is internal 1 error message"
       },
       [  // array in array
         "this is nested array error 1"
       ]
-      ]
+    ]
   },
   "ja": { // 'ja' Locale
     // ...
