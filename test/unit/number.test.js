@@ -1,5 +1,13 @@
 import numberFormats from './fixture/number'
 
+function convertToCharCodes (str) {
+  const codes = []
+  for (let i = 0; i < str.length; i++) {
+    codes.push(str.charCodeAt(i))
+  }
+  return codes
+}
+
 const desc = VueI18n.availabilities.numberFormat ? describe : describe.skip
 desc('number format', () => {
   describe('numberFormats', () => {
@@ -44,7 +52,11 @@ desc('number format', () => {
         i18n.locale = 'zh-CN'
       }).then(() => {
         // NOTE: avoid webkit (safari/phantomjs) & Intl polyfill wired localization...
-        isChrome && assert.equal(text.textContent, '101.00人民币')
+        if (isChrome) {
+          const actual = [49, 48, 49, 46, 48, 48, 160, 20154, 27665, 24065] // 101.00&nbsp;人民币
+          const target = convertToCharCodes(text.textContent)
+          assert.deepEqual(target, actual)
+        }
       }).then(done)
     })
   })

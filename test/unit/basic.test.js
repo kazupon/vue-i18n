@@ -695,8 +695,8 @@ describe('basic', () => {
         })
 
         it('should respect other number options', () => {
-          const options = { style: 'currency', currency: 'EUR', currencyDisplay: 'code' }
-          assert.equal(i18n.n(money, options), 'EUR10,100.00')
+          const options = { style: 'currency', currency: 'EUR', currencyDisplay: 'symbol' }
+          assert.equal(i18n.n(money, options), '€10,100.00')
         })
       })
 
@@ -706,8 +706,8 @@ describe('basic', () => {
         })
 
         it('should respect other number options', () => {
-          const options = { key: 'currency', currency: 'EUR', currencyDisplay: 'code' }
-          assert.equal(i18n.n(money, options), 'EUR10,100.00')
+          const options = { key: 'currency', currency: 'EUR', currencyDisplay: 'symbol' }
+          assert.equal(i18n.n(money, options), '€10,100.00')
         })
       })
     })
