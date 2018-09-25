@@ -14,6 +14,7 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-syntax-flow": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@vue/babel-preset-app": "^3.0.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-istanbul": "^3.1.2",
@@ -59,7 +60,6 @@
     "uglify-js": "^2.7.5",
     "vue": "^2.5.16",
     "vue-template-compiler": "^2.5.16",
-    "@vue/babel-preset-app": "^3.0.0",
     "vuepress": "^0.10.0",
     "webpack": "^4.9.1",
     "webpack-serve": "^1.0.2"
@@ -69,7 +69,7 @@
     "dist/vue-i18n.min.js",
     "dist/vue-i18n.common.js",
     "dist/vue-i18n.esm.js",
-    "src",
+    "src/*.js",
     "types/*.d.ts",
     "decls"
   ],
@@ -84,7 +84,6 @@
   "license": "MIT",
   "main": "dist/vue-i18n.common.js",
   "module": "dist/vue-i18n.esm.js",
-  "types": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kazupon/vue-i18n.git"
@@ -95,9 +94,9 @@
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
     "dev": "cross-env BABEL_ENV=test webpack-serve --hot --open --content ./test/unit/ --config config/webpack.dev.conf.js",
-    "docs:dev": "vuepress dev vuepress",
-    "docs:clean": "rm -rf docs/**",
     "docs:build": "node config/version.js && vuepress build vuepress -d docs",
+    "docs:clean": "rm -rf docs/**",
+    "docs:dev": "vuepress dev vuepress",
     "flow": "flow check",
     "lint": "eslint --fix src test config",
     "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
@@ -111,5 +110,7 @@
     "test:types": "tsc -p types",
     "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js"
   },
+  "sideEffects": false,
+  "types": "types/index.d.ts",
   "unpkg": "dist/vue-i18n.js"
 }
