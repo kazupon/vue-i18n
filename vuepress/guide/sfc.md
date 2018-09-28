@@ -98,7 +98,7 @@ module.exports = {
 }
 ```
 
-## Vue CLI 3.0 (beta)
+## Vue CLI 3.0
 
 [Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
@@ -212,7 +212,7 @@ module.exports = {
 you can be used the locale messages with multiple `i18n` custom block.
 
 ```html
-<i18n src='./common/locales.json'></i18n>
+<i18n src="./common/locales.json"></i18n>
 <i18n>
   {
     "en": {
