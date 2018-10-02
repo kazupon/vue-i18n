@@ -61,7 +61,7 @@ export default class VueI18n {
       install(window.Vue)
     }
 
-    // Manual install for scenarios Vue isn't avialble on the
+    // Manual install for scenarios Vue isn't available on the
     // window, including server-rendering.
     if (!Vue && options.Vue) {
       install(options.Vue)

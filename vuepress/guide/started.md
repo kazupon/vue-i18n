@@ -14,7 +14,7 @@ code samples in the guide.
 <div id="app">
   <p>{{ $t("message.hello") }}</p>
 </div>
-``` 
+```
 
 ## JavaScript
 
@@ -50,12 +50,25 @@ const i18n = new VueI18n({
 new Vue({ i18n }).$mount('#app')
 
 // Now the app has started!
-``` 
+```
 
 Output the following:
 
-```html 
+```html
 <div id="#app">
   <p>こんにちは、世界</p>
 </div>
+```
+
+## Server side rendering
+When running in NodeJS you need to pass Vue into vue-i18n.
+
+```Javascript
+const Vue = require('vue')
+
+const i18n = new VueI18n({
+  Vue,
+  locale:
+  messages,
+})
 ```
