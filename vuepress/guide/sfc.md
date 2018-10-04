@@ -54,7 +54,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 For Webpack the configuration below is required:
 
-for vue-loader v15:
+for vue-loader v15 or later :
 ```js
 module.exports = {
   // ...
@@ -66,6 +66,7 @@ module.exports = {
       },
       {
         resourceQuery: /blockType=i18n/,
+        type: 'javascript/auto',
         loader: '@kazupon/vue-i18n-loader'
       }
       // ...
@@ -100,7 +101,7 @@ module.exports = {
 
 ## Vue CLI 3.0
 
-[Vue-cli 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
+[Vue CLI 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
 In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
 
@@ -111,6 +112,7 @@ module.exports = {
     config.module
       .rule("i18n")
       .resourceQuery(/blockType=i18n/)
+      .type('javascript/auto')
       .use("i18n")
         .loader("@kazupon/vue-i18n-loader")
         .end();
@@ -183,6 +185,26 @@ ja:
 
 Webpack conf the below:
 
+for vue-loader v15:
+```js
+// Vue CLI 3.0
+module.exports = {
+  chainWebpack: config => {
+    config.module
+      .rule("i18n")
+      .resourceQuery(/blockType=i18n/)
+      .type('javascript/auto')
+      .use("i18n")
+        .loader("@kazupon/vue-i18n-loader")
+        .end()
+      .use('yaml')
+        .loader('yaml-loader')
+        .end()
+  }
+}
+```
+
+for vue-loader v14:
 ```js
 module.exports = {
   // ...
