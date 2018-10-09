@@ -9,7 +9,7 @@
 
 <p align="center">Internationalization plugin for Vue.js</p>
 
-<h3 align="center">Sliver Sponsors</h3>
+<h3 align="center">Silver Sponsors</h3>
 
 <p align="center">
   <a href="https://locize.com/" target="_blank">
