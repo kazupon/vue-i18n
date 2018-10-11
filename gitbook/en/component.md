@@ -1,6 +1,6 @@
 # Component based localization
 
-In general, locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance and it sets `i18n` option as root Vue instance. Therefore you can globally translate with using `$t` or `$tc` in the root Vue instance and any composed component. 
+In general, locale info (e.g. `locale`,`messages`, etc) is set as a constructor option of the `VueI18n` instance and it sets the `i18n` option as a root Vue instance. This means you can use translations globally by using `$t` or `$tc` in the root Vue instance and any composed component.
 You can also manage locale info for each component separately, which might be more convenient due to Vues component oriented design.
 
 Component based localization example:

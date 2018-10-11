@@ -1,6 +1,6 @@
 # Fallback localization
 
-The following locale messages that not exist `message` key in `ja` locale:
+When the `message` key does not exist in the `ja` locale:
 
 ```javascript
 const messages = {
@@ -12,7 +12,7 @@ const messages = {
 }
 ```
 
-When specify the `fallbackLocale` option to VueI18n constructor option, `message` key is localized with `en` locale key:
+And you have specified a `fallbackLocale` in the VueI18n constructor option, the `message` key uses the corresponding `en` locale key as a fallback:
 
 ```javascript
 const i18n = new VueI18n({
@@ -22,13 +22,13 @@ const i18n = new VueI18n({
 })
 ```
 
-Template the below:
+When you template the below:
 
 ```html
 <p>{{ $t('message') }}</p>
 ```
 
-Output the below:
+The following will be the output:
 
 ```html
 <p>hello world</p>
