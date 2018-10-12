@@ -115,7 +115,6 @@ function getPathCharType (ch: ?string): string {
     case 0x2E: // .
     case 0x22: // "
     case 0x27: // '
-    case 0x30: // 0
       return ch
 
     case 0x5F: // _
@@ -134,15 +133,7 @@ function getPathCharType (ch: ?string): string {
       return 'ws'
   }
 
-  // a-z, A-Z
-  if ((code >= 0x61 && code <= 0x7A) || (code >= 0x41 && code <= 0x5A)) {
-    return 'ident'
-  }
-
-  // 1-9
-  if (code >= 0x31 && code <= 0x39) { return 'number' }
-
-  return 'else'
+  return 'ident'
 }
 
 /**
