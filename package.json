@@ -61,6 +61,7 @@
     "typescript": "^2.4.1",
     "uglify-js": "^2.7.5",
     "vue": "^2.5.17",
+    "vue-server-renderer": "^2.5.17",
     "vue-template-compiler": "^2.5.17",
     "vuepress": "^0.14.0",
     "webpack": "^4.19.1",
@@ -107,11 +108,12 @@
     "sauce:coolkids": "karma start config/karma.sauce.conf.js -- 0",
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
-    "test": "npm run lint && npm run flow && npm run test:types && npm run test:cover && npm run test:e2e",
+    "test": "npm run lint && npm run flow && npm run test:types && npm run test:cover && npm run test:e2e && npm run test:server",
     "test:cover": "cross-env BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "npm run build && node test/e2e/runner.js",
     "test:types": "tsc -p types",
-    "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js"
+    "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js",
+    "test:server": "npm run build && mocha test/server/**"
   },
   "sideEffects": false,
   "types": "types/index.d.ts",
