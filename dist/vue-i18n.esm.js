@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.1.0 
+ * vue-i18n v8.1.1 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -308,7 +308,7 @@ var mixin = {
 
     this._i18n = null;
   }
-}
+};
 
 /*  */
 
@@ -390,7 +390,7 @@ var component = {
 
     return h(props.tag, data, i18n.i(path, locale, params))
   }
-}
+};
 
 /*  */
 
@@ -503,16 +503,16 @@ function makeParams (locale, args) {
 var Vue;
 
 function install (_Vue) {
-  Vue = _Vue;
-
-  var version = (Vue.version && Number(Vue.version.split('.')[0])) || -1;
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== 'production' && install.installed) {
+  if (process.env.NODE_ENV !== 'production' && install.installed && _Vue === Vue) {
     warn('already installed.');
     return
   }
   install.installed = true;
 
+  Vue = _Vue;
+
+  var version = (Vue.version && Number(Vue.version.split('.')[0])) || -1;
   /* istanbul ignore if */
   if (process.env.NODE_ENV !== 'production' && version < 2) {
     warn(("vue-i18n (" + (install.version) + ") need to use Vue 2.0 or later (Vue: " + (Vue.version) + ")."));
@@ -571,14 +571,15 @@ function parse (format) {
       text = '';
       var sub = '';
       char = format[position++];
-      while (char !== '}') {
+      while (char !== undefined && char !== '}') {
         sub += char;
         char = format[position++];
       }
+      var isClosed = char === '}';
 
       var type = RE_TOKEN_LIST_VALUE.test(sub)
         ? 'list'
-        : RE_TOKEN_NAMED_VALUE.test(sub)
+        : isClosed && RE_TOKEN_NAMED_VALUE.test(sub)
           ? 'named'
           : 'unknown';
       tokens.push({ value: sub, type: type });
@@ -1580,6 +1581,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '8.1.0';
+VueI18n.version = '8.1.1';
 
 export default VueI18n;
