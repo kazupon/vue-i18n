@@ -1,3 +1,20 @@
+<a name="8.1.1"></a>
+## [8.1.1](https://github.com/kazupon/vue-i18n/compare/v8.1.0...v8.1.1) (2018-10-12)
+
+
+### :bug: Bug Fixes
+
+* **build:** fix rollup building issues ([1a1958a](https://github.com/kazupon/vue-i18n/commit/1a1958a))
+* **format:** Should warn as unknown if named format is not closed. ([#435](https://github.com/kazupon/vue-i18n/issues/435)) by [@exoego](https://github.com/exoego) ([d1f6ed0](https://github.com/kazupon/vue-i18n/commit/d1f6ed0)), closes [#435](https://github.com/kazupon/vue-i18n/issues/435)
+* **install:** fix cannot redfine error ([6d5ec61](https://github.com/kazupon/vue-i18n/commit/6d5ec61))
+
+
+### :zap: Improvements
+
+* **package.json:** tree shaking optimization ([38948c5](https://github.com/kazupon/vue-i18n/commit/38948c5))
+
+
+
 <a name="8.1.0"></a>
 # [8.1.0](https://github.com/kazupon/vue-i18n/compare/v8.0.0...v8.1.0) (2018-09-03)
 
