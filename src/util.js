@@ -152,3 +152,7 @@ export const canUseDateTimeFormat: boolean =
 
 export const canUseNumberFormat: boolean =
   typeof Intl !== 'undefined' && typeof Intl.NumberFormat !== 'undefined'
+
+export function isChineseCharacter (character: string): boolean {
+  return /[\u4E00-\u9FA5]/g.test(character)
+}

@@ -1,5 +1,8 @@
 export default {
   en: {
+    '嵌套': {
+      '中文': 'chinese'
+    },
     message: {
       hello: 'the world',
       hoge: 'hoge',
@@ -51,6 +54,9 @@ export default {
     }
   },
   ja: {
+    '嵌套': {
+      '中文': '中国語'
+    },
     message: {
       hello: 'ザ・ワールド',
       hoge: 'ほげ',

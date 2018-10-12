@@ -17,6 +17,10 @@ describe('basic', () => {
       it('should translate an english', () => {
         assert.equal(i18n.t('message.hello'), messages.en.message.hello)
       })
+
+      it('should support nested path contains chinese', () => {
+        assert.equal(i18n.t('嵌套.中文'), messages.en['嵌套']['中文'])
+      })
     })
 
     describe('empty string', () => {
@@ -52,6 +56,10 @@ describe('basic', () => {
     describe('ja locale', () => {
       it('should translate a japanese', () => {
         assert.equal(i18n.t('message.hello', 'ja'), messages.ja.message.hello)
+      })
+
+      it('should support nested path contains chinese', () => {
+        assert.equal(i18n.t('嵌套.中文', 'ja'), messages.ja['嵌套']['中文'])
       })
     })
 
