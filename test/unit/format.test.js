@@ -85,6 +85,13 @@ describe('compile', () => {
       assert.equal(compiled[2], ', age: ')
       assert.equal(compiled[3], '0x20')
     })
+
+    it('should be compiled as unknown if not closed', () => {
+      const tokens = parse('name: {name')
+      const compiled = compile(tokens, { name: 'kazupon' })
+      assert(compiled.length === 1)
+      assert.equal(compiled[0], 'name: ')
+    })
   })
 
   describe('unknown token', () => {
@@ -102,6 +109,7 @@ describe('compile', () => {
       spy.restore()
     })
   })
+
 
   describe('values unknown mode', () => {
     it('should be compiled with empty', () => {

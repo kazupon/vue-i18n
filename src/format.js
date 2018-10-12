@@ -45,14 +45,15 @@ export function parse (format: string): Array<Token> {
       text = ''
       let sub: string = ''
       char = format[position++]
-      while (char !== '}') {
+      while (char !== undefined && char !== '}') {
         sub += char
         char = format[position++]
       }
+      const isClosed = char === '}'
 
       const type = RE_TOKEN_LIST_VALUE.test(sub)
         ? 'list'
-        : RE_TOKEN_NAMED_VALUE.test(sub)
+        : isClosed && RE_TOKEN_NAMED_VALUE.test(sub)
           ? 'named'
           : 'unknown'
       tokens.push({ value: sub, type })
