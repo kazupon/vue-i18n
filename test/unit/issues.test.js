@@ -301,11 +301,19 @@ describe('issues', () => {
   })
 
   describe('#247', () => {
-    it('should warn if circular reference in linked locale message', () => {
+    it('should be warned if circular reference in linked locale message', () => {
       const spy = sinon.spy(console, 'warn')
-      vm.$i18n.t('message.circular1')
+      assert.strictEqual(vm.$i18n.t('message.circular1'), 'Foo Bar Buz Foo @:message.circular2')
       assert(spy.notCalled === false)
       assert(spy.callCount === 1)
+      spy.restore()
+    })
+
+    it('should not be warned if same non-circular link used repeatedly', () => {
+      const spy = sinon.spy(console, 'warn')
+      assert.strictEqual(vm.$i18n.t('message.linkTwice'), 'the world: the world')
+      assert(spy.notCalled === true)
+      assert(spy.callCount === 0)
       spy.restore()
     })
   })

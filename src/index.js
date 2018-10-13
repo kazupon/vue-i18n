@@ -294,6 +294,8 @@ export default class VueI18n {
         Array.isArray(values) ? values : [values]
       )
 
+      visitedLinks.delete(linkPlaceholder)
+
       // Replace the link with the translated
       ret = !translated ? ret : ret.replace(link, translated)
     }
