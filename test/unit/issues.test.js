@@ -300,6 +300,16 @@ describe('issues', () => {
     })
   })
 
+  describe('#247', () => {
+    it('should warn if circular reference in linked locale message', () => {
+      const spy = sinon.spy(console, 'warn')
+      vm.$i18n.t('message.circular1')
+      assert(spy.notCalled === false)
+      assert(spy.callCount === 1)
+      spy.restore()
+    })
+  })
+
   describe('#377', () => {
     it('should be destroyed', done => {
       const el = document.createElement('div')

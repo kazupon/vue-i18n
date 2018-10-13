@@ -16,6 +16,9 @@ export default {
       linkHyphen: '@:hyphen-hello',
       linkUnderscore: '@:underscore_hello',
       linkList: '@:message.hello: {0} {1}',
+      circular1: 'Welcome @:message.circular2',
+      circular2: 'Elon @:message.circular3',
+      circular3: '@:message.circular1 foo',
       'hyphen-locale': 'hello hyphen',
       '1234': 'Number-based keys are found',
       '1mixedKey': 'Mixed keys are not found.'

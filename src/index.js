@@ -197,7 +197,8 @@ export default class VueI18n {
     key: Path,
     host: any,
     interpolateMode: string,
-    values: any
+    values: any,
+    visitedLinks: Set<string>
   ): any {
     if (!message) { return null }
 
@@ -232,7 +233,7 @@ export default class VueI18n {
 
     // Check for the existance of links within the translated string
     if (ret.indexOf('@:') >= 0) {
-      ret = this._link(locale, message, ret, host, interpolateMode, values)
+      ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinks)
     }
 
     return this._render(ret, interpolateMode, values)
@@ -244,7 +245,8 @@ export default class VueI18n {
     str: string,
     host: any,
     interpolateMode: string,
-    values: any
+    values: any,
+    visitedLinks: Set<string>
   ): any {
     let ret: string = str
 
@@ -261,11 +263,18 @@ export default class VueI18n {
       const link: string = matches[idx]
       // Remove the leading @:
       const linkPlaceholder: string = link.substr(2)
+
+      if (visitedLinks.has(linkPlaceholder)) {
+        warn(`Circular reference found. Linked key "${linkPlaceholder}" is already visited in [${Array.from(visitedLinks).join(', ')}]`)
+        return ret
+      }
+
       // Translate the link
       let translated: any = this._interpolate(
         locale, message, linkPlaceholder, host,
         interpolateMode === 'raw' ? 'string' : interpolateMode,
-        interpolateMode === 'raw' ? undefined : values
+        interpolateMode === 'raw' ? undefined : values,
+        visitedLinks.add(linkPlaceholder)
       )
 
       if (this._isFallbackRoot(translated)) {
@@ -309,10 +318,10 @@ export default class VueI18n {
     args: any
   ): any {
     let res: any =
-      this._interpolate(locale, messages[locale], key, host, interpolateMode, args)
+      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, new Set())
     if (!isNull(res)) { return res }
 
-    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args)
+    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, new Set())
     if (!isNull(res)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
