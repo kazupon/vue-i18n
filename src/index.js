@@ -387,11 +387,11 @@ export default class VueI18n {
       choice = 1
     }
 
-    const implicit = { 'count': choice, 'n': choice }
-    const parsed = parseArgs(...values)
-    parsed.params = Object.assign(implicit, parsed.params)
-    const enhancedValues = parsed.locale === null ? [parsed.params] : [parsed.locale, parsed.params]
-    return fetchChoice(this._t(key, _locale, messages, host, ...enhancedValues), choice)
+    const predefined = { 'count': choice, 'n': choice }
+    const parsedArgs = parseArgs(...values)
+    parsedArgs.params = Object.assign(predefined, parsedArgs.params)
+    values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
+    return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {
