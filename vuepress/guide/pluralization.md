@@ -35,7 +35,7 @@ Output the below:
 <p>10 apples</p>
 ```    
 
-## Accessing the number implicitly 
+## Accessing the number via the pre-defined argument
 
 You don't need to explicitly give the number for pluralization.
 The number can be accessed within locale messages via pre-defined named arguments `{count}` and/or `{n}`.
