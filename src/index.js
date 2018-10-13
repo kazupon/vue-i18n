@@ -198,7 +198,7 @@ export default class VueI18n {
     host: any,
     interpolateMode: string,
     values: any,
-    visitedLinks: Set<string>
+    visitedLinkStack: Array<string>
   ): any {
     if (!message) { return null }
 
@@ -233,7 +233,7 @@ export default class VueI18n {
 
     // Check for the existance of links within the translated string
     if (ret.indexOf('@:') >= 0) {
-      ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinks)
+      ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack)
     }
 
     return this._render(ret, interpolateMode, values)
@@ -246,7 +246,7 @@ export default class VueI18n {
     host: any,
     interpolateMode: string,
     values: any,
-    visitedLinks: Set<string>
+    visitedLinkStack: Array<string>
   ): any {
     let ret: string = str
 
@@ -264,17 +264,18 @@ export default class VueI18n {
       // Remove the leading @:
       const linkPlaceholder: string = link.substr(2)
 
-      if (visitedLinks.has(linkPlaceholder)) {
-        warn(`Circular reference found. Linked key "${linkPlaceholder}" is already visited in [${Array.from(visitedLinks).join(', ')}]`)
+      if (visitedLinkStack.includes(linkPlaceholder)) {
+        warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
         return ret
       }
+      visitedLinkStack.push(linkPlaceholder)
 
       // Translate the link
       let translated: any = this._interpolate(
         locale, message, linkPlaceholder, host,
         interpolateMode === 'raw' ? 'string' : interpolateMode,
         interpolateMode === 'raw' ? undefined : values,
-        visitedLinks.add(linkPlaceholder)
+        visitedLinkStack
       )
 
       if (this._isFallbackRoot(translated)) {
@@ -294,7 +295,7 @@ export default class VueI18n {
         Array.isArray(values) ? values : [values]
       )
 
-      visitedLinks.delete(linkPlaceholder)
+      visitedLinkStack.pop()
 
       // Replace the link with the translated
       ret = !translated ? ret : ret.replace(link, translated)
@@ -320,10 +321,10 @@ export default class VueI18n {
     args: any
   ): any {
     let res: any =
-      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, new Set())
+      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, [key])
     if (!isNull(res)) { return res }
 
-    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, new Set())
+    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key])
     if (!isNull(res)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)

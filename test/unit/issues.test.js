@@ -303,7 +303,7 @@ describe('issues', () => {
   describe('#247', () => {
     it('should be warned if circular reference in linked locale message', () => {
       const spy = sinon.spy(console, 'warn')
-      assert.strictEqual(vm.$i18n.t('message.circular1'), 'Foo Bar Buz Foo @:message.circular2')
+      assert.strictEqual(vm.$i18n.t('message.circular1'), 'Foo Bar Buz @:message.circular1')
       assert(spy.notCalled === false)
       assert(spy.callCount === 1)
       spy.restore()
