@@ -1,3 +1,20 @@
+<a name="8.2.0"></a>
+# [8.2.0](https://github.com/kazupon/vue-i18n/compare/v8.1.1...v8.2.0) (2018-10-13)
+
+
+### :bug: Bug Fixes
+
+* **index:** Add warning for circular reference in linked message ([#438](https://github.com/kazupon/vue-i18n/issues/438)) by [@exoego](https://github.com/exoego) ([7583485](https://github.com/kazupon/vue-i18n/commit/7583485)), closes [#438](https://github.com/kazupon/vue-i18n/issues/438)
+
+
+### :zap: Improvements
+
+* **index:** Allow escaping link key like @:(foo.bar). ([#437](https://github.com/kazupon/vue-i18n/issues/437)) by [@exoego](https://github.com/exoego) ([acfc458](https://github.com/kazupon/vue-i18n/commit/acfc458)), closes [#437](https://github.com/kazupon/vue-i18n/issues/437)
+* **index:** Pre-defined named arguments for Pluraization ([#440](https://github.com/kazupon/vue-i18n/issues/440)) by [@exoego](https://github.com/exoego) ([e84f0fb](https://github.com/kazupon/vue-i18n/commit/e84f0fb)), closes [#440](https://github.com/kazupon/vue-i18n/issues/440)
+* **path:** Allow non-ascii chars including numbers. ([#436](https://github.com/kazupon/vue-i18n/issues/436)) by [@exoego](https://github.com/exoego) ([a556c58](https://github.com/kazupon/vue-i18n/commit/a556c58)), closes [#436](https://github.com/kazupon/vue-i18n/issues/436)
+
+
+
 <a name="8.1.1"></a>
 ## [8.1.1](https://github.com/kazupon/vue-i18n/compare/v8.1.0...v8.1.1) (2018-10-12)
 
