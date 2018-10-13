@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.1.1 
+ * vue-i18n v8.2.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -760,7 +760,6 @@
       case 0x2E: // .
       case 0x22: // "
       case 0x27: // '
-      case 0x30: // 0
         return ch
 
       case 0x5F: // _
@@ -779,15 +778,7 @@
         return 'ws'
     }
 
-    // a-z, A-Z
-    if ((code >= 0x61 && code <= 0x7A) || (code >= 0x41 && code <= 0x5A)) {
-      return 'ident'
-    }
-
-    // 1-9
-    if (code >= 0x31 && code <= 0x39) { return 'number' }
-
-    return 'else'
+    return 'ident'
   }
 
   /**
@@ -980,6 +971,8 @@
     'localeMatcher',
     'formatMatcher'
   ];
+  var linkKeyMatcher = /(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g;
+  var bracketsMatcher = /[()]/g;
 
   var VueI18n = function VueI18n (options) {
     var this$1 = this;
@@ -1125,7 +1118,8 @@
     key,
     host,
     interpolateMode,
-    values
+    values,
+    visitedLinkStack
   ) {
     if (!message) { return null }
 
@@ -1160,7 +1154,7 @@
 
     // Check for the existance of links within the translated string
     if (ret.indexOf('@:') >= 0) {
-      ret = this._link(locale, message, ret, host, interpolateMode, values);
+      ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack);
     }
 
     return this._render(ret, interpolateMode, values)
@@ -1172,7 +1166,8 @@
     str,
     host,
     interpolateMode,
-    values
+    values,
+    visitedLinkStack
   ) {
       var this$1 = this;
 
@@ -1181,7 +1176,7 @@
     // Match all the links within the local
     // We are going to replace each of
     // them with its translation
-    var matches = ret.match(/(@:[\w\-_|.]+)/g);
+    var matches = ret.match(linkKeyMatcher);
     for (var idx in matches) {
       // ie compatible: filter custom array
       // prototype method
@@ -1189,13 +1184,21 @@
         continue
       }
       var link = matches[idx];
-      // Remove the leading @:
-      var linkPlaceholder = link.substr(2);
+      // Remove the leading @: and the brackets
+      var linkPlaceholder = link.substr(2).replace(bracketsMatcher, '');
+
+      if (visitedLinkStack.includes(linkPlaceholder)) {
+        warn(("Circular reference found. \"" + link + "\" is already visited in the chain of " + (visitedLinkStack.reverse().join(' <- '))));
+        return ret
+      }
+      visitedLinkStack.push(linkPlaceholder);
+
       // Translate the link
       var translated = this$1._interpolate(
         locale, message, linkPlaceholder, host,
         interpolateMode === 'raw' ? 'string' : interpolateMode,
-        interpolateMode === 'raw' ? undefined : values
+        interpolateMode === 'raw' ? undefined : values,
+        visitedLinkStack
       );
 
       if (this$1._isFallbackRoot(translated)) {
@@ -1214,6 +1217,8 @@
         locale, linkPlaceholder, translated, host,
         Array.isArray(values) ? values : [values]
       );
+
+      visitedLinkStack.pop();
 
       // Replace the link with the translated
       ret = !translated ? ret : ret.replace(link, translated);
@@ -1239,10 +1244,10 @@
     args
   ) {
     var res =
-      this._interpolate(locale, messages[locale], key, host, interpolateMode, args);
+      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, [key]);
     if (!isNull(res)) { return res }
 
-    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args);
+    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key]);
     if (!isNull(res)) {
       if (!this._silentTranslationWarn) {
         warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
@@ -1327,6 +1332,11 @@
     if (choice === undefined) {
       choice = 1;
     }
+
+    var predefined = { 'count': choice, 'n': choice };
+    var parsedArgs = parseArgs.apply(void 0, values);
+    parsedArgs.params = Object.assign(predefined, parsedArgs.params);
+    values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params];
     return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
   };
 
@@ -1587,7 +1597,7 @@
     numberFormat: canUseNumberFormat
   };
   VueI18n.install = install;
-  VueI18n.version = '8.1.1';
+  VueI18n.version = '8.2.0';
 
   return VueI18n;
 
