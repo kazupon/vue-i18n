@@ -13,6 +13,7 @@ export default {
       linkEnd: 'This is a linked translation to @:message.hello',
       linkWithin: 'Isn\'t @:message.hello we live in great?',
       linkMultiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
+      linkBrackets: 'Hello @:(message.hoge). Isn\'t @:(message.hello) great?',
       linkHyphen: '@:hyphen-hello',
       linkUnderscore: '@:underscore_hello',
       linkList: '@:message.hello: {0} {1}',

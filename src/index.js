@@ -31,6 +31,8 @@ const numberFormatKeys = [
   'localeMatcher',
   'formatMatcher'
 ]
+const linkKeyMatcher = /(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g
+const bracketsMatcher = /[()]/g
 
 export default class VueI18n {
   static install: () => void
@@ -253,7 +255,7 @@ export default class VueI18n {
     // Match all the links within the local
     // We are going to replace each of
     // them with its translation
-    const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
+    const matches: any = ret.match(linkKeyMatcher)
     for (const idx in matches) {
       // ie compatible: filter custom array
       // prototype method
@@ -261,8 +263,8 @@ export default class VueI18n {
         continue
       }
       const link: string = matches[idx]
-      // Remove the leading @:
-      const linkPlaceholder: string = link.substr(2)
+      // Remove the leading @: and the brackets
+      const linkPlaceholder: string = link.substr(2).replace(bracketsMatcher, '')
 
       if (visitedLinkStack.includes(linkPlaceholder)) {
         warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
