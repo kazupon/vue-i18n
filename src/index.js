@@ -251,7 +251,7 @@ export default class VueI18n {
     // Match all the links within the local
     // We are going to replace each of
     // them with its translation
-    const matches: any = ret.match(/(@:[\w\-_|.]+)/g)
+    const matches: any = ret.match(/(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g)
     for (const idx in matches) {
       // ie compatible: filter custom array
       // prototype method
@@ -259,8 +259,8 @@ export default class VueI18n {
         continue
       }
       const link: string = matches[idx]
-      // Remove the leading @:
-      const linkPlaceholder: string = link.substr(2)
+      // Remove the leading @: and the brackets
+      const linkPlaceholder: string = link.substr(2).replace(/[()]/g, '')
       // Translate the link
       let translated: any = this._interpolate(
         locale, message, linkPlaceholder, host,
