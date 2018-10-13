@@ -71,6 +71,7 @@ export default {
     },
     plurals: {
       car: 'ザ・ワールド | これはフォールバック',
+      implicitPluralCount: 'こっちには来ない | count:{count}, n:{n}',
       format: {
         named: 'こんにちは {name}, ごきげんいかが？ | こんにちは {name}, ごきげんいかが？',
         list: 'こんにちは {0}, ごきげんいかが？| こんにちは {0}, ごきげんいかが？'

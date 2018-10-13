@@ -191,6 +191,30 @@ describe('basic', () => {
       })
     })
 
+    describe('implicit choice exposing', () => {
+      describe('en locale', () => {
+        it('should expose "count" implicitly to locale message', () => {
+          assert.strictEqual(i18n.tc('plurals.apple', 10), '10 apples')
+        })
+
+        it('should not expose if given explicitly', () => {
+          const explicitArgs = { 'count': 'Many' }
+          assert.strictEqual(i18n.tc('plurals.apple', 10, explicitArgs), 'Many apples')
+        })
+      })
+
+      describe('ja locale', () => {
+        it('should expose "count" and "n" implicitly to locale message', () => {
+          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 'ja'), 'count:10, n:10')
+        })
+
+        it('should not expose if given explicitly', () => {
+          const explicitArgs = { 'count': 'たくさん', 'n': '大量' }
+          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 'ja', explicitArgs), 'count:たくさん, n:大量')
+        })
+      })
+    })
+
     describe('en locale', () => {
       it('should translate an english', () => {
         assert.equal(i18n.tc('plurals.car', 1), 'car')

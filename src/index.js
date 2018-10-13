@@ -400,6 +400,11 @@ export default class VueI18n {
     if (choice === undefined) {
       choice = 1
     }
+
+    const predefined = { 'count': choice, 'n': choice }
+    const parsedArgs = parseArgs(...values)
+    parsedArgs.params = Object.assign(predefined, parsedArgs.params)
+    values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
     return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
   }
 
