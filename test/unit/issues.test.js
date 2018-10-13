@@ -361,4 +361,25 @@ describe('issues', () => {
       })
     })
   })
+
+  describe('#398', () => {
+    it('should return true', () => {
+      assert.strictEqual(vm.$te('0123a'), true)
+      assert.strictEqual(vm.$te('01234'), true)
+      assert.strictEqual(vm.$te('message.1234'), true)
+    })
+  })
+
+  describe('#430', () => {
+    it('should be translated', () => {
+      assert.strictEqual(
+        vm.$t('日本語'),
+        messages[vm.$i18n.locale]['日本語']
+      )
+      assert.strictEqual(
+        vm.$t('message.sálvame'),
+        messages[vm.$i18n.locale]['message']['sálvame']
+      )
+    })
+  })
 })
