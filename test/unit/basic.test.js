@@ -49,6 +49,12 @@ describe('basic', () => {
       })
     })
 
+    describe('linked translation', () => {
+      it('should translate link with braces ', () => {
+        assert.strictEqual(i18n.t('message.linkBrackets'), 'Hello hoge. Isn\'t the world great?')
+      })
+    })
+
     describe('ja locale', () => {
       it('should translate a japanese', () => {
         assert.equal(i18n.t('message.hello', 'ja'), messages.ja.message.hello)
