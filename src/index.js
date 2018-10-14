@@ -267,7 +267,9 @@ export default class VueI18n {
       const linkPlaceholder: string = link.substr(2).replace(bracketsMatcher, '')
 
       if (visitedLinkStack.includes(linkPlaceholder)) {
-        warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
+        if (process.env.NODE_ENV !== 'production') {
+          warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
+        }
         return ret
       }
       visitedLinkStack.push(linkPlaceholder)
@@ -583,8 +585,10 @@ export default class VueI18n {
 
   _n (value: number, locale: Locale, key: ?string, options: ?NumberFormatOptions): NumberFormatResult {
     /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.numberFormat) {
-      warn('Cannot format a Number value due to not supported Intl.NumberFormat.')
+    if (!VueI18n.availabilities.numberFormat) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn('Cannot format a Number value due to not supported Intl.NumberFormat.')
+      }
       return ''
     }
 
