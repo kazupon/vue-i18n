@@ -18,7 +18,7 @@
 
 - It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues with no clear repro steps will not be triaged. If an issue labeled "need repro" receives no further input from the issue author for more than 5 days, it will be closed.
 
-- It is recommended that you make a JSFiddle/JSBin/Codepen to demonstrate your issue. You could start based with [this template](http://jsfiddle.net/qegsr2pn/) that already includes the latest version of Vue.
+- It is recommended that you make a JSFiddle/JSBin/Codepen/CodeSandbox to demonstrate your issue. You could start based with [this template](http://jsfiddle.net/r8qnsfb1/) that already includes the latest version.
 
 - For bugs that involves build setups, you can create a reproduction repository with steps in the README.
 
