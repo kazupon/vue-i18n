@@ -1,3 +1,18 @@
+<a name="8.2.1"></a>
+## [8.2.1](https://github.com/kazupon/vue-i18n/compare/v8.2.0...v8.2.1) (2018-10-15)
+
+
+### :bug: Bug Fixes
+
+* **extend:** fix TypeError: Cannot redefine property: $i18n ([#422](https://github.com/kazupon/vue-i18n/issues/422)) by [@HadiChen](https://github.com/HadiChen) ([cb19082](https://github.com/kazupon/vue-i18n/commit/cb19082)), closes [#422](https://github.com/kazupon/vue-i18n/issues/422)
+
+
+### :zap: Improvements
+
+* **index:** Suppress some warnings in production: smaller min.js and performance gain. ([#441](https://github.com/kazupon/vue-i18n/issues/441)) by @	exoego ([43931f5](https://github.com/kazupon/vue-i18n/commit/43931f5)), closes [#441](https://github.com/kazupon/vue-i18n/issues/441)
+
+
+
 <a name="8.2.0"></a>
 # [8.2.0](https://github.com/kazupon/vue-i18n/compare/v8.1.1...v8.2.0) (2018-10-13)
 
