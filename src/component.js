@@ -52,7 +52,7 @@ export default {
       }
     })
 
-    if (hasPlaces && children.length > 0 && !everyPlace) {
+    if (process.env.NODE_ENV !== 'production' && hasPlaces && children.length > 0 && !everyPlace) {
       warn('If places prop is set, all child elements must have place prop set.')
     }
 
