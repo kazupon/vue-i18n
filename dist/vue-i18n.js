@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.2.0 
+ * vue-i18n v8.2.1 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -172,10 +172,12 @@
   /*  */
 
   function extend (Vue) {
-    // $FlowFixMe
-    Object.defineProperty(Vue.prototype, '$i18n', {
-      get: function get () { return this._i18n }
-    });
+    if (!Vue.prototype.hasOwnProperty('$i18n')) {
+      // $FlowFixMe
+      Object.defineProperty(Vue.prototype, '$i18n', {
+        get: function get () { return this._i18n }
+      });
+    }
 
     Vue.prototype.$t = function (key) {
       var values = [], len = arguments.length - 1;
@@ -1188,7 +1190,9 @@
       var linkPlaceholder = link.substr(2).replace(bracketsMatcher, '');
 
       if (visitedLinkStack.includes(linkPlaceholder)) {
-        warn(("Circular reference found. \"" + link + "\" is already visited in the chain of " + (visitedLinkStack.reverse().join(' <- '))));
+        {
+          warn(("Circular reference found. \"" + link + "\" is already visited in the chain of " + (visitedLinkStack.reverse().join(' <- '))));
+        }
         return ret
       }
       visitedLinkStack.push(linkPlaceholder);
@@ -1526,7 +1530,9 @@
   VueI18n.prototype._n = function _n (value, locale, key, options) {
     /* istanbul ignore if */
     if (!VueI18n.availabilities.numberFormat) {
-      warn('Cannot format a Number value due to not supported Intl.NumberFormat.');
+      {
+        warn('Cannot format a Number value due to not supported Intl.NumberFormat.');
+      }
       return ''
     }
 
@@ -1597,7 +1603,7 @@
     numberFormat: canUseNumberFormat
   };
   VueI18n.install = install;
-  VueI18n.version = '8.2.0';
+  VueI18n.version = '8.2.1';
 
   return VueI18n;
 
