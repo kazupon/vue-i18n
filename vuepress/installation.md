@@ -43,6 +43,18 @@ Vue.use(VueI18n)
 
 You don't need to do this when using global script tags.
 
+## Vue Cli 3.x
+    
+```sh
+vue add i18n
+```
+
+You need Vue cli 3.x as pre-requisite, you can install it on your shell with the next command:
+
+```sh
+npm install @vue/cli -g
+```
+
 ## Dev Build
 
 You will have to clone directly from GitHub and build `vue-i18n` yourself if you want to use the latest dev build.
