@@ -65,10 +65,6 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
   const teen = choice > 10 && choice < 20;
   const endsWithOne = choice % 10 === 1;
 
-  if (choicesLength < 4) {
-    return (!teen && endsWithOne) ? 1 : 2;
-  }
-
   if (!teen && endsWithOne) {
     return 1;
   }
