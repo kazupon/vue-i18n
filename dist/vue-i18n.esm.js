@@ -58,32 +58,6 @@ function parseArgs () {
   return { locale: locale, params: params }
 }
 
-function getOldChoiceIndexFixed (choice) {
-  return choice
-    ? choice > 1
-      ? 1
-      : 0
-    : 1
-}
-
-function getChoiceIndex (choice, choicesLength) {
-  choice = Math.abs(choice);
-
-  if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
-
-  return choice ? Math.min(choice, 2) : 0
-}
-
-function fetchChoice (message, choice) {
-  /* istanbul ignore if */
-  if (!message && typeof message !== 'string') { return null }
-  var choices = message.split('|');
-
-  choice = getChoiceIndex(choice, choices.length);
-  if (!choices[choice]) { return message }
-  return choices[choice].trim()
-}
-
 function looseClone (obj) {
   return JSON.parse(JSON.stringify(obj))
 }
@@ -1165,8 +1139,6 @@ VueI18n.prototype._link = function _link (
   values,
   visitedLinkStack
 ) {
-    var this$1 = this;
-
   var ret = str;
 
   // Match all the links within the local
@@ -1192,26 +1164,26 @@ VueI18n.prototype._link = function _link (
     visitedLinkStack.push(linkPlaceholder);
 
     // Translate the link
-    var translated = this$1._interpolate(
+    var translated = this._interpolate(
       locale, message, linkPlaceholder, host,
       interpolateMode === 'raw' ? 'string' : interpolateMode,
       interpolateMode === 'raw' ? undefined : values,
       visitedLinkStack
     );
 
-    if (this$1._isFallbackRoot(translated)) {
-      if (process.env.NODE_ENV !== 'production' && !this$1._silentTranslationWarn) {
+    if (this._isFallbackRoot(translated)) {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(("Fall back to translate the link placeholder '" + linkPlaceholder + "' with root locale."));
       }
       /* istanbul ignore if */
-      if (!this$1._root) { throw Error('unexpected error') }
-      var root = this$1._root;
+      if (!this._root) { throw Error('unexpected error') }
+      var root = this._root;
       translated = root._translate(
         root._getMessages(), root.locale, root.fallbackLocale,
         linkPlaceholder, host, interpolateMode, values
       );
     }
-    translated = this$1._warnDefault(
+    translated = this._warnDefault(
       locale, linkPlaceholder, translated, host,
       Array.isArray(values) ? values : [values]
     );
@@ -1335,7 +1307,36 @@ VueI18n.prototype._tc = function _tc (
   var parsedArgs = parseArgs.apply(void 0, values);
   parsedArgs.params = Object.assign(predefined, parsedArgs.params);
   values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params];
-  return fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
+  return this.fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
+};
+
+VueI18n.prototype.fetchChoice = function fetchChoice (message, choice) {
+  /* istanbul ignore if */
+  if (!message && typeof message !== 'string') { return null }
+  var choices = message.split('|');
+
+  choice = this.getChoiceIndex(choice, choices.length);
+  if (!choices[choice]) { return message }
+  return choices[choice].trim()
+};
+
+/**
+ * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+ * @param choiceLength {number} an overall amount of available choices
+ * @returns a final choice index
+*/
+VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength) {
+  choice = Math.abs(choice);
+
+  if (choicesLength === 2) {
+    return choice
+      ? choice > 1
+        ? 1
+        : 0
+      : 1
+  }
+
+  return choice ? Math.min(choice, 2) : 0
 };
 
 VueI18n.prototype.tc = function tc (key, choice) {
