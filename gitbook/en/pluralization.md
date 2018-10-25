@@ -53,7 +53,7 @@ Very simplified example using rules for Slavic langauges (Russian, Ukrainian, et
  * @returns a final choice index to select plural word by
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n instance, so the locale property exists
+  // this === VueI18n instance, so the locale property also exists here
   if (this.locale !== 'ru') {
     // proceed to the default implementation
   }
@@ -66,7 +66,7 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
   const endsWithOne = choice % 10 === 1;
 
   if (choicesLength < 4) {
-    return (!teen && endsWithOne) ? 1 : 2 : 0;
+    return (!teen && endsWithOne) ? 1 : 2;
   }
 
   if (!teen && endsWithOne) {
