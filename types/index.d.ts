@@ -140,6 +140,13 @@ declare class VueI18n {
   setNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
   mergeNumberFormat(locale: VueI18n.Locale, format: VueI18n.NumberFormat): void;
 
+  /**
+   * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+   * @param choiceLength {number} an overall amount of available choices
+   * @returns a final choice index
+  */
+  getChoiceIndex: (choice: number, choicesLength: number) => number;
+
   static install: PluginFunction<never>;
   static version: string;
   static availabilities: VueI18n.IntlAvailability;
