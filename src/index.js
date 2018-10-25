@@ -5,7 +5,6 @@ import {
   warn,
   isNull,
   parseArgs,
-  fetchChoice,
   isPlainObject,
   isObject,
   looseClone,
@@ -407,7 +406,36 @@ export default class VueI18n {
     const parsedArgs = parseArgs(...values)
     parsedArgs.params = Object.assign(predefined, parsedArgs.params)
     values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
-    return fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
+    return this.fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
+  }
+
+  fetchChoice (message: string, choice: number): ?string {
+    /* istanbul ignore if */
+    if (!message && typeof message !== 'string') { return null }
+    const choices: Array<string> = message.split('|')
+
+    choice = this.getChoiceIndex(choice, choices.length)
+    if (!choices[choice]) { return message }
+    return choices[choice].trim()
+  }
+
+  /**
+   * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+   * @param choiceLength {number} an overall amount of available choices
+   * @returns a final choice index
+  */
+  getChoiceIndex (choice: number, choicesLength: number): number {
+    choice = Math.abs(choice)
+
+    if (choicesLength === 2) {
+      return choice
+        ? choice > 1
+          ? 1
+          : 0
+        : 1
+    }
+
+    return choice ? Math.min(choice, 2) : 0
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {

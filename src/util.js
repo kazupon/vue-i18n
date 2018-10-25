@@ -50,32 +50,6 @@ export function parseArgs (...args: Array<mixed>): Object {
   return { locale, params }
 }
 
-function getOldChoiceIndexFixed (choice: number): number {
-  return choice
-    ? choice > 1
-      ? 1
-      : 0
-    : 1
-}
-
-function getChoiceIndex (choice: number, choicesLength: number): number {
-  choice = Math.abs(choice)
-
-  if (choicesLength === 2) { return getOldChoiceIndexFixed(choice) }
-
-  return choice ? Math.min(choice, 2) : 0
-}
-
-export function fetchChoice (message: string, choice: number): ?string {
-  /* istanbul ignore if */
-  if (!message && typeof message !== 'string') { return null }
-  const choices: Array<string> = message.split('|')
-
-  choice = getChoiceIndex(choice, choices.length)
-  if (!choices[choice]) { return message }
-  return choices[choice].trim()
-}
-
 export function looseClone (obj: Object): Object {
   return JSON.parse(JSON.stringify(obj))
 }
