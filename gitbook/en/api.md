@@ -38,6 +38,20 @@
 
   Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
+#### getChoiceIndex
+
+- **Arguments:**
+  - `{number} choice`
+  - `{number} choicesLength`
+
+- **Return:** `finalChoice {number}`
+
+  Get pluralization index for current pluralizing number and a given amount of choices. Can be overriden through prototype mutation:
+  ```js
+    VueI18n.prototype.getChoiceIndex = /* custom implementation */
+  ```
+
+
 #### $te
 
 - **Arguments:**

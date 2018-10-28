@@ -1,5 +1,6 @@
 import messages from './fixture/index'
 import { parse } from '../../src/format'
+import VueI18n from '../../src'
 const compiler = require('vue-template-compiler')
 
 describe('issues', () => {
@@ -380,6 +381,56 @@ describe('issues', () => {
         vm.$t('message.sálvame'),
         messages[vm.$i18n.locale]['message']['sálvame']
       )
+    })
+  })
+
+  describe('#78', () => {
+    it('should allow custom pluralization', () => {
+      const defaultImpl = VueI18n.prototype.getChoiceIndex
+      VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
+        if (this.locale !== 'ru') {
+          return defaultImpl.apply(this, arguments)
+        }
+
+        if (choice === 0) {
+          return 0
+        }
+
+        const teen = choice > 10 && choice < 20
+        const endsWithOne = choice % 10 === 1
+
+        if (choicesLength < 4) {
+          return (!teen && endsWithOne) ? 1 : 2
+        }
+
+        if (!teen && endsWithOne) {
+          return 1
+        }
+
+        if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+          return 2
+        }
+
+        return (choicesLength < 4) ? 2 : 3
+      }
+
+
+      i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          ru: {
+            car: '0 машин | 1 машина | {n} машины | {n} машин'
+          }
+        }
+      })
+      vm = new Vue({ i18n })
+
+      assert(vm.$tc('car', 0), '0 машин')
+      assert(vm.$tc('car', 1), '1 машина')
+      assert(vm.$tc('car', 2), '2 машины')
+      assert(vm.$tc('car', 4), '4 машины')
+      assert(vm.$tc('car', 12), '12 машин')
+      assert(vm.$tc('car', 21), '21 машина')
     })
   })
 })
