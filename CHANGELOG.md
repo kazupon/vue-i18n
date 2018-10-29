@@ -1,3 +1,13 @@
+<a name="8.3.0"></a>
+# [8.3.0](https://github.com/kazupon/vue-i18n/compare/v8.2.1...v8.3.0) (2018-10-29)
+
+
+### :zap: Improvements
+
+* **pluralization:** Extendable pluralization by [@Raiondesu](https://github.com/Raiondesu) ([bbab90b](https://github.com/kazupon/vue-i18n/commit/bbab90b))
+
+
+
 <a name="8.2.1"></a>
 ## [8.2.1](https://github.com/kazupon/vue-i18n/compare/v8.2.0...v8.2.1) (2018-10-15)
 
