@@ -333,6 +333,20 @@ Whether suppress warnings outputted when localization fails.
 
 ### Methods
 
+#### getChoiceIndex
+
+  * **Arguments:**
+    * `{number} choice`
+    * `{number} choicesLength`
+  
+  * **Return:** `finalChoice {number}`
+
+Get pluralization index for current pluralizing number and a given amount of choices. Can be overriden through prototype mutation:
+
+```js
+VueI18n.prototype.getChoiceIndex = /* custom implementation */
+```
+
 #### getLocaleMessage( locale )
 
   * **Arguments:**
