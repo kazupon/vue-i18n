@@ -294,21 +294,18 @@ export default class I18nPath {
       return null
     } else {
       const length: number = paths.length
-      let ret: any = null
       let last: any = obj
       let i: number = 0
       while (i < length) {
         const value: any = last[paths[i]]
         if (value === undefined) {
-          last = null
-          break
+          return null
         }
         last = value
         i++
       }
 
-      ret = last
-      return ret
+      return last
     }
   }
 }
