@@ -83,7 +83,7 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
  * Check if an expression is a literal value.
  */
 
-const literalValueRE: RegExp = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
+const literalValueRE: RegExp = /^\s?(?:true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
 function isLiteral (exp: string): boolean {
   return literalValueRE.test(exp)
 }
