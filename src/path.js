@@ -253,15 +253,6 @@ export type PathValue = PathValueObject | PathValueArray | string | number | boo
 export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
 
-function empty (target: any): boolean {
-  /* istanbul ignore else */
-  if (Array.isArray(target)) {
-    return target.length === 0
-  } else {
-    return false
-  }
-}
-
 export default class I18nPath {
   _cache: Object
 
@@ -290,7 +281,7 @@ export default class I18nPath {
     if (!isObject(obj)) { return null }
 
     const paths: Array<string> = this.parsePath(path)
-    if (empty(paths)) {
+    if (paths.length === 0) {
       return null
     } else {
       const length: number = paths.length
