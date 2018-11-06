@@ -83,7 +83,7 @@ pathStateMachine[IN_DOUBLE_QUOTE] = {
  * Check if an expression is a literal value.
  */
 
-const literalValueRE: RegExp = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
+const literalValueRE: RegExp = /^\s?(?:true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/
 function isLiteral (exp: string): boolean {
   return literalValueRE.test(exp)
 }
@@ -253,15 +253,6 @@ export type PathValue = PathValueObject | PathValueArray | string | number | boo
 export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
 
-function empty (target: any): boolean {
-  /* istanbul ignore else */
-  if (Array.isArray(target)) {
-    return target.length === 0
-  } else {
-    return false
-  }
-}
-
 export default class I18nPath {
   _cache: Object
 
@@ -290,25 +281,22 @@ export default class I18nPath {
     if (!isObject(obj)) { return null }
 
     const paths: Array<string> = this.parsePath(path)
-    if (empty(paths)) {
+    if (paths.length === 0) {
       return null
     } else {
       const length: number = paths.length
-      let ret: any = null
       let last: any = obj
       let i: number = 0
       while (i < length) {
         const value: any = last[paths[i]]
         if (value === undefined) {
-          last = null
-          break
+          return null
         }
         last = value
         i++
       }
 
-      ret = last
-      return ret
+      return last
     }
   }
 }

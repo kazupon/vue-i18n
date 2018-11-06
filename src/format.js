@@ -27,8 +27,8 @@ type Token = {
   value: string
 }
 
-const RE_TOKEN_LIST_VALUE: RegExp = /^(\d)+/
-const RE_TOKEN_NAMED_VALUE: RegExp = /^(\w)+/
+const RE_TOKEN_LIST_VALUE: RegExp = /^(?:\d)+/
+const RE_TOKEN_NAMED_VALUE: RegExp = /^(?:\w)+/
 
 export function parse (format: string): Array<Token> {
   const tokens: Array<Token> = []
