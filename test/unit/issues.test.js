@@ -433,4 +433,38 @@ describe('issues', () => {
       assert(vm.$tc('car', 21), '21 машина')
     })
   })
+
+  describe('#453', () => {
+    it('should be handled root vm instance', done => {
+      const vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          missing: (locale, key, instance) => {
+            assert.equal('ja', locale)
+            assert.equal('foo.bar', key)
+            assert(vm === instance)
+            done()
+          }
+        }),
+        components: {
+          child: {
+            i18n: {
+              locale: 'ja'
+            },
+            render (h) {
+              return h('p', ['hello child'])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [
+            h('child', { ref: 'child' })
+          ])
+        }
+      }).$mount()
+      vm.$nextTick(() => {
+        vm.$refs.child.$i18n.t('foo.bar', 'ja')
+      })
+    })
+  })
 })
