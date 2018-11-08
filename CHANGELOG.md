@@ -1,3 +1,20 @@
+<a name="8.3.1"></a>
+## [8.3.1](https://github.com/kazupon/vue-i18n/compare/v8.3.0...v8.3.1) (2018-11-08)
+
+
+### :bug: Bug Fixes
+
+* **directive:** fix cannnot update with v-t when had been changed locale message ([4895a2e](https://github.com/kazupon/vue-i18n/commit/4895a2e)), closes [#450](https://github.com/kazupon/vue-i18n/issues/450)
+* **index:** fix merge bug ([1798490](https://github.com/kazupon/vue-i18n/commit/1798490)), closes [#458](https://github.com/kazupon/vue-i18n/issues/458)
+* **missing:** fix vm argument passing ([dc48099](https://github.com/kazupon/vue-i18n/commit/dc48099)), closes [#453](https://github.com/kazupon/vue-i18n/issues/453)
+
+
+### :zap: Improvements
+
+* Optimize path.js and format.js ([#456](https://github.com/kazupon/vue-i18n/issues/456)) by [@exoego](https://github.com/exoego) ([639453c](https://github.com/kazupon/vue-i18n/commit/639453c)), closes [#456](https://github.com/kazupon/vue-i18n/issues/456)
+
+
+
 <a name="8.3.0"></a>
 # [8.3.0](https://github.com/kazupon/vue-i18n/compare/v8.2.1...v8.3.0) (2018-10-29)
 
