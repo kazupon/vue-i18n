@@ -58,12 +58,12 @@ desc('datetime format', () => {
         locale: 'ja-JP',
         dateTimeFormats
       })
-      const short = {
+      const foo = {
         year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit'
       }
-      i18n.mergeDateTimeFormat('en-US', { short })
-      assert.deepEqual(short, i18n.getDateTimeFormat('en-US').short)
+      i18n.mergeDateTimeFormat('en-US', { foo })
+      assert.deepEqual(foo, i18n.getDateTimeFormat('en-US').foo)
     })
   })
 })

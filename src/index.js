@@ -9,6 +9,7 @@ import {
   isObject,
   looseClone,
   remove,
+  merge,
   canUseDateTimeFormat,
   canUseNumberFormat
 } from './util'
@@ -460,7 +461,7 @@ export default class VueI18n {
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
-    this._vm.$set(this._vm.messages, locale, Vue.util.extend(this._vm.messages[locale] || {}, message))
+    this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message))
   }
 
   getDateTimeFormat (locale: Locale): DateTimeFormat {
@@ -472,7 +473,7 @@ export default class VueI18n {
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
-    this._vm.$set(this._vm.dateTimeFormats, locale, Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format))
+    this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format))
   }
 
   _localizeDateTime (
@@ -568,7 +569,7 @@ export default class VueI18n {
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
-    this._vm.$set(this._vm.numberFormats, locale, Vue.util.extend(this._vm.numberFormats[locale] || {}, format))
+    this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format))
   }
 
   _localizeNumber (

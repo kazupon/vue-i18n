@@ -499,4 +499,44 @@ describe('issues', () => {
       })
     })
   })
+
+  describe('#458', () => {
+    it('should be merged locale message', done => {
+      const vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            hello: 'hello world!'
+          }
+        }),
+        render (h) {
+          return h('div', [
+            h('p', { ref: 'text1' }, [this.$t('key1')]),
+            h('p', { ref: 'text2' }, [this.$t('shared.key1')]),
+            h('p', { ref: 'text3' }, [this.$t('key2')]),
+            h('p', { ref: 'text4' }, [this.$t('shared.key2')])
+          ])
+        }
+      }).$mount()
+      nextTick(() => {
+        vm.$i18n.mergeLocaleMessage('en', {
+          key1: 'Hello Module 1',
+          shared: {
+            key1: 'Hello Module 1 shared key 1'
+          }
+        })
+        vm.$i18n.mergeLocaleMessage('en', {
+          key2: 'Hello Module 2',
+          shared: {
+            key2: 'Hello Module 2 shared key 2'
+          }
+        })
+      }).then(() => {
+        assert.equal(vm.$refs.text1.textContent, 'Hello Module 1')
+        assert.equal(vm.$refs.text2.textContent, 'Hello Module 1 shared key 1')
+        assert.equal(vm.$refs.text3.textContent, 'Hello Module 2')
+        assert.equal(vm.$refs.text4.textContent, 'Hello Module 2 shared key 2')
+      }).then(done)
+    })
+  })
 })
