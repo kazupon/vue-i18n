@@ -434,6 +434,38 @@ describe('issues', () => {
     })
   })
 
+  describe('#450', () => {
+    it('shoulbe be translated with v-t', done => {
+      const vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              hello: 'hi there!'
+            }
+          }
+        }),
+        render (h) {
+          // <p ref="text" v-t="'hello'"></p>
+          return h('p', { ref: 'text', directives: [{
+            name: 't', rawName: 'v-t', value: ('hello'), expression: "'hello'"
+          }] })
+        }
+      }).$mount(document.createElement('div'))
+
+      nextTick(() => {
+        assert.equal(vm.$refs.text.textContent, 'hi there!')
+      }).then(() => {
+        vm.$i18n.setLocaleMessage('en', {
+          hello: 'hello there!'
+        })
+        vm.$forceUpdate()
+      }).then(() => {
+        assert.equal(vm.$refs.text.textContent, 'hello there!')
+      }).then(done)
+    })
+  })
+
   describe('#453', () => {
     it('should be handled root vm instance', done => {
       const vm = new Vue({
