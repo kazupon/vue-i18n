@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.3.0 
+ * vue-i18n v8.3.1 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -223,7 +223,7 @@
         } else if (isPlainObject(options.i18n)) {
           // component local i18n
           if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
-            options.i18n.root = this.$root.$i18n;
+            options.i18n.root = this.$root;
             options.i18n.formatter = this.$root.$i18n.formatter;
             options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
             options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
@@ -385,7 +385,10 @@
   function update (el, binding, vnode, oldVNode) {
     if (!assert(el, vnode)) { return }
 
-    if (localeEqual(el, vnode) && looseEqual(binding.value, binding.oldValue)) { return }
+    var i18n = vnode.context.$i18n;
+    if (localeEqual(el, vnode) &&
+      (looseEqual(binding.value, binding.oldValue) &&
+       looseEqual(el._localeMessage, i18n.getLocaleMessage(i18n.locale)))) { return }
 
     t(el, binding, vnode);
   }
@@ -402,6 +405,8 @@
     delete el['_vt'];
     el._locale = undefined;
     delete el['_locale'];
+    el._localeMessage = undefined;
+    delete el['_localeMessage'];
   }
 
   function assert (el, vnode) {
@@ -451,6 +456,7 @@
       el._vt = el.textContent = (ref$2 = vm.$i18n).t.apply(ref$2, [ path ].concat( makeParams(locale, args) ));
     }
     el._locale = vm.$i18n.locale;
+    el._localeMessage = vm.$i18n.getLocaleMessage(vm.$i18n.locale);
   }
 
   function parseValue (value) {
@@ -535,8 +541,8 @@
 
 
 
-  var RE_TOKEN_LIST_VALUE = /^(\d)+/;
-  var RE_TOKEN_NAMED_VALUE = /^(\w)+/;
+  var RE_TOKEN_LIST_VALUE = /^(?:\d)+/;
+  var RE_TOKEN_NAMED_VALUE = /^(?:\w)+/;
 
   function parse (format) {
     var tokens = [];
@@ -704,7 +710,7 @@
    * Check if an expression is a literal value.
    */
 
-  var literalValueRE = /^\s?(true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
+  var literalValueRE = /^\s?(?:true|false|-?[\d.]+|'[^']*'|"[^"]*")\s?$/;
   function isLiteral (exp) {
     return literalValueRE.test(exp)
   }
@@ -874,15 +880,6 @@
 
 
 
-  function empty (target) {
-    /* istanbul ignore else */
-    if (Array.isArray(target)) {
-      return target.length === 0
-    } else {
-      return false
-    }
-  }
-
   var I18nPath = function I18nPath () {
     this._cache = Object.create(null);
   };
@@ -908,25 +905,22 @@
     if (!isObject(obj)) { return null }
 
     var paths = this.parsePath(path);
-    if (empty(paths)) {
+    if (paths.length === 0) {
       return null
     } else {
       var length = paths.length;
-      var ret = null;
       var last = obj;
       var i = 0;
       while (i < length) {
         var value = last[paths[i]];
         if (value === undefined) {
-          last = null;
-          break
+          return null
         }
         last = value;
         i++;
       }
 
-      ret = last;
-      return ret
+      return last
     }
   };
 
@@ -1031,7 +1025,7 @@
     /* istanbul ignore if */
     if (!this._sync || !this._root) { return null }
     var target = this._vm;
-    return this._root.vm.$watch('locale', function (val) {
+    return this._root.$i18n.vm.$watch('locale', function (val) {
       target.$set(target, 'locale', val);
       target.$forceUpdate();
     }, { immediate: true })
@@ -1185,7 +1179,7 @@
         }
         /* istanbul ignore if */
         if (!this$1._root) { throw Error('unexpected error') }
-        var root = this$1._root;
+        var root = this$1._root.$i18n;
         translated = root._translate(
           root._getMessages(), root.locale, root.fallbackLocale,
           linkPlaceholder, host, interpolateMode, values
@@ -1256,7 +1250,7 @@
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
-      return (ref = this._root).t.apply(ref, [ key ].concat( values ))
+      return (ref = this._root).$t.apply(ref, [ key ].concat( values ))
     } else {
       return this._warnDefault(locale, key, ret, host, values)
     }
@@ -1278,7 +1272,7 @@
         warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
       }
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.i(key, locale, values)
+      return this._root.$i18n.i(key, locale, values)
     } else {
       return this._warnDefault(locale, key, ret, host, [values])
     }
@@ -1376,7 +1370,7 @@
   };
 
   VueI18n.prototype.mergeLocaleMessage = function mergeLocaleMessage (locale, message) {
-    this._vm.$set(this._vm.messages, locale, Vue.util.extend(this._vm.messages[locale] || {}, message));
+    this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message));
   };
 
   VueI18n.prototype.getDateTimeFormat = function getDateTimeFormat (locale) {
@@ -1388,7 +1382,7 @@
   };
 
   VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, format) {
-    this._vm.$set(this._vm.dateTimeFormats, locale, Vue.util.extend(this._vm.dateTimeFormats[locale] || {}, format));
+    this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format));
   };
 
   VueI18n.prototype._localizeDateTime = function _localizeDateTime (
@@ -1442,7 +1436,7 @@
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.d(value, key, locale)
+      return this._root.$i18n.d(value, key, locale)
     } else {
       return ret || ''
     }
@@ -1487,7 +1481,7 @@
   };
 
   VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format) {
-    this._vm.$set(this._vm.numberFormats, locale, Vue.util.extend(this._vm.numberFormats[locale] || {}, format));
+    this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format));
   };
 
   VueI18n.prototype._localizeNumber = function _localizeNumber (
@@ -1552,7 +1546,7 @@
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
-      return this._root.n(value, Object.assign({}, { key: key, locale: locale }, options))
+      return this._root.$i18n.n(value, Object.assign({}, { key: key, locale: locale }, options))
     } else {
       return ret || ''
     }
@@ -1606,7 +1600,7 @@
     numberFormat: canUseNumberFormat
   };
   VueI18n.install = install;
-  VueI18n.version = '8.3.0';
+  VueI18n.version = '8.3.1';
 
   return VueI18n;
 
