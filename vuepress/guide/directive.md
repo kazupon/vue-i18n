@@ -32,7 +32,7 @@ Templates:
 <div id="string-syntax">
   <!-- string literal -->
   <p v-t="'hello'"></p>
-  <!-- keypath biniding via data -->
+  <!-- keypath binding via data -->
   <p v-t="path"></p>
 </div>
 ```
@@ -74,7 +74,7 @@ Templates:
 <div id="object-syntax">
   <!-- literal -->
   <p v-t="{ path: 'hello', locale: 'ja', args: { name: 'kazupon' } }"></p>
-  <!-- data biniding via data -->
+  <!-- data binding via data -->
   <p v-t="{ path: path, args: { name: nickName } }"></p>
 </div>
 ```
