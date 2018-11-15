@@ -5,7 +5,7 @@
 Locale Messages syntax the below:
 
 ```typescript
-// As Flowtype defnition, Locale Messages syntax like BNF annotation
+// As Flowtype definition, Locale Messages syntax like BNF annotation
 type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 type LocaleMessageObject = { [key: Path]: LocaleMessage };
 type LocaleMessageArray = LocaleMessage[];
