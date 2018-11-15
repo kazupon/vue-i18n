@@ -225,7 +225,7 @@ The formatter that implemented with `Formatter` interface.
 
 A handler for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
 
-If missing handler is assigned, and occured localization missing, it's not warned.
+If missing handler is assigned, and occurred localization missing, it's not warned.
 
 #### fallbackRoot
 
