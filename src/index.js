@@ -233,7 +233,7 @@ export default class VueI18n {
       }
     }
 
-    // Check for the existance of links within the translated string
+    // Check for the existence of links within the translated string
     if (ret.indexOf('@:') >= 0) {
       ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack)
     }
@@ -422,7 +422,7 @@ export default class VueI18n {
 
   /**
    * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choiceLength {number} an overall amount of available choices
+   * @param choicesLength {number} an overall amount of available choices
    * @returns a final choice index
   */
   getChoiceIndex (choice: number, choicesLength: number): number {

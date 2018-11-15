@@ -75,7 +75,7 @@
 
   Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
-  If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+  If the datetime format of `key` not exist in `dateTimeFormats` option,  fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
 
 #### $n
 
@@ -90,7 +90,7 @@
 
   Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
-  If the number format of `key` not exist in `numberFormats` option,  fallback to depened on `fallbackLocale` option of `VueI18n` constructor.
+  If the number format of `key` not exist in `numberFormats` option,  fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
 
   If the second `key` argument specified as an object, it should have the following properties:
   - `key {Path}`: optional, number format
@@ -145,7 +145,7 @@
 - `{boolean} dateTimeFormat`: locale sensitive datetime formatting
 - `{boolean} numberFormat`: locale sensitive number formatting
 
-  The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
+  The above internationalization features are depends on [the browser environments](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ### Constructor options
 
@@ -213,9 +213,9 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `null`
 
-  A hander for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
+  A handler for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
 
-  If missing hander is assigned, and occured localization missing, it's not warned.
+  If missing handler is assigned, and occurred localization missing, it's not warned.
 
 #### fallbackRoot
 
@@ -301,7 +301,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Read/Write**
 
-  A hander for localization missing.
+  A handler for localization missing.
 
 #### formatter
 

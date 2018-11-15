@@ -279,6 +279,6 @@ you can be used the locale messages with multiple `i18n` custom block.
 </i18n>
 ```
 
-In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale messge that defined only at single file component. These locale messages will be merged as locale message of component.
+In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale message that defined only at single file component. These locale messages will be merged as locale message of component.
 
 In this way, multiple custom blocks useful when want to be used as module.

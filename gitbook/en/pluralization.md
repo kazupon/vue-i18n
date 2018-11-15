@@ -45,11 +45,11 @@ Such pluralization, however, does not apply to all languages (Slavic languages, 
 
 In order to implement these rules you can override the `VueI18n.prototype.getChoiceIndex` function.
 
-Very simplified example using rules for Slavic langauges (Russian, Ukrainian, etc.):
+Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
 /**
  * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choiceLength {number} an overall amount of available choices
+ * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index to select plural word by
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {

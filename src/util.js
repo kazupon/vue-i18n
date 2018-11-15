@@ -1,7 +1,7 @@
 /* @flow */
 
 /**
- * utilites
+ * utilities
  */
 
 export function warn (msg: string, err: ?Error): void {

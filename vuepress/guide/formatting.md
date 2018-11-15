@@ -138,7 +138,7 @@ You can realize with custom formatter that implement [Formatter Interface](https
 The following custom formatter with ES2015 class syntax:
 
 ```js 
-// Custom Formatter implementaion
+// Custom Formatter implementation
 class CustomFormatter {
      constructor (options) {
        // ...
@@ -154,12 +154,12 @@ class CustomFormatter {
      //   - list formatting: 'Hi {0}'
      //
      // @param {Object | Array} values
-     //   values of `message` interpolcation.
+     //   values of `message` interpolation.
      //   passed values with `$t`, `$tc` and `i18n` functional component.
      //   e.g. 
      //   - $t('hello', { name: 'kazupon' }) -> passed values: Object `{ name: 'kazupon' }` 
      //   - $t('hello', ['kazupon']) -> passed values: Array `['kazupon']`
-     //   - `i18n` functional component (component interpolcation)
+     //   - `i18n` functional component (component interpolation)
      //     <i18n path="hello">
      //       <p>kazupon</p>
      //       <p>how are you?</p>
@@ -173,7 +173,7 @@ class CustomFormatter {
      //   - array included VNode object, when is using `i18n` functional component.
      // 
      interpolate (message, values) {
-       // implement interpolcation logic here
+       // implement interpolation logic here
        // ...
     
        // return the interpolated array

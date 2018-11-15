@@ -33,7 +33,7 @@ describe('issues', () => {
   })
 
   describe('#42, #43', () => {
-    it('should not be occured error', () => {
+    it('should not be occurred error', () => {
       assert.equal(
         vm.$t('message[\'hello\']'),
         messages[vm.$i18n.locale]['message']['hello']

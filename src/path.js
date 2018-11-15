@@ -3,7 +3,7 @@
 import { isObject } from './util'
 
 /**
- *  Path paerser
+ *  Path parser
  *  - Inspired:
  *    Vue.js Path parser
  */
