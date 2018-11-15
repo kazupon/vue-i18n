@@ -100,7 +100,7 @@ You can **flexibly** use mustash syntax `{{}}` in templates and also computed pr
 
 #### Cons
 
-`$t` is executed **everytime** when re-render occures, so it does have a translation costs.
+`$t` is executed **every time** when re-render occures, so it does have a translation costs.
 
 ### `v-t`
 
