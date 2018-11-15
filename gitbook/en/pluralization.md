@@ -49,7 +49,7 @@ Very simplified example using rules for Slavic langauges (Russian, Ukrainian, et
 ```js
 /**
  * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choiceLength {number} an overall amount of available choices
+ * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index to select plural word by
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
