@@ -94,7 +94,7 @@ Outputs:
 You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
 #### Cons
-`$t` is executed **every time** when re-render occures, so it does have a translation costs.
+`$t` is executed **every time** when re-render occurs, so it does have a translation costs.
 
 ### `v-t`
 `v-t` is a custom directive. It has the following pros and cons:
