@@ -145,7 +145,7 @@
 - `{boolean} dateTimeFormat`: locale sensitive datetime formatting
 - `{boolean} numberFormat`: locale sensitive number formatting
 
-  The above internationalization features are depends on [the browser environmens](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
+  The above internationalization features are depends on [the browser environments](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
 ### Constructor options
 
