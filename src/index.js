@@ -31,7 +31,7 @@ const numberFormatKeys = [
   'localeMatcher',
   'formatMatcher'
 ]
-const linkKeyMatcher = /(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g
+const linkKeyMatcher = /(?:@:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const bracketsMatcher = /[()]/g
 
 export default class VueI18n {
