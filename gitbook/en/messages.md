@@ -56,7 +56,7 @@ In the above Locale Messages structure,  You can translate with using below key 
 </div>
 ```
 
-Ouput the following:
+Output the following:
 
 ```html
 <div id="app">
