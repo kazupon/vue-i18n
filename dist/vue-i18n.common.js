@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.3.1 
+ * vue-i18n v8.3.2 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -8,7 +8,7 @@
 /*  */
 
 /**
- * utilites
+ * utilities
  */
 
 function warn (msg, err) {
@@ -626,7 +626,7 @@ function compile (tokens, values) {
 /*  */
 
 /**
- *  Path paerser
+ *  Path parser
  *  - Inspired:
  *    Vue.js Path parser
  */
@@ -937,7 +937,7 @@ var numberFormatKeys = [
   'localeMatcher',
   'formatMatcher'
 ];
-var linkKeyMatcher = /(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g;
+var linkKeyMatcher = /(?:@:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g;
 var bracketsMatcher = /[()]/g;
 
 var VueI18n = function VueI18n (options) {
@@ -1118,7 +1118,7 @@ VueI18n.prototype._interpolate = function _interpolate (
     }
   }
 
-  // Check for the existance of links within the translated string
+  // Check for the existence of links within the translated string
   if (ret.indexOf('@:') >= 0) {
     ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack);
   }
@@ -1320,7 +1320,7 @@ VueI18n.prototype.fetchChoice = function fetchChoice (message, choice) {
 
 /**
  * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choiceLength {number} an overall amount of available choices
+ * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index
 */
 VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength) {
@@ -1596,6 +1596,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '8.3.1';
+VueI18n.version = '8.3.2';
 
 module.exports = VueI18n;

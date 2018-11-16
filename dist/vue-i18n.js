@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.3.1 
+ * vue-i18n v8.3.2 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -12,7 +12,7 @@
   /*  */
 
   /**
-   * utilites
+   * utilities
    */
 
   function warn (msg, err) {
@@ -630,7 +630,7 @@
   /*  */
 
   /**
-   *  Path paerser
+   *  Path parser
    *  - Inspired:
    *    Vue.js Path parser
    */
@@ -941,7 +941,7 @@
     'localeMatcher',
     'formatMatcher'
   ];
-  var linkKeyMatcher = /(@:([\w\-_|.]+|\([\w\-_|.]+\)))/g;
+  var linkKeyMatcher = /(?:@:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g;
   var bracketsMatcher = /[()]/g;
 
   var VueI18n = function VueI18n (options) {
@@ -1122,7 +1122,7 @@
       }
     }
 
-    // Check for the existance of links within the translated string
+    // Check for the existence of links within the translated string
     if (ret.indexOf('@:') >= 0) {
       ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack);
     }
@@ -1324,7 +1324,7 @@
 
   /**
    * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choiceLength {number} an overall amount of available choices
+   * @param choicesLength {number} an overall amount of available choices
    * @returns a final choice index
   */
   VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength) {
@@ -1600,7 +1600,7 @@
     numberFormat: canUseNumberFormat
   };
   VueI18n.install = install;
-  VueI18n.version = '8.3.1';
+  VueI18n.version = '8.3.2';
 
   return VueI18n;
 
