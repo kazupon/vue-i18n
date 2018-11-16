@@ -1,3 +1,13 @@
+<a name="8.3.2"></a>
+## [8.3.2](https://github.com/kazupon/vue-i18n/compare/v8.3.1...v8.3.2) (2018-11-16)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* **index:** Optimize unnecessary capturing. ([#462](https://github.com/kazupon/vue-i18n/issues/462)) by [@exoego](https://github.com/exoego) ([116845e](https://github.com/kazupon/vue-i18n/commit/116845e)), closes [#462](https://github.com/kazupon/vue-i18n/issues/462)
+
+
+
 <a name="8.3.1"></a>
 ## [8.3.1](https://github.com/kazupon/vue-i18n/compare/v8.3.0...v8.3.1) (2018-11-08)
 
