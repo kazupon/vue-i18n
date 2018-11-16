@@ -3,8 +3,8 @@
 You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
 Locale messages the below:
-    
-```js    
+
+```js
 const messages = {
   en: {
     car: 'car | cars',
@@ -15,10 +15,10 @@ const messages = {
 
 Template the below:
 
-```html 
+```html
 <p>{{ $tc('car', 1) }}</p>
 <p>{{ $tc('car', 2) }}</p>
-    
+
 <p>{{ $tc('apple', 0) }}</p>
 <p>{{ $tc('apple', 1) }}</p>
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
@@ -26,14 +26,14 @@ Template the below:
 
 Output the below:
 
-```html 
+```html
 <p>car</p>
 <p>cars</p>
-    
+
 <p>no apples</p>
 <p>one apple</p>
 <p>10 apples</p>
-```    
+```
 
 ## Accessing the number via the pre-defined argument
 
@@ -42,8 +42,8 @@ The number can be accessed within locale messages via pre-defined named argument
 You can overwrite those pre-defined named arguments if necessary.
 
 Locale messages the below:
-    
-```js    
+
+```js
 const messages = {
   en: {
     apple: 'no apples | one apple | {count} apples',
@@ -54,7 +54,7 @@ const messages = {
 
 Template the below:
 
-```html 
+```html
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
 <p>{{ $tc('apple', 10) }}</p>
 
@@ -65,14 +65,14 @@ Template the below:
 
 Output the below:
 
-```html 
+```html
 <p>10 apples</p>
 <p>10 apples</p>
 
 <p>1 banana</p>
 <p>1 banana</p>
 <p>too much bananas</p>
-```    
+```
 
 
 ## Custom pluralization
@@ -135,10 +135,10 @@ Your template still needs to use `$tc()`, not `$t()`:
 <p>{{ $tc('car', 12) }}</p>
 <p>{{ $tc('car', 21) }}</p>
 
-<p>{{ $tc('car', 0) }}</p>
-<p>{{ $tc('car', 4) }}</p>
-<p>{{ $tc('car', 11) }}</p>
-<p>{{ $tc('car', 31) }}</p>
+<p>{{ $tc('banana', 0) }}</p>
+<p>{{ $tc('banana', 4) }}</p>
+<p>{{ $tc('banana', 11) }}</p>
+<p>{{ $tc('banana', 31) }}</p>
 ```
 
 Which results in:
