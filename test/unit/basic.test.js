@@ -46,12 +46,16 @@ describe('basic', () => {
         assert.strictEqual(i18n.t('message.linkBrackets'), 'Hello hoge. Isn\'t the world great?')
       })
 
-      it('should translate link with lower-case conversion', () => {
+      it('should translate link with lower-case formatting', () => {
         assert.strictEqual(i18n.t('message.linkCaseLower'), 'Please provide home address')
       })
 
-      it('should translate link with upper-case conversion', () => {
+      it('should translate link with upper-case formatting', () => {
         assert.strictEqual(i18n.t('message.linkCaseUpper'), 'HOME ADDRESS')
+      })
+
+      it('should translate link without formatting if modifier is not known.', () => {
+        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'Home address')
       })
     })
 

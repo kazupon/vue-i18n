@@ -19,6 +19,7 @@ export default {
       linkList: '@:message.hello: {0} {1}',
       linkCaseLower: 'Please provide @.lower:message.homeAddress',
       linkCaseUpper: '@.upper:message.homeAddress',
+      linkCaseUnknown: '@.unknown:message.homeAddress',
       homeAddress: 'Home address',
       circular1: 'Foo @:message.circular2',
       circular2: 'Bar @:message.circular3',
