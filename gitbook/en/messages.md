@@ -126,13 +126,10 @@ const messages = {
 }
 ```
 
-Template the below:
-
 ```html
 <label>{{ $t('message.missingHomeAddress') }}</label>
 
 <p class="error">{{ $t('message.missingHomeAddress') }}</p>
-
 ```
 
 Output the below:
@@ -143,3 +140,33 @@ Output the below:
 <p class="error">Please provide home address</p>
 ```
 
+### Grouping by brackets
+
+A translation key of linked locale message can also have the form of `@:(message.foo.bar.baz)` in which the link to another translation key is within brackets `()`.
+
+This can be useful if the link `@:message.something` is following by period `.`, which can be a part of link but in case it should not be.
+
+Locale messages the below:
+
+```js
+const messages = {
+  en: {
+    message: {
+      dio: 'DIO',
+      linked: 'There\'s a reason, you lost, @:(message.dio).'
+    }
+  }
+}
+```
+
+Template the below:
+
+```html
+<p>{{ $t('message.linked') }}</p>
+```
+
+Output the below:
+
+```html
+<p>There's a reason, you lost, DIO.</p>
+```
