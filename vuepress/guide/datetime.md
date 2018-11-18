@@ -8,7 +8,7 @@ You can localize the datetime with your definition formats.
 
 DateTime formats the below:
 
-```js 
+```js
 const dateTimeFormats = {
   'en-US': {
     short: {
@@ -24,8 +24,8 @@ const dateTimeFormats = {
       year: 'numeric', month: 'short', day: 'numeric'
     },
     long: {
-          year: 'numeric', month: 'short', day: 'numeric',
-          weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true
     }
   }
 }
@@ -35,11 +35,11 @@ As the Above, You can define the datetime format with named (e.g. `short`, `long
 
 After that like the locale messages, You need to specify the `dateTimeFormats` option of `VueI18n` constructor:
 
-```js    
+```js
 const i18n = new VueI18n({
   dateTimeFormats
 })
-    
+
 new Vue({
   i18n
 }).$mount('#app')
@@ -47,7 +47,7 @@ new Vue({
 
 Template the below:
 
-```html 
+```html
 <div id="app">
   <p>{{ $d(new Date(), 'short') }}</p>
   <p>{{ $d(new Date(), 'long', 'ja-JP') }}</p>
@@ -56,7 +56,7 @@ Template the below:
 
 Output the below:
 
-```html    
+```html
 <div id="app">
   <p>Apr 19, 2017</p>
   <p>2017年4月19日(水) 午前2:19</p>

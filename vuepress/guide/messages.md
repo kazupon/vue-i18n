@@ -16,7 +16,7 @@ type Path = string;
 
 Based on the above syntax, You can configure the following structure Locale Messages:
 
-```json 
+```json
 {
   "en": {  // 'en' Locale
     "key1": "this is message1", // basic
@@ -93,9 +93,9 @@ const messages = {
 
 Template the below:
 
-```html    
+```html
 <p>{{ $t('message.linked') }}</p>
-```    
+```
 
 Output the below:
 
@@ -125,12 +125,12 @@ const messages = {
 
 Template the below:
 
-```html    
+```html
 <p>{{ $t('message.linked') }}</p>
-```    
+```
 
 Output the below:
 
 ```html
-<p>There's a reason, you lost, Dio.</p>
+<p>There's a reason, you lost, DIO.</p>
 ```

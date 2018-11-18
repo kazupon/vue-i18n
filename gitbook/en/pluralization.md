@@ -1,6 +1,6 @@
 # Pluralization
 
-You can translate with pluralization.  You must define a locale string that has a pipe `|` separator, and define plurals separated by a `|` pipe.
+You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
 Make your your local strings like this:
 
@@ -99,10 +99,10 @@ Your template still needs to use `$tc()`, not `$t()`:
 <p>{{ $tc('car', 12) }}</p>
 <p>{{ $tc('car', 21) }}</p>
 
-<p>{{ $tc('car', 0) }}</p>
-<p>{{ $tc('car', 4) }}</p>
-<p>{{ $tc('car', 11) }}</p>
-<p>{{ $tc('car', 31) }}</p>
+<p>{{ $tc('banana', 0) }}</p>
+<p>{{ $tc('banana', 4) }}</p>
+<p>{{ $tc('banana', 11) }}</p>
+<p>{{ $tc('banana', 31) }}</p>
 ```
 
 Which results in:
