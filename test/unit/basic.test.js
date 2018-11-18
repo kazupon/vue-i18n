@@ -29,29 +29,33 @@ describe('basic', () => {
       it('should translate simple link', () => {
         assert.equal(i18n.t('message.link'), messages.en.message.hello)
       })
-    })
 
-    describe('linked translation', () => {
       it('should translate link at the end of locale', () => {
         assert.equal(i18n.t('message.linkEnd'), 'This is a linked translation to the world')
       })
-    })
 
-    describe('linked translation', () => {
       it('should translate link within a locale', () => {
         assert.equal(i18n.t('message.linkWithin'), 'Isn\'t the world we live in great?')
       })
-    })
 
-    describe('linked translation', () => {
       it('should translate multiple links within a locale', () => {
         assert.equal(i18n.t('message.linkMultiple'), 'Hello hoge!, isn\'t the world great?')
       })
-    })
 
-    describe('linked translation', () => {
       it('should translate link with braces ', () => {
         assert.strictEqual(i18n.t('message.linkBrackets'), 'Hello hoge. Isn\'t the world great?')
+      })
+
+      it('should translate link with lower-case formatting', () => {
+        assert.strictEqual(i18n.t('message.linkCaseLower'), 'Please provide home address')
+      })
+
+      it('should translate link with upper-case formatting', () => {
+        assert.strictEqual(i18n.t('message.linkCaseUpper'), 'HOME ADDRESS')
+      })
+
+      it('should translate link without formatting if modifier is not known.', () => {
+        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'Home address')
       })
     })
 

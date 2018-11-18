@@ -31,8 +31,13 @@ const numberFormatKeys = [
   'localeMatcher',
   'formatMatcher'
 ]
-const linkKeyMatcher = /(?:@:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
+const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
+const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
+const formatters = {
+  'upper': (str) => str.toLocaleUpperCase(),
+  'lower': (str) => str.toLocaleLowerCase()
+}
 
 export default class VueI18n {
   static install: () => void
@@ -234,7 +239,7 @@ export default class VueI18n {
     }
 
     // Check for the existence of links within the translated string
-    if (ret.indexOf('@:') >= 0) {
+    if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
       ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack)
     }
 
@@ -263,8 +268,11 @@ export default class VueI18n {
         continue
       }
       const link: string = matches[idx]
-      // Remove the leading @: and the brackets
-      const linkPlaceholder: string = link.substr(2).replace(bracketsMatcher, '')
+      const linkKeyPrefixMatches: any = link.match(linkKeyPrefixMatcher)
+      const [linkPrefix, formatterName] = linkKeyPrefixMatches
+
+      // Remove the leading @:, @.case: and the brackets
+      const linkPlaceholder: string = link.replace(linkPrefix, '').replace(bracketsMatcher, '')
 
       if (visitedLinkStack.includes(linkPlaceholder)) {
         if (process.env.NODE_ENV !== 'production') {
@@ -298,6 +306,9 @@ export default class VueI18n {
         locale, linkPlaceholder, translated, host,
         Array.isArray(values) ? values : [values]
       )
+      if (formatters.hasOwnProperty(formatterName)) {
+        translated = formatters[formatterName](translated)
+      }
 
       visitedLinkStack.pop()
 

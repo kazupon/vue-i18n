@@ -103,6 +103,43 @@ Output the below:
 <p>DIO: the world !!!!</p>
 ```
 
+### Formatting linked locale messages
+
+If the language distinguish cases of character, you may need control the case of the linked locale messages.
+Linked messages can be formatted with modifier  `@.MODIFIER:key`
+
+The below modifiers are available currently.
+
+* `upper`: Uppercase all characters in the linked message.
+* `lower`: Lowercase all characters in the linked message.
+
+Locale messages the below:
+
+```javascript
+const messages = {
+  en: {
+    message: {
+      homeAddress: 'Home address',
+      missingHomeAddress: 'Please provide @.lower:message.homeAddress'
+    }
+  }
+}
+```
+
+```html
+<label>{{ $t('message.missingHomeAddress') }}</label>
+
+<p class="error">{{ $t('message.missingHomeAddress') }}</p>
+```
+
+Output the below:
+
+```html
+<label>Home address</label>
+
+<p class="error">Please provide home address</p>
+```
+
 ### Grouping by brackets
 
 A translation key of linked locale message can also have the form of `@:(message.foo.bar.baz)` in which the link to another translation key is within brackets `()`.
