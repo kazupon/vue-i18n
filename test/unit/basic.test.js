@@ -347,6 +347,11 @@ describe('basic', () => {
         const vm = new Vue({ i18n })
         assert.equal(vm.$t('message.hello'), messages.en.message.hello)
       })
+
+      it('should translate an english key with spaces', () => {
+        const vm = new Vue({ i18n })
+        assert.equal(vm.$t('hello world'), messages.en['hello world'])
+      })
     })
 
     describe('ja locale', () => {
@@ -562,6 +567,11 @@ describe('basic', () => {
       it('should return true', () => {
         const vm = new Vue({ i18n })
         assert(vm.$te('message.hello') === true)
+      })
+
+      it('should return true for key with spaces', () => {
+        const vm = new Vue({ i18n })
+        assert(vm.$te('hello world') === true)
       })
 
       it('should return true with locale', () => {
