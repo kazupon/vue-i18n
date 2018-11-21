@@ -16,7 +16,7 @@ describe('issues', () => {
 
   describe('#24', () => {
     it('should be translated', () => {
-      assert.equal(
+      assert.strictEqual(
         vm.$t('continue-with-new-account'),
         messages[vm.$i18n.locale]['continue-with-new-account']
       )
@@ -25,7 +25,7 @@ describe('issues', () => {
 
   describe('#35', () => {
     it('should be translated', () => {
-      assert.equal(
+      assert.strictEqual(
         vm.$t('underscore', { helloMsg: 'hello' }),
         'hello world'
       )
@@ -34,7 +34,7 @@ describe('issues', () => {
 
   describe('#42, #43', () => {
     it('should not be occurred error', () => {
-      assert.equal(
+      assert.strictEqual(
         vm.$t('message[\'hello\']'),
         messages[vm.$i18n.locale]['message']['hello']
       )
@@ -43,7 +43,7 @@ describe('issues', () => {
 
   describe('#51', () => {
     it('should be translated', () => {
-      assert.equal(
+      assert.strictEqual(
         vm.$t('message.hyphen-locale'),
         'hello hyphen'
       )
@@ -55,18 +55,18 @@ describe('issues', () => {
       const arrayMessages = messages[vm.$i18n.locale].issues.arrayBugs
       for (let i = 0; i < arrayMessages.length; i++) {
         const item = vm.$t('issues.arrayBugs')[i]
-        assert.equal(item, arrayMessages[i])
+        assert.strictEqual(item, arrayMessages[i])
       }
     })
   })
 
   describe('#97', () => {
     it('should be translated', () => {
-      assert.equal(
+      assert.strictEqual(
         vm.$t('message.1234'),
         messages[vm.$i18n.locale]['message']['1234']
       )
-      assert.equal(
+      assert.strictEqual(
         vm.$t('message.1mixedKey'),
         messages[vm.$i18n.locale]['message']['1mixedKey']
       )
@@ -85,15 +85,15 @@ describe('issues', () => {
       })
       const vm = new Component({ i18n }).$mount()
       nextTick(() => {
-        assert.equal(vm.$refs.custom.textContent, 'custom block!')
+        assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
   })
 
   describe('#170', () => {
     it('should be translated', () => {
-      assert.equal(vm.$i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
-      assert.equal(vm.$i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
+      assert.strictEqual(vm.$i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
+      assert.strictEqual(vm.$i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
     })
   })
 
@@ -109,7 +109,7 @@ describe('issues', () => {
         }
       }).$mount()
       nextTick(() => {
-        assert.equal(
+        assert.strictEqual(
           vm.$el.innerHTML,
           'the world: <strong>underscore the wolrd</strong> <strong>the world</strong>'
         )
@@ -141,7 +141,7 @@ describe('issues', () => {
         }
       }).$mount()
       nextTick(() => {
-        assert.equal(
+        assert.strictEqual(
           vm.$refs.comp.$refs.title.textContent,
           'billy-bob\'s fine steaks. - yeee hawwww!!!'
         )
@@ -163,7 +163,7 @@ describe('issues', () => {
         i18n: new VueI18n({ locale: 'en' })
       }).$mount()
       nextTick(() => {
-        assert.equal(vm.$refs.custom.textContent, 'custom block!')
+        assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
   })
@@ -202,8 +202,8 @@ describe('issues', () => {
       const el1 = vm.$refs.comp.$refs.el1
       const el2 = vm.$refs.comp.$refs.el2
       nextTick(() => {
-        assert.equal(el1.textContent, 'こんにちは')
-        assert.equal(el2.textContent, 'メッセージ')
+        assert.strictEqual(el1.textContent, 'こんにちは')
+        assert.strictEqual(el2.textContent, 'メッセージ')
       }).then(done)
     })
   })
@@ -237,10 +237,10 @@ describe('issues', () => {
         }
       }).$mount()
       nextTick(() => {
-        assert.equal(vm.$refs.el1.textContent, '[EN] alpha injected value')
-        assert.equal(vm.$refs.el2.textContent, '[XX] bravo injected value')
-        assert.equal(vm.$refs.el3.textContent, '[EN] charlie injected value')
-        assert.equal(vm.$refs.el4.textContent, '[XX] delta injected value')
+        assert.strictEqual(vm.$refs.el1.textContent, '[EN] alpha injected value')
+        assert.strictEqual(vm.$refs.el2.textContent, '[XX] bravo injected value')
+        assert.strictEqual(vm.$refs.el3.textContent, '[EN] charlie injected value')
+        assert.strictEqual(vm.$refs.el4.textContent, '[XX] delta injected value')
       }).then(done)
     })
   })
@@ -249,10 +249,10 @@ describe('issues', () => {
     it('should be parsed', () => {
       const tokens = parse('{deposit}% PREPAYMENT')
       assert(tokens.length === 2)
-      assert.equal(tokens[0].type, 'named')
-      assert.equal(tokens[0].value, 'deposit')
-      assert.equal(tokens[1].type, 'text')
-      assert.equal(tokens[1].value, '% PREPAYMENT')
+      assert.strictEqual(tokens[0].type, 'named')
+      assert.strictEqual(tokens[0].value, 'deposit')
+      assert.strictEqual(tokens[1].type, 'text')
+      assert.strictEqual(tokens[1].value, '% PREPAYMENT')
     })
   })
 
@@ -265,7 +265,7 @@ describe('issues', () => {
           return h('p', { ref: 'text' }, [this.$t('message.hello')])
         }
       }).$mount(el)
-      assert.equal(vm.$refs.text.textContent, messages.en.message.hello)
+      assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
     })
   })
 
@@ -296,7 +296,7 @@ describe('issues', () => {
         }
       }).$mount()
       nextTick(() => {
-        assert.equal(vm.$el.innerHTML, 'hello 203')
+        assert.strictEqual(vm.$el.innerHTML, 'hello 203')
       }).then(done)
     })
   })
@@ -350,12 +350,12 @@ describe('issues', () => {
       }).$mount(el)
 
       Vue.nextTick(() => {
-        assert.equal(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
+        assert.strictEqual(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
         vm.startLoading()
         delay(50).then(() => {
-          assert.equal(vm.$refs.el2.outerHTML, '<div><span>CANNOT_REPRODUCE_WITHOUT_THIS</span></div>')
+          assert.strictEqual(vm.$refs.el2.outerHTML, '<div><span>CANNOT_REPRODUCE_WITHOUT_THIS</span></div>')
           delay(60).then(() => {
-            assert.equal(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
+            assert.strictEqual(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
             done()
           })
         })
@@ -454,14 +454,14 @@ describe('issues', () => {
       }).$mount(document.createElement('div'))
 
       nextTick(() => {
-        assert.equal(vm.$refs.text.textContent, 'hi there!')
+        assert.strictEqual(vm.$refs.text.textContent, 'hi there!')
       }).then(() => {
         vm.$i18n.setLocaleMessage('en', {
           hello: 'hello there!'
         })
         vm.$forceUpdate()
       }).then(() => {
-        assert.equal(vm.$refs.text.textContent, 'hello there!')
+        assert.strictEqual(vm.$refs.text.textContent, 'hello there!')
       }).then(done)
     })
   })
@@ -472,8 +472,8 @@ describe('issues', () => {
         i18n: new VueI18n({
           locale: 'en',
           missing: (locale, key, instance) => {
-            assert.equal('ja', locale)
-            assert.equal('foo.bar', key)
+            assert.strictEqual('ja', locale)
+            assert.strictEqual('foo.bar', key)
             assert(vm === instance)
             done()
           }
@@ -532,10 +532,10 @@ describe('issues', () => {
           }
         })
       }).then(() => {
-        assert.equal(vm.$refs.text1.textContent, 'Hello Module 1')
-        assert.equal(vm.$refs.text2.textContent, 'Hello Module 1 shared key 1')
-        assert.equal(vm.$refs.text3.textContent, 'Hello Module 2')
-        assert.equal(vm.$refs.text4.textContent, 'Hello Module 2 shared key 2')
+        assert.strictEqual(vm.$refs.text1.textContent, 'Hello Module 1')
+        assert.strictEqual(vm.$refs.text2.textContent, 'Hello Module 1 shared key 1')
+        assert.strictEqual(vm.$refs.text3.textContent, 'Hello Module 2')
+        assert.strictEqual(vm.$refs.text4.textContent, 'Hello Module 2 shared key 2')
       }).then(done)
     })
   })
