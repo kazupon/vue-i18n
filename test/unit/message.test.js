@@ -47,17 +47,17 @@ describe('message', () => {
 
       const { text } = vm.$refs
       nextTick(() => {
-        assert.equal(text.textContent, messages.en.message.hello)
+        assert.strictEqual(text.textContent, messages.en.message.hello)
         // hot reload (set reactivity messages)
         messages.en.message.hello = expectEnLocale
         i18n.setLocaleMessage('en', messages.en)
       }).then(() => {
-        assert.equal(text.textContent, expectEnLocale)
+        assert.strictEqual(text.textContent, expectEnLocale)
         // upade locale
         i18n.setLocaleMessage('ja', expectJaLocaleMessage)
         i18n.locale = 'ja'
       }).then(() => {
-        assert.equal(text.textContent, expectJaLocaleMessage.message.hello)
+        assert.strictEqual(text.textContent, expectJaLocaleMessage.message.hello)
       }).then(done)
     })
   })

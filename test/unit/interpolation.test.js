@@ -56,7 +56,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.textContent, 'one: 1')
+          assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
     })
@@ -74,7 +74,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
         }).then(done)
       })
     })
@@ -93,7 +93,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
     })
@@ -108,7 +108,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.textContent, 'one: 1')
+          assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
     })
@@ -127,7 +127,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
     })
@@ -146,7 +146,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
     })
@@ -164,7 +164,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'text: foo, component: <p place="y">bar</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: <p place="y">bar</p>')
         }).then(done)
       })
     })
@@ -183,7 +183,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'text: foo, component: ')
+          assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: ')
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
           spy.restore()
@@ -202,7 +202,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(vm.$el.innerHTML, 'fallback from <p>child</p>')
+          assert.strictEqual(vm.$el.innerHTML, 'fallback from <p>child</p>')
         }).then(done)
       })
     })
@@ -226,7 +226,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
         nextTick(() => {
-          assert.equal(
+          assert.strictEqual(
             vm.$el.innerHTML,
             'element: <p>1</p>, component: <div><div class="nested">element: <p>2</p>, component: <p>nested</p></div></div>'
           )
@@ -248,7 +248,7 @@ describe('component interpolation', () => {
         }
       }).$mount(el)
       nextTick(() => {
-        assert.equal(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
+        assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
       }).then(done)
     })
   })
@@ -265,7 +265,7 @@ describe('component interpolation', () => {
         }
       }).$mount(el)
       nextTick(() => {
-        assert.equal(vm.$el.textContent, '一: 1')
+        assert.strictEqual(vm.$el.textContent, '一: 1')
       }).then(done)
     })
   })
@@ -282,7 +282,7 @@ describe('component interpolation', () => {
         }
       }).$mount(el)
       nextTick(() => {
-        assert.equal(
+        assert.strictEqual(
           vm.$el.innerHTML,
           'I accept xxx <a href=\"/term\">Term of service</a>.'
         )

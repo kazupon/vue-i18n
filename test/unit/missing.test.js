@@ -4,8 +4,8 @@ describe('missing', () => {
       const i18n = new VueI18n({
         locale: 'en',
         missing: (locale, key, vm) => {
-          assert.equal('en', locale)
-          assert.equal('foo.bar.buz', key)
+          assert.strictEqual('en', locale)
+          assert.strictEqual('foo.bar.buz', key)
           assert(vm === null)
           done()
         }
@@ -21,8 +21,8 @@ describe('missing', () => {
         i18n: new VueI18n({
           locale: 'en',
           missing: (locale, key, instance) => {
-            assert.equal('en', locale)
-            assert.equal('foo.bar.buz', key)
+            assert.strictEqual('en', locale)
+            assert.strictEqual('foo.bar.buz', key)
             assert(vm === instance)
             done()
           }
@@ -42,7 +42,7 @@ describe('missing', () => {
         missing
       })
 
-      assert.equal(missing, i18n.missing)
+      assert.strictEqual(missing, i18n.missing)
 
       i18n.missing = (locale, key, vm) => {
         done()
@@ -59,11 +59,11 @@ describe('missing', () => {
       }
 
       const missing = (locale, key, vm, values) => {
-        assert.equal('en', locale)
-        assert.equal('cannot.find', key)
+        assert.strictEqual('en', locale)
+        assert.strictEqual('cannot.find', key)
         // `values` is normalized to be an array.
-        assert.equal('bar', values[0].foo)
-        assert.equal(1234, values[0].num)
+        assert.strictEqual('bar', values[0].foo)
+        assert.strictEqual(1234, values[0].num)
         done()
       }
 
@@ -85,7 +85,7 @@ describe('missing', () => {
         }
       })
 
-      assert.equal(i18n.t('foo.bar.buz'), 'foo.bar.buz')
+      assert.strictEqual(i18n.t('foo.bar.buz'), 'foo.bar.buz')
       done()
     })
   })

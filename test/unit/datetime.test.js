@@ -41,13 +41,13 @@ desc('datetime format', () => {
 
       nextTick(() => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-        isChrome && assert.equal(text.textContent, '12/19/2012, 10:00 PM')
+        isChrome && assert.strictEqual(text.textContent, '12/19/2012, 10:00 PM')
         i18n.setDateTimeFormat('zh-CN', zhFormat)
         assert.deepEqual(i18n.getDateTimeFormat('zh-CN'), zhFormat)
         i18n.locale = 'zh-CN'
       }).then(() => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-        isChrome && assert.equal(text.textContent, '2012/12/20 下午12:00')
+        isChrome && assert.strictEqual(text.textContent, '2012/12/20 下午12:00')
       }).then(done)
     })
   })
