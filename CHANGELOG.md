@@ -1,3 +1,13 @@
+<a name="8.4.0"></a>
+# [8.4.0](https://github.com/kazupon/vue-i18n/compare/v8.3.2...v8.4.0) (2018-11-30)
+
+
+### :star: New Features
+
+* **index:** Add linked message formatting ([#467](https://github.com/kazupon/vue-i18n/issues/467)) by [@exoego](https://github.com/exoego) ([776b81b](https://github.com/kazupon/vue-i18n/commit/776b81b)), closes [#467](https://github.com/kazupon/vue-i18n/issues/467)
+
+
+
 <a name="8.3.2"></a>
 ## [8.3.2](https://github.com/kazupon/vue-i18n/compare/v8.3.1...v8.3.2) (2018-11-16)
 
