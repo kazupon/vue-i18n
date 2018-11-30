@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.3.2 
+ * vue-i18n v8.4.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -937,8 +937,13 @@ var numberFormatKeys = [
   'localeMatcher',
   'formatMatcher'
 ];
-var linkKeyMatcher = /(?:@:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g;
+var linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g;
+var linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/;
 var bracketsMatcher = /[()]/g;
+var formatters = {
+  'upper': function (str) { return str.toLocaleUpperCase(); },
+  'lower': function (str) { return str.toLocaleLowerCase(); }
+};
 
 var VueI18n = function VueI18n (options) {
   var this$1 = this;
@@ -1119,7 +1124,7 @@ VueI18n.prototype._interpolate = function _interpolate (
   }
 
   // Check for the existence of links within the translated string
-  if (ret.indexOf('@:') >= 0) {
+  if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
     ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack);
   }
 
@@ -1150,8 +1155,12 @@ VueI18n.prototype._link = function _link (
       continue
     }
     var link = matches[idx];
-    // Remove the leading @: and the brackets
-    var linkPlaceholder = link.substr(2).replace(bracketsMatcher, '');
+    var linkKeyPrefixMatches = link.match(linkKeyPrefixMatcher);
+    var linkPrefix = linkKeyPrefixMatches[0];
+      var formatterName = linkKeyPrefixMatches[1];
+
+    // Remove the leading @:, @.case: and the brackets
+    var linkPlaceholder = link.replace(linkPrefix, '').replace(bracketsMatcher, '');
 
     if (visitedLinkStack.includes(linkPlaceholder)) {
       if (process.env.NODE_ENV !== 'production') {
@@ -1185,6 +1194,9 @@ VueI18n.prototype._link = function _link (
       locale, linkPlaceholder, translated, host,
       Array.isArray(values) ? values : [values]
     );
+    if (formatters.hasOwnProperty(formatterName)) {
+      translated = formatters[formatterName](translated);
+    }
 
     visitedLinkStack.pop();
 
@@ -1596,6 +1608,6 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '8.3.2';
+VueI18n.version = '8.4.0';
 
 module.exports = VueI18n;
