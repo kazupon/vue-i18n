@@ -25,7 +25,7 @@ The `lang` folder is where all of our translation files will reside. The `setup`
 //i18n-setup.js
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import messages from '@/lang'
+import messages from '@/lang/en'
 import axios from 'axios'
 
 Vue.use(VueI18n)
