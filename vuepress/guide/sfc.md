@@ -54,7 +54,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 For Webpack the configuration below is required:
 
-for vue-loader v15 or later :
+for vue-loader v15 or later:
 ```js
 module.exports = {
   // ...
@@ -145,6 +145,29 @@ If you want to read more about modifying the existing configuration [click here]
 
 ## Laravel-Mix
 
+for Laravel-mix 4 with vue-loader v15:
+```js
+// Extend Mix with the "i18n" method, that loads the vue-i18n-loader
+mix.extend( 'i18n', new class {
+        webpackRules() {
+            return [
+                {
+                    resourceQuery: /blockType=i18n/,
+                    type:          'javascript/auto',
+                    loader:        '@kazupon/vue-i18n-loader',
+                },
+            ];
+        }
+    }(),
+);
+
+// Make sure to call the .i18n() (to load the loader) before .js(..., ...)
+mix.i18n()
+   .js( 'resources/js/App.js', 'public/js/app.js' )
+   ...
+```
+
+for Laravel-mix 2 with vue-loader v14:
 As of [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) of Laravel-mix, you can add custom rules via mix.extend(). Laravel mix already has its own rules for handling .vue files. To add the `vue-i18n-loader`, add the following to `webpack.mix.js`
 
 ```js
