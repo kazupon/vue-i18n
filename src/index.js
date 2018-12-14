@@ -458,7 +458,7 @@ export default class VueI18n {
     }
 
     if (this.locale in this.pluralizationRules) {
-      return this.pluralizationRules[this.locale](choice, choicesLength)
+      return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
     } else {
       return defaultImpl(choice, choicesLength)
     }
