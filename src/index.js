@@ -9,9 +9,7 @@ import {
   isObject,
   looseClone,
   remove,
-  merge,
-  canUseDateTimeFormat,
-  canUseNumberFormat
+  merge
 } from './util'
 import BaseFormatter from './format'
 import I18nPath from './path'
@@ -688,9 +686,20 @@ export default class VueI18n {
   }
 }
 
-VueI18n.availabilities = {
-  dateTimeFormat: canUseDateTimeFormat,
-  numberFormat: canUseNumberFormat
-}
+let availabilities: IntlAvailability
+// $FlowFixMe
+Object.defineProperty(VueI18n, 'availabilities', {
+  get () {
+    if (!availabilities) {
+      const intlDefined = typeof Intl !== 'undefined'
+      availabilities = {
+        dateTimeFormat: intlDefined && typeof Intl.DateTimeFormat !== 'undefined',
+        numberFormat: intlDefined && typeof Intl.NumberFormat !== 'undefined'
+      }
+    }
+
+    return availabilities
+  }
+})
 VueI18n.install = install
 VueI18n.version = '__VERSION__'
