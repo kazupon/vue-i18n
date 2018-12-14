@@ -38,6 +38,8 @@
 
   Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
+  If default pluralization does not suit your needs, see [pluralization rules in constructor options](#pluralizationrules) and [custom pluralization](pluralization.md).
+
 #### getChoiceIndex
 
 - **Arguments:**
@@ -249,6 +251,26 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   If `true`, supress localization fail warnings.
 
+#### pluralizationRules
+
+> 8.5+
+
+- **Type:** `Object`
+
+- **Default:** `{}`
+
+  A set of rules for word pluralization in a following format:
+  ```js
+    {
+      // Key - locale for the rule to be applied to.
+      // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word.
+
+      'ru': function (choice, choiceIndex) => Number/* index of the plural word */;
+      'en': function (choice, choiceIndex) => Number/* index of the plural word */;
+      'jp': function (choice, choiceIndex) => Number/* index of the plural word */;
+    }
+  ```
+
 ### Properties
 
 #### locale
@@ -320,6 +342,16 @@ You can specify the below some options of `I18nOptions` constructor options of [
 - **Read/Write**
 
   Whether suppress warnings outputted when localization fails.
+
+#### pluralizationRules
+
+> 8.5+
+
+- **Type:** `Object`
+
+- **Default:** `{}`
+
+  A set of rules for word pluralization.
 
 ### Methods
 
