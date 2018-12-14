@@ -43,7 +43,7 @@ This will output the following HTML:
 
 Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
 
-In order to implement these rules you can pass a pluralization rule to your VueI18n options' `pluralizationRules` property.
+In order to implement these rules you can pass an optional `pluralizationRules` object into `VueI18n` constructor options.
 
 Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
