@@ -351,7 +351,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `{}`
 
-  A set of rules for word pluralization.
+  A set of rules for word pluralization. Key is a locale, value is the rule function for that locale.
 
 ### Methods
 
