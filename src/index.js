@@ -60,6 +60,10 @@ export default class VueI18n {
   _dataListeners: Array<any>
 
   constructor (options: I18nOptions = {}) {
+    if (options.getChoiceIndex) {
+      this.getChoiceIndex = options.getChoiceIndex;
+    }
+
     // Auto install if it is not done yet and `window` has `Vue`.
     // To allow users to avoid auto-installation in some cases,
     // this code should be placed here. See #290
