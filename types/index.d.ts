@@ -41,6 +41,7 @@ declare namespace VueI18n {
     fallbackRoot?: boolean;
     sync?: boolean;
     silentTranslationWarn?: boolean;
+    getChoiceIndex?: (choice: number, choicesLength: number) => number;
   }
 }
 

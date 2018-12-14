@@ -61,7 +61,8 @@ declare type I18nOptions = {
   root?: I18n, // for internal
   fallbackRoot?: boolean,
   sync?: boolean,
-  silentTranslationWarn?: boolean
+  silentTranslationWarn?: boolean,
+  getChoiceIndex?: (choice: number, choicesLength: number) => number,
 };
 
 declare type IntlAvailability = {
