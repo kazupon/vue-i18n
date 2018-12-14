@@ -103,7 +103,10 @@ declare interface I18n {
   getNumberFormat (locale: Locale): NumberFormat,
   setNumberFormat (locale: Locale, format: NumberFormat): void,
   mergeNumberFormat (locale: Locale, format: NumberFormat): void,
-  n (value: number, ...args: any): NumberFormatResult
+  n (value: number, ...args: any): NumberFormatResult,
+  pluralizationRules: {
+    [lang: string]: (choice: number, choicesLength: number) => number
+  }
 };
 
 declare interface Formatter {
