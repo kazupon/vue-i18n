@@ -237,7 +237,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   If `false`, regardless of the root level locale, localize for each component locale.
 
-### silentTranslationWarn
+#### silentTranslationWarn
 
 > 6.1+
 
