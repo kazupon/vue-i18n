@@ -142,7 +142,7 @@ declare class VueI18n {
 
   /**
    * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choiceLength {number} an overall amount of available choices
+   * @param choicesLength {number} an overall amount of available choices
    * @returns a final choice index
   */
   getChoiceIndex: (choice: number, choicesLength: number) => number;

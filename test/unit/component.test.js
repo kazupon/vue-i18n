@@ -100,31 +100,31 @@ describe('component translation', () => {
     const child2 = vm.$refs.child2.$refs.who
     const subChild1 = vm.$refs.child1.$refs['sub-child1'].$refs.who
     const subChild2 = vm.$refs.child2.$refs['sub-child2'].$refs.who
-    assert.equal(root.textContent, 'ルート')
-    assert.equal(child1.textContent, 'child1')
-    assert.equal(child1Fallback.textContent, 'フォールバック')
+    assert.strictEqual(root.textContent, 'ルート')
+    assert.strictEqual(child1.textContent, 'child1')
+    assert.strictEqual(child1Fallback.textContent, 'フォールバック')
 
     // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-    isChrome && assert.equal(child1DateTime.textContent, '12/19/2012, 10:00 PM')
-    isChrome && assert.equal(child1Number.textContent, '$101.00')
-    assert.equal(child2.textContent, 'ルート')
-    assert.equal(subChild1.textContent, 'ルート')
-    assert.equal(subChild2.textContent, 'サブの子2')
+    isChrome && assert.strictEqual(child1DateTime.textContent, '12/19/2012, 10:00 PM')
+    isChrome && assert.strictEqual(child1Number.textContent, '$101.00')
+    assert.strictEqual(child2.textContent, 'ルート')
+    assert.strictEqual(subChild1.textContent, 'ルート')
+    assert.strictEqual(subChild2.textContent, 'サブの子2')
 
     // change locale
     i18n.locale = 'en-US'
     vm.$refs.child1.$i18n.locale = 'ja-JP'
     nextTick(() => {
-      assert.equal(root.textContent, 'root')
-      assert.equal(child1.textContent, '子1')
-      assert.equal(child1Fallback.textContent, 'fallback')
+      assert.strictEqual(root.textContent, 'root')
+      assert.strictEqual(child1.textContent, '子1')
+      assert.strictEqual(child1Fallback.textContent, 'fallback')
 
       // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-      isChrome && assert.equal(child1DateTime.textContent, '2012/12/20 12:00')
-      isChrome && assert.equal(child1Number.textContent, '￥101')
-      assert.equal(child2.textContent, 'root')
-      assert.equal(subChild1.textContent, 'root')
-      assert.equal(subChild2.textContent, 'sub-child2')
+      isChrome && assert.strictEqual(child1DateTime.textContent, '2012/12/20 12:00')
+      isChrome && assert.strictEqual(child1Number.textContent, '￥101')
+      assert.strictEqual(child2.textContent, 'root')
+      assert.strictEqual(subChild1.textContent, 'root')
+      assert.strictEqual(subChild2.textContent, 'sub-child2')
 
       vm.$destroy()
     }).then(() => {

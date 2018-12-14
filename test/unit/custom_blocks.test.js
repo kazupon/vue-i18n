@@ -33,10 +33,10 @@ describe('custom blocks', () => {
         }
       }).$mount(el)
       nextTick(() => {
-        assert.equal(vm.$refs.child.$refs.who.textContent, '子')
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, '子')
         i18n.locale = 'en'
       }).then(() => {
-        assert.equal(vm.$refs.child.$refs.who.textContent, 'child')
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'child')
       }).then(done)
     })
   })
@@ -62,10 +62,10 @@ describe('custom blocks', () => {
         }
       }).$mount(el)
       nextTick(() => {
-        assert.equal(vm.$refs.child.$refs.who.textContent, 'ルート')
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'ルート')
         i18n.locale = 'en'
       }).then(() => {
-        assert.equal(vm.$refs.child.$refs.who.textContent, 'root')
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'root')
         spy.restore()
       }).then(done)
     })

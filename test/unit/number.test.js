@@ -46,7 +46,7 @@ desc('number format', () => {
         }
       }
       nextTick(() => {
-        assert.equal(text.textContent, '$101.00')
+        assert.strictEqual(text.textContent, '$101.00')
         i18n.setNumberFormat('zh-CN', zhFormat)
         assert.deepEqual(i18n.getNumberFormat('zh-CN'), zhFormat)
         i18n.locale = 'zh-CN'

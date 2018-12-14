@@ -1,6 +1,6 @@
 # Pluralization
 
-You can translate with pluralization.  You must define a locale string that has a pipe `|` separator, and define plurals separated by a `|` pipe.
+You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
 Make your your local strings like this:
 
@@ -45,11 +45,11 @@ Such pluralization, however, does not apply to all languages (Slavic languages, 
 
 In order to implement these rules you can override the `VueI18n.prototype.getChoiceIndex` function.
 
-Very simplified example using rules for Slavic langauges (Russian, Ukrainian, etc.):
+Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
 /**
  * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choiceLength {number} an overall amount of available choices
+ * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index to select plural word by
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
@@ -99,10 +99,10 @@ Your template still needs to use `$tc()`, not `$t()`:
 <p>{{ $tc('car', 12) }}</p>
 <p>{{ $tc('car', 21) }}</p>
 
-<p>{{ $tc('car', 0) }}</p>
-<p>{{ $tc('car', 4) }}</p>
-<p>{{ $tc('car', 11) }}</p>
-<p>{{ $tc('car', 31) }}</p>
+<p>{{ $tc('banana', 0) }}</p>
+<p>{{ $tc('banana', 4) }}</p>
+<p>{{ $tc('banana', 11) }}</p>
+<p>{{ $tc('banana', 31) }}</p>
 ```
 
 Which results in:

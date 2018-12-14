@@ -54,7 +54,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 For Webpack the configuration below is required:
 
-for vue-loader v15 or later :
+for vue-loader v15 or later:
 ```js
 module.exports = {
   // ...
@@ -105,7 +105,7 @@ module.exports = {
 
 In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
 
-for vue-loader v15:
+for vue-loader v15 or later:
 ```js
 module.exports = {
   chainWebpack: config => {
@@ -144,6 +144,30 @@ _Don 't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)
 If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/guide/webpack.html).
 
 ## Laravel-Mix
+
+for Laravel-mix 4 with vue-loader v15 or later:
+```js
+// Extend Mix with the "i18n" method, that loads the vue-i18n-loader
+mix.extend( 'i18n', new class {
+        webpackRules() {
+            return [
+                {
+                    resourceQuery: /blockType=i18n/,
+                    type:          'javascript/auto',
+                    loader:        '@kazupon/vue-i18n-loader',
+                },
+            ];
+        }
+    }(),
+);
+
+// Make sure to call the .i18n() (to load the loader) before .js(..., ...)
+mix.i18n()
+   .js( 'resources/js/App.js', 'public/js/app.js' )
+   ...
+```
+
+for Laravel-mix 2 with vue-loader v14:
 
 As of [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) of Laravel-mix, you can add custom rules via mix.extend(). Laravel mix already has its own rules for handling .vue files. To add the `vue-i18n-loader`, add the following to `webpack.mix.js`
 
@@ -185,7 +209,7 @@ ja:
 
 Webpack conf the below:
 
-for vue-loader v15:
+for vue-loader v15 or later:
 ```js
 // Vue CLI 3.0
 module.exports = {
@@ -231,7 +255,7 @@ module.exports = {
 
 ## Multiple custom blocks
 
-you can be used the locale messages with multiple `i18n` custom block.
+You can be used the locale messages with multiple `i18n` custom block.
 
 ```html
 <i18n src="./common/locales.json"></i18n>

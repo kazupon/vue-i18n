@@ -1,3 +1,50 @@
+<a name="8.4.0"></a>
+# [8.4.0](https://github.com/kazupon/vue-i18n/compare/v8.3.2...v8.4.0) (2018-11-30)
+
+
+### :star: New Features
+
+* **index:** Add linked message formatting ([#467](https://github.com/kazupon/vue-i18n/issues/467)) by [@exoego](https://github.com/exoego) ([776b81b](https://github.com/kazupon/vue-i18n/commit/776b81b)), closes [#467](https://github.com/kazupon/vue-i18n/issues/467)
+
+
+
+<a name="8.3.2"></a>
+## [8.3.2](https://github.com/kazupon/vue-i18n/compare/v8.3.1...v8.3.2) (2018-11-16)
+
+
+### :chart_with_upwards_trend: Performance Fixes
+
+* **index:** Optimize unnecessary capturing. ([#462](https://github.com/kazupon/vue-i18n/issues/462)) by [@exoego](https://github.com/exoego) ([116845e](https://github.com/kazupon/vue-i18n/commit/116845e)), closes [#462](https://github.com/kazupon/vue-i18n/issues/462)
+
+
+
+<a name="8.3.1"></a>
+## [8.3.1](https://github.com/kazupon/vue-i18n/compare/v8.3.0...v8.3.1) (2018-11-08)
+
+
+### :bug: Bug Fixes
+
+* **directive:** fix cannnot update with v-t when had been changed locale message ([4895a2e](https://github.com/kazupon/vue-i18n/commit/4895a2e)), closes [#450](https://github.com/kazupon/vue-i18n/issues/450)
+* **index:** fix merge bug ([1798490](https://github.com/kazupon/vue-i18n/commit/1798490)), closes [#458](https://github.com/kazupon/vue-i18n/issues/458)
+* **missing:** fix vm argument passing ([dc48099](https://github.com/kazupon/vue-i18n/commit/dc48099)), closes [#453](https://github.com/kazupon/vue-i18n/issues/453)
+
+
+### :zap: Improvements
+
+* Optimize path.js and format.js ([#456](https://github.com/kazupon/vue-i18n/issues/456)) by [@exoego](https://github.com/exoego) ([639453c](https://github.com/kazupon/vue-i18n/commit/639453c)), closes [#456](https://github.com/kazupon/vue-i18n/issues/456)
+
+
+
+<a name="8.3.0"></a>
+# [8.3.0](https://github.com/kazupon/vue-i18n/compare/v8.2.1...v8.3.0) (2018-10-29)
+
+
+### :zap: Improvements
+
+* **pluralization:** Extendable pluralization by [@Raiondesu](https://github.com/Raiondesu) ([bbab90b](https://github.com/kazupon/vue-i18n/commit/bbab90b))
+
+
+
 <a name="8.2.1"></a>
 ## [8.2.1](https://github.com/kazupon/vue-i18n/compare/v8.2.0...v8.2.1) (2018-10-15)
 
