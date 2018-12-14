@@ -10,39 +10,12 @@ declare namespace VueI18n {
   interface LocaleMessageArray { [index: number]: LocaleMessage; }
   interface LocaleMessages { [key: string]: LocaleMessageObject; }
   type TranslateResult = string | LocaleMessages;
-  interface DateTimeFormatOptions {
-    year?: string;
-    month?: string;
-    day?: string;
-    hour?: string;
-    minute?: string;
-    second?: string;
-    weekday?: string;
-    hour12?: boolean;
-    era?: string;
-    timeZone?: string;
-    timeZoneName?: string;
-    localeMatcher?: string;
-    formatMatcher?: string;
-  }
-  interface DateTimeFormat { [key: string]: DateTimeFormatOptions; }
-  interface DateTimeFormats { [key: string]: DateTimeFormat; }
+
+  interface DateTimeFormat { [type: string]: Intl.DateTimeFormatOptions; }
+  interface DateTimeFormats { [lang: string]: DateTimeFormat; }
   type DateTimeFormatResult = string;
-  interface NumberFormatOptions {
-    style?: string;
-    currency?: string;
-    currencyDisplay?: string;
-    useGrouping?: boolean;
-    minimumIntegerDigits?: number;
-    minimumFractionDigits?: number;
-    maximumFractionDigits?: number;
-    minimumSignificantDigits?: number;
-    maximumSignificantDigits?: number;
-    localeMatcher?: string;
-    formatMatcher?: string;
-  }
-  interface NumberFormat { [key: string]: NumberFormatOptions; }
-  interface NumberFormats { [key: string]: NumberFormat; }
+  interface NumberFormat { [type: string]: Intl.NumberFormatOptions; }
+  interface NumberFormats { [lang: string]: NumberFormat; }
   type NumberFormatResult = string;
 
   interface Formatter {
