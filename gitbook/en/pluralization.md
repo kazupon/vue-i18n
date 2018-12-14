@@ -43,7 +43,7 @@ This will output the following HTML:
 
 Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
 
-In order to implement these rules you can pass a pluralization rule to your VueI18n options' `pluralizationMap` property.
+In order to implement these rules you can pass a pluralization rule to your VueI18n options' `pluralizationRules` property.
 
 Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
@@ -53,7 +53,7 @@ Very simplified example using rules for Slavic languages (Russian, Ukrainian, et
  * @returns a final choice index to select plural word by
 **/
 new VueI18n({
-  pluralizationMap: {
+  pluralizationRules: {
     // Language to use the rule for, 'ru', in this case
     'ru': function (choice, choicesLength) {
       // this === VueI18n instance, so the locale property also exists here
