@@ -60,10 +60,6 @@ export default class VueI18n {
   _dataListeners: Array<any>
 
   constructor (options: I18nOptions = {}) {
-    if (options.getChoiceIndex) {
-      this.getChoiceIndex = options.getChoiceIndex;
-    }
-
     // Auto install if it is not done yet and `window` has `Vue`.
     // To allow users to avoid auto-installation in some cases,
     // this code should be placed here. See #290
@@ -93,6 +89,8 @@ export default class VueI18n {
     this._numberFormatters = {}
     this._path = new I18nPath()
     this._dataListeners = []
+
+    this.pluralizationRules = options.pluralizationRules || {};
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -441,17 +439,25 @@ export default class VueI18n {
    * @returns a final choice index
   */
   getChoiceIndex (choice: number, choicesLength: number): number {
-    choice = Math.abs(choice)
+    const defaultImpl = (_choice: number, _choicesLength: number) => {
+      _choice = Math.abs(_choice)
 
-    if (choicesLength === 2) {
-      return choice
-        ? choice > 1
-          ? 1
-          : 0
-        : 1
+      if (_choicesLength === 2) {
+        return _choice
+          ? _choice > 1
+            ? 1
+            : 0
+          : 1
+      }
+
+      return _choice ? Math.min(_choice, 2) : 0
+    };
+
+    if (this.locale in this.pluralizationRules) {
+      return this.pluralizationRules[this.locale](choice, choicesLength);
+    } else {
+      return defaultImpl(choice, choicesLength);
     }
-
-    return choice ? Math.min(choice, 2) : 0
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {

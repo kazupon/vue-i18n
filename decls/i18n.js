@@ -62,7 +62,9 @@ declare type I18nOptions = {
   fallbackRoot?: boolean,
   sync?: boolean,
   silentTranslationWarn?: boolean,
-  getChoiceIndex?: (choice: number, choicesLength: number) => number,
+  pluralizationRules?: {
+    [lang: string]: (choice: number, choicesLength: number) => number,
+  },
 };
 
 declare type IntlAvailability = {
