@@ -120,9 +120,3 @@ export function looseEqual (a: any, b: any): boolean {
     return false
   }
 }
-
-export const canUseDateTimeFormat: boolean =
-  typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined'
-
-export const canUseNumberFormat: boolean =
-  typeof Intl !== 'undefined' && typeof Intl.NumberFormat !== 'undefined'
