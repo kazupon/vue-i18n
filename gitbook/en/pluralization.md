@@ -47,14 +47,14 @@ In order to implement these rules you can pass an optional `pluralizationRules` 
 
 Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
-/**
- * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choicesLength {number} an overall amount of available choices
- * @returns a final choice index to select plural word by
-**/
 new VueI18n({
   pluralizationRules: {
-    // Language to use the rule for, 'ru', in this case
+    /** Key - language to use the rule for, 'ru', in this case */
+    /** Value - function
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index to select plural word by
+     **/
     'ru': function (choice, choicesLength) {
       // this === VueI18n instance, so the locale property also exists here
 
