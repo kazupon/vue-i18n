@@ -44,6 +44,14 @@ declare namespace VueI18n {
   interface NumberFormat { [key: string]: NumberFormatOptions; }
   interface NumberFormats { [key: string]: NumberFormat; }
   type NumberFormatResult = string;
+  type PluralizationRulesMap = {
+    /**
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index
+    */
+    [lang: string]: (choice: number, choicesLength: number) => number;
+  };
 
   interface Formatter {
     interpolate(message: string, values?: Values): any[];
@@ -68,6 +76,7 @@ declare namespace VueI18n {
     fallbackRoot?: boolean;
     sync?: boolean;
     silentTranslationWarn?: boolean;
+    pluralizationRules?: PluralizationRulesMap;
   }
 }
 
@@ -103,6 +112,7 @@ export declare interface IVueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   silentTranslationWarn: boolean;
+  pluralizationRules: VueI18n.PluralizationRulesMap;
 }
 
 declare class VueI18n {

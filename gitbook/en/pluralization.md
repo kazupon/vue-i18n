@@ -43,42 +43,45 @@ This will output the following HTML:
 
 Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
 
-In order to implement these rules you can override the `VueI18n.prototype.getChoiceIndex` function.
+In order to implement these rules you can pass an optional `pluralizationRules` object into `VueI18n` constructor options.
 
 Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
-/**
- * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choicesLength {number} an overall amount of available choices
- * @returns a final choice index to select plural word by
-**/
-VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n instance, so the locale property also exists here
-  if (this.locale !== 'ru') {
-    // proceed to the default implementation
+new VueI18n({
+  pluralizationRules: {
+    /** Key - language to use the rule for, 'ru', in this case */
+    /** Value - function
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index to select plural word by
+     **/
+    'ru': function (choice, choicesLength) {
+      // this === VueI18n instance, so the locale property also exists here
+
+      if (choice === 0) {
+        return 0;
+      }
+
+      const teen = choice > 10 && choice < 20;
+      const endsWithOne = choice % 10 === 1;
+
+      if (choicesLength < 4) {
+        return (!teen && endsWithOne) ? 1 : 2;
+      }
+      if (!teen && endsWithOne) {
+        return 1;
+      }
+      if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+        return 2;
+      }
+
+      return (choicesLength < 4) ? 2 : 3;
+    }
   }
-
-  if (choice === 0) {
-    return 0;
-  }
-
-  const teen = choice > 10 && choice < 20;
-  const endsWithOne = choice % 10 === 1;
-
-  if (!teen && endsWithOne) {
-    return 1;
-  }
-
-  if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-    return 2;
-  }
-
-  return (choicesLength < 4) ? 2 : 3;
-}
+});
 ```
 
 This would effectively give this:
-
 
 ```javascript
 const messages = {
@@ -119,3 +122,7 @@ Which results in:
 <p>11 бананов</p>
 <p>31 банан</p>
 ```
+
+### Default pluralization
+
+If your current locale is not found in a pluralization map, the [default](#pluralization) rule of the english langugage will be used.
