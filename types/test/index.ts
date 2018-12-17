@@ -1,5 +1,5 @@
 import Vue, { ComponentOptions } from 'vue';
-import VueI18n from "../index";
+import VueI18n, { DateTimeFormatOptions, NumberFormatOptions } from "../index";
 
 /*
 import * as VueI18n from 'vue-i18n';
@@ -27,11 +27,11 @@ VueI18n.availabilities;             // $ExpectType IntlAvailability
 const locale = 'locale';
 const key = 'key';
 const value = 'value';
-const dateTimeFormatOptions = {
+const dateTimeFormatOptions: DateTimeFormatOptions = {
   year: '2-digit',
   timeZone: 'Asia/Tokyo'
 };
-const numberFormatOptions = {
+const numberFormatOptions: NumberFormatOptions = {
   style: 'currency',
   currency: 'JPY'
 };
