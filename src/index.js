@@ -56,6 +56,9 @@ export default class VueI18n {
   _numberFormatters: Object
   _path: I18nPath
   _dataListeners: Array<any>
+  pluralizationRules: {
+    [lang: string]: (choice: number, choicesLength: number) => number
+  }
 
   constructor (options: I18nOptions = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -87,6 +90,8 @@ export default class VueI18n {
     this._numberFormatters = {}
     this._path = new I18nPath()
     this._dataListeners = []
+
+    this.pluralizationRules = options.pluralizationRules || {}
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -435,17 +440,26 @@ export default class VueI18n {
    * @returns a final choice index
   */
   getChoiceIndex (choice: number, choicesLength: number): number {
-    choice = Math.abs(choice)
+    // Default (old) getChoiceIndex implementation - english-compatible
+    const defaultImpl = (_choice: number, _choicesLength: number) => {
+      _choice = Math.abs(_choice)
 
-    if (choicesLength === 2) {
-      return choice
-        ? choice > 1
-          ? 1
-          : 0
-        : 1
+      if (_choicesLength === 2) {
+        return _choice
+          ? _choice > 1
+            ? 1
+            : 0
+          : 1
+      }
+
+      return _choice ? Math.min(_choice, 2) : 0
     }
 
-    return choice ? Math.min(choice, 2) : 0
+    if (this.locale in this.pluralizationRules) {
+      return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
+    } else {
+      return defaultImpl(choice, choicesLength)
+    }
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {

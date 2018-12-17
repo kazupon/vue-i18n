@@ -384,56 +384,6 @@ describe('issues', () => {
     })
   })
 
-  describe('#78', () => {
-    it('should allow custom pluralization', () => {
-      const defaultImpl = VueI18n.prototype.getChoiceIndex
-      VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-        if (this.locale !== 'ru') {
-          return defaultImpl.apply(this, arguments)
-        }
-
-        if (choice === 0) {
-          return 0
-        }
-
-        const teen = choice > 10 && choice < 20
-        const endsWithOne = choice % 10 === 1
-
-        if (choicesLength < 4) {
-          return (!teen && endsWithOne) ? 1 : 2
-        }
-
-        if (!teen && endsWithOne) {
-          return 1
-        }
-
-        if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-          return 2
-        }
-
-        return (choicesLength < 4) ? 2 : 3
-      }
-
-
-      i18n = new VueI18n({
-        locale: 'en',
-        messages: {
-          ru: {
-            car: '0 машин | 1 машина | {n} машины | {n} машин'
-          }
-        }
-      })
-      vm = new Vue({ i18n })
-
-      assert(vm.$tc('car', 0), '0 машин')
-      assert(vm.$tc('car', 1), '1 машина')
-      assert(vm.$tc('car', 2), '2 машины')
-      assert(vm.$tc('car', 4), '4 машины')
-      assert(vm.$tc('car', 12), '12 машин')
-      assert(vm.$tc('car', 21), '21 машина')
-    })
-  })
-
   describe('#450', () => {
     it('shoulbe be translated with v-t', done => {
       const vm = new Vue({
@@ -537,6 +487,147 @@ describe('issues', () => {
         assert.strictEqual(vm.$refs.text3.textContent, 'Hello Module 2')
         assert.strictEqual(vm.$refs.text4.textContent, 'Hello Module 2 shared key 2')
       }).then(done)
+    })
+  })
+
+  describe('#78, #464', () => {
+    it('should fallback to default pluralization', () => {
+      // / Test default pluralization rule (english)
+      const i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          'en': {
+            test: 'no tests | 1 test | {n} tests'
+          }
+        }
+      })
+
+      assert.strictEqual(i18n.tc('test', 1), '1 test')
+      assert.strictEqual(i18n.tc('test', 0), 'no tests')
+      assert.strictEqual(i18n.tc('test', 10), '10 tests')
+    })
+
+    it('should use custom pluralization if available', () => {
+      // Test custom pluralization rule (slavic languages)
+      function slavicPluralization (choice, choicesLength) {
+        if (choice === 0) {
+          return 0
+        }
+
+        const teen = choice > 10 && choice < 20
+        const endsWithOne = choice % 10 === 1
+
+        if (choicesLength < 4) {
+          return (!teen && endsWithOne) ? 1 : 2
+        }
+
+        if (!teen && endsWithOne) {
+          return 1
+        }
+
+        if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+          return 2
+        }
+
+        return (choicesLength < 4) ? 2 : 3
+      }
+
+      let i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          'en': {
+            test: 'no tests | 1 test | {n} tests'
+          },
+          'ru': {
+            test: 'нет тестов | 1 тест | {n} теста | {n} тестов'
+          }
+        },
+        pluralizationRules: {
+          'ru': slavicPluralization
+        }
+      })
+
+      assert.strictEqual(i18n.tc('test', 1), '1 test')
+      assert.strictEqual(i18n.tc('test', 0), 'no tests')
+      assert.strictEqual(i18n.tc('test', 10), '10 tests')
+
+      i18n.locale = 'ru'
+
+      assert.strictEqual(i18n.tc('test', 1), '1 тест')
+      assert.strictEqual(i18n.tc('test', 3), '3 теста')
+      assert.strictEqual(i18n.tc('test', 0), 'нет тестов')
+      assert.strictEqual(i18n.tc('test', 10), '10 тестов')
+
+      i18n = new VueI18n({
+        locale: 'ru',
+        messages: {
+          ru: {
+            car: '0 машин | 1 машина | {n} машины | {n} машин'
+          }
+        },
+        pluralizationRules: {
+          ru: slavicPluralization
+        }
+      })
+      vm = new Vue({ i18n })
+
+      assert(vm.$tc('car', 0), '0 машин')
+      assert(vm.$tc('car', 1), '1 машина')
+      assert(vm.$tc('car', 2), '2 машины')
+      assert(vm.$tc('car', 4), '4 машины')
+      assert(vm.$tc('car', 12), '12 машин')
+      assert(vm.$tc('car', 21), '21 машина')
+    })
+
+    it('ensures backward-compatibility with #451', () => {
+      const defaultImpl = VueI18n.prototype.getChoiceIndex
+      VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
+        if (this.locale !== 'ru') {
+          return defaultImpl.apply(this, arguments)
+        }
+
+        if (choice === 0) {
+          return 0
+        }
+
+        const teen = choice > 10 && choice < 20
+        const endsWithOne = choice % 10 === 1
+
+        if (choicesLength < 4) {
+          return (!teen && endsWithOne) ? 1 : 2
+        }
+
+        if (!teen && endsWithOne) {
+          return 1
+        }
+
+        if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+          return 2
+        }
+
+        return (choicesLength < 4) ? 2 : 3
+      }
+
+
+      i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          ru: {
+            car: '0 машин | 1 машина | {n} машины | {n} машин'
+          }
+        }
+      })
+      vm = new Vue({ i18n })
+
+      assert(vm.$tc('car', 0), '0 машин')
+      assert(vm.$tc('car', 1), '1 машина')
+      assert(vm.$tc('car', 2), '2 машины')
+      assert(vm.$tc('car', 4), '4 машины')
+      assert(vm.$tc('car', 12), '12 машин')
+      assert(vm.$tc('car', 21), '21 машина')
+
+      // Set the default implementation back
+      VueI18n.prototype.getChoiceIndex = defaultImpl
     })
   })
 })
