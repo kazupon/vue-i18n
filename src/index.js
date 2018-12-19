@@ -329,7 +329,7 @@ export default class VueI18n {
 
     // If the custom formatter refuses to work - apply the default one
     if (typeof ret === 'undefined') {
-      ret = defaultFormatter.interpolate(messages, values, key)
+      ret = defaultFormatter.interpolate(message, values, path)
     }
 
     // if interpolateMode is **not** 'string' ('row'),
