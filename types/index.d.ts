@@ -70,7 +70,7 @@ declare namespace VueI18n {
   };
 
   interface Formatter {
-    interpolate(message: string, values: Values | undefined, path: string): any[];
+    interpolate(message: string, values: Values | undefined, path: string): (any[] | undefined);
   }
 
   type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => string | void;
