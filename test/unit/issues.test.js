@@ -649,12 +649,13 @@ describe('issues', () => {
         formatter: {
           interpolate (message, values, path) {
             assert(path, testPath)
-            return [path]
+
+            return undefined // pass the case to the default formatter
           }
         }
       })
 
-      i18n.t(testPath)
+      assert(i18n.t(testPath), 'Hello!')
     })
   })
 })
