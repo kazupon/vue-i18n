@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.4.0 
+ * vue-i18n v8.5.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -132,12 +132,6 @@ function looseEqual (a, b) {
     return false
   }
 }
-
-var canUseDateTimeFormat =
-  typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat !== 'undefined';
-
-var canUseNumberFormat =
-  typeof Intl !== 'undefined' && typeof Intl.NumberFormat !== 'undefined';
 
 /*  */
 
@@ -979,6 +973,8 @@ var VueI18n = function VueI18n (options) {
   this._path = new I18nPath();
   this._dataListeners = [];
 
+  this.pluralizationRules = options.pluralizationRules || {};
+
   this._exist = function (message, key) {
     if (!message || !key) { return false }
     return !isNull(this$1._path.getPathValue(message, key))
@@ -1209,7 +1205,7 @@ VueI18n.prototype._link = function _link (
 
 VueI18n.prototype._render = function _render (message, interpolateMode, values) {
   var ret = this._formatter.interpolate(message, values);
-  // if interpolateMode is **not** 'string' ('row'),
+  // if interpolateMode is **not** 'string' ('raw'),
   // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
   return interpolateMode === 'string' ? ret.join('') : ret
 };
@@ -1336,17 +1332,26 @@ VueI18n.prototype.fetchChoice = function fetchChoice (message, choice) {
  * @returns a final choice index
 */
 VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength) {
-  choice = Math.abs(choice);
+  // Default (old) getChoiceIndex implementation - english-compatible
+  var defaultImpl = function (_choice, _choicesLength) {
+    _choice = Math.abs(_choice);
 
-  if (choicesLength === 2) {
-    return choice
-      ? choice > 1
-        ? 1
-        : 0
-      : 1
+    if (_choicesLength === 2) {
+      return _choice
+        ? _choice > 1
+          ? 1
+          : 0
+        : 1
+    }
+
+    return _choice ? Math.min(_choice, 2) : 0
+  };
+
+  if (this.locale in this.pluralizationRules) {
+    return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
+  } else {
+    return defaultImpl(choice, choicesLength)
   }
-
-  return choice ? Math.min(choice, 2) : 0
 };
 
 VueI18n.prototype.tc = function tc (key, choice) {
@@ -1405,7 +1410,7 @@ VueI18n.prototype._localizeDateTime = function _localizeDateTime (
 
   // fallback locale
   if (isNull(formats) || isNull(formats[key])) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + " datetime formats."));
     }
     _locale = fallback;
@@ -1439,7 +1444,7 @@ VueI18n.prototype._d = function _d (value, locale, key) {
   var ret =
     this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key);
   if (this._isFallbackRoot(ret)) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to datetime localization of root: key '" + key + "' ."));
     }
     /* istanbul ignore if */
@@ -1505,7 +1510,7 @@ VueI18n.prototype._localizeNumber = function _localizeNumber (
 
   // fallback locale
   if (isNull(formats) || isNull(formats[key])) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to '" + fallback + "' number formats from '" + locale + " number formats."));
     }
     _locale = fallback;
@@ -1549,7 +1554,7 @@ VueI18n.prototype._n = function _n (value, locale, key, options) {
   var ret =
     this._localizeNumber(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options);
   if (this._isFallbackRoot(ret)) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
       warn(("Fall back to number localization of root: key '" + key + "' ."));
     }
     /* istanbul ignore if */
@@ -1603,11 +1608,22 @@ VueI18n.prototype.n = function n (value) {
 
 Object.defineProperties( VueI18n.prototype, prototypeAccessors );
 
-VueI18n.availabilities = {
-  dateTimeFormat: canUseDateTimeFormat,
-  numberFormat: canUseNumberFormat
-};
+var availabilities;
+// $FlowFixMe
+Object.defineProperty(VueI18n, 'availabilities', {
+  get: function get () {
+    if (!availabilities) {
+      var intlDefined = typeof Intl !== 'undefined';
+      availabilities = {
+        dateTimeFormat: intlDefined && typeof Intl.DateTimeFormat !== 'undefined',
+        numberFormat: intlDefined && typeof Intl.NumberFormat !== 'undefined'
+      };
+    }
+
+    return availabilities
+  }
+});
 VueI18n.install = install;
-VueI18n.version = '8.4.0';
+VueI18n.version = '8.5.0';
 
 module.exports = VueI18n;

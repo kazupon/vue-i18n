@@ -1,3 +1,20 @@
+<a name="8.5.0"></a>
+# [8.5.0](https://github.com/kazupon/vue-i18n/compare/v8.4.0...v8.5.0) (2018-12-17)
+
+
+### :bug: Bug Fixes
+
+* **index:** evaluate availabilities lazily (fix [#477](https://github.com/kazupon/vue-i18n/issues/477)) ([#483](https://github.com/kazupon/vue-i18n/issues/483)) by [@gamtiq](https://github.com/gamtiq) ([b66f02e](https://github.com/kazupon/vue-i18n/commit/b66f02e)), closes [#477](https://github.com/kazupon/vue-i18n/issues/477) [#483](https://github.com/kazupon/vue-i18n/issues/483)
+
+
+### :zap: Improvements
+
+* **index:** Allow pluralization customization via constructor options (closes [#464](https://github.com/kazupon/vue-i18n/issues/464)) ([#482](https://github.com/kazupon/vue-i18n/issues/482)) by [@Raiondesu](https://github.com/Raiondesu) ([ef4b1a6](https://github.com/kazupon/vue-i18n/commit/ef4b1a6)), closes [#464](https://github.com/kazupon/vue-i18n/issues/464) [#482](https://github.com/kazupon/vue-i18n/issues/482) [#464](https://github.com/kazupon/vue-i18n/issues/464) [#464](https://github.com/kazupon/vue-i18n/issues/464) [#464](https://github.com/kazupon/vue-i18n/issues/464) [#464](https://github.com/kazupon/vue-i18n/issues/464) [#451](https://github.com/kazupon/vue-i18n/issues/451)
+* **index:** make silentTranslationWarn work for dates and numbers too ([#481](https://github.com/kazupon/vue-i18n/issues/481)) by [@Raiondesu](https://github.com/Raiondesu) ([402092b](https://github.com/kazupon/vue-i18n/commit/402092b)), closes [#481](https://github.com/kazupon/vue-i18n/issues/481)
+* **types:** typed autocomplete in date and number format options ([#485](https://github.com/kazupon/vue-i18n/issues/485)) by [@Raiondesu](https://github.com/Raiondesu) ([e2e5993](https://github.com/kazupon/vue-i18n/commit/e2e5993)), closes [#485](https://github.com/kazupon/vue-i18n/issues/485)
+
+
+
 <a name="8.4.0"></a>
 # [8.4.0](https://github.com/kazupon/vue-i18n/compare/v8.3.2...v8.4.0) (2018-11-30)
 
