@@ -630,4 +630,31 @@ describe('issues', () => {
       VueI18n.prototype.getChoiceIndex = defaultImpl
     })
   })
+
+  describe('#484', () => {
+    it('passes path to the formatter', () => {
+      const testPath = 'test.deep.message'
+
+      i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          en: {
+            test: {
+              deep: {
+                message: 'Hello!'
+              }
+            }
+          }
+        },
+        formatter: {
+          interpolate (message, values, path) {
+            assert(path, testPath)
+            return [path]
+          }
+        }
+      })
+
+      i18n.t(testPath)
+    })
+  })
 })

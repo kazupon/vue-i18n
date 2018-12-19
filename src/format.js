@@ -9,7 +9,7 @@ export default class BaseFormatter {
     this._caches = Object.create(null)
   }
 
-  interpolate (message: string, values: any): Array<any> {
+  interpolate (message: string, values: any, path: string): Array<any> {
     if (!values) {
       return [message]
     }
