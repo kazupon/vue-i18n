@@ -650,7 +650,7 @@ describe('issues', () => {
           interpolate (message, values, path) {
             assert(path, testPath)
 
-            return undefined // pass the case to the default formatter
+            return null // pass the case to the default formatter
           }
         }
       })

@@ -328,7 +328,7 @@ export default class VueI18n {
     let ret = this._formatter.interpolate(message, values, path)
 
     // If the custom formatter refuses to work - apply the default one
-    if (typeof ret === 'undefined') {
+    if (!ret) {
       ret = defaultFormatter.interpolate(message, values, path)
     }
 

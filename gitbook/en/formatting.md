@@ -165,7 +165,7 @@ class CustomFormatter {
  //   interpolated values. you need to return the following:
  //   - array of string, when is using `$t` or `$tc`.
  //   - array included VNode object, when is using `i18n` functional component.
- //   - undefined - if you want the default vue-i18n formatter to handle the case
+ //   - null - if you want the default vue-i18n formatter to handle the case
  //
  interpolate (message, values, path) {
    // implement interpolation logic here
