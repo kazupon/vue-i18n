@@ -37,6 +37,8 @@ const formatters = {
   'lower': (str) => str.toLocaleLowerCase()
 }
 
+const defaultFormatter = new BaseFormatter()
+
 export default class VueI18n {
   static install: () => void
   static version: string
@@ -76,7 +78,7 @@ export default class VueI18n {
     const numberFormats = options.numberFormats || {}
 
     this._vm = null
-    this._formatter = options.formatter || new BaseFormatter()
+    this._formatter = options.formatter || defaultFormatter
     this._missing = options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
@@ -246,7 +248,7 @@ export default class VueI18n {
       ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack)
     }
 
-    return this._render(ret, interpolateMode, values)
+    return this._render(ret, interpolateMode, values, key)
   }
 
   _link (
@@ -322,9 +324,15 @@ export default class VueI18n {
     return ret
   }
 
-  _render (message: string, interpolateMode: string, values: any): any {
-    const ret = this._formatter.interpolate(message, values)
-    // if interpolateMode is **not** 'string' ('raw'),
+  _render (message: string, interpolateMode: string, values: any, path: string): any {
+    let ret = this._formatter.interpolate(message, values, path)
+
+    // If the custom formatter refuses to work - apply the default one
+    if (!ret) {
+      ret = defaultFormatter.interpolate(message, values, path)
+    }
+
+    // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
     return interpolateMode === 'string' ? ret.join('') : ret
   }

@@ -110,5 +110,5 @@ declare interface I18n {
 };
 
 declare interface Formatter {
-  interpolate (message: string, values?: any): Array<any>
+  interpolate (message: string, values: any, path: string): (Array<any> | null)
 };
