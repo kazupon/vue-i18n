@@ -41,7 +41,7 @@ export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): vo
 function assert (el: any, vnode: any): boolean {
   const vm: any = vnode.context
   if (!vm) {
-    warn('Vue instance doest not exists in VNode context')
+    warn('Vue instance does not exists in VNode context')
     return false
   }
 
