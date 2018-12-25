@@ -1,3 +1,18 @@
+<a name="8.6.0"></a>
+# [8.6.0](https://github.com/kazupon/vue-i18n/compare/v8.5.0...v8.6.0) (2018-12-25)
+
+
+### :bug: Bug Fixes
+
+* **pluralization:** inherit pluralization rules ⚠ ([#493](https://github.com/kazupon/vue-i18n/issues/493)) by [@Raiondesu](https://github.com/Raiondesu) ([7a23f32](https://github.com/kazupon/vue-i18n/commit/7a23f32)), closes [#493](https://github.com/kazupon/vue-i18n/issues/493)
+
+
+### :zap: Improvements
+
+* **format:** Add the path as argument to the custom formatter ([#489](https://github.com/kazupon/vue-i18n/issues/489)) by [@Raiondesu](https://github.com/Raiondesu) ([b9437ea](https://github.com/kazupon/vue-i18n/commit/b9437ea)), closes [#489](https://github.com/kazupon/vue-i18n/issues/489) [#484](https://github.com/kazupon/vue-i18n/issues/484) [#484](https://github.com/kazupon/vue-i18n/issues/484)
+
+
+
 <a name="8.5.0"></a>
 # [8.5.0](https://github.com/kazupon/vue-i18n/compare/v8.4.0...v8.5.0) (2018-12-17)
 
