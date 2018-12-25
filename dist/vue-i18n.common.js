@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.5.0 
+ * vue-i18n v8.6.0 
  * (c) 2018 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -217,6 +217,7 @@ var mixin = {
           options.i18n.formatter = this.$root.$i18n.formatter;
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
+          options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
         }
 
         // init locale messages via custom blocks
@@ -939,6 +940,8 @@ var formatters = {
   'lower': function (str) { return str.toLocaleLowerCase(); }
 };
 
+var defaultFormatter = new BaseFormatter();
+
 var VueI18n = function VueI18n (options) {
   var this$1 = this;
   if ( options === void 0 ) options = {};
@@ -958,7 +961,7 @@ var VueI18n = function VueI18n (options) {
   var numberFormats = options.numberFormats || {};
 
   this._vm = null;
-  this._formatter = options.formatter || new BaseFormatter();
+  this._formatter = options.formatter || defaultFormatter;
   this._missing = options.missing || null;
   this._root = options.root || null;
   this._sync = options.sync === undefined ? true : !!options.sync;
@@ -1124,7 +1127,7 @@ VueI18n.prototype._interpolate = function _interpolate (
     ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack);
   }
 
-  return this._render(ret, interpolateMode, values)
+  return this._render(ret, interpolateMode, values, key)
 };
 
 VueI18n.prototype._link = function _link (
@@ -1203,9 +1206,15 @@ VueI18n.prototype._link = function _link (
   return ret
 };
 
-VueI18n.prototype._render = function _render (message, interpolateMode, values) {
-  var ret = this._formatter.interpolate(message, values);
-  // if interpolateMode is **not** 'string' ('raw'),
+VueI18n.prototype._render = function _render (message, interpolateMode, values, path) {
+  var ret = this._formatter.interpolate(message, values, path);
+
+  // If the custom formatter refuses to work - apply the default one
+  if (!ret) {
+    ret = defaultFormatter.interpolate(message, values, path);
+  }
+
+  // if interpolateMode is **not** 'string' ('row'),
   // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
   return interpolateMode === 'string' ? ret.join('') : ret
 };
@@ -1624,6 +1633,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
   }
 });
 VueI18n.install = install;
-VueI18n.version = '8.5.0';
+VueI18n.version = '8.6.0';
 
 module.exports = VueI18n;
