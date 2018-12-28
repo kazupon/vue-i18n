@@ -199,5 +199,53 @@ describe('custom directive', () => {
         }).then(done)
       })
     })
+
+    describe('preserve content', () => {
+      it('should clear element content on destroy by default', done => {
+        const vm = createVM({
+          i18n,
+          data: () => ({ visible: true }),
+          render (h) {
+            // <p ref="text" v-t="'message.hello'"></p>
+            const directives = this.visible ? [{
+              name: 't', rawName: 'v-t', value: ('message.hello'), expression: "'message.hello'"
+            }] : []
+            return h('p', { ref: 'text', directives })
+          }
+        })
+
+        nextTick(() => {
+          assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
+
+          vm.visible = false
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.strictEqual(vm.$refs.text.textContent, '')
+        }).then(done)
+      })
+
+      it('should not clear element content with "preserve" modifier', done => {
+        const vm = createVM({
+          i18n,
+          data: () => ({ visible: true }),
+          render (h) {
+            // <p ref="text" v-t.preserve="'message.hello'"></p>
+            const directives = this.visible ? [{
+              name: 't', rawName: 'v-t', value: ('message.hello'), expression: "'message.hello'", modifiers: { preserve: true }
+            }] : []
+            return h('p', { ref: 'text', directives })
+          }
+        })
+
+        nextTick(() => {
+          assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
+
+          vm.visible = false
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
+        }).then(done)
+      })
+    })
   })
 })

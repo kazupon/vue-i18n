@@ -26,7 +26,9 @@ export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): vo
     return
   }
 
-  el.textContent = ''
+  if (!binding.modifiers.preserve) {
+    el.textContent = ''
+  }
   el._vt = undefined
   delete el['_vt']
   el._locale = undefined
