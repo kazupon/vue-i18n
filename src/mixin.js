@@ -38,6 +38,7 @@ export default {
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn
           options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules
+          options.i18n.preserveDirectiveContent = this.$root.$i18n.preserveDirectiveContent
         }
 
         // init locale messages via custom blocks
