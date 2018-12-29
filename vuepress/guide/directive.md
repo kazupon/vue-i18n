@@ -88,6 +88,71 @@ Outputs:
 </div>
 ```
 
+## Use with transitions
+
+:::tip Support Version
+:new: 8.7+
+:::
+
+When `v-t` directive is applied to an element inside [`<transition>` component](https://vuejs.org/v2/api/#transition), you may notice that translated message will disappear during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in disappearing element inside `<transition>` component will be destroyed **before transition starts**. This behavior may result in content flickering on short animations, but most noticable on long transitions.
+
+To make sure directive content will stay un-touched during transition just add [`.preserve` modifier](../api/#v-t) to `v-t` directive defintion.
+
+Javascript:
+
+```js
+new Vue({
+  i18n: new VueI18n({
+    locale: 'en',
+    messages: {
+      en: { preserve: 'with preserve' },
+    }
+  }),
+  data: { toggle: true }
+}).$mount('#in-transitions')
+```
+
+Templates:
+
+```html
+<div id="in-transitions">
+  <transition name="fade">
+    <span v-if="toggle" v-t.preserve="'preserve'"></span>
+  </transition>
+  <button @click="toggle = !toggle">Toggle</button>
+</div>
+```
+
+It is also possible to set global setting on `VueI18n` instance itself, which will have effect on all `v-t` directives without modifier.
+
+Javascript:
+
+```js
+new Vue({
+  i18n: new VueI18n({
+    locale: 'en',
+    messages: {
+      en: { preserve: 'with preserve' },
+    },
+    preserveDirectiveContent: true
+  }),
+  data: { toggle: true }
+}).$mount('#in-transitions')
+```
+
+Templates:
+
+```html
+<div id="in-transitions">
+  <transition name="fade">
+    <span v-if="toggle" v-t="'preserve'"></span>
+  </transition>
+  <button @click="toggle = !toggle">Toggle</button>
+</div>
+```
+
+About the above examples, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/directive)
+
 ## `$t` vs `v-t`
 
 ### `$t`
