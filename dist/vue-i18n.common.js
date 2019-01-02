@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v8.6.0 
- * (c) 2018 kazuya kawaguchi
+ * vue-i18n v8.7.0 
+ * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
 'use strict';
@@ -218,6 +218,7 @@ var mixin = {
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
           options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
+          options.i18n.preserveDirectiveContent = this.$root.$i18n.preserveDirectiveContent;
         }
 
         // init locale messages via custom blocks
@@ -391,7 +392,10 @@ function unbind (el, binding, vnode, oldVNode) {
     return
   }
 
-  el.textContent = '';
+  var i18n = vnode.context.$i18n || {};
+  if (!binding.modifiers.preserve && !i18n.preserveDirectiveContent) {
+    el.textContent = '';
+  }
   el._vt = undefined;
   delete el['_vt'];
   el._locale = undefined;
@@ -977,6 +981,9 @@ var VueI18n = function VueI18n (options) {
   this._dataListeners = [];
 
   this.pluralizationRules = options.pluralizationRules || {};
+  this.preserveDirectiveContent = options.preserveDirectiveContent === undefined
+    ? false
+    : !!options.preserveDirectiveContent;
 
   this._exist = function (message, key) {
     if (!message || !key) { return false }
@@ -1633,6 +1640,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
   }
 });
 VueI18n.install = install;
-VueI18n.version = '8.6.0';
+VueI18n.version = '8.7.0';
 
 module.exports = VueI18n;
