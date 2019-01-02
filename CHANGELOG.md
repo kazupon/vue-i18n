@@ -1,3 +1,13 @@
+<a name="8.7.0"></a>
+# [8.7.0](https://github.com/kazupon/vue-i18n/compare/v8.6.0...v8.7.0) (2019-01-02)
+
+
+### :zap: Improvements
+
+* **directive:** Preserve directive content ([#495](https://github.com/kazupon/vue-i18n/issues/495)) by [@bponomarenko](https://github.com/bponomarenko) ([c29edba](https://github.com/kazupon/vue-i18n/commit/c29edba)), closes [#495](https://github.com/kazupon/vue-i18n/issues/495) [#408](https://github.com/kazupon/vue-i18n/issues/408) [#408](https://github.com/kazupon/vue-i18n/issues/408)
+
+
+
 <a name="8.6.0"></a>
 # [8.6.0](https://github.com/kazupon/vue-i18n/compare/v8.5.0...v8.6.0) (2018-12-25)
 
