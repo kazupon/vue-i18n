@@ -26,7 +26,10 @@ export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): vo
     return
   }
 
-  el.textContent = ''
+  const i18n: any = vnode.context.$i18n || {}
+  if (!binding.modifiers.preserve && !i18n.preserveDirectiveContent) {
+    el.textContent = ''
+  }
   el._vt = undefined
   delete el['_vt']
   el._locale = undefined

@@ -247,7 +247,7 @@ Whether synchronize the root level locale to the component localization locale.
 
 If `false`, regardless of the root level locale, localize for each component locale.
 
-### silentTranslationWarn
+#### silentTranslationWarn
 
 > 6.1+
 
@@ -258,6 +258,16 @@ If `false`, regardless of the root level locale, localize for each component loc
 Whether suppress warnings outputted when localization fails.
 
 If `true`, supress localization fail warnings.
+
+#### preserveDirectiveContent
+
+> 8.7+
+
+  * **Type:** `Boolean`
+
+  * **Default:** `false`
+
+Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
 ### Properties
 
@@ -331,6 +341,16 @@ The formatter that implemented with `Formatter` interface.
 
 Whether suppress warnings outputted when localization fails.
 
+#### preserveDirectiveContent
+
+> 8.7+
+
+  * **Type:** `boolean`
+
+  * **Read/Write**
+
+Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
+
 ### Methods
 
 #### getChoiceIndex
@@ -338,7 +358,7 @@ Whether suppress warnings outputted when localization fails.
   * **Arguments:**
     * `{number} choice`
     * `{number} choicesLength`
-  
+
   * **Return:** `finalChoice {number}`
 
 Get pluralization index for current pluralizing number and a given amount of choices. Can be overriden through prototype mutation:
@@ -519,6 +539,10 @@ This is the same as `$n` method of Vue instance method. More detail see [$n](#n)
 
   * **Expects:** `string | Object`
 
+  * **Modifiers:**
+
+    * `.preserve`: (8.7.0+) preserves element `textContent` when directive is unbinded.
+
   * **Details:**
 
 Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
@@ -526,6 +550,10 @@ Update the element `textContent` that localized with locale messages. You can us
     * path: required, key of locale messages
     * locale: optional, locale
     * args: optional, for list or named formatting
+
+::::tip NOTE
+The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
+::::
   * **Examples:**
 ```html
 <!-- string syntax: literal -->
@@ -539,6 +567,9 @@ Update the element `textContent` that localized with locale messages. You can us
 
 <!-- object syntax: binding via data or computed props -->
 <p v-t="{ path: greeting, args: { name: fullName } }"></p>
+
+<!-- with preserve modifier -->
+<p v-t.preserve="'foo.bar'"></p>
 ```
 
   * **See also:** [Custom directive localization](../guide/directive.md)

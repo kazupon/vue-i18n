@@ -61,6 +61,7 @@ export default class VueI18n {
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
+  preserveDirectiveContent: boolean
 
   constructor (options: I18nOptions = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -94,6 +95,9 @@ export default class VueI18n {
     this._dataListeners = []
 
     this.pluralizationRules = options.pluralizationRules || {}
+    this.preserveDirectiveContent = options.preserveDirectiveContent === undefined
+      ? false
+      : !!options.preserveDirectiveContent
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }

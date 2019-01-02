@@ -15,6 +15,17 @@
       <p v-t="{ path: 'hello', locale: 'ja', args: { name: 'kazupon' } }"></p>
       <p v-t="{ path: path, args: { name: nickName } }"></p>
     </div>
+    <div id="in-transitions">
+      <p>
+        <transition name="fade">
+          <span v-if="toggle" v-t="'clean'" class="red-bg"></span>
+        </transition>
+        <transition name="fade">
+          <span v-if="toggle" v-t.preserve="'preserve'" class="red-bg"></span>
+        </transition>
+      </p>
+      <button @click="toggle = !toggle">Toggle</button>
+    </div>
     <script>
       // string syntax example
       new Vue({
@@ -42,6 +53,35 @@
         },
         data: { path: 'hello' }
       }).$mount('#object-syntax')
+
+      // use in transitions example
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              clean: 'without preserve',
+              preserve: 'with preserve'
+            },
+          }
+        }),
+        data: { toggle: true }
+      }).$mount('#in-transitions')
     </script>
+    <style>
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 1s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+
+      .red-bg {
+        background-color: red;
+        padding: 5px;
+      }
+    </style>
   </body>
 </html>

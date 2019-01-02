@@ -65,6 +65,7 @@ declare type I18nOptions = {
   pluralizationRules?: {
     [lang: string]: (choice: number, choicesLength: number) => number,
   },
+  preserveDirectiveContent?: boolean,
 };
 
 declare type IntlAvailability = {
@@ -106,7 +107,8 @@ declare interface I18n {
   n (value: number, ...args: any): NumberFormatResult,
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
-  }
+  },
+  preserveDirectiveContent: boolean
 };
 
 declare interface Formatter {

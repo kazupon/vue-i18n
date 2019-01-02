@@ -93,6 +93,7 @@ declare namespace VueI18n {
     sync?: boolean;
     silentTranslationWarn?: boolean;
     pluralizationRules?: PluralizationRulesMap;
+    preserveDirectiveContent?: boolean;
   }
 }
 
@@ -129,6 +130,7 @@ export declare interface IVueI18n {
   formatter: VueI18n.Formatter;
   silentTranslationWarn: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
+  preserveDirectiveContent: boolean;
 }
 
 declare class VueI18n {
