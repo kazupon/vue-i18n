@@ -257,7 +257,7 @@ If `false`, regardless of the root level locale, localize for each component loc
 
 Whether suppress warnings outputted when localization fails.
 
-If `true`, supress localization fail warnings.
+If `true`, suppress localization fail warnings.
 
 #### preserveDirectiveContent
 
@@ -361,7 +361,7 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 
   * **Return:** `finalChoice {number}`
 
-Get pluralization index for current pluralizing number and a given amount of choices. Can be overriden through prototype mutation:
+Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
 
 ```js
 VueI18n.prototype.getChoiceIndex = /* custom implementation */
