@@ -18,12 +18,11 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 
 <h2 align="center">Generous Supporters</h2>
 
-- 38elements
-
-[It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=50.0)
+[Currently vacant. It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=50.0)
 
 <h2 align="center">Awesome Supporters</h2>
 
 - Shinya Katayama
+- 38elements
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=20.0)
