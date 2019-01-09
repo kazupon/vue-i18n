@@ -85,21 +85,24 @@ export default {
   beforeDestroy (): void {
     if (!this._i18n) { return }
 
-    if (this._subscribing) {
-      this._i18n.unsubscribeDataChanging(this)
-      delete this._subscribing
-    }
+    const self = this
+    this.$nextTick(() => {
+      if (self._subscribing) {
+        self._i18n.unsubscribeDataChanging(self)
+        delete self._subscribing
+      }
 
-    if (this._i18nWatcher) {
-      this._i18nWatcher()
-      delete this._i18nWatcher
-    }
+      if (self._i18nWatcher) {
+        self._i18nWatcher()
+        delete self._i18nWatcher
+      }
 
-    if (this._localeWatcher) {
-      this._localeWatcher()
-      delete this._localeWatcher
-    }
+      if (self._localeWatcher) {
+        self._localeWatcher()
+        delete self._localeWatcher
+      }
 
-    this._i18n = null
+      self._i18n = null
+    })
   }
 }
