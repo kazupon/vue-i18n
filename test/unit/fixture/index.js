@@ -61,7 +61,8 @@ export default {
     ],
     issues: {
       arrayBugs: ['bug1', 'bug2']
-    }
+    },
+    'foo.bar.buz': 'hello flat key!'
   },
   ja: {
     message: {
@@ -101,6 +102,7 @@ export default {
     ],
     issues: {
       arrayBugs: ['バグ1', 'バグ2']
-    }
+    },
+    'foo.bar.buz': 'こんにちは、フラットなキーさん！'
   }
 }

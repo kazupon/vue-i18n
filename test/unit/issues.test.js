@@ -319,6 +319,13 @@ describe('issues', () => {
     })
   })
 
+  describe('#349', () => {
+    it('should be existed', done => {
+      assert(vm.$te('foo.bar.buz') === true)
+      done()
+    })
+  })
+
   describe('#377', () => {
     it('should be destroyed', done => {
       const el = document.createElement('div')
