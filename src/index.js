@@ -33,8 +33,8 @@ const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
 const formatters = {
-  'upper': (str) => str.toLocaleUpperCase(),
-  'lower': (str) => str.toLocaleLowerCase()
+  'upper': str => str.toLocaleUpperCase(),
+  'lower': str => str.toLocaleLowerCase()
 }
 
 const defaultFormatter = new BaseFormatter()
@@ -727,5 +727,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
     return availabilities
   }
 })
+
 VueI18n.install = install
 VueI18n.version = '__VERSION__'
