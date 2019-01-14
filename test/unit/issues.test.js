@@ -638,6 +638,13 @@ describe('issues', () => {
     })
   })
 
+  describe('#468', () => {
+    it('should be existed', done => {
+      assert(vm.$te('hello world') === true)
+      done()
+    })
+  })
+
   describe('#484', () => {
     it('passes path to the formatter', () => {
       const testPath = 'test.deep.message'
