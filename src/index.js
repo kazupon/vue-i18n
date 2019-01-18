@@ -54,6 +54,7 @@ export default class VueI18n {
   _watcher: any
   _i18nWatcher: Function
   _silentTranslationWarn: boolean
+  _silentFallbackWarn: boolean
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
