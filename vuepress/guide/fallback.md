@@ -33,3 +33,12 @@ Output the below:
 ```html
 <p>hello world</p>
 ```
+
+Note, that by default falling back to `fallbackLocale` generates two console warnings:
+
+```console
+[vue-i18n] Value of key 'message' is not a string!
+[vue-i18n] Fall back to translate the keypath 'message' with 'en' locale.
+```
+
+To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
