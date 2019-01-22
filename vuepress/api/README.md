@@ -261,7 +261,7 @@ If `true`, suppress localization fail warnings.
 
 #### silentFallbackWarn
 
-> 8.8+
+> :new: 8.8+
 
   * **Type:** `Boolean`
   * **Default:** `false`
