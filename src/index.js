@@ -217,6 +217,10 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
+  _isSilentFallback (locale: Locale): boolean {
+    return this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  }
+
   _interpolate (
     locale: Locale,
     message: LocaleMessageObject,
@@ -237,7 +241,7 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !(this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale))) {
+          if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
             warn(`Value of key '${key}' is not a string!`)
           }
           return null
@@ -250,7 +254,7 @@ export default class VueI18n {
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
-        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
           warn(`Value of key '${key}' is not a string!`)
         }
         return null

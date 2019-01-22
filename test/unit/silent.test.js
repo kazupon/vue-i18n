@@ -78,37 +78,84 @@ describe('silent', () => {
       assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
     })
 
-    it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
-      const vm = new Vue({ i18n })
-      const warningRegex = /Value of .* is not a string./
-      vm.$t('winner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+    describe('if first try is null or undefined,', () => {
+      it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
+        const vm = new Vue({ i18n })
+        const warningRegex = /Value of .* is not a string./
+        vm.$t('winner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
 
-      vm.$i18n.silentFallbackWarn = false
-      vm.$t('winner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        vm.$i18n.silentFallbackWarn = false
+        vm.$t('winner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
+
+      it('should supress `not a string` warnings for fallback to root.', () => {
+        const el = document.createElement('div')
+        const root = new Vue({
+          i18n,
+          components: {
+            subComponent: {
+              i18n: { messages: { hu: { name: 'Név' } } },
+              render (h) { return h('p') }
+            }
+          },
+          render (h) { return h('sub-component') }
+        }).$mount(el)
+        const vm = root.$children[0]
+        const warningRegex = /Value of .* is not a string./
+        vm.$t('chickenDinner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        vm.$i18n.silentFallbackWarn = false
+        vm.$t('chickenDinner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
     })
 
-    it('should supress `not a string` warnings for fallback to root.', () => {
-      const el = document.createElement('div')
-      const root = new Vue({
-        i18n,
-        components: {
-          subComponent: {
-            i18n: { messages: { hu: { name: 'Név' } } },
-            render (h) { return h('p') }
-          }
-        },
-        render (h) { return h('sub-component') }
-      }).$mount(el)
-      const vm = root.$children[0]
-      const warningRegex = /Value of .* is not a string./
-      vm.$t('chickenDinner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+    describe('if first try is not null, undefined, array, plain object or string,', () => {
+      it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
+        const vm = new Vue({
+          i18n: new VueI18n({
+            locale: 'hu',
+            fallbackLocale: 'en',
+            silentFallbackWarn: true,
+            messages: {
+              en: { winner: 'winner' },
+              hu: { winner: true } // translation value is boolean
+            }
+          })
+        })
+        const warningRegex = /Value of .* is not a string./
+        vm.$t('winner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
 
-      vm.$i18n.silentFallbackWarn = false
-      vm.$t('chickenDinner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        vm.$i18n.silentFallbackWarn = false
+        vm.$t('winner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
+
+      it('should supress `not a string` warnings for fallback to root.', () => {
+        const el = document.createElement('div')
+        const root = new Vue({
+          i18n,
+          components: {
+            subComponent: {
+              i18n: { messages: { hu: { chickenDinner: 11 } } }, // translation value is number
+              render (h) { return h('p') }
+            }
+          },
+          render (h) { return h('sub-component') }
+        }).$mount(el)
+        const vm = root.$children[0]
+        const warningRegex = /Value of .* is not a string./
+        vm.$t('chickenDinner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        vm.$i18n.silentFallbackWarn = false
+        vm.$t('chickenDinner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
     })
 
     it('should not suppress `not a string` warnings when no further fallback is possible.', () => {
