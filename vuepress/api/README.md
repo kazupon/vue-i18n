@@ -259,6 +259,17 @@ Whether suppress warnings outputted when localization fails.
 
 If `true`, suppress localization fail warnings.
 
+#### silentFallbackWarn
+
+> :new: 8.8+
+
+  * **Type:** `Boolean`
+  * **Default:** `false`
+
+Whether suppress warnings when falling back to either `fallbackLocale` or `root`.
+
+If `true`, warnings will be generated only when no translation is available at all, and not for fallbacks.
+
 #### preserveDirectiveContent
 
 > 8.7+

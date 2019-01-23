@@ -73,6 +73,15 @@ Outputs the following:
 
 As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: `locale: 'ja'`).
 
+Note, that by default falling back to root locale generates two warnings in the console:
+
+```console
+[vue-i18n] Value of key 'message.greeting' is not a string!
+[vue-i18n] Fall back to translate the keypath 'message.greeting' with root locale.
+```
+
+To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
+
 If you hope localize in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
 
 ## Translation in functional component
