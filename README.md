@@ -13,7 +13,7 @@
 <h3 align="center">Sliver Sponsors</h3>
 
 <p align="center">
-  <a href="https://www.codeandweb.com/babeledit" target="_blank">
+  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png">
   </a>
 </p>

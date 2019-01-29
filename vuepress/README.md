@@ -15,7 +15,7 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
 
 <div class="sponsors" style="text-align:center; padding: 24px 0;">
   <h4>Silver Sponsors</h4>
-  <a href="https://www.codeandweb.com/babeledit" target="_blank">
+  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img src="/vue-i18n/patrons/babeledit.png">
   </a>
 </div>
