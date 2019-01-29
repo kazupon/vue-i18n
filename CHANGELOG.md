@@ -1,3 +1,20 @@
+<a name="8.8.0"></a>
+# [8.8.0](https://github.com/kazupon/vue-i18n/compare/v8.7.0...v8.8.0) (2019-01-29)
+
+
+### :bug: Bug Fixes
+
+* **index:** fix flat path based key issue ([bed9c39](https://github.com/kazupon/vue-i18n/commit/bed9c39)), closes [#349](https://github.com/kazupon/vue-i18n/issues/349)
+* **mixin:** fix beforeDestroy can not find this.$t ([#500](https://github.com/kazupon/vue-i18n/issues/500)) by [@masongzhi](https://github.com/masongzhi) ([311b8f3](https://github.com/kazupon/vue-i18n/commit/311b8f3)), closes [#500](https://github.com/kazupon/vue-i18n/issues/500)
+
+
+### :zap: Improvements
+
+* **directive:** Fix typo on warning message ([#509](https://github.com/kazupon/vue-i18n/issues/509)) by [@kimuraz](https://github.com/kimuraz) ([e879024](https://github.com/kazupon/vue-i18n/commit/e879024)), closes [#509](https://github.com/kazupon/vue-i18n/issues/509)
+* **index:** silence fallback warnings ([#510](https://github.com/kazupon/vue-i18n/issues/510)) by [@SzNagyMisu](https://github.com/SzNagyMisu) ([ddc0c79](https://github.com/kazupon/vue-i18n/commit/ddc0c79)), closes [#510](https://github.com/kazupon/vue-i18n/issues/510) [#139](https://github.com/kazupon/vue-i18n/issues/139)
+
+
+
 <a name="8.7.0"></a>
 # [8.7.0](https://github.com/kazupon/vue-i18n/compare/v8.6.0...v8.7.0) (2019-01-02)
 
