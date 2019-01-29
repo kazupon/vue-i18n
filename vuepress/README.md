@@ -13,7 +13,14 @@ features:
 footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
 ---
 
-<div class="patreon" style="margin: 24px 0;">
+<div class="sponsors" style="text-align:center; padding: 24px 0;">
+  <h4>Silver Sponsors</h4>
+  <a href="https://www.codeandweb.com/babeledit" target="_blank">
+    <img src="/vue-i18n/patrons/babeledit.png">
+  </a>
+</div>
+
+<div class="patreon" style="padding: 24px 0;">
   <p style="text-align: center;">
     <a href="https://www.patreon.com/kazupon" target="_blank">
       <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
