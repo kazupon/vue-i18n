@@ -10,6 +10,14 @@
 
 <p align="center">Internationalization plugin for Vue.js</p>
 
+<h3 align="center">Sliver Sponsors</h3>
+
+<p align="center">
+  <a href="https://www.codeandweb.com/babeledit" target="_blank">
+    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png">
+  </a>
+</p>
+
 <p align="center">
   <a href="https://www.patreon.com/kazupon" target="_blank">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
