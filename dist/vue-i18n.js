@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.7.0 
+ * vue-i18n v8.8.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -221,6 +221,7 @@
             options.i18n.formatter = this.$root.$i18n.formatter;
             options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
             options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
+            options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn;
             options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
             options.i18n.preserveDirectiveContent = this.$root.$i18n.preserveDirectiveContent;
           }
@@ -269,22 +270,25 @@
     beforeDestroy: function beforeDestroy () {
       if (!this._i18n) { return }
 
-      if (this._subscribing) {
-        this._i18n.unsubscribeDataChanging(this);
-        delete this._subscribing;
-      }
+      var self = this;
+      this.$nextTick(function () {
+        if (self._subscribing) {
+          self._i18n.unsubscribeDataChanging(self);
+          delete self._subscribing;
+        }
 
-      if (this._i18nWatcher) {
-        this._i18nWatcher();
-        delete this._i18nWatcher;
-      }
+        if (self._i18nWatcher) {
+          self._i18nWatcher();
+          delete self._i18nWatcher;
+        }
 
-      if (this._localeWatcher) {
-        this._localeWatcher();
-        delete this._localeWatcher;
-      }
+        if (self._localeWatcher) {
+          self._localeWatcher();
+          delete self._localeWatcher;
+        }
 
-      this._i18n = null;
+        self._i18n = null;
+      });
     }
   };
 
@@ -411,7 +415,7 @@
   function assert (el, vnode) {
     var vm = vnode.context;
     if (!vm) {
-      warn('Vue instance doest not exists in VNode context');
+      warn('Vue instance does not exists in VNode context');
       return false
     }
 
@@ -979,6 +983,9 @@
     this._silentTranslationWarn = options.silentTranslationWarn === undefined
       ? false
       : !!options.silentTranslationWarn;
+    this._silentFallbackWarn = options.silentFallbackWarn === undefined
+      ? false
+      : !!options.silentFallbackWarn;
     this._dateTimeFormatters = {};
     this._numberFormatters = {};
     this._path = new I18nPath();
@@ -991,7 +998,10 @@
 
     this._exist = function (message, key) {
       if (!message || !key) { return false }
-      return !isNull(this$1._path.getPathValue(message, key))
+      if (this$1._path.getPathValue(message, key)) { return true }
+      // fallback for flat key
+      if (message[key]) { return true }
+      return false
     };
 
     this._initVM({
@@ -1003,7 +1013,7 @@
     });
   };
 
-  var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true } };
+  var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true },silentFallbackWarn: { configurable: true } };
 
   VueI18n.prototype._initVM = function _initVM (data) {
     var silent = Vue.config.silent;
@@ -1067,6 +1077,9 @@
   prototypeAccessors.silentTranslationWarn.get = function () { return this._silentTranslationWarn };
   prototypeAccessors.silentTranslationWarn.set = function (silent) { this._silentTranslationWarn = silent; };
 
+  prototypeAccessors.silentFallbackWarn.get = function () { return this._silentFallbackWarn };
+  prototypeAccessors.silentFallbackWarn.set = function (silent) { this._silentFallbackWarn = silent; };
+
   VueI18n.prototype._getMessages = function _getMessages () { return this._vm.messages };
   VueI18n.prototype._getDateTimeFormats = function _getDateTimeFormats () { return this._vm.dateTimeFormats };
   VueI18n.prototype._getNumberFormats = function _getNumberFormats () { return this._vm.numberFormats };
@@ -1093,6 +1106,10 @@
     return !val && !isNull(this._root) && this._fallbackRoot
   };
 
+  VueI18n.prototype._isSilentFallback = function _isSilentFallback (locale) {
+    return this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  };
+
   VueI18n.prototype._interpolate = function _interpolate (
     locale,
     message,
@@ -1113,7 +1130,7 @@
       if (isPlainObject(message)) {
         ret = message[key];
         if (typeof ret !== 'string') {
-          if (!this._silentTranslationWarn) {
+          if (!this._silentTranslationWarn && !this._isSilentFallback(locale)) {
             warn(("Value of key '" + key + "' is not a string!"));
           }
           return null
@@ -1126,7 +1143,7 @@
       if (typeof pathRet === 'string') {
         ret = pathRet;
       } else {
-        if (!this._silentTranslationWarn) {
+        if (!this._silentTranslationWarn && !this._isSilentFallback(locale)) {
           warn(("Value of key '" + key + "' is not a string!"));
         }
         return null
@@ -1245,7 +1262,7 @@
 
     res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key]);
     if (!isNull(res)) {
-      if (!this._silentTranslationWarn) {
+      if (!this._silentTranslationWarn && !this._silentFallbackWarn) {
         warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
       }
       return res
@@ -1269,7 +1286,7 @@
       host, 'string', parsedArgs.params
     );
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn) {
+      if (!this._silentTranslationWarn && !this._silentFallbackWarn) {
         warn(("Fall back to translate the keypath '" + key + "' with root locale."));
       }
       /* istanbul ignore if */
@@ -1643,8 +1660,9 @@
       return availabilities
     }
   });
+
   VueI18n.install = install;
-  VueI18n.version = '8.7.0';
+  VueI18n.version = '8.8.0';
 
   return VueI18n;
 
