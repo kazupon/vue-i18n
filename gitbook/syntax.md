@@ -2,7 +2,7 @@
 
 You can use the bellow structure locale:
 
-```json
+```js
 {
   key1: 'this is message1', // basic
   nested: { // nested
