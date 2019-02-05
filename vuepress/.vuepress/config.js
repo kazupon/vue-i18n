@@ -24,7 +24,11 @@ module.exports = {
         nav: [
           {
             text: 'Guide',
-            link: '/guide/started.md',
+            link: '/guide/formatting',
+          },
+          {
+            text: 'Legacy',
+            link: '/legacy/',
           },
           {
             text: 'API',
@@ -44,28 +48,34 @@ module.exports = {
           }
         ],
         sidebar: [
-          '/installation.md',
-          '/introduction.md',
-          ['/5.x/', 'Looking for 5.x docs?'],
+          '/introduction',
+          '/started',
+          '/installation',
           {
             title: 'Guide',
             collapsable: false,
             children: [
-              '/guide/started.md',
-              '/guide/formatting.md',
-              '/guide/pluralization.md',
-              '/guide/datetime.md',
-              '/guide/number.md',
-              '/guide/messages.md',
-              '/guide/fallback.md',
-              '/guide/component.md',
-              '/guide/directive.md',
-              '/guide/interpolation.md',
-              '/guide/sfc.md',
-              '/guide/hot-reload.md',
-              '/guide/locale.md',
-              '/guide/lazy-loading.md',
-              '/guide/migrations.md'
+              '/guide/formatting',
+              '/guide/pluralization',
+              '/guide/datetime',
+              '/guide/number',
+              '/guide/messages',
+              '/guide/fallback',
+              '/guide/component',
+              '/guide/directive',
+              '/guide/interpolation',
+              '/guide/sfc',
+              '/guide/hot-reload',
+              '/guide/locale',
+              '/guide/lazy-loading'
+            ]
+          },
+          {
+            title: 'Legacy',
+            collapsable: false,
+            children: [
+              '/legacy/',
+              '/legacy/v5'
             ]
           }
         ]

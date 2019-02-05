@@ -1,4 +1,4 @@
-# Migrations
+# Migration from v5.x
 
 ## Global config
 
