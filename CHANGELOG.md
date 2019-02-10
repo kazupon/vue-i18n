@@ -1,3 +1,19 @@
+<a name="8.8.1"></a>
+## [8.8.1](https://github.com/kazupon/vue-i18n/compare/v8.8.0...v8.8.1) (2019-02-10)
+
+
+### :bug: Bug Fixes
+
+* **index:** fixed [#478](https://github.com/kazupon/vue-i18n/issues/478) ([#518](https://github.com/kazupon/vue-i18n/issues/518)) by [@stroncium](https://github.com/stroncium) ([469edd9](https://github.com/kazupon/vue-i18n/commit/469edd9)), closes [#478](https://github.com/kazupon/vue-i18n/issues/478) [#518](https://github.com/kazupon/vue-i18n/issues/518) [#478](https://github.com/kazupon/vue-i18n/issues/478)
+
+
+### :zap: Improvements
+
+* **flowtype:** update typings ([44e04e7](https://github.com/kazupon/vue-i18n/commit/44e04e7))
+* **typescript:** update typings ([dee35b9](https://github.com/kazupon/vue-i18n/commit/dee35b9))
+
+
+
 <a name="8.8.0"></a>
 # [8.8.0](https://github.com/kazupon/vue-i18n/compare/v8.7.0...v8.8.0) (2019-01-29)
 
