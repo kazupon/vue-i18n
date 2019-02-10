@@ -92,8 +92,9 @@ declare namespace VueI18n {
     fallbackRoot?: boolean;
     sync?: boolean;
     silentTranslationWarn?: boolean;
-    pluralizationRules?: PluralizationRulesMap;
+    silentFallbackWarn?: boolean;
     preserveDirectiveContent?: boolean;
+    pluralizationRules?: PluralizationRulesMap;
   }
 }
 
@@ -129,8 +130,9 @@ export declare interface IVueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   silentTranslationWarn: boolean;
-  pluralizationRules: VueI18n.PluralizationRulesMap;
+  silentFallbackWarn: boolean;
   preserveDirectiveContent: boolean;
+  pluralizationRules: VueI18n.PluralizationRulesMap;
 }
 
 declare class VueI18n {
@@ -145,6 +147,9 @@ declare class VueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   silentTranslationWarn: boolean;
+  silentFallbackWarn: boolean;
+  preserveDirectiveContent: boolean;
+  pluralizationRules: VueI18n.PluralizationRulesMap;
 
   t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;

@@ -63,6 +63,7 @@ const i18n = new VueI18n({
   fallbackRoot: false,
   sync: true,
   silentTranslationWarn: true,
+  silentFallbackWarn: true,
   preserveDirectiveContent: true,
 });
 i18n.messages[locale][key];         // $ExpectType LocaleMessage
@@ -73,6 +74,7 @@ i18n.fallbackLocale;                // $ExpectType string
 i18n.missing;                       // $ExpectType MissingHandler
 i18n.formatter;                     // $ExpectType Formatter
 i18n.silentTranslationWarn;         // $ExpectType boolean
+i18n.silentFallbackWarn;            // $ExpectType boolean
 i18n.preserveDirectiveContent;      // $ExpectType boolean
 i18n.setLocaleMessage;              // $ExpectType (locale: string, message: LocaleMessageObject) => void
 i18n.getLocaleMessage;              // $ExpectType (locale: string) => LocaleMessageObject
