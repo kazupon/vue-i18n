@@ -59,10 +59,10 @@ export default class VueI18n {
   _numberFormatters: Object
   _path: I18nPath
   _dataListeners: Array<any>
+  _preserveDirectiveContent: boolean
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
-  preserveDirectiveContent: boolean
 
   constructor (options: I18nOptions = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -97,11 +97,10 @@ export default class VueI18n {
     this._numberFormatters = {}
     this._path = new I18nPath()
     this._dataListeners = []
-
-    this.pluralizationRules = options.pluralizationRules || {}
-    this.preserveDirectiveContent = options.preserveDirectiveContent === undefined
+    this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
       : !!options.preserveDirectiveContent
+    this.pluralizationRules = options.pluralizationRules || {}
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -190,6 +189,9 @@ export default class VueI18n {
 
   get silentFallbackWarn (): boolean { return this._silentFallbackWarn }
   set silentFallbackWarn (silent: boolean): void { this._silentFallbackWarn = silent }
+
+  get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
+  set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
 
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
