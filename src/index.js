@@ -263,7 +263,7 @@ export default class VueI18n {
 
     // Check for the existence of links within the translated string
     if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
-      ret = this._link(locale, message, ret, host, interpolateMode, values, visitedLinkStack)
+      ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
 
     return this._render(ret, interpolateMode, values, key)

@@ -672,4 +672,19 @@ describe('issues', () => {
       assert(i18n.t(testPath), 'Hello!')
     })
   })
+
+  describe('#478', () => {
+    it('should be translated', () => {
+      const res = vm.$t('message.linkHelloName', { name: 'World {text}' })
+      assert.strictEqual(res, 'Hello World {text}')
+    })
+    it('should be translated', () => {
+      const res = vm.$t('message.linkHelloName', { name: 'World {text}', text: 'something' })
+      assert.strictEqual(res, 'Hello World {text}')
+    })
+    it('should be translated', () => {
+      const res = vm.$t('message.linkLinkHelloName', { name: 'World {text}', text: 'something' })
+      assert.strictEqual(res, 'Hello World {text}')
+    })
+  })
 })
