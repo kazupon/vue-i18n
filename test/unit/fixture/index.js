@@ -12,6 +12,7 @@ export default {
       fallback: 'this is fallback',
       link: '@:message.hello',
       linkHelloName: '@:message.helloName',
+      linkLinkHelloName: '@:message.linkHelloName',
       linkEnd: 'This is a linked translation to @:message.hello',
       linkWithin: 'Isn\'t @:message.hello we live in great?',
       linkMultiple: 'Hello @:message.hoge!, isn\'t @:message.hello great?',
