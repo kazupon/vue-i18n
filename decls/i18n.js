@@ -62,6 +62,7 @@ declare type I18nOptions = {
   fallbackRoot?: boolean,
   sync?: boolean,
   silentTranslationWarn?: boolean,
+  silentFallbackWarn?: boolean,
   pluralizationRules?: {
     [lang: string]: (choice: number, choicesLength: number) => number,
   },
@@ -90,6 +91,8 @@ declare interface I18n {
   set formatter (formatter: Formatter): void,
   get silentTranslationWarn (): boolean,
   set silentTranslationWarn (silent: boolean): void,
+  get silentFallbackWarn (): boolean,
+  set silentFallbackWarn (slient: boolean): void,
   getLocaleMessage (locale: Locale): LocaleMessageObject,
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
