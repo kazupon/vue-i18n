@@ -130,6 +130,10 @@ export default class VueI18n {
     Vue.config.silent = silent
   }
 
+  destroyVM (): void {
+    this._vm.$destroy()
+  }
+
   subscribeDataChanging (vm: any): void {
     this._dataListeners.push(vm)
   }

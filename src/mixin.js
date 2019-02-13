@@ -95,6 +95,7 @@ export default {
 
       if (self._i18nWatcher) {
         self._i18nWatcher()
+        self._i18n.destroyVM()
         delete self._i18nWatcher
       }
 
