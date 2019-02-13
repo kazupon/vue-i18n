@@ -51,8 +51,6 @@ export default class VueI18n {
   _fallbackRoot: boolean
   _missing: ?MissingHandler
   _exist: Function
-  _watcher: any
-  _i18nWatcher: Function
   _silentTranslationWarn: boolean
   _silentFallbackWarn: boolean
   _dateTimeFormatters: Object
