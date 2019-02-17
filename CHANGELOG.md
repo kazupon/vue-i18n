@@ -1,3 +1,13 @@
+<a name="8.8.2"></a>
+## [8.8.2](https://github.com/kazupon/vue-i18n/compare/v8.8.1...v8.8.2) (2019-02-17)
+
+
+### :bug: Bug Fixes
+
+* **mixin:** fix memory leak ([135058d](https://github.com/kazupon/vue-i18n/commit/135058d)), closes [#514](https://github.com/kazupon/vue-i18n/issues/514)
+
+
+
 <a name="8.8.1"></a>
 ## [8.8.1](https://github.com/kazupon/vue-i18n/compare/v8.8.0...v8.8.1) (2019-02-10)
 
