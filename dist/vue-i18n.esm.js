@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.8.1 
+ * vue-i18n v8.8.2 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -273,6 +273,7 @@ var mixin = {
 
       if (self._i18nWatcher) {
         self._i18nWatcher();
+        self._i18n.destroyVM();
         delete self._i18nWatcher;
       }
 
@@ -1015,6 +1016,10 @@ VueI18n.prototype._initVM = function _initVM (data) {
   Vue.config.silent = silent;
 };
 
+VueI18n.prototype.destroyVM = function destroyVM () {
+  this._vm.$destroy();
+};
+
 VueI18n.prototype.subscribeDataChanging = function subscribeDataChanging (vm) {
   this._dataListeners.push(vm);
 };
@@ -1658,6 +1663,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.8.1';
+VueI18n.version = '8.8.2';
 
 export default VueI18n;
