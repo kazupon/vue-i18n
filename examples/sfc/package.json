@@ -1,29 +1,49 @@
 {
   "name": "sfc",
-  "description": "vue-i18n custom blocks example",
-  "version": "1.0.0",
-  "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
     "postinstall": "npm link ../../"
   },
   "dependencies": {
-    "vue": "^2.4.2"
+    "vue": "^2.6.6"
   },
   "devDependencies": {
-    "@kazupon/vue-i18n-loader": "^0.2.0",
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-preset-latest": "^6.0.0",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.25.0",
-    "file-loader": "^0.9.0",
-    "vue-loader": "^13.0.2",
-    "vue-template-compiler": "^2.4.2",
-    "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0",
-    "yaml-loader": "^0.4.0"
-  }
+    "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.14.0",
+    "eslint-plugin-vue": "^5.2.1",
+    "vue-i18n-loader": "^1.0.0",
+    "vue-template-compiler": "^2.6.6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/recommended",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

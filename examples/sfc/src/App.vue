@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'app',
+  name: 'App',
   data () { return { locale: 'en' } },
   watch: {
     locale (val) {
