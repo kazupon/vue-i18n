@@ -102,7 +102,7 @@ export default class VueI18n {
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
-      if (this._path.getPathValue(message, key)) { return true }
+      if (!isNull(this._path.getPathValue(message, key))) { return true }
       // fallback for flat key
       if (message[key]) { return true }
       return false
