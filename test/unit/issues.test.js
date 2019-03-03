@@ -687,4 +687,10 @@ describe('issues', () => {
       assert.strictEqual(res, 'Hello World {text}')
     })
   })
+
+  describe('#515', () => {
+    it('$te should return true for empty string', () => {
+      assert.strictEqual(vm.$te('message.empty'), true)
+    })
+  })
 })
