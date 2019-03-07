@@ -85,6 +85,7 @@ declare interface I18n {
   set fallbackLocale (locale: Locale): void,
   get messages (): LocaleMessages,
   get dateTimeFormats (): DateTimeFormats,
+  get availableLocales (): Locale[],
   get missing (): ?MissingHandler,
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
