@@ -629,6 +629,14 @@ describe('basic', () => {
     })
   })
 
+  describe('i18n#availableLocales', () => {
+    describe('en', () => {
+      it('should translate an english', () => {
+        assert.deepStrictEqual(i18n.availableLocales, ['ja', 'en'])
+      })
+    })
+  })
+
   let desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
   desc('i18n#d', () => {
     let dt
