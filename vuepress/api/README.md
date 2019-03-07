@@ -209,6 +209,19 @@ The number formats of localization.
 
   * **See also:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
+#### availableLocales
+
+> :new: 8.8.3+
+
+  * **Type:** `Locale[]`
+
+  * **Default:** `[]`
+  
+  * **Examples:** `["en", "ja"]`
+
+The list of available locales in `messages`.
+
+
 #### formatter
 
   * **Type:** `Formatter`
