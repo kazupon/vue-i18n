@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.8.2 
+ * vue-i18n v8.9.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -994,7 +994,7 @@ var VueI18n = function VueI18n (options) {
 
   this._exist = function (message, key) {
     if (!message || !key) { return false }
-    if (this$1._path.getPathValue(message, key)) { return true }
+    if (!isNull(this$1._path.getPathValue(message, key))) { return true }
     // fallback for flat key
     if (message[key]) { return true }
     return false
@@ -1009,7 +1009,7 @@ var VueI18n = function VueI18n (options) {
   });
 };
 
-var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true },silentFallbackWarn: { configurable: true },preserveDirectiveContent: { configurable: true } };
+var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },availableLocales: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true },silentFallbackWarn: { configurable: true },preserveDirectiveContent: { configurable: true } };
 
 VueI18n.prototype._initVM = function _initVM (data) {
   var silent = Vue.config.silent;
@@ -1057,6 +1057,7 @@ prototypeAccessors.vm.get = function () { return this._vm };
 prototypeAccessors.messages.get = function () { return looseClone(this._getMessages()) };
 prototypeAccessors.dateTimeFormats.get = function () { return looseClone(this._getDateTimeFormats()) };
 prototypeAccessors.numberFormats.get = function () { return looseClone(this._getNumberFormats()) };
+prototypeAccessors.availableLocales.get = function () { return Object.keys(this.messages).sort() };
 
 prototypeAccessors.locale.get = function () { return this._vm.locale };
 prototypeAccessors.locale.set = function (locale) {
@@ -1665,6 +1666,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.8.2';
+VueI18n.version = '8.9.0';
 
 module.exports = VueI18n;
