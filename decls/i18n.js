@@ -63,9 +63,7 @@ declare type I18nOptions = {
   sync?: boolean,
   silentTranslationWarn?: boolean,
   silentFallbackWarn?: boolean,
-  pluralizationRules?: {
-    [lang: string]: (choice: number, choicesLength: number) => number,
-  },
+  pluralizationRules?: PluralizationRules,
   preserveDirectiveContent?: boolean,
 };
 
@@ -73,6 +71,10 @@ declare type IntlAvailability = {
   dateTimeFormat: boolean,
   numberFormat: boolean
 };
+
+declare type PluralizationRules = {
+  [lang: string]: (choice: number, choicesLength: number) => number,
+}
 
 declare interface I18n {
   static install: () => void, // for Vue plugin interface
@@ -85,6 +87,7 @@ declare interface I18n {
   set fallbackLocale (locale: Locale): void,
   get messages (): LocaleMessages,
   get dateTimeFormats (): DateTimeFormats,
+  get numberFormats (): NumberFormats,
   get availableLocales (): Locale[],
   get missing (): ?MissingHandler,
   set missing (handler: MissingHandler): void,
@@ -94,6 +97,11 @@ declare interface I18n {
   set silentTranslationWarn (silent: boolean): void,
   get silentFallbackWarn (): boolean,
   set silentFallbackWarn (slient: boolean): void,
+  get pluralizationRules (): PluralizationRules,
+  set pluralizationRules (rules: PluralizationRules): void,
+  get preserveDirectiveContent (): boolean,
+  set preserveDirectiveContent (preserve: boolean): void,
+
   getLocaleMessage (locale: Locale): LocaleMessageObject,
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
@@ -109,9 +117,8 @@ declare interface I18n {
   setNumberFormat (locale: Locale, format: NumberFormat): void,
   mergeNumberFormat (locale: Locale, format: NumberFormat): void,
   n (value: number, ...args: any): NumberFormatResult,
-  pluralizationRules: {
-    [lang: string]: (choice: number, choicesLength: number) => number
-  },
+  getChoiceIndex: (choice: number, choicesLength: number) => number,
+  pluralizationRules: PluralizationRules,
   preserveDirectiveContent: boolean
 };
 
