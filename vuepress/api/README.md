@@ -211,7 +211,7 @@ The number formats of localization.
 
 #### availableLocales
 
-> :new: 8.8.3+
+> :new: 8.9.0+
 
   * **Type:** `Locale[]`
 
