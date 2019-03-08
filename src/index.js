@@ -169,6 +169,7 @@ export default class VueI18n {
   get messages (): LocaleMessages { return looseClone(this._getMessages()) }
   get dateTimeFormats (): DateTimeFormats { return looseClone(this._getDateTimeFormats()) }
   get numberFormats (): NumberFormats { return looseClone(this._getNumberFormats()) }
+  get availableLocales (): Locale[] { return Object.keys(this.messages).sort() }
 
   get locale (): Locale { return this._vm.locale }
   set locale (locale: Locale): void {

@@ -629,6 +629,12 @@ describe('basic', () => {
     })
   })
 
+  describe('i18n#availableLocales', () => {
+    it('should return locales defined in messages in lexical order', () => {
+      assert.deepStrictEqual(i18n.availableLocales, ['en', 'ja'])
+    })
+  })
+
   let desc = VueI18n.availabilities.dateTimeFormat ? describe : describe.skip
   desc('i18n#d', () => {
     let dt

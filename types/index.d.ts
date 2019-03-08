@@ -141,6 +141,7 @@ declare class VueI18n {
   readonly messages: VueI18n.LocaleMessages;
   readonly dateTimeFormats: VueI18n.DateTimeFormats;
   readonly numberFormats: VueI18n.NumberFormats;
+  readonly availableLocales: VueI18n.Locale[];
 
   locale: VueI18n.Locale;
   fallbackLocale: VueI18n.Locale;
