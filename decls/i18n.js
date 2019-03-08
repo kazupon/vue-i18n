@@ -118,9 +118,7 @@ declare interface I18n {
   mergeNumberFormat (locale: Locale, format: NumberFormat): void,
   n (value: number, ...args: any): NumberFormatResult,
   getChoiceIndex: (choice: number, choicesLength: number) => number,
-  pluralizationRules: {
-    [lang: string]: (choice: number, choicesLength: number) => number
-  },
+  pluralizationRules: PluralizationRules,
   preserveDirectiveContent: boolean
 };
 
