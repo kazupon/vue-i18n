@@ -219,8 +219,7 @@ The number formats of localization.
   
   * **Examples:** `["en", "ja"]`
 
-The list of available locales in `messages`.
-
+The list of available locales in `messages` in lexical order.
 
 #### formatter
 

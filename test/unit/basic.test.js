@@ -630,10 +630,8 @@ describe('basic', () => {
   })
 
   describe('i18n#availableLocales', () => {
-    describe('en', () => {
-      it('should translate an english', () => {
-        assert.deepStrictEqual(i18n.availableLocales, ['ja', 'en'])
-      })
+    it('should return locales defined in messages in lexical order', () => {
+      assert.deepStrictEqual(i18n.availableLocales, ['en', 'ja'])
     })
   })
 
