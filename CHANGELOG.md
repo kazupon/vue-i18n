@@ -1,3 +1,23 @@
+<a name="8.9.0"></a>
+# [8.9.0](https://github.com/kazupon/vue-i18n/compare/v8.8.2...v8.9.0) (2019-03-08)
+
+
+### :bug: Bug Fixes
+
+* **index:** Fix [#515](https://github.com/kazupon/vue-i18n/issues/515) empty string not returning true ([#525](https://github.com/kazupon/vue-i18n/issues/525)) by [@kimuraz](https://github.com/kimuraz) ([396c5ca](https://github.com/kazupon/vue-i18n/commit/396c5ca)), closes [#515](https://github.com/kazupon/vue-i18n/issues/515) [#525](https://github.com/kazupon/vue-i18n/issues/525) [#515](https://github.com/kazupon/vue-i18n/issues/515)
+
+
+### :star: New Features
+
+* **index:** add availableLocales (related issue [#193](https://github.com/kazupon/vue-i18n/issues/193), PR [#528](https://github.com/kazupon/vue-i18n/issues/528)) by [@exoego](https://github.com/exoego) ([8f75b1f](https://github.com/kazupon/vue-i18n/commit/8f75b1f)), closes [#193](https://github.com/kazupon/vue-i18n/issues/193) [#528](https://github.com/kazupon/vue-i18n/issues/528) [#193](https://github.com/kazupon/vue-i18n/issues/193) [#193](https://github.com/kazupon/vue-i18n/issues/193) [#193](https://github.com/kazupon/vue-i18n/issues/193) [#193](https://github.com/kazupon/vue-i18n/issues/193)
+
+
+### :zap: Improvements
+
+* **flowtype:** Fix missing type declarations in flow type ([#529](https://github.com/kazupon/vue-i18n/issues/529)) by [@exoego](https://github.com/exoego) ([4173764](https://github.com/kazupon/vue-i18n/commit/4173764)), closes [#529](https://github.com/kazupon/vue-i18n/issues/529)
+
+
+
 <a name="8.8.2"></a>
 ## [8.8.2](https://github.com/kazupon/vue-i18n/compare/v8.8.1...v8.8.2) (2019-02-17)
 
