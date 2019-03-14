@@ -27,7 +27,7 @@ sidebar: auto
     * `{Array | Object} values`: 可选
   * **Return:** `TranslateResult`
 
-本地化关键字的语言环境信息, 组件语言环境信息进行本地化优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果你指定的 `key` 为列表/格式化的语言环境信息，你必须指定 `values` 了。有关 values 详细信息，请参阅格式化 [Formatting](../guide/formatting.md).
+本地化关键字的语言环境信息, 组件语言环境信息进行本地化优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果你指定的 `key` 为列表/格式化的语言环境信息，你必须指定 `values` 。有关 `values` 详细信息，请参阅格式化 [Formatting](../guide/formatting.md).
 
 :::danger 提示
 注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $t = this.$t.bind(this)`)
