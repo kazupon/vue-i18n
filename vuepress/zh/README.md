@@ -24,7 +24,7 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
 <div class="features">
   <div class="feature">
     <h2>简单</h2>
-    <p>您可以使用简单的API将国际化引入您的应用</p>
+    <p>你可以使用简单的API将国际化引入你的应用</p>
   </div>
   <div class="feature">
     <h2>强大</h2>
@@ -32,6 +32,6 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
   </div>
   <div class="feature">
     <h2>面向组件</h2>
-    <p>您可以在单个文件组件上管理区域设置消息</p>
+    <p>你可以在单个文件组件上管理区域设置消息</p>
   </div>
 </div>
