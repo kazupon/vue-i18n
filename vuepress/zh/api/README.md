@@ -43,7 +43,7 @@ sidebar: auto
     * `{string | Array | Object} values`: 可选
   * **Return:** `TranslateResult`
 
-用复数本地化关键字的语言环境信息。优先于组件语言环境信息和全局语言环境信息。如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果要将 `values` 指定为字符串值，请设置本地化 `values` 的 `locale` 信息。如果要为 `values` 指定 Array 或 Object values ，则必须使用 `$t` 的 `values` 指定。
+用多元化本地化关键字的语言环境信息。优先于组件语言环境信息和全局语言环境信息。如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果要将 `values` 指定为字符串值，请设置本地化 `values` 的 `locale` 信息。如果要为 `values` 指定 Array 或 Object values ，则必须使用 `$t` 的 `values` 指定。
 
 :::danger 提示
 注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $tc = this.$tc.bind(this)`)
