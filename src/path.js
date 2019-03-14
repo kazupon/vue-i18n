@@ -122,7 +122,6 @@ function getPathCharType (ch: ?string): string {
     case 0x2D: // -
       return 'ident'
 
-    case 0x20: // Space
     case 0x09: // Tab
     case 0x0A: // Newline
     case 0x0D: // Return
