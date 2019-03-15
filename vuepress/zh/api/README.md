@@ -398,7 +398,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`
   * **Return:** `LocaleMessageObject`
 
-获取语言环境的 `locale` 信息。
+获取 locale 的语言环境信息。
 
 #### setLocaleMessage( locale, message )
 
@@ -407,7 +407,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`
     * `{LocaleMessageObject} message`
 
-设置语言环境的 `locale` 信息。
+设置 locale 的语言环境信息。
 
 #### mergeLocaleMessage( locale, message )
 
@@ -461,7 +461,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`: 可选
   * **Return:** `boolean`
 
-检查全局语言环境信息中是否存在 `key` 路径。 如果指定了语言环境，请检查语言环境的语言环境信息。
+检查全局语言环境信息中是否存在 `key` 路径。 如果指定了 `locale` ，请检查 `locale` 的语言环境信息。
 
 #### getDateTimeFormat ( locale )
 
