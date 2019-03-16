@@ -12,7 +12,7 @@ sidebar: auto
 
   * **类型：** `I18nOptions`
 
-基于组件化的本地化选项
+基于组件的本地化选项
 
   * **请参阅:** `VueI18n` 类构造函数选项
 
@@ -27,10 +27,10 @@ sidebar: auto
     * `{Array | Object} values`: 可选
   * **Return:** `TranslateResult`
 
-本地化关键字的语言环境信息, 组件语言环境信息进行本地化优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果你指定的 `key` 为列表/格式化的语言环境信息，你必须指定 `values` 。有关 `values` 详细信息，请参阅格式化 [Formatting](../guide/formatting.md).
+本地化语言环境信息 `key`， 本地化组件语言环境信息优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果你指定了 `locale` ，本地化语言环境使用 `locale` 。如果你指定的 `key` 为列表/格式化的语言环境信息，你必须指定 `values` 。有关 `values` 详细信息，请参阅 [Formatting](../guide/formatting.md).
 
 :::danger 提示
-注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $t = this.$t.bind(this)`)
+注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在`data`选项中, `const $t = this.$t.bind(this)`)。
 :::
 
 #### $tc
@@ -43,10 +43,10 @@ sidebar: auto
     * `{string | Array | Object} values`: 可选
   * **Return:** `TranslateResult`
 
-用多元化本地化关键字的语言环境信息。优先于组件语言环境信息和全局语言环境信息。如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果要将 `values` 指定为字符串值，请设置本地化 `values` 的 `locale` 信息。如果要为 `values` 指定 Array 或 Object values ，则必须使用 `$t` 的 `values` 指定。
+使用复数本地化语言环境信息 `key` ，本地化组件语言环境信息优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果要将 `values` 指定为字符串值，那么你需要设置本地化语言环境信息。如果要为 `values` 指定 Array 或 Object values ，则必须指定 `values` 带有`$t`。
 
 :::danger 提示
-注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $tc = this.$tc.bind(this)`)
+注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在 `data`选项中, `const $tc = this.$tc.bind(this)`)
 :::
 
 #### $te
@@ -60,7 +60,7 @@ sidebar: auto
 检查 key 是否存在。在Vue实例中，如果未指定组件语言环境信息，请使用全局语言环境信息进行检查。如果指定了 `locale` ，请检查语言环境的 `locale` 信息。
 
 :::danger 提示
-注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $te = this.$te.bind(this)`).
+注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在`data`选项中, `const $te = this.$te.bind(this)`).
 :::
 
 #### $d
@@ -74,12 +74,12 @@ sidebar: auto
     * `{Locale | Object} locale`: 可选
   * **Return:** `DateTimeFormatResult`
 
-使用关键字日期时间格式本地化 datetime 的 `value` 。关键字的日期时间格式需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
+使用日期时间格式 `key` 本地化 datetime 的 `value` 。日期时间格式`key`需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
-如果 `dateTimeFormats` 选项中不存在关键字的日期时间格式，则 fallback 将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
+如果 `dateTimeFormats` 选项中不存在日期时间格式的 `key` ，fallback将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
 
 :::danger 提示
-注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $n = this.$n.bind(this)`).
+注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在 `data` 选项中, `const $n = this.$n.bind(this)`).
 :::
 
 #### $n
@@ -93,9 +93,9 @@ sidebar: auto
     * `{Locale} locale`: 可选
   * **Return:** `NumberFormatResult`
 
-使用关键字数字格式本地化 number 的 `value` 。关键字的数字格式需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
+使用数字格式 `key` 本地化 number 的 `value` 。数字格式 `key` 需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
-如果 `numberFormats` 选项中不存在关键字的数字格式，则 fallback 将依赖于 `VueI18n` 构造函数的 `fallbackLocale`选项。
+如果 `numberFormats` 选项中不存在用数字格式 `key` ，则 fallback 将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
 
 如果第二个 `key` 参数指定为对象，则它应具有以下属性：
 
@@ -116,7 +116,7 @@ sidebar: auto
 任何指定数字的格式选项将优先于 `VueI18n` 构造函数的 `numberFormats` 。
 
 :::danger 提示
-注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在data选项中, `const $d = this.$d.bind(this)`).
+注意 你需要保证此上下文等于生命周期方法中的组件实例 (例如，在 `data` 选项中, `const $d = this.$d.bind(this)`).
 :::
 
 ### 注入属性
@@ -127,13 +127,13 @@ sidebar: auto
 
   * **Read only**
 
-获取 `VueI18n` 实例，如果你指定。
+获取 `VueI18n` 实例，如果是指定。
 
 如果在组件选项中指定了 `i18n` 选项，则可以在组件上获得 `VueI18n` 实例，否则，你将获得 `VueI18n` 的根实例。
 
 ## `VueI18n` class
 
-`Vuei18n` class 实现了 [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js) `I18n` 接口
+`Vuei18n` class 实现了`I18n` 接口 [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### 静态属性
 
@@ -156,7 +156,7 @@ vue-i18n 版本
 
   * `{boolean} numberFormat`: 区域敏感的数字格式
 
-由于使用ECMAScript Internationalization API（ECMA-402）实现，上述国际化功能取决于[浏览器环境](http://kangax.github.io/compat-table/esintl/)
+由于使用ECMAScript Internationalization API（ECMA-402）实现，上述国际化功能取决于[the browser environments](http://kangax.github.io/compat-table/esintl/)
 
 ### 构造函数选项
 
@@ -248,7 +248,7 @@ vue-i18n 版本
 
 在组件本地化中，当本地化失败时是否回退到根级别（全局）本地化。
 
-如果为 `false` ，则会发出警告，并返回关键字。
+如果为 `false` ，则会发出警告，并返回key。
 
 #### sync
 
@@ -281,7 +281,7 @@ vue-i18n 版本
 
 是否在回退到 `fallbackLocale` 或 `root` 时取消警告。
 
-如果为true ，则仅在根本没有可用的转换时生成警告，而不是在回退时。
+如果为 `true` ，则仅在根本没有可用的转换时生成警告，而不是在回退时。
 
 #### preserveDirectiveContent
 
@@ -398,7 +398,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`
   * **Return:** `LocaleMessageObject`
 
-获取 locale 的语言环境信息。
+获取语言环境的 `locale` 信息。
 
 #### setLocaleMessage( locale, message )
 
@@ -407,7 +407,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`
     * `{LocaleMessageObject} message`
 
-设置 locale 的语言环境信息。
+设置语言环境的 `locale` 信息。
 
 #### mergeLocaleMessage( locale, message )
 
@@ -451,7 +451,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{string | Array | Object} values`: 可选
   * **Return:** `TranslateResult`
 
-这与 `$c` 方法返回的 `Function` 相同。 更多细节见 [$c](#c)。
+这与 `$tc` 方法返回的 `Function` 相同。 更多细节见 [$tc](#tc)。
 
 #### te( key, [locale] )
 
@@ -461,7 +461,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`: 可选
   * **Return:** `boolean`
 
-检查全局语言环境信息中是否存在 `key` 路径。 如果指定了 `locale` ，请检查 `locale` 的语言环境信息。
+检查全局语言环境信息中是否存在key路径。 如果指定了语言环境 `locale`，请检查语言环境的语言环境信息 `locale`。
 
 #### getDateTimeFormat ( locale )
 
@@ -576,7 +576,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * args: 可选, 用于列表或命名格式
 
 ::::提示 注意
-当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent` 。 在使用[transitions](https://vuejs.org/v2/guide/transitions.html)的时候，这可能有不合理的情况. 在指令 `unbind` 之后保留 `textContent` 数据使用 `.preserve` 修饰符或global [`preserveDirectiveContent` option](#preservedirectivecontent).
+当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent` 。 在使用的时候，可能有不合理的情况[transitions](https://vuejs.org/v2/guide/transitions.html). 在指令解除绑定之后保留 `textContent` 数据使用 `.preserve` 修饰符或global [`preserveDirectiveContent` option](#preservedirectivecontent).
 ::::
   * **示例：**
 ```html
