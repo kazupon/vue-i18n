@@ -1,14 +1,14 @@
 # 格式化
 
-## HTML格式
+## HTML格式化
 
 :::warning 提示
-:warning: 在你的网站上动态插入任意HTML可能非常危险，因为它很容易导致XSS漏洞。 仅对可信内容使用HTML插值，而不对用户提供的内容使用。
+:warning: 在你的网站上动态插入任意 HTML 可能非常危险，因为它很容易导致 XSS 漏洞。仅对可信内容使用 HTML 插值，而不对用户提供的内容使用。
 
 我们建议使用 [组件插值](interpolation.md) 功能。
 :::
 
-在某些情况下，你可能希望将翻译呈现为HTML消息而不是静态字符串。
+在某些情况下，你可能希望将翻译呈现为 HTML 消息而不是静态字符串。
 
 
 ```js
@@ -130,7 +130,7 @@ const messages = {
 
 ## 自定义格式
 
-有时，你可能需要使用自定义格式进行翻译 (例如： [ICU 信息语法](http://userguide.icu-project.org/formatparse/messages)).
+有时，你可能需要使用自定义格式进行翻译 (例如： [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
 
 你可以使用实现 [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43) 的自定义格式化程序来实现。
 
