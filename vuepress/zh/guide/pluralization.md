@@ -75,11 +75,11 @@ const messages = {
 
 ## 自定义复数
 
-然而，这种复数并不适用于所有语言（例如，斯拉夫语言具有不同的复数规则）。
+然而，这种复数并不适用于所有语言(例如，斯拉夫语言具有不同的复数规则)。
 
 为了实现这些规则，你可以覆盖 `VueI18n.prototype.getChoiceIndex` 函数。
 
-使用斯拉夫语言规则的简化示例（俄语，乌克兰语等）：
+使用斯拉夫语言规则的简化示例(俄语，乌克兰语等)：
 ```js
 /**
  * @param choice {number} 由 $tc 输入的选择索引: `$tc('path.to.rule', choiceIndex)`
@@ -87,7 +87,7 @@ const messages = {
  * @returns 选择复数单词的最终选择索引
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n 实例, 所以 locale 属性也存在于此处
+  // this === VueI18n 实例，所以 locale 属性也存在于此处
   if (this.locale !== 'ru') {
     // 继续执行默认实现
   }
@@ -124,7 +124,7 @@ const messages = {
 ```
 格式为 `0 things | 1 thing | few things | multiple things`.
 
-你的模板仍然需要使用 `$tc()` ，而不是 `$t()` ：
+你的模板仍然需要使用 `$tc()`，而不是 `$t()` ：
 
 ```html
 <p>{{ $tc('car', 1) }}</p>

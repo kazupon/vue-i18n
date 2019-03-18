@@ -5,7 +5,7 @@
 Locale Messages 语法如下：
 
 ```typescript
-// 作为Flowtype定义，Locale Messages 语法类似于 BNF 注释
+// 作为 Flowtype 定义，Locale Messages 语法类似于 BNF 注释
 type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 type LocaleMessageObject = { [key: Path]: LocaleMessage };
 type LocaleMessageArray = LocaleMessage[];
@@ -39,7 +39,7 @@ type Path = string;
 }
 ```
 
-在上面的Locale Messages结构中，你可以使用以下 key 路径进行翻译。
+在上面的 Locale Messages 结构中，你可以使用以下 key 路径进行翻译。
 
 ```html
 <div id="app">
@@ -75,7 +75,7 @@ type Path = string;
 
 ## Linked locale messages
 
-如果有一个翻译 key 总是与另一个具有相同的具体文本，你可以链接到它。要链接到另一个翻译 key ，你所要做的就是在其内容前加上一个 `@:`符号，后跟翻译 key 的全名，包括你要链接到的名称空间。
+如果有一个翻译 key 总是与另一个具有相同的具体文本，你可以链接到它。要链接到另一个翻译 key ，你所要做的就是在其内容前加上一个 `@:` 符号，后跟翻译 key 的全名，包括你要链接到的名称空间。
 
 Locale messages 如下：
 
@@ -106,7 +106,7 @@ const messages = {
 
 ### 按括号分组
 
-链接的语言环境消息的翻译 key 也可以具有 `@:(message.foo.bar.baz)` 的形式，其中到另一个翻译 key 的链接在括号 `()` 。
+链接的语言环境消息的翻译 key 也可以具有 `@:(message.foo.bar.baz)` 的形式，其中到另一个翻译 key 的链接在括号 `()`。
 
 如果链接 `@:message.something` 按 `.` 跟随，则此选项非常有用，它可以是链接的一部分但是如果它不应该是。
 

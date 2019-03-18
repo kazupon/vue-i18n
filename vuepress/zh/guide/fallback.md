@@ -41,4 +41,4 @@ const i18n = new VueI18n({
 [vue-i18n] Fall back to translate the keypath 'message' with 'en' locale.
 ```
 
-为了抑制这些警告（同时保留那些警告完全没有给定 key 的翻译），在初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true`。
+为了抑制这些警告(同时保留那些警告完全没有给定 key 的翻译)，在初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true`。

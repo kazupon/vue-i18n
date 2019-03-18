@@ -6,13 +6,13 @@
  7.0+ 新增
 :::
 
-有时，我们需要使用包含HTML标记或组件的语言环境消息进行本地化。 例如：
+有时，我们需要使用包含 HTML 标记或组件的语言环境消息进行本地化。 例如：
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-在上面的消息中，如果你使用 `$t` ，可能你会尝试编写以下语言环境消息：
+在上面的消息中，如果你使用 `$t`，可能你会尝试编写以下语言环境消息：
 
 ```js
 const messages = {
@@ -84,13 +84,13 @@ new Vue({
 </div>
 ```
 
-关于上面的例子，见 [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
+关于上面的例子，见 [示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
 
 `i18n` 功能组件的子元素用 `path` 属性的语言环境消息进行插值。 在上面的例子中，
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
-内插在 `term` 区域信息.
+内插在 `term` 区域信息。
 
 在上面的示例中，组件插值遵循 **列表格式**。 `i18n` 功能组件的子项按其出现顺序进行插值。
 
@@ -151,7 +151,7 @@ new Vue({
 </div>
 ```
 
-:::warning Notice
+:::warning 提示
 :warning: `i18n` 组件的所有子项都必须设置 `place` 属性。否则它将回退到列表格式。
 :::
 

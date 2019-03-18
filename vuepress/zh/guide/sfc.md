@@ -2,9 +2,9 @@
 
 ## 基本用法
 
-如果使用单文件组件构建Vue组件或Vue应用程序，则可以管理 `i18n` 自定义块的语言环境信息。
+如果使用单文件组件构建 Vue 组件或 Vue 应用程序，则可以管理 `i18n` 自定义块的语言环境信息。
 
-以下内容是： [single file components example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
+以下内容是： [单文件组件示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
 ```js
 <i18n>
@@ -44,7 +44,7 @@ export default {
 
 ## 安装 vue-i18n-loader
 
-由于使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader` 。如果使用单文件组件，虽然 [vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用，但你必须另外安装  [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) ：
+由于使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader`。如果使用单文件组件，虽然 [vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用，但你必须另外安装  [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) ：
 
 ```sh
 npm i --save-dev @kazupon/vue-i18n-loader
@@ -54,7 +54,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 对于 Webpack ，需要以下配置：
 
-对于 vue-loader v15或更高版本：
+对于 vue-loader v15 或更高版本：
 ```js
 module.exports = {
   // ...
@@ -103,7 +103,7 @@ module.exports = {
 
 [Vue CLI 3.0](https://github.com/vuejs/vue-cli) 隐藏了 webpack 配置，因此，如果我们想在单文件组件中添加对 `<i18n>` 标记的支持，我们需要修改现有配置。
 
-为此，我们必须在项目的根目录下创建一个 `vue.config.js` 。完成后，我们必须包括以下内容：
+为此，我们必须在项目的根目录下创建一个 `vue.config.js`。完成后，我们必须包括以下内容：
 
 对于 vue-loader v15或更高版本：
 ```js
@@ -141,7 +141,7 @@ module.exports = {
 ```
 _别忘了安装 [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` 或 `yarn add deepmerge -D`)_
 
-如果你想了解有关修改现有配置的更多信息 [click here](https://cli.vuejs.org/guide/webpack.html).
+如果你想了解有关修改现有配置的更多信息 [点击这里](https://cli.vuejs.org/guide/webpack.html).
 
 ## Laravel-Mix
 
@@ -161,7 +161,7 @@ mix.extend( 'i18n', new class {
     }(),
 );
 
-// 确保在 .js(...，...) 之前调用 .i18n()（来加载加载器）
+// 确保在 .js(...，...) 之前调用 .i18n()(来加载加载器)
 mix.i18n()
    .js( 'resources/js/App.js', 'public/js/app.js' )
    ...
@@ -169,7 +169,7 @@ mix.i18n()
 
 对于带有 vue-loader v14 的 Laravel-mix 2 ：
 
-从 Laravel-mix 的 [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) 开始，你可以通过 mix.extend() 添加自定义规则。Laravel mix 已经有了处理 .vue 文件的规则。要添加 `vue-i18n-loader` ，请将以下内容添加到 `webpack.mix.js`
+从 Laravel-mix 的 [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) 开始，你可以通过 mix.extend() 添加自定义规则。Laravel mix 已经有了处理 .vue 文件的规则。要添加 `vue-i18n-loader`，请将以下内容添加到 `webpack.mix.js`
 
 ```js
 // 下面的代码将注入 i18n Kazupon/vue-18-loader 作为 .vue 文件的加载器。
@@ -193,7 +193,7 @@ mix.i18n()
 
 ## YAML loading
 
- `i18n` 自定义块需要指定JSON格式，也可以通过使用 `vue-loader` 预加载器功能来使用 `YAML` 格式。
+ `i18n` 自定义块需要指定 JSON 格式，也可以通过使用 `vue-loader` 预加载器功能来使用 `YAML` 格式。
 
 以下是 `YAML` 格式的 `i18n` 自定义块：
 
@@ -277,7 +277,7 @@ module.exports = {
 
 ## Scoped 风格
 
-当使用带有 `scoped style` `vue-i18n` 时，重要的是要记住使用 [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) 来设置嵌套转换的样式。例如：
+当使用带有 `scoped style` `vue-i18n` 时，重要的是要记住使用 [深度选择器](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) 来设置嵌套转换的样式。例如：
 
 ```html
 ...

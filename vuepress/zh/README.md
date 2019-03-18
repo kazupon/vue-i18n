@@ -7,7 +7,7 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 0 0 24px 0;">
-  <h4>特别赞助</h4>
+  <h4>白银赞助商</h4>
   <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img src="/vue-i18n/patrons/babeledit.png">
   </a>
@@ -24,14 +24,14 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
 <div class="features">
   <div class="feature">
     <h2>简单</h2>
-    <p>你可以使用简单的API将国际化引入你的应用</p>
+    <p>通过简单的 API 将你的应用国际化</p>
   </div>
   <div class="feature">
     <h2>强大</h2>
-    <p>除了简单的翻译外，还支持多元化，数字，日期时间等本地化</p>
+    <p>除了简单的翻译外，还支持复数，数字，日期时间等本地化处理</p>
   </div>
   <div class="feature">
     <h2>面向组件</h2>
-    <p>你可以在单个文件组件上管理语言环境消息</p>
+    <p>你可以在单文件组件上管理语言环境消息</p>
   </div>
 </div>

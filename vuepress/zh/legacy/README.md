@@ -51,7 +51,7 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// 改变丢失的处理程序
+// 改变丢失的处理函数
 i18n.missing = (locale, key, vm) => {
   // 处理翻译缺失
 }
@@ -191,7 +191,7 @@ i18n.te('hello') // -> true
 
 ### locales 已被替换
 
-使用 `messages` 的 `VueI18n` 类的构造函数的选项，或 `messages` 的 `i18n`选项（Component选项）：
+使用 `messages` 的 `VueI18n` 类的构造函数的选项，或 `messages` 的 `i18n` 选项( Component 选项)：
 
 ```js
 const i18n = new VueI18n({

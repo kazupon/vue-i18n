@@ -19,7 +19,7 @@ our-cool-project
 ---it.js
 ```
 
-`lang` 文件夹是我们所有翻译文件所在的位置。 `setup` 文件夹是我们的任意设置的文件，如 i18n-setup ，全局组件 inits，插件 inits 和其他位置。
+ `lang` 文件夹是我们所有翻译文件所在的位置。 `setup` 文件夹是我们的任意设置的文件，如 i18n-setup ，全局组件 inits ，插件 inits 和其他位置。
 
 ```js
 //i18n-setup.js
@@ -62,9 +62,9 @@ export function loadLanguageAsync (lang) {
 
 简而言之，我们正在创建一个新的 VueI18n 实例。然后我们创建一个 `loadedLanguages` 数组，它将跟踪我们加载的语言。接下来是 `setI18nLanguage` 函数，它将实际更改我们的 vueI18n 实例中的语言，axios 以及其他需要的地方。
 
- `loadLanguageAsync` 函数是我们实际用于更改语言的函数。加载新文件是通过import功能完成的， `import` 功能由Webpack慷慨提供，它允许我们动态加载文件，并且因为它使用 promises ，我们可以轻松地等待加载完成。
+ `loadLanguageAsync` 函数是我们实际用于更改语言的函数。加载新文件是通过import功能完成的， `import` 功能由 Webpack 慷慨提供，它允许我们动态加载文件，并且因为它使用 promises ，我们可以轻松地等待加载完成。
 
-你可以在 [Webpack documentation](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 中了解有关导入功能的更多信息。
+你可以在 [Webpack 文档](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 中了解有关导入功能的更多信息。
 
 使用 `loadLanguageAsync` 函数很简单。一个常见的用例是在 vue-router beforeEach 钩子里面。
 

@@ -30,8 +30,7 @@ npm install vue-i18n
 yarn add vue-i18n
 ```
 
-如果在一个模块化工程中使用它，必须要通过 Vue.use() 明确地安装`vue-i18n`：
-via `Vue.use()`:
+如果在一个模块化工程中使用它，必须要通过 `Vue.use()` 明确地安装`vue-i18n`：
 
 
 ```javascript
@@ -49,7 +48,7 @@ Vue.use(VueI18n)
 vue add i18n
 ```
 
-你需要 Vue cli 3.x 作为先决条件，你可以在shell上使用下面的命令来安装：
+你需要 Vue cli 3.x 作为先决条件，你可以在命令式上使用下面的命令来安装：
 
 ```sh
 npm install @vue/cli -g
