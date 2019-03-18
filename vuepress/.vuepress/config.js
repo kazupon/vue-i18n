@@ -9,7 +9,7 @@ module.exports = {
     '/zh/': {
       lang: 'zh-CN',
       title: 'Vue I18n',
-      description: 'Vue I18n是Vue.js的国际化插件'
+      description: 'Vue I18n 是 Vue.js 的国际化插件'
     },
   },
   head: [
