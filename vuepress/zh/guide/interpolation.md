@@ -12,7 +12,7 @@
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-在上面的消息中，如果你使用 `$t` ，可能你会尝试编写以下区域设置消息：
+在上面的消息中，如果你使用 `$t` ，可能你会尝试编写以下语言环境消息：
 
 ```js
 const messages = {
@@ -35,7 +35,7 @@ const messages = {
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-这非常麻烦，如果在区域设置消息中配置 `<a>` 标记，则可能存在因本地化而导致的XSS漏洞 `v-html="$t('term')"`。
+这非常麻烦，如果在语言环境消息中配置 `<a>` 标记，则可能存在因本地化而导致的XSS漏洞 `v-html="$t('term')"`。
 
 你可以使用 `i18n` 功能组件来避免它。 例如：
 

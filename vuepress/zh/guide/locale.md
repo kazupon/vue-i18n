@@ -2,7 +2,7 @@
 
 通常，使用 Vue 根实例作为起点，使用 `VueI18n` 类的 `locale` 属性作为参考来本地化所有子组件。
 
-有时你可能希望动态更改区域设置。在这种情况下，你可以更改 `VueI18n` 实例的 `locale` 属性的值。
+有时你可能希望动态更改语言环境。在这种情况下，你可以更改 `VueI18n` 实例的 `locale` 属性的值。
 
 ```js
 const i18n = new VueI18n({
@@ -44,5 +44,5 @@ export default {
 ```
 
 :::warning 警告
-:warning: 对于使用 `sync: false`组件，将忽略区域设置更改。
+:warning: 对于使用 `sync: false`组件，将忽略语言环境更改。
 :::

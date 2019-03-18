@@ -82,7 +82,7 @@ new Vue({
 
 为避免以上警告 (同时保留那些警告完全没有给定关键字的翻译) 需初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true` 。
 
-如果你希望在组件区域设置中进行本地化, 你可以用 `sync: false` 和 `locale` 在 `i18n` 选项中.
+如果你希望在组件语言环境中进行本地化, 你可以用 `sync: false` 和 `locale` 在 `i18n` 选项中.
 
 ## 功能组件的翻译
 
