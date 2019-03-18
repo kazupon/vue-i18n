@@ -22,13 +22,13 @@ const i18n = new VueI18n({
 })
 ```
 
-模板如下:
+模板如下：
 
 ```html
 <p>{{ $t('message') }}</p>
 ```
 
-输出如下:
+输出如下：
 
 ```html
 <p>hello world</p>

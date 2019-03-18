@@ -14,7 +14,7 @@ sidebar: auto
 
 基于组件的本地化选项
 
-  * **请参阅:** `VueI18n` 类构造函数选项
+  * **请参阅：** `VueI18n` 类构造函数选项
 
 ### Vue 注入方法
 
@@ -25,7 +25,7 @@ sidebar: auto
     * `{Path} key`: 必填
     * `{Locale} locale`: 可选
     * `{Array | Object} values`: 可选
-  * **Return:** `TranslateResult`
+  * **返回值：** `TranslateResult`
 
 本地化语言环境信息 `key`， 本地化组件语言环境信息优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果你指定了 `locale` ，本地化语言环境使用 `locale` 。如果你指定的 `key` 为列表/格式化的语言环境信息，你必须指定 `values` 。有关 `values` 详细信息，请参阅 [Formatting](../guide/formatting.md).
 
@@ -41,7 +41,7 @@ sidebar: auto
     * `{number} choice`: 可选, 默认为 1
     * `{Locale} locale`: 可选
     * `{string | Array | Object} values`: 可选
-  * **Return:** `TranslateResult`
+  * **返回值：** `TranslateResult`
 
 使用复数本地化语言环境信息 `key` ，本地化组件语言环境信息优先于全局语言环境信息。 如果未指定组件语言环境信息，将使用全局语言环境信息进行本地化。如果指定了 `locale` ，本地化语言环境使用 `locale` 。如果要将 `values` 指定为字符串值，那么你需要设置本地化语言环境信息。如果要为 `values` 指定 Array 或 Object values ，则必须指定 `values` 带有`$t`。
 
@@ -55,7 +55,7 @@ sidebar: auto
 
     * `{Path} key`: 必填
     * `{Locale} locale`: 可选
-  * **Return:** `boolean`
+  * **返回值：** `boolean`
 
 检查 key 是否存在。在Vue实例中，如果未指定组件语言环境信息，请使用全局语言环境信息进行检查。如果指定了 `locale` ，请检查语言环境的 `locale` 信息。
 
@@ -72,7 +72,7 @@ sidebar: auto
     * `{number | Date} value`: 必填
     * `{Path | Object} key`: 可选
     * `{Locale | Object} locale`: 可选
-  * **Return:** `DateTimeFormatResult`
+  * **返回值：** `DateTimeFormatResult`
 
 使用日期时间格式 `key` 本地化 datetime 的 `value` 。日期时间格式`key`需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
@@ -91,7 +91,7 @@ sidebar: auto
     * `{number} value`: 必填
     * `{Path | Object} key`: 可选
     * `{Locale} locale`: 可选
-  * **Return:** `NumberFormatResult`
+  * **返回值：** `NumberFormatResult`
 
 使用数字格式 `key` 本地化 number 的 `value` 。数字格式 `key` 需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
@@ -196,7 +196,7 @@ vue-i18n 版本
 
 本地化的日期时间格式。
 
-  * **请参阅:** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+  * **请参阅：** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
@@ -208,7 +208,7 @@ vue-i18n 版本
 
 本地化的数字格式。
 
-  * **请参阅:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+  * **请参阅：** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### availableLocales
 
@@ -218,7 +218,7 @@ vue-i18n 版本
 
   * **默认值：** `[]`
 
-  * **Examples:** `["en", "ja"]`
+  * **示例：** `["en", "ja"]`
 
 以词法顺序排列的 `messages` 中的可用语言环境列表。
 
@@ -383,7 +383,7 @@ vue-i18n 版本
     * `{number} choice`
     * `{number} choicesLength`
 
-  * **Return:** `finalChoice {number}`
+  * **返回值：** `finalChoice {number}`
 
 获取当前复数和给定选择数量的复数索引，可以通过原型变更覆盖：
 
@@ -396,7 +396,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
   * **参数：**
 
     * `{Locale} locale`
-  * **Return:** `LocaleMessageObject`
+  * **返回值：** `LocaleMessageObject`
 
 获取语言环境的 `locale` 信息。
 
@@ -427,7 +427,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Path} key`: 必填
     * `{Locale} locale`: 可选
     * `{Array | Object} values`: 可选
-  * **Return:** : `TranslateResult`
+  * **返回值：** : `TranslateResult`
 
 这与 `$t` 方法返回的 `Function` 相同。 更多细节见 [$t](#t)。
 
@@ -440,7 +440,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Path} key`: 必填
     * `{Locale} locale`: 可选
     * `{Array} values`: 可选
-  * **Return:** : `TranslateResult`
+  * **返回值：** : `TranslateResult`
 
 #### tc( key, [choice], [values] )
 
@@ -449,7 +449,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Path} key`: 必填
     * `{number} choice`: 可选, 默认为 1
     * `{string | Array | Object} values`: 可选
-  * **Return:** `TranslateResult`
+  * **返回值：** `TranslateResult`
 
 这与 `$tc` 方法返回的 `Function` 相同。 更多细节见 [$tc](#tc)。
 
@@ -459,7 +459,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
     * `{string} key`: 必填
     * `{Locale} locale`: 可选
-  * **Return:** `boolean`
+  * **返回值：** `boolean`
 
 检查全局语言环境信息中是否存在key路径。 如果指定了语言环境 `locale`，请检查语言环境的语言环境信息 `locale`。
 
@@ -470,7 +470,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
   * **参数：**
 
     * `{Locale} locale`
-  * **Return:** `DateTimeFormat`
+  * **返回值：** `DateTimeFormat`
 
 获取语言环境的日期时间格式。
 
@@ -505,7 +505,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{number | Date} value`: 必填
     * `{Path | Object} key`: 可选
     * `{Locale | Object} locale`: 可选
-  * **Return:** `DateTimeFormatResult`
+  * **返回值：** `DateTimeFormatResult`
 
 这与 Vue 实例方法的 `$d` 方法相同。 更多细节见 [$d](#d)。
 
@@ -516,7 +516,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
   * **参数：**
 
     * `{Locale} locale`
-  * **Return:** `NumberFormat`
+  * **返回值：** `NumberFormat`
 
 获取语言环境的数字格式。
 
@@ -551,7 +551,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{number} value`: 必填
     * `{Path | Object} key`: 可选
     * `{Locale} locale`: 可选
-  * **Return:** `NumberFormatResult`
+  * **返回值：** `NumberFormatResult`
 
 这与 Vue 实例方法的 `$n` 方法相同。 更多细节见 [$n](#n)。
 
@@ -596,7 +596,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
-  * **请参阅:** [Custom directive localization](../guide/directive.md)
+  * **请参阅：** [Custom directive localization](../guide/directive.md)
 
 ## 组件
 
@@ -662,6 +662,6 @@ new Vue({
 
 有关详细用法，请参阅下面链接的指南部分。
 
-#### 请参阅:
+#### 请参阅：
 
 [Component interpolation](../guide/interpolation.md)

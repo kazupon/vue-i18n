@@ -156,14 +156,14 @@ class CustomFormatter {
      //   `message` 插值的值
      //   使用 `$t`， `$tc` 和 `i18n` 功能组件传递值。
      //   e.g.
-     //   - $t('hello', { name: 'kazupon' }) -> 传递值: Object `{ name: 'kazupon' }`
+     //   - $t('hello', { name: 'kazupon' }) -> 传递值： Object `{ name: 'kazupon' }`
      //   - $t('hello', ['kazupon']) -> 传递值: Array `['kazupon']`
      //   - `i18n` 功能组件 (组件插值)
      //     <i18n path="hello">
      //       <p>kazupon</p>
      //       <p>how are you?</p>
      //     </i18n>
-     //     -> 传递值: Array (included VNode):
+     //     -> 传递值： Array (included VNode):
      //        `[VNode{ tag: 'p', text: 'kazupon', ...}, VNode{ tag: 'p', text: 'how are you?', ...}]`
      //
      // @return {Array<any>}

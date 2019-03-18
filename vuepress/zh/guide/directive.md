@@ -25,7 +25,7 @@ new Vue({
 }).$mount('#string-syntax')
 ```
 
-模板:
+模板：
 
 ```html
 <div id="string-syntax">
@@ -36,7 +36,7 @@ new Vue({
 </div>
 ```
 
-输出:
+输出：
 
 ```html
 <div id="string-syntax">
@@ -67,7 +67,7 @@ new Vue({
 }).$mount('#object-syntax')
 ```
 
-模板:
+模板：
 
 ```html
 <div id="object-syntax">
@@ -78,7 +78,7 @@ new Vue({
 </div>
 ```
 
-输出:
+输出：
 
 ```html
 <div id="object-syntax">
@@ -90,7 +90,7 @@ new Vue({
 ## 使用翻译
 
 :::提示 支持版本
-:新增: 8.7+
+ 8.7+ 新增
 :::
 
 当 `v-t` 指令应用于内部元素 [`<transition>` component](https://vuejs.org/v2/api/#transition)时, 你可能会注意到转换后的消息将会消失。 这种行为与 `<transition>` 组件实现的性质有关 **在转换开始之前** ，`<transition>` 组件内消失元素中的所有指令都将被销毁。此行为可能导致内容在短动画上闪烁，但在长过渡时最明显。
@@ -111,7 +111,7 @@ new Vue({
 }).$mount('#in-transitions')
 ```
 
-模板:
+模板：
 
 ```html
 <div id="in-transitions">
@@ -139,7 +139,7 @@ new Vue({
 }).$mount('#in-transitions')
 ```
 
-模板:
+模板：
 
 ```html
 <div id="in-transitions">

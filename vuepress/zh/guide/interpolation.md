@@ -29,7 +29,7 @@ const messages = {
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
 ```
 
-输出:
+输出：
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
