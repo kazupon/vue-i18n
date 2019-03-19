@@ -57,7 +57,7 @@ sidebar: auto
     * `{Locale} locale`: 可选
   * **返回值：** `boolean`
 
-检查 key 是否存在。在 Vue 实例中，如果未指定组件语言环境信息，请使用全局语言环境信息进行检查。如果指定了 `locale`，请检查语言环境的 `locale` 信息。
+检查 key 是否存在。在 Vue 实例中，如果未指定组件语言环境信息，则使用全局语言环境信息。如果指定了 `locale`，则使用 `locale` 的语言环境。
 
 :::danger 提示
 注意，你需要保证此上下文等于生命周期方法中的组件实例 (例如在 `data` 选项中，`const $te = this.$te.bind(this)`)。
