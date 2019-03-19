@@ -92,11 +92,11 @@ module.exports = {
         lastUpdated: '最近一次更新',
         nav: [
           {
-            text: 'Guide',
+            text: '指南',
             link: '/zh/guide/formatting',
           },
           {
-            text: 'Legacy',
+            text: '旧版',
             link: '/zh/legacy/',
           },
           {
@@ -104,15 +104,15 @@ module.exports = {
             link: '/zh/api/'
           },
           {
-            text: 'CLI Plugin',
+            text: '脚手架插件',
             link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
           },
           {
-            text: 'Patreon',
+            text: '赞助',
             link: 'https://www.patreon.com/kazupon'
           },
           {
-            text: 'Release Notes',
+            text: '发布日志',
             link: 'https://github.com/kazupon/vue-i18n/releases'
           }
         ],
