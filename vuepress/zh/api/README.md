@@ -74,7 +74,7 @@ sidebar: auto
     * `{Locale | Object} locale`: 可选
   * **返回值：** `DateTimeFormatResult`
 
-使用日期时间格式 `key` 本地化 datetime 的 `value`。日期时间格式 `key` 需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
+将日期时间 `value` 以 `key` 的格式本地化。日期时间格式 `key` 需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
 如果 `dateTimeFormats` 选项中不存在日期时间格式的 `key`，fallback将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
 
