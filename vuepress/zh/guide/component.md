@@ -1,4 +1,4 @@
-# Component based localization
+# 基于组件的本地化
 
 通常语言环境信息 (例如： `locale`，`messages` 等) 被设置为 `VueI18n` 的构造实例并且需要设置 `i18n` 的选项作为 Vue 的实例。
 

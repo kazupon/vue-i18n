@@ -293,7 +293,7 @@ vue-i18n 版本
 
 在指令解除绑定后，`v-t` 指令的元素是否应该保留 `textContent`。
 
-### Properties
+### 属性
 
 #### locale
 
@@ -375,7 +375,7 @@ vue-i18n 版本
 
 在指令解除绑定后，`v-t` 指令的元素是否应该保留 `textContent`。
 
-### Methods
+### 方法
 
 #### getChoiceIndex
 
@@ -575,7 +575,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * locale：可选，语言环境
     * args：可选，用于列表或命名格式
 
-::::提示 注意
+::::tip 注意
 当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在使用的时候，可能有不合理的情况[transitions](https://vuejs.org/v2/guide/transitions.html)。在指令解除绑定之后保留 `textContent` 数据使用 `.preserve` 修饰符或 global [`preserveDirectiveContent` option](#preservedirectivecontent)。
 ::::
   * **示例：**
