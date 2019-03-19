@@ -5,7 +5,7 @@
 :::warning 提示
 :warning: 在你的网站上动态插入任意 HTML 可能非常危险，因为它很容易导致 XSS 漏洞。仅对可信内容使用 HTML 插值，而不对用户提供的内容使用。
 
-我们建议使用 [组件插值](interpolation.md) 功能。
+我们建议使用[组件插值](interpolation.md) 功能。
 :::
 
 在某些情况下，你可能希望将翻译呈现为 HTML 消息而不是静态字符串。
@@ -130,9 +130,9 @@ const messages = {
 
 ## 自定义格式
 
-有时，你可能需要使用自定义格式进行翻译 (例如： [ICU 信息语法](http://userguide.icu-project.org/formatparse/messages))。
+有时，你可能需要使用自定义格式进行翻译 (例如：[ICU 信息语法](http://userguide.icu-project.org/formatparse/messages))。
 
-你可以使用实现 [格式化接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43) 的自定义格式化程序来实现。
+你可以使用实现[格式化接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43) 的自定义格式化程序来实现。
 
 以下使用 ES2015 类语法的自定义格式化程序：
 
@@ -149,15 +149,15 @@ class CustomFormatter {
      // @param {string} 信息
      //   列表或命名格式的字符串。
      //   例如：
-     //   - 命名格式: 'Hi {name}'
-     //   - 列表格式: 'Hi {0}'
+     //   - 命名格式：'Hi {name}'
+     //   - 列表格式：'Hi {0}'
      //
      // @param {Object | Array} 值
      //   `message` 插值的值
      //   使用 `$t`， `$tc` 和 `i18n` 功能组件传递值。
      //   e.g.
      //   - $t('hello', { name: 'kazupon' }) -> 传递值： Object `{ name: 'kazupon' }`
-     //   - $t('hello', ['kazupon']) -> 传递值: Array `['kazupon']`
+     //   - $t('hello', ['kazupon']) -> 传递值：Array `['kazupon']`
      //   - `i18n` 功能组件 (组件插值)
      //     <i18n path="hello">
      //       <p>kazupon</p>
@@ -196,4 +196,4 @@ const i18n = new VueI18n({
 new Vue({ i18n }).$mount('#app')
 ```
 
-你可以查看 [自定义格式化程序的官方示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)。
+你可以查看[自定义格式化程序的官方示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom)。

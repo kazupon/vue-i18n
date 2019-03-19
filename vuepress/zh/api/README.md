@@ -10,11 +10,11 @@ sidebar: auto
 
 #### i18n
 
-  * **类型：** `I18nOptions`
+  * **类型：**`I18nOptions`
 
 基于组件的本地化选项
 
-  * **请参阅：** `VueI18n` 类构造函数选项
+  * **请参阅：**`VueI18n` 类构造函数选项
 
 ### Vue 注入方法
 
@@ -22,10 +22,10 @@ sidebar: auto
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{Locale} locale`: 可选
-    * `{Array | Object} values`: 可选
-  * **返回值：** `TranslateResult`
+    * `{Path} key`：必填
+    * `{Locale} locale`：可选
+    * `{Array | Object} values`：可选
+  * **返回值：**`TranslateResult`
 
 本地化语言环境信息 `key`，在本地化时组件的语言环境信息优先于全局语言环境信息。如果未指定组件的语言环境信息，就使用全局语言环境信息进行本地化。如果你指定了 `locale` 参数，则使用 `locale` 提供的语言环境进行本地化。如果你为列表/格式化的语言环境信息指定了 `key`，就必须同时指定 `values`。有关 `values` 的详细信息，请参阅[格式化](../guide/formatting.md)。
 
@@ -37,95 +37,95 @@ sidebar: auto
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{number} choice`: 可选，默认为 1
-    * `{Locale} locale`: 可选
-    * `{string | Array | Object} values`: 可选
-  * **返回值：** `TranslateResult`
+    * `{Path} key`：必填
+    * `{number} choice`：可选，默认为 1
+    * `{Locale} locale`：可选
+    * `{string | Array | Object} values`：可选
+  * **返回值：**`TranslateResult`
 
 以复数形式将语言环境信息 `key` 本地化。在本地化时组件的语言环境信息优先于全局语言环境信息。如果未指定组件的语言环境信息，就使用全局语言环境信息进行本地化。如果你指定了 `locale` 参数，则使用 `locale` 提供的语言环境进行本地化。如果将 `values` 指定为字符串，则该字符串会作为语言环境信息进行本地化。如果将 `values` 指定为 Array 或 Object，则格式必须为 `$t` 的 `values`。
 
 :::danger 提示
-注意，你需要保证此上下文等于生命周期方法中的组件实例 (例如在 `data` 选项中，`const $tc = this.$tc.bind(this)`)
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $tc = this.$tc.bind(this)`)
 :::
 
 #### $te
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{Locale} locale`: 可选
-  * **返回值：** `boolean`
+    * `{Path} key`：必填
+    * `{Locale} locale`：可选
+  * **返回值：**`boolean`
 
 检查 key 是否存在。在 Vue 实例中，如果未指定组件语言环境信息，请使用全局语言环境信息进行检查。如果指定了 `locale`，请检查语言环境的 `locale` 信息。
 
 :::danger 提示
-注意，你需要保证此上下文等于生命周期方法中的组件实例 (例如在 `data` 选项中，`const $te = this.$te.bind(this)`)。
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $te = this.$te.bind(this)`)。
 :::
 
 #### $d
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
-    * `{number | Date} value`: 必填
-    * `{Path | Object} key`: 可选
-    * `{Locale | Object} locale`: 可选
-  * **返回值：** `DateTimeFormatResult`
+    * `{number | Date} value`：必填
+    * `{Path | Object} key`：可选
+    * `{Locale | Object} locale`：可选
+  * **返回值：**`DateTimeFormatResult`
 
-使用日期时间格式 `key` 本地化 datetime 的 `value`。日期时间格式 `key` 需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
+将日期时间 `value` 以 `key` 的格式本地化。日期时间格式 `key` 需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
-如果 `dateTimeFormats` 选项中不存在日期时间格式的 `key`，fallback将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
+如果 `dateTimeFormats` 选项中不存在日期时间格式的 `key`，则根据 `VueI18n` 构造函数的 `fallbackLocale` 选项回退。
 
 :::danger 提示
-注意，你需要保证此上下文等于生命周期方法中的组件实例 (例如在 `data` 选项中，`const $n = this.$n.bind(this)`)。
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $n = this.$n.bind(this)`)。
 :::
 
 #### $n
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
-    * `{number} value`: 必填
-    * `{Path | Object} key`: 可选
-    * `{Locale} locale`: 可选
-  * **返回值：** `NumberFormatResult`
+    * `{number} value`：必填
+    * `{Path | Object} key`：可选
+    * `{Locale} locale`：可选
+  * **返回值：**`NumberFormatResult`
 
-使用数字格式 `key` 本地化 number 的 `value`。数字格式 `key` 需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
+将数字 `value` 以 `key` 的格式本地化。数字格式 `key` 需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
 
-如果 `numberFormats` 选项中不存在用数字格式 `key`，则 fallback 将依赖于 `VueI18n` 构造函数的 `fallbackLocale` 选项。
+如果 `numberFormats` 选项中不存在用数字格式 `key`，则根据 `VueI18n` 构造函数的 `fallbackLocale` 选项回退。
 
 如果第二个 `key` 参数指定为对象，则它应具有以下属性：
 
-* `key {Path}`: 可选，数字格式
-* `locale {Locale}`: 可选，语言环境
-* `style {string}`: 可选，数字格式选项
-* `currency {string}`: 可选，数字格式选项
-* `currencyDisplay {string}`: 可选，数字格式选项
-* `useGrouping {string}`: 可选，数字格式选项
-* `minimumIntegerDigits {string}`: 可选，数字格式选项
-* `minimumFractionDigits {string}`: 可选，数字格式选项
-* `maximumFractionDigits {string}`: 可选，数字格式选项
-* `minimumSignificantDigits {string}`: 可选，数字格式选项
-* `maximumSignificantDigits {string}`: 可选，数字格式选项
-* `localeMatcher {string}`: 可选，数字格式选项
-* `formatMatcher {string}`: 可选，数字格式选项
+* `key {Path}`：可选，数字格式
+* `locale {Locale}`：可选，语言环境
+* `style {string}`：可选，数字格式选项
+* `currency {string}`：可选，数字格式选项
+* `currencyDisplay {string}`：可选，数字格式选项
+* `useGrouping {string}`：可选，数字格式选项
+* `minimumIntegerDigits {string}`：可选，数字格式选项
+* `minimumFractionDigits {string}`：可选，数字格式选项
+* `maximumFractionDigits {string}`：可选，数字格式选项
+* `minimumSignificantDigits {string}`：可选，数字格式选项
+* `maximumSignificantDigits {string}`：可选，数字格式选项
+* `localeMatcher {string}`：可选，数字格式选项
+* `formatMatcher {string}`：可选，数字格式选项
 
 任何指定数字的格式选项将优先于 `VueI18n` 构造函数的 `numberFormats`。
 
 :::danger 提示
-注意，你需要保证此上下文等于生命周期方法中的组件实例 (例如在 `data` 选项中，`const $d = this.$d.bind(this)`)。
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $d = this.$d.bind(this)`)。
 :::
 
 ### 注入属性
 
 #### $i18n
 
-  * **类型：** `I18n`
+  * **类型：**`I18n`
 
-  * **Read only**
+  * **只读**
 
 获取 `VueI18n` 实例，如果是指定。
 
@@ -133,98 +133,98 @@ sidebar: auto
 
 ## `VueI18n` 类
 
-`Vuei18n` 类实现了 `I18n` [流式接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+`Vuei18n` 类实现了 `I18n` [flowtype 接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### 静态属性
 
 #### 版本
 
-  * **类型：** `string`
+  * **类型：**`string`
 
 vue-i18n 版本
 
 #### 可用性
 
-> 7.0+ 新增
+> 7.0 新增
 
-  * **类型：** `IntlAvailability`
+  * **类型：**`IntlAvailability`
 
 
 是否提供以下国际化功能：
 
-  * `{boolean} dateTimeFormat`: 区域敏感的时间格式
+  * `{boolean} dateTimeFormat`：环境敏感的时间格式
 
-  * `{boolean} numberFormat`: 区域敏感的数字格式
+  * `{boolean} numberFormat`：环境敏感的数字格式
 
-由于使用 ECMAScript Internationalization API (ECMA-402) 实现，上述国际化功能取决于[浏览器环境](http://kangax.github.io/compat-table/esintl/)
+由于使用 ECMAScript Internationalization API (ECMA-402) 实现，上述国际化功能取决于[浏览器环境](http://kangax.github.io/compat-table/esintl/)。
 
 ### 构造函数选项
 
-你可以在下面指定 `I18nOptions` 构造函数的一些选项[流式接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+你可以基于[flowtype 定义](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js) 中的 `I18nOptions` 指定下列构造函数选项
 
 #### locale
 
-  * **类型：** `Locale`
+  * **类型：**`Locale`
 
-  * **默认值：** `'en-US'`
+  * **默认值：**`'en-US'`
 
 语言环境。
 
 #### fallbackLocale
 
-  * **类型：** `Locale`
+  * **类型：**`Locale`
 
-  * **默认值：** `'en-US'`
+  * **默认值：**`'en-US'`
 
 预设的语言环境。
 
 #### messages
 
-  * **类型：** `LocaleMessages`
+  * **类型：**`LocaleMessages`
 
-  * **默认值：** `{}`
+  * **默认值：**`{}`
 
 本地化的语言环境信息。
 
 #### dateTimeFormats
 
-> 7.0+ 新增
+> 7.0 新增
 
-  * **类型：** `DateTimeFormats`
+  * **类型：**`DateTimeFormats`
 
-  * **默认值：** `{}`
+  * **默认值：**`{}`
 
 本地化的日期时间格式。
 
-  * **请参阅：** `DateTimeFormats` 类型的[流式接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+  * **请参阅：**`DateTimeFormats` 类型的[flowtype 接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
-> 7.0+ 新增
+> 7.0 新增
 
-  * **类型：** `NumberFormats`
+  * **类型：**`NumberFormats`
 
-  * **默认值：** `{}`
+  * **默认值：**`{}`
 
 本地化的数字格式。
 
-  * **请参阅：** `NumberFormats` 类型的[流式接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+  * **请参阅：**`NumberFormats` 类型的[flowtype 接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### availableLocales
 
-> 8.9.0+ 新增
+> 8.9.0 新增
 
-  * **类型：** `Locale[]`
+  * **类型：**`Locale[]`
 
-  * **默认值：** `[]`
+  * **默认值：**`[]`
 
-  * **示例：** `["en", "ja"]`
+  * **示例：**`["en", "ja"]`
 
 以词法顺序排列的 `messages` 中的可用语言环境列表。
 
 #### formatter
 
-  * **类型：** `Formatter`
+  * **类型：**`Formatter`
 
   * **默认值：** Built in formatter
 
@@ -232,19 +232,19 @@ vue-i18n 版本
 
 #### missing
 
-  * **类型：** `MissingHandler`
+  * **类型：**`MissingHandler`
 
-  * **默认值：** `null`
+  * **默认值：**`null`
 
-缺少本地化的处理函数。使用本地化目标语言环境，本地化关键字路径和 Vue 实例调用处理函数。
+缺少本地化时的处理函数。该处理函数在被调用时会使用本地化目标语言环境，本地化路径关键字和 Vue 实例。
 
-如果分配了未定义的异常处理函数，并且发生本地化未定义，则不会发出警告。
+如果设置了该函数，则本地化信息未定义时不会产生警告。
 
 #### fallbackRoot
 
-  * **类型：** `Boolean`
+  * **类型：**`Boolean`
 
-  * **默认值：** `true`
+  * **默认值：**`true`
 
 在组件本地化中，当本地化失败时是否回退到根级别 (全局) 本地化。
 
@@ -252,9 +252,9 @@ vue-i18n 版本
 
 #### sync
 
-  * **类型：** `Boolean`
+  * **类型：**`Boolean`
 
-  * **默认值：** `true`
+  * **默认值：**`true`
 
 是否将根级别语言环境与组件本地化语言环境同步。
 
@@ -262,11 +262,11 @@ vue-i18n 版本
 
 #### silentTranslationWarn
 
-> 6.1+
+> 6.1 新增
 
-  * **类型：** `Boolean`
+  * **类型：**`Boolean`
 
-  * **默认值：** `false`
+  * **默认值：**`false`
 
 是否取消本地化失败时输出的警告。
 
@@ -274,10 +274,10 @@ vue-i18n 版本
 
 #### silentFallbackWarn
 
-> 8.8+ 新增
+> 8.8 新增
 
-  * **类型：** `Boolean`
-  * **默认值：** `false`
+  * **类型：**`Boolean`
+  * **默认值：**`false`
 
 是否在回退到 `fallbackLocale` 或 `root` 时取消警告。
 
@@ -285,19 +285,19 @@ vue-i18n 版本
 
 #### preserveDirectiveContent
 
-> 8.7+
+> 8.7 新增
 
-  * **类型：** `Boolean`
+  * **类型：**`Boolean`
 
-  * **默认值：** `false`
+  * **默认值：**`false`
 
-在指令解除绑定后， `v-t` 指令的元素是否应该保留 `textContent`。
+在指令解除绑定后，`v-t` 指令的元素是否应该保留 `textContent`。
 
 ### Properties
 
 #### locale
 
-  * **类型：** `Locale`
+  * **类型：**`Locale`
 
   * **读取/写入**
 
@@ -305,7 +305,7 @@ vue-i18n 版本
 
 #### fallbackLocale
 
-  * **类型：** `Locale`
+  * **类型：**`Locale`
 
   * **读取/写入**
 
@@ -313,7 +313,7 @@ vue-i18n 版本
 
 #### messages
 
-  * **类型：** `LocaleMessages`
+  * **类型：**`LocaleMessages`
 
   * **只读**
 
@@ -321,9 +321,9 @@ vue-i18n 版本
 
 #### dateTimeFormats
 
-> 7.0+ 新增
+> 7.0 新增
 
-  * **类型：** `DateTimeFormats`
+  * **类型：**`DateTimeFormats`
 
   * **只读**
 
@@ -331,9 +331,9 @@ vue-i18n 版本
 
 #### numberFormats
 
-> 7.0+ 新增
+> 7.0 新增
 
-  * **类型：** `NumberFormats`
+  * **类型：**`NumberFormats`
 
   * **只读**
 
@@ -341,7 +341,7 @@ vue-i18n 版本
 
 #### missing
 
-  * **类型：** `MissingHandler`
+  * **类型：**`MissingHandler`
 
   * **读取/写入**
 
@@ -349,7 +349,7 @@ vue-i18n 版本
 
 #### formatter
 
-  * **类型：** `Formatter`
+  * **类型：**`Formatter`
 
   * **读取/写入**
 
@@ -357,9 +357,9 @@ vue-i18n 版本
 
 #### silentTranslationWarn
 
-> 6.1+
+> 6.1 新增
 
-  * **类型：** `boolean`
+  * **类型：**`boolean`
 
   * **读取/写入**
 
@@ -367,9 +367,9 @@ vue-i18n 版本
 
 #### preserveDirectiveContent
 
-> 8.7+
+> 8.7 新增
 
-  * **类型：** `boolean`
+  * **类型：**`boolean`
 
   * **读取/写入**
 
@@ -383,7 +383,7 @@ vue-i18n 版本
     * `{number} choice`
     * `{number} choicesLength`
 
-  * **返回值：** `finalChoice {number}`
+  * **返回值：**`finalChoice {number}`
 
 获取当前复数和给定选择数量的复数索引，可以通过原型变更覆盖：
 
@@ -396,7 +396,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
   * **参数：**
 
     * `{Locale} locale`
-  * **返回值：** `LocaleMessageObject`
+  * **返回值：**`LocaleMessageObject`
 
 获取语言环境的 `locale` 信息。
 
@@ -411,7 +411,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### mergeLocaleMessage( locale, message )
 
-> 6.1+
+> 6.1 新增
 
   * **参数：**
 
@@ -424,59 +424,59 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{Locale} locale`: 可选
-    * `{Array | Object} values`: 可选
-  * **返回值：** : `TranslateResult`
+    * `{Path} key`：必填
+    * `{Locale} locale`：可选
+    * `{Array | Object} values`：可选
+  * **返回值：**：`TranslateResult`
 
-这与 `$t` 方法返回的 `Function` 相同。 更多细节见 [$t](#t)。
+这与 `$t` 方法返回的 `Function` 相同。更多细节见[$t](#t)。
 
 #### i( key, [locale], [values] )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{Locale} locale`: 可选
-    * `{Array} values`: 可选
-  * **返回值：** : `TranslateResult`
+    * `{Path} key`：必填
+    * `{Locale} locale`：可选
+    * `{Array} values`：可选
+  * **返回值：**：`TranslateResult`
 
 #### tc( key, [choice], [values] )
 
   * **参数：**
 
-    * `{Path} key`: 必填
-    * `{number} choice`: 可选，默认为 1
-    * `{string | Array | Object} values`: 可选
-  * **返回值：** `TranslateResult`
+    * `{Path} key`：必填
+    * `{number} choice`：可选，默认为 1
+    * `{string | Array | Object} values`：可选
+  * **返回值：**`TranslateResult`
 
-这与 `$tc` 方法返回的 `Function` 相同。 更多细节见 [$tc](#tc)。
+这与 `$tc` 方法返回的 `Function` 相同。更多细节见[$tc](#tc)。
 
 #### te( key, [locale] )
 
   * **参数：**
 
-    * `{string} key`: 必填
-    * `{Locale} locale`: 可选
-  * **返回值：** `boolean`
+    * `{string} key`：必填
+    * `{Locale} locale`：可选
+  * **返回值：**`boolean`
 
-检查全局语言环境信息中是否存在 key 路径。 如果指定了语言环境 `locale`，请检查语言环境的语言环境信息 `locale`。
+检查全局语言环境信息中是否存在 key 路径。如果指定了语言环境 `locale`，请检查语言环境的语言环境信息 `locale`。
 
 #### getDateTimeFormat ( locale )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
     * `{Locale} locale`
-  * **返回值：** `DateTimeFormat`
+  * **返回值：**`DateTimeFormat`
 
 获取语言环境的日期时间格式。
 
 #### setDateTimeFormat ( locale, format )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
@@ -487,7 +487,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### mergeDateTimeFormat ( locale, format )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
@@ -498,31 +498,31 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### d( value, [key], [locale] )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
-    * `{number | Date} value`: 必填
-    * `{Path | Object} key`: 可选
-    * `{Locale | Object} locale`: 可选
-  * **返回值：** `DateTimeFormatResult`
+    * `{number | Date} value`：必填
+    * `{Path | Object} key`：可选
+    * `{Locale | Object} locale`：可选
+  * **返回值：**`DateTimeFormatResult`
 
-这与 Vue 实例方法的 `$d` 方法相同。 更多细节见 [$d](#d)。
+这与 Vue 实例方法的 `$d` 方法相同。更多细节见[$d](#d)。
 
 #### getNumberFormat ( locale )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
     * `{Locale} locale`
-  * **返回值：** `NumberFormat`
+  * **返回值：**`NumberFormat`
 
 获取语言环境的数字格式。
 
 #### setNumberFormat ( locale, format )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
@@ -533,7 +533,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### mergeNumberFormat ( locale, format )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
@@ -544,39 +544,39 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### n( value, [key], [locale] )
 
-> 7.0+ 新增
+> 7.0 新增
 
   * **参数：**
 
-    * `{number} value`: 必填
-    * `{Path | Object} key`: 可选
-    * `{Locale} locale`: 可选
-  * **返回值：** `NumberFormatResult`
+    * `{number} value`：必填
+    * `{Path | Object} key`：可选
+    * `{Locale} locale`：可选
+  * **返回值：**`NumberFormatResult`
 
-这与 Vue 实例方法的 `$n` 方法相同。 更多细节见 [$n](#n)。
+这与 Vue 实例方法的 `$n` 方法相同。更多细节见[$n](#n)。
 
 ## 指令
 
-> 7.3+ 新增
+> 7.3 新增
 
 ### v-t
 
-  * **预期：** `string | Object`
+  * **预期：**`string | Object`
 
   * **修饰符：**
 
-    * `.preserve`: (8.7.0+) 当指令解除绑定时，保留元素 `textContent`。
+    * `.preserve`：(8.7.0 新增) 当指令解除绑定时，保留元素 `textContent`。
 
   * **详细：**
 
-更新使用语言环境信息进行本地化的元素 `textContent`。 你可以使用字符串语法或对象语法。 字符串语法可以指定为语言环境信息的关键字路径。 如果可以使用对象语法，则需要将以下参数指定为对象键：
+更新使用语言环境信息进行本地化的元素 `textContent`。你可以使用字符串语法或对象语法。字符串语法可以指定为语言环境信息的关键字路径。如果可以使用对象语法，则需要将以下参数指定为对象键：
 
-    * path: 必填，语言环境信息的关键字
-    * locale: 可选，语言环境
-    * args: 可选，用于列表或命名格式
+    * path：必填，语言环境信息的关键字
+    * locale：可选，语言环境
+    * args：可选，用于列表或命名格式
 
 ::::提示 注意
-当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。 在使用的时候，可能有不合理的情况 [transitions](https://vuejs.org/v2/guide/transitions.html). 在指令解除绑定之后保留 `textContent` 数据使用 `.preserve` 修饰符或 global [`preserveDirectiveContent` option](#preservedirectivecontent)。
+当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在使用的时候，可能有不合理的情况[transitions](https://vuejs.org/v2/guide/transitions.html)。在指令解除绑定之后保留 `textContent` 数据使用 `.preserve` 修饰符或 global [`preserveDirectiveContent` option](#preservedirectivecontent)。
 ::::
   * **示例：**
 ```html
@@ -596,20 +596,20 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
-  * **请参阅：** [自定义指令本地化](../guide/directive.md)
+  * **请参阅：**[自定义指令本地化](../guide/directive.md)
 
 ## 组件
 
 ### i18n 功能组件
 
-> 7.0+ 新增
+> 7.0 新增
 
 #### 参数：
 
-  * `path {Path}`: 必填，关于区域信息的关键字路径
-  * `locale {Locale}`: 可选，语言环境
-  * `tag {string}`: 可选，默认值 `span`
-  * `places {Array | Object}`: 可选 (7.2+)
+  * `path {Path}`：必填，关于区域信息的关键字路径
+  * `locale {Locale}`：可选，语言环境
+  * `tag {string}`：可选，默认值 `span`
+  * `places {Array | Object}`：可选 (7.2 新增)
 
 #### 用法：
 
@@ -654,7 +654,7 @@ new Vue({
 
 ### 地区
 
-> 7.2+ 新增
+> 7.2 新增
 
 #### 预期：`{number | string}`
 

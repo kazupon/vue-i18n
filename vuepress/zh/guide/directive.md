@@ -1,7 +1,7 @@
 # 自定义指令本地化
 
 :::提示 支持的版本
- 7.3+ 新增
+ 7.3 新增
 :::
 
 你不仅可以使用 `v-t` 自定义指令进行翻译，还可以使用 `$t` 方法进行翻译。
@@ -90,12 +90,12 @@ new Vue({
 ## 使用翻译
 
 :::提示 支持版本
- 8.7+ 新增
+ 8.7 新增
 :::
 
-当 `v-t` 指令应用于内部元素 [`<transition>` component](https://vuejs.org/v2/api/#transition)时, 你可能会注意到转换后的消息将会消失。 这种行为与 `<transition>` 组件实现的性质有关 **在转换开始之前** ，`<transition>` 组件内消失元素中的所有指令都将被销毁。此行为可能导致内容在短动画上闪烁，但在长过渡时最明显。
+当 `v-t` 指令应用于内部元素[`<transition>` component](https://vuejs.org/v2/api/#transition)时, 你可能会注意到转换后的消息将会消失。这种行为与 `<transition>` 组件实现的性质有关 **在转换开始之前** ，`<transition>` 组件内消失元素中的所有指令都将被销毁。此行为可能导致内容在短动画上闪烁，但在长过渡时最明显。
 
-为了确保在转换期间指令内容不会被触及，只需将 [`.preserve` modifier](../api/#v-t) 添加到 `v-t` 指令定义中。
+为了确保在转换期间指令内容不会被触及，只需将[`.preserve` modifier](../api/#v-t) 添加到 `v-t` 指令定义中。
 
 Javascript:
 
@@ -150,7 +150,7 @@ new Vue({
 </div>
 ```
 
-关于上面的例子，请参阅 [示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/directive)
+关于上面的例子，请参阅[示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/directive)
 
 ## `$t` vs `v-t`
 
@@ -172,10 +172,10 @@ new Vue({
 
 #### 优点
 
-`v-t` 比 `$t` 方法具有 **更好的** 性能，因为它在一次翻译时使用自定义指令进行缓存。 此外，使用由 [`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions) 提供的Vue编译器模块可以进行预翻译。
+`v-t` 比 `$t` 方法具有 **更好的** 性能，因为它在一次翻译时使用自定义指令进行缓存。此外，使用由[`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions) 提供的Vue编译器模块可以进行预翻译。
 
 因此，可以进行 **更多性能优化**。
 
 #### 缺点
 
-`v-t` 不能像 `$t` 一样灵活使用，它相当 **复杂**。 带有 `v-t` 的翻译内容被插入到 `textContent` 的元素中。此外，当你使用服务器渲染时，你需要设置 [自定义指令](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) 到 `createRenderer` 函数的 `directives` 选项。
+`v-t` 不能像 `$t` 一样灵活使用，它相当 **复杂**。带有 `v-t` 的翻译内容被插入到 `textContent` 的元素中。此外，当你使用服务器渲染时，你需要设置[自定义指令](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) 到 `createRenderer` 函数的 `directives` 选项。

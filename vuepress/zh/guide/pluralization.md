@@ -1,6 +1,6 @@
 # 复数
 
-你可以使用复数进行翻译。 你必须定义具有管道 `|` 分隔符的语言环境，并在管道分隔符中定义复数。
+你可以使用复数进行翻译。你必须定义具有管道 `|` 分隔符的语言环境，并在管道分隔符中定义复数。
 
 语言环境信息如下：
 
@@ -82,7 +82,7 @@ const messages = {
 使用斯拉夫语言规则的简化示例(俄语，乌克兰语等)：
 ```js
 /**
- * @param choice {number} 由 $tc 输入的选择索引: `$tc('path.to.rule', choiceIndex)`
+ * @param choice {number} 由 $tc 输入的选择索引：`$tc('path.to.rule', choiceIndex)`
  * @param choicesLength {number} 总体可用选择
  * @returns 选择复数单词的最终选择索引
 **/
