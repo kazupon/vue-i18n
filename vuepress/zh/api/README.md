@@ -461,7 +461,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`：可选
   * **返回值：**`boolean`
 
-检查全局语言环境信息中是否存在 key 路径。如果指定了语言环境 `locale`，请检查语言环境的语言环境信息 `locale`。
+检查全局语言环境信息中是否存在 key 路径。如果指定了 `locale`，请检查语言环境信息 `locale`。
 
 #### getDateTimeFormat ( locale )
 
