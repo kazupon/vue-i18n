@@ -418,7 +418,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * `{Locale} locale`
     * `{LocaleMessageObject} message`
 
-将已注册的 `locale` 信息与语言环境的 `locale` 信息合并。
+将语言环境信息 `locale` 合并到已注册的语言环境信息中。
 
 #### t( key, [locale], [values] )
 
