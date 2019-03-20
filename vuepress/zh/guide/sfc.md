@@ -44,7 +44,7 @@ export default {
 
 ## 安装 vue-i18n-loader
 
-由于使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader`。如果使用单文件组件，虽然[vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用，但你必须另外安装[vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) ：
+由于使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader`。如果使用单文件组件，虽然[vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用，但你必须另外安装[vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader)：
 
 ```sh
 npm i --save-dev @kazupon/vue-i18n-loader
@@ -141,11 +141,11 @@ module.exports = {
 ```
 _别忘了安装[deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` 或 `yarn add deepmerge -D`)_
 
-如果你想了解有关修改现有配置的更多信息[点击这里](https://cli.vuejs.org/guide/webpack.html).
+如果你想了解有关修改现有配置的更多信息[点击这里](https://cli.vuejs.org/guide/webpack.html)。
 
 ## Laravel-Mix
 
-对于带有 vue-loader v15 或更高版本的 Laravel-mix 4 ：
+对于带有 vue-loader v15 或更高版本的 Laravel-mix 4：
 ```js
 // 使用 “i18n” 方法扩展 Mix ，加载vue-i18n-loader
 mix.extend( 'i18n', new class {
@@ -180,7 +180,7 @@ mix.extend( 'i18n', function( webpackConfig, ...args ) {
             return;
         }
 
-        // 在此模块中，为 i18n 标记添加 vue-i18n-loader 。
+        // 在此模块中，为 i18n 标记添加 vue-i18n-loader。
         module.options.loaders.i18n = '@kazupon/vue-i18n-loader';
     } );
 } );
@@ -302,9 +302,9 @@ module.exports = {
 </style>
 ```
 
-## 功能组件中的自定义块
+## 函数式组件中的自定义块
 
-如果单个文件组件具有使用功能组件的模板，并且你已经定义了 `i18n` 自定义块，请注意你无法使用语言环境信息进行本地化。
+如果单个文件组件具有使用函数式组件的模板，并且你已经定义了 `i18n` 自定义块，请注意你无法使用语言环境信息进行本地化。
 
 例如，以下代码无法使用 `i18n` 自定义块的语言环境信息进行本地化。
 

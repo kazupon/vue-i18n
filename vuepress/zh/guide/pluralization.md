@@ -111,7 +111,7 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
 }
 ```
 
-这将有效地给出：
+这将有效地实现这一目标：
 
 
 ```javascript

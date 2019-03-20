@@ -65,7 +65,7 @@ sidebar: auto
 
 #### $d
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -84,7 +84,7 @@ sidebar: auto
 
 #### $n
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -145,10 +145,9 @@ vue-i18n 版本
 
 #### 可用性
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **类型：**`IntlAvailability`
-
 
 是否提供以下国际化功能：
 
@@ -188,7 +187,7 @@ vue-i18n 版本
 
 #### dateTimeFormats
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **类型：**`DateTimeFormats`
 
@@ -200,7 +199,7 @@ vue-i18n 版本
 
 #### numberFormats
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **类型：**`NumberFormats`
 
@@ -212,7 +211,7 @@ vue-i18n 版本
 
 #### availableLocales
 
-> 8.9.0 新增
+> :new: 8.9.0 新增
 
   * **类型：**`Locale[]`
 
@@ -274,7 +273,7 @@ vue-i18n 版本
 
 #### silentFallbackWarn
 
-> 8.8 新增
+> :new: 8.8 新增
 
   * **类型：**`Boolean`
   * **默认值：**`false`
@@ -293,13 +292,13 @@ vue-i18n 版本
 
 在指令解除绑定后，`v-t` 指令的元素是否应该保留 `textContent`。
 
-### 属性
+### Properties
 
 #### locale
 
   * **类型：**`Locale`
 
-  * **读取/写入**
+  * **可读/可写**
 
 语言环境。
 
@@ -307,7 +306,7 @@ vue-i18n 版本
 
   * **类型：**`Locale`
 
-  * **读取/写入**
+  * **可读/可写**
 
 预设的语言环境。
 
@@ -321,7 +320,7 @@ vue-i18n 版本
 
 #### dateTimeFormats
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **类型：**`DateTimeFormats`
 
@@ -331,7 +330,7 @@ vue-i18n 版本
 
 #### numberFormats
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **类型：**`NumberFormats`
 
@@ -343,7 +342,7 @@ vue-i18n 版本
 
   * **类型：**`MissingHandler`
 
-  * **读取/写入**
+  * **可读/可写**
 
 缺少本地化时的处理函数。
 
@@ -351,7 +350,7 @@ vue-i18n 版本
 
   * **类型：**`Formatter`
 
-  * **读取/写入**
+  * **可读/可写**
 
 使用 `Formatter` 接口实现的格式化。
 
@@ -361,7 +360,7 @@ vue-i18n 版本
 
   * **类型：**`boolean`
 
-  * **读取/写入**
+  * **可读/可写**
 
 是否取消本地化失败时输出的警告。
 
@@ -371,7 +370,7 @@ vue-i18n 版本
 
   * **类型：**`boolean`
 
-  * **读取/写入**
+  * **可读/可写**
 
 在指令解除绑定后，`v-t` 指令的元素是否应该保留 `textContent`。
 
@@ -433,7 +432,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### i( key, [locale], [values] )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -465,7 +464,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### getDateTimeFormat ( locale )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -476,7 +475,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### setDateTimeFormat ( locale, format )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -487,7 +486,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### mergeDateTimeFormat ( locale, format )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -498,7 +497,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### d( value, [key], [locale] )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -511,7 +510,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### getNumberFormat ( locale )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -522,7 +521,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### setNumberFormat ( locale, format )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -533,7 +532,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### mergeNumberFormat ( locale, format )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -544,7 +543,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### n( value, [key], [locale] )
 
-> 7.0 新增
+> :new: 7.0 新增
 
   * **参数：**
 
@@ -557,7 +556,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 ## 指令
 
-> 7.3 新增
+> :new: 7.3 新增
 
 ### v-t
 
@@ -571,28 +570,28 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 更新使用语言环境信息进行本地化的元素 `textContent`。你可以使用字符串语法或对象语法。字符串语法可以指定为语言环境信息的关键字路径。如果可以使用对象语法，则需要将以下参数指定为对象键：
 
-    * path：必填，语言环境信息的关键字
-    * locale：可选，语言环境
-    * args：可选，用于列表或命名格式
+    * `path`：必填，语言环境信息的关键字
+    * `locale`：可选，语言环境
+    * `args`：可选，用于列表或命名格式
 
 ::::tip 注意
 当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在[过渡动画](https://cn.vuejs.org/v2/guide/transitions.html)内部使用的时候，可能出现不合预期的情况。为了在指令解除绑定之后保留 `textContent` 数据，可使用 `.preserve` 修饰符或全局的 [`preserveDirectiveContent` 选项](#preservedirectivecontent)。
 ::::
   * **示例：**
 ```html
-<!-- 字符串语法：文字 -->
+<!-- 字符串语法：字面量 -->
 <p v-t="'foo.bar'"></p>
 
 <!-- 字符串语法：通过数据或计算属性绑定 -->
 <p v-t="msg"></p>
 
-<!-- 对象语法： 文字 -->
+<!-- 对象语法： 字面量 -->
 <p v-t="{ path: 'hi', locale: 'ja', args: { name: 'kazupon' } }"></p>
 
 <!-- 对象语法： 通过数据或计算属性绑定 -->
 <p v-t="{ path: greeting, args: { name: fullName } }"></p>
 
-<!-- 保留修饰符 -->
+<!-- `preserve` 修饰符 -->
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
@@ -600,9 +599,9 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 ## 组件
 
-### i18n 功能组件
+### i18n 函数式组件
 
-> 7.0 新增
+> :new: 7.0 新增
 
 #### 参数：
 
@@ -654,7 +653,7 @@ new Vue({
 
 ### 地区
 
-> 7.2 新增
+> :new: 7.2 新增
 
 #### 预期：`{number | string}`
 

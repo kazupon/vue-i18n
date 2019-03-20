@@ -6,7 +6,7 @@
  7.0 新增
 :::
 
-有时，我们需要使用包含 HTML 标记或组件的语言环境消息进行本地化。例如：
+有时，我们需要使用包含 HTML 标签或组件的语言环境消息进行本地化。例如：
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
@@ -35,9 +35,9 @@ const messages = {
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-这非常麻烦，如果在语言环境消息中配置 `<a>` 标记，则可能存在因本地化而导致的XSS漏洞 `v-html="$t('term')"`。
+这是非常麻烦的，如果在语言环境消息中配置 `<a>` 标签，则可能存在因本地化而导致的XSS漏洞 `v-html="$t('term')"`。
 
-你可以使用 `i18n` 功能组件来避免它。例如：
+你可以使用 `i18n` 函数式组件来避免它。例如：
 
 ```html
 <div id="app">
@@ -86,13 +86,13 @@ new Vue({
 
 关于上面的例子，见[示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
 
-`i18n` 功能组件的子元素用 `path` 属性的语言环境消息进行插值。在上面的例子中，
+`i18n` 函数式组件的子元素用 `path` 属性的语言环境消息进行插值。在上面的例子中，
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
 内插在 `term` 区域信息。
 
-在上面的示例中，组件插值遵循 **列表格式**。`i18n` 功能组件的子项按其出现顺序进行插值。
+在上面的示例中，组件插值遵循 **列表格式**。`i18n` 函数式组件的子项按其出现顺序进行插值。
 
 ## 高级用法
 
