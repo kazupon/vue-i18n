@@ -576,7 +576,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
     * args：可选，用于列表或命名格式
 
 ::::tip 注意
-当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在使用的时候，可能有不合理的情况[transitions](https://vuejs.org/v2/guide/transitions.html)。在指令解除绑定之后保留 `textContent` 数据使用 `.preserve` 修饰符或 global [`preserveDirectiveContent` option](#preservedirectivecontent)。
+当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在[过渡动画](https://cn.vuejs.org/v2/guide/transitions.html)内部使用的时候，可能出现不合预期的情况。为了在指令解除绑定之后保留 `textContent` 数据，可使用 `.preserve` 修饰符或全局的 [`preserveDirectiveContent` 选项](#preservedirectivecontent)。
 ::::
   * **示例：**
 ```html
