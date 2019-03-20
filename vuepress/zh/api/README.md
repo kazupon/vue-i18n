@@ -385,7 +385,7 @@ vue-i18n 版本
 
   * **返回值：**`finalChoice {number}`
 
-获取当前复数和给定选择数量的复数索引，可以通过原型变更覆盖：
+根据当前的数字和一组给定的选项，获取其复数索引，可以通过原型变更覆盖：
 
 ```js
 VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
