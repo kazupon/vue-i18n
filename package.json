@@ -72,7 +72,7 @@
     "dist/vue-i18n.min.js",
     "dist/vue-i18n.common.js",
     "dist/vue-i18n.esm.js",
-    "src/*.js",
+    "src/**/*.js",
     "types/*.d.ts",
     "decls"
   ],

@@ -1,6 +1,24 @@
 /* @flow */
 
 /**
+ * constants
+ */
+
+export const numberFormatKeys = [
+  'style',
+  'currency',
+  'currencyDisplay',
+  'useGrouping',
+  'minimumIntegerDigits',
+  'minimumFractionDigits',
+  'maximumFractionDigits',
+  'minimumSignificantDigits',
+  'maximumSignificantDigits',
+  'localeMatcher',
+  'formatMatcher'
+]
+
+/**
  * utilities
  */
 
