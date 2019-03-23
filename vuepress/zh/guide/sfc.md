@@ -193,7 +193,7 @@ mix.i18n()
 
 ## YAML loading
 
- `i18n` 自定义块需要指定 JSON 格式，也可以通过使用 `vue-loader` 预加载器功能来使用 `YAML` 格式。
+`i18n` 自定义块需要指定 JSON 格式，也可以通过使用 `vue-loader` 预加载器功能来使用 `YAML` 格式。
 
 以下是 `YAML` 格式的 `i18n` 自定义块：
 

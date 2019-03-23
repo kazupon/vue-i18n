@@ -39,7 +39,7 @@ type Path = string;
 }
 ```
 
-在上面的 Locale Messages 结构中，你可以使用以下 key 路径进行翻译。
+在上面的 Locale Messages 结构中，你可以使用以下键名路径进行翻译。
 
 ```html
 <div id="app">

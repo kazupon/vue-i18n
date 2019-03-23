@@ -1,6 +1,6 @@
 # 回退本地化
 
-在 `ja` 语言环境中不存在 `message` 键的以下语言环境消息：
+以下语言环境消息的 `ja` 语言环境中不存在 `message` 键：
 
 ```js
 const messages = {
@@ -41,4 +41,4 @@ const i18n = new VueI18n({
 [vue-i18n] Fall back to translate the keypath 'message' with 'en' locale.
 ```
 
-为了抑制这些警告(同时保留那些警告完全没有给定 key 的翻译)，在初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true`。
+为了避免这些警告 (同时保留那些完全没有翻译给定关键字的警告)，需初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true`。
