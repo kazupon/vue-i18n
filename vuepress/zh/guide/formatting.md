@@ -134,7 +134,7 @@ const messages = {
 
 你可以使用实现[格式化接口](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43) 的自定义格式化函数来实现。
 
-以下使用 ES2015 类语法的自定义格式化函数：
+以下使用 ES2015 class 语法的自定义格式化函数：
 
 ```js
 // 实现自定义格式
