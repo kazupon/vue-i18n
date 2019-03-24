@@ -1,6 +1,6 @@
 # 回退本地化
 
-以下语言环境消息的 `ja` 语言环境中不存在 `message` 键：
+以下语言环境信息的 `ja` 语言环境中不存在 `message` 键：
 
 ```js
 const messages = {

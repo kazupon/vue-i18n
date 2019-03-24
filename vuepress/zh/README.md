@@ -32,6 +32,6 @@ footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
   </div>
   <div class="feature">
     <h2>面向组件</h2>
-    <p>你可以在单文件组件上管理语言环境消息</p>
+    <p>你可以在单文件组件上管理语言环境信息</p>
   </div>
 </div>

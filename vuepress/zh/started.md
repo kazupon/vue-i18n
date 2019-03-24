@@ -24,7 +24,7 @@
 //
 // Vue.use(VueI18n)
 
-// 准备翻译的区域信息
+// 准备翻译的语言环境信息
 const messages = {
   en: {
     message: {

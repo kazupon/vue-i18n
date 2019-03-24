@@ -14,7 +14,7 @@ type Locale = string;
 type Path = string;
 ```
 
-基于以上语法，你可以配置以下结构的 Locale 消息：
+基于以上语法，你可以配置以下结构的 Locale 信息：
 
 ```json
 {
@@ -106,7 +106,7 @@ const messages = {
 
 ### 按括号分组
 
-链接的语言环境消息的翻译 key 也可以具有 `@:(message.foo.bar.baz)` 的形式，其中到另一个翻译 key 的链接在括号 `()`。
+链接的语言环境信息的翻译 key 也可以具有 `@:(message.foo.bar.baz)` 的形式，其中到另一个翻译 key 的链接在括号 `()`。
 
 如果链接 `@:message.something` 按 `.` 跟随，则此选项非常有用，它可以是链接的一部分但是如果它不应该是。
 

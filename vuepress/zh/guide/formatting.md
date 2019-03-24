@@ -28,7 +28,7 @@ const messages = {
 <p v-html="$t('message.hello')"></p>
 ```
 
-输出如下 (取代预先格式化的消息)
+输出如下 (取代预先格式化的信息)
 
 
 ```html

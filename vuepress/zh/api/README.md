@@ -605,7 +605,7 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 #### 参数：
 
-  * `path {Path}`：必填，关于区域信息的键名路径
+  * `path {Path}`：必填，关于语言环境信息的键名路径
   * `locale {Locale}`：可选，语言环境
   * `tag {string}`：可选，默认值 `span`
   * `places {Array | Object}`：可选 (7.2 新增)
