@@ -44,5 +44,5 @@ export default {
 ```
 
 :::warning 警告
-:warning: 对于使用 `sync: false` 组件，将忽略语言环境更改。
+:warning: 对于使用了 `sync: false` 的组件，语言环境的更改将被忽略。
 :::
