@@ -62,7 +62,7 @@ export function loadLanguageAsync (lang) {
 
 简而言之，我们正在创建一个新的 VueI18n 实例。然后我们创建一个 `loadedLanguages` 数组，它将跟踪我们加载的语言。接下来是 `setI18nLanguage` 函数，它将实际更改 vueI18n 实例、axios 以及其它需要的地方的语言。
 
-`loadLanguageAsync` 函数是我们实际用于更改语言的函数。加载新文件是通过import功能完成的， `import` 功能由 Webpack 慷慨提供，它允许我们动态加载文件，并且因为它使用 promises，我们可以轻松地等待加载完成。
+`loadLanguageAsync` 是实际用于更改语言的函数。加载新文件是通过import功能完成的，`import` 功能由 Webpack 慷慨提供，它允许我们动态加载文件，并且因为它使用 promise，我们可以轻松地等待加载完成。
 
 你可以在 [Webpack 文档](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 中了解有关导入功能的更多信息。
 
