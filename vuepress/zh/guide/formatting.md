@@ -156,7 +156,7 @@ class CustomFormatter {
      //   `message` 插值的值
      //   使用 `$t`， `$tc` 和 `i18n` 函数式组件传递值。
      //   e.g.
-     //   - $t('hello', { name: 'kazupon' }) -> 传递值： Object `{ name: 'kazupon' }`
+     //   - $t('hello', { name: 'kazupon' }) -> 传递值：Object `{ name: 'kazupon' }`
      //   - $t('hello', ['kazupon']) -> 传递值：Array `['kazupon']`
      //   - `i18n` 函数式组件 (组件插值)
      //     <i18n path="hello">
