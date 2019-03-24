@@ -31,7 +31,7 @@ import axios from 'axios'
 Vue.use(VueI18n)
 
 export const i18n = new VueI18n({
-  locale: 'en', // 设置 locale
+  locale: 'en', // 设置语言环境
   fallbackLocale: 'en',
   messages // 设置 locale messages
 })
