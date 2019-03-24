@@ -35,7 +35,7 @@ const messages = {
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-这是非常麻烦的，如果在语言环境消息中配置 `<a>` 标签，则可能存在因本地化而导致的XSS漏洞 `v-html="$t('term')"`。
+这是非常麻烦的，如果在语言环境消息中配置 `<a>` 标签，则可能由于使用了 `v-html="$t('term')"` 进行本地化而存在被 XSS 攻击的可能性。
 
 你可以使用 `i18n` 函数式组件来避免它。例如：
 
