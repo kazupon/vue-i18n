@@ -64,7 +64,7 @@ export function loadLanguageAsync (lang) {
 
 `loadLanguageAsync` 函数是我们实际用于更改语言的函数。加载新文件是通过import功能完成的， `import` 功能由 Webpack 慷慨提供，它允许我们动态加载文件，并且因为它使用 promises，我们可以轻松地等待加载完成。
 
-你可以在[Webpack 文档](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 中了解有关导入功能的更多信息。
+你可以在 [Webpack 文档](https://webpack.js.org/guides/code-splitting/#dynamic-imports) 中了解有关导入功能的更多信息。
 
 使用 `loadLanguageAsync` 函数很简单。一个常见的用例是在 vue-router beforeEach 钩子里面。
 
