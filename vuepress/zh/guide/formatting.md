@@ -33,7 +33,7 @@ const messages = {
 
 ```html
 <p>hello
-<!--<br> 存在，但呈现为html而不是字符串-->
+<!--<br> 存在，但呈现为 html 而不是字符串-->
 world</p>
 ```
 
