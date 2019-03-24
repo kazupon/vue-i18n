@@ -23,7 +23,7 @@ const messages = {
 }
 ```
 
-以下，你可以尝试在模板中实现：
+你可能会尝试在以下模板中实现：
 
 ```html
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
