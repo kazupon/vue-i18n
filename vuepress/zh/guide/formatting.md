@@ -102,7 +102,7 @@ const messages = {
 <p>hello world</p>
 ```
 
-## 在 rails i18n 格式上支持 ruby
+## 支持 ruby on rails 的 i18n 格式
 
 语言环境信息如下：
 
