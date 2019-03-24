@@ -149,7 +149,7 @@ class CustomFormatter {
      // @param {string} 信息
      //   列表或具名格式的字符串。
      //   例如：
-     //   - 命名格式：'Hi {name}'
+     //   - 具名格式：'Hi {name}'
      //   - 列表格式：'Hi {0}'
      //
      // @param {Object | Array} 值
