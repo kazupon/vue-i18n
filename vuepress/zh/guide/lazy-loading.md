@@ -33,7 +33,7 @@ Vue.use(VueI18n)
 export const i18n = new VueI18n({
   locale: 'en', // 设置语言环境
   fallbackLocale: 'en',
-  messages // 设置 locale messages
+  messages // 设置语言环境信息
 })
 
 const loadedLanguages = ['en'] // 我们的预装默认语言
