@@ -163,7 +163,7 @@ class CustomFormatter {
      //       <p>kazupon</p>
      //       <p>how are you?</p>
      //     </i18n>
-     //     -> 传递值： Array (included VNode):
+     //     -> 传递值：Array (included VNode):
      //        `[VNode{ tag: 'p', text: 'kazupon', ...}, VNode{ tag: 'p', text: 'how are you?', ...}]`
      //
      // @return {Array<any>}
