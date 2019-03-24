@@ -6,7 +6,7 @@
 
 ```js
 const i18n = new VueI18n({
-  locale: 'ja', // 设置 locale
+  locale: 'ja', // 设置语言环境
   ...
 })
 
