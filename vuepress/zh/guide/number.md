@@ -23,7 +23,7 @@ const numberFormats = {
 }
 ```
 
-如上，你可以使用指定字段 (例如：`currency` 等) 的定义数字格式，你需要使用[the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)。
+如上，你可以指定具名的 (例如：`currency` 等) 的数字格式，并且需要使用 [ECMA-402 Intl.NumberFormat 的选项](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)。
 
 之后就像语言环境信息一样，你需要指定 `VueI18n` 构造函数的 `numberFormats` 选项：
 
