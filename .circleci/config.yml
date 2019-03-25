@@ -27,12 +27,17 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
 
+      #- run: |
+      #    curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+      #    sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      #    apt-get update
+      #    apt-get install -y google-chrome-stable build-essential jq git openssh-server
+      #    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
       - run: |
-          curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-          sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-          apt-get update
-          apt-get install -y google-chrome-stable build-essential jq git openssh-server
-          apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
       #- run: |
       #    sudo apt install libappindicator3-1
       #    curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
