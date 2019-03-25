@@ -2,10 +2,10 @@
 
 ## 结构
 
-Locale Messages 语法如下：
+语言环境信息的语法如下：
 
 ```typescript
-// 作为 Flowtype 定义，Locale Messages 语法类似于 BNF 注释
+// 作为 Flowtype 定义，语言环境信息的语法类似于 BNF 注释
 type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 type LocaleMessageObject = { [key: Path]: LocaleMessage };
 type LocaleMessageArray = LocaleMessage[];
@@ -39,7 +39,7 @@ type Path = string;
 }
 ```
 
-在上面的 Locale Messages 结构中，你可以使用以下键名路径进行翻译。
+在上面的语言环境信息的结构中，你可以使用以下键名路径进行翻译。
 
 ```html
 <div id="app">
@@ -77,7 +77,7 @@ type Path = string;
 
 如果有一个翻译关键字总是与另一个具有相同的具体文本，你可以链接到它。要链接到另一个翻译关键字，你所要做的就是在其内容前加上一个 `@:` 符号后跟完整的翻译键名，包括你要链接到的命名空间。
 
-Locale messages 如下：
+语言环境信息如下：
 
 ```js
 const messages = {
@@ -110,7 +110,7 @@ const messages = {
 
 如果链接 `@:message.something` 后紧跟着一个点 `.`，则此选项非常有用，因为它本不该成为但却成为了链接的一部分。
 
-Locale messages 如下：
+语言环境信息如下：
 
 ```js
 const messages = {
