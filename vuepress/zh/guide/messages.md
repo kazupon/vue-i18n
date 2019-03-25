@@ -1,4 +1,4 @@
-# Locale messages 语法
+# 语言环境信息的语法
 
 ## 结构
 
