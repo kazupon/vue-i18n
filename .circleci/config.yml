@@ -28,11 +28,17 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
 
       - run: |
-          sudo apt install libappindicator3-1
-          curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome.deb
-          sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-          rm google-chrome.deb
+          curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+          sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+          apt-get update
+          apt-get install -y google-chrome-stable build-essential jq git openssh-server \
+          apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+      #- run: |
+      #    sudo apt install libappindicator3-1
+      #    curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      #    sudo dpkg -i google-chrome.deb
+      #    sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+      #    rm google-chrome.deb
 
       - run:
           name: Install Dependencies
