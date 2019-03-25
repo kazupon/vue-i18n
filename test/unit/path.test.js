@@ -9,10 +9,27 @@ describe('path', () => {
     })
   })
 
+  describe('whitespace', () => {
+    it('should get value if it contains space 0x20', () => {
+      const val = path.getPathValue({ 'a c': 1 }, 'a c')
+      assert.strictEqual(val, 1)
+    })
+
+    it('should return null if it contains whitespace chars except space 0x20', () => {
+      const val = path.getPathValue({ 'a\tc': 1 }, 'a\tc')
+      assert.strictEqual(val, null)
+    })
+  })
+
   describe('object', () => {
     it('should get path value', () => {
       const val = path.getPathValue({ a: { b: 1 } }, 'a')
       assert.strictEqual(val.b, 1)
+    })
+
+    it('should accept space 0x20 as keypath', () => {
+      const val = path.getPathValue({ a: { 'b c d': 1 } }, 'a.b c d')
+      assert.strictEqual(val, 1)
     })
   })
 

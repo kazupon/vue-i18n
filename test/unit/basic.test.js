@@ -105,6 +105,13 @@ describe('basic', () => {
         it('should be translated', () => {
           assert.strictEqual(i18n.t('message.format'), messages.en.message.format)
         })
+
+        it('should be translated if keypath contains spaces', () => {
+          assert.strictEqual(
+            i18n.t('message.Hello {0}', ['kazupon']),
+            'Hello kazupon'
+          )
+        })
       })
 
       describe('array keypath', () => {

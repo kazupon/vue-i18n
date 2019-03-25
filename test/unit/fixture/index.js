@@ -28,6 +28,7 @@ export default {
       circular2: 'Bar @:message.circular3',
       circular3: 'Buz @:message.circular1',
       linkTwice: '@:message.hello: @:message.hello',
+      'Hello {0}': 'Hello {0}',
       'hyphen-locale': 'hello hyphen',
       '1234': 'Number-based keys are found',
       '1mixedKey': 'Mixed keys are not found.',

@@ -50,6 +50,15 @@ declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => string | void;
 
+declare type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
+declare type FormattedNumberPart = {
+  type: FormattedNumberPartType,
+  value: string,
+};
+// This array is the same as Intl.NumberFormat.formatToParts() return value:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts#Return_value
+declare type NumberFormatToPartsResult = Array<FormattedNumberPart>;
+
 declare type I18nOptions = {
   locale?: Locale,
   fallbackLocale?: Locale,

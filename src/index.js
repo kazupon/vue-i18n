@@ -9,26 +9,14 @@ import {
   isObject,
   looseClone,
   remove,
-  merge
+  merge,
+  numberFormatKeys
 } from './util'
 import BaseFormatter from './format'
 import I18nPath from './path'
 
 import type { PathValue } from './path'
 
-const numberFormatKeys = [
-  'style',
-  'currency',
-  'currencyDisplay',
-  'useGrouping',
-  'minimumIntegerDigits',
-  'minimumFractionDigits',
-  'maximumFractionDigits',
-  'minimumSignificantDigits',
-  'maximumSignificantDigits',
-  'localeMatcher',
-  'formatMatcher'
-]
 const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
@@ -626,14 +614,14 @@ export default class VueI18n {
     this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format))
   }
 
-  _localizeNumber (
+  _getNumberFormatter (
     value: number,
     locale: Locale,
     fallback: Locale,
     numberFormats: NumberFormats,
     key: string,
     options: ?NumberFormatOptions
-  ): ?NumberFormatResult {
+  ): ?Object {
     let _locale: Locale = locale
     let formats: NumberFormat = numberFormats[_locale]
 
@@ -662,7 +650,7 @@ export default class VueI18n {
           formatter = this._numberFormatters[id] = new Intl.NumberFormat(_locale, format)
         }
       }
-      return formatter.format(value)
+      return formatter
     }
   }
 
@@ -680,8 +668,8 @@ export default class VueI18n {
       return nf.format(value)
     }
 
-    const ret: ?NumberFormatResult =
-      this._localizeNumber(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
+    const formatter: ?Object = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
+    const ret: ?NumberFormatResult = formatter && formatter.format(value)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
         warn(`Fall back to number localization of root: key '${key}' .`)
@@ -728,6 +716,34 @@ export default class VueI18n {
     }
 
     return this._n(value, locale, key, options)
+  }
+
+  _ntp (value: number, locale: Locale, key: ?string, options: ?NumberFormatOptions): NumberFormatToPartsResult {
+    /* istanbul ignore if */
+    if (!VueI18n.availabilities.numberFormat) {
+      if (process.env.NODE_ENV !== 'production') {
+        warn('Cannot format to parts a Number value due to not supported Intl.NumberFormat.')
+      }
+      return []
+    }
+
+    if (!key) {
+      const nf = !options ? new Intl.NumberFormat(locale) : new Intl.NumberFormat(locale, options)
+      return nf.formatToParts(value)
+    }
+
+    const formatter: ?Object = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
+    const ret: ?NumberFormatToPartsResult = formatter && formatter.formatToParts(value)
+    if (this._isFallbackRoot(ret)) {
+      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+        warn(`Fall back to format number to parts of root: key '${key}' .`)
+      }
+      /* istanbul ignore if */
+      if (!this._root) { throw Error('unexpected error') }
+      return this._root.$i18n._ntp(value, locale, key, options)
+    } else {
+      return ret || []
+    }
   }
 }
 
