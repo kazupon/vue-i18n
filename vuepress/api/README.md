@@ -715,7 +715,7 @@ new Vue({
 
 Each of these named scoped slots will accept three scope parameters:
 
-* `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer')
+* `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer`)
 * `index {Number}`: index of the specific part in the array of number parts
 * `parts {Array}`: array of all formatted number parts
 
