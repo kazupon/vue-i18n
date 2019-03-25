@@ -58,7 +58,7 @@ jobs:
       # run tests!
       #- run: yarn test
       - run: yarn lint
-      - run: yarn flow
+      #- run: yarn flow
       - run: yarn test:types
       - run: yarn test:cover
       - run: yarn test:e2e
