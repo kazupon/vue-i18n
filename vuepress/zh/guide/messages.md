@@ -108,7 +108,7 @@ const messages = {
 
 链接到的语言环境信息的键名也可以形如 `@:(message.foo.bar.baz)`，其中链接到另一段翻译的键名在括号 `()` 里。
 
-如果链接 `@:message.something` 按 `.` 跟随，则此选项非常有用，它可以是链接的一部分但是如果它不应该是。
+如果链接 `@:message.something` 后紧跟着一个点 `.`，则此选项非常有用，因为它本不该成为但却成为了链接的一部分。
 
 Locale messages 如下：
 
