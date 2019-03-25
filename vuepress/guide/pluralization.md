@@ -2,8 +2,6 @@
 
 You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
-*Your template will needs to use `$tc()` instead of `$t()`.*
-
 Locale messages the below:
 
 ```js

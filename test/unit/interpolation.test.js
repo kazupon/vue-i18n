@@ -1,4 +1,4 @@
-import Component from '../../src/components/interpolation'
+import Component from '../../src/component'
 
 const messages = {
   en: {

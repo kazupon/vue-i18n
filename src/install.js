@@ -1,8 +1,7 @@
 import { warn } from './util'
 import extend from './extend'
 import mixin from './mixin'
-import interpolationComponent from './components/interpolation'
-import numberComponent from './components/number'
+import component from './component'
 import { bind, update, unbind } from './directive'
 
 export let Vue
@@ -27,8 +26,7 @@ export function install (_Vue) {
   extend(Vue)
   Vue.mixin(mixin)
   Vue.directive('t', { bind, update, unbind })
-  Vue.component(interpolationComponent.name, interpolationComponent)
-  Vue.component(numberComponent.name, numberComponent)
+  Vue.component(component.name, component)
 
   // use simple mergeStrategies to prevent i18n instance lose '__proto__'
   const strats = Vue.config.optionMergeStrategies
