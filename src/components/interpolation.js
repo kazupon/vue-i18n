@@ -1,6 +1,6 @@
 /* @flow */
 
-import { warn } from './util'
+import { warn } from '../util'
 
 export default {
   name: 'i18n',

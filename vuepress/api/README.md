@@ -89,15 +89,15 @@ Note that you need to guarantee this context equal to component instance in life
   * **Arguments:**
 
     * `{number} value`: required
-    * `{Path | Object} key`: optional
+    * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
   * **Return:** `NumberFormatResult`
 
-Localize the number of `value` with number format of `key`. The number format of `key` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
+Localize the number of `value` with number format of `format`. The number format of `format` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
-If the number format of `key` not exist in `numberFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
+If the number format of `format` not exist in `numberFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
 
-If the second `key` argument specified as an object, it should have the following properties:
+If the second `format` argument specified as an object, it should have the following properties:
 
 * `key {Path}`: optional, number format
 * `locale {Locale}`: optional, locale
@@ -216,7 +216,7 @@ The number formats of localization.
   * **Type:** `Locale[]`
 
   * **Default:** `[]`
-  
+
   * **Examples:** `["en", "ja"]`
 
 The list of available locales in `messages` in lexical order.
@@ -541,14 +541,14 @@ Set the number format of locale.
 
 Merge the registered number formats with the number format of locale.
 
-#### n( value, [key], [locale] )
+#### n( value, [format], [locale] )
 
 > :new: 7.0+
 
   * **Arguments:**
 
     * `{number} value`: required
-    * `{Path | Object} key`: optional
+    * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
   * **Return:** `NumberFormatResult`
 
@@ -648,6 +648,80 @@ new Vue({
 #### See also:
 
 [Component interpolation](../guide/interpolation.md)
+
+### i18n-n functional component
+
+> :new: 8.10+
+
+#### Props:
+
+  * `value {number}`: required, number to format
+  * `format {strig | NumberFormatOptions}`: optional, number format name or object with explicit format options
+  * `locale {Locale}`: optional, locale
+  * `tag {string}`: optional, default `span`
+
+#### Usage:
+
+```html
+<div id="app">
+  <!-- ... -->
+  <i18n-n :value="money" format="currency" tag="label">
+    <span v-slot:currency="slotProps" class="font-weight: bold">{{ slotProps.currency }}<span>
+  </i18n-n>
+  <!-- ... -->
+</div>
+```
+```js
+var numberFormats = {
+  'en-US': {
+    currency: {
+      style: 'currency', currency: 'USD'
+    }
+  },
+  'ja-JP': {
+    currency: {
+      style: 'currency', currency: 'JPY'
+    }
+  }
+}
+
+const i18n = new VueI18n({
+  locale: 'en-US',
+  numberFormats
+})
+new Vue({
+  i18n,
+  data: {
+    money: 10234,
+  }
+}).$mount('#app')
+```
+
+#### Scoped slots
+
+`<i18n-n>` functional component can accept a number of named scoped slots. List of supported slot names is based on [`Intl.NumberFormat.formatToParts()` output types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts):
+
+* `currency`
+* `decimal`
+* `fraction`
+* `group`
+* `infinity`
+* `integer`
+* `literal`
+* `minusSign`
+* `nan`
+* `plusSign`
+* `percentSign`
+
+Each of these named scoped slots will accept three scope parameters:
+
+* `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer')
+* `index {Number}`: index of the specific part in the array of number parts
+* `parts {Array}`: array of all formatted number parts
+
+#### See also:
+
+[Number custom formatting](../guide/number.md#custom-formatting)
 
 ## Special Attributes
 

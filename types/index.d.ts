@@ -69,6 +69,14 @@ declare namespace VueI18n {
     [lang: string]: (choice: number, choicesLength: number) => number;
   };
 
+  type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
+
+  interface FormattedNumberPart {
+    type: FormattedNumberPartType;
+    value: string;
+  }
+  interface NumberFormatToPartsResult { [index: number]: FormattedNumberPart; }
+
   interface Formatter {
     interpolate(message: string, values: Values | undefined, path: string): (any[] | null);
   }
@@ -115,6 +123,7 @@ export type NumberFormatOptions = VueI18n.NumberFormatOptions;
 export type NumberFormat = VueI18n.NumberFormat;
 export type NumberFormats = VueI18n.NumberFormats;
 export type NumberFormatResult = VueI18n.NumberFormatResult;
+export type NumberFormatToPartsResult = VueI18n.NumberFormatToPartsResult;
 export type Formatter = VueI18n.Formatter;
 export type MissingHandler = VueI18n.MissingHandler;
 export type IntlAvailability = VueI18n.IntlAvailability;
