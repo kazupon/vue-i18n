@@ -161,7 +161,7 @@ mix.extend( 'i18n', new class {
     }(),
 );
 
-// 确保在 .js(...，...) 之前调用 .i18n()(来加载加载器)
+// 确保在 `.js(..., ...)` 之前调用 `.i18n()` (来加载加载器)
 mix.i18n()
    .js( 'resources/js/App.js', 'public/js/app.js' )
    ...
