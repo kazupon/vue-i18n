@@ -58,6 +58,10 @@ export default {
       return slot ? slot({ [part.type]: part.value, index, parts }) : part.value
     })
 
-    return h(props.tag, values)
+    return h(props.tag, {
+      attrs: data.attrs,
+      'class': data['class'],
+      staticClass: data.staticClass
+    }, values)
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  component: function (browser) {
+  number: function (browser) {
     browser
       .url('http://localhost:8080/examples/number/')
       .waitForElementVisible('#app', 1000)
