@@ -44,7 +44,7 @@ export default {
 
 ## 安装 vue-i18n-loader
 
-由于使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader`。如果使用单文件组件，虽然[vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用，但你必须另外安装[vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader)：
+为了使用 `<i18n>` 自定义块，你需要安装 `vue-loader` 和 `vue-i18n-loader`。如果你使用了单文件组件，[vue-loader](https://github.com/vuejs/vue-loader) 很可能已在项目中使用了，那么 [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) 必须另外安装：
 
 ```sh
 npm i --save-dev @kazupon/vue-i18n-loader
