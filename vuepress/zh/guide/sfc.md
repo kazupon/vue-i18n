@@ -147,7 +147,7 @@ _别忘了安装[deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i 
 
 对于带有 vue-loader v15 或更高版本的 Laravel-mix 4：
 ```js
-// 使用 “i18n” 方法扩展 Mix ，加载vue-i18n-loader
+// 使用 “i18n” 方法扩展 Mix ，加载 vue-i18n-loader
 mix.extend( 'i18n', new class {
         webpackRules() {
             return [
