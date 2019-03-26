@@ -87,7 +87,7 @@ const messages = {
  * @returns 选择复数单词的最终选择索引
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n 实例，所以 locale 属性也存在于此处
+  // this === VueI18n 实例，所以语言环境属性也存在于此处
   if (this.locale !== 'ru') {
     // 继续执行默认实现
   }
