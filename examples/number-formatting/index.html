@@ -13,13 +13,13 @@
         <option value="en-US">en-US</option>
         <option value="ja-JP">ja-JP</option>
       </select>
-      <p>
-        {{ $t('money') }}:
-        <i18n-n :value="money" format="currency">
+      <div class="view">
+        <p class="label">{{ $t('money') }}:</p>
+        <i18n-n :value="money" format="currency" tag="p" class="money">
           <template slot="decimal" slot-scope="props"><!-- do not render decimal separator --></template>
           <span slot="fraction" slot-scope="props" style="vertical-align: super">{{ props.fraction }}</span>
         </i18n-n>
-      </p>
+      </div>
     </div>
     <script>
       var messages = {
