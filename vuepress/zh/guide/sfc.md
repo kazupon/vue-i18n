@@ -185,7 +185,7 @@ mix.extend( 'i18n', function( webpackConfig, ...args ) {
     } );
 } );
 
-// 确保在 .js(...，...) 之前调用 .i18n()
+// 确保在 `.js(...，...)` 之前调用 `.i18n()`
 mix.i18n()
    .js( 'resources/assets/js/App.js', 'public/js/app.js' )
    ...
