@@ -167,7 +167,7 @@ mix.i18n()
    ...
 ```
 
-对于带有 vue-loader v14 的 Laravel-mix 2 ：
+对于带有 vue-loader v14 的 Laravel-mix 2：
 
 从 Laravel-mix 的[V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) 开始，你可以通过 mix.extend() 添加自定义规则。Laravel mix 已经有了处理 .vue 文件的规则。要添加 `vue-i18n-loader`，请将以下内容添加到 `webpack.mix.js`
 
