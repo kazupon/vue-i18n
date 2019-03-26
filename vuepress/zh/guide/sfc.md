@@ -105,7 +105,7 @@ module.exports = {
 
 为此，我们必须在项目的根目录下创建一个 `vue.config.js`。完成后，我们必须包括以下内容：
 
-对于 vue-loader v15或更高版本：
+对于 vue-loader v15 或更高版本：
 ```js
 module.exports = {
   chainWebpack: config => {
