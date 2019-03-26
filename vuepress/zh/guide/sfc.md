@@ -52,7 +52,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 ## Webpack
 
-对于 Webpack ，需要以下配置：
+需要对 Webpack 进行以下配置：
 
 对于 vue-loader v15 或更高版本：
 ```js
