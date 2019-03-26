@@ -79,7 +79,7 @@ const messages = {
 
 为了实现这些规则，你可以覆盖 `VueI18n.prototype.getChoiceIndex` 函数。
 
-使用斯拉夫语言规则的简化示例(俄语、乌克兰语等)：
+使用斯拉夫语言规则的简化示例 (俄语、乌克兰语等)：
 ```js
 /**
  * @param choice {number} 由 $tc 输入的选择索引：`$tc('path.to.rule', choiceIndex)`
