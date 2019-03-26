@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:10.0-browsers
         environment:
           TZ: Asia/Tokyo
-          #CHROME_BIN: "/usr/bin/google-chrome"
+          CHROME_BIN: "/usr/bin/google-chrome"
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -38,12 +38,12 @@ jobs:
       #    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
       #    sudo apt-get update
       #    sudo apt-get --only-upgrade install google-chrome-stable
-      #- run: |
-      #    sudo apt install libappindicator3-1
-      #    curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      #    sudo dpkg -i google-chrome.deb
-      #    sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-      #    rm google-chrome.deb
+      - run: |
+          sudo apt install libappindicator3-1
+          curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome.deb
+          sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+          rm google-chrome.deb
 
       - run:
           name: Install Dependencies
