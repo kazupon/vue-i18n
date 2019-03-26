@@ -4,7 +4,7 @@
 
 如果使用单文件组件构建 Vue 组件或 Vue 应用程序，则可以管理 `i18n` 自定义块的语言环境信息。
 
-以下内容是：[单文件组件示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
+以下是[单文件组件示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
 ```js
 <i18n>
