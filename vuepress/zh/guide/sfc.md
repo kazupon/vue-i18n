@@ -277,7 +277,7 @@ module.exports = {
 
 ## Scoped 风格
 
-当使用带有 `scoped style` `vue-i18n` 时，重要的是要记住使用[深度选择器](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) 来设置嵌套转换的样式。例如：
+当使用带有 `scoped style` `vue-i18n` 时，重要的是要记住使用[深度选择器](https://vue-loader.vuejs.org/zh/guide/scoped-css.html#深度作用选择器) 来设置嵌套转换的样式。例如：
 
 ```html
 ...
