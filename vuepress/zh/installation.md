@@ -30,7 +30,7 @@ npm install vue-i18n
 yarn add vue-i18n
 ```
 
-如果在一个模块化工程中使用它，必须要通过 `Vue.use()` 明确地安装`vue-i18n`：
+如果在一个模块系统中使用它，你必须通过 `Vue.use()` 明确地安装 `vue-i18n`：
 
 
 ```javascript
