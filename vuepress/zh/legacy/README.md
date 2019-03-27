@@ -191,7 +191,7 @@ i18n.te('hello') // -> true
 
 ### locales 已被替换
 
-使用 `messages` 的 `VueI18n` 类的构造函数的选项，或 `messages` 的 `i18n` 选项( Component 选项)：
+使用 `messages` 的 `VueI18n` 类的构造函数的选项，或 `messages` 的 `i18n` 选项 (针对组件选项)：
 
 ```js
 const i18n = new VueI18n({
