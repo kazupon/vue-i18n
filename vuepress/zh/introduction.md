@@ -29,7 +29,7 @@ Vue I18n 是 Vue.js 的国际化插件。它可以轻松地将一些本地化功
   </a>
 </p>
 
-## Links
+## 相关链接
 
 [<img src="https://assets-cdn.github.com/favicon.ico" alt="icon" width="16" height="16"/> Vue CLI plugin](https://github.com/kazupon/vue-cli-plugin-i18n)
 
