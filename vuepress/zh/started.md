@@ -38,7 +38,7 @@ const messages = {
   }
 }
 
-// 通过配置创建 VueI18n 实例
+// 通过选项创建 VueI18n 实例
 const i18n = new VueI18n({
   locale: 'ja', // 设置地区
   messages, // 设置地区信息
