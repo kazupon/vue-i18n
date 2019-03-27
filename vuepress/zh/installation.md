@@ -48,7 +48,7 @@ Vue.use(VueI18n)
 vue add i18n
 ```
 
-你需要 Vue cli 3.x 作为先决条件，你可以在命令式上使用下面的命令来安装：
+你需要 Vue cli 3.x 作为先决条件，你可以在命令行上使用下面的命令来安装：
 
 ```sh
 npm install @vue/cli -g
