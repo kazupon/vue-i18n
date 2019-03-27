@@ -235,7 +235,7 @@ i18n.locale = 'ja'
 app.$i18n.locale = 'ja'
 ```
 
-## Features
+## 特性
 
 ### 已删除动态语言环境
 
