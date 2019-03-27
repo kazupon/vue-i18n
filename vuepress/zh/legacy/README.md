@@ -204,7 +204,7 @@ const i18n = new VueI18n({
   // ...
 })
 
-// for Component
+// 针对组件选项
 const Component1 = {
   i18n: {
     messages: {
