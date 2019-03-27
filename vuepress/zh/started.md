@@ -18,7 +18,7 @@
 ## JavaScript
 
 ```js
-// 如果使用模块系统(例如通过vue-cli)，则需要导入 Vue 和 VueI18n ，然后调用Vue.use(VueI18n)。
+// 如果使用模块系统 (例如通过 vue-cli)，则需要导入 Vue 和 VueI18n ，然后调用 Vue.use(VueI18n)。
 // import Vue from 'vue'
 // import VueI18n from 'vue-i18n'
 //
