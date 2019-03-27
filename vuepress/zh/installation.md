@@ -56,7 +56,7 @@ npm install @vue/cli -g
 
 ## 开发版构建
 
-如果你想使用最新的开发版，就得从 GitHub 上直接 clone，然后自己 build 一个 `vue-i18n`。
+如果你想使用最新的开发版构建，就得从 GitHub 上直接 clone，然后自己构建一个 `vue-i18n`。
 
 ```sh
 git clone https://github.com/kazupon/vue-i18n.git node_modules/vue-i18n
