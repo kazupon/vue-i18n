@@ -1,7 +1,7 @@
 # 开始
 
 :::tip 说明
-我们将在指南中的代码示例中使用[ES2015](https://github.com/lukehoban/es6features)
+我们将在指南中的代码示例中使用 [ES2015](https://github.com/lukehoban/es6features) 语法。
 :::
 
 ## HTML
