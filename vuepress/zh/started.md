@@ -45,7 +45,7 @@ const i18n = new VueI18n({
 })
 
 
-// 通过 `i18n` 配置创建 Vue 实例
+// 通过 `i18n` 选项创建 Vue 实例
 new Vue({ i18n }).$mount('#app')
 
 // 现在应用程序已经准备好了！
