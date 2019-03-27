@@ -10,7 +10,7 @@
 
 [unpkg.com](https://unpkg.com) 提供了基于 NPM 的 CDN 链接。上面的链接会一直指向在 NPM 发布的最新版本。你也可以通过 <https://unpkg.com/vue-i18n@8.9.0/dist/vue-i18n.js> 这样的 URL 指定版本号或者 tag。
 
-在Vue之后加入vue-i18n，它会自动安装：
+在 Vue 之后引入 vue-i18n，它会自动安装：
 
 
 ```html
