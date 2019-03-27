@@ -1,7 +1,7 @@
 # 介绍
 
 :::warning 说明
-:warning: 本文档适用于 Vue I18n v6.0 或更高版本. 如果你使用 v5.x，请参阅[旧版](./legacy/) 部分。
+:warning: 本文档适用于 Vue I18n v6.0 或更高版本. 如果你使用 v5.x，请参阅[旧版](./legacy/)部分。
 :::
 
 Vue I18n 是 Vue.js 的国际化插件。它可以轻松地将一些本地化功能集成到你的 Vue.js 应用程序中。
