@@ -51,7 +51,7 @@ new Vue({ i18n }).$mount('#app')
 // 现在应用程序已经准备好了！
 ```
 
-Output the following:
+输出如下：
 
 ```html
 <div id="#app">
