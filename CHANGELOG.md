@@ -1,3 +1,23 @@
+<a name="8.10.0"></a>
+# [8.10.0](https://github.com/kazupon/vue-i18n/compare/v8.9.0...v8.10.0) (2019-03-28)
+
+
+### :star: New Features
+
+* **number:** i18n-n functional component ([#541](https://github.com/kazupon/vue-i18n/issues/541)) by [@bponomarenko](https://github.com/bponomarenko) ([b33579d](https://github.com/kazupon/vue-i18n/commit/b33579d)), closes [#541](https://github.com/kazupon/vue-i18n/issues/541)
+* **path:** Keypath should parse if sub path contains spaces. ([#533](https://github.com/kazupon/vue-i18n/issues/533)) by [@exoego](https://github.com/exoego) ([640daaf](https://github.com/kazupon/vue-i18n/commit/640daaf)), closes [#533](https://github.com/kazupon/vue-i18n/issues/533)
+
+
+### :zap: Improvements
+
+* **number:** support data fall through in i18n-n ([#545](https://github.com/kazupon/vue-i18n/issues/545)) ([71cadbf](https://github.com/kazupon/vue-i18n/commit/71cadbf)), closes [#545](https://github.com/kazupon/vue-i18n/issues/545)
+
+
+### :pencil: docs
+
+* **vuepress:** translate documents for chinese ([#536](https://github.com/kazupon/vue-i18n/issues/536)) by [@xuhongbo](https://github.com/xuhongbo) ([ccf29f8](https://github.com/kazupon/vue-i18n/commit/ccf29f8)), closes [#536](https://github.com/kazupon/vue-i18n/issues/536) [#531](https://github.com/kazupon/vue-i18n/issues/531) [#1](https://github.com/kazupon/vue-i18n/issues/1) [#533](https://github.com/kazupon/vue-i18n/issues/533) [#540](https://github.com/kazupon/vue-i18n/issues/540) [#541](https://github.com/kazupon/vue-i18n/issues/541) [#1](https://github.com/kazupon/vue-i18n/issues/1) [#2](https://github.com/kazupon/vue-i18n/issues/2)
+
+
 <a name="8.9.0"></a>
 # [8.9.0](https://github.com/kazupon/vue-i18n/compare/v8.8.2...v8.9.0) (2019-03-08)
 
