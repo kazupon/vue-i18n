@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>单文件组件 | Vue I18n</title>
+    <meta name="description" content="Vue I18n 是 Vue.js 的国际化插件">
+    <meta name="theme-color" content="#3eaf7c">
+    
+    <link rel="preload" href="/vue-i18n/assets/css/0.styles.10da93c6.css" as="style"><link rel="preload" href="/vue-i18n/assets/js/app.68bdc542.js" as="script"><link rel="preload" href="/vue-i18n/assets/js/37.5d75dc22.js" as="script"><link rel="prefetch" href="/vue-i18n/assets/js/10.180f99e2.js"><link rel="prefetch" href="/vue-i18n/assets/js/11.2314f5d0.js"><link rel="prefetch" href="/vue-i18n/assets/js/12.23155f27.js"><link rel="prefetch" href="/vue-i18n/assets/js/13.fac1baf1.js"><link rel="prefetch" href="/vue-i18n/assets/js/14.d215d072.js"><link rel="prefetch" href="/vue-i18n/assets/js/15.f8ebbb4c.js"><link rel="prefetch" href="/vue-i18n/assets/js/16.5163deaa.js"><link rel="prefetch" href="/vue-i18n/assets/js/17.3bff87e8.js"><link rel="prefetch" href="/vue-i18n/assets/js/18.2535460e.js"><link rel="prefetch" href="/vue-i18n/assets/js/19.c99a5796.js"><link rel="prefetch" href="/vue-i18n/assets/js/2.7cc39a3c.js"><link rel="prefetch" href="/vue-i18n/assets/js/20.adb6977a.js"><link rel="prefetch" href="/vue-i18n/assets/js/21.52e20f9b.js"><link rel="prefetch" href="/vue-i18n/assets/js/22.09c4caef.js"><link rel="prefetch" href="/vue-i18n/assets/js/23.fbb859e0.js"><link rel="prefetch" href="/vue-i18n/assets/js/24.ede87835.js"><link rel="prefetch" href="/vue-i18n/assets/js/25.6b60bebe.js"><link rel="prefetch" href="/vue-i18n/assets/js/26.98410eea.js"><link rel="prefetch" href="/vue-i18n/assets/js/27.7346cf8b.js"><link rel="prefetch" href="/vue-i18n/assets/js/28.2b334bca.js"><link rel="prefetch" href="/vue-i18n/assets/js/29.2973c2e1.js"><link rel="prefetch" href="/vue-i18n/assets/js/3.3a886515.js"><link rel="prefetch" href="/vue-i18n/assets/js/30.068dfcb3.js"><link rel="prefetch" href="/vue-i18n/assets/js/31.9fdc3d6d.js"><link rel="prefetch" href="/vue-i18n/assets/js/32.d1ed87e2.js"><link rel="prefetch" href="/vue-i18n/assets/js/33.49a8e750.js"><link rel="prefetch" href="/vue-i18n/assets/js/34.f7ec4fd1.js"><link rel="prefetch" href="/vue-i18n/assets/js/35.b90df94e.js"><link rel="prefetch" href="/vue-i18n/assets/js/36.22a269c4.js"><link rel="prefetch" href="/vue-i18n/assets/js/38.935b7756.js"><link rel="prefetch" href="/vue-i18n/assets/js/39.c79a5ab2.js"><link rel="prefetch" href="/vue-i18n/assets/js/4.bf8e0c60.js"><link rel="prefetch" href="/vue-i18n/assets/js/40.2191090a.js"><link rel="prefetch" href="/vue-i18n/assets/js/41.7adaa050.js"><link rel="prefetch" href="/vue-i18n/assets/js/42.3cc45596.js"><link rel="prefetch" href="/vue-i18n/assets/js/43.e2900926.js"><link rel="prefetch" href="/vue-i18n/assets/js/5.dc6df060.js"><link rel="prefetch" href="/vue-i18n/assets/js/6.8d759d9b.js"><link rel="prefetch" href="/vue-i18n/assets/js/7.d90d2e49.js"><link rel="prefetch" href="/vue-i18n/assets/js/8.00e47cf5.js"><link rel="prefetch" href="/vue-i18n/assets/js/9.b6dffd28.js">
+    <link rel="stylesheet" href="/vue-i18n/assets/css/0.styles.10da93c6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-i18n/zh/" class="home-link router-link-active"><!----> <span class="site-name">Vue I18n</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-i18n/zh/guide/formatting.html" class="nav-link">指南</a></div><div class="nav-item"><a href="/vue-i18n/zh/legacy/" class="nav-link">旧版</a></div><div class="nav-item"><a href="/vue-i18n/zh/api/" class="nav-link">API</a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-cli-plugin-i18n" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  脚手架插件
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.patreon.com/kazupon" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  赞助
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-i18n/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  发布日志
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-i18n/guide/sfc.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/zh/guide/sfc.html" class="nav-link router-link-exact-active router-link-active">简体中文</a></li></ul></div></div> <a href="https://github.com/kazupon/vue-i18n" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-i18n/zh/guide/formatting.html" class="nav-link">指南</a></div><div class="nav-item"><a href="/vue-i18n/zh/legacy/" class="nav-link">旧版</a></div><div class="nav-item"><a href="/vue-i18n/zh/api/" class="nav-link">API</a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-cli-plugin-i18n" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  脚手架插件
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://www.patreon.com/kazupon" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  赞助
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-i18n/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  发布日志
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-i18n/guide/sfc.html" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/zh/guide/sfc.html" class="nav-link router-link-exact-active router-link-active">简体中文</a></li></ul></div></div> <a href="https://github.com/kazupon/vue-i18n" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/vue-i18n/zh/" class="sidebar-link">Home</a></li><li><a href="/vue-i18n/zh/introduction.html" class="sidebar-link">介绍</a></li><li><a href="/vue-i18n/zh/started.html" class="sidebar-link">开始</a></li><li><a href="/vue-i18n/zh/installation.html" class="sidebar-link">安装</a></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>Guide</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/vue-i18n/zh/guide/formatting.html" class="sidebar-link">格式化</a></li><li><a href="/vue-i18n/zh/guide/pluralization.html" class="sidebar-link">复数</a></li><li><a href="/vue-i18n/zh/guide/datetime.html" class="sidebar-link">日期时间本地化</a></li><li><a href="/vue-i18n/zh/guide/number.html" class="sidebar-link">数字本地化</a></li><li><a href="/vue-i18n/zh/guide/messages.html" class="sidebar-link">语言环境信息的语法</a></li><li><a href="/vue-i18n/zh/guide/fallback.html" class="sidebar-link">回退本地化</a></li><li><a href="/vue-i18n/zh/guide/component.html" class="sidebar-link">基于组件的本地化</a></li><li><a href="/vue-i18n/zh/guide/directive.html" class="sidebar-link">自定义指令本地化</a></li><li><a href="/vue-i18n/zh/guide/interpolation.html" class="sidebar-link">组件插值</a></li><li><a href="/vue-i18n/zh/guide/sfc.html" class="active sidebar-link">单文件组件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#基本用法" class="sidebar-link">基本用法</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#安装-vue-i18n-loader" class="sidebar-link">安装 vue-i18n-loader</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#webpack" class="sidebar-link">Webpack</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#vue-cli-3-0" class="sidebar-link">Vue CLI 3.0</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#laravel-mix" class="sidebar-link">Laravel-Mix</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#加载-yaml" class="sidebar-link">加载 YAML</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#多个自定义块" class="sidebar-link">多个自定义块</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#scoped-风格" class="sidebar-link">Scoped 风格</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/zh/guide/sfc.html#函数式组件中的自定义块" class="sidebar-link">函数式组件中的自定义块</a></li></ul></li><li><a href="/vue-i18n/zh/guide/hot-reload.html" class="sidebar-link">热重载</a></li><li><a href="/vue-i18n/zh/guide/locale.html" class="sidebar-link">语言环境变更</a></li><li><a href="/vue-i18n/zh/guide/lazy-loading.html" class="sidebar-link">延迟加载翻译</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>Legacy</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/vue-i18n/zh/legacy/" class="sidebar-link">从 v5.x 迁移</a></li><li><a href="/vue-i18n/zh/legacy/v5.html" class="sidebar-link">documentation for v5.x</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="单文件组件"><a href="#单文件组件" aria-hidden="true" class="header-anchor">#</a> 单文件组件</h1> <h2 id="基本用法"><a href="#基本用法" aria-hidden="true" class="header-anchor">#</a> 基本用法</h2> <p>如果使用单文件组件构建 Vue 组件或 Vue 应用程序，则可以管理 <code>i18n</code> 自定义块的语言环境信息。</p> <p>以下是<a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank" rel="noopener noreferrer">单文件组件示例<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>i18n<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;en&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;hello&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;hello world!&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;ja&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;hello&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;こんにちは、世界！&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>i18n<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;app&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">&quot;locale&quot;</span><span class="token operator">&gt;</span>locale<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>select v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">&quot;locale&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>option<span class="token operator">&gt;</span>en<span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>option<span class="token operator">&gt;</span>ja<span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>message<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token function">$t</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">'app'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">{</span> locale<span class="token punctuation">:</span> <span class="token string">'en'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  watch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">locale</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$i18n<span class="token punctuation">.</span>locale <span class="token operator">=</span> val
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><h2 id="安装-vue-i18n-loader"><a href="#安装-vue-i18n-loader" aria-hidden="true" class="header-anchor">#</a> 安装 vue-i18n-loader</h2> <p>为了使用 <code>&lt;i18n&gt;</code> 自定义块，你需要安装 <code>vue-loader</code> 和 <code>vue-i18n-loader</code>。如果你使用了单文件组件，<a href="https://github.com/vuejs/vue-loader" target="_blank" rel="noopener noreferrer">vue-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 很可能已在项目中使用了，那么 <a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer">vue-i18n-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 必须另外安装：</p> <div class="language-sh extra-class"><pre class="language-text"><code>npm i --save-dev @kazupon/vue-i18n-loader
+</code></pre></div><h2 id="webpack"><a href="#webpack" aria-hidden="true" class="header-anchor">#</a> Webpack</h2> <p>需要对 Webpack 进行以下配置：</p> <p>对于 vue-loader v15 或更高版本：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.vue$/</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        resourceQuery<span class="token punctuation">:</span> <span class="token regex">/blockType=i18n/</span><span class="token punctuation">,</span>
+        type<span class="token punctuation">:</span> <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>对于 vue-loader v14：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.vue$/</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          loaders<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 你需要指定 `i18n` 的值为 `vue-i18n-loader`</span>
+            i18n<span class="token punctuation">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="vue-cli-3-0"><a href="#vue-cli-3-0" aria-hidden="true" class="header-anchor">#</a> Vue CLI 3.0</h2> <p><a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener noreferrer">Vue CLI 3.0<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 隐藏了 webpack 配置，因此，如果我们想在单文件组件中添加对 <code>&lt;i18n&gt;</code> 标记的支持，我们需要修改现有配置。</p> <p>为此，我们必须在项目的根目录下创建一个 <code>vue.config.js</code>。完成后，我们必须包括以下内容：</p> <p>对于 vue-loader v15 或更高版本：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token punctuation">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex">/blockType=i18n/</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@kazupon/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>对于 vue-loader v14：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> merge <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'deepmerge'</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token punctuation">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'vue'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'vue-loader'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token parameter">options</span> <span class="token operator">=&gt;</span>
+        <span class="token function">merge</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          loaders<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            i18n<span class="token punctuation">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><em>别忘了安装<a href="https://github.com/KyleAMathews/deepmerge" target="_blank" rel="noopener noreferrer">deepmerge<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>! (<code>npm i deepmerge -D</code> 或 <code>yarn add deepmerge -D</code>)</em></p> <p>如果你想了解有关修改现有配置的更多信息<a href="https://cli.vuejs.org/guide/webpack.html" target="_blank" rel="noopener noreferrer">点击这里<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <h2 id="laravel-mix"><a href="#laravel-mix" aria-hidden="true" class="header-anchor">#</a> Laravel-Mix</h2> <p>对于带有 vue-loader v15 或更高版本的 Laravel-mix 4：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 使用 “i18n” 方法扩展 Mix ，加载 vue-i18n-loader</span>
+mix<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> <span class="token string">'i18n'</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">class</span> <span class="token punctuation">{</span>
+        <span class="token function">webpackRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    resourceQuery<span class="token punctuation">:</span> <span class="token regex">/blockType=i18n/</span><span class="token punctuation">,</span>
+                    type<span class="token punctuation">:</span>          <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
+                    loader<span class="token punctuation">:</span>        <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 确保在 `.js(..., ...)` 之前调用 `.i18n()` (来加载加载器)</span>
+mix<span class="token punctuation">.</span><span class="token function">i18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">js</span><span class="token punctuation">(</span> <span class="token string">'resources/js/App.js'</span><span class="token punctuation">,</span> <span class="token string">'public/js/app.js'</span> <span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+</code></pre></div><p>对于带有 vue-loader v14 的 Laravel-mix 2：</p> <p>从 Laravel-mix 的 <a href="https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1" target="_blank" rel="noopener noreferrer">V2.1<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 开始，你可以通过 <code>mix.extend()</code> 添加自定义规则。Laravel mix 已经有了处理 .vue 文件的规则。要添加 <code>vue-i18n-loader</code>，请将以下内容添加到 <code>webpack.mix.js</code>：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 下面的代码将注入 i18n Kazupon/vue-18-loader 作为 .vue 文件的加载器。</span>
+mix<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> <span class="token string">'i18n'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">webpackConfig<span class="token punctuation">,</span> <span class="token operator">...</span>args</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    webpackConfig<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token parameter">module</span> <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 搜索处理 .vue 文件的 “vue-loader” 组件。</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> module<span class="token punctuation">.</span>loader <span class="token operator">!==</span> <span class="token string">'vue-loader'</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 在此模块中，为 i18n 标记添加 vue-i18n-loader。</span>
+        module<span class="token punctuation">.</span>options<span class="token punctuation">.</span>loaders<span class="token punctuation">.</span>i18n <span class="token operator">=</span> <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 确保在 `.js(...，...)` 之前调用 `.i18n()`</span>
+mix<span class="token punctuation">.</span><span class="token function">i18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">js</span><span class="token punctuation">(</span> <span class="token string">'resources/assets/js/App.js'</span><span class="token punctuation">,</span> <span class="token string">'public/js/app.js'</span> <span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+</code></pre></div><h2 id="加载-yaml"><a href="#加载-yaml" aria-hidden="true" class="header-anchor">#</a> 加载 YAML</h2> <p><code>i18n</code> 自定义块需要指定为 JSON 格式，你也可以通过使用 <code>vue-loader</code> 预加载器功能来使用 <code>YAML</code> 格式。</p> <p>以下是 <code>YAML</code> 格式的 <code>i18n</code> 自定义块：</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+en:
+  hello: &quot;hello world!&quot;
+ja:
+  hello: &quot;こんにちは、世界！&quot;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>Webpack 配置如下：</p> <p>对于 vue-loader v15 或更高版本：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Vue CLI 3.0</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token punctuation">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex">/blockType=i18n/</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@kazupon/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'yaml'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'yaml-loader'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>对于 vue-loader v14：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.vue$/</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          preLoaders<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            i18n<span class="token punctuation">:</span> <span class="token string">'yaml-loader'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          loaders<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            i18n<span class="token punctuation">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="多个自定义块"><a href="#多个自定义块" aria-hidden="true" class="header-anchor">#</a> 多个自定义块</h2> <p>你可以使用具有多个 <code>i18n</code> 自定义块的语言环境信息。</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>./common/locales.json<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  {
+    &quot;en&quot;: {
+      &quot;hello&quot;: &quot;hello world!&quot;
+    },
+    &quot;ja&quot;: {
+      &quot;hello&quot;: &quot;こんにちは、世界！&quot;
+    }
+  }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>如上所见，第一个自定义块使用 <code>src</code> 特性加载常用的语言环境信息，第二个自定义块加载仅在该单文件组件中定义的语言环境信息。这些语言环境信息将合并为组件的语言环境信息。</p> <p>这样，多个自定义块在想要用作模块时非常有用。</p> <h2 id="scoped-风格"><a href="#scoped-风格" aria-hidden="true" class="header-anchor">#</a> Scoped 风格</h2> <p>当使用带有 <code>scoped style</code> <code>vue-i18n</code> 时，重要的是要记住使用<a href="https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B1%E5%BA%A6%E4%BD%9C%E7%94%A8%E9%80%89%E6%8B%A9%E5%99%A8" target="_blank" rel="noopener noreferrer">深度选择器<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 来设置嵌套转换的样式。例如：</p> <div class="language-html extra-class"><pre class="language-html"><code>...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>message: {{ $t('hello') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+...
+<span class="token comment">&lt;!-- 不可行--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- 可行 --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.parent &gt;&gt;&gt; p</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="函数式组件中的自定义块"><a href="#函数式组件中的自定义块" aria-hidden="true" class="header-anchor">#</a> 函数式组件中的自定义块</h2> <p>如果单个文件组件具有使用函数式组件的模板，并且你已经定义了 <code>i18n</code> 自定义块，请注意你无法使用语言环境信息进行本地化。</p> <p>例如，以下代码无法使用 <code>i18n</code> 自定义块的语言环境信息进行本地化。</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+{
+  &quot;en&quot;: {
+    &quot;hello&quot;: &quot;hello world&quot;
+  },
+  &quot;ja&quot;: {
+    &quot;hello&quot;: &quot;こんにちは、世界&quot;
+  }
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">functional</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- 'hello' 的父实例的语言环境信息 --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>{{ parent.$t('hello') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/kazupon/vue-i18n/edit/master/vuepress/zh/guide/sfc.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">最近一次更新: </span> <span class="time">2019-3-27 19:07:32</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/vue-i18n/zh/guide/interpolation.html" class="prev">
+          组件插值
+        </a></span> <span class="next"><a href="/vue-i18n/zh/guide/hot-reload.html">
+          热重载
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/vue-i18n/assets/js/app.68bdc542.js" defer></script><script src="/vue-i18n/assets/js/37.5d75dc22.js" defer></script>
+  </body>
+</html>
