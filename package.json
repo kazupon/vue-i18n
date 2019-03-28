@@ -9,6 +9,9 @@
   "bugs": {
     "url": "https://github.com/kazupon/vue-i18n/issues"
   },
+  "resolutions": {
+    "webpack-dev-middleware": "3.6.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

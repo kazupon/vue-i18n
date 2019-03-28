@@ -7989,7 +7989,7 @@ mime@^1.2.11:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@^2.0.3, mime@^2.1.0, mime@^2.3.1:
+mime@^2.0.3, mime@^2.3.1:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.0.tgz#e051fd881358585f3279df333fe694da0bcffdd6"
   integrity sha512-ikBcWwyqXQSHKtciCcctu9YfPbFYZ4+gbHEmE0Q8jzcTYQg5dHCr3g2wwAZjPoJfQVXZq6KXAjpXOTf5/cjT7w==
@@ -11743,11 +11743,6 @@ url-join@^1.0.0:
   resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
   integrity sha1-dBxsL0WWxIMNZxhGCSDQySIC3Hg=
 
-url-join@^2.0.2:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/url-join/-/url-join-2.0.5.tgz#5af22f18c052a000a48d7b82c5e9c2e2feeda728"
-  integrity sha1-WvIvGMBSoACkjXuCxenC4v7tpyg=
-
 url-loader@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-1.1.2.tgz#b971d191b83af693c5e3fea4064be9e1f2d7f8d8"
@@ -12084,23 +12079,10 @@ webpack-cli@^3.1.1:
     v8-compile-cache "^2.0.2"
     yargs "^12.0.5"
 
-webpack-dev-middleware@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-2.0.6.tgz#a51692801e8310844ef3e3790e1eacfe52326fd4"
-  integrity sha512-tj5LLD9r4tDuRIDa5Mu9lnY2qBBehAITv6A9irqXhw/HQquZgTx3BCd57zYbU2gMDnncA49ufK2qVQSbaKJwOw==
-  dependencies:
-    loud-rejection "^1.6.0"
-    memory-fs "~0.4.1"
-    mime "^2.1.0"
-    path-is-absolute "^1.0.0"
-    range-parser "^1.0.3"
-    url-join "^2.0.2"
-    webpack-log "^1.0.1"
-
-webpack-dev-middleware@^3.0.0, webpack-dev-middleware@^3.5.1:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-3.6.1.tgz#91f2531218a633a99189f7de36045a331a4b9cd4"
-  integrity sha512-XQmemun8QJexMEvNFbD2BIg4eSKrmSIMrTfnl2nql2Sc6OGAYFyb8rwuYrCjl/IiEYYuyTEiimMscu7EXji/Dw==
+webpack-dev-middleware@3.6.0, webpack-dev-middleware@^2.0.6, webpack-dev-middleware@^3.0.0, webpack-dev-middleware@^3.5.1:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-3.6.0.tgz#71f1b04e52ff8d442757af2be3a658237d53a3e5"
+  integrity sha512-oeXA3m+5gbYbDBGo4SvKpAHJJEGMoekUbHgo1RK7CP1sz7/WOSeu/dWJtSTk+rzDCLkPwQhGocgIq6lQqOyOwg==
   dependencies:
     memory-fs "^0.4.1"
     mime "^2.3.1"
@@ -12155,7 +12137,7 @@ webpack-hot-client@^3.0.0:
     webpack-log "^1.1.1"
     ws "^4.0.0"
 
-webpack-log@^1.0.1, webpack-log@^1.1.1, webpack-log@^1.1.2:
+webpack-log@^1.1.1, webpack-log@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.2.0.tgz#a4b34cda6b22b518dbb0ab32e567962d5c72a43d"
   integrity sha512-U9AnICnu50HXtiqiDxuli5gLB5PGBo7VvcHx36jRZHwK4vzOYLbImqT4lwWwoMHdQWwEKw736fCHEekokTEKHA==
