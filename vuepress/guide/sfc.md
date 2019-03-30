@@ -277,9 +277,22 @@ In this way, multiple custom blocks useful when want to be used as module.
 
 ## Scoped style
 
-When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) for styling a nested translation. For example:
+When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) for styling an element __*inside*__ the translation string. For example:
+
+__Translation contains only text__ (Work without deep selector)
 
 ```html
+...
+<i18n>
+{
+  "en": {
+    "hello": "helloworld!"
+  },
+  "ja": {
+    "hello": "こんにちは、世界"
+  }
+}
+</i18n>
 ...
 <template>
   <div class="parent">
@@ -287,20 +300,58 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
   </div>
 </template>
 ...
-<!-- Won't work-->
-<style scoped>
+<!-- Will work -->
+<style>
 .parent p {
   color: #42b883;
+}
+</style>
+```
+
+__Translation with HTML element__ (Must use deep selector)
+```html
+...
+<i18n>
+{
+  "en": {
+    "hello": "hello<span>world!</span>"
+  },
+  "ja": {
+    "hello": "こんにちは、<span>世界！</span>"
+  }
+}
+</i18n>
+...
+<template>
+  <div class="parent">
+    <p v-html="$t('hello')"></p>
+  </div>
+</template>
+...
+<!-- Won't work -->
+<style>
+.parent p {
+  color: #42b883;
+}
+
+.parent p span{
+  color: red;
 }
 </style>
 
 <!-- Will work -->
 <style>
-.parent >>> p {
+.parent p {
   color: #42b883;
+}
+
+.parent p >>> span{
+  color: red;
 }
 </style>
 ```
+
+
 
 ## Custom blocks in functional component
 
