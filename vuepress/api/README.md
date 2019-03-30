@@ -656,7 +656,7 @@ new Vue({
 #### Props:
 
   * `value {number}`: required, number to format
-  * `format {strig | NumberFormatOptions}`: optional, number format name or object with explicit format options
+  * `format {string | NumberFormatOptions}`: optional, number format name or object with explicit format options
   * `locale {Locale}`: optional, locale
   * `tag {string}`: optional, default `span`
 
