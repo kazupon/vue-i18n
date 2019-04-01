@@ -234,10 +234,10 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
-            warn(`Value of key '${key}' is not a string!`)
-          }
-          return null
+          // if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+          //   warn(`Value of key '${key}' is not a string!`)
+          // }
+          ret = key
         }
       } else {
         return null

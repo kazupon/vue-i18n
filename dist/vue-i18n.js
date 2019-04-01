@@ -1217,10 +1217,10 @@
       if (isPlainObject(message)) {
         ret = message[key];
         if (typeof ret !== 'string') {
-          if (!this._silentTranslationWarn && !this._isSilentFallback(locale)) {
-            warn(("Value of key '" + key + "' is not a string!"));
-          }
-          return null
+          // if ("development" !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+          // warn(`Value of key '${key}' is not a string!`)
+          // }
+          ret = key;
         }
       } else {
         return null
