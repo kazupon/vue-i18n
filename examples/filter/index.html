@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>filter example</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../dist/vue-i18n.js"></script>
+</head>
+<body>
+<div id="string-syntax">
+  <p>{ 'hello' | t }</p>
+  <p>{ path | t }</p>
+</div>
+<div id="in-transitions">
+  <p>
+    <transition name="fade">
+      <span v-if="toggle" class="red-bg">{ 'clean' | t }</span>
+    </transition>
+  </p>
+  <button @click="toggle = !toggle">Toggle</button>
+</div>
+<script>
+  // string syntax example
+  new Vue({
+    i18n: new VueI18n({
+      locale: 'en',
+      messages: {
+        en: { hello: 'hi there!' },
+        ja: { hello: 'こんにちは！' }
+      }
+    }),
+    data: { path: 'hello' }
+  }).$mount('#string-syntax')
+
+  // use in transitions example
+  new Vue({
+    i18n: new VueI18n({
+      locale: 'en',
+      messages: {
+        en: {
+          clean: 'without preserve',
+          preserve: 'with preserve'
+        },
+      }
+    }),
+    data: { toggle: true }
+  }).$mount('#in-transitions')
+</script>
+<style>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+  .red-bg {
+    background-color: red;
+    padding: 5px;
+  }
+</style>
+</body>
+</html>

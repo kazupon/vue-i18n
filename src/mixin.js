@@ -1,6 +1,7 @@
 /* @flow */
 
 import VueI18n from './index'
+import { initFilter, destroyFilter } from './filter'
 import { isPlainObject, warn, merge } from './util'
 
 export default {
@@ -30,6 +31,8 @@ export default {
         this._i18nWatcher = this._i18n.watchI18nData()
         this._i18n.subscribeDataChanging(this)
         this._subscribing = true
+
+        initFilter.apply(this)
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
@@ -103,6 +106,8 @@ export default {
         self._localeWatcher()
         delete self._localeWatcher
       }
+
+      destroyFilter.apply(this)
 
       self._i18n = null
     })
