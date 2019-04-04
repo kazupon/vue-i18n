@@ -32,7 +32,7 @@ export default {
         this._i18n.subscribeDataChanging(this)
         this._subscribing = true
 
-        initFilter.apply(this)
+        initFilter.call(this)
       } else if (isPlainObject(options.i18n)) {
         // component local i18n
         if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
@@ -107,7 +107,7 @@ export default {
         delete self._localeWatcher
       }
 
-      destroyFilter.apply(this)
+      destroyFilter.call(this)
 
       self._i18n = null
     })
