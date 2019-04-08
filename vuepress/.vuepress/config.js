@@ -11,6 +11,11 @@ module.exports = {
       title: 'Vue I18n',
       description: 'Vue I18n 是 Vue.js 的国际化插件'
     },
+    '/ja/': {
+      lang: 'ja-JP',
+      title: 'Vue I18n',
+      description: 'Vue I18n は、Vue.js のための国際化プラグインです。'
+    },
   },
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
@@ -149,7 +154,71 @@ module.exports = {
             ]
           }
         ]
-      }
+      },
+      '/ja/': {
+        label: '日本語',
+        selectText: '言語',
+        editLinkText: 'このページを GitHub で編集する',
+        lastUpdated: '最終更新日時',
+        nav: [
+          {
+            text: 'ガイド',
+            link: '/guide/formatting',
+          },
+          {
+            text: 'レガシー',
+            link: '/legacy/',
+          },
+          {
+            text: 'API',
+            link: '/api/'
+          },
+          {
+            text: 'CLI プラグイン',
+            link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+          },
+          {
+            text: 'Patreon',
+            link: 'https://www.patreon.com/kazupon'
+          },
+          {
+            text: 'リリースノート',
+            link: 'https://github.com/kazupon/vue-i18n/releases'
+          }
+        ],
+        sidebar: [
+          '/introduction',
+          '/started',
+          '/installation',
+          {
+            title: 'ガイド',
+            collapsable: false,
+            children: [
+              '/guide/formatting',
+              '/guide/pluralization',
+              '/guide/datetime',
+              '/guide/number',
+              '/guide/messages',
+              '/guide/fallback',
+              '/guide/component',
+              '/guide/directive',
+              '/guide/interpolation',
+              '/guide/sfc',
+              '/guide/hot-reload',
+              '/guide/locale',
+              '/guide/lazy-loading'
+            ]
+          },
+          {
+            title: 'レガシー',
+            collapsable: false,
+            children: [
+              '/legacy/',
+              '/legacy/v5'
+            ]
+          }
+        ]
+      },
     }
   }
 }
