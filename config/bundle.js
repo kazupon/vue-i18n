@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const zlib = require('zlib')
 const rollup = require('rollup')
-const uglify = require('uglify-js')
+const terser = require('terser')
 
 module.exports = build
 
@@ -28,8 +28,8 @@ function buildEntry (config) {
     .then(bundle => bundle.generate(output))
     .then(({ code }) => {
       if (isProd) {
-        var minified = (banner ? banner + '\n' : '') + uglify.minify(code, {
-          fromString: true,
+        var minified = (banner ? banner + '\n' : '') + terser.minify(code, {
+          toplevel: true,
           output: {
             ascii_only: true
           },
