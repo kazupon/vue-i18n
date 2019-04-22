@@ -8,6 +8,12 @@
 We recommended that use [component interpolation](interpolation.md) feature.  
 :::
 
+:::warning Notice
+> :new: 8.11+
+
+You can control the use of HTML formatting. see the detail  `allowHtmlFormatting` property API.
+:::
+
 In some cases you might want to rendered your translation as an HTML message and not a static string.
 
     

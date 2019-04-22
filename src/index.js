@@ -17,6 +17,7 @@ import I18nPath from './path'
 
 import type { PathValue } from './path'
 
+const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/gi
 const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
@@ -46,6 +47,7 @@ export default class VueI18n {
   _path: I18nPath
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
+  _allowHtmlFormatting: AllowHtmlFormattingLevel
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -87,6 +89,7 @@ export default class VueI18n {
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
+    this._allowHtmlFormatting = options.allowHtmlForamtting || 'off'
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -96,6 +99,12 @@ export default class VueI18n {
       return false
     }
 
+    if (this._allowHtmlFormatting !== 'off') {
+      Object.keys(messages).forEach(locale => {
+        this._checkLocleMessages(locale, this._allowHtmlFormatting, messages[locale])
+      })
+    }
+
     this._initVM({
       locale,
       fallbackLocale,
@@ -103,6 +112,9 @@ export default class VueI18n {
       dateTimeFormats,
       numberFormats
     })
+  }
+
+  _checkLocaleMessage (locale: Locale, level: AllowHtmlFormattingLevel, message: LocaleMessageObject): void {
   }
 
   _initVM (data: {
@@ -183,6 +195,18 @@ export default class VueI18n {
 
   get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
   set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
+
+  get allowHtmlForamtting (): AllowHtmlFormattingLevel { return this._allowHtmlFormatting }
+  set allowHtmlForamtting (level: AllowHtmlFormattingLevel): void {
+    const orgLevel = this._allowHtmlFormatting
+    this._allowHtmlFormatting = level
+    if (orgLevel !== level && level !== 'off') {
+      const messages = this._getMessages()
+      Object.keys(messages).forEach(locale => {
+        this._checkLocaleMessage(locale, this._allowHtmlFormatting, messages[locale])
+      })
+    }
+  }
 
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
@@ -499,10 +523,16 @@ export default class VueI18n {
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
+    if (this._allowHtmlFormatting !== 'off') {
+      this._checkLocaleMessage(locale, this._allowHtmlFormatting, message)
+    }
     this._vm.$set(this._vm.messages, locale, message)
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
+    if (this._allowHtmlFormatting !== 'off') {
+      this._checkLocaleMessage(locale, this._allowHtmlFormatting, message)
+    }
     this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message))
   }
 
