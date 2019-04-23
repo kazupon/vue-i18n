@@ -71,7 +71,7 @@ declare namespace VueI18n {
 
   type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 
-  type AllowHtmlFormattingLevel = 'off' | 'warn' | 'error';
+  type WarnHtmlInMessageLevel = 'allow' | 'warn' | 'error';
 
   interface FormattedNumberPart {
     type: FormattedNumberPartType;
@@ -105,7 +105,7 @@ declare namespace VueI18n {
     silentFallbackWarn?: boolean;
     preserveDirectiveContent?: boolean;
     pluralizationRules?: PluralizationRulesMap;
-    allowHtmlFormatting?: AllowHtmlFormattingLevel;
+    warnHtmlInMessage?: WarnHtmlInMessageLevel;
   }
 }
 
@@ -127,7 +127,7 @@ export type NumberFormat = VueI18n.NumberFormat;
 export type NumberFormats = VueI18n.NumberFormats;
 export type NumberFormatResult = VueI18n.NumberFormatResult;
 export type NumberFormatToPartsResult = VueI18n.NumberFormatToPartsResult;
-export type AllowHtmlFormattingLevel = VueI18n.AllowHtmlFormattingLevel;
+export type WarnHtmlInMessageLevel = VueI18n.WarnHtmlInMessageLevel;
 export type Formatter = VueI18n.Formatter;
 export type MissingHandler = VueI18n.MissingHandler;
 export type IntlAvailability = VueI18n.IntlAvailability;
@@ -146,7 +146,7 @@ export declare interface IVueI18n {
   silentFallbackWarn: boolean;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
-  allowHtmlFormatting: VueI18n.AllowHtmlFormattingLevel;
+  warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
 }
 
 declare class VueI18n {
@@ -165,7 +165,7 @@ declare class VueI18n {
   silentFallbackWarn: boolean;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
-  allowHtmlFormatting: VueI18n.AllowHtmlFormattingLevel;
+  warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
 
   t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;

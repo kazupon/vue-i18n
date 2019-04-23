@@ -59,7 +59,7 @@ declare type FormattedNumberPart = {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts#Return_value
 declare type NumberFormatToPartsResult = Array<FormattedNumberPart>;
 
-declare type AllowHtmlFormattingLevel = 'off' | 'warn' | 'error';
+declare type WarnHtmlInMessageLevel = 'allow' | 'warn' | 'error';
 
 declare type I18nOptions = {
   locale?: Locale,
@@ -76,7 +76,7 @@ declare type I18nOptions = {
   silentFallbackWarn?: boolean,
   pluralizationRules?: PluralizationRules,
   preserveDirectiveContent?: boolean,
-  allowHtmlForamtting?: AllowHtmlFormattingLevel,
+  warnHtmlInMessage?: WarnHtmlInMessageLevel,
 };
 
 declare type IntlAvailability = {
@@ -113,8 +113,8 @@ declare interface I18n {
   set pluralizationRules (rules: PluralizationRules): void,
   get preserveDirectiveContent (): boolean,
   set preserveDirectiveContent (preserve: boolean): void,
-  get allowHtmlFormatting (): AllowHtmlFormattingLevel,
-  set allowHtmlFormatting (level: AllowHtmlFormattingLevel): void,
+  get warnHtmlInMessage (): WarnHtmlInMessageLevel,
+  set warnHtmlInMessage (level: WarnHtmlInMessageLevel): void,
 
   getLocaleMessage (locale: Locale): LocaleMessageObject,
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,

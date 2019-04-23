@@ -3,6 +3,7 @@
 import { install, Vue } from './install'
 import {
   warn,
+  error,
   isNull,
   parseArgs,
   isPlainObject,
@@ -47,7 +48,7 @@ export default class VueI18n {
   _path: I18nPath
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
-  _allowHtmlFormatting: AllowHtmlFormattingLevel
+  _warnHtmlInMessage: WarnHtmlInMessageLevel
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -89,7 +90,7 @@ export default class VueI18n {
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
-    this._allowHtmlFormatting = options.allowHtmlForamtting || 'off'
+    this._warnHtmlInMessage = options.warnHtmlInMessage || 'allow'
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -99,9 +100,9 @@ export default class VueI18n {
       return false
     }
 
-    if (this._allowHtmlFormatting !== 'off') {
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       Object.keys(messages).forEach(locale => {
-        this._checkLocleMessages(locale, this._allowHtmlFormatting, messages[locale])
+        this._checkLocaleMessage(locale, this._warnHtmlInMessage, messages[locale])
       })
     }
 
@@ -114,7 +115,39 @@ export default class VueI18n {
     })
   }
 
-  _checkLocaleMessage (locale: Locale, level: AllowHtmlFormattingLevel, message: LocaleMessageObject): void {
+  _checkLocaleMessage (locale: Locale, level: WarnHtmlInMessageLevel, message: LocaleMessageObject): void {
+    const stack: Array<string> = []
+
+    const fn = (message: mixed, stack: Array<string>) => {
+      if (isPlainObject(message)) {
+        Object.keys(message).forEach(key => {
+          const val = message[key]
+          const hasObject = isPlainObject(val)
+          stack.push(key)
+          hasObject && stack.push('.')
+          fn(val, stack)
+          hasObject && stack.pop()
+        })
+      } else if (Array.isArray(message)) {
+        message.forEach((item, index) => {
+          stack.push(`[${index}]`)
+          fn(item, stack)
+          stack.pop()
+        })
+      } else if (typeof message === 'string') {
+        const ret = htmlTagMatcher.test(message)
+        if (ret) {
+          const msg = `Detect unsafe locale message '${message}' of keypath '${stack.join('')}' at '${locale}', suggest use component interpolation with '<i18n>'`
+          if (level === 'warn') {
+            warn(msg)
+          } else if (level === 'error') {
+            error(msg)
+          }
+        }
+      }
+    }
+
+    fn(message, stack)
   }
 
   _initVM (data: {
@@ -196,14 +229,14 @@ export default class VueI18n {
   get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
   set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
 
-  get allowHtmlForamtting (): AllowHtmlFormattingLevel { return this._allowHtmlFormatting }
-  set allowHtmlForamtting (level: AllowHtmlFormattingLevel): void {
-    const orgLevel = this._allowHtmlFormatting
-    this._allowHtmlFormatting = level
-    if (orgLevel !== level && level !== 'off') {
+  get warnHtmlInMessage (): WarnHtmlInMessageLevel { return this._warnHtmlInMessage }
+  set warnHtmlInMessage (level: WarnHtmlInMessageLevel): void {
+    const orgLevel = this._warnHtmlInMessage
+    this._warnHtmlInMessage = level
+    if (orgLevel !== level && (level === 'warn' || level === 'error')) {
       const messages = this._getMessages()
       Object.keys(messages).forEach(locale => {
-        this._checkLocaleMessage(locale, this._allowHtmlFormatting, messages[locale])
+        this._checkLocaleMessage(locale, this._warnHtmlInMessage, messages[locale])
       })
     }
   }
@@ -523,15 +556,17 @@ export default class VueI18n {
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
-    if (this._allowHtmlFormatting !== 'off') {
-      this._checkLocaleMessage(locale, this._allowHtmlFormatting, message)
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
+      this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
+      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, message)
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
-    if (this._allowHtmlFormatting !== 'off') {
-      this._checkLocaleMessage(locale, this._allowHtmlFormatting, message)
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
+      this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
+      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message))
   }
