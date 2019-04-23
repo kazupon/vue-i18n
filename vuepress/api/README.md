@@ -292,15 +292,20 @@ If `true`, warnings will be generated only when no translation is available at a
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
-#### allowHtmlFormatting
+#### warnHtmlInMessage
 
 > 8.11+
 
-  * **Type:** `AllowHtmlFormattingLevel`
+  * **Type:** `WarnHtmlInMessageLevel`
 
-  * **Default:** `off`
+  * **Default:** `allow`
 
-Whether to allow the use locale messages of HTML formatting. See the `allowHtmlFormatting` property.
+Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
+
+:::danger Important!!
+In next major version, `warnHtmlInMessage` option is `warn` as default.
+:::
+
 
 ### Properties
 
@@ -384,11 +389,11 @@ Whether suppress warnings outputted when localization fails.
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
-#### allowHtmlFormatting
+#### warnHtmlInMessage
 
 > 8.11+
 
-  * **Type:** `AllowHtmlFormattingLevel`
+  * **Type:** `WarnHtmlInMessageLevel`
 
   * **Read/Write**
 
@@ -399,7 +404,7 @@ If you set `warn` or` error`, will check the locale messages on the VueI18n inst
 If you are specified `warn`, a warning will be output at console.
 If you are specified `error` will occured an Error.
 
-In VueI18n instance, set the `off` as default.
+In VueI18n instance, set the `allow` as default.
 
 
 ### Methods
@@ -439,7 +444,7 @@ Set the locale message of locale.
 :::tip NOTE
 > 8.11+
 
-If you set `warn` or` error` in the `allowHtmlFormatting` property, when this method is executed, it will check if HTML formatting is used for locale message.
+If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
 :::
 
 #### mergeLocaleMessage( locale, message )
@@ -456,7 +461,7 @@ Merge the registered locale messages with the locale message of locale.
 :::tip NOTE
 > 8.11+
 
-If you set `warn` or` error` in the `allowHtmlFormatting` property, when this method is executed, it will check if HTML formatting is used for locale message.
+If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
 :::
 
 #### t( key, [locale], [values] )
