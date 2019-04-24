@@ -137,7 +137,7 @@ export default class VueI18n {
       } else if (typeof message === 'string') {
         const ret = htmlTagMatcher.test(message)
         if (ret) {
-          const msg = `Detect unsafe locale message '${message}' of keypath '${stack.join('')}' at '${locale}', suggest use component interpolation with '<i18n>'`
+          const msg = `Detected HTML in message '${message}' of keypath '${stack.join('')}' at '${locale}'. Consider  component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
           if (level === 'warn') {
             warn(msg)
           } else if (level === 'error') {
