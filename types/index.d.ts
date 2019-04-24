@@ -71,7 +71,7 @@ declare namespace VueI18n {
 
   type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 
-  type WarnHtmlInMessageLevel = 'allow' | 'warn' | 'error';
+  type WarnHtmlInMessageLevel = 'off' | 'warn' | 'error';
 
   interface FormattedNumberPart {
     type: FormattedNumberPartType;

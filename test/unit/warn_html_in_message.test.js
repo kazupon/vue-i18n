@@ -25,9 +25,9 @@ describe('warnHtmlInMessage', () => {
         ja: { message: '<p>こんにちは</p>' }
       }
 
-      // `allow`
+      // `off`
       new VueI18n({
-        warnHtmlInMessage: 'allow',
+        warnHtmlInMessage: 'off',
         messages
       })
       assert(spyWarn.callCount === 0)
@@ -67,7 +67,7 @@ describe('warnHtmlInMessage', () => {
       }
 
       const i18n = new VueI18n({
-        warnHtmlInMessage: 'allow',
+        warnHtmlInMessage: 'off',
         messages
       })
 
@@ -81,8 +81,8 @@ describe('warnHtmlInMessage', () => {
       assert(spyWarn.callCount === 2)
       assert(spyError.callCount === 2)
 
-      // `allow`
-      i18n.warnHtmlInMessage = 'allow'
+      // `off`
+      i18n.warnHtmlInMessage = 'off'
       assert(spyWarn.callCount === 2)
       assert(spyError.callCount === 2)
     })
@@ -111,7 +111,7 @@ describe('warnHtmlInMessage', () => {
       assert(spyWarn.callCount === 1)
       assert(spyError.callCount === 1)
 
-      i18n.warnHtmlInMessage = 'allow'
+      i18n.warnHtmlInMessage = 'off'
       assert(spyWarn.callCount === 1)
       assert(spyError.callCount === 1)
     })
@@ -140,7 +140,7 @@ describe('warnHtmlInMessage', () => {
       assert(spyWarn.callCount === 1)
       assert(spyError.callCount === 1)
 
-      i18n.warnHtmlInMessage = 'allow'
+      i18n.warnHtmlInMessage = 'off'
       assert(spyWarn.callCount === 1)
       assert(spyError.callCount === 1)
     })

@@ -298,7 +298,7 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 
   * **Type:** `WarnHtmlInMessageLevel`
 
-  * **Default:** `allow`
+  * **Default:** `off`
 
 Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
 
@@ -404,7 +404,7 @@ If you set `warn` or` error`, will check the locale messages on the VueI18n inst
 If you are specified `warn`, a warning will be output at console.
 If you are specified `error` will occured an Error.
 
-In VueI18n instance, set the `allow` as default.
+In VueI18n instance, set the `off` as default.
 
 
 ### Methods

@@ -90,7 +90,7 @@ export default class VueI18n {
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
-    this._warnHtmlInMessage = options.warnHtmlInMessage || 'allow'
+    this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
