@@ -118,8 +118,8 @@ export default class VueI18n {
   _checkLocaleMessage (locale: Locale, level: WarnHtmlInMessageLevel, message: LocaleMessageObject): void {
     const stack: Array<string> = []
 
-    const fn = (message: mixed, stack: Array<string>) => {
-      if (isPlainObject(message)) {
+    const fn = (message: any, stack: Array<string>) => {
+      if (isObject(message)) {
         Object.keys(message).forEach(key => {
           const val = message[key]
           const hasObject = isPlainObject(val)
