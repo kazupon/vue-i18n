@@ -116,28 +116,28 @@ export default class VueI18n {
   }
 
   _checkLocaleMessage (locale: Locale, level: WarnHtmlInMessageLevel, message: LocaleMessageObject): void {
-    const stack: Array<string> = []
+    const paths: Array<string> = []
 
-    const fn = (message: any, stack: Array<string>) => {
+    const fn = (message: any, paths: Array<string>) => {
       if (isObject(message)) {
         Object.keys(message).forEach(key => {
           const val = message[key]
           const hasObject = isPlainObject(val)
-          stack.push(key)
-          hasObject && stack.push('.')
-          fn(val, stack)
-          hasObject && stack.pop()
+          paths.push(key)
+          hasObject && paths.push('.')
+          fn(val, paths)
+          hasObject && paths.pop()
         })
       } else if (Array.isArray(message)) {
         message.forEach((item, index) => {
-          stack.push(`[${index}]`)
-          fn(item, stack)
-          stack.pop()
+          paths.push(`[${index}]`)
+          fn(item, paths)
+          paths.pop()
         })
       } else if (typeof message === 'string') {
         const ret = htmlTagMatcher.test(message)
         if (ret) {
-          const msg = `Detected HTML in message '${message}' of keypath '${stack.join('')}' at '${locale}'. Consider  component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
+          const msg = `Detected HTML in message '${message}' of keypath '${paths.join('')}' at '${locale}'. Consider component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
           if (level === 'warn') {
             warn(msg)
           } else if (level === 'error') {
@@ -147,7 +147,7 @@ export default class VueI18n {
       }
     }
 
-    fn(message, stack)
+    fn(message, paths)
   }
 
   _initVM (data: {
