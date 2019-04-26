@@ -16,9 +16,10 @@ describe('warnHtmlInMessage', () => {
         en: {
           message: {
             foo: {
-              buz: '<p>buz</p>'
+              buz: '<p>buz</p>',
+              hello: 'hello'
             },
-            bar: [1, '<p>bar</p>'],
+            bar: [1, { buz: '<p>buz</p>' }],
             buz: 22
           }
         },
@@ -38,7 +39,7 @@ describe('warnHtmlInMessage', () => {
         warnHtmlInMessage: 'warn',
         messages
       })
-      assert(spyWarn.callCount === 2)
+      assert(spyWarn.callCount === 3)
       assert(spyError.callCount === 0)
 
       // `error`
@@ -46,8 +47,8 @@ describe('warnHtmlInMessage', () => {
         warnHtmlInMessage: 'error',
         messages
       })
-      assert(spyWarn.callCount === 2)
-      assert(spyError.callCount === 2)
+      assert(spyWarn.callCount === 3)
+      assert(spyError.callCount === 3)
     })
   })
 
@@ -73,18 +74,18 @@ describe('warnHtmlInMessage', () => {
 
       // `warn`
       i18n.warnHtmlInMessage = 'warn'
-      assert(spyWarn.callCount === 2)
+      assert(spyWarn.callCount === 3)
       assert(spyError.callCount === 0)
 
       // `error`
       i18n.warnHtmlInMessage = 'error'
-      assert(spyWarn.callCount === 2)
-      assert(spyError.callCount === 2)
+      assert(spyWarn.callCount === 3)
+      assert(spyError.callCount === 3)
 
       // `off`
       i18n.warnHtmlInMessage = 'off'
-      assert(spyWarn.callCount === 2)
-      assert(spyError.callCount === 2)
+      assert(spyWarn.callCount === 3)
+      assert(spyError.callCount === 3)
     })
   })
 
@@ -109,11 +110,11 @@ describe('warnHtmlInMessage', () => {
         hello: '<p>こんにちは</p>'
       })
       assert(spyWarn.callCount === 1)
-      assert(spyError.callCount === 1)
+      assert(spyError.callCount === 2)
 
       i18n.warnHtmlInMessage = 'off'
       assert(spyWarn.callCount === 1)
-      assert(spyError.callCount === 1)
+      assert(spyError.callCount === 2)
     })
   })
 
@@ -138,11 +139,11 @@ describe('warnHtmlInMessage', () => {
         hello: '<p>こんにちは</p>'
       })
       assert(spyWarn.callCount === 1)
-      assert(spyError.callCount === 1)
+      assert(spyError.callCount === 2)
 
       i18n.warnHtmlInMessage = 'off'
       assert(spyWarn.callCount === 1)
-      assert(spyError.callCount === 1)
+      assert(spyError.callCount === 2)
     })
   })
 })

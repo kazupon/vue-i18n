@@ -18,7 +18,7 @@ import I18nPath from './path'
 
 import type { PathValue } from './path'
 
-const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/gi
+const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
 const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
@@ -118,21 +118,35 @@ export default class VueI18n {
   _checkLocaleMessage (locale: Locale, level: WarnHtmlInMessageLevel, message: LocaleMessageObject): void {
     const paths: Array<string> = []
 
-    const fn = (message: any, paths: Array<string>) => {
-      if (isObject(message)) {
+    const fn = (level: WarnHtmlInMessageLevel, locale: Locale, message: any, paths: Array<string>) => {
+      if (isPlainObject(message)) {
         Object.keys(message).forEach(key => {
           const val = message[key]
-          const hasObject = isPlainObject(val)
-          paths.push(key)
-          hasObject && paths.push('.')
-          fn(val, paths)
-          hasObject && paths.pop()
+          if (isPlainObject(val)) {
+            paths.push(key)
+            paths.push('.')
+            fn(level, locale, val, paths)
+            paths.pop()
+            paths.pop()
+          } else {
+            paths.push(key)
+            fn(level, locale, val, paths)
+            paths.pop()
+          }
         })
       } else if (Array.isArray(message)) {
         message.forEach((item, index) => {
-          paths.push(`[${index}]`)
-          fn(item, paths)
-          paths.pop()
+          if (isPlainObject(item)) {
+            paths.push(`[${index}]`)
+            paths.push('.')
+            fn(level, locale, item, paths)
+            paths.pop()
+            paths.pop()
+          } else {
+            paths.push(`[${index}]`)
+            fn(level, locale, item, paths)
+            paths.pop()
+          }
         })
       } else if (typeof message === 'string') {
         const ret = htmlTagMatcher.test(message)
@@ -147,7 +161,7 @@ export default class VueI18n {
       }
     }
 
-    fn(message, paths)
+    fn(level, locale, message, paths)
   }
 
   _initVM (data: {
