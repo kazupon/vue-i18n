@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.11.0 
+ * vue-i18n v8.11.1 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -1860,6 +1860,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.11.0';
+VueI18n.version = '8.11.1';
 
 module.exports = VueI18n;
