@@ -1,3 +1,14 @@
+<a name="8.11.0"></a>
+# [8.11.0](https://github.com/kazupon/vue-i18n/compare/v8.10.0...v8.11.0) (2019-04-26)
+
+
+### :star: New Features
+
+* ES modules for browser ([#561](https://github.com/kazupon/vue-i18n/issues/561)) ([c9b9adf](https://github.com/kazupon/vue-i18n/commit/c9b9adf)), closes [#561](https://github.com/kazupon/vue-i18n/issues/561)
+* HTML locale message warning option ([#567](https://github.com/kazupon/vue-i18n/issues/567)) ([4aecf03](https://github.com/kazupon/vue-i18n/commit/4aecf03)), closes [#567](https://github.com/kazupon/vue-i18n/issues/567)
+
+
+
 <a name="8.10.0"></a>
 # [8.10.0](https://github.com/kazupon/vue-i18n/compare/v8.9.0...v8.10.0) (2019-03-28)
 
