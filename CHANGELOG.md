@@ -1,3 +1,13 @@
+<a name="8.11.1"></a>
+## [8.11.1](https://github.com/kazupon/vue-i18n/compare/v8.11.0...v8.11.1) (2019-04-26)
+
+
+### :bug: Bug Fixes
+
+* fix ES Modules distribution ([bb631a1](https://github.com/kazupon/vue-i18n/commit/bb631a1))
+
+
+
 <a name="8.11.0"></a>
 # [8.11.0](https://github.com/kazupon/vue-i18n/compare/v8.10.0...v8.11.0) (2019-04-26)
 
