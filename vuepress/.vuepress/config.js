@@ -104,7 +104,8 @@ module.exports = {
               '/guide/sfc',
               '/guide/hot-reload',
               '/guide/locale',
-              '/guide/lazy-loading'
+              '/guide/lazy-loading',
+              '/guide/tooling'
             ]
           },
           {
@@ -181,7 +182,6 @@ module.exports = {
           }
         ],
         sidebar: [
-          '/zh/',
           '/zh/introduction',
           '/zh/started',
           '/zh/installation',
@@ -201,7 +201,8 @@ module.exports = {
               '/zh/guide/sfc',
               '/zh/guide/hot-reload',
               '/zh/guide/locale',
-              '/zh/guide/lazy-loading'
+              '/zh/guide/lazy-loading',
+              '/zh/guide/tooling'
             ]
           },
           {
