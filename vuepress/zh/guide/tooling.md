@@ -32,12 +32,12 @@ It easily integrates some localization lint features to your Vue.js Application.
 
 You can use this extension to enable SSR and improve i18n performance.
 
-## Third vendor tooling
+## 3rd party tooling
 
 ### BabelEdit
 
 [BabelEdit](https://www.codeandweb.com/babeledit) is translation editor for web apps.
 
-BabelEdit can transtae of `json` file, and also it can tnraslate `i18n` custom block of Single-file components.
+BabelEdit can transtae of `json` file, and also it can translate `i18n` custom block of Single-file components.
 
 See more about [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n) with BabelEdit.
