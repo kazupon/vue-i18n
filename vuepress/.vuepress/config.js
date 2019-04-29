@@ -28,20 +28,52 @@ module.exports = {
         lastUpdated: 'Last Updated',
         nav: [
           {
-            text: 'Guide',
-            link: '/guide/formatting',
+            text: 'Lean',
+            items: [
+              {
+                text: 'Guide',
+                link: '/guide/formatting',
+              },
+              {
+                text: 'API',
+                link: '/api/'
+              }
+            ]
           },
           {
-            text: 'Legacy',
-            link: '/legacy/',
-          },
-          {
-            text: 'API',
-            link: '/api/'
-          },
-          {
-            text: 'CLI Plugin',
-            link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+            text: 'Ecosystem',
+            items: [
+              {
+                text: 'Offical Tooling',
+                items: [
+                  {
+                    text: 'Vue CLI Plugin',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Webpack Loader',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'ESLint Plugin',
+                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: 'Extensions',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: 'Translation Tooling',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  }
+                ]
+              }
+            ]
           },
           {
             text: 'Patreon',
@@ -92,20 +124,52 @@ module.exports = {
         lastUpdated: '最近一次更新',
         nav: [
           {
-            text: '指南',
-            link: '/zh/guide/formatting',
+            text: 'Lean',
+            items: [
+              {
+                text: '指南',
+                link: '/zh/guide/formatting',
+              },
+              {
+                text: 'API',
+                link: '/zh/api/'
+              }
+            ]
           },
           {
-            text: '旧版',
-            link: '/zh/legacy/',
-          },
-          {
-            text: 'API',
-            link: '/zh/api/'
-          },
-          {
-            text: '脚手架插件',
-            link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+            text: 'Ecosystem',
+            items: [
+              {
+                text: 'Offical Tooling',
+                items: [
+                  {
+                    text: '脚手架插件',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Webpack Loader',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'ESLint Plugin',
+                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: 'Extensions',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: 'Translation Tooling',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  }
+                ]
+              }
+            ]
           },
           {
             text: '赞助',
