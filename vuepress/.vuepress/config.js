@@ -44,7 +44,7 @@ module.exports = {
             text: 'Ecosystem',
             items: [
               {
-                text: 'Offical Tooling',
+                text: 'Official Tooling',
                 items: [
                   {
                     text: 'Vue CLI Plugin',
@@ -140,7 +140,7 @@ module.exports = {
             text: 'Ecosystem',
             items: [
               {
-                text: 'Offical Tooling',
+                text: 'Official Tooling',
                 items: [
                   {
                     text: '脚手架插件',
