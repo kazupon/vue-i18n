@@ -2141,11 +2141,6 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
   integrity sha512-jp/uFnooOiO+L211eZOoSyzpOITMXx1rBITauYykG3BRYPu8h0UcxsPNB04RR5vo4Tyz3+ay17tR6JVf9qzYWg==
 
-async@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.9.0.tgz#ac3613b1da9bed1b47510bb4651b8931e47146c7"
-  integrity sha1-rDYTsdqb7RtHUQu0ZRuJMeRxRsc=
-
 async@1.x, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -4420,15 +4415,15 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-ecstatic@^1.4.0:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/ecstatic/-/ecstatic-1.4.1.tgz#32cb7b6fa2e290d58668674d115e8f0c3d567d6a"
-  integrity sha1-Mst7b6LikNWGaGdNEV6PDD1WfWo=
+ecstatic@^3.0.0:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ecstatic/-/ecstatic-3.3.1.tgz#b15b5b036c2233defc78d7bacbd8765226c95577"
+  integrity sha512-/rrctvxZ78HMI/tPIsqdvFKHHscxR3IJuKrZI2ZoUgkt2SiufyLFBmcco+aqQBIu6P1qBsUNG3drAAGLx80vTQ==
   dependencies:
-    he "^0.5.0"
-    mime "^1.2.11"
+    he "^1.1.1"
+    mime "^1.6.0"
     minimist "^1.1.0"
-    url-join "^1.0.0"
+    url-join "^2.0.5"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -5968,15 +5963,10 @@ he@1.1.1:
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
   integrity sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
 
-he@1.2.x, he@^1.1.0:
+he@1.2.x, he@^1.1.0, he@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
-
-he@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/he/-/he-0.5.0.tgz#2c05ffaef90b68e860f3fd2b54ef580989277ee2"
-  integrity sha1-LAX/rvkLaOhg8/0rVO9YCYknfuI=
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -6129,18 +6119,18 @@ http-proxy@^1.13.0, http-proxy@^1.17.0, http-proxy@^1.8.1:
     follow-redirects "^1.0.0"
     requires-port "^1.0.0"
 
-http-server@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/http-server/-/http-server-0.9.0.tgz#8f1b06bdc733618d4dc42831c7ba1aff4e06001a"
-  integrity sha1-jxsGvcczYY1NxCgxx7oa/04GABo=
+http-server@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/http-server/-/http-server-0.11.1.tgz#2302a56a6ffef7f9abea0147d838a5e9b6b6a79b"
+  integrity sha512-6JeGDGoujJLmhjiRGlt8yK8Z9Kl0vnl/dQoQZlc4oeqaUoAKQg94NILLfrY3oWzSyFaQCVNTcKE5PZ3cH8VP9w==
   dependencies:
     colors "1.0.3"
     corser "~2.0.0"
-    ecstatic "^1.4.0"
+    ecstatic "^3.0.0"
     http-proxy "^1.8.1"
     opener "~1.4.0"
     optimist "0.6.x"
-    portfinder "0.4.x"
+    portfinder "^1.0.13"
     union "~0.4.3"
 
 http-signature@~1.2.0:
@@ -7943,7 +7933,7 @@ mime@1.4.1:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   integrity sha512-KI1+qOZu5DcW6wayYHSzR/tXKCDC5Om4s1z2QJjDULzLcmf3DvzS7oluY4HCTrc+9FiKmWUgeNLg7W3uIQvxtQ==
 
-mime@^1.2.11:
+mime@^1.2.11, mime@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
@@ -9016,14 +9006,6 @@ pkg-dir@^3.0.0:
   integrity sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==
   dependencies:
     find-up "^3.0.0"
-
-portfinder@0.4.x:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-0.4.0.tgz#a3ffadffafe4fb98e0601a85eda27c27ce84ca1e"
-  integrity sha1-o/+t/6/k+5jgYBqF7aJ8J86Eyh4=
-  dependencies:
-    async "0.9.0"
-    mkdirp "0.5.x"
 
 portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.20"
@@ -11675,10 +11657,10 @@ url-join@3.0.0:
   resolved "https://registry.yarnpkg.com/url-join/-/url-join-3.0.0.tgz#26e8113ace195ea30d0fc38186e45400f9cea672"
   integrity sha1-JugROs4ZXqMND8OBhuRUAPnOpnI=
 
-url-join@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
-  integrity sha1-dBxsL0WWxIMNZxhGCSDQySIC3Hg=
+url-join@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/url-join/-/url-join-2.0.5.tgz#5af22f18c052a000a48d7b82c5e9c2e2feeda728"
+  integrity sha1-WvIvGMBSoACkjXuCxenC4v7tpyg=
 
 url-loader@^1.0.1:
   version "1.1.2"
