@@ -1,3 +1,13 @@
+<a name="8.11.2"></a>
+## [8.11.2](https://github.com/kazupon/vue-i18n/compare/v8.11.1...v8.11.2) (2019-04-30)
+
+
+### :bug: Bug Fixes
+
+* bug(mixin): fix SSR memory leak by moving subscribeDataChanging calls into beforeMount ([#572](https://github.com/kazupon/vue-i18n/issues/572)) by [@Pindar](https://github.com/Pindar) ([32b5795](https://github.com/kazupon/vue-i18n/commit/32b5795)), closes [#572](https://github.com/kazupon/vue-i18n/issues/572)
+
+
+
 <a name="8.11.1"></a>
 ## [8.11.1](https://github.com/kazupon/vue-i18n/compare/v8.11.0...v8.11.1) (2019-04-26)
 
