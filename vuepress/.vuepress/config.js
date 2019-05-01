@@ -28,7 +28,7 @@ module.exports = {
         lastUpdated: 'Last Updated',
         nav: [
           {
-            text: 'Lean',
+            text: 'Learn',
             items: [
               {
                 text: 'Guide',
