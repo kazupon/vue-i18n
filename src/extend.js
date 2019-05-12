@@ -13,9 +13,9 @@ export default function extend (Vue: any): void {
     return i18n._t(key, i18n.locale, i18n._getMessages(), this, ...values)
   }
 
-  Vue.prototype.$tc = function (key: Path, choice?: number, ...values: any): TranslateResult {
+  Vue.prototype.$tc = function (key: Path, choice?: number, args: any, ...values: any): TranslateResult {
     const i18n = this.$i18n
-    return i18n._tc(key, i18n.locale, i18n._getMessages(), this, choice, ...values)
+    return i18n._tc(key, i18n.locale, i18n._getMessages(), this, choice, args, ...values)
   }
 
   Vue.prototype.$te = function (key: Path, locale?: Locale): boolean {

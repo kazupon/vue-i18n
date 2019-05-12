@@ -121,7 +121,7 @@ declare interface I18n {
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void,
   t (key: Path, ...values: any): TranslateResult,
   i (key: Path, locale: Locale, values: Object): TranslateResult,
-  tc (key: Path, choice?: number, ...values: any): TranslateResult,
+  tc (key: Path, choice?: number, args: any, ...values: any): TranslateResult,
   te (key: Path, locale?: Locale): boolean,
   getDateTimeFormat (locale: Locale): DateTimeFormat,
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void,
@@ -131,7 +131,7 @@ declare interface I18n {
   setNumberFormat (locale: Locale, format: NumberFormat): void,
   mergeNumberFormat (locale: Locale, format: NumberFormat): void,
   n (value: number, ...args: any): NumberFormatResult,
-  getChoiceIndex: (choice: number, choicesLength: number) => number,
+  getChoiceIndex: (choice: number, choicesLength: number, args: any) => number,
   pluralizationRules: PluralizationRules,
   preserveDirectiveContent: boolean
 };

@@ -90,7 +90,7 @@ Very simplified example using rules for Slavic languages (Russian, Ukrainian, et
  * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index to select plural word by
 **/
-VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
+VueI18n.prototype.getChoiceIndex = function (choice, choicesLength, args) {
   // this === VueI18n instance, so the locale property also exists here
   if (this.locale !== 'ru') {
     // proceed to the default implementation

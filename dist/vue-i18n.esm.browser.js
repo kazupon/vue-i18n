@@ -164,9 +164,9 @@ function extend (Vue) {
     return i18n._t(key, i18n.locale, i18n._getMessages(), this, ...values)
   };
 
-  Vue.prototype.$tc = function (key, choice, ...values) {
+  Vue.prototype.$tc = function (key, choice, args, ...values) {
     const i18n = this.$i18n;
-    return i18n._tc(key, i18n.locale, i18n._getMessages(), this, choice, ...values)
+    return i18n._tc(key, i18n.locale, i18n._getMessages(), this, choice, args, ...values)
   };
 
   Vue.prototype.$te = function (key, locale) {
@@ -1485,26 +1485,27 @@ class VueI18n {
     messages,
     host,
     choice,
+    args,
     ...values
   ) {
     if (!key) { return '' }
     if (choice === undefined) {
       choice = 1;
     }
-
+    
     const predefined = { 'count': choice, 'n': choice };
     const parsedArgs = parseArgs(...values);
     parsedArgs.params = Object.assign(predefined, parsedArgs.params);
     values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params];
-    return this.fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
+    return this.fetchChoice(this._t(key, _locale, messages, host, ...values), choice, args)
   }
 
-  fetchChoice (message, choice) {
+  fetchChoice (message, choice, args) {
     /* istanbul ignore if */
     if (!message && typeof message !== 'string') { return null }
     const choices = message.split('|');
 
-    choice = this.getChoiceIndex(choice, choices.length);
+    choice = this.getChoiceIndex(choice, choices.length, args);
     if (!choices[choice]) { return message }
     return choices[choice].trim()
   }
@@ -1514,7 +1515,7 @@ class VueI18n {
    * @param choicesLength {number} an overall amount of available choices
    * @returns a final choice index
   */
-  getChoiceIndex (choice, choicesLength) {
+  getChoiceIndex (choice, choicesLength, args) {
     // Default (old) getChoiceIndex implementation - english-compatible
     const defaultImpl = (_choice, _choicesLength) => {
       _choice = Math.abs(_choice);
@@ -1537,8 +1538,8 @@ class VueI18n {
     }
   }
 
-  tc (key, choice, ...values) {
-    return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
+  tc (key, choice, args, ...values) {
+    return this._tc(key, this.locale, this._getMessages(), null, choice, args, ...values)
   }
 
   _te (key, locale, messages, ...args) {

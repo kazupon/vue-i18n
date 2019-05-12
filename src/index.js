@@ -500,26 +500,27 @@ export default class VueI18n {
     messages: LocaleMessages,
     host: any,
     choice?: number,
+    args: any,
     ...values: any
   ): any {
     if (!key) { return '' }
     if (choice === undefined) {
       choice = 1
     }
-
+    
     const predefined = { 'count': choice, 'n': choice }
     const parsedArgs = parseArgs(...values)
     parsedArgs.params = Object.assign(predefined, parsedArgs.params)
     values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
-    return this.fetchChoice(this._t(key, _locale, messages, host, ...values), choice)
+    return this.fetchChoice(this._t(key, _locale, messages, host, ...values), choice, args)
   }
 
-  fetchChoice (message: string, choice: number): ?string {
+  fetchChoice (message: string, choice: number, args: any): ?string {
     /* istanbul ignore if */
     if (!message && typeof message !== 'string') { return null }
     const choices: Array<string> = message.split('|')
 
-    choice = this.getChoiceIndex(choice, choices.length)
+    choice = this.getChoiceIndex(choice, choices.length, args)
     if (!choices[choice]) { return message }
     return choices[choice].trim()
   }
@@ -529,7 +530,7 @@ export default class VueI18n {
    * @param choicesLength {number} an overall amount of available choices
    * @returns a final choice index
   */
-  getChoiceIndex (choice: number, choicesLength: number): number {
+  getChoiceIndex (choice: number, choicesLength: number, args: any): number {
     // Default (old) getChoiceIndex implementation - english-compatible
     const defaultImpl = (_choice: number, _choicesLength: number) => {
       _choice = Math.abs(_choice)
@@ -552,8 +553,8 @@ export default class VueI18n {
     }
   }
 
-  tc (key: Path, choice?: number, ...values: any): TranslateResult {
-    return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
+  tc (key: Path, choice?: number, args: any, ...values: any): TranslateResult {
+    return this._tc(key, this.locale, this._getMessages(), null, choice, args, ...values)
   }
 
   _te (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): boolean {

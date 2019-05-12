@@ -177,12 +177,12 @@ function extend (Vue) {
     return i18n._t.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this ].concat( values ))
   };
 
-  Vue.prototype.$tc = function (key, choice) {
-    var values = [], len = arguments.length - 2;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
+  Vue.prototype.$tc = function (key, choice, args) {
+    var values = [], len = arguments.length - 3;
+    while ( len-- > 0 ) values[ len ] = arguments[ len + 3 ];
 
     var i18n = this.$i18n;
-    return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this, choice ].concat( values ))
+    return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this, choice, args ].concat( values ))
   };
 
   Vue.prototype.$te = function (key, locale) {
@@ -1513,30 +1513,31 @@ VueI18n.prototype._tc = function _tc (
   _locale,
   messages,
   host,
-  choice
+  choice,
+  args
 ) {
     var ref;
 
-    var values = [], len = arguments.length - 5;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 5 ];
+    var values = [], len = arguments.length - 6;
+    while ( len-- > 0 ) values[ len ] = arguments[ len + 6 ];
   if (!key) { return '' }
   if (choice === undefined) {
     choice = 1;
   }
-
+    
   var predefined = { 'count': choice, 'n': choice };
   var parsedArgs = parseArgs.apply(void 0, values);
   parsedArgs.params = Object.assign(predefined, parsedArgs.params);
   values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params];
-  return this.fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice)
+  return this.fetchChoice((ref = this)._t.apply(ref, [ key, _locale, messages, host ].concat( values )), choice, args)
 };
 
-VueI18n.prototype.fetchChoice = function fetchChoice (message, choice) {
+VueI18n.prototype.fetchChoice = function fetchChoice (message, choice, args) {
   /* istanbul ignore if */
   if (!message && typeof message !== 'string') { return null }
   var choices = message.split('|');
 
-  choice = this.getChoiceIndex(choice, choices.length);
+  choice = this.getChoiceIndex(choice, choices.length, args);
   if (!choices[choice]) { return message }
   return choices[choice].trim()
 };
@@ -1546,7 +1547,7 @@ VueI18n.prototype.fetchChoice = function fetchChoice (message, choice) {
  * @param choicesLength {number} an overall amount of available choices
  * @returns a final choice index
 */
-VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength) {
+VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLength, args) {
   // Default (old) getChoiceIndex implementation - english-compatible
   var defaultImpl = function (_choice, _choicesLength) {
     _choice = Math.abs(_choice);
@@ -1569,12 +1570,12 @@ VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLengt
   }
 };
 
-VueI18n.prototype.tc = function tc (key, choice) {
+VueI18n.prototype.tc = function tc (key, choice, args) {
     var ref;
 
-    var values = [], len = arguments.length - 2;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
-  return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice ].concat( values ))
+    var values = [], len = arguments.length - 3;
+    while ( len-- > 0 ) values[ len ] = arguments[ len + 3 ];
+  return (ref = this)._tc.apply(ref, [ key, this.locale, this._getMessages(), null, choice, args ].concat( values ))
 };
 
 VueI18n.prototype._te = function _te (key, locale, messages) {
