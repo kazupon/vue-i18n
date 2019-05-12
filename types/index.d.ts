@@ -169,7 +169,7 @@ declare class VueI18n {
 
   t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
-  tc(key: VueI18n.Path, choice?: VueI18n.Choice, args: any, values?: VueI18n.Values): string;
+  tc(key: VueI18n.Path, choice?: VueI18n.Choice, args?: any, values?: VueI18n.Values): string;
   tc(key: VueI18n.Path, choice: VueI18n.Choice, locale: VueI18n.Locale, args: any, values?: VueI18n.Values): string;
   te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
   d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
