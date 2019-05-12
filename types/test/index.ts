@@ -116,9 +116,9 @@ vm.$tc(key);                        // $ExpectType string
 vm.$tc(key, 1);                     // $ExpectType string
 vm.$tc(key, 1, []);                 // $ExpectType string
 vm.$tc(key, 1, {});                 // $ExpectType string
-vm.$tc(key, 1, locale);             // $ExpectType string
-vm.$tc(key, 1, locale, []);         // $ExpectType string
-vm.$tc(key, 1, locale, {});         // $ExpectType string
+vm.$tc(key, 1, 0, locale);             // $ExpectType string
+vm.$tc(key, 1, 0, locale, []);         // $ExpectType string
+vm.$tc(key, 1, 0, locale, {});         // $ExpectType string
 vm.$te(key);                        // $ExpectType boolean
 vm.$te(key, locale);                // $ExpectType boolean
 vm.$d(1, key);                      // $ExpectType string
