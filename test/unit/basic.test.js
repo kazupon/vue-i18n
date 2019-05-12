@@ -502,7 +502,7 @@ describe('basic', () => {
         it('should return replaced string if available', () => {
           const vm = new Vue({ i18n })
           assert.strictEqual(
-            vm.$tc('Hello {0}', 1, ['kazupon']),
+            vm.$tc('Hello {0}', 1, 0, ['kazupon']),
             'Hello kazupon'
           )
         })
@@ -519,7 +519,7 @@ describe('basic', () => {
         it('should return replaced string', () => {
           const vm = new Vue({ i18n })
           assert.strictEqual(
-            vm.$tc('plurals.format.named', 1, { name: 'kazupon' }),
+            vm.$tc('plurals.format.named', 1, 0, { name: 'kazupon' }),
             'Hello kazupon, how are you?'
           )
         })
@@ -529,7 +529,7 @@ describe('basic', () => {
         it('should return replaced string', () => {
           const vm = new Vue({ i18n })
           assert.strictEqual(
-            vm.$tc('plurals.format.list', 1, ['kazupon']),
+            vm.$tc('plurals.format.list', 1, 0, ['kazupon']),
             'Hello kazupon, how are you?'
           )
         })
@@ -539,7 +539,7 @@ describe('basic', () => {
     describe('locale argument', () => {
       it('should return empty string', () => {
         const vm = new Vue({ i18n })
-        assert.strictEqual(vm.$tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+        assert.strictEqual(vm.$tc('plurals.car', 1, 0, 'ja'), 'ザ・ワールド')
       })
     })
 
@@ -547,7 +547,7 @@ describe('basic', () => {
       it('should return replaced string', () => {
         const vm = new Vue({ i18n })
         assert.strictEqual(
-          vm.$tc('plurals.format.list', 1, 'ja', ['kazupon']),
+          vm.$tc('plurals.format.list', 1, 0, 'ja', ['kazupon']),
           'こんにちは kazupon, ごきげんいかが？'
         )
       })
@@ -557,7 +557,7 @@ describe('basic', () => {
       it('should return fallback string', () => {
         const vm = new Vue({ i18n })
         assert.strictEqual(
-          vm.$tc('plurals.fallback', 2, 'ja'),
+          vm.$tc('plurals.fallback', 2, 0, 'ja'),
           'ザ・ワールド'
         )
       })
