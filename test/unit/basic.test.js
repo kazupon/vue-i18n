@@ -196,51 +196,51 @@ describe('basic', () => {
     describe('split plural with zero choice', () => {
       it('should allow a zero choice, a one choice and a plural choice', () => {
         const count = 10
-        assert.strictEqual(i18n.tc('plurals.apple', 0), 'no apples')
-        assert.strictEqual(i18n.tc('plurals.apple', 1), 'one apple')
-        assert.strictEqual(i18n.tc('plurals.apple', count, { count }), '10 apples')
+        assert.strictEqual(i18n.tc('plurals.apple', 0, 0), 'no apples')
+        assert.strictEqual(i18n.tc('plurals.apple', 1, 0), 'one apple')
+        assert.strictEqual(i18n.tc('plurals.apple', count, 0, { count }), '10 apples')
       })
     })
 
     describe('implicit choice exposing', () => {
       describe('en locale', () => {
         it('should expose "count" implicitly to locale message', () => {
-          assert.strictEqual(i18n.tc('plurals.apple', 10), '10 apples')
+          assert.strictEqual(i18n.tc('plurals.apple', 10, 0), '10 apples')
         })
 
         it('should not expose if given explicitly', () => {
           const explicitArgs = { 'count': 'Many' }
-          assert.strictEqual(i18n.tc('plurals.apple', 10, explicitArgs), 'Many apples')
+          assert.strictEqual(i18n.tc('plurals.apple', 10, 0, explicitArgs), 'Many apples')
         })
       })
 
       describe('ja locale', () => {
         it('should expose "count" and "n" implicitly to locale message', () => {
-          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 'ja'), 'count:10, n:10')
+          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 0, 'ja'), 'count:10, n:10')
         })
 
         it('should not expose if given explicitly', () => {
           const explicitArgs = { 'count': 'たくさん', 'n': '大量' }
-          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 'ja', explicitArgs), 'count:たくさん, n:大量')
+          assert.strictEqual(i18n.tc('plurals.implicitPluralCount', 10, 0, 'ja', explicitArgs), 'count:たくさん, n:大量')
         })
       })
     })
 
     describe('en locale', () => {
       it('should translate an english', () => {
-        assert.strictEqual(i18n.tc('plurals.car', 1), 'car')
+        assert.strictEqual(i18n.tc('plurals.car', 1, 0), 'car')
       })
     })
 
     describe('multi plural check', () => {
       it('should fetch pluralized string', () => {
-        assert.strictEqual(i18n.tc('plurals.car', 2), 'cars')
+        assert.strictEqual(i18n.tc('plurals.car', 2, 0), 'cars')
       })
     })
 
     describe('ja locale', () => {
       it('should translate a japanese', () => {
-        assert.strictEqual(i18n.tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+        assert.strictEqual(i18n.tc('plurals.car', 1, 0, 'ja'), 'ザ・ワールド')
       })
     })
 
@@ -270,7 +270,7 @@ describe('basic', () => {
 
         it('should return replaced string if available', () => {
           assert.strictEqual(
-            i18n.tc('Hello {0}', 1, ['kazupon']),
+            i18n.tc('Hello {0}', 1, 0, ['kazupon']),
             'Hello kazupon'
           )
         })
@@ -285,7 +285,7 @@ describe('basic', () => {
       describe('named', () => {
         it('should return replaced string', () => {
           assert.strictEqual(
-            i18n.tc('plurals.format.named', 1, { name: 'kazupon' }),
+            i18n.tc('plurals.format.named', 1, 0, { name: 'kazupon' }),
             'Hello kazupon, how are you?'
           )
         })
@@ -294,7 +294,7 @@ describe('basic', () => {
       describe('list', () => {
         it('should return replaced string', () => {
           assert.strictEqual(
-            i18n.tc('plurals.format.list', 1, ['kazupon']),
+            i18n.tc('plurals.format.list', 1, 0, ['kazupon']),
             'Hello kazupon, how are you?'
           )
         })
@@ -303,14 +303,14 @@ describe('basic', () => {
 
     describe('locale argument', () => {
       it('should return empty string', () => {
-        assert.strictEqual(i18n.tc('plurals.car', 1, 'ja'), 'ザ・ワールド')
+        assert.strictEqual(i18n.tc('plurals.car', 1, 0, 'ja'), 'ザ・ワールド')
       })
     })
 
     describe('format & locale arguments', () => {
       it('should return replaced string', () => {
         assert.strictEqual(
-          i18n.tc('plurals.format.list', 1, 'ja', ['kazupon']),
+          i18n.tc('plurals.format.list', 1, 0, 'ja', ['kazupon']),
           'こんにちは kazupon, ごきげんいかが？'
         )
       })
@@ -319,7 +319,7 @@ describe('basic', () => {
     describe('fallback', () => {
       it('should return fallback string', () => {
         assert.strictEqual(
-          i18n.tc('plurals.fallback', 1, 'ja'),
+          i18n.tc('plurals.fallback', 1, 0, 'ja'),
           'これはフォールバック'
         )
       })
