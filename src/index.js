@@ -3,6 +3,7 @@
 import { install, Vue } from './install'
 import {
   warn,
+  error,
   isNull,
   parseArgs,
   isPlainObject,
@@ -17,6 +18,7 @@ import I18nPath from './path'
 
 import type { PathValue } from './path'
 
+const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
 const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
@@ -46,6 +48,7 @@ export default class VueI18n {
   _path: I18nPath
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
+  _warnHtmlInMessage: WarnHtmlInMessageLevel
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -87,6 +90,7 @@ export default class VueI18n {
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
+    this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -96,6 +100,12 @@ export default class VueI18n {
       return false
     }
 
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
+      Object.keys(messages).forEach(locale => {
+        this._checkLocaleMessage(locale, this._warnHtmlInMessage, messages[locale])
+      })
+    }
+
     this._initVM({
       locale,
       fallbackLocale,
@@ -103,6 +113,55 @@ export default class VueI18n {
       dateTimeFormats,
       numberFormats
     })
+  }
+
+  _checkLocaleMessage (locale: Locale, level: WarnHtmlInMessageLevel, message: LocaleMessageObject): void {
+    const paths: Array<string> = []
+
+    const fn = (level: WarnHtmlInMessageLevel, locale: Locale, message: any, paths: Array<string>) => {
+      if (isPlainObject(message)) {
+        Object.keys(message).forEach(key => {
+          const val = message[key]
+          if (isPlainObject(val)) {
+            paths.push(key)
+            paths.push('.')
+            fn(level, locale, val, paths)
+            paths.pop()
+            paths.pop()
+          } else {
+            paths.push(key)
+            fn(level, locale, val, paths)
+            paths.pop()
+          }
+        })
+      } else if (Array.isArray(message)) {
+        message.forEach((item, index) => {
+          if (isPlainObject(item)) {
+            paths.push(`[${index}]`)
+            paths.push('.')
+            fn(level, locale, item, paths)
+            paths.pop()
+            paths.pop()
+          } else {
+            paths.push(`[${index}]`)
+            fn(level, locale, item, paths)
+            paths.pop()
+          }
+        })
+      } else if (typeof message === 'string') {
+        const ret = htmlTagMatcher.test(message)
+        if (ret) {
+          const msg = `Detected HTML in message '${message}' of keypath '${paths.join('')}' at '${locale}'. Consider component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
+          if (level === 'warn') {
+            warn(msg)
+          } else if (level === 'error') {
+            error(msg)
+          }
+        }
+      }
+    }
+
+    fn(level, locale, message, paths)
   }
 
   _initVM (data: {
@@ -183,6 +242,18 @@ export default class VueI18n {
 
   get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
   set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
+
+  get warnHtmlInMessage (): WarnHtmlInMessageLevel { return this._warnHtmlInMessage }
+  set warnHtmlInMessage (level: WarnHtmlInMessageLevel): void {
+    const orgLevel = this._warnHtmlInMessage
+    this._warnHtmlInMessage = level
+    if (orgLevel !== level && (level === 'warn' || level === 'error')) {
+      const messages = this._getMessages()
+      Object.keys(messages).forEach(locale => {
+        this._checkLocaleMessage(locale, this._warnHtmlInMessage, messages[locale])
+      })
+    }
+  }
 
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
@@ -499,10 +570,18 @@ export default class VueI18n {
   }
 
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
+      this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
+      if (this._warnHtmlInMessage === 'error') { return }
+    }
     this._vm.$set(this._vm.messages, locale, message)
   }
 
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
+    if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
+      this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
+      if (this._warnHtmlInMessage === 'error') { return }
+    }
     this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message))
   }
 

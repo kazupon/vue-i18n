@@ -46,6 +46,22 @@ const entries = {
     env: 'development',
     moduleName,
     banner
+  },
+  browser_development: {
+    entry: 'src/index.js',
+    dest: resolve(`dist/${pack.name}.esm.browser.js`),
+    format: 'es',
+    env: 'development',
+    moduleName,
+    transpile: false
+  },
+  browser_production: {
+    entry: 'src/index.js',
+    dest: resolve(`dist/${pack.name}.esm.browser.min.js`),
+    format: 'es',
+    env: 'production',
+    moduleName,
+    transpile: false
   }
 }
 
@@ -61,8 +77,7 @@ function genConfig (opts) {
     plugins: [
       flow(),
       node(),
-      cjs(),
-      buble()
+      cjs()
     ]
   }
 
@@ -71,6 +86,10 @@ function genConfig (opts) {
     replacePluginOptions['process.env.NODE_ENV'] = JSON.stringify(opts.env)
   }
   config.plugins.push(replace(replacePluginOptions))
+
+  if (opts.transpile !== false) {
+    config.plugins.push(buble())
+  }
 
   return config
 }

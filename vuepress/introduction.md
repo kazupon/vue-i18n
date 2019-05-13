@@ -27,11 +27,3 @@ Is your company using vue-i18n or vue-cli-plugin-i18n to build awesome apps? Joi
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
   </a>
 </p>
-
-## Links
-
-[<img src="https://assets-cdn.github.com/favicon.ico" alt="icon" width="16" height="16"/> Vue CLI plugin](https://github.com/kazupon/vue-cli-plugin-i18n)
-
-[<img src="https://assets-cdn.github.com/favicon.ico" alt="icon" width="16" height="16"/> webpack loader for Custom block](https://github.com/kazupon/vue-i18n-loader)
-
-[<img src="https://assets-cdn.github.com/favicon.ico" alt="icon" width="16" height="16"/> Extensions](https://github.com/kazupon/vue-i18n-extensions)

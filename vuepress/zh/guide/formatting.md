@@ -1,42 +1,5 @@
 # 格式化
 
-## HTML格式化
-
-:::warning 提示
-:warning: 在你的网站上动态插入任意 HTML 可能非常危险，因为它很容易导致 XSS 攻击。仅对可信内容使用 HTML 插值，而不对用户提供的内容使用。
-
-我们建议使用[组件插值](interpolation.md) 功能。
-:::
-
-在某些情况下，你可能希望将翻译呈现为 HTML 信息而不是静态字符串。
-
-
-```js
-const messages = {
-  en: {
-    message: {
-      hello: 'hello <br> world'
-    }
-  }
-}
-```
-
-模板如下：
-
-
-```html
-<p v-html="$t('message.hello')"></p>
-```
-
-输出如下 (取代预先格式化的信息)
-
-
-```html
-<p>hello
-<!--<br> 存在，但呈现为 html 而不是字符串-->
-world</p>
-```
-
 ## 具名格式
 
 语言环境信息如下：
@@ -101,6 +64,44 @@ const messages = {
 ```html
 <p>hello world</p>
 ```
+
+## HTML格式化
+
+:::warning 提示
+:warning: 在你的网站上动态插入任意 HTML 可能非常危险，因为它很容易导致 XSS 攻击。仅对可信内容使用 HTML 插值，而不对用户提供的内容使用。
+
+我们建议使用[组件插值](interpolation.md) 功能。
+:::
+
+在某些情况下，你可能希望将翻译呈现为 HTML 信息而不是静态字符串。
+
+
+```js
+const messages = {
+  en: {
+    message: {
+      hello: 'hello <br> world'
+    }
+  }
+}
+```
+
+模板如下：
+
+
+```html
+<p v-html="$t('message.hello')"></p>
+```
+
+输出如下 (取代预先格式化的信息)
+
+
+```html
+<p>hello
+<!--<br> 存在，但呈现为 html 而不是字符串-->
+world</p>
+```
+
 
 ## 支持 ruby on rails 的 i18n 格式
 

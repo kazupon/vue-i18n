@@ -292,6 +292,21 @@ If `true`, warnings will be generated only when no translation is available at a
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
+#### warnHtmlInMessage
+
+> 8.11+
+
+  * **Type:** `WarnHtmlInMessageLevel`
+
+  * **Default:** `off`
+
+Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
+
+:::danger Important!!
+In next major version, `warnHtmlInMessage` option is `warn` as default.
+:::
+
+
 ### Properties
 
 #### locale
@@ -374,6 +389,24 @@ Whether suppress warnings outputted when localization fails.
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
+#### warnHtmlInMessage
+
+> 8.11+
+
+  * **Type:** `WarnHtmlInMessageLevel`
+
+  * **Read/Write**
+
+Whether to allow the use locale messages of HTML formatting.
+
+If you set `warn` or` error`, will check the locale messages on the VueI18n instance.
+
+If you are specified `warn`, a warning will be output at console.
+If you are specified `error` will occured an Error.
+
+In VueI18n instance, set the `off` as default.
+
+
 ### Methods
 
 #### getChoiceIndex
@@ -408,6 +441,12 @@ Get the locale message of locale.
 
 Set the locale message of locale.
 
+:::tip NOTE
+> 8.11+
+
+If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+:::
+
 #### mergeLocaleMessage( locale, message )
 
 > 6.1+
@@ -418,6 +457,12 @@ Set the locale message of locale.
     * `{LocaleMessageObject} message`
 
 Merge the registered locale messages with the locale message of locale.
+
+:::tip NOTE
+> 8.11+
+
+If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+:::
 
 #### t( key, [locale], [values] )
 
@@ -574,9 +619,9 @@ Update the element `textContent` that localized with locale messages. You can us
     * locale: optional, locale
     * args: optional, for list or named formatting
 
-::::tip NOTE
+:::tip NOTE
 The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
-::::
+:::
   * **Examples:**
 ```html
 <!-- string syntax: literal -->

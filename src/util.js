@@ -32,6 +32,16 @@ export function warn (msg: string, err: ?Error): void {
   }
 }
 
+export function error (msg: string, err: ?Error): void {
+  if (typeof console !== 'undefined') {
+    console.error('[vue-i18n] ' + msg)
+    /* istanbul ignore if */
+    if (err) {
+      console.error(err.stack)
+    }
+  }
+}
+
 export function isObject (obj: mixed): boolean %checks {
   return obj !== null && typeof obj === 'object'
 }
