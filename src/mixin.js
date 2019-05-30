@@ -9,6 +9,9 @@ export default {
     options.i18n = options.i18n || (options.__i18n ? {} : null)
 
     if (options.i18n) {
+      if (typeof options.i18n === 'function') {
+        options.i18n = options.i18n()
+      }
       if (options.i18n instanceof VueI18n) {
         // init locale messages via custom blocks
         if (options.__i18n) {

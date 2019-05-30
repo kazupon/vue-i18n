@@ -213,12 +213,19 @@ declare module 'vue/types/vue' {
 }
 
 declare module 'vue/types/options' {
+
+  type VueI18nFactory = () => {
+    messages?: VueI18n.LocaleMessages;
+    dateTimeFormats?: VueI18n.DateTimeFormats;
+    numberFormats?: VueI18n.NumberFormats;
+  }
+
   interface ComponentOptions<V extends Vue> {
     i18n?: {
       messages?: VueI18n.LocaleMessages;
       dateTimeFormats?: VueI18n.DateTimeFormats;
       numberFormats?: VueI18n.NumberFormats;
-    };
+    } | VueI18nFactory;
   }
 }
 
