@@ -10,9 +10,10 @@ sidebar: auto
 
 #### i18n
 
-  * **Type:** `I18nOptions`
+  * **Type:** `I18nOptions | VueI18nFactory`
 
 Component based localization option.
+A VueI18n factory can be provided.
 
   * **See also:** `VueI18n` class constructor options
 
