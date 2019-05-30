@@ -32,7 +32,7 @@ describe('i18n factory', () => {
 
   beforeEach(done => {
     FactoryBasedComponent = Vue.extend({
-      i18n: i18nFactory, // normal i18n instance injection
+      i18n: i18nFactory, // i18n factory injection
       render (h) {
         return h('div', {}, [
           h('p', { ref: 'who' }, [this.$t('who')])
