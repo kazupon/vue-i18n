@@ -30,7 +30,7 @@ $ npm run perform
 
 ## Measurement enviroments
 - Vue.config.performance = true
-- Builded `vue-cli` webpack-simple
+- Builded Vue CLI v3
 - Development build (Disable Production build)
 - Headless chrome (pappeteer)
 
