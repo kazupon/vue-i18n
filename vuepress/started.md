@@ -12,7 +12,7 @@ code samples in the guide.
 <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
 
 <div id="app">
-  <p>{{ $t("message.hello") }}</p>
+  <p>{{ $t("hello") }}</p>
 </div>
 ``` 
 
