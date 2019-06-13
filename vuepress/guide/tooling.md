@@ -40,4 +40,4 @@ You can use this extension to enable SSR and improve i18n performance.
 
 BabelEdit can translate `json` files, and it can also translate `i18n` custom block of Single-file components.
 
-Read more about BabelEdit in  [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).
+Read more about BabelEdit in [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).

@@ -4,7 +4,6 @@ export default class CustomFormatter {
   constructor (options = {}) {
     this._locale = options.locale || 'en-US'
     this._formatter = new MessageFormat(this._locale)
-    this._formatter.setIntlSupport(true)
     this._caches = Object.create(null)
   }
 
