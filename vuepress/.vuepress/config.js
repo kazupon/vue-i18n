@@ -227,20 +227,52 @@ module.exports = {
         lastUpdated: '最終更新日時',
         nav: [
           {
-            text: 'ガイド',
-            link: '/guide/formatting',
+            text: '学ぶ',
+            items: [
+              {
+                text: 'ガイド',
+                link: '/ja/guide/formatting'
+              },
+              {
+                text: 'API',
+                link: '/ja/api/'
+              }
+            ]
           },
           {
-            text: 'レガシー',
-            link: '/legacy/',
-          },
-          {
-            text: 'API',
-            link: '/api/'
-          },
-          {
-            text: 'CLI プラグイン',
-            link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+            text: 'エコシステム',
+            items: [
+              {
+                text: '公式ツール',
+                items: [
+                  {
+                    text: 'Vue CLI プラグイン',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Webpack ローダー',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'ESLint プラグイン',
+                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: '拡張',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: '翻訳ツール',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  }
+                ]
+              }
+            ]
           },
           {
             text: 'Patreon',
@@ -252,34 +284,34 @@ module.exports = {
           }
         ],
         sidebar: [
-          '/introduction',
-          '/started',
-          '/installation',
+          '/ja/introduction',
+          '/ja/started',
+          '/ja/installation',
           {
             title: 'ガイド',
             collapsable: false,
             children: [
-              '/guide/formatting',
-              '/guide/pluralization',
-              '/guide/datetime',
-              '/guide/number',
-              '/guide/messages',
-              '/guide/fallback',
-              '/guide/component',
-              '/guide/directive',
-              '/guide/interpolation',
-              '/guide/sfc',
-              '/guide/hot-reload',
-              '/guide/locale',
-              '/guide/lazy-loading'
+              '/ja/guide/formatting',
+              '/ja/guide/pluralization',
+              '/ja/guide/datetime',
+              '/ja/guide/number',
+              '/ja/guide/messages',
+              '/ja/guide/fallback',
+              '/ja/guide/component',
+              '/ja/guide/directive',
+              '/ja/guide/interpolation',
+              '/ja/guide/sfc',
+              '/ja/guide/hot-reload',
+              '/ja/guide/locale',
+              '/ja/guide/lazy-loading'
             ]
           },
           {
             title: 'レガシー',
             collapsable: false,
             children: [
-              '/legacy/',
-              '/legacy/v5'
+              '/ja/legacy/',
+              '/ja/legacy/v5'
             ]
           }
         ]
