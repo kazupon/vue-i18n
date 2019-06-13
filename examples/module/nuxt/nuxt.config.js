@@ -5,44 +5,61 @@ const i18nExtensions = require('vue-i18n-extensions')
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-  locale: 'ja',
+  locale: 'en',
   messages: {
     en: require('./locales/en.json'),
     ja: require('./locales/ja.json')
   }
 })
 
-module.exports = {
+export default {
+  mode: 'universal',
   /*
   ** Headers of the page
   */
   head: {
-    title: 'nuxt',
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   /*
-  ** Customize the progress bar color
+  ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#fff' },
+  /*
+  ** Global CSS
+  */
+  css: [
+  ],
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+  ],
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+  ],
   /*
   ** Build configuration
   */
   build: {
     /*
-    ** Run ESLint on save
+    ** You can extend webpack config here
     */
     extend (config, ctx) {
-      // inject `compilerModules` to vue-loader options
+      // inject `compilerOptions` to vue-loader options
       config.module.rules.forEach(rule => {
         if (rule.loader === 'vue-loader') {
-          rule.options.compilerModules = [i18nExtensions.module(i18n)]
+          rule.options.compilerOptions = rule.options.compilerOptions || {}
+          rule.options.compilerOptions.modules = [i18nExtensions.module(i18n)]
         }
       })
     }

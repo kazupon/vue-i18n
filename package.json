@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n",
   "description": "Internationalization plugin for Vue.js",
-  "version": "8.10.0",
+  "version": "8.11.2",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -34,7 +34,7 @@
     "eslint-plugin-vue-libs": "^2.0.1",
     "flow-bin": "^0.38.0",
     "git-commit-message-convention": "git://github.com/kazupon/git-commit-message-convention.git",
-    "http-server": "^0.9.0",
+    "http-server": "^0.11.1",
     "intl": "^1.2.5",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
@@ -61,8 +61,8 @@
     "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "2.53.1",
     "sinon": "^2.1.0",
+    "terser": "^3.17.0",
     "typescript": "^2.4.1",
-    "uglify-js": "^2.7.5",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17",
     "vuepress": "^0.14.0",
@@ -75,6 +75,8 @@
     "dist/vue-i18n.min.js",
     "dist/vue-i18n.common.js",
     "dist/vue-i18n.esm.js",
+    "dist/vue-i18n.esm.browser.js",
+    "dist/vue-i18n.esm.browser.min.js",
     "src/**/*.js",
     "types/*.d.ts",
     "decls"

@@ -8,11 +8,12 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:5000
-npm run dev
-
 # build for production
 npm run build
+
+# serve at localhost:5000
+npm run serve
+
 ```
 
-For detailed explanation on how things work, consult the [docs for rollup-plugin-vue](http://vuejs.github.io/rollup-plugin-vue/#/en/2.3/)
+For detailed explanation on how things work, consult the [docs for rollup-plugin-vue](http://vuejs.github.io/rollup-plugin-vue/)

@@ -1,3 +1,34 @@
+<a name="8.11.2"></a>
+## [8.11.2](https://github.com/kazupon/vue-i18n/compare/v8.11.1...v8.11.2) (2019-04-30)
+
+
+### :bug: Bug Fixes
+
+* bug(mixin): fix SSR memory leak by moving subscribeDataChanging calls into beforeMount ([#572](https://github.com/kazupon/vue-i18n/issues/572)) by [@Pindar](https://github.com/Pindar) ([32b5795](https://github.com/kazupon/vue-i18n/commit/32b5795)), closes [#572](https://github.com/kazupon/vue-i18n/issues/572)
+
+
+
+<a name="8.11.1"></a>
+## [8.11.1](https://github.com/kazupon/vue-i18n/compare/v8.11.0...v8.11.1) (2019-04-26)
+
+
+### :bug: Bug Fixes
+
+* fix ES Modules distribution ([bb631a1](https://github.com/kazupon/vue-i18n/commit/bb631a1))
+
+
+
+<a name="8.11.0"></a>
+# [8.11.0](https://github.com/kazupon/vue-i18n/compare/v8.10.0...v8.11.0) (2019-04-26)
+
+
+### :star: New Features
+
+* ES modules for browser ([#561](https://github.com/kazupon/vue-i18n/issues/561)) ([c9b9adf](https://github.com/kazupon/vue-i18n/commit/c9b9adf)), closes [#561](https://github.com/kazupon/vue-i18n/issues/561)
+* HTML locale message warning option ([#567](https://github.com/kazupon/vue-i18n/issues/567)) ([4aecf03](https://github.com/kazupon/vue-i18n/commit/4aecf03)), closes [#567](https://github.com/kazupon/vue-i18n/issues/567)
+
+
+
 <a name="8.10.0"></a>
 # [8.10.0](https://github.com/kazupon/vue-i18n/compare/v8.9.0...v8.10.0) (2019-03-28)
 
