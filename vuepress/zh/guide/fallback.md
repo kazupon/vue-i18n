@@ -12,7 +12,7 @@ const messages = {
 }
 ```
 
-当为 VueI18n 构造函数选项指定 `fallbackLocale` 选项时，`message` 键使用 `en` 语言环键进行本地化：
+当为 VueI18n 构造函数选项指定 `fallbackLocale` 选项时，`message` 键使用 `en` 语言环境进行本地化：
 
 ```js
 const i18n = new VueI18n({
