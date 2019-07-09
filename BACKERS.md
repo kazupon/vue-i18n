@@ -30,7 +30,6 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 
 - Shinya Katayama
 - 38elements
-- Fedor Indutny
 - 直博 中島
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=20.0)
