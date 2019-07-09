@@ -35,6 +35,10 @@ describe('component translation', () => {
             messages: {
               'en-US': { who: 'child1' },
               'ja-JP': { who: '子1' }
+            },
+            sharedMessages: { // shared messages for child1 component
+              'en-US': { foo: { bar: 'bar' } },
+              'ja-JP': { foo: { bar: 'バー' } }
             }
           },
           components: {
@@ -52,6 +56,7 @@ describe('component translation', () => {
               h('p', { ref: 'fallback' }, [this.$t('fallback')]),
               h('p', { ref: 'datetime' }, [this.$d(dt, 'short')]),
               h('p', { ref: 'number' }, [this.$n(money, 'currency')]),
+              h('p', { ref: 'shared' }, [this.$t('foo.bar')]),
               h('sub-child1', { ref: 'sub-child1' })
             ])
           }
@@ -97,6 +102,7 @@ describe('component translation', () => {
     const child1Fallback = vm.$refs.child1.$refs.fallback
     const child1DateTime = vm.$refs.child1.$refs.datetime
     const child1Number = vm.$refs.child1.$refs.number
+    const child1Shared = vm.$refs.child1.$refs.shared
     const child2 = vm.$refs.child2.$refs.who
     const subChild1 = vm.$refs.child1.$refs['sub-child1'].$refs.who
     const subChild2 = vm.$refs.child2.$refs['sub-child2'].$refs.who
@@ -107,6 +113,8 @@ describe('component translation', () => {
     // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
     isChrome && assert.strictEqual(child1DateTime.textContent, '12/19/2012, 10:00 PM')
     isChrome && assert.strictEqual(child1Number.textContent, '$101.00')
+    assert.strictEqual(child1Shared.textContent, 'bar')
+
     assert.strictEqual(child2.textContent, 'ルート')
     assert.strictEqual(subChild1.textContent, 'ルート')
     assert.strictEqual(subChild2.textContent, 'サブの子2')

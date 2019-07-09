@@ -55,6 +55,11 @@ export default {
           }
         }
 
+        const { sharedMessages } = options.i18n
+        if (sharedMessages && isPlainObject(sharedMessages)) {
+          options.i18n.messages = merge(options.i18n.messages, sharedMessages)
+        }
+
         this._i18n = new VueI18n(options.i18n)
         this._i18nWatcher = this._i18n.watchI18nData()
 
