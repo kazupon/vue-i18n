@@ -42,6 +42,7 @@ export default class VueI18n {
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean
+  _formatFallbackMessages: boolean
   _silentFallbackWarn: boolean
   _dateTimeFormatters: Object
   _numberFormatters: Object
@@ -79,6 +80,9 @@ export default class VueI18n {
     this._silentTranslationWarn = options.silentTranslationWarn === undefined
       ? false
       : !!options.silentTranslationWarn
+    this._formatFallbackMessages = options.formatFallbackMessages === undefined
+      ? false
+      : !!options.formatFallbackMessages
     this._silentFallbackWarn = options.silentFallbackWarn === undefined
       ? false
       : !!options.silentFallbackWarn
@@ -274,7 +278,10 @@ export default class VueI18n {
         )
       }
     }
-    return key
+
+    const parsedArgs = parseArgs(...values)
+
+    return this._render(key, 'string', parsedArgs.params, key)
   }
 
   _isFallbackRoot (val: any): boolean {
