@@ -1,3 +1,18 @@
+<a name="8.12.0"></a>
+# [8.12.0](https://github.com/kazupon/vue-i18n/compare/v8.11.2...v8.12.0) (2019-07-09)
+
+
+### :star: New Features
+
+* **mixin:** shared locale messages feature ([82543de](https://github.com/kazupon/vue-i18n/commit/82543de))
+
+
+### :zap: Improvements
+
+* **typing:** sharedMessages option type ([6967a15](https://github.com/kazupon/vue-i18n/commit/6967a15))
+
+
+
 <a name="8.11.2"></a>
 ## [8.11.2](https://github.com/kazupon/vue-i18n/compare/v8.11.1...v8.11.2) (2019-04-30)
 
