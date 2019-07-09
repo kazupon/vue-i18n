@@ -84,6 +84,57 @@ To suppress these warnings (while keeping those which warn of the total absence 
 
 If you hope localize in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
 
+
+## Shared locale messages for components
+
+Sometimes you may want to import shared locale messages for certain components, not fallback from global locale messages (e.g. common messages of certain feature for components.
+
+You can use `sharedMessages` options of `i18n`.
+
+Common Locale Messasge example:
+```js
+export default {
+  en: {
+    buttons: {
+      save: "Save",
+      // ...
+    }
+  },
+  ja: {
+    buttons: {
+      save: "保存",
+      // ...
+    }
+  }
+}
+```
+
+Components:
+```js
+import commonMessage from './locales/common' // imporot common locale messages
+
+export default {
+  name: 'ServiceModal',
+  template: `
+    <div class="modal">
+      <div class="body">
+        <p>This is good service</p>
+      </div>
+      <div class="footer">
+        <button type="button">{{ $t('buttons.save') }}</button>
+      </div>
+    </div>
+  `,
+  i18n: {
+    messages: { ... },
+    sharedMessages: commonMessages
+  }
+}
+```
+
+If `sharedMessages` option is specified along with the `messages` option, those messages will be merged into locale messages into the VueI18n instance of the target component.
+
+
 ## Translation in functional component
 
 When using a functional component, all the data (including props, children, slots, parent, etc.) is passed through `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:

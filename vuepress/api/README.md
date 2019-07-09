@@ -306,6 +306,16 @@ Whether to allow the use locale messages of HTML formatting. See the `warnHtmlIn
 In next major version, `warnHtmlInMessage` option is `warn` as default.
 :::
 
+#### sharedMessages
+
+> 8.12+
+
+  * **Type:** `LocaleMessages`
+
+  * **Default:** `undefined`
+
+The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
+
 
 ### Properties
 
