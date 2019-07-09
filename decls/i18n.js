@@ -77,6 +77,7 @@ declare type I18nOptions = {
   pluralizationRules?: PluralizationRules,
   preserveDirectiveContent?: boolean,
   warnHtmlInMessage?: WarnHtmlInMessageLevel,
+  sharedMessages?: LocaleMessage,
 };
 
 declare type IntlAvailability = {

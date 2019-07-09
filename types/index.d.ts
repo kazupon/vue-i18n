@@ -106,6 +106,7 @@ declare namespace VueI18n {
     preserveDirectiveContent?: boolean;
     pluralizationRules?: PluralizationRulesMap;
     warnHtmlInMessage?: WarnHtmlInMessageLevel;
+    sharedMessages?: LocaleMessages;
   }
 }
 
@@ -218,6 +219,7 @@ declare module 'vue/types/options' {
       messages?: VueI18n.LocaleMessages;
       dateTimeFormats?: VueI18n.DateTimeFormats;
       numberFormats?: VueI18n.NumberFormats;
+      sharedMessages?: VueI18n.LocaleMessages;
     };
   }
 }
