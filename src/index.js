@@ -279,9 +279,13 @@ export default class VueI18n {
       }
     }
 
-    const parsedArgs = parseArgs(...values)
+    if (this._formatFallbackMessages) {
+      const parsedArgs = parseArgs(...values)
 
-    return this._render(key, 'string', parsedArgs.params, key)
+      return this._render(key, 'string', parsedArgs.params, key)
+    }
+
+    return key
   }
 
   _isFallbackRoot (val: any): boolean {
