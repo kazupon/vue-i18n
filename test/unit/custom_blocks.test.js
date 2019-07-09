@@ -70,4 +70,41 @@ describe('custom blocks', () => {
       }).then(done)
     })
   })
+
+  describe('sharedMessages option', () => {
+    it('should be translated', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        components: {
+          child: {
+            __i18n: [JSON.stringify({
+              en: { who: 'child' },
+              ja: { who: '子' }
+            })],
+            i18n: {
+              sharedMessages: {
+                en: { foo: 'foo' },
+                ja: { foo: 'フー' }
+              }
+            },
+            render (h) {
+              return h('div', {}, [
+                h('p', { ref: 'foo' }, [this.$t('foo')])
+              ])
+            }
+          }
+        },
+        render (h) {
+          return h('div', {}, [h('child', { ref: 'child' })])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.strictEqual(vm.$refs.child.$refs.foo.textContent, 'フー')
+        i18n.locale = 'en'
+      }).then(() => {
+        assert.strictEqual(vm.$refs.child.$refs.foo.textContent, 'foo')
+      }).then(done)
+    })
+  })
 })
