@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.11.2 
+ * vue-i18n v8.12.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -265,6 +265,12 @@
                 warn("Cannot parse locale messages via custom blocks.", e);
               }
             }
+          }
+
+          var ref = options.i18n;
+          var sharedMessages = ref.sharedMessages;
+          if (sharedMessages && isPlainObject(sharedMessages)) {
+            options.i18n.messages = merge(options.i18n.messages, sharedMessages);
           }
 
           this._i18n = new VueI18n(options.i18n);
@@ -1882,7 +1888,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.11.2';
+  VueI18n.version = '8.12.0';
 
   return VueI18n;
 

@@ -237,6 +237,11 @@ var mixin = {
           }
         }
 
+        const { sharedMessages } = options.i18n;
+        if (sharedMessages && isPlainObject(sharedMessages)) {
+          options.i18n.messages = merge(options.i18n.messages, sharedMessages);
+        }
+
         this._i18n = new VueI18n(options.i18n);
         this._i18nWatcher = this._i18n.watchI18nData();
 
@@ -1828,6 +1833,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.11.2';
+VueI18n.version = '8.12.0';
 
 export default VueI18n;
