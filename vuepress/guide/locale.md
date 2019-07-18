@@ -47,3 +47,8 @@ export default {
 :::warning Notice
 :warning: Locale changing is ignored for components that use `sync: false`.
 :::
+
+:::warning Component vs. root scope
+:warning: Changing `$i18n.locale` inside a component does not update the root locale.
+If you rely on the root locale, for example when using [root fallbacks](./fallback.html), use `$root.$i18n.locale` instead of `$i18n.locale`.
+:::
