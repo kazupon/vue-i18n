@@ -125,7 +125,7 @@ module.exports = {
         lastUpdated: '最近一次更新',
         nav: [
           {
-            text: 'Lean',
+            text: '学习',
             items: [
               {
                 text: '指南',
@@ -138,10 +138,10 @@ module.exports = {
             ]
           },
           {
-            text: 'Ecosystem',
+            text: '生态',
             items: [
               {
-                text: 'Official Tooling',
+                text: '官方工具',
                 items: [
                   {
                     text: '脚手架插件',
@@ -152,17 +152,17 @@ module.exports = {
                     link: 'https://github.com/kazupon/vue-i18n-loader'
                   },
                   {
-                    text: 'ESLint Plugin',
+                    text: 'ESLint 插件',
                     link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
                   },
                   {
-                    text: 'Extensions',
+                    text: '扩展',
                     link: 'https://github.com/kazupon/vue-i18n-extensions'
                   }
                 ]
               },
               {
-                text: 'Translation Tooling',
+                text: '翻译工具',
                 items: [
                   {
                     text: 'BabelEdit',
