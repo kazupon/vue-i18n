@@ -111,7 +111,7 @@ export default {
 
 Components:
 ```js
-import commonMessage from './locales/common' // imporot common locale messages
+import commonMessage from './locales/common' // import common locale messages
 
 export default {
   name: 'ServiceModal',
