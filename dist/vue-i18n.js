@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.12.0 
+ * vue-i18n v8.13.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -1097,7 +1097,7 @@
       : !!options.fallbackRoot;
     this._silentTranslationWarn = options.silentTranslationWarn === undefined
       ? false
-      : !!options.silentTranslationWarn;
+      : options.silentTranslationWarn;
     this._silentFallbackWarn = options.silentFallbackWarn === undefined
       ? false
       : !!options.silentFallbackWarn;
@@ -1284,7 +1284,7 @@
         return missingRet
       }
     } else {
-      if (!this._silentTranslationWarn) {
+      if (!this._isSilentTranslationWarn(key)) {
         warn(
           "Cannot translate the value of keypath '" + key + "'. " +
           'Use the value of keypath as default.'
@@ -1298,8 +1298,20 @@
     return !val && !isNull(this._root) && this._fallbackRoot
   };
 
-  VueI18n.prototype._isSilentFallback = function _isSilentFallback (locale) {
-    return this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  VueI18n.prototype._isSilentFallbackWarn = function _isSilentFallbackWarn (key) {
+    return this._silentFallbackWarn instanceof RegExp
+      ? this._silentFallbackWarn.test(key)
+      : this._silentFallbackWarn
+  };
+
+  VueI18n.prototype._isSilentFallback = function _isSilentFallback (locale, key) {
+    return this._isSilentFallbackWarn(key) && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  };
+
+  VueI18n.prototype._isSilentTranslationWarn = function _isSilentTranslationWarn (key) {
+    return this._silentTranslationWarn instanceof RegExp
+      ? this._silentTranslationWarn.test(key)
+      : this._silentTranslationWarn
   };
 
   VueI18n.prototype._interpolate = function _interpolate (
@@ -1322,7 +1334,7 @@
       if (isPlainObject(message)) {
         ret = message[key];
         if (typeof ret !== 'string') {
-          if (!this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+          if (!this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
             warn(("Value of key '" + key + "' is not a string!"));
           }
           return null
@@ -1335,7 +1347,7 @@
       if (typeof pathRet === 'string') {
         ret = pathRet;
       } else {
-        if (!this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+        if (!this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
           warn(("Value of key '" + key + "' is not a string!"));
         }
         return null
@@ -1396,7 +1408,7 @@
       );
 
       if (this._isFallbackRoot(translated)) {
-        if (!this._silentTranslationWarn) {
+        if (!this._isSilentTranslationWarn(linkPlaceholder)) {
           warn(("Fall back to translate the link placeholder '" + linkPlaceholder + "' with root locale."));
         }
         /* istanbul ignore if */
@@ -1452,7 +1464,7 @@
 
     res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key]);
     if (!isNull(res)) {
-      if (!this._silentTranslationWarn && !this._silentFallbackWarn) {
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(("Fall back to translate the keypath '" + key + "' with '" + fallback + "' locale."));
       }
       return res
@@ -1476,7 +1488,7 @@
       host, 'string', parsedArgs.params
     );
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn && !this._silentFallbackWarn) {
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(("Fall back to translate the keypath '" + key + "' with root locale."));
       }
       /* istanbul ignore if */
@@ -1499,7 +1511,7 @@
     var ret =
       this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values);
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn) {
+      if (!this._isSilentTranslationWarn(key)) {
         warn(("Fall back to interpolate the keypath '" + key + "' with root locale."));
       }
       if (!this._root) { throw Error('unexpected error') }
@@ -1645,8 +1657,8 @@
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (!this._silentTranslationWarn) {
-        warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + " datetime formats."));
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(("Fall back to '" + fallback + "' datetime formats from '" + locale + "' datetime formats."));
       }
       _locale = fallback;
       formats = dateTimeFormats[_locale];
@@ -1679,8 +1691,8 @@
     var ret =
       this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key);
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn) {
-        warn(("Fall back to datetime localization of root: key '" + key + "' ."));
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(("Fall back to datetime localization of root: key '" + key + "'."));
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
@@ -1745,8 +1757,8 @@
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (!this._silentTranslationWarn) {
-        warn(("Fall back to '" + fallback + "' number formats from '" + locale + " number formats."));
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(("Fall back to '" + fallback + "' number formats from '" + locale + "' number formats."));
       }
       _locale = fallback;
       formats = numberFormats[_locale];
@@ -1789,8 +1801,8 @@
     var formatter = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options);
     var ret = formatter && formatter.format(value);
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn) {
-        warn(("Fall back to number localization of root: key '" + key + "' ."));
+      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(("Fall back to number localization of root: key '" + key + "'."));
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
@@ -1858,7 +1870,7 @@
     var formatter = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options);
     var ret = formatter && formatter.formatToParts(value);
     if (this._isFallbackRoot(ret)) {
-      if (!this._silentTranslationWarn) {
+      if (!this._isSilentTranslationWarn(key)) {
         warn(("Fall back to format number to parts of root: key '" + key + "' ."));
       }
       /* istanbul ignore if */
@@ -1888,7 +1900,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.12.0';
+  VueI18n.version = '8.13.0';
 
   return VueI18n;
 
