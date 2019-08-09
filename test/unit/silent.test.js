@@ -1,3 +1,6 @@
+import dateTimeFormats from './fixture/datetime'
+import numberFormats from './fixture/number'
+
 describe('silent', () => {
   let spy
   beforeEach(() => {
@@ -220,6 +223,45 @@ describe('silent', () => {
         vm.$i18n.silentFallbackWarn = /chic.*/
         vm.$t('chickenDinner')
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+      })
+    })
+
+    describe('datetime/number format', () => {
+      it('should be suppressed translate warnings', () => {
+        const el = document.createElement('div')
+        const root = new Vue({
+          i18n: new VueI18n({
+            locale: 'en-US',
+            fallbackLocale: 'ja-JP',
+            silentFallbackWarn: true,
+            dateTimeFormats,
+            numberFormats
+          }),
+          components: {
+            subComponent: {
+              i18n: {
+                dateTimeFormats: {},
+                numberFormats: {}
+              },
+              render (h) { return h('p') }
+            }
+          },
+          render (h) { return h('sub-component') }
+        }).$mount(el)
+        const vm = root.$children[0]
+        const warningDateTimeRegex = /Fall back to .* datetime formats\./
+        const warningNumberRegex = /Fall back to .* number formats\./
+        vm.$d(Date.now(), 'long')
+        vm.$n(10, 'numeric')
+        assert(spy.getCalls().some(call => call.args[0].match(warningDateTimeRegex)) === false)
+        assert(spy.getCalls().some(call => call.args[0].match(warningNumberRegex)) === false)
+
+        // change
+        vm.$i18n.silentFallbackWarn = false
+        vm.$d(Date.now(), 'long')
+        vm.$n(10, 'numeric')
+        assert(spy.getCalls().some(call => call.args[0].match(warningDateTimeRegex)) === true)
+        assert(spy.getCalls().some(call => call.args[0].match(warningNumberRegex)) === true)
       })
     })
   })

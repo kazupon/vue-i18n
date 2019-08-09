@@ -621,8 +621,8 @@ export default class VueI18n {
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale} datetime formats.`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`)
       }
       _locale = fallback
       formats = dateTimeFormats[_locale]
@@ -655,8 +655,8 @@ export default class VueI18n {
     const ret: ?DateTimeFormatResult =
       this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
-        warn(`Fall back to datetime localization of root: key '${key}' .`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to datetime localization of root: key '${key}'.`)
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
@@ -718,8 +718,8 @@ export default class VueI18n {
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
-        warn(`Fall back to '${fallback}' number formats from '${locale} number formats.`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`)
       }
       _locale = fallback
       formats = numberFormats[_locale]
@@ -762,8 +762,8 @@ export default class VueI18n {
     const formatter: ?Object = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
     const ret: ?NumberFormatResult = formatter && formatter.format(value)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
-        warn(`Fall back to number localization of root: key '${key}' .`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to number localization of root: key '${key}'.`)
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
