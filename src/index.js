@@ -286,11 +286,9 @@ export default class VueI18n {
   }
 
   _isSilentTranslationWarn (key: Path): boolean {
-    if (this._silentTranslationWarn instanceof RegExp) {
-      return this._silentTranslationWarn.test(key)
-    } else {
-      return this._silentTranslationWarn
-    }
+    return this._silentTranslationWarn instanceof RegExp
+      ? this._silentTranslationWarn.test(key)
+      : this._silentTranslationWarn
   }
 
   _interpolate (
