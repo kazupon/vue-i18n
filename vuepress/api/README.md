@@ -261,26 +261,28 @@ If `false`, regardless of the root level locale, localize for each component loc
 
 #### silentTranslationWarn
 
-> 6.1+
+> 6.1+, :up: 8.13
 
-  * **Type:** `Boolean`
+  * **Type:** `Boolean | RegExp`
 
   * **Default:** `false`
 
 Whether suppress warnings outputted when localization fails.
 
 If `true`, suppress localization fail warnings.
+If you use regular expression, you can suppress localization fail warnings that it match with translation `key` (e.g. `$t`).
 
 #### silentFallbackWarn
 
-> :new: 8.8+
+> :new: 8.8+, :up: 8.13
 
-  * **Type:** `Boolean`
+  * **Type:** `Boolean | RegExp`
   * **Default:** `false`
 
 Whether suppress warnings when falling back to either `fallbackLocale` or `root`.
 
 If `true`, warnings will be generated only when no translation is available at all, and not for fallbacks.
+If you use regular expression, you can suppress the fallback warnings that it match `key` (e.g. `$t`).
 
 #### preserveDirectiveContent
 
@@ -381,19 +383,29 @@ The formatter that implemented with `Formatter` interface.
 
 #### silentTranslationWarn
 
-> 6.1+
+> 6.1+, :up: 8.13
 
-  * **Type:** `boolean`
+  * **Type:** `Boolean | RegExp`
 
   * **Read/Write**
 
 Whether suppress warnings outputted when localization fails.
 
+#### silentFallbackWarn
+
+> :new: 8.8+, :up: 8.13
+
+  * **Type:** `Boolean | RegExp`
+
+  * **Read/Write**
+
+Whether suppress fallback warnings when localization fails.
+
 #### preserveDirectiveContent
 
 > 8.7+
 
-  * **Type:** `boolean`
+  * **Type:** `Boolean`
 
   * **Read/Write**
 
