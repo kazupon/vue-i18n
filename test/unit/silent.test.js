@@ -8,25 +8,56 @@ describe('silent', () => {
   })
 
   describe('silentTranslationWarn', () => {
-    it('should be suppressed translate warnings', () => {
-      const vm = new Vue({
-        i18n: new VueI18n({
-          locale: 'en',
-          silentTranslationWarn: true,
-          messages: {
-            en: { who: 'root' },
-            ja: { who: 'ルート' }
-          }
+    describe('boolean', () => {
+      it('should be suppressed translate warnings', () => {
+        const warningRegex = /Cannot translate the value of keypath 'foo.bar.buz'. Use the value of keypath as default./
+        const vm = new Vue({
+          i18n: new VueI18n({
+            locale: 'en',
+            silentTranslationWarn: true,
+            messages: {
+              en: { who: 'root' },
+              ja: { who: 'ルート' }
+            }
+          })
         })
+
+        vm.$t('foo.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        // change
+        vm.$i18n.silentTranslationWarn = false
+        vm.$t('foo.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
       })
+    })
 
-      vm.$t('foo.bar.buz')
-      assert(spy.notCalled === true)
+    describe('Regex', () => {
+      it('should be suppressed translate warnings', () => {
+        const warningRegex = /Cannot translate the value of keypath .*\. Use the value of keypath as default./
+        const vm = new Vue({
+          i18n: new VueI18n({
+            locale: 'en',
+            silentTranslationWarn: true,
+            messages: {
+              en: { who: 'root' },
+              ja: { who: 'ルート' }
+            }
+          })
+        })
 
-      // change
-      vm.$i18n.silentTranslationWarn = false
-      vm.$t('foo.bar.buz')
-      assert(spy.callCount === 2)
+        vm.$t('foo.bar.buz')
+        vm.$t('who.bar')
+        vm.$t('who.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        // change to boolean
+        vm.$i18n.silentTranslationWarn = /^foo\..*|who\.bar$/
+        vm.$t('foo.bar.buz')
+        vm.$t('who.bar')
+        vm.$t('who.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
     })
   })
 
