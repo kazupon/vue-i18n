@@ -42,7 +42,7 @@ export default class VueI18n {
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean | RegExp
-  _silentFallbackWarn: boolean
+  _silentFallbackWarn: boolean | RegExp
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
@@ -237,8 +237,8 @@ export default class VueI18n {
   get silentTranslationWarn (): boolean | RegExp { return this._silentTranslationWarn }
   set silentTranslationWarn (silent: boolean | RegExp): void { this._silentTranslationWarn = silent }
 
-  get silentFallbackWarn (): boolean { return this._silentFallbackWarn }
-  set silentFallbackWarn (silent: boolean): void { this._silentFallbackWarn = silent }
+  get silentFallbackWarn (): boolean | RegExp { return this._silentFallbackWarn }
+  set silentFallbackWarn (silent: boolean | RegExp): void { this._silentFallbackWarn = silent }
 
   get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
   set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
@@ -281,8 +281,14 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
-  _isSilentFallback (locale: Locale): boolean {
-    return this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  _isSilentFallbackWarn (key: Path): boolean {
+    return this._silentFallbackWarn instanceof RegExp
+      ? this._silentFallbackWarn.test(key)
+      : this._silentFallbackWarn
+  }
+
+  _isSilentFallback (locale: Locale, key: Path): boolean {
+    return this._isSilentFallbackWarn(key) && (this._isFallbackRoot() || locale !== this.fallbackLocale)
   }
 
   _isSilentTranslationWarn (key: Path): boolean {
@@ -311,7 +317,7 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale)) {
+          if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
             warn(`Value of key '${key}' is not a string!`)
           }
           return null
@@ -324,7 +330,7 @@ export default class VueI18n {
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
-        if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale)) {
+        if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
           warn(`Value of key '${key}' is not a string!`)
         }
         return null
@@ -440,7 +446,7 @@ export default class VueI18n {
 
     res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key])
     if (!isNull(res)) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._silentFallbackWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
       }
       return res
@@ -460,7 +466,7 @@ export default class VueI18n {
       host, 'string', parsedArgs.params
     )
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._silentFallbackWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
       }
       /* istanbul ignore if */
