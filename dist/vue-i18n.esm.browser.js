@@ -216,6 +216,7 @@ var mixin = {
           options.i18n.root = this.$root;
           options.i18n.formatter = this.$root.$i18n.formatter;
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
+          options.i18n.formatFallbackMessages = this.$root.$i18n.formatFallbackMessages;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
           options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn;
           options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
@@ -321,8 +322,7 @@ var interpolationComponent = {
   functional: true,
   props: {
     tag: {
-      type: String,
-      default: 'span'
+      type: String
     },
     path: {
       type: String,
@@ -335,61 +335,78 @@ var interpolationComponent = {
       type: [Array, Object]
     }
   },
-  render (h, { props, data, children, parent }) {
-    const i18n = parent.$i18n;
-
-    children = (children || []).filter(child => {
-      return child.tag || (child.text = child.text.trim())
-    });
-
-    if (!i18n) {
+  render (h, { data, parent, props, slots }) {
+    const { $i18n } = parent;
+    if (!$i18n) {
       {
         warn('Cannot find VueI18n instance!');
       }
-      return children
+      return
     }
 
-    const path = props.path;
-    const locale = props.locale;
+    const { path, locale, places } = props;
+    const params = slots();
+    const children = $i18n.i(
+      path,
+      locale,
+      onlyHasDefaultPlace(params) || places
+        ? useLegacyPlaces(params.default, places)
+        : params
+    );
 
-    const params = {};
-    const places = props.places || {};
-
-    const hasPlaces = Array.isArray(places)
-      ? places.length > 0
-      : Object.keys(places).length > 0;
-
-    const everyPlace = children.every(child => {
-      if (child.data && child.data.attrs) {
-        const place = child.data.attrs.place;
-        return (typeof place !== 'undefined') && place !== ''
-      }
-    });
-
-    if (hasPlaces && children.length > 0 && !everyPlace) {
-      warn('If places prop is set, all child elements must have place prop set.');
-    }
-
-    if (Array.isArray(places)) {
-      places.forEach((el, i) => {
-        params[i] = el;
-      });
-    } else {
-      Object.keys(places).forEach(key => {
-        params[key] = places[key];
-      });
-    }
-
-    children.forEach((child, i) => {
-      const key = everyPlace
-        ? `${child.data.attrs.place}`
-        : `${i}`;
-      params[key] = child;
-    });
-
-    return h(props.tag, data, i18n.i(path, locale, params))
+    const tag = props.tag || 'span';
+    return tag ? h(tag, data, children) : children
   }
 };
+
+function onlyHasDefaultPlace (params) {
+  let prop;
+  for (prop in params) {
+    if (prop !== 'default') { return false }
+  }
+  return Boolean(prop)
+}
+
+function useLegacyPlaces (children, places) {
+  const params = places ? createParamsFromPlaces(places) : {};
+  if (!children) { return params }
+
+  const everyPlace = children.every(vnodeHasPlaceAttribute);
+  if (everyPlace) {
+    warn('`place` attribute is deprecated in next major version. Please switch to Vue slots.');
+  }
+
+  return children.reduce(
+    everyPlace ? assignChildPlace : assignChildIndex,
+    params
+  )
+}
+
+function createParamsFromPlaces (places) {
+  {
+    warn('`places` prop is deprecated in next majaor version. Please switch to Vue slots.');
+  }
+
+  return Array.isArray(places)
+    ? places.reduce(assignChildIndex, {})
+    : Object.assign({}, places)
+}
+
+function assignChildPlace (params, child) {
+  if (child.data && child.data.attrs && child.data.attrs.place) {
+    params[child.data.attrs.place] = child;
+  }
+  return params
+}
+
+function assignChildIndex (params, child, index) {
+  params[index] = child;
+  return params
+}
+
+function vnodeHasPlaceAttribute (vnode) {
+  return Boolean(vnode.data && vnode.data.attrs && vnode.data.attrs.place)
+}
 
 /*  */
 
@@ -1048,6 +1065,7 @@ class VueI18n {
   
   
   
+  
 
   constructor (options = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -1072,6 +1090,9 @@ class VueI18n {
     this._fallbackRoot = options.fallbackRoot === undefined
       ? true
       : !!options.fallbackRoot;
+    this._formatFallbackMessages = options.formatFallbackMessages === undefined
+      ? false
+      : !!options.formatFallbackMessages;
     this._silentTranslationWarn = options.silentTranslationWarn === undefined
       ? false
       : options.silentTranslationWarn;
@@ -1218,6 +1239,9 @@ class VueI18n {
     this._vm.$set(this._vm, 'fallbackLocale', locale);
   }
 
+  get formatFallbackMessages () { return this._formatFallbackMessages }
+  set formatFallbackMessages (fallback) { this._formatFallbackMessages = fallback; }
+
   get missing () { return this._missing }
   set missing (handler) { this._missing = handler; }
 
@@ -1264,7 +1288,13 @@ class VueI18n {
         );
       }
     }
-    return key
+
+    if (this._formatFallbackMessages) {
+      const parsedArgs = parseArgs(...values);
+      return this._render(key, 'string', parsedArgs.params, key)
+    } else {
+      return key
+    }
   }
 
   _isFallbackRoot (val) {
@@ -1845,6 +1875,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.13.0';
+VueI18n.version = '8.14.0';
 
 export default VueI18n;

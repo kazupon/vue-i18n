@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.13.0 
+ * vue-i18n v8.14.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -242,6 +242,7 @@ var mixin = {
           options.i18n.root = this.$root;
           options.i18n.formatter = this.$root.$i18n.formatter;
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
+          options.i18n.formatFallbackMessages = this.$root.$i18n.formatFallbackMessages;
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
           options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn;
           options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
@@ -348,8 +349,7 @@ var interpolationComponent = {
   functional: true,
   props: {
     tag: {
-      type: String,
-      default: 'span'
+      type: String
     },
     path: {
       type: String,
@@ -363,65 +363,84 @@ var interpolationComponent = {
     }
   },
   render: function render (h, ref) {
-    var props = ref.props;
     var data = ref.data;
-    var children = ref.children;
     var parent = ref.parent;
+    var props = ref.props;
+    var slots = ref.slots;
 
-    var i18n = parent.$i18n;
-
-    children = (children || []).filter(function (child) {
-      return child.tag || (child.text = child.text.trim())
-    });
-
-    if (!i18n) {
+    var $i18n = parent.$i18n;
+    if (!$i18n) {
       if (process.env.NODE_ENV !== 'production') {
         warn('Cannot find VueI18n instance!');
       }
-      return children
+      return
     }
 
     var path = props.path;
     var locale = props.locale;
+    var places = props.places;
+    var params = slots();
+    var children = $i18n.i(
+      path,
+      locale,
+      onlyHasDefaultPlace(params) || places
+        ? useLegacyPlaces(params.default, places)
+        : params
+    );
 
-    var params = {};
-    var places = props.places || {};
-
-    var hasPlaces = Array.isArray(places)
-      ? places.length > 0
-      : Object.keys(places).length > 0;
-
-    var everyPlace = children.every(function (child) {
-      if (child.data && child.data.attrs) {
-        var place = child.data.attrs.place;
-        return (typeof place !== 'undefined') && place !== ''
-      }
-    });
-
-    if (process.env.NODE_ENV !== 'production' && hasPlaces && children.length > 0 && !everyPlace) {
-      warn('If places prop is set, all child elements must have place prop set.');
-    }
-
-    if (Array.isArray(places)) {
-      places.forEach(function (el, i) {
-        params[i] = el;
-      });
-    } else {
-      Object.keys(places).forEach(function (key) {
-        params[key] = places[key];
-      });
-    }
-
-    children.forEach(function (child, i) {
-      var key = everyPlace
-        ? ("" + (child.data.attrs.place))
-        : ("" + i);
-      params[key] = child;
-    });
-
-    return h(props.tag, data, i18n.i(path, locale, params))
+    var tag = props.tag || 'span';
+    return tag ? h(tag, data, children) : children
   }
 };
+
+function onlyHasDefaultPlace (params) {
+  var prop;
+  for (prop in params) {
+    if (prop !== 'default') { return false }
+  }
+  return Boolean(prop)
+}
+
+function useLegacyPlaces (children, places) {
+  var params = places ? createParamsFromPlaces(places) : {};
+  if (!children) { return params }
+
+  var everyPlace = children.every(vnodeHasPlaceAttribute);
+  if (process.env.NODE_ENV !== 'production' && everyPlace) {
+    warn('`place` attribute is deprecated in next major version. Please switch to Vue slots.');
+  }
+
+  return children.reduce(
+    everyPlace ? assignChildPlace : assignChildIndex,
+    params
+  )
+}
+
+function createParamsFromPlaces (places) {
+  if (process.env.NODE_ENV !== 'production') {
+    warn('`places` prop is deprecated in next majaor version. Please switch to Vue slots.');
+  }
+
+  return Array.isArray(places)
+    ? places.reduce(assignChildIndex, {})
+    : Object.assign({}, places)
+}
+
+function assignChildPlace (params, child) {
+  if (child.data && child.data.attrs && child.data.attrs.place) {
+    params[child.data.attrs.place] = child;
+  }
+  return params
+}
+
+function assignChildIndex (params, child, index) {
+  params[index] = child;
+  return params
+}
+
+function vnodeHasPlaceAttribute (vnode) {
+  return Boolean(vnode.data && vnode.data.attrs && vnode.data.attrs.place)
+}
 
 /*  */
 
@@ -1091,6 +1110,9 @@ var VueI18n = function VueI18n (options) {
   this._fallbackRoot = options.fallbackRoot === undefined
     ? true
     : !!options.fallbackRoot;
+  this._formatFallbackMessages = options.formatFallbackMessages === undefined
+    ? false
+    : !!options.formatFallbackMessages;
   this._silentTranslationWarn = options.silentTranslationWarn === undefined
     ? false
     : options.silentTranslationWarn;
@@ -1130,7 +1152,7 @@ var VueI18n = function VueI18n (options) {
   });
 };
 
-var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },availableLocales: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true },silentFallbackWarn: { configurable: true },preserveDirectiveContent: { configurable: true },warnHtmlInMessage: { configurable: true } };
+var prototypeAccessors = { vm: { configurable: true },messages: { configurable: true },dateTimeFormats: { configurable: true },numberFormats: { configurable: true },availableLocales: { configurable: true },locale: { configurable: true },fallbackLocale: { configurable: true },formatFallbackMessages: { configurable: true },missing: { configurable: true },formatter: { configurable: true },silentTranslationWarn: { configurable: true },silentFallbackWarn: { configurable: true },preserveDirectiveContent: { configurable: true },warnHtmlInMessage: { configurable: true } };
 
 VueI18n.prototype._checkLocaleMessage = function _checkLocaleMessage (locale, level, message) {
   var paths = [];
@@ -1239,6 +1261,9 @@ prototypeAccessors.fallbackLocale.set = function (locale) {
   this._vm.$set(this._vm, 'fallbackLocale', locale);
 };
 
+prototypeAccessors.formatFallbackMessages.get = function () { return this._formatFallbackMessages };
+prototypeAccessors.formatFallbackMessages.set = function (fallback) { this._formatFallbackMessages = fallback; };
+
 prototypeAccessors.missing.get = function () { return this._missing };
 prototypeAccessors.missing.set = function (handler) { this._missing = handler; };
 
@@ -1287,7 +1312,13 @@ VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm,
       );
     }
   }
-  return key
+
+  if (this._formatFallbackMessages) {
+    var parsedArgs = parseArgs.apply(void 0, values);
+    return this._render(key, 'string', parsedArgs.params, key)
+  } else {
+    return key
+  }
 };
 
 VueI18n.prototype._isFallbackRoot = function _isFallbackRoot (val) {
@@ -1896,6 +1927,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.13.0';
+VueI18n.version = '8.14.0';
 
 module.exports = VueI18n;
