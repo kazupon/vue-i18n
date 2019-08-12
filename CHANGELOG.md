@@ -1,3 +1,14 @@
+<a name="8.14.0"></a>
+# [8.14.0](https://github.com/kazupon/vue-i18n/compare/v8.13.0...v8.14.0) (2019-08-12)
+
+
+### :star: New Features
+
+* fallback formatting ([#637](https://github.com/kazupon/vue-i18n/issues/637)) by [@sebwas](https://github.com/sebwas) ([bf9929c](https://github.com/kazupon/vue-i18n/commit/bf9929c)), closes [#637](https://github.com/kazupon/vue-i18n/issues/637)
+* support slots syntax for component interpolation ([#685](https://github.com/kazupon/vue-i18n/issues/685)) by [@aavondet](https://github.com/aavondet) ([71ca843](https://github.com/kazupon/vue-i18n/commit/71ca843)), closes [#685](https://github.com/kazupon/vue-i18n/issues/685)
+
+
+
 <a name="8.13.0"></a>
 # [8.13.0](https://github.com/kazupon/vue-i18n/compare/v8.12.0...v8.13.0) (2019-08-09)
 
