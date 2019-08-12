@@ -677,6 +677,10 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
   * `tag {string}`: optional, default `span`
   * `places {Array | Object}`: optional (7.2+)
 
+:::danger Important!!
+In next major version, `places` prop is deprecated. Please switch to slots syntax.
+:::
+
 #### Usage:
 
 ```html
