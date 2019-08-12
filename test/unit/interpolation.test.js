@@ -290,76 +290,78 @@ describe('component interpolation', () => {
     })
   })
 
-  describe('text nodes with slots', () => {
-    it('should be interpolated', done => {
-      const el = document.createElement('div')
-      const vm = new Vue({
-        i18n,
-        render (h) {
-          return h('i18n', { props: { path: 'text' }, slot: '' }, [this._v('1')])
-        }
-      }).$mount(el)
-      nextTick(() => {
-        assert.strictEqual(vm.$el.textContent, 'one: 1')
-      }).then(done)
+  describe('slot', () => {
+    describe('text nodes with slots', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'text' }, slot: '' }, [this._v('1')])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.textContent, 'one: 1')
+        }).then(done)
+      })
     })
-  })
 
-  describe('primitive nodes with scoped slots', () => {
-    it('should be interpolated', done => {
-      const el = document.createElement('div')
-      const vm = new Vue({
-        i18n,
-        render (h) {
-          return h('i18n', { props: { path: 'primitive' } }, [
-            h('template', { slot: '0' }, ['1']),
-            h('template', { slot: '1' }, ['2'])
-          ])
-        }
-      }).$mount(el)
-      nextTick(() => {
-        assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
-      }).then(done)
-    })
-  })
-
-  describe('linked with slots', () => {
-    it('should be interpolated', done => {
-      const el = document.createElement('div')
-      const vm = new Vue({
-        i18n,
-        render (h) {
-          return h('i18n', { props: { path: 'link' } }, [
-            h('template', { slot: '0' }, ['1']),
-            h('template', { slot: '1' }, ['2'])
-          ])
-        }
-      }).$mount(el)
-      nextTick(() => {
-        assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
-      }).then(done)
-    })
-  })
-
-  describe('included translation locale message', () => {
-    it('should be interpolated', done => {
-      const el = document.createElement('div')
-      const vm = new Vue({
-        i18n,
-        render (h) {
-          return h('i18n', { props: { path: 'term' } }, [
-            h('template', { slot: '0' }, [
-              h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+    describe('primitive nodes with scoped slots', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'primitive' } }, [
+              h('template', { slot: '0' }, ['1']),
+              h('template', { slot: '1' }, ['2'])
             ])
-          ])
-        }
-      }).$mount(el)
-      nextTick(() => {
-        assert.strictEqual(
-          vm.$el.innerHTML,
-          'I accept xxx <a href=\"/term\">Term of service</a>.'
-        )
-      }).then(done)
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
+        }).then(done)
+      })
+    })
+
+    describe('linked with slots', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'link' } }, [
+              h('template', { slot: '0' }, ['1']),
+              h('template', { slot: '1' }, ['2'])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
+        }).then(done)
+      })
+    })
+
+    describe('included translation locale message', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'term' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            'I accept xxx <a href=\"/term\">Term of service</a>.'
+          )
+        }).then(done)
+      })
     })
   })
 

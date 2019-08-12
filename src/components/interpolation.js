@@ -7,8 +7,7 @@ export default {
   functional: true,
   props: {
     tag: {
-      type: String,
-      default: 'span'
+      type: String
     },
     path: {
       type: String,
@@ -29,32 +28,38 @@ export default {
       }
       return
     }
+
+    const { path, locale, places } = props
     const params = slots()
     const children = $i18n.i(
-      props.path,
-      props.locale,
-      onlyHasDefaultPlace(params) || props.places
-        ? useLegacyPlaces(params.default, props.places)
+      path,
+      locale,
+      onlyHasDefaultPlace(params) || places
+        ? useLegacyPlaces(params.default, places)
         : params
     )
 
-    const { tag } = props
+    const tag = props.tag || 'span'
     return tag ? h(tag, data, children) : children
   }
 }
 
 function onlyHasDefaultPlace (params) {
-  var prop
-  for (prop in params) if (prop !== 'default') return false
+  let prop
+  for (prop in params) {
+    if (prop !== 'default') { return false }
+  }
   return Boolean(prop)
 }
 
 function useLegacyPlaces (children, places) {
   const params = places ? createParamsFromPlaces(places) : {}
-  if (!children) return params
-  const everyPlace = children.every(vnodeHasPlaceAttribute)
+  if (!children) { return params }
 
-  if (process.env.NODE_ENV !== 'production' && everyPlace) { warn('`place` attribute is deprecated. Please switch to Vue slots.') }
+  const everyPlace = children.every(vnodeHasPlaceAttribute)
+  if (process.env.NODE_ENV !== 'production' && everyPlace) {
+    warn('`place` attribute is deprecated. Please switch to Vue slots.')
+  }
 
   return children.reduce(
     everyPlace ? assignChildPlace : assignChildIndex,
@@ -63,19 +68,24 @@ function useLegacyPlaces (children, places) {
 }
 
 function createParamsFromPlaces (places) {
-  if (process.env.NODE_ENV !== 'production') { warn('`places` prop is deprecated. Please switch to Vue slots.') }
+  if (process.env.NODE_ENV !== 'production') {
+    warn('`places` prop is deprecated. Please switch to Vue slots.')
+  }
+
   return Array.isArray(places)
     ? places.reduce(assignChildIndex, {})
     : Object.assign({}, places)
 }
 
 function assignChildPlace (params, child) {
-  params[child.data.attrs.place] = child
+  if (child.data && child.data.attrs && child.data.attrs.place) {
+    params[child.data.attrs.place] = child
+  }
   return params
 }
 
-function assignChildIndex (params, child, key) {
-  params[key] = child
+function assignChildIndex (params, child, index) {
+  params[index] = child
   return params
 }
 
