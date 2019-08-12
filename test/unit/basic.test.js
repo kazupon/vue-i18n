@@ -161,6 +161,60 @@ describe('basic', () => {
       })
     })
 
+    describe('format arguments of fallback', () => {
+      describe('if activated', () => {
+        describe('named', () => {
+          it('should return replaced string', () => {
+            i18n = new VueI18n({
+              locale: 'en',
+              fallbackLocale: 'en',
+              formatFallbackMessages: true
+            })
+
+            assert.strictEqual(
+              i18n.t('Hello {name}, how are you?', { name: 'kazupon' }),
+              'Hello kazupon, how are you?'
+            )
+          })
+        })
+
+        describe('list', () => {
+          it('should return replaced string', () => {
+            i18n = new VueI18n({
+              locale: 'en',
+              fallbackLocale: 'en',
+              formatFallbackMessages: true
+            })
+
+            assert.strictEqual(
+              i18n.t('Hello {0}, how are you?', ['kazupon']),
+              'Hello kazupon, how are you?'
+            )
+          })
+        })
+      })
+
+      describe('if not activated', () => {
+        describe('named', () => {
+          it('should not return replaced string', () => {
+            assert.strictEqual(
+              i18n.t('Hello {name}, how are you?', { name: 'kazupon' }),
+              'Hello {name}, how are you?'
+            )
+          })
+        })
+
+        describe('list', () => {
+          it('should not return replaced string', () => {
+            assert.strictEqual(
+              i18n.t('Hello {0}, how are you?', ['kazupon']),
+              'Hello {0}, how are you?'
+            )
+          })
+        })
+      })
+    })
+
     describe('locale argument', () => {
       it('should return empty string', () => {
         assert.strictEqual(i18n.t('message.hello', 'ja'), messages.ja.message.hello)

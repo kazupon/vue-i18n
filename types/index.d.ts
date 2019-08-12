@@ -100,6 +100,7 @@ declare namespace VueI18n {
     formatter?: Formatter;
     missing?: MissingHandler;
     fallbackRoot?: boolean;
+    formatFallbackMessages?: boolean;
     sync?: boolean;
     silentTranslationWarn?: boolean | RegExp;
     silentFallbackWarn?: boolean | RegExp;
@@ -143,6 +144,7 @@ export declare interface IVueI18n {
   fallbackLocale: VueI18n.Locale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
+  formatFallbackMessages: boolean;
   silentTranslationWarn: boolean | RegExp;
   silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
@@ -162,6 +164,7 @@ declare class VueI18n {
   fallbackLocale: VueI18n.Locale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
+  formatFallbackMessages: boolean;
   silentTranslationWarn: boolean | RegExp;
   silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
