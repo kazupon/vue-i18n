@@ -34,6 +34,7 @@ export default {
           options.i18n.root = this.$root
           options.i18n.formatter = this.$root.$i18n.formatter
           options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale
+          options.i18n.formatFallbackMessages = this.$root.$i18n.formatFallbackMessages
           options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn
           options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn
           options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules

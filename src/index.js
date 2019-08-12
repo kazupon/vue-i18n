@@ -232,6 +232,9 @@ export default class VueI18n {
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
+  get formatFallbackMessages (): boolean { return this._formatFallbackMessages }
+  set formatFallbackMessages (fallback: boolean): void { this._formatFallbackMessages = fallback }
+
   get missing (): ?MissingHandler { return this._missing }
   set missing (handler: MissingHandler): void { this._missing = handler }
 

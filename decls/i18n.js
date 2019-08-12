@@ -71,6 +71,7 @@ declare type I18nOptions = {
   missing?: MissingHandler,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
+  formatFallbackMessages?: boolean,
   sync?: boolean,
   silentTranslationWarn?: boolean,
   silentFallbackWarn?: boolean,
@@ -106,6 +107,8 @@ declare interface I18n {
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
+  get formatFallbackMessages (): boolean,
+  set formatFallbackMessages (fallback: boolean): void,
   get silentTranslationWarn (): boolean,
   set silentTranslationWarn (silent: boolean): void,
   get silentFallbackWarn (): boolean,
