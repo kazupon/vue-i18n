@@ -1,3 +1,15 @@
+<a name="8.13.0"></a>
+# [8.13.0](https://github.com/kazupon/vue-i18n/compare/v8.12.0...v8.13.0) (2019-08-09)
+
+
+### :star: New Features
+
+* datetime/number formats fallback warning filter ([46de19e](https://github.com/kazupon/vue-i18n/commit/46de19e)), closes [#558](https://github.com/kazupon/vue-i18n/issues/558)
+* fallback translation warning filter ([69fc798](https://github.com/kazupon/vue-i18n/commit/69fc798))
+* translation missing warning filter ([666dc9d](https://github.com/kazupon/vue-i18n/commit/666dc9d))
+
+
+
 <a name="8.12.0"></a>
 # [8.12.0](https://github.com/kazupon/vue-i18n/compare/v8.11.2...v8.12.0) (2019-07-09)
 

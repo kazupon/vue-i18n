@@ -53,7 +53,7 @@ desc('number format', () => {
       }).then(() => {
         // NOTE: avoid webkit (safari/phantomjs) & Intl polyfill wired localization...
         if (isChrome) {
-          const actual = [49, 48, 49, 46, 48, 48, 160, 20154, 27665, 24065] // 101.00&nbsp;人民币
+          const actual = [49, 48, 49, 46, 48, 48, 20154, 27665, 24065] // 101.00人民币
           const target = convertToCharCodes(text.textContent)
           assert.deepEqual(target, actual)
         }

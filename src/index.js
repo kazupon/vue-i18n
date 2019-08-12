@@ -41,9 +41,9 @@ export default class VueI18n {
   _fallbackRoot: boolean
   _missing: ?MissingHandler
   _exist: Function
-  _silentTranslationWarn: boolean
+  _silentTranslationWarn: boolean | RegExp
+  _silentFallbackWarn: boolean | RegExp
   _formatFallbackMessages: boolean
-  _silentFallbackWarn: boolean
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
@@ -77,12 +77,12 @@ export default class VueI18n {
     this._fallbackRoot = options.fallbackRoot === undefined
       ? true
       : !!options.fallbackRoot
-    this._silentTranslationWarn = options.silentTranslationWarn === undefined
-      ? false
-      : !!options.silentTranslationWarn
     this._formatFallbackMessages = options.formatFallbackMessages === undefined
       ? false
       : !!options.formatFallbackMessages
+    this._silentTranslationWarn = options.silentTranslationWarn === undefined
+      ? false
+      : options.silentTranslationWarn
     this._silentFallbackWarn = options.silentFallbackWarn === undefined
       ? false
       : !!options.silentFallbackWarn
@@ -241,11 +241,11 @@ export default class VueI18n {
   get formatter (): Formatter { return this._formatter }
   set formatter (formatter: Formatter): void { this._formatter = formatter }
 
-  get silentTranslationWarn (): boolean { return this._silentTranslationWarn }
-  set silentTranslationWarn (silent: boolean): void { this._silentTranslationWarn = silent }
+  get silentTranslationWarn (): boolean | RegExp { return this._silentTranslationWarn }
+  set silentTranslationWarn (silent: boolean | RegExp): void { this._silentTranslationWarn = silent }
 
-  get silentFallbackWarn (): boolean { return this._silentFallbackWarn }
-  set silentFallbackWarn (silent: boolean): void { this._silentFallbackWarn = silent }
+  get silentFallbackWarn (): boolean | RegExp { return this._silentFallbackWarn }
+  set silentFallbackWarn (silent: boolean | RegExp): void { this._silentFallbackWarn = silent }
 
   get preserveDirectiveContent (): boolean { return this._preserveDirectiveContent }
   set preserveDirectiveContent (preserve: boolean): void { this._preserveDirectiveContent = preserve }
@@ -274,7 +274,7 @@ export default class VueI18n {
         return missingRet
       }
     } else {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
         warn(
           `Cannot translate the value of keypath '${key}'. ` +
           'Use the value of keypath as default.'
@@ -294,8 +294,20 @@ export default class VueI18n {
     return !val && !isNull(this._root) && this._fallbackRoot
   }
 
-  _isSilentFallback (locale: Locale): boolean {
-    return this._silentFallbackWarn && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  _isSilentFallbackWarn (key: Path): boolean {
+    return this._silentFallbackWarn instanceof RegExp
+      ? this._silentFallbackWarn.test(key)
+      : this._silentFallbackWarn
+  }
+
+  _isSilentFallback (locale: Locale, key: Path): boolean {
+    return this._isSilentFallbackWarn(key) && (this._isFallbackRoot() || locale !== this.fallbackLocale)
+  }
+
+  _isSilentTranslationWarn (key: Path): boolean {
+    return this._silentTranslationWarn instanceof RegExp
+      ? this._silentTranslationWarn.test(key)
+      : this._silentTranslationWarn
   }
 
   _interpolate (
@@ -318,7 +330,7 @@ export default class VueI18n {
       if (isPlainObject(message)) {
         ret = message[key]
         if (typeof ret !== 'string') {
-          if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+          if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
             warn(`Value of key '${key}' is not a string!`)
           }
           return null
@@ -331,7 +343,7 @@ export default class VueI18n {
       if (typeof pathRet === 'string') {
         ret = pathRet
       } else {
-        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._isSilentFallback(locale)) {
+        if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
           warn(`Value of key '${key}' is not a string!`)
         }
         return null
@@ -391,7 +403,7 @@ export default class VueI18n {
       )
 
       if (this._isFallbackRoot(translated)) {
-        if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+        if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(linkPlaceholder)) {
           warn(`Fall back to translate the link placeholder '${linkPlaceholder}' with root locale.`)
         }
         /* istanbul ignore if */
@@ -447,7 +459,7 @@ export default class VueI18n {
 
     res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key])
     if (!isNull(res)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._silentFallbackWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
       }
       return res
@@ -467,7 +479,7 @@ export default class VueI18n {
       host, 'string', parsedArgs.params
     )
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn && !this._silentFallbackWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(`Fall back to translate the keypath '${key}' with root locale.`)
       }
       /* istanbul ignore if */
@@ -486,7 +498,7 @@ export default class VueI18n {
     const ret: any =
       this._translate(messages, locale, this.fallbackLocale, key, host, 'raw', values)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
         warn(`Fall back to interpolate the keypath '${key}' with root locale.`)
       }
       if (!this._root) { throw Error('unexpected error') }
@@ -622,8 +634,8 @@ export default class VueI18n {
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale} datetime formats.`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`)
       }
       _locale = fallback
       formats = dateTimeFormats[_locale]
@@ -656,8 +668,8 @@ export default class VueI18n {
     const ret: ?DateTimeFormatResult =
       this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(`Fall back to datetime localization of root: key '${key}' .`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to datetime localization of root: key '${key}'.`)
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
@@ -719,8 +731,8 @@ export default class VueI18n {
 
     // fallback locale
     if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(`Fall back to '${fallback}' number formats from '${locale} number formats.`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`)
       }
       _locale = fallback
       formats = numberFormats[_locale]
@@ -763,8 +775,8 @@ export default class VueI18n {
     const formatter: ?Object = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
     const ret: ?NumberFormatResult = formatter && formatter.format(value)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
-        warn(`Fall back to number localization of root: key '${key}' .`)
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+        warn(`Fall back to number localization of root: key '${key}'.`)
       }
       /* istanbul ignore if */
       if (!this._root) { throw Error('unexpected error') }
@@ -827,7 +839,7 @@ export default class VueI18n {
     const formatter: ?Object = this._getNumberFormatter(value, locale, this.fallbackLocale, this._getNumberFormats(), key, options)
     const ret: ?NumberFormatToPartsResult = formatter && formatter.formatToParts(value)
     if (this._isFallbackRoot(ret)) {
-      if (process.env.NODE_ENV !== 'production' && !this._silentTranslationWarn) {
+      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key)) {
         warn(`Fall back to format number to parts of root: key '${key}' .`)
       }
       /* istanbul ignore if */

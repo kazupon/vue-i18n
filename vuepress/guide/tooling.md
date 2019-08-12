@@ -12,6 +12,10 @@ There are also tools from third vendors integrating Vue I18n.
 
 With this plugin, you can setup the i18n environment for the Vue application, and support the i18n development environment.
 
+### Nuxt Module
+
+[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module. 
+
 ### Webpack loader
 
 [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) is an officially provided webpack loader.

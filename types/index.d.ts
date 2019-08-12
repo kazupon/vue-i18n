@@ -102,8 +102,8 @@ declare namespace VueI18n {
     fallbackRoot?: boolean;
     formatFallbackMessages?: boolean;
     sync?: boolean;
-    silentTranslationWarn?: boolean;
-    silentFallbackWarn?: boolean;
+    silentTranslationWarn?: boolean | RegExp;
+    silentFallbackWarn?: boolean | RegExp;
     preserveDirectiveContent?: boolean;
     pluralizationRules?: PluralizationRulesMap;
     warnHtmlInMessage?: WarnHtmlInMessageLevel;
@@ -145,8 +145,8 @@ export declare interface IVueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   formatFallbackMessages: boolean;
-  silentTranslationWarn: boolean;
-  silentFallbackWarn: boolean;
+  silentTranslationWarn: boolean | RegExp;
+  silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
@@ -165,8 +165,8 @@ declare class VueI18n {
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   formatFallbackMessages: boolean;
-  silentTranslationWarn: boolean;
-  silentFallbackWarn: boolean;
+  silentTranslationWarn: boolean | RegExp;
+  silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
