@@ -1,4 +1,3 @@
-const fs = require('fs')
 const puppeteer = require('puppeteer')
 
 function parseTimings (timings) {
@@ -37,9 +36,13 @@ async function perform (browser, target, url, profileName) {
       return timing.cat.match(/blink\.user_timing/) && timing.name.match(/.*<App> render$/)
     })
     const durations = parseTimings(timings)
+    let sum = 0.0
     durations.forEach((duration, index) => {
-      console.log(`${target} ${index}: ${(duration.end.ts - duration.begin.ts) / 1000} ms`)
+      const time = (duration.end.ts - duration.begin.ts) / 1000
+      sum += time
+      console.log(`${target} ${index + 1}: ${time} ms`)
     })
+    console.log(`${target} average: ${sum / 10} ms`)
   } catch (e) {
     console.error(e)
   } finally {
@@ -50,10 +53,10 @@ async function perform (browser, target, url, profileName) {
 async function main () {
   const browser = await puppeteer.launch()
   try {
-    await perform(browser, 'plain', 'http://localhost:5000/plain/', 'plain')
-    await perform(browser, 'method', 'http://localhost:5000/method/', 'method')
-    await perform(browser, 'directive', 'http://localhost:5000/directive/', 'directive')
-    await perform(browser, 'compiler', 'http://localhost:5000/compiler/', 'compiler')
+    await perform(browser, 'plain', 'http://localhost:5000/plain/dist/', 'plain')
+    await perform(browser, 'method', 'http://localhost:5000/method/dist/', 'method')
+    await perform(browser, 'directive', 'http://localhost:5000/directive/dist/', 'directive')
+    await perform(browser, 'compiler', 'http://localhost:5000/compiler/dist/', 'compiler')
   } catch (e) {
     console.error(e)
   } finally {

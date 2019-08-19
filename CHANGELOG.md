@@ -1,3 +1,41 @@
+<a name="8.14.0"></a>
+# [8.14.0](https://github.com/kazupon/vue-i18n/compare/v8.13.0...v8.14.0) (2019-08-12)
+
+
+### :star: New Features
+
+* fallback formatting ([#637](https://github.com/kazupon/vue-i18n/issues/637)) by [@sebwas](https://github.com/sebwas) ([bf9929c](https://github.com/kazupon/vue-i18n/commit/bf9929c)), closes [#637](https://github.com/kazupon/vue-i18n/issues/637)
+* support slots syntax for component interpolation ([#685](https://github.com/kazupon/vue-i18n/issues/685)) by [@aavondet](https://github.com/aavondet) ([71ca843](https://github.com/kazupon/vue-i18n/commit/71ca843)), closes [#685](https://github.com/kazupon/vue-i18n/issues/685)
+
+
+
+<a name="8.13.0"></a>
+# [8.13.0](https://github.com/kazupon/vue-i18n/compare/v8.12.0...v8.13.0) (2019-08-09)
+
+
+### :star: New Features
+
+* datetime/number formats fallback warning filter ([46de19e](https://github.com/kazupon/vue-i18n/commit/46de19e)), closes [#558](https://github.com/kazupon/vue-i18n/issues/558)
+* fallback translation warning filter ([69fc798](https://github.com/kazupon/vue-i18n/commit/69fc798))
+* translation missing warning filter ([666dc9d](https://github.com/kazupon/vue-i18n/commit/666dc9d))
+
+
+
+<a name="8.12.0"></a>
+# [8.12.0](https://github.com/kazupon/vue-i18n/compare/v8.11.2...v8.12.0) (2019-07-09)
+
+
+### :star: New Features
+
+* **mixin:** shared locale messages feature ([82543de](https://github.com/kazupon/vue-i18n/commit/82543de))
+
+
+### :zap: Improvements
+
+* **typing:** sharedMessages option type ([6967a15](https://github.com/kazupon/vue-i18n/commit/6967a15))
+
+
+
 <a name="8.11.2"></a>
 ## [8.11.2](https://github.com/kazupon/vue-i18n/compare/v8.11.1...v8.11.2) (2019-04-30)
 

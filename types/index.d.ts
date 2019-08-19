@@ -100,12 +100,14 @@ declare namespace VueI18n {
     formatter?: Formatter;
     missing?: MissingHandler;
     fallbackRoot?: boolean;
+    formatFallbackMessages?: boolean;
     sync?: boolean;
-    silentTranslationWarn?: boolean;
-    silentFallbackWarn?: boolean;
+    silentTranslationWarn?: boolean | RegExp;
+    silentFallbackWarn?: boolean | RegExp;
     preserveDirectiveContent?: boolean;
     pluralizationRules?: PluralizationRulesMap;
     warnHtmlInMessage?: WarnHtmlInMessageLevel;
+    sharedMessages?: LocaleMessages;
   }
 }
 
@@ -142,8 +144,9 @@ export declare interface IVueI18n {
   fallbackLocale: VueI18n.Locale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
-  silentTranslationWarn: boolean;
-  silentFallbackWarn: boolean;
+  formatFallbackMessages: boolean;
+  silentTranslationWarn: boolean | RegExp;
+  silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
@@ -161,8 +164,9 @@ declare class VueI18n {
   fallbackLocale: VueI18n.Locale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
-  silentTranslationWarn: boolean;
-  silentFallbackWarn: boolean;
+  formatFallbackMessages: boolean;
+  silentTranslationWarn: boolean | RegExp;
+  silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
@@ -218,6 +222,7 @@ declare module 'vue/types/options' {
     messages?: VueI18n.LocaleMessages;
     dateTimeFormats?: VueI18n.DateTimeFormats;
     numberFormats?: VueI18n.NumberFormats;
+    sharedMessages?: VueI18n.LocaleMessages;
   }
 
   interface ComponentOptions<V extends Vue> {
@@ -225,6 +230,7 @@ declare module 'vue/types/options' {
       messages?: VueI18n.LocaleMessages;
       dateTimeFormats?: VueI18n.DateTimeFormats;
       numberFormats?: VueI18n.NumberFormats;
+      sharedMessages?: VueI18n.LocaleMessages;
     } | VueI18nFactory;
   }
 }

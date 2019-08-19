@@ -6,6 +6,7 @@ const messages = {
     primitive: 'one: {0}, two: {1}',
     component: 'element: {0}, component: {1}',
     mixed: 'text: {x}, component: {y}',
+    named: 'header: {header}, footer: {footer}',
     link: '@:primitive',
     term: 'I accept xxx {0}.',
     tos: 'Term of service',
@@ -287,6 +288,102 @@ describe('component interpolation', () => {
           'I accept xxx <a href=\"/term\">Term of service</a>.'
         )
       }).then(done)
+    })
+  })
+
+  describe('slot', () => {
+    describe('with default slot', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'text' }, slot: '' }, [this._v('1')])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.textContent, 'one: 1')
+        }).then(done)
+      })
+    })
+
+    describe('with named slots ', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'named' } }, [
+              h('template', { slot: 'header' }, [h('p', 'header')]),
+              h('template', { slot: 'footer' }, [h('p', 'footer')])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            'header: <p>header</p>, footer: <p>footer</p>'
+          )
+        }).then(done)
+      })
+    })
+
+    describe('primitive nodes', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'primitive' } }, [
+              h('template', { slot: '0' }, ['1']),
+              h('template', { slot: '1' }, ['2'])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
+        }).then(done)
+      })
+    })
+
+    describe('linked', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'link' } }, [
+              h('template', { slot: '0' }, ['1']),
+              h('template', { slot: '1' }, ['2'])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
+        }).then(done)
+      })
+    })
+
+    describe('included translation locale message', () => {
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'term' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            'I accept xxx <a href=\"/term\">Term of service</a>.'
+          )
+        }).then(done)
+      })
     })
   })
 

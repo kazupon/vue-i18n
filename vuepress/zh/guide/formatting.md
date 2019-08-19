@@ -65,7 +65,7 @@ const messages = {
 <p>hello world</p>
 ```
 
-## HTML格式化
+## HTML 格式化
 
 :::warning 提示
 :warning: 在你的网站上动态插入任意 HTML 可能非常危险，因为它很容易导致 XSS 攻击。仅对可信内容使用 HTML 插值，而不对用户提供的内容使用。

@@ -71,12 +71,14 @@ declare type I18nOptions = {
   missing?: MissingHandler,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
+  formatFallbackMessages?: boolean,
   sync?: boolean,
-  silentTranslationWarn?: boolean,
-  silentFallbackWarn?: boolean,
+  silentTranslationWarn?: boolean | RegExp,
+  silentFallbackWarn?: boolean | RegExp,
   pluralizationRules?: PluralizationRules,
   preserveDirectiveContent?: boolean,
   warnHtmlInMessage?: WarnHtmlInMessageLevel,
+  sharedMessages?: LocaleMessage,
 };
 
 declare type IntlAvailability = {
@@ -105,10 +107,12 @@ declare interface I18n {
   set missing (handler: MissingHandler): void,
   get formatter (): Formatter,
   set formatter (formatter: Formatter): void,
-  get silentTranslationWarn (): boolean,
-  set silentTranslationWarn (silent: boolean): void,
-  get silentFallbackWarn (): boolean,
-  set silentFallbackWarn (slient: boolean): void,
+  get formatFallbackMessages (): boolean,
+  set formatFallbackMessages (fallback: boolean): void,
+  get silentTranslationWarn (): boolean | RegExp,
+  set silentTranslationWarn (silent: boolean | RegExp): void,
+  get silentFallbackWarn (): boolean | RegExp,
+  set silentFallbackWarn (slient: boolean | RegExp): void,
   get pluralizationRules (): PluralizationRules,
   set pluralizationRules (rules: PluralizationRules): void,
   get preserveDirectiveContent (): boolean,

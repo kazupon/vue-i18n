@@ -1,3 +1,6 @@
+import dateTimeFormats from './fixture/datetime'
+import numberFormats from './fixture/number'
+
 describe('silent', () => {
   let spy
   beforeEach(() => {
@@ -8,25 +11,56 @@ describe('silent', () => {
   })
 
   describe('silentTranslationWarn', () => {
-    it('should be suppressed translate warnings', () => {
-      const vm = new Vue({
-        i18n: new VueI18n({
-          locale: 'en',
-          silentTranslationWarn: true,
-          messages: {
-            en: { who: 'root' },
-            ja: { who: 'ルート' }
-          }
+    describe('boolean', () => {
+      it('should be suppressed translate warnings', () => {
+        const warningRegex = /Cannot translate the value of keypath 'foo.bar.buz'. Use the value of keypath as default./
+        const vm = new Vue({
+          i18n: new VueI18n({
+            locale: 'en',
+            silentTranslationWarn: true,
+            messages: {
+              en: { who: 'root' },
+              ja: { who: 'ルート' }
+            }
+          })
         })
+
+        vm.$t('foo.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        // change
+        vm.$i18n.silentTranslationWarn = false
+        vm.$t('foo.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
       })
+    })
 
-      vm.$t('foo.bar.buz')
-      assert(spy.notCalled === true)
+    describe('Regex', () => {
+      it('should be suppressed translate warnings', () => {
+        const warningRegex = /Cannot translate the value of keypath .*\. Use the value of keypath as default./
+        const vm = new Vue({
+          i18n: new VueI18n({
+            locale: 'en',
+            silentTranslationWarn: true,
+            messages: {
+              en: { who: 'root' },
+              ja: { who: 'ルート' }
+            }
+          })
+        })
 
-      // change
-      vm.$i18n.silentTranslationWarn = false
-      vm.$t('foo.bar.buz')
-      assert(spy.callCount === 2)
+        vm.$t('foo.bar.buz')
+        vm.$t('who.bar')
+        vm.$t('who.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+        // change to boolean
+        vm.$i18n.silentTranslationWarn = /^foo\..*|who\.bar$/
+        vm.$t('foo.bar.buz')
+        vm.$t('who.bar')
+        vm.$t('who.bar.buz')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
     })
   })
 
@@ -44,44 +78,10 @@ describe('silent', () => {
       })
     })
 
-    it('should suppress `Fall back to ${fallback} locale` warnings', () => {
-      const vm = new Vue({ i18n })
-      const warningRegex = /Fall back to .* 'en' locale./
-      vm.$t('winner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
-
-      vm.$i18n.silentFallbackWarn = false
-      vm.$t('winner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
-    })
-
-    it('should suppress `Fall back to root locale` warnings.', () => {
-      const el = document.createElement('div')
-      const root = new Vue({
-        i18n,
-        components: {
-          subComponent: {
-            i18n: { messages: { hu: { name: 'Név' } } },
-            render (h) { return h('p') }
-          }
-        },
-        render (h) { return h('sub-component') }
-      }).$mount(el)
-      const vm = root.$children[0]
-      const warningRegex = /Fall back to .* root locale./
-
-      vm.$t('chickenDinner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
-
-      vm.$i18n.silentFallbackWarn = false
-      vm.$t('chickenDinner')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
-    })
-
-    describe('if first try is null or undefined,', () => {
-      it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
+    describe('boolean', () => {
+      it('should suppress `Fall back to ${fallback} locale` warnings', () => {
         const vm = new Vue({ i18n })
-        const warningRegex = /Value of .* is not a string./
+        const warningRegex = /Fall back to .* 'en' locale./
         vm.$t('winner')
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
 
@@ -90,7 +90,7 @@ describe('silent', () => {
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
       })
 
-      it('should supress `not a string` warnings for fallback to root.', () => {
+      it('should suppress `Fall back to root locale` warnings.', () => {
         const el = document.createElement('div')
         const root = new Vue({
           i18n,
@@ -103,66 +103,166 @@ describe('silent', () => {
           render (h) { return h('sub-component') }
         }).$mount(el)
         const vm = root.$children[0]
-        const warningRegex = /Value of .* is not a string./
+        const warningRegex = /Fall back to .* root locale./
+
         vm.$t('chickenDinner')
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
 
         vm.$i18n.silentFallbackWarn = false
         vm.$t('chickenDinner')
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+      })
+
+      describe('if first try is null or undefined,', () => {
+        it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
+          const vm = new Vue({ i18n })
+          const warningRegex = /Value of .* is not a string./
+          vm.$t('winner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+          vm.$i18n.silentFallbackWarn = false
+          vm.$t('winner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        })
+
+        it('should supress `not a string` warnings for fallback to root.', () => {
+          const el = document.createElement('div')
+          const root = new Vue({
+            i18n,
+            components: {
+              subComponent: {
+                i18n: { messages: { hu: { name: 'Név' } } },
+                render (h) { return h('p') }
+              }
+            },
+            render (h) { return h('sub-component') }
+          }).$mount(el)
+          const vm = root.$children[0]
+          const warningRegex = /Value of .* is not a string./
+          vm.$t('chickenDinner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+          vm.$i18n.silentFallbackWarn = false
+          vm.$t('chickenDinner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        })
+      })
+
+      describe('if first try is not null, undefined, array, plain object or string,', () => {
+        it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
+          const vm = new Vue({
+            i18n: new VueI18n({
+              locale: 'hu',
+              fallbackLocale: 'en',
+              silentFallbackWarn: true,
+              messages: {
+                en: { winner: 'winner' },
+                hu: { winner: true } // translation value is boolean
+              }
+            })
+          })
+          const warningRegex = /Value of .* is not a string./
+          vm.$t('winner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+          vm.$i18n.silentFallbackWarn = false
+          vm.$t('winner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        })
+
+        it('should supress `not a string` warnings for fallback to root.', () => {
+          const el = document.createElement('div')
+          const root = new Vue({
+            i18n,
+            components: {
+              subComponent: {
+                i18n: { messages: { hu: { chickenDinner: 11 } } }, // translation value is number
+                render (h) { return h('p') }
+              }
+            },
+            render (h) { return h('sub-component') }
+          }).$mount(el)
+          const vm = root.$children[0]
+          const warningRegex = /Value of .* is not a string./
+          vm.$t('chickenDinner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
+
+          vm.$i18n.silentFallbackWarn = false
+          vm.$t('chickenDinner')
+          assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        })
+      })
+
+      it('should not suppress `not a string` warnings when no further fallback is possible.', () => {
+        const vm = new Vue({ i18n })
+        const warningRegex = /Value of .* is not a string./
+        vm.$t('loser')
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
       })
     })
 
-    describe('if first try is not null, undefined, array, plain object or string,', () => {
-      it('should suppress `not a string` warnings for fallback to fallbackLocale.', () => {
-        const vm = new Vue({
-          i18n: new VueI18n({
-            locale: 'hu',
-            fallbackLocale: 'en',
-            silentFallbackWarn: true,
-            messages: {
-              en: { winner: 'winner' },
-              hu: { winner: true } // translation value is boolean
-            }
-          })
-        })
-        const warningRegex = /Value of .* is not a string./
-        vm.$t('winner')
-        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
-
-        vm.$i18n.silentFallbackWarn = false
-        vm.$t('winner')
-        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
-      })
-
-      it('should supress `not a string` warnings for fallback to root.', () => {
+    describe('Regexp', () => {
+      it('should be suppressed translate warnings', () => {
         const el = document.createElement('div')
         const root = new Vue({
           i18n,
           components: {
             subComponent: {
-              i18n: { messages: { hu: { chickenDinner: 11 } } }, // translation value is number
+              i18n: { messages: { hu: { name: 'Név' } } },
               render (h) { return h('p') }
             }
           },
           render (h) { return h('sub-component') }
         }).$mount(el)
         const vm = root.$children[0]
-        const warningRegex = /Value of .* is not a string./
+        const warningRegex = /Fall back to .*\./
         vm.$t('chickenDinner')
         assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
 
-        vm.$i18n.silentFallbackWarn = false
+        // change to boolean
+        vm.$i18n.silentFallbackWarn = /chic.*/
         vm.$t('chickenDinner')
-        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+        assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === false)
       })
     })
 
-    it('should not suppress `not a string` warnings when no further fallback is possible.', () => {
-      const vm = new Vue({ i18n })
-      const warningRegex = /Value of .* is not a string./
-      vm.$t('loser')
-      assert(spy.getCalls().some(call => call.args[0].match(warningRegex)) === true)
+    describe('datetime/number format', () => {
+      it('should be suppressed translate warnings', () => {
+        const el = document.createElement('div')
+        const root = new Vue({
+          i18n: new VueI18n({
+            locale: 'en-US',
+            fallbackLocale: 'ja-JP',
+            silentFallbackWarn: true,
+            dateTimeFormats,
+            numberFormats
+          }),
+          components: {
+            subComponent: {
+              i18n: {
+                dateTimeFormats: {},
+                numberFormats: {}
+              },
+              render (h) { return h('p') }
+            }
+          },
+          render (h) { return h('sub-component') }
+        }).$mount(el)
+        const vm = root.$children[0]
+        const warningDateTimeRegex = /Fall back to .* datetime formats\./
+        const warningNumberRegex = /Fall back to .* number formats\./
+        vm.$d(Date.now(), 'long')
+        vm.$n(10, 'numeric')
+        assert(spy.getCalls().some(call => call.args[0].match(warningDateTimeRegex)) === false)
+        assert(spy.getCalls().some(call => call.args[0].match(warningNumberRegex)) === false)
+
+        // change
+        vm.$i18n.silentFallbackWarn = false
+        vm.$d(Date.now(), 'long')
+        vm.$n(10, 'numeric')
+        assert(spy.getCalls().some(call => call.args[0].match(warningDateTimeRegex)) === true)
+        assert(spy.getCalls().some(call => call.args[0].match(warningNumberRegex)) === true)
+      })
     })
   })
 })

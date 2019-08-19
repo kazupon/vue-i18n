@@ -32,7 +32,10 @@ The following in [single file components example](https://github.com/kazupon/vue
 <script>
 export default {
   name: 'app',
-  data () { return { locale: 'en' } },
+  data () {
+    this.$i18n.locale = 'en';
+    return { locale: 'en' } 
+  },
   watch: {
     locale (val) {
       this.$i18n.locale = val

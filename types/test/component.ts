@@ -31,6 +31,10 @@ const Component1 = {
     messages: {
       en: { message: { hello: 'hello component1' } },
       ja: { message: { hello: 'こんにちは、component1' } }
+    },
+    sharedMessages: {
+      en: { buttons: { save: 'Save'} },
+      ja: { buttons: { save: 'Save'} }
     }
   }
 }

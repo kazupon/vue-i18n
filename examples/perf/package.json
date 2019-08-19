@@ -15,7 +15,7 @@
   "author": "kazuya kawaguchi <kawakazu80@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^0.10.2",
-    "serve": "^6.1.0"
+    "puppeteer": "^1.17.0",
+    "serve": "^11.0.1"
   }
 }
