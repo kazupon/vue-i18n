@@ -13,7 +13,7 @@ sidebar: auto
   * **Type:** `I18nOptions | VueI18nFactory`
 
 Component based localization option.
-A VueI18n factory can be provided.
+A VueI18n factory can be provided. Factory is useful when you need to create multiple VueI18n instances of same configurations (e.g. micro-frontent) .
 
   * **See also:** `VueI18n` class constructor options
 
