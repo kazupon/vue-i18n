@@ -69,7 +69,7 @@ function useLegacyPlaces (children, places) {
 
 function createParamsFromPlaces (places) {
   if (process.env.NODE_ENV !== 'production') {
-    warn('`places` prop is deprecated in next majaor version. Please switch to Vue slots.')
+    warn('`places` prop is deprecated in next major version. Please switch to Vue slots.')
   }
 
   return Array.isArray(places)
