@@ -19,8 +19,24 @@ describe('mixin', () => {
   describe('beforeDestroy', () => {
     describe('not assign VueI18n instance', () => {
       it('should be succeeded', () => {
-        assert(mixin.beforeDestroy() === undefined)
+        let nextTickCalled = 0
+        const that = {
+          beforeDestroy: mixin.beforeDestroy,
+          $nextTick: () => nextTickCalled++
+        }
+        const result = that.beforeDestroy()
+        assert.equal(result, undefined)
+        assert.equal(nextTickCalled, 1)
       })
+    })
+    it('this._i18n should still be available after beforeDestroy', () => {
+      const that = {
+        _i18n: 1,
+        beforeDestroy: mixin.beforeDestroy,
+        $nextTick: () => {}
+      }
+      that.beforeDestroy()
+      assert.ok(that._i18n)
     })
   })
 })

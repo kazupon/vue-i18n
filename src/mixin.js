@@ -108,8 +108,6 @@ export default {
   },
 
   beforeDestroy (): void {
-    if (!this._i18n) { return }
-
     const self = this
     this.$nextTick(() => {
       if (self._subscribing) {
@@ -127,8 +125,6 @@ export default {
         self._localeWatcher()
         delete self._localeWatcher
       }
-
-      self._i18n = null
     })
   }
 }
