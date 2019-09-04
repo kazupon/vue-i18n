@@ -1,6 +1,6 @@
 # Fallback localization
 
-The following locale messages that not exist `message` key in `ja` locale:
+The following locale messages that don't exist `message` key in `ja` locale:
 
 ```js
 const messages = {
