@@ -54,7 +54,13 @@ function onlyHasDefaultPlace (params) {
 
 function useLegacyPlaces (children, places) {
   const params = places ? createParamsFromPlaces(places) : {}
+  
   if (!children) { return params }
+
+  // Filter empty text nodes
+  children = children.filter(child => {
+    return child.tag || child.text.trim() !== ''
+  })
 
   const everyPlace = children.every(vnodeHasPlaceAttribute)
   if (process.env.NODE_ENV !== 'production' && everyPlace) {
