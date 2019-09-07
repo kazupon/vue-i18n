@@ -59,7 +59,7 @@ function useLegacyPlaces (children, places) {
 
   // Filter empty text nodes
   children = children.filter(child => {
-    return child.tag || (child.text = child.text.trim())
+    return child.tag || child.text.trim() !== ''
   })
 
   const everyPlace = children.every(vnodeHasPlaceAttribute)
