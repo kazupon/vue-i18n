@@ -81,7 +81,7 @@ describe('component interpolation', () => {
     })
 
     describe('empty text node between components', () => {
-      it('should be interpolated', done => {
+      it('should NOT be interpolated', done => {
         const el = document.createElement('div')
         const vm = new Vue({
           i18n,
