@@ -80,6 +80,25 @@ describe('component interpolation', () => {
       })
     })
 
+    describe('empty text node between components', () => {
+      it('should NOT be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'primitive' } }, [
+              h('p', ['1']),
+              this._v(''),
+              h('p', ['2'])
+            ])
+          }
+        }).$mount(el)
+        nextTick(() => {
+          assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
+        }).then(done)
+      })
+    })
+
     describe('components', () => {
       it('should be interpolated', done => {
         const el = document.createElement('div')
