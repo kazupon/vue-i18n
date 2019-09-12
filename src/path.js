@@ -194,6 +194,7 @@ function parse (path: Path): ?Array<string> {
       actions[APPEND]()
     } else {
       subPathDepth = 0
+      if (key === undefined) { return false }
       key = formatSubPath(key)
       if (key === false) {
         return false

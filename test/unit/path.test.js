@@ -77,4 +77,16 @@ describe('path', () => {
       assert.strictEqual(path.getPathValue(null, 'a.b'), null)
     })
   })
+
+  describe('Blanket: term', () => {
+    it('should not get null', () => {
+      assert.strictEqual(path.getPathValue({}, 'a.b.c[]'), null)
+    })
+  })
+
+  describe('Blanket: middle', () => {
+    it('should not get null', () => {
+      assert.strictEqual(path.getPathValue({}, 'a.b.c[]d'), null)
+    })
+  })
 })
