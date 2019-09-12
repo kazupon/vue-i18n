@@ -1,3 +1,14 @@
+<a name="8.14.1"></a>
+## [8.14.1](https://github.com/kazupon/vue-i18n/compare/v8.14.0...v8.14.1) (2019-09-12)
+
+
+### :bug: Bug Fixes
+
+* **path:** fix branket key error ([8d2aba7](https://github.com/kazupon/vue-i18n/commit/8d2aba7))
+* **component:** Fix interpolation component when there are empty text nodes ([547cdd1](https://github.com/kazupon/vue-i18n/commit/547cdd1)) by [@Demivan](https://github.com/Demivan)
+
+
+
 <a name="8.14.0"></a>
 # [8.14.0](https://github.com/kazupon/vue-i18n/compare/v8.13.0...v8.14.0) (2019-08-12)
 
