@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.14.0 
+ * vue-i18n v8.14.1 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -401,7 +401,13 @@ function onlyHasDefaultPlace (params) {
 
 function useLegacyPlaces (children, places) {
   var params = places ? createParamsFromPlaces(places) : {};
+  
   if (!children) { return params }
+
+  // Filter empty text nodes
+  children = children.filter(function (child) {
+    return child.tag || child.text.trim() !== ''
+  });
 
   var everyPlace = children.every(vnodeHasPlaceAttribute);
   if (process.env.NODE_ENV !== 'production' && everyPlace) {
@@ -416,7 +422,7 @@ function useLegacyPlaces (children, places) {
 
 function createParamsFromPlaces (places) {
   if (process.env.NODE_ENV !== 'production') {
-    warn('`places` prop is deprecated in next majaor version. Please switch to Vue slots.');
+    warn('`places` prop is deprecated in next major version. Please switch to Vue slots.');
   }
 
   return Array.isArray(places)
@@ -965,6 +971,7 @@ function parse$1 (path) {
       actions[APPEND]();
     } else {
       subPathDepth = 0;
+      if (key === undefined) { return false }
       key = formatSubPath(key);
       if (key === false) {
         return false
@@ -1925,6 +1932,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.14.0';
+VueI18n.version = '8.14.1';
 
 export default VueI18n;
