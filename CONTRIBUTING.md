@@ -4,6 +4,14 @@
 - [Pull Request Guidelines](#pull-request-guidelines)
 - [Development Setup](#development-setup)
 
+## General Guidelines
+
+Thanks for understanding that English is used as a shared language in this repository.
+Maintainers do not use machine translation to avoid miscommunication due to error in translation.
+If description of issue / PR are written in non-English languages, those may be closed.
+
+It is ofcourse fine to use non-English language, when you open a PR to translate documents and communicates with other users in same language.
+
 ## Issue Reporting Guidelines
 
 - The issue list of this repo is **exclusively** for bug reports and feature requests. Non-conforming issues will be closed immediately.
