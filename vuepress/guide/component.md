@@ -91,7 +91,7 @@ Sometimes you may want to import shared locale messages for certain components, 
 
 You can use `sharedMessages` options of `i18n`.
 
-Common Locale Messasge example:
+Common Locale Messages example:
 ```js
 export default {
   en: {
