@@ -3,7 +3,7 @@ home: true
 heroImage: ./vue-i18n-logo.png
 actionText: 快速上手 →
 actionLink: introduction.md
-footer: MIT Licensed | Copyright © 2018 kazuya kawaguchi
+footer: MIT Licensed | Copyright © 2019 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 0 0 24px 0;">
