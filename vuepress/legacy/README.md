@@ -46,7 +46,7 @@ property:
 ```js
 const i18n = new VueI18n({
   // ...
-  missing: (locale, key, vm) => {
+  missing: (locale, key, vm, values) => {
     // handle translation missing
   },
   // ...
@@ -54,11 +54,11 @@ const i18n = new VueI18n({
 const app = new Vue({ i18n }).$mount('#app')
 
 // change missing handler
-i18n.missing = (locale, key, vm) => {
+i18n.missing = (locale, key, vm, values) => {
   // handle translation missing
 }
 // or
-app.$i18n.missing = (locale, key, vm) => {
+app.$i18n.missing = (locale, key, vm, values) => {
   // handle translation missing
 }
 ```

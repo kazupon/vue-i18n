@@ -83,7 +83,7 @@ declare namespace VueI18n {
     interpolate(message: string, values: Values | undefined, path: string): (any[] | null);
   }
 
-  type MissingHandler = (locale: Locale, key: Path, vm?: Vue) => string | void;
+  type MissingHandler = (locale: Locale, key: Path, vm: Vue | null, values: any) => string | void;
 
   interface IntlAvailability {
     dateTimeFormat: boolean;
