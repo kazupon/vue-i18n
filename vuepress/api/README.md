@@ -235,7 +235,7 @@ The formatter that implemented with `Formatter` interface.
 
   * **Default:** `null`
 
-A handler for localization missing. The handler gets called with the localization target locale, localization path key and the Vue instance.
+A handler for localization missing. The handler gets called with the localization target locale, localization path key, the Vue instance and values.
 
 If missing handler is assigned, and occurred localization missing, it's not warned.
 
