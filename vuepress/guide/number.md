@@ -23,9 +23,9 @@ const numberFormats = {
 }
 ```
 
-As the above, you can define the number format with name (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
+As the above, you can define named number formats (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
 
-After that like the locale messages, you need to specify the `numberFormats` option of `VueI18n` constructor:
+After that, when using the locale messages, you need to specify the `numberFormats` option of the `VueI18n` constructor:
 
 ```js
 const i18n = new VueI18n({
@@ -76,7 +76,7 @@ The following template:
 </div>
 ```
 
-will produce output below:
+will produce the below output:
 
 ```html
 <div id="app">
@@ -86,9 +86,9 @@ will produce output below:
 </div>
 ```
 
-But real power of this component comes into play when it is used with [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+But the real power of this component comes into play when it is used with [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
-Lets say there is requirement to render integer part of the number with a bolder font. This can be achieved by specifying `integer` scoped slot element:
+Let's say there is a requirement to render the integer part of the number with a bolder font. This can be achieved by specifying `integer` scoped slot element:
 
 ```html
 <i18n-n :value="100" format="currency">
