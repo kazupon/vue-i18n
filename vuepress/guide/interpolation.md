@@ -6,13 +6,13 @@
 :new: 7.0+
 :::
 
-Sometimes, we need to localize with locale message that was included HTML tag or component. For example:
+Sometimes, we need to localize with a locale message that was included in a HTML tag or component. For example:
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-In the above message, if you use with `$t`, probably you may try to compose the following locale messages:
+In the above message, if you use `$t`, you will probably try to compose the following locale messages:
 
 ```js
 const messages = {
@@ -23,22 +23,22 @@ const messages = {
 }
 ```
 
-And in the following, you may try to implement in template:
+And your localized template may look like this:
 
 ```html
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
 ```
 
-output:
+Output:
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-This is very cumbersome, and if you configure the `<a>` tag in a locale message, there is a possibility XSS vulnerabilities due to localize with
+This is very cumbersome, and if you configure the `<a>` tag in a locale message, there is a possibility of XSS vulnerabilities due to localizing with
 `v-html="$t('term')"`.
 
-You can avoid it with using `i18n` functional component. For example:
+You can avoid it using the `i18n` functional component. For example:
 
 ```html
 <div id="app">
@@ -87,13 +87,13 @@ the following output:
 
 About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
 
-The children of `i18n` functional component is interpolated with locale message of `path` prop. In the above example, 
+The children of `i18n` functional component are interpolated with locale message of `path` prop. In the above example,
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
 is interpolated with `term` locale message.
 
-In above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their orders of appearance.
+In the above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their order of appearance.
 
 ## Slots syntax usage
 
@@ -101,7 +101,7 @@ In above example, the component interpolation follows the **list formatting**.  
 :new: 8.14+
 :::
 
-You use slots syntax with Named formatting then, It's more convenient. For example:
+It's more convenient to use the named slots syntax. For example:
 
 ```html
 <div id="app">
@@ -151,7 +151,7 @@ Outputs:
 </div>
 ```
 
-In Vue 2.6 and later,you can can use the following slots syntax in templates:
+In Vue 2.6 and later, you can can use the following slots syntax in templates:
 
 ```html
 <div id="app">
@@ -165,14 +165,14 @@ In Vue 2.6 and later,you can can use the following slots syntax in templates:
 ```
 
 :::warning Limitation
-:warning: In `i18n` component, slots porps is not supported.
+:warning: In `i18n` component, slots props are not supported.
 :::
 
 
 ## Places syntax usage
 
 :::danger Important!!
-In next major version, `place` attribute, `places` prop is deprecated. Please switch to slots syntax.
+In the next major version, the `place` and `places` props will be deprecated. Please switch to slots syntax.
 :::
 
 :::tip Support Version
@@ -180,7 +180,7 @@ In next major version, `place` attribute, `places` prop is deprecated. Please sw
 :::
 
 :::warning Notice
-:warning: In `i18n` component, text content consists of only white spaces will be omitted.
+:warning: In `i18n` component, text content consisting of only white spaces will be omitted.
 :::
 
 Named formatting is supported with the help of `place` attribute. For example:

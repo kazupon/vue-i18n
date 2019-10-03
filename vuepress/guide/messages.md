@@ -2,7 +2,7 @@
 
 ## Structure
 
-Locale Messages syntax the below:
+Locale Messages syntax below:
 
 ```typescript
 // As Flowtype definition, Locale Messages syntax like BNF annotation
@@ -14,7 +14,7 @@ type Locale = string;
 type Path = string;
 ```
 
-Based on the above syntax, You can configure the following structure Locale Messages:
+Based on the above syntax, You can configure the following Locale Messages structure:
 
 ```json
 {
@@ -39,7 +39,7 @@ Based on the above syntax, You can configure the following structure Locale Mess
 }
 ```
 
-In the above Locale Messages structure, You can translate with using below key paths.
+In the above Locale Messages structure, You can translate using below key paths.
 
 ```html
 <div id="app">
@@ -91,13 +91,13 @@ const messages = {
 }
 ```
 
-Template the below:
+Template:
 
 ```html
 <p>{{ $t('message.linked') }}</p>
 ```
 
-Output the below:
+Output:
 
 ```html
 <p>DIO: the world !!!!</p>
@@ -108,9 +108,9 @@ Output the below:
 
 A translation key of linked locale message can also have the form of `@:(message.foo.bar.baz)` in which the link to another translation key is within brackets `()`.
 
-This can be useful if the link `@:message.something` is following by period `.`, which can be a part of link but in case it should not be.
+This can be useful if the link `@:message.something` is followed by period `.`, which otherwise would be part of the link and may not need to be.
 
-Locale messages the below:
+Locale messages:
 
 ```js
 const messages = {
@@ -123,13 +123,13 @@ const messages = {
 }
 ```
 
-Template the below:
+Template:
 
 ```html
 <p>{{ $t('message.linked') }}</p>
 ```
 
-Output the below:
+Output:
 
 ```html
 <p>There's a reason, you lost, DIO.</p>

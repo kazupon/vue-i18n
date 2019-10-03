@@ -2,7 +2,7 @@
 
 ## Basic Usage
 
-If you are building Vue component or Vue application with using single file components, you can manage the locale messages `i18n` custom block.
+If you are building Vue component or Vue application using single file components, you can manage the locale messages `i18n` custom block.
 
 The following in [single file components example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
@@ -34,7 +34,7 @@ export default {
   name: 'app',
   data () {
     this.$i18n.locale = 'en';
-    return { locale: 'en' } 
+    return { locale: 'en' }
   },
   watch: {
     locale (val) {
@@ -106,7 +106,7 @@ module.exports = {
 
 [Vue CLI 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
 
-In order to do that we have to create a `vue.config.js` at the root of our project. Once done that, we have to include the following:
+In order to do that we have to create a `vue.config.js` at the root of our project. Once we have done that, we have to include the following:
 
 for vue-loader v15 or later:
 ```js
@@ -258,7 +258,7 @@ module.exports = {
 
 ## Multiple custom blocks
 
-You can be used the locale messages with multiple `i18n` custom block.
+You can use locale messages with multiple `i18n` custom blocks.
 
 ```html
 <i18n src="./common/locales.json"></i18n>
@@ -274,7 +274,7 @@ You can be used the locale messages with multiple `i18n` custom block.
 </i18n>
 ```
 
-In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale message that defined only at single file component. These locale messages will be merged as locale message of component.
+In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale message that is defined only at single file component. These locale messages will be merged as locale message of component.
 
 In this way, multiple custom blocks useful when want to be used as module.
 
