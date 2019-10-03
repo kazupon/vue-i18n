@@ -4,7 +4,7 @@ Loading all of your translation files at once is overkill and unnecessary.
 
 Lazy loading or asynchronously loading the translation files is really easy when using Webpack.
 
-Lets assume we have a project directory similar to the one bellow
+Let´s assume we have a project directory similar to the one below:
 
 ```
 our-cool-project
@@ -19,7 +19,7 @@ our-cool-project
 ---it.js
 ```
 
-The `lang` folder is where all of our translation files will reside. The `setup` folder is where our arbitrary setup files like the i18n-setup, global component inits, plugin inits and other reside.
+The `lang` folder is where all of our translation files reside. The `setup` folder is where our arbitrary setup files like the i18n-setup, global component inits, plugin inits and other reside.
 
 ```js
 //i18n-setup.js
@@ -36,7 +36,7 @@ export const i18n = new VueI18n({
   messages // set locale messages
 })
 
-const loadedLanguages = ['en'] // our default language that is preloaded 
+const loadedLanguages = ['en'] // our default language that is preloaded
 
 function setI18nLanguage (lang) {
   i18n.locale = lang
@@ -73,7 +73,7 @@ The `loadLanguageAsync` function is what we will actually use to change the lang
 
 You can learn more about the import function in the [Webpack documentation](https://webpack.js.org/guides/code-splitting/#dynamic-imports).
 
-Using the `loadLanguageAsync` function is straight forward. A common use case is inside a vue-router beforeEach hook.
+Using the `loadLanguageAsync` function is straightforward. A common use case is inside a vue-router beforeEach hook.
 
 ```js
 router.beforeEach((to, from, next) => {
