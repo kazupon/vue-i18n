@@ -2,7 +2,7 @@
 
 In general, locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance and it sets `i18n` option as root Vue instance.
 
-Therefore you can globally translate with using `$t` or `$tc` in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vue components oriented design.
+Therefore you can globally translate using `$t` or `$tc` in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vue components oriented design.
 
 Component based localization example:
 
@@ -51,7 +51,7 @@ new Vue({
 
 Template:
 
-    
+
 ```html
 <div id="app">
   <p>{{ $t("message.hello") }}</p>
@@ -73,7 +73,7 @@ Outputs the following:
 
 As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: `locale: 'ja'`).
 
-Note, that by default falling back to root locale generates two warnings in the console:
+Note that, by default, falling back to root locale generates two warnings in the console:
 
 ```console
 [vue-i18n] Value of key 'message.greeting' is not a string!
@@ -82,7 +82,7 @@ Note, that by default falling back to root locale generates two warnings in the 
 
 To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
 
-If you hope localize in the component locale, you can realize with `sync: false` and `locale` in `i18n` option.
+If you want to localize using the component locale, you can do that with `sync: false` and `locale` in the `i18n` option.
 
 
 ## Shared locale messages for components
@@ -91,7 +91,7 @@ Sometimes you may want to import shared locale messages for certain components, 
 
 You can use `sharedMessages` options of `i18n`.
 
-Common Locale Messasge example:
+Common Locale Message example:
 ```js
 export default {
   en: {
@@ -137,7 +137,7 @@ If `sharedMessages` option is specified along with the `messages` option, those 
 
 ## Translation in functional component
 
-When using a functional component, all the data (including props, children, slots, parent, etc.) is passed through `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
+When using a functional component, all data (including props, children, slots, parent, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
 
 ```html
 ...
