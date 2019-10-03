@@ -4,7 +4,7 @@
 :new: 7.3+
 :::
 
-You can translate not only with `v-t` custom directive, but also with `$t`
+You can translate not only with `v-t` custom directive, but also with the `$t`
 method.
 
 ## String syntax
@@ -94,9 +94,9 @@ Outputs:
 :new: 8.7+
 :::
 
-When `v-t` directive is applied to an element inside [`<transition>` component](https://vuejs.org/v2/api/#transition), you may notice that translated message will disappear during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in disappearing element inside `<transition>` component will be destroyed **before transition starts**. This behavior may result in content flickering on short animations, but most noticable on long transitions.
+When `v-t` directive is applied to an element inside [`<transition>` component](https://vuejs.org/v2/api/#transition), you may notice that the translated message disappears during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in the disappearing element inside the `<transition>` component will be destroyed **before the transition starts**. This behavior may result in content flickering on short animations, but is most noticable on long transitions.
 
-To make sure directive content will stay un-touched during transition just add [`.preserve` modifier](../api/#v-t) to `v-t` directive defintion.
+To make sure directive content stays un-touched during a transition, just add the [`.preserve` modifier](../api/#v-t) to the `v-t` directive defintion.
 
 Javascript:
 
@@ -123,7 +123,7 @@ Templates:
 </div>
 ```
 
-It is also possible to set global setting on `VueI18n` instance itself, which will have effect on all `v-t` directives without modifier.
+It is also possible to set global settings on the `VueI18n` instance itself, which will affect all `v-t` directives without modifier.
 
 Javascript:
 
@@ -157,7 +157,7 @@ About the above examples, see the [example](https://github.com/kazupon/vue-i18n/
 
 ### `$t`
 
-`$t` is extended Vue instance method. It has the following pros and cons:
+`$t` is an extended Vue instance method. It has the following pros and cons:
 
 #### Pros
 
@@ -165,7 +165,7 @@ You can **flexibly** use mustash syntax `{{}}` in templates and also computed pr
 
 #### Cons
 
-`$t` is executed **every time** when re-render occurs, so it does have a translation costs.
+`$t` is executed **every time** when re-render occurs, so it does have translation costs.
 
 ### `v-t`
 
@@ -179,4 +179,4 @@ Therefore it's possible to make **more performance optimizations**.
 
 #### Cons
 
-`v-t` can not be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of the `createRenderer` function.
+`v-t` cannot be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of the `createRenderer` function.
