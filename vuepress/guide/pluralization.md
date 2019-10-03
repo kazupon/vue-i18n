@@ -15,7 +15,7 @@ const messages = {
 }
 ```
 
-Template the below:
+Template below:
 
 ```html
 <p>{{ $tc('car', 1) }}</p>
@@ -26,7 +26,7 @@ Template the below:
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
 ```
 
-Output the below:
+Output below:
 
 ```html
 <p>car</p>
@@ -54,7 +54,7 @@ const messages = {
 }
 ```
 
-Template the below:
+Template below:
 
 ```html
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
@@ -65,7 +65,7 @@ Template the below:
 <p>{{ $tc('banana', 100, { n: 'too much' }) }}</p>
 ```
 
-Output the below:
+Output below:
 
 ```html
 <p>10 apples</p>
