@@ -44,6 +44,7 @@ declare type NumberFormatOptions = {
 };
 declare type NumberFormat = { [key: string]: NumberFormatOptions };
 declare type NumberFormats = { [key: Locale]: NumberFormat };
+declare type Modifiers = { [key: string]: (str : string) => string };
 
 declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
@@ -69,6 +70,7 @@ declare type I18nOptions = {
   numberFormats?: NumberFormats,
   formatter?: Formatter,
   missing?: MissingHandler,
+  modifiers?: Modifiers,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
   formatFallbackMessages?: boolean,

@@ -23,6 +23,7 @@ export default {
       linkCaseLower: 'Please provide @.lower:message.homeAddress',
       linkCaseUpper: '@.upper:message.homeAddress',
       linkCaseUnknown: '@.unknown:message.homeAddress',
+      linkCaseCustom: '@.custom:message.homeAddress',
       homeAddress: 'Home address',
       circular1: 'Foo @:message.circular2',
       circular2: 'Bar @:message.circular3',

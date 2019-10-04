@@ -8,7 +8,10 @@ describe('basic', () => {
     i18n = new VueI18n({
       locale: 'en',
       fallbackLocale: 'en',
-      messages
+      messages,
+      modifiers: {
+        custom: str => str.replace(/[aeiou]/g, 'x')
+      }
     })
   })
 
@@ -56,6 +59,10 @@ describe('basic', () => {
 
       it('should translate link without formatting if modifier is not known.', () => {
         assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'Home address')
+      })
+
+      it('should render link with custom formatting.', () => {
+        assert.strictEqual(i18n.t('message.linkCaseCustom'), 'Hxmx xddrxss')
       })
     })
 

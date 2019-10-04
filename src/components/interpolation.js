@@ -54,7 +54,7 @@ function onlyHasDefaultPlace (params) {
 
 function useLegacyPlaces (children, places) {
   const params = places ? createParamsFromPlaces(places) : {}
-  
+
   if (!children) { return params }
 
   // Filter empty text nodes
