@@ -103,6 +103,57 @@ Output:
 <p>DIO: the world !!!!</p>
 ```
 
+### Formatting linked locale messages
+
+If the language distinguish cases of character, you may need control the case of the linked locale messages.
+Linked messages can be formatted with modifier  `@.modifier:key`
+
+The below modifiers are available currently.
+
+* `upper`: Uppercase all characters in the linked message.
+* `lower`: Lowercase all characters in the linked message.
+
+Locale messages the below:
+
+```javascript
+const messages = {
+  en: {
+    message: {
+      homeAddress: 'Home address',
+      missingHomeAddress: 'Please provide @.lower:message.homeAddress'
+    }
+  }
+}
+```
+
+```html
+<label>{{ $t('message.missingHomeAddress') }}</label>
+
+<p class="error">{{ $t('message.missingHomeAddress') }}</p>
+```
+
+Output the below:
+
+```html
+<label>Home address</label>
+
+<p class="error">Please provide home address</p>
+```
+
+You can add modifiers or overwrite the existing ones passing the `modifiers` options to the `VueI18n` constructor.
+
+```javascript
+const i18n = new VueI18n({
+  locale: 'en',
+  messages: {
+    // ...
+  },
+  modifiers: {
+    snakeCase: (str) => str.split(' ').join('-')
+  }
+})
+```
+
 
 ### Grouping by brackets
 
