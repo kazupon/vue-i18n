@@ -22,7 +22,7 @@ const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
 const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
-const formatters = {
+const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
   'lower': str => str.toLocaleLowerCase()
 }
@@ -36,6 +36,7 @@ export default class VueI18n {
 
   _vm: any
   _formatter: Formatter
+  _modifiers: Modifiers
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
@@ -71,6 +72,7 @@ export default class VueI18n {
 
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
+    this._modifiers = options.modifiers || {}
     this._missing = options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
@@ -418,8 +420,11 @@ export default class VueI18n {
         locale, linkPlaceholder, translated, host,
         Array.isArray(values) ? values : [values]
       )
-      if (formatters.hasOwnProperty(formatterName)) {
-        translated = formatters[formatterName](translated)
+
+      if (this._modifiers.hasOwnProperty(formatterName)) {
+        translated = this._modifiers[formatterName](translated)
+      } else if (defaultModifiers.hasOwnProperty(formatterName)) {
+        translated = defaultModifiers[formatterName](translated)
       }
 
       visitedLinkStack.pop()

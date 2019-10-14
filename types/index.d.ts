@@ -68,6 +68,7 @@ declare namespace VueI18n {
     */
     [lang: string]: (choice: number, choicesLength: number) => number;
   };
+  type Modifiers = { [key: string]: (str : string) => string };
 
   type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 
@@ -98,6 +99,7 @@ declare namespace VueI18n {
     dateTimeFormats?: DateTimeFormats;
     numberFormats?: NumberFormats;
     formatter?: Formatter;
+    modifiers?: Modifiers,
     missing?: MissingHandler;
     fallbackRoot?: boolean;
     formatFallbackMessages?: boolean;

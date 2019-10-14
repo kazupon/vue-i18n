@@ -229,6 +229,16 @@ The list of available locales in `messages` in lexical order.
 
 The formatter that implemented with `Formatter` interface.
 
+#### modifiers
+
+> :new: 8.15.0+
+
+  * **Type:** `Modifier`
+
+  * **Default:** `lower` and `upper` modifiers
+
+Modifiers functions for linked messages
+
 #### missing
 
   * **Type:** `MissingHandler`

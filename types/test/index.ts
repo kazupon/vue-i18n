@@ -58,6 +58,9 @@ const i18n = new VueI18n({
       return [message];
     },
   },
+  modifiers: {
+    foo: (str) => 'bar'
+  },
   missing(locale, key, vm) {
   },
   fallbackRoot: false,
