@@ -107,8 +107,12 @@ It's more convenient to use the named slots syntax. For example:
 <div id="app">
   <!-- ... -->
   <i18n path="info" tag="p">
-    <span slot="limit">{{ changeLimit }}</span>
-    <a slot="action" :href="changeUrl">{{ $t('change') }}</a>
+    <template v-slot:limit>
+      <span>{{ changeLimit }}</span>
+    </template>
+    <template v-slot:action>
+      <a :href="changeUrl">{{ $t('change') }}</a>
+    </template>
   </i18n>
   <!-- ... -->
 </div>
@@ -157,8 +161,12 @@ In Vue 2.6 and later, you can can use the following slots syntax in templates:
 <div id="app">
   <!-- ... -->
   <i18n path="info" tag="p">
-    <span v-slot:limit>{{ changeLimit }}</span>
-    <a v-slot:action :href="changeUrl">{{ $t('change') }}</a>
+    <template #limit>
+      <span>{{ changeLimit }}</span>
+    </template>
+    <template #action>
+      <a :href="changeUrl">{{ $t('change') }}</a>
+    </template>
   </i18n>
   <!-- ... -->
 </div>
