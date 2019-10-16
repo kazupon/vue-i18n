@@ -1,3 +1,13 @@
+<a name="8.15.0"></a>
+# [8.15.0](https://github.com/kazupon/vue-i18n/compare/v8.14.1...v8.15.0) (2019-10-16)
+
+
+### :star: New Features
+
+* Add constructor option for custom modifiers ([#724](https://github.com/kazupon/vue-i18n/issues/724)) by [@epaezrubio](https://github.com/epaezrubio) ([3217212](https://github.com/kazupon/vue-i18n/commit/3217212)), closes [#724](https://github.com/kazupon/vue-i18n/issues/724)
+
+
+
 <a name="8.14.1"></a>
 ## [8.14.1](https://github.com/kazupon/vue-i18n/compare/v8.14.0...v8.14.1) (2019-09-12)
 
