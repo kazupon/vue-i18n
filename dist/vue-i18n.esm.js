@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.14.1 
+ * vue-i18n v8.15.0 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -401,7 +401,7 @@ function onlyHasDefaultPlace (params) {
 
 function useLegacyPlaces (children, places) {
   var params = places ? createParamsFromPlaces(places) : {};
-  
+
   if (!children) { return params }
 
   // Filter empty text nodes
@@ -1082,7 +1082,7 @@ var htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/;
 var linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g;
 var linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/;
 var bracketsMatcher = /[()]/g;
-var formatters = {
+var defaultModifiers = {
   'upper': function (str) { return str.toLocaleUpperCase(); },
   'lower': function (str) { return str.toLocaleLowerCase(); }
 };
@@ -1109,6 +1109,7 @@ var VueI18n = function VueI18n (options) {
 
   this._vm = null;
   this._formatter = options.formatter || defaultFormatter;
+  this._modifiers = options.modifiers || {};
   this._missing = options.missing || null;
   this._root = options.root || null;
   this._sync = options.sync === undefined ? true : !!options.sync;
@@ -1455,8 +1456,11 @@ VueI18n.prototype._link = function _link (
       locale, linkPlaceholder, translated, host,
       Array.isArray(values) ? values : [values]
     );
-    if (formatters.hasOwnProperty(formatterName)) {
-      translated = formatters[formatterName](translated);
+
+    if (this._modifiers.hasOwnProperty(formatterName)) {
+      translated = this._modifiers[formatterName](translated);
+    } else if (defaultModifiers.hasOwnProperty(formatterName)) {
+      translated = defaultModifiers[formatterName](translated);
     }
 
     visitedLinkStack.pop();
@@ -1932,6 +1936,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.14.1';
+VueI18n.version = '8.15.0';
 
 export default VueI18n;
