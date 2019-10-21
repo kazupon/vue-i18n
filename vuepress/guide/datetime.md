@@ -10,7 +10,7 @@ DateTime formats the below:
 
 ```js
 const dateTimeFormats = {
-  'en-US': {
+  'en-us': {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
@@ -19,7 +19,7 @@ const dateTimeFormats = {
       weekday: 'short', hour: 'numeric', minute: 'numeric'
     }
   },
-  'ja-JP': {
+  'ja-jp': {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
