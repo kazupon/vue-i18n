@@ -127,7 +127,7 @@ const messages = {
 ```
 
 ```html
-<label>{{ $t('message.missingHomeAddress') }}</label>
+<label>{{ $t('message.homeAddress') }}</label>
 
 <p class="error">{{ $t('message.missingHomeAddress') }}</p>
 ```
