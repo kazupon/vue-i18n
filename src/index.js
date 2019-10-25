@@ -68,14 +68,13 @@ export default class VueI18n {
     const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
-    const untranslated: String = options.prefix !== undefined ? options.prefix.untranslated || '' : ''
-    const translated: String = options.prefix !== undefined ? options.prefix.translated || '' : ''
-    const messages: LocaleMessages = translated !== '' ? this.createPrefixedMessages(translated, options.messages || {}) : options.messages || {}
+    const prefix: Object = this.prefixedConstructor(options.prefix)
+    const messages: LocaleMessages = this.createPrefixedMessages(prefix, options.messages)
 
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
     this._modifiers = options.modifiers || {}
-    this._missing = untranslated !== '' ? this.createPrefixedMissingHandler(untranslated) : options.missing || null
+    this._missing = options.missing === undefined ? this.createPrefixedMissingHandler(prefix) : options.missing
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
     this._fallbackRoot = options.fallbackRoot === undefined
@@ -197,13 +196,46 @@ export default class VueI18n {
     remove(this._dataListeners, vm)
   }
 
-  createPrefixedMessages (prefix: String, messages: Object): Function {
-    return JSON.parse(JSON.stringify(messages).replace(/":"/g, `":"${prefix} `).replace(/\|/g, `| ${prefix} `))
+  prefixedConstructor (prefix: any): Object {
+    const prefix_  = typeof prefix === 'object'
+    if (prefix_) {
+      return {
+        active: prefix.active !== undefined ? prefix.active : true,
+        untranslated: prefix.untranslated !== undefined ? prefix.untranslated : '🔥',
+        translated: prefix.translated !== undefined ? prefix.translated : '✅'
+      }
+    } else {
+      if (prefix) {
+        return {
+          active: true,
+          untranslated: '🔥',
+          translated: '✅'
+        }
+      } else {
+        return {
+          active: false,
+          untranslated: '',
+          translated: ''
+        }
+      }
+    }
   }
 
-  createPrefixedMissingHandler (prefix: String): Function {
-    return (locale, key) => {
-      return `${prefix} ${key}`
+  createPrefixedMessages (prefix: String, messages: Object): Object {
+    if (!prefix.active) {
+      return messages || {}
+    } else {
+      return JSON.parse(JSON.stringify(messages).replace(/":"/g, `":"${prefix.translated} `).replace(/\|/g, `| ${prefix.translated} `))
+    }
+  }
+
+  createPrefixedMissingHandler (prefix: Object): any {
+    if (!prefix.active) {
+      return null
+    } else {
+      return (locale, key) => {
+        return `${prefix.untranslated} ${key}`
+      }
     }
   }
 
