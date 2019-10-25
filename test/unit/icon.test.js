@@ -7,12 +7,11 @@ describe('icons', () => {
       locale: 'en',
       fallbackLocale: 'en',
       messages,
-      icons: true,
-      modifiers: {
-        custom: str => str.replace(/[aeiou]/g, 'x')
+      prefix: {
+        translated: '✅',
+        untranslated: '🔥'
       }
     })
-    i18n.locale = 'icon'
   })
 
   describe('i18n#t', () => {

@@ -66,17 +66,16 @@ export default class VueI18n {
 
     const locale: Locale = options.locale || 'en-US'
     const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
-    const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
-    const icon = options.icons || false
-
-    if (icon) { messages.icon = messages[fallbackLocale] }
+    const untranslated: String = options.prefix !== undefined ? options.prefix.untranslated || '' : ''
+    const translated: String = options.prefix !== undefined ? options.prefix.translated || '' : ''
+    const messages: LocaleMessages = translated !== '' ? this.createPrefixedMessages(translated, options.messages || {}) : options.messages || {}
 
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
     this._modifiers = options.modifiers || {}
-    this._missing = options.missing || null
+    this._missing = untranslated !== '' ? this.createPrefixedMissingHandler(untranslated) : options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
     this._fallbackRoot = options.fallbackRoot === undefined
@@ -198,6 +197,16 @@ export default class VueI18n {
     remove(this._dataListeners, vm)
   }
 
+  createPrefixedMessages (prefix: String, messages: Object): Function {
+    return JSON.parse(JSON.stringify(messages).replace(/":"/g, `":"${prefix} `).replace(/\|/g, `| ${prefix} `))
+  }
+
+  createPrefixedMissingHandler (prefix: String): Function {
+    return (locale, key) => {
+      return `${prefix} ${key}`
+    }
+  }
+
   watchI18nData (): Function {
     const self = this
     return this._vm.$watch('$data', () => {
@@ -289,17 +298,9 @@ export default class VueI18n {
 
     if (this._formatFallbackMessages) {
       const parsedArgs = parseArgs(...values)
-      if (locale === 'icon') {
-        return `🔥 ${this._render(key, 'string', parsedArgs.params, key)}`
-      } else {
-        return this._render(key, 'string', parsedArgs.params, key)
-      }
+      return this._render(key, 'string', parsedArgs.params, key)
     } else {
-      if (locale === 'icon') {
-        return `🔥 ${key}`
-      } else {
-        return key
-      }
+      return key
     }
   }
 
@@ -367,11 +368,8 @@ export default class VueI18n {
     if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
-    if (locale === 'icon') {
-      return this._render(`✅ ${ret}`, interpolateMode, values, key)
-    } else {
-      return this._render(ret, interpolateMode, values, key)
-    }
+    
+    return this._render(ret, interpolateMode, values, key)
   }
 
   _link (
