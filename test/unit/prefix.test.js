@@ -1,7 +1,7 @@
 import messages from './fixture/index'
 
 describe('prefix', () => {
-  window.i18n = null
+  let i18n
   const defaultTranslated = '✅'
   const defaultUntranslated = '🔥'
   const translated = 'translated'
