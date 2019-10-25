@@ -69,6 +69,9 @@ export default class VueI18n {
     const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
+    const icon = options.icons || false
+
+    if (icon) { messages.icon = messages[fallbackLocale] }
 
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
@@ -286,9 +289,17 @@ export default class VueI18n {
 
     if (this._formatFallbackMessages) {
       const parsedArgs = parseArgs(...values)
-      return this._render(key, 'string', parsedArgs.params, key)
+      if (locale === 'icon') {
+        return `🔥 ${this._render(key, 'string', parsedArgs.params, key)}`
+      } else {
+        return this._render(key, 'string', parsedArgs.params, key)
+      }
     } else {
-      return key
+      if (locale === 'icon') {
+        return `🔥 ${key}`
+      } else {
+        return key
+      }
     }
   }
 
@@ -356,8 +367,11 @@ export default class VueI18n {
     if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
-
-    return this._render(ret, interpolateMode, values, key)
+    if (locale === 'icon') {
+      return this._render(`✅ ${ret}`, interpolateMode, values, key)
+    } else {
+      return this._render(ret, interpolateMode, values, key)
+    }
   }
 
   _link (
