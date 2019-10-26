@@ -74,7 +74,7 @@ export default class VueI18n {
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
     this._modifiers = options.modifiers || {}
-    this._missing = options.missing === undefined ? this.createPrefixedMissingHandler(prefix) : options.missing
+    this._missing = prefix.active ? this.createPrefixedMissingHandler(prefix, options.missing) : options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
     this._fallbackRoot = options.fallbackRoot === undefined
@@ -229,13 +229,20 @@ export default class VueI18n {
     }
   }
 
-  createPrefixedMissingHandler (prefix: Object): any {
+  createPrefixedMissingHandler (prefix: Object, missing: Function): any {
     if (!prefix.active) {
       return null
     } else {
-      return (locale, key) => {
-        return `${prefix.untranslated} ${key}`
+      if (missing === undefined) {
+        return (locale, key) => {
+          return `${prefix.untranslated} ${key}`
+        }
+      } else {
+        return (locale, key, vm) => {
+          return `${prefix.untranslated} ${missing(locale, key, vm)}`
+        }
       }
+      
     }
   }
 

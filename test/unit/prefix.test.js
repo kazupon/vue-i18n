@@ -125,4 +125,24 @@ describe('prefix', () => {
       })
     })
   })
+
+  describe('Missing handler and prefix', () => {
+    beforeEach(() => {
+      i18n = new VueI18n({
+        locale: 'en',
+        fallbackLocale: 'en',
+        messages,
+        prefix: true,
+        missing: (locale, key, vm) => {
+          return 'fixed text'
+        }
+      })
+    })
+
+    describe('i18n#t', () => {
+      it(`should set an ${defaultUntranslated} static missing word`, () => {
+        assert.strictEqual(i18n.t('message.noTranslationFound'), `${defaultUntranslated} fixed text`)
+      })
+    })
+  })
 })
