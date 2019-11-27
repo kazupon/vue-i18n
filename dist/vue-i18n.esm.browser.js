@@ -204,7 +204,7 @@ var mixin = {
             });
           } catch (e) {
             {
-              warn(`Cannot parse locale messages via custom blocks.`, e);
+              error(`Cannot parse locale messages via custom blocks.`, e);
             }
           }
         }
@@ -1887,6 +1887,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.0';
+VueI18n.version = '8.15.1';
 
 export default VueI18n;

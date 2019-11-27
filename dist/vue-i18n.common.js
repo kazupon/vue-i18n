@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.15.0 
+ * vue-i18n v8.15.1 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -230,7 +230,7 @@ var mixin = {
             });
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
-              warn("Cannot parse locale messages via custom blocks.", e);
+              error("Cannot parse locale messages via custom blocks.", e);
             }
           }
         }
@@ -1938,6 +1938,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.0';
+VueI18n.version = '8.15.1';
 
 module.exports = VueI18n;

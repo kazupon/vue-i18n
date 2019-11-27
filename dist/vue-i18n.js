@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.15.0 
+ * vue-i18n v8.15.1 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -234,7 +234,7 @@
               });
             } catch (e) {
               {
-                warn("Cannot parse locale messages via custom blocks.", e);
+                error("Cannot parse locale messages via custom blocks.", e);
               }
             }
           }
@@ -1942,7 +1942,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.15.0';
+  VueI18n.version = '8.15.1';
 
   return VueI18n;
 
