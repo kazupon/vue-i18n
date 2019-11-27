@@ -1,3 +1,13 @@
+<a name="8.15.1"></a>
+## [8.15.1](https://github.com/kazupon/vue-i18n/compare/v8.15.0...v8.15.1) (2019-11-27)
+
+
+### :zap: Improvements
+
+* **mixin:** change to custom blocks parse error ([a9858be](https://github.com/kazupon/vue-i18n/commit/a9858be))
+
+
+
 <a name="8.15.0"></a>
 # [8.15.0](https://github.com/kazupon/vue-i18n/compare/v8.14.1...v8.15.0) (2019-10-16)
 
