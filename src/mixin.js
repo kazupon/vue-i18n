@@ -1,7 +1,7 @@
 /* @flow */
 
 import VueI18n from './index'
-import { isPlainObject, warn, merge } from './util'
+import { isPlainObject, warn, error, merge } from './util'
 
 export default {
   beforeCreate (): void {
@@ -22,7 +22,7 @@ export default {
             })
           } catch (e) {
             if (process.env.NODE_ENV !== 'production') {
-              warn(`Cannot parse locale messages via custom blocks.`, e)
+              error(`Cannot parse locale messages via custom blocks.`, e)
             }
           }
         }
