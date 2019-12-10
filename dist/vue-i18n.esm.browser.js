@@ -15,7 +15,8 @@ const numberFormatKeys = [
   'minimumSignificantDigits',
   'maximumSignificantDigits',
   'localeMatcher',
-  'formatMatcher'
+  'formatMatcher',
+  'unit'
 ];
 
 /**

@@ -26,7 +26,8 @@
     'minimumSignificantDigits',
     'maximumSignificantDigits',
     'localeMatcher',
-    'formatMatcher'
+    'formatMatcher',
+    'unit'
   ];
 
   /**
