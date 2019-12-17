@@ -79,4 +79,20 @@ describe('message', () => {
       assert.deepEqual({ foo: 'bar', bar: 'foo' }, i18n.getLocaleMessage('en'))
     })
   })
+
+  it('Should be merged and notified if the target is empty', (done) => {
+    const i18n = new VueI18n({
+      locale: 'ru',
+      messages: {
+        ru: {}
+      }
+    })
+    const uw = i18n._vm.$watch('messages.ru.foo', (newVal, oldVal, o) => {
+      assert.equal(newVal, 'бар');
+      uw();
+      done();
+    });
+    i18n.mergeLocaleMessage('ru', { foo: 'бар' })
+    assert.deepEqual({ foo: 'бар' }, i18n.getLocaleMessage('ru'))
+  })
 })
