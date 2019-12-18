@@ -1,3 +1,13 @@
+<a name="8.15.3"></a>
+## [8.15.3](https://github.com/kazupon/vue-i18n/compare/v8.15.2...v8.15.3) (2019-12-18)
+
+
+### :zap: Improvements
+
+* **index:** fix mergeLocaleMessage. add changes notification on merging with an empty target object ([#752](https://github.com/kazupon/vue-i18n/issues/752)) by [@jekill](https://github.com/jekill) ([048eac5](https://github.com/kazupon/vue-i18n/commit/048eac5)), closes [#752](https://github.com/kazupon/vue-i18n/issues/752)
+
+
+
 <a name="8.15.2"></a>
 ## [8.15.2](https://github.com/kazupon/vue-i18n/compare/v8.15.1...v8.15.2) (2019-12-18)
 
