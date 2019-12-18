@@ -1627,7 +1627,7 @@ class VueI18n {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message);
       if (this._warnHtmlInMessage === 'error') { return }
     }
-    this._vm.$set(this._vm.messages, locale, merge(this._vm.messages[locale] || {}, message));
+    this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message));
   }
 
   getDateTimeFormat (locale) {
@@ -1888,6 +1888,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.2';
+VueI18n.version = '8.15.3';
 
 export default VueI18n;
