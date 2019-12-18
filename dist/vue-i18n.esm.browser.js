@@ -15,7 +15,8 @@ const numberFormatKeys = [
   'minimumSignificantDigits',
   'maximumSignificantDigits',
   'localeMatcher',
-  'formatMatcher'
+  'formatMatcher',
+  'unit'
 ];
 
 /**
@@ -1887,6 +1888,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.1';
+VueI18n.version = '8.15.2';
 
 export default VueI18n;

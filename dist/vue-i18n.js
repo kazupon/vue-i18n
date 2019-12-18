@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.15.1 
+ * vue-i18n v8.15.2 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -26,7 +26,8 @@
     'minimumSignificantDigits',
     'maximumSignificantDigits',
     'localeMatcher',
-    'formatMatcher'
+    'formatMatcher',
+    'unit'
   ];
 
   /**
@@ -1942,7 +1943,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.15.1';
+  VueI18n.version = '8.15.2';
 
   return VueI18n;
 
