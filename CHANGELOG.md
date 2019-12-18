@@ -1,3 +1,13 @@
+<a name="8.15.2"></a>
+## [8.15.2](https://github.com/kazupon/vue-i18n/compare/v8.15.1...v8.15.2) (2019-12-18)
+
+
+### :bug: Bug Fixes
+
+* **index:** Fix exception when using unit number formatting by [@simonjodet](https://github.com/simonjodet) ([194b801](https://github.com/kazupon/vue-i18n/commit/194b801)), closes [#750](https://github.com/kazupon/vue-i18n/issues/750) [#751](https://github.com/kazupon/vue-i18n/issues/751)
+
+
+
 <a name="8.15.1"></a>
 ## [8.15.1](https://github.com/kazupon/vue-i18n/compare/v8.15.0...v8.15.1) (2019-11-27)
 
