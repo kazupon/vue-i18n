@@ -62,7 +62,7 @@ Template below:
 
 <p>{{ $tc('banana', 1, { n: 1 }) }}</p>
 <p>{{ $tc('banana', 1) }}</p>
-<p>{{ $tc('banana', 100, { n: 'too much' }) }}</p>
+<p>{{ $tc('banana', 100, { n: 'too many' }) }}</p>
 ```
 
 Output below:
@@ -73,7 +73,7 @@ Output below:
 
 <p>1 banana</p>
 <p>1 banana</p>
-<p>too much bananas</p>
+<p>too many bananas</p>
 ```
 
 
