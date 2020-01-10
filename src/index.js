@@ -537,7 +537,7 @@ export default class VueI18n {
       choice = 1
     }
 
-    const predefined = { 'count': choice, 'n': choice }
+    const x = { 'count': choice, 'n': choice }
     const parsedArgs = parseArgs(...values)
     parsedArgs.params = Object.assign(predefined, parsedArgs.params)
     values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
@@ -593,6 +593,15 @@ export default class VueI18n {
 
   te (key: Path, locale?: Locale): boolean {
     return this._te(key, this.locale, this._getMessages(), locale)
+  }
+
+  _tb (key: Path, locale: Locale, messages: LocaleMessages, ...args: any): TranslateResult {
+    const _locale: Locale = parseArgs(...args).locale || locale
+    return ''
+  }
+
+  tb (key: Path, locale?: Locale): TranslateResult {
+    return this._tb(key, this.locale, this._getMessages(), locale)
   }
 
   getLocaleMessage (locale: Locale): LocaleMessageObject {
