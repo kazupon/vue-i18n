@@ -537,7 +537,7 @@ export default class VueI18n {
       choice = 1
     }
 
-    const x = { 'count': choice, 'n': choice }
+    const predefined = { 'count': choice, 'n': choice }
     const parsedArgs = parseArgs(...values)
     parsedArgs.params = Object.assign(predefined, parsedArgs.params)
     values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
