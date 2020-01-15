@@ -387,6 +387,53 @@ describe('basic', () => {
     })
   })
 
+  describe('i18n#tb', () => {
+    describe('no value passed', () => {
+      it('should be second choice', () => {
+        assert.strictEqual(i18n.tb('plurals.validity'), 'invalid')
+      })
+    })
+
+    describe('falsey value passed', () => {
+      describe('en locale', () => {
+        it('should return second choice', () => {
+          const falseyValues = [undefined, null, false]
+          falseyValues.forEach(falseyValue => {
+            assert.strictEqual(i18n.tb('plurals.validity', falseyValue), 'invalid')
+          })
+        })
+      })
+    })
+
+    describe('true value passed', () => {
+      describe('ja locale', () => {
+        it('should return first choice', () => {
+          assert.strictEqual(i18n.tb('plurals.validity', true, 'ja'), '有効')
+        })
+      })
+    })
+
+    describe('key argument', () => {
+      describe('not specify', () => {
+        it('should return empty string', () => {
+          assert.strictEqual(i18n.tb(), '')
+        })
+      })
+
+      describe('empty string', () => {
+        it('should return empty string', () => {
+          assert.strictEqual(i18n.tb(''), '')
+        })
+      })
+
+      describe('not regist key', () => {
+        it('should return key string', () => {
+          assert.strictEqual(i18n.tb('foo.bar'), 'foo.bar')
+        })
+      })
+    })
+  })
+
   describe('i18n#te', () => {
     describe('existing key', () => {
       it('should return true', () => {
