@@ -600,7 +600,7 @@ export default class VueI18n {
     _locale: Locale,
     messages: LocaleMessages,
     flag?: boolean,
-    ...values: any): TranslateResult {
+    ...values: any): any {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)

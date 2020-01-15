@@ -20,7 +20,7 @@ export default function extend (Vue: any): void {
 
   Vue.prototype.$tb = function (key: Path, flag?: boolean, ...values: any): TranslateResult {
     const i18n = this.$i18n
-    return i18n._tb(key, i18n.locale, i18n.__getMessages(), flag, values)
+    return i18n._tb(key, i18n.locale, i18n._getMessages(), flag, values)
   }
 
   Vue.prototype.$te = function (key: Path, locale?: Locale): boolean {
