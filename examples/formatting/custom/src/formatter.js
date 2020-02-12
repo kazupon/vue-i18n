@@ -7,7 +7,7 @@ export default class CustomFormatter {
     this._caches = Object.create(null)
   }
 
-  interpolate (message, values, path) {
+  interpolate (message, values) {
     let fn = this._caches[message]
     if (!fn) {
       fn = this._formatter.compile(message, this._locale)
