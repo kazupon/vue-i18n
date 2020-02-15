@@ -106,6 +106,7 @@ It is possible to specify multiple scoped slots at the same time:
 
 ```html
 <i18n-n :value="1234" :format="{ key: 'currency', currency: 'EUR' }">
+  <span v-slot:currency="slotProps" styles="color: green">{{ slotProps.currency }}</span>
   <span v-slot:integer="slotProps" styles="font-weight: bold">{{ slotProps.integer }}</span>
   <span v-slot:group="slotProps" styles="font-weight: bold">{{ slotProps.group }}</span>
   <span v-slot:fraction="slotProps" styles="font-size: small">{{ slotProps.fraction }}</span>
@@ -116,7 +117,7 @@ It is possible to specify multiple scoped slots at the same time:
 
 ```html
 <span>
-  €
+  <span styles="color: green">€</span>
   <span styles="font-weight: bold">1</span>
   <span styles="font-weight: bold">,</span>
   <span styles="font-weight: bold">234</span>

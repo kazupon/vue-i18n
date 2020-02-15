@@ -58,7 +58,7 @@ const messages = {
 
 <p>{{ $tc('banana', 1, { n: 1 }) }}</p>
 <p>{{ $tc('banana', 1) }}</p>
-<p>{{ $tc('banana', 100, { n: 'too much' }) }}</p>
+<p>{{ $tc('banana', 100, { n: 'too many' }) }}</p>
 ```
 
 输出如下：
@@ -69,7 +69,7 @@ const messages = {
 
 <p>1 banana</p>
 <p>1 banana</p>
-<p>too much bananas</p>
+<p>too many bananas</p>
 ```
 
 
