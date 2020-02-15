@@ -4453,9 +4453,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 ecstatic@^3.0.0:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/ecstatic/-/ecstatic-3.3.1.tgz#b15b5b036c2233defc78d7bacbd8765226c95577"
-  integrity sha512-/rrctvxZ78HMI/tPIsqdvFKHHscxR3IJuKrZI2ZoUgkt2SiufyLFBmcco+aqQBIu6P1qBsUNG3drAAGLx80vTQ==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/ecstatic/-/ecstatic-3.3.2.tgz#6d1dd49814d00594682c652adb66076a69d46c48"
+  integrity sha512-fLf9l1hnwrHI2xn9mEDT7KIi22UDqA2jaCwyCbSUJh9a1V+LEUSL/JO/6TIz/QyuBURWUHrFL5Kg2TtO1bkkog==
   dependencies:
     he "^1.1.1"
     mime "^1.6.0"
@@ -5871,9 +5871,9 @@ handle-thing@^2.0.0:
   integrity sha512-d4sze1JNC454Wdo2fkuyzCr6aHcbL6PGGuFAz0Li/NcOm1tCHGnWDRmJP85dh9IhQErTc2svWFEX5xHIOo//kQ==
 
 handlebars@^4.0.1, handlebars@^4.0.2:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
-  integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.2.tgz#01127b3840156a0927058779482031afe0e730d7"
+  integrity sha512-4PwqDL2laXtTWZghzzCtunQUTLbo31pcCJrd/B/9JP8XbhVzpS5ZXuKqlOzsd1rtcaLo4KqAn8nl8mkknS4MHw==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
@@ -11562,9 +11562,9 @@ uglify-js@3.4.x:
     source-map "~0.6.1"
 
 uglify-js@^3.1.4:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.2.tgz#cb1a601e67536e9ed094a92dd1e333459643d3f9"
-  integrity sha512-uhRwZcANNWVLrxLfNFEdltoPNhECUR3lc+UdJoG9CBpMcSnKyWA94tc3eAujB1GcMY5Uwq8ZMp4qWpxWYDQmaA==
+  version "3.7.5"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.5.tgz#278c7c24927ac5a32d3336fc68fd4ae1177a486a"
+  integrity sha512-GFZ3EXRptKGvb/C1Sq6nO1iI7AGcjyqmIyOw0DrD0675e+NNbGO72xmMM2iEBdFbxaTLo70NbjM/Wy54uZIlsg==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"

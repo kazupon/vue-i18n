@@ -54,7 +54,7 @@ It is ofcourse fine to use non-English language, when you open a PR to translate
 
 ### Work Step Example
 - Fork the repository from [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n) !
-- Create your topic branch from `dev`: `git branch my-new-topic origin/dev`
+- Create your topic branch from `v8.x`: `git branch my-new-topic origin/dev`
 - Add codes and pass tests !
 - Commit your changes: `git commit -am 'Add some topic'`
 - Push to the branch: `git push origin my-new-topic`
