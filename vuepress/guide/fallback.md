@@ -58,6 +58,8 @@ const messages = {
 
 This way the translations can be used in a very natural way, automatically falling back to the source language if the translated string cannot be found:
 
+*ps: `fallbackRoot` have higher priority than `formatFallbackMessages`*
+
 ```html
 <p>{{ $t('Hello world') }}</p>
 ```
