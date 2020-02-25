@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v8.15.3 
- * (c) 2019 kazuya kawaguchi
+ * vue-i18n v8.15.4 
+ * (c) 2020 kazuya kawaguchi
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -1310,7 +1310,7 @@
   VueI18n.prototype._getDateTimeFormats = function _getDateTimeFormats () { return this._vm.dateTimeFormats };
   VueI18n.prototype._getNumberFormats = function _getNumberFormats () { return this._vm.numberFormats };
 
-  VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm, values) {
+  VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm, values, interpolateMode) {
     if (!isNull(result)) { return result }
     if (this._missing) {
       var missingRet = this._missing.apply(null, [locale, key, vm, values]);
@@ -1328,7 +1328,7 @@
 
     if (this._formatFallbackMessages) {
       var parsedArgs = parseArgs.apply(void 0, values);
-      return this._render(key, 'string', parsedArgs.params, key)
+      return this._render(key, interpolateMode, parsedArgs.params, key)
     } else {
       return key
     }
@@ -1461,7 +1461,8 @@
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values]
+        Array.isArray(values) ? values : [values],
+        interpolateMode
       );
 
       if (this._modifiers.hasOwnProperty(formatterName)) {
@@ -1538,7 +1539,7 @@
       if (!this._root) { throw Error('unexpected error') }
       return (ref = this._root).$t.apply(ref, [ key ].concat( values ))
     } else {
-      return this._warnDefault(locale, key, ret, host, values)
+      return this._warnDefault(locale, key, ret, host, values, 'string')
     }
   };
 
@@ -1560,7 +1561,7 @@
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$i18n.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, [values])
+      return this._warnDefault(locale, key, ret, host, [values], 'raw')
     }
   };
 
@@ -1943,7 +1944,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.15.3';
+  VueI18n.version = '8.15.4';
 
   return VueI18n;
 
