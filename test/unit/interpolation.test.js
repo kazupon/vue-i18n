@@ -13,7 +13,8 @@ const messages = {
     fallback: 'fallback from {0}'
   },
   ja: {
-    text: '一: {0}'
+    text: '一: {0}',
+    'I am {0}': '一: {0}'
   }
 }
 const components = {
@@ -400,6 +401,86 @@ describe('component interpolation', () => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'I accept xxx <a href=\"/term\">Term of service</a>.'
+          )
+        }).then(done)
+      })
+    })
+
+    describe('formatFallbackMessages', () => {
+      let i18n
+      beforeEach(() => {
+        i18n = new VueI18n({
+          locale: 'en',
+          messages,
+          formatFallbackMessages: true
+        })
+      })
+
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+
+        nextTick(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            'I am <a href=\"/term\">Term of service</a>'
+          )
+        }).then(done)
+      })
+
+      it('use ja message', done => {
+        i18n.locale = 'ja'
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        nextTick().then(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            '一: <a href=\"/term\">tos</a>'
+          )
+        }).then(done)
+      })
+
+      it('fallbackRoot has higher priority than formatFallbackMessages', done => {
+        i18n = new VueI18n({
+          locale: 'ja',
+          messages,
+          fallbackLocale: 'en',
+          formatFallbackMessages: true,
+          fallbackRoot: true
+        })
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        nextTick().then(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            '一: <a href=\"/term\">Term of service</a>'
           )
         }).then(done)
       })
