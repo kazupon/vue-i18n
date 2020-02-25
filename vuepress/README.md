@@ -13,6 +13,8 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   </a>
 </div>
 
+<sponsor-button/>
+
 <div class="patreon" style="padding: 0 0 24px 0;">
   <p style="text-align: center;">
     <a href="https://www.patreon.com/kazupon" target="_blank">
