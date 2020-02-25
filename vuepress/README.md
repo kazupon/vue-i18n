@@ -13,7 +13,9 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   </a>
 </div>
 
-<sponsor-button/>
+<div class="github" style="padding: 0 0 24px 0;">
+  <sponsor-button/>
+</div>
 
 <div class="patreon" style="padding: 0 0 24px 0;">
   <p style="text-align: center;">
