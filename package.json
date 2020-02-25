@@ -9,8 +9,19 @@
   "bugs": {
     "url": "https://github.com/kazupon/vue-i18n/issues"
   },
-  "resolutions": {
-    "webpack-dev-middleware": "3.6.0"
+  "changelog": {
+    "labels": {
+      "Type: Feature": ":star: Features",
+      "Type: Bug": ":bug: Bug Fixes",
+      "Type: Security": ":lock: Security Fixes",
+      "Type: Performance": ":chart_with_upwards_trend: Performance Fixes",
+      "Type: Improvement": ":zap: Improvement Features",
+      "Type: Breaking": ":boom: Breaking Change",
+      "Type: Deprecated": ":warning: Deprecated Features",
+      "Type: I18n": ":globe_with_meridians: Internationalization",
+      "Type: A11y": ":wheelchair: Accessibility",
+      "Type: Documentation": ":pencil: Documentation"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
@@ -24,8 +35,6 @@
     "babel-preset-power-assert": "^3.0.0",
     "buble": "^0.19.3",
     "chromedriver": "^80.0.0",
-    "conventional-changelog-cli": "^1.2.0",
-    "conventional-github-releaser": "^1.1.3",
     "cross-env": "^5.1.6",
     "cross-spawn": "^6.0.0",
     "eslint": "^5.6.0",
@@ -33,7 +42,6 @@
     "eslint-plugin-flowtype": "^2.47.0",
     "eslint-plugin-vue-libs": "^2.0.1",
     "flow-bin": "^0.38.0",
-    "git-commit-message-convention": "git+https://github.com/kazupon/git-commit-message-convention.git",
     "http-server": "^0.11.1",
     "intl": "^1.2.5",
     "jasmine": "^2.5.3",
@@ -48,6 +56,8 @@
     "karma-sauce-launcher": "^1.2.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.5",
+    "lerna-changelog": "^1.0.0",
+    "lerna-changelog-label-schema": "^3.0.0",
     "mocha": "^4.1.0",
     "mocha-loader": "^2.0.0",
     "nightwatch": "^0.9.12",
@@ -60,6 +70,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "2.53.1",
+    "shipjs": "^0.16.0",
     "sinon": "^2.1.0",
     "terser": "^3.17.0",
     "typescript": "^2.4.1",
@@ -97,9 +108,11 @@
     "type": "git",
     "url": "git+https://github.com/kazupon/vue-i18n.git"
   },
+  "resolutions": {
+    "webpack-dev-middleware": "3.6.0"
+  },
   "scripts": {
     "build": "node config/build.js",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s -n ./node_modules/git-commit-message-convention/convention.js",
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
     "dev": "cross-env BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
@@ -108,7 +121,8 @@
     "docs:dev": "vuepress dev vuepress",
     "flow": "flow check",
     "lint": "eslint --fix src test",
-    "release": "conventional-github-releaser -n ./node_modules/git-commit-message-convention/convention.js",
+    "release:prepare": "shipjs prepare",
+    "release:trigger": "shipjs trigger",
     "sauce": "npm run sauce:coolkids && npm run sauce:ie && npm run sauce:mobile",
     "sauce:coolkids": "karma start config/karma.sauce.conf.js -- 0",
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
