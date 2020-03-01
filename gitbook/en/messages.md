@@ -112,6 +112,7 @@ The below modifiers are available currently.
 
 * `upper`: Uppercase all characters in the linked message.
 * `lower`: Lowercase all characters in the linked message.
+* `capitalize`: Uppercase the first char in the linked message.
 
 Locale messages the below:
 
@@ -120,7 +121,10 @@ const messages = {
   en: {
     message: {
       homeAddress: 'Home address',
-      missingHomeAddress: 'Please provide @.lower:message.homeAddress'
+      phoneNumber: 'phone number',
+      missingHomeAddress: 'Please provide @.lower:message.homeAddress and @:message.phoneNumber',
+      phoneNbField: '@.capitalize:message.phoneNumber :'
+      phoneNbPlaceholder: 'Please enter your @:message.phoneNumber ...'
     }
   }
 }
@@ -130,6 +134,9 @@ const messages = {
 <label>{{ $t('message.missingHomeAddress') }}</label>
 
 <p class="error">{{ $t('message.missingHomeAddress') }}</p>
+
+<label>{{ $t('message.phoneNbField') }}</label>
+<input type="tel" :placeholder="$t('message.phoneNbPlaceholder')">
 ```
 
 Output the below:
@@ -138,6 +145,9 @@ Output the below:
 <label>Home address</label>
 
 <p class="error">Please provide home address</p>
+
+<label>Phone number :</label>
+<input type="tel" :placeholder="Please enter your phone number ...">
 ```
 
 ### Grouping by brackets
