@@ -1,18 +1,20 @@
 # Fallback localization
 
-The following locale messages with a `message` key that doesn't exist in the `ja` locale:
+*Summary: Use `fallbackLocale: '<lang>'` to choose which language to use when your preferred language lacks a translation.*
+
+Sometimes some items will not be translated into some languages.  In this example, the item `hello` is available in English but not Japanese:
 
 ```js
 const messages = {
   en: {
-    message: 'hello world'
+    hello: 'Hello, world!'
   },
   ja: {
   }
 }
 ```
 
-When specifying the `fallbackLocale` option in the VueI18n constructor option, `message` key is localized with `en` locale key:
+If you want to use (say) `en` items when an item is not available in your desired locale, set the `fallbackLocale` option in the VueI18n constructor:
 
 ```js
 const i18n = new VueI18n({
@@ -25,46 +27,42 @@ const i18n = new VueI18n({
 Template:
 
 ```html
-<p>{{ $t('message') }}</p>
+<p>{{ $t('hello') }}</p>
 ```
 
 Output:
 
 ```html
-<p>hello world</p>
+<p>Hello, world!</p>
 ```
 
-Note that, by default, falling back to `fallbackLocale` generates two console warnings:
+By default, falling back to `fallbackLocale` generates two console warnings:
 
 ```console
-[vue-i18n] Value of key 'message' is not a string!
-[vue-i18n] Fall back to translate the keypath 'message' with 'en' locale.
+[vue-i18n] Value of key 'hello' is not a string!
+[vue-i18n] Fall back to translate the keypath 'hello' with 'en' locale.
 ```
 
 To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
 
 ## Fallback interpolation
 
-Since the keys to the translations are strings, the original message can be used as a key instead of the path.
+*Summary: Set `formatFallbackMessages: true` to do template interpolation on translation keys when your language lacks a translation for a key.*
+
+Since the keys to the translations are strings, you can use a user-readable message (for a particular language) as a key.
 E.g.
 
 ```javascript
 const messages = {
   ja: {
-    'Hello world': 'こんにちは、世界'
+    'Hello, world!': 'こんにちは、世界!'
   }
 }
 ```
 
-This way the translations can be used in a very natural way, automatically falling back to the source language if the translated string cannot be found:
+This is useful because you don't have to specify a translation for the string "Hello, world!" into English.
 
-*ps: `fallbackRoot` have higher priority than `formatFallbackMessages`*
-
-```html
-<p>{{ $t('Hello world') }}</p>
-```
-
-To enrich this feature, interpolation of fallback messages can be turned on by setting `formatFallbackMessages` to `true`:
+In fact, you can even include template parameters in a key.  Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys *are* your templates.
 
 ```javascript
 const messages = {
