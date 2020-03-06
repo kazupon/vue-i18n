@@ -57,12 +57,16 @@ describe('basic', () => {
         assert.strictEqual(i18n.t('message.linkCaseUpper'), 'HOME ADDRESS')
       })
 
+      it('should translate link with the first letter as upper-case', () => {
+        assert.strictEqual(i18n.t('message.linkCaseCapitalize'), 'Home Address')
+      })
+
       it('should translate link without formatting if modifier is not known.', () => {
-        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'Home address')
+        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'home Address')
       })
 
       it('should render link with custom formatting.', () => {
-        assert.strictEqual(i18n.t('message.linkCaseCustom'), 'Hxmx xddrxss')
+        assert.strictEqual(i18n.t('message.linkCaseCustom'), 'hxmx Addrxss')
       })
     })
 

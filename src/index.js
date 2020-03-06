@@ -24,7 +24,8 @@ const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
 const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
-  'lower': str => str.toLocaleLowerCase()
+  'lower': str => str.toLocaleLowerCase(),
+  'capitalize': str => `${str.charAt(0).toLocaleUpperCase()}${str.substr(1)}`
 }
 
 const defaultFormatter = new BaseFormatter()
