@@ -1283,7 +1283,7 @@ class VueI18n {
   _getDateTimeFormats () { return this._vm.dateTimeFormats }
   _getNumberFormats () { return this._vm.numberFormats }
 
-  _warnDefault (locale, key, result, vm, values) {
+  _warnDefault (locale, key, result, vm, values, interpolateMode) {
     if (!isNull(result)) { return result }
     if (this._missing) {
       const missingRet = this._missing.apply(null, [locale, key, vm, values]);
@@ -1301,7 +1301,7 @@ class VueI18n {
 
     if (this._formatFallbackMessages) {
       const parsedArgs = parseArgs(...values);
-      return this._render(key, 'string', parsedArgs.params, key)
+      return this._render(key, interpolateMode, parsedArgs.params, key)
     } else {
       return key
     }
@@ -1433,7 +1433,8 @@ class VueI18n {
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values]
+        Array.isArray(values) ? values : [values],
+        interpolateMode
       );
 
       if (this._modifiers.hasOwnProperty(formatterName)) {
@@ -1506,7 +1507,7 @@ class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values)
+      return this._warnDefault(locale, key, ret, host, values, 'string')
     }
   }
 
@@ -1524,7 +1525,7 @@ class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$i18n.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, [values])
+      return this._warnDefault(locale, key, ret, host, [values], 'raw')
     }
   }
 
@@ -1888,6 +1889,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.3';
+VueI18n.version = '8.15.4';
 
 export default VueI18n;

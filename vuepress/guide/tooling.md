@@ -45,3 +45,11 @@ You can use this extension to enable SSR and improve i18n performance.
 BabelEdit can translate `json` files, and it can also translate `i18n` custom block of Single-file components.
 
 Read more about BabelEdit in [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).
+
+### i18n Ally
+
+[i18n Ally](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally) is i18n extension for VSCode.
+
+i18n Ally give awesome DX for your i18n development.
+
+Read more about i18n Ally in [README](https://github.com/antfu/i18n-ally/blob/master/README.md).

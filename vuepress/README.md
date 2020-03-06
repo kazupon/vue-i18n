@@ -3,7 +3,7 @@ home: true
 heroImage: ./vue-i18n-logo.png
 actionText: Get Started →
 actionLink: introduction.md
-footer: MIT Licensed | Copyright © 2019 kazuya kawaguchi
+footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 0 0 24px 0;">
@@ -11,6 +11,10 @@ footer: MIT Licensed | Copyright © 2019 kazuya kawaguchi
   <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img src="/vue-i18n/patrons/babeledit.png">
   </a>
+</div>
+
+<div class="github" style="text-align:center; padding: 0 0 24px 0;">
+  <sponsor-button />
 </div>
 
 <div class="patreon" style="padding: 0 0 24px 0;">
