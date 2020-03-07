@@ -448,7 +448,7 @@ export default class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
   }
 
   _translate (
