@@ -1,3 +1,21 @@
+
+## v8.15.5 (2020-03-07)
+
+#### :star: Features
+* [#787](https://github.com/kazupon/vue-i18n/pull/787) Add a 'capitalize' default modifier for linked message ([@charlesmass](https://github.com/charlesmass))
+
+#### :zap: Improvement Features
+* [#794](https://github.com/kazupon/vue-i18n/pull/794) Support returning 'string' type for customized interpolation ([@sihyeonn](https://github.com/sihyeonn))
+
+#### :pencil: Documentation
+* [#791](https://github.com/kazupon/vue-i18n/pull/791) Revise fallback.md ([@jlebar](https://github.com/jlebar))
+
+#### Committers: 4
+- Justin Lebar ([@jlebar](https://github.com/jlebar))
+- L M ([@charlesmass](https://github.com/charlesmass))
+- Sihyeon Jang ([@sihyeonn](https://github.com/sihyeonn))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 <a name="8.15.4"></a>
 ## [8.15.4](https://github.com/kazupon/vue-i18n/compare/v8.15.3...v8.15.4) (2020-02-25)
 
