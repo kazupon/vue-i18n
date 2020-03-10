@@ -6883,23 +6883,23 @@ ini@^1.3.2, ini@^1.3.4, ini@^1.3.5, ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-inquirer@7.0.4:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.4.tgz#99af5bde47153abca23f5c7fc30db247f39da703"
-  integrity sha512-Bu5Td5+j11sCkqfqmUTiwv+tWisMtP0L7Q8WrqA2C/BbBhy1YTdFrvjjlrKq8oagA/tLQBski2Gcx/Sqyi2qSQ==
+inquirer@7.0.6:
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.6.tgz#ee4ff0ea7ecda5324656fe665878790f66df7d0c"
+  integrity sha512-7SVO4h+QIdMq6XcqIqrNte3gS5MzCCKZdsq9DO4PJziBFNYzP3PGFbDjgadDb//MCahzgjCxvQ/O2wa7kx9o4w==
   dependencies:
     ansi-escapes "^4.2.1"
-    chalk "^2.4.2"
+    chalk "^3.0.0"
     cli-cursor "^3.1.0"
     cli-width "^2.0.0"
     external-editor "^3.0.3"
     figures "^3.0.0"
     lodash "^4.17.15"
     mute-stream "0.0.8"
-    run-async "^2.2.0"
+    run-async "^2.4.0"
     rxjs "^6.5.3"
     string-width "^4.1.0"
-    strip-ansi "^5.1.0"
+    strip-ansi "^6.0.0"
     through "^2.3.6"
 
 inquirer@^6.2.2:
@@ -8859,7 +8859,7 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.1, mkdirp@~0.5.1, mkdirp@~0.5.x:
   dependencies:
     minimist "0.0.8"
 
-mkdirp@^1.0.3:
+mkdirp@^1.0.0, mkdirp@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.3.tgz#4cf2e30ad45959dddea53ad97d518b6c8205e1ea"
   integrity sha512-6uCP4Qc0sWsgMLy1EOqqS/3rjDHOEnsStVr/4vtAIK2Y5i2kA7lFFejYrpIyiN9w0pYf4ckeCYT9f1r1P9KX5g==
@@ -11186,6 +11186,13 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
+run-async@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.4.0.tgz#e59054a5b86876cfae07f431d18cbaddc594f1e8"
+  integrity sha512-xJTbh/d7Lm7SBhc1tNvTpeCHaEzoyxPrqNlvSdMfBTYwaY++UJFyXUOxAtsRUXjlqOfj8luNaR9vjCh4KeV+pg==
+  dependencies:
+    is-promise "^2.1.0"
+
 run-parallel@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
@@ -11364,10 +11371,15 @@ serialize-javascript@^1.4.0:
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.9.1.tgz#cfc200aef77b600c47da9bb8149c943e798c2fdb"
   integrity sha512-0Vb/54WJ6k5v8sSWN09S0ora+Hnr+cX40r9F170nT+mSkaxltoE/7R3OrIdBSUv1OoiobH1QoWQbCnAO+e8J1A==
 
-serialize-javascript@^2.1.0, serialize-javascript@^2.1.2:
+serialize-javascript@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
   integrity sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
+
+serialize-javascript@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-3.0.0.tgz#492e489a2d77b7b804ad391a5f5d97870952548e"
+  integrity sha512-skZcHYw2vEX4bw90nAr2iTTsz6x2SrHEnfxgKYmZlvJYBEZrvbKtobJWlQ20zczKb3bsHHXXTYt48zBA7ni9cw==
 
 serve-index@^1.9.1:
   version "1.9.1"
@@ -11456,10 +11468,10 @@ shelljs@0.8.3:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shipjs-lib@0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/shipjs-lib/-/shipjs-lib-0.16.0.tgz#6f4ea05ec69e6a217a7d1f18df0327ac80214d39"
-  integrity sha512-OD+LVtiBZ+7O8A8DqZYzALuLzc+ByCIsPv1Dt7CJyjTDgHejgDS03j7PY10EsMMTX9WzJ74SiFpER2CCEcfSoQ==
+shipjs-lib@0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/shipjs-lib/-/shipjs-lib-0.17.0.tgz#d679a74bb15da204428a42749ccc956219f3945d"
+  integrity sha512-L5fWc+kTISWsNLBPV4miWNvBD8DiGpWflNCHU/GsvAEIau7henH2SzN2WGA6YsirmsTsK8SZaEjOzK0ncrDhbQ==
   dependencies:
     deepmerge "^4.2.2"
     dotenv "^8.1.0"
@@ -11467,10 +11479,10 @@ shipjs-lib@0.16.0:
     semver "6.3.0"
     shelljs "0.8.3"
 
-shipjs@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/shipjs/-/shipjs-0.16.0.tgz#8fa2b2beb3013eae66d947975a61db6468269832"
-  integrity sha512-p2oTLCwFFIkXGUkrMw+cW5UwFdKWlQViLhrEyGyLSxe3GnGoAcxloupJTrgpRUsqF/nCrGSTpvzS1lU2ihTybg==
+shipjs@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/shipjs/-/shipjs-0.17.0.tgz#7de59dcc3e1dabc7b2d6b246f74406df8f59c9dd"
+  integrity sha512-9F2uSGiWOo6U9GBWVhnuD8tpbxTwodpQdPCbejNJ7l8a54aBpZjyh2bP3rxdd3u4SzEMRHZik61/llkjjqwwww==
   dependencies:
     "@babel/runtime" "^7.6.3"
     "@octokit/rest" "^17.0.0"
@@ -11484,14 +11496,14 @@ shipjs@^0.16.0:
     ejs "^3.0.0"
     esm "3.2.25"
     globby "^10.0.1"
-    inquirer "7.0.4"
+    inquirer "7.0.6"
     mime-types "^2.1.25"
-    mkdirp "^0.5.1"
+    mkdirp "^1.0.0"
     open "^7.0.0"
     prettier "^1.18.2"
-    serialize-javascript "^2.1.0"
+    serialize-javascript "^3.0.0"
     shell-quote "^1.7.2"
-    shipjs-lib "0.16.0"
+    shipjs-lib "0.17.0"
     temp-write "4.0.0"
     tempfile "^3.0.0"
 

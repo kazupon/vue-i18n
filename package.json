@@ -70,7 +70,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "2.53.1",
-    "shipjs": "^0.16.0",
+    "shipjs": "^0.17.0",
     "sinon": "^2.1.0",
     "terser": "^3.17.0",
     "typescript": "^2.4.1",
