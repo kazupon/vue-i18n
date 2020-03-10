@@ -11,11 +11,11 @@
   },
   "changelog": {
     "labels": {
-      "Type: Feature": ":star: Features",
+      "Type: Feature": ":star: New Features",
       "Type: Bug": ":bug: Bug Fixes",
       "Type: Security": ":lock: Security Fixes",
       "Type: Performance": ":chart_with_upwards_trend: Performance Fixes",
-      "Type: Improvement": ":zap: Improvement Features",
+      "Type: Improvement": ":zap: Improved Features",
       "Type: Breaking": ":boom: Breaking Change",
       "Type: Deprecated": ":warning: Deprecated Features",
       "Type: I18n": ":globe_with_meridians: Internationalization",
