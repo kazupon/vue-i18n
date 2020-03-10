@@ -1047,7 +1047,8 @@ const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/;
 const bracketsMatcher = /[()]/g;
 const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
-  'lower': str => str.toLocaleLowerCase()
+  'lower': str => str.toLocaleLowerCase(),
+  'capitalize': str => `${str.charAt(0).toLocaleUpperCase()}${str.substr(1)}`
 };
 
 const defaultFormatter = new BaseFormatter();
@@ -1462,7 +1463,7 @@ class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
   }
 
   _translate (
@@ -1889,6 +1890,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.4';
+VueI18n.version = '8.15.5';
 
 export default VueI18n;

@@ -1,5 +1,5 @@
 /*!
- * vue-i18n v8.15.4 
+ * vue-i18n v8.15.5 
  * (c) 2020 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -1091,7 +1091,8 @@
   var bracketsMatcher = /[()]/g;
   var defaultModifiers = {
     'upper': function (str) { return str.toLocaleUpperCase(); },
-    'lower': function (str) { return str.toLocaleLowerCase(); }
+    'lower': function (str) { return str.toLocaleLowerCase(); },
+    'capitalize': function (str) { return ("" + (str.charAt(0).toLocaleUpperCase()) + (str.substr(1))); }
   };
 
   var defaultFormatter = new BaseFormatter();
@@ -1490,7 +1491,7 @@
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
   };
 
   VueI18n.prototype._translate = function _translate (
@@ -1944,7 +1945,7 @@
   });
 
   VueI18n.install = install;
-  VueI18n.version = '8.15.4';
+  VueI18n.version = '8.15.5';
 
   return VueI18n;
 
