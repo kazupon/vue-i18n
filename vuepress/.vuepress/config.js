@@ -56,7 +56,7 @@ module.exports = {
                   },
                   {
                     text: 'ESLint Plugin',
-                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                    link: 'https://intlify.github.io/eslint-plugin-vue-i18n/'
                   },
                   {
                     text: 'Extensions',
@@ -157,7 +157,7 @@ module.exports = {
                   },
                   {
                     text: 'ESLint 插件',
-                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                    link: 'https://intlify.github.io/eslint-plugin-vue-i18n/'
                   },
                   {
                     text: '扩展',

@@ -10,7 +10,7 @@
 
 [vue-cli-plugin-i18n](https://github.com/kazupon/vue-cli-plugin-i18n) 是官方提供的 Vue Cli 插件。
 
-使用此插件，您可以为Vue应用程序设置 i18n 环境，并支持 i18n 开发环境。 
+使用此插件，您可以为Vue应用程序设置 i18n 环境，并支持 i18n 开发环境。
 
 ### Webpack Loader
 
@@ -21,7 +21,7 @@
 
 ### ESLint 插件
 
-[eslint-plugin-vue-i18n](https://kazupon.github.io/eslint-plugin-vue-i18n/) 是为 Vue I18n 编写的 ESLint 插件。
+[eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) 是为 Vue I18n 编写的 ESLint 插件。
 
 它可以轻松地将一些本地化 lint 功能集成到 Vue.js 应用程序中。
 

@@ -14,7 +14,7 @@ With this plugin, you can setup the i18n environment for the Vue application, an
 
 ### Nuxt Module
 
-[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module. 
+[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module.
 
 ### Webpack loader
 
@@ -26,7 +26,7 @@ In about `i18n` custom block, see the [Single file components section](./sfc.md)
 
 ### ESLint Plugin
 
-[eslint-plugin-vue-i18n](https://kazupon.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
+[eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
 
 It easily integrates some localization lint features to your Vue.js Application.
 
