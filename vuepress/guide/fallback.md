@@ -89,6 +89,6 @@ When the template is as below:
 The following will be output:
 
 ```html
-<p>Здравствуйте John</p>
+<p>Здравствуйте, John</p>
 <p>The weather today is sunny!</p>
 ```
