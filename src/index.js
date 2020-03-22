@@ -604,7 +604,6 @@ export default class VueI18n {
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, message)
   }
@@ -612,7 +611,6 @@ export default class VueI18n {
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message))
   }
