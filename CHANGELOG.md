@@ -1,4 +1,18 @@
 
+## v8.15.6 (2020-03-23)
+
+#### :bug: Bug Fixes
+* [#817](https://github.com/kazupon/vue-i18n/pull/817) Bugfix : 'setLocaleMessage' / 'mergeLocaleMessage' doesn't work if 'warnHtmlInMessage' is set to 'error'  ([@aym3nb](https://github.com/aym3nb))
+
+#### :pencil: Documentation
+* [#816](https://github.com/kazupon/vue-i18n/pull/816) Update fallback.md ([@scoutrul](https://github.com/scoutrul))
+
+#### Committers: 3
+- Anton ([@scoutrul](https://github.com/scoutrul))
+- Aymen Bareche ([@aym3nb](https://github.com/aym3nb))
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
 ## v8.15.5 (2020-03-07)
 
 #### :star: Features
