@@ -260,6 +260,39 @@ desc('number custom formatting', () => {
     })
   })
 
+  describe('change number format runtime', () => {
+    it('should be changed', done => {
+      const i18n = new VueI18n({
+        locale: 'en-US',
+        numberFormats
+      })
+      const el = document.createElement('div')
+      document.body.appendChild(el)
+
+      const money = 101
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$n(money, 'currency')])
+        }
+      }).$mount(el)
+
+      const { text } = vm.$refs
+      const otherEnFormat = {
+        currency: {
+          style: 'currency', currency: 'CZK', currencyDisplay: 'name'
+        }
+      }
+
+      nextTick(() => {
+        assert.strictEqual(text.textContent, '$101.00')
+        i18n.setNumberFormat('en-US', otherEnFormat)
+      }).then(() => {
+        assert.strictEqual(text.textContent, '101.00 Czech korunas')
+      }).then(done)
+    })
+  })
+
   describe('warnning in render', () => {
     it('should be warned', () => {
       const spy = sinon.spy(console, 'warn')

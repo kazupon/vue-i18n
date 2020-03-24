@@ -717,10 +717,24 @@ export default class VueI18n {
 
   setNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, format)
+    this._clearNumberFormat(locale, format)
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format))
+    this._clearNumberFormat(locale, format)
+  }
+
+  _clearNumberFormat (locale: Locale, format: NumberFormat): void {
+    for (const key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._numberFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._numberFormatters[id]
+    }
   }
 
   _getNumberFormatter (
