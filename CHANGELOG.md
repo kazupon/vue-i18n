@@ -1,4 +1,13 @@
 
+## v8.15.7 (2020-03-25)
+
+#### :bug: Bug Fixes
+* [#819](https://github.com/kazupon/vue-i18n/pull/819) Fixed bug when changing number format runtime ([@slischka](https://github.com/slischka))
+
+#### Committers: 1
+- Jiří Slischka ([@slischka](https://github.com/slischka))
+
+
 ## v8.15.6 (2020-03-23)
 
 #### :bug: Bug Fixes
