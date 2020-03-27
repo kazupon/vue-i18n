@@ -1,4 +1,13 @@
 
+## v8.16.0 (2020-03-27)
+
+#### :star: New Features
+* [#822](https://github.com/kazupon/vue-i18n/pull/822) post translation hooking feature ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.15.7 (2020-03-25)
 
 #### :bug: Bug Fixes
