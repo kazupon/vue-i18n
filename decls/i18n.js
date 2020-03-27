@@ -50,6 +50,7 @@ declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => string | void;
+declare type PostTranslationHandler = (str: string) => string;
 
 declare type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 declare type FormattedNumberPart = {
@@ -81,6 +82,7 @@ declare type I18nOptions = {
   preserveDirectiveContent?: boolean,
   warnHtmlInMessage?: WarnHtmlInMessageLevel,
   sharedMessages?: LocaleMessage,
+  postTranslation?: PostTranslationHandler,
 };
 
 declare type IntlAvailability = {
@@ -121,6 +123,8 @@ declare interface I18n {
   set preserveDirectiveContent (preserve: boolean): void,
   get warnHtmlInMessage (): WarnHtmlInMessageLevel,
   set warnHtmlInMessage (level: WarnHtmlInMessageLevel): void,
+  get postTranslation (): ?PostTranslationHandler,
+  set postTranslation (handler: PostTranslationHandler): void,
 
   getLocaleMessage (locale: Locale): LocaleMessageObject,
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void,

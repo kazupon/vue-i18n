@@ -328,6 +328,17 @@ In next major version, `warnHtmlInMessage` option is `warn` as default.
 
 The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
 
+#### postTranslation
+
+> 8.16+
+
+  * **Type:** `PostTranslationHandler`
+
+  * **Default:** `null`
+
+A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, $tc, and `tc`.
+
+This handler is useful if you want to filter on translated text such as space trimming.
 
 ### Properties
 
@@ -438,6 +449,15 @@ If you are specified `error` will occured an Error.
 
 In VueI18n instance, set the `off` as default.
 
+#### postTranslation
+
+> 8.16+
+
+  * **Type:** `PostTranslationHandler`
+
+  * **Read/Write**
+
+A handler for post processing of translation.
 
 ### Methods
 
