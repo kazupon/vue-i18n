@@ -52,6 +52,7 @@ export default class VueI18n {
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
+  _postTranslation: PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -98,6 +99,7 @@ export default class VueI18n {
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
+    this._postTranslation = options.postTranslation || null
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -264,6 +266,9 @@ export default class VueI18n {
       })
     }
   }
+
+  get postTranslation (): ?PostTranslationHandler { return this._postTranslation }
+  set postTranslation (handler: PostTranslationHandler): void { this._postTranslation = handler }
 
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
@@ -481,7 +486,7 @@ export default class VueI18n {
     const parsedArgs = parseArgs(...values)
     const locale: Locale = parsedArgs.locale || _locale
 
-    const ret: any = this._translate(
+    let ret: any = this._translate(
       messages, locale, this.fallbackLocale, key,
       host, 'string', parsedArgs.params
     )
@@ -493,7 +498,11 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values, 'string')
+      ret = this._warnDefault(locale, key, ret, host, values, 'string')
+      if (this._postTranslation) {
+        ret = this._postTranslation(ret)
+      }
+      return ret
     }
   }
 
