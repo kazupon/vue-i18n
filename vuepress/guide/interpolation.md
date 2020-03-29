@@ -155,7 +155,7 @@ Outputs:
 </div>
 ```
 
-In Vue 2.6 and later, you can can use the following slots syntax in templates:
+In Vue 2.6 and later, you can use the following slots syntax in templates:
 
 ```html
 <div id="app">
