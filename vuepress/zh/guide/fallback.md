@@ -42,3 +42,54 @@ const i18n = new VueI18n({
 ```
 
 为了避免这些警告 (同时保留那些完全没有翻译给定关键字的警告)，需初始化 `VueI18n` 实例时设置 `silentFallbackWarn：true`。
+
+## 回退插值
+
+由于翻译的键值是字符串，因此也可以作为翻译的值：
+
+```javascript
+const messages = {
+  ja: {
+    'Hello world': 'こんにちは、世界'
+  }
+}
+```
+
+这是一种很自然的书写方式，如果在`message`中找不到相应的键值将回退到原本的语言：
+
+*注意: `fallbackRoot`的优先级高于`formatFallbackMessages`*
+
+```html
+<p>{{ $t('Hello world') }}</p>
+```
+
+为了实现此功能，可以通过设置`formatFallbackMessages`为`true`：
+
+```javascript
+const messages = {
+  ru: {
+    'Hello {name}': 'Здравствуйте {name}'
+  }
+}
+
+const i18n = new VueI18n({
+  locale: 'ru',
+  fallbackLocale: 'en',
+  formatFallbackMessages: true,
+  messages
+})
+```
+
+当模板`template`如下时：
+
+```html
+<p>{{ $t('Hello {name}', { name: 'John' }}) }}</p>
+<p>{{ $t('The weather today is {condition}!', { condition: 'sunny' }) }}</p>
+```
+
+将会输出：
+
+```html
+<p>Здравствуйте John</p>
+<p>The weather today is sunny!</p>
+```

@@ -12,12 +12,18 @@ export default new VueI18n({
   formatter,
   messages: {
     'en-US': {
+      tos: 'Terms of service',
+      terms: 'I accept the {0}',
       message: {
         hello: 'hello!!',
         plural: 'You have {n, plural, =0{no messages} one{1 message} other{# messages}}.',
         select: '{gender, select, male{He} female{She} other{They}} liked this.',
         number: 'Current Percent: {current, number, percent}',
-        time: 'Current Time: {current, time, short}'
+        time: 'Current Time: {current, time, short}',
+      },
+      fly: {
+        departure: 'You can {action} until {limit} minutes from departure',
+        board: 'board'
       }
     },
     'ja-JP': {

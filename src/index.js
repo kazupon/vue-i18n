@@ -24,7 +24,8 @@ const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
 const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
-  'lower': str => str.toLocaleLowerCase()
+  'lower': str => str.toLocaleLowerCase(),
+  'capitalize': str => `${str.charAt(0).toLocaleUpperCase()}${str.substr(1)}`
 }
 
 const defaultFormatter = new BaseFormatter()
@@ -51,6 +52,7 @@ export default class VueI18n {
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
+  _postTranslation: PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -97,6 +99,7 @@ export default class VueI18n {
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
+    this._postTranslation = options.postTranslation || null
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -264,11 +267,14 @@ export default class VueI18n {
     }
   }
 
+  get postTranslation (): ?PostTranslationHandler { return this._postTranslation }
+  set postTranslation (handler: PostTranslationHandler): void { this._postTranslation = handler }
+
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
   _getNumberFormats (): NumberFormats { return this._vm.numberFormats }
 
-  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any): ?string {
+  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any, interpolateMode: string): ?string {
     if (!isNull(result)) { return result }
     if (this._missing) {
       const missingRet = this._missing.apply(null, [locale, key, vm, values])
@@ -286,7 +292,7 @@ export default class VueI18n {
 
     if (this._formatFallbackMessages) {
       const parsedArgs = parseArgs(...values)
-      return this._render(key, 'string', parsedArgs.params, key)
+      return this._render(key, interpolateMode, parsedArgs.params, key)
     } else {
       return key
     }
@@ -418,7 +424,8 @@ export default class VueI18n {
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values]
+        Array.isArray(values) ? values : [values],
+        interpolateMode
       )
 
       if (this._modifiers.hasOwnProperty(formatterName)) {
@@ -446,7 +453,7 @@ export default class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
   }
 
   _translate (
@@ -479,7 +486,7 @@ export default class VueI18n {
     const parsedArgs = parseArgs(...values)
     const locale: Locale = parsedArgs.locale || _locale
 
-    const ret: any = this._translate(
+    let ret: any = this._translate(
       messages, locale, this.fallbackLocale, key,
       host, 'string', parsedArgs.params
     )
@@ -491,7 +498,11 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values)
+      ret = this._warnDefault(locale, key, ret, host, values, 'string')
+      if (this._postTranslation) {
+        ret = this._postTranslation(ret)
+      }
+      return ret
     }
   }
 
@@ -509,7 +520,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$i18n.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, [values])
+      return this._warnDefault(locale, key, ret, host, [values], 'raw')
     }
   }
 
@@ -602,7 +613,6 @@ export default class VueI18n {
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, message)
   }
@@ -610,7 +620,6 @@ export default class VueI18n {
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message))
   }
@@ -717,10 +726,24 @@ export default class VueI18n {
 
   setNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, format)
+    this._clearNumberFormat(locale, format)
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format))
+    this._clearNumberFormat(locale, format)
+  }
+
+  _clearNumberFormat (locale: Locale, format: NumberFormat): void {
+    for (const key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._numberFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._numberFormatters[id]
+    }
   }
 
   _getNumberFormatter (

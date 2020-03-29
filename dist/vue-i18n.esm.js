@@ -1,6 +1,6 @@
 /*!
- * vue-i18n v8.15.3 
- * (c) 2019 kazuya kawaguchi
+ * vue-i18n v8.15.5 
+ * (c) 2020 kazuya kawaguchi
  * Released under the MIT License.
  */
 /*  */
@@ -1085,7 +1085,8 @@ var linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/;
 var bracketsMatcher = /[()]/g;
 var defaultModifiers = {
   'upper': function (str) { return str.toLocaleUpperCase(); },
-  'lower': function (str) { return str.toLocaleLowerCase(); }
+  'lower': function (str) { return str.toLocaleLowerCase(); },
+  'capitalize': function (str) { return ("" + (str.charAt(0).toLocaleUpperCase()) + (str.substr(1))); }
 };
 
 var defaultFormatter = new BaseFormatter();
@@ -1304,7 +1305,7 @@ VueI18n.prototype._getMessages = function _getMessages () { return this._vm.mess
 VueI18n.prototype._getDateTimeFormats = function _getDateTimeFormats () { return this._vm.dateTimeFormats };
 VueI18n.prototype._getNumberFormats = function _getNumberFormats () { return this._vm.numberFormats };
 
-VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm, values) {
+VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm, values, interpolateMode) {
   if (!isNull(result)) { return result }
   if (this._missing) {
     var missingRet = this._missing.apply(null, [locale, key, vm, values]);
@@ -1322,7 +1323,7 @@ VueI18n.prototype._warnDefault = function _warnDefault (locale, key, result, vm,
 
   if (this._formatFallbackMessages) {
     var parsedArgs = parseArgs.apply(void 0, values);
-    return this._render(key, 'string', parsedArgs.params, key)
+    return this._render(key, interpolateMode, parsedArgs.params, key)
   } else {
     return key
   }
@@ -1455,7 +1456,8 @@ VueI18n.prototype._link = function _link (
     }
     translated = this._warnDefault(
       locale, linkPlaceholder, translated, host,
-      Array.isArray(values) ? values : [values]
+      Array.isArray(values) ? values : [values],
+      interpolateMode
     );
 
     if (this._modifiers.hasOwnProperty(formatterName)) {
@@ -1483,7 +1485,7 @@ VueI18n.prototype._render = function _render (message, interpolateMode, values, 
 
   // if interpolateMode is **not** 'string' ('row'),
   // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-  return interpolateMode === 'string' ? ret.join('') : ret
+  return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
 };
 
 VueI18n.prototype._translate = function _translate (
@@ -1532,7 +1534,7 @@ VueI18n.prototype._t = function _t (key, _locale, messages, host) {
     if (!this._root) { throw Error('unexpected error') }
     return (ref = this._root).$t.apply(ref, [ key ].concat( values ))
   } else {
-    return this._warnDefault(locale, key, ret, host, values)
+    return this._warnDefault(locale, key, ret, host, values, 'string')
   }
 };
 
@@ -1554,7 +1556,7 @@ VueI18n.prototype._i = function _i (key, locale, messages, host, values) {
     if (!this._root) { throw Error('unexpected error') }
     return this._root.$i18n.i(key, locale, values)
   } else {
-    return this._warnDefault(locale, key, ret, host, [values])
+    return this._warnDefault(locale, key, ret, host, [values], 'raw')
   }
 };
 
@@ -1937,6 +1939,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.3';
+VueI18n.version = '8.15.5';
 
 export default VueI18n;

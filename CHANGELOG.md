@@ -1,3 +1,67 @@
+
+## v8.16.0 (2020-03-27)
+
+#### :star: New Features
+* [#822](https://github.com/kazupon/vue-i18n/pull/822) post translation hooking feature ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.15.7 (2020-03-25)
+
+#### :bug: Bug Fixes
+* [#819](https://github.com/kazupon/vue-i18n/pull/819) Fixed bug when changing number format runtime ([@slischka](https://github.com/slischka))
+
+#### Committers: 1
+- Jiří Slischka ([@slischka](https://github.com/slischka))
+
+
+## v8.15.6 (2020-03-23)
+
+#### :bug: Bug Fixes
+* [#817](https://github.com/kazupon/vue-i18n/pull/817) Bugfix : 'setLocaleMessage' / 'mergeLocaleMessage' doesn't work if 'warnHtmlInMessage' is set to 'error'  ([@aym3nb](https://github.com/aym3nb))
+
+#### :pencil: Documentation
+* [#816](https://github.com/kazupon/vue-i18n/pull/816) Update fallback.md ([@scoutrul](https://github.com/scoutrul))
+
+#### Committers: 3
+- Anton ([@scoutrul](https://github.com/scoutrul))
+- Aymen Bareche ([@aym3nb](https://github.com/aym3nb))
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
+## v8.15.5 (2020-03-07)
+
+#### :star: Features
+* [#787](https://github.com/kazupon/vue-i18n/pull/787) Add a 'capitalize' default modifier for linked message ([@charlesmass](https://github.com/charlesmass))
+
+#### :zap: Improvement Features
+* [#794](https://github.com/kazupon/vue-i18n/pull/794) Support returning 'string' type for customized interpolation ([@sihyeonn](https://github.com/sihyeonn))
+
+#### :pencil: Documentation
+* [#791](https://github.com/kazupon/vue-i18n/pull/791) Revise fallback.md ([@jlebar](https://github.com/jlebar))
+
+#### Committers: 4
+- Justin Lebar ([@jlebar](https://github.com/jlebar))
+- L M ([@charlesmass](https://github.com/charlesmass))
+- Sihyeon Jang ([@sihyeonn](https://github.com/sihyeonn))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+<a name="8.15.4"></a>
+## [8.15.4](https://github.com/kazupon/vue-i18n/compare/v8.15.3...v8.15.4) (2020-02-25)
+
+
+### :bug: Bug Fixes
+
+* **index:** improve formatFallbackMessages code (#779) (#783) by [@masongzhi](https://github.com/masongzhi) ([53895b9](https://github.com/kazupon/vue-i18n/commit/53895b9)))
+
+### :up: Updates
+
+* some fixes ([8a9a950](https://github.com/kazupon/vue-i18n/commit/8a9a950))
+
+
+
 <a name="8.15.3"></a>
 ## [8.15.3](https://github.com/kazupon/vue-i18n/compare/v8.15.2...v8.15.3) (2019-12-18)
 
@@ -382,7 +446,7 @@ see the [API docs](https://kazupon.github.io/vue-i18n/api/)
 
 ### NOTE
 
-* extend: 
+* extend:
 
 
 
@@ -943,7 +1007,7 @@ In the examples, please refer to this [examples](https://github.com/kazupon/vue-
 - locales <sup>DEPRECATED, use `messages` of `i18n` option (e.g `{ i18n: { messaes: ... } }`)</sup>
 
 ### Instance Properties
-- $lang <sup>DEPRECATED, use `locale` of Vue instance property `$i18n` (e.g `vm.$i18n.locale = 'en'`) 
+- $lang <sup>DEPRECATED, use `locale` of Vue instance property `$i18n` (e.g `vm.$i18n.locale = 'en'`)
 
 ### VueI18n class <sup>NEW</sup>
 - constructor options: See the [`I18nOptions` type](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L7-L15) of flowtype.
@@ -1269,7 +1333,7 @@ In the examples, please refer to this [examples](https://github.com/kazupon/vue-
 ### DEPRECATED
 
 * **index:** plugin install `Vue.use` options (`options.locales`, `options.lang`). See [README](https://github.com/kazupon/vue-i18n/blob/dev/README.md)
-    
+
 
 <a name="2.4.1"></a>
 ## [2.4.1](https://github.com/kazupon/vue-i18n/compare/v2.4.0...v2.4.1) (2016-02-29)

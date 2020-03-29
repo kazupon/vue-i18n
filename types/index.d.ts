@@ -85,6 +85,7 @@ declare namespace VueI18n {
   }
 
   type MissingHandler = (locale: Locale, key: Path, vm: Vue | null, values: any) => string | void;
+  type PostTranslationHandler = (str: string) => string;
 
   interface IntlAvailability {
     dateTimeFormat: boolean;
@@ -110,6 +111,7 @@ declare namespace VueI18n {
     pluralizationRules?: PluralizationRulesMap;
     warnHtmlInMessage?: WarnHtmlInMessageLevel;
     sharedMessages?: LocaleMessages;
+    postTranslation?: PostTranslationHandler;
   }
 }
 
@@ -134,6 +136,7 @@ export type NumberFormatToPartsResult = VueI18n.NumberFormatToPartsResult;
 export type WarnHtmlInMessageLevel = VueI18n.WarnHtmlInMessageLevel;
 export type Formatter = VueI18n.Formatter;
 export type MissingHandler = VueI18n.MissingHandler;
+export type PostTranslationHandler = VueI18n.PostTranslationHandler;
 export type IntlAvailability = VueI18n.IntlAvailability;
 export type I18nOptions = VueI18n.I18nOptions;
 
@@ -172,6 +175,7 @@ declare class VueI18n {
   preserveDirectiveContent: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
+  postTranslation: VueI18n.PostTranslationHandler;
 
   t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;

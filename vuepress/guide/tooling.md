@@ -14,7 +14,7 @@ With this plugin, you can setup the i18n environment for the Vue application, an
 
 ### Nuxt Module
 
-[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module. 
+[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module.
 
 ### Webpack loader
 
@@ -26,7 +26,7 @@ In about `i18n` custom block, see the [Single file components section](./sfc.md)
 
 ### ESLint Plugin
 
-[eslint-plugin-vue-i18n](https://kazupon.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
+[eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
 
 It easily integrates some localization lint features to your Vue.js Application.
 
@@ -45,3 +45,11 @@ You can use this extension to enable SSR and improve i18n performance.
 BabelEdit can translate `json` files, and it can also translate `i18n` custom block of Single-file components.
 
 Read more about BabelEdit in [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).
+
+### i18n Ally
+
+[i18n Ally](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally) is i18n extension for VSCode.
+
+i18n Ally give awesome DX for your i18n development.
+
+Read more about i18n Ally in [README](https://github.com/antfu/i18n-ally/blob/master/README.md).

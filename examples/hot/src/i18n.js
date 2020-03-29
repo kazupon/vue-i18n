@@ -4,10 +4,10 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
 function loadLocaleInfo () {
-  const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  const locales = require.context('./locales', true, /(^|\/)[A-Za-z0-9_,\s-]+\.json$/i)
   const messages = {}
   locales.keys().forEach(key => {
-    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
+    const matched = key.match(/([A-Za-z0-9_-]+)\./i)
     if (matched && matched.length > 1) {
       const locale = matched[1]
       messages[locale] = locales(key)

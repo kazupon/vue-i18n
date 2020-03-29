@@ -56,7 +56,7 @@ module.exports = {
                   },
                   {
                     text: 'ESLint Plugin',
-                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                    link: 'https://intlify.github.io/eslint-plugin-vue-i18n/'
                   },
                   {
                     text: 'Extensions',
@@ -65,11 +65,15 @@ module.exports = {
                 ]
               },
               {
-                text: 'Translation Tooling',
+                text: '3rd Party Tooling',
                 items: [
                   {
                     text: 'BabelEdit',
                     link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  },
+                  {
+                    text: 'i18n Ally',
+                    link: 'https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally'
                   }
                 ]
               }
@@ -153,7 +157,7 @@ module.exports = {
                   },
                   {
                     text: 'ESLint 插件',
-                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                    link: 'https://intlify.github.io/eslint-plugin-vue-i18n/'
                   },
                   {
                     text: '扩展',
