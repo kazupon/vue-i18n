@@ -154,8 +154,8 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
         locale: 'en',
         fallbackLocale: {
           'de-CH': ['fr', 'it'],
-          'zh-Hant!': ['zh-Hans'],
-          'es-CL!': ['es-AR'],
+          'zh-Hant': ['zh-Hans'],
+          'es-CL': ['es-AR'],
           'es': ['en-GB'],
           'pt': ['es-AR'],
           'default': ['en', 'da']
