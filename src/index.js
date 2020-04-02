@@ -41,7 +41,7 @@ export default class VueI18n {
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
-  _localeChainCache: Array<Locale>
+  _localeChainCache: Map<string, Array<Locale>>
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean | RegExp
@@ -456,7 +456,7 @@ export default class VueI18n {
   resetFallbackLocale (
     fallbackLocale: any
   ) {
-    this._localeChainCache = []
+    this._localeChainCache = new Map()
     this.fallbackLocale = fallbackLocale
   }
 
@@ -499,7 +499,7 @@ export default class VueI18n {
     chain: Array<Locale>,
     block: Array<Locale>,
     blocks: any
-  ): Array<locale> {
+  ): any {
     var follow = true
     for (var i = 0; (i < block.length) && (typeof follow === 'boolean'); i++) {
       var locale = block[i]
@@ -517,14 +517,13 @@ export default class VueI18n {
     }
     //
     if (!this._localeChainCache) {
-      this._localeChainCache = []
+      this._localeChainCache = new Map()
     }
-    var chain = this._localeChainCache[start]
+    var chain = this._localeChainCache.get(start)
     if (!chain) {
       if (!fallbackLocale) {
         fallbackLocale = this.fallbackLocale
       }
-      debugger
       chain = []
       // first block defined by start
       var block = [start]
@@ -538,10 +537,14 @@ export default class VueI18n {
       }
       // last block defined by default
       var defaults
-      if (fallbackLocale['default']) {
-        defaults = fallbackLocale['default']
-      } else if (fallbackLocale instanceof Map) {
-        defaults = null
+      if (Array.isArray(fallbackLocale)) {
+        defaults = fallbackLocale
+      } else if (fallbackLocale instanceof Object) {
+        if (fallbackLocale['default']) {
+          defaults = fallbackLocale['default']
+        } else {
+          defaults = null
+        }
       } else {
         defaults = fallbackLocale
       }
@@ -558,7 +561,7 @@ export default class VueI18n {
           null
         )
       }
-      this._localeChainCache[start] = chain
+      this._localeChainCache.set(start, chain)
     }
     return chain
   }
