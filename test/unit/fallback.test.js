@@ -6,7 +6,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
     beforeEach(() => {
       i18n = new VueI18n({
         locale: 'en',
-        fallbackLocale: '',
+        fallbackLocale: false,
         messages,
         modifiers: {
           custom: str => str.replace(/[aeiou]/g, 'x')
@@ -169,7 +169,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
 
     describe('German (Switzerland)', () => {
       var locale = 'de-CH'
-      var expected = ['de-CH', 'de', 'fr', 'it', 'en', 'da']
+      var expected = ['de-CH', 'fr', 'it', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
         assert.deepEqual(i18n._getFallbackPath(locale), expected)
       })
