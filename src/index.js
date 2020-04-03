@@ -67,7 +67,7 @@ export default class VueI18n {
     }
 
     const locale: Locale = options.locale || 'en-US'
-    const fallbackLocale: Locale = options.fallbackLocale === false
+    const fallbackLocale: any = options.fallbackLocale === false
       ? false
       : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
@@ -235,7 +235,7 @@ export default class VueI18n {
 
   get fallbackLocale (): Locale { return this._vm.fallbackLocale }
   set fallbackLocale (locale: Locale): void {
-    this._vm.$set(this._vm, 'fallbackPath', [])
+    this._vm.$set(this._vm, '_localeChainCache', new Map())
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
