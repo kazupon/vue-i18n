@@ -159,7 +159,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `'en-US'`
 
-  The locale of localization.
+  The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
@@ -167,7 +167,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `'en-US'`
 
-  The locale of fallback localization.
+  The locale of fallback localization. For more complex fallback definitions see fallback.
 
 #### messages
 
