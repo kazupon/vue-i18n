@@ -67,7 +67,9 @@ export default class VueI18n {
     }
 
     const locale: Locale = options.locale || 'en-US'
-    const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
+    const fallbackLocale: Locale = options.fallbackLocale === false
+      ? false
+      : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
