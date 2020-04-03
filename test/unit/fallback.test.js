@@ -18,7 +18,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       const locale = 'en'
       const expected = ['en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -26,7 +26,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'en-GB'
       var expected = ['en-GB', 'en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -34,7 +34,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de'
       var expected = ['de']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -42,7 +42,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de-CH'
       var expected = ['de-CH', 'de']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
   })
@@ -64,7 +64,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'en'
       var expected = ['en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -72,7 +72,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'en-GB'
       var expected = ['en-GB', 'en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -80,7 +80,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de'
       var expected = ['de', 'en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -88,7 +88,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de-CH'
       var expected = ['de-CH', 'de', 'en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
   })
@@ -110,7 +110,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'en'
       var expected = ['en', 'ja']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -118,7 +118,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'en-GB'
       var expected = ['en-GB', 'en', 'ja']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -126,7 +126,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de'
       var expected = ['de', 'en', 'ja']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -134,7 +134,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de-CH'
       var expected = ['de-CH', 'de', 'en', 'ja']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -142,7 +142,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'ja'
       var expected = ['ja', 'en']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
   })
@@ -171,7 +171,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de-CH'
       var expected = ['de-CH', 'fr', 'it', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -179,7 +179,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de-CH!'
       var expected = ['de-CH', 'fr', 'it', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -187,7 +187,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'de'
       var expected = ['de', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -195,7 +195,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'zh-Hant'
       var expected = ['zh-Hant', 'zh-Hans', 'zh', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -203,7 +203,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'es-SP'
       var expected = ['es-SP', 'es', 'en-GB', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -211,7 +211,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'es-SP!'
       var expected = ['es-SP', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -219,7 +219,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'fr'
       var expected = ['fr', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -227,7 +227,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'pt-BR'
       var expected = ['pt-BR', 'pt', 'es-AR', 'es', 'en-GB', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
 
@@ -235,7 +235,7 @@ describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
       var locale = 'es-CL'
       var expected = ['es-CL', 'es-AR', 'es', 'en-GB', 'en', 'da']
       it(locale + ' should fallback to ' + expected, () => {
-        assert.deepEqual(i18n._getFallbackPath(locale), expected)
+        assert.deepEqual(i18n.getLocaleChain(locale), expected)
       })
     })
   })
