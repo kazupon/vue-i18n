@@ -1,6 +1,6 @@
 import messages from './fixture/index'
 
-describe('=== #2 Fallback Locale as array for cascading fallbacks ...', () => {
+describe('kazupon#138 mmokross#2 - Fallback Locale as array for cascading fallbacks ...', () => {
   var types = [
     {
       description: '... none',
