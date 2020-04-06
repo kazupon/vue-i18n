@@ -143,7 +143,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Outputs:
+Результат:
 
 ```html
 <div id="app">
@@ -227,7 +227,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Outputs:
+Результат:
 
 ```html
 <div id="app">
@@ -255,7 +255,7 @@ If you still want to interpolate text content in named formatting, you could def
 </div>
 ```
 
-Outputs:
+Результат:
 
 ```html
 <div id="app">

@@ -37,7 +37,7 @@ Templates:
 </div>
 ```
 
-Outputs:
+Результат:
 
 ```html
 <div id="string-syntax">
@@ -79,7 +79,7 @@ Templates:
 </div>
 ```
 
-Outputs:
+Результат:
 
 ```html
 <div id="object-syntax">

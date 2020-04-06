@@ -79,14 +79,14 @@ const i18n = new VueI18n({
 })
 ```
 
-When the template is as below:
+Шаблон:
 
 ```html
 <p>{{ $t('Hello {name}', { name: 'John' }}) }}</p>
 <p>{{ $t('The weather today is {condition}!', { condition: 'sunny' }) }}</p>
 ```
 
-The following will be output:
+Результат:
 
 ```html
 <p>Здравствуйте, John</p>
