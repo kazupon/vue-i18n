@@ -22,7 +22,7 @@ const app = new Vue({
 
 // Hot updates
 if (module.hot) {
-  module.hot.accept(['./en', './ja'], function () {
+  module.hot.accept(['./en', './ru'], function () {
     i18n.setLocaleMessage('en', require('./en').default)
     i18n.setLocaleMessage('ru', require('./ru').default)
     // Or the following hot updates via $i18n property
