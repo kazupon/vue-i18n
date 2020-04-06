@@ -238,7 +238,7 @@ module.exports = {
                 link: '/ru/guide/formatting',
               },
               {
-                text: 'API',
+                text: 'Справочник API',
                 link: '/ru/api/'
               }
             ]
