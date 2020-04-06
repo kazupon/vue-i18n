@@ -1,6 +1,6 @@
 # Локализация DateTime
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 7.0+
 :::
 

@@ -1,6 +1,6 @@
 # Локализация Number
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 7.0+
 :::
 
@@ -58,7 +58,7 @@ Output the below:
 
 ## Custom formatting
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 8.10+
 :::
 

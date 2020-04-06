@@ -90,7 +90,7 @@ Outputs:
 
 ## Use with transitions
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 8.7+
 :::
 

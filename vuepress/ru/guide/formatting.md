@@ -1,6 +1,6 @@
-# Форматирование сообщений
+# Форматы сообщений
 
-## Именованное форматирование
+## Именованный формат
 
 Сообщения локализации:
 
@@ -26,7 +26,7 @@ const messages = {
 <p>hello world</p>
 ```
 
-## Форматирование списков
+## Формат списков
 
 Сообщения локализации:
 
@@ -64,7 +64,7 @@ const messages = {
 <p>hello world</p>
 ```
 
-## HTML formatting
+## HTML формат
 
 :::warning Notice
 :warning: Dynamically localizing arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content.
@@ -91,7 +91,7 @@ const messages = {
 }
 ```
 
-Template:
+Шаблон:
 
 
 ```html
@@ -108,9 +108,9 @@ world</p>
 ```
 
 
-## Support ruby on rails i18n format
+## Поддержка формата ruby on rails i18n
 
-Locale messages:
+Сообщения локализации:
 
 ```js
 const messages = {
@@ -122,19 +122,19 @@ const messages = {
 }
 ```
 
-Template:
+Шаблон:
 
 ```html
 <p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
 ```
 
-Output:
+Результат:
 
 ```html
 <p>hello world</p>
 ```
 
-## Custom formatting
+## Пользовательский формат
 
 Sometimes, you may need to translate using custom formatting (e.g. [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
 

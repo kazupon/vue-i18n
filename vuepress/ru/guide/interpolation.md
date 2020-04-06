@@ -2,7 +2,7 @@
 
 ## Basic Usage
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 7.0+
 :::
 
@@ -97,7 +97,7 @@ In the above example, the component interpolation follows the **list formatting*
 
 ## Slots syntax usage
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 8.14+
 :::
 
@@ -183,7 +183,7 @@ In Vue 2.6 and later, you can use the following slots syntax in templates:
 In the next major version, the `place` and `places` props will be deprecated. Please switch to slots syntax.
 :::
 
-:::tip Support Version
+:::tip Поддерживаемая версия
 :new: 7.2+
 :::
 
