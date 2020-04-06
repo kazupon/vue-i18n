@@ -30,7 +30,7 @@ const i18n = new VueI18n({
 <p>{{ $t('hello') }}</p>
 ```
 
-Output:
+Результат:
 
 ```html
 <p>Hello, world!</p>

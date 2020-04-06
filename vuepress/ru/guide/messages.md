@@ -56,7 +56,7 @@ In the above Locale Messages structure, You can translate using below key paths.
 </div>
 ```
 
-Output the following:
+Результат:
 
 ```html
 <div id="app">
@@ -77,7 +77,7 @@ Output the following:
 
 If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
 
-Locale messages the below:
+Сообщения локализации:
 
 ```js
 const messages = {
@@ -97,7 +97,7 @@ const messages = {
 <p>{{ $t('message.linked') }}</p>
 ```
 
-Output:
+Результат:
 
 ```html
 <p>DIO: the world !!!!</p>
@@ -113,7 +113,7 @@ The below modifiers are available currently.
 * `upper`: Uppercase all characters in the linked message.
 * `lower`: Lowercase all characters in the linked message.
 
-Locale messages the below:
+Сообщения локализации:
 
 ```javascript
 const messages = {
@@ -180,7 +180,7 @@ const messages = {
 <p>{{ $t('message.linked') }}</p>
 ```
 
-Output:
+Результат:
 
 ```html
 <p>There's a reason, you lost, DIO.</p>

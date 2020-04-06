@@ -1,6 +1,6 @@
 # Однофайловые компоненты
 
-## Basic Usage
+## Базовое использование
 
 If you are building Vue component or Vue application using single file components, you can manage the locale messages `i18n` custom block.
 

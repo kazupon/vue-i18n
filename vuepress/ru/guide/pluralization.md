@@ -47,7 +47,7 @@ You don't need to explicitly give the number for pluralization.
 The number can be accessed within locale messages via pre-defined named arguments `{count}` and/or `{n}`.
 You can overwrite those pre-defined named arguments if necessary.
 
-Locale messages the below:
+Сообщения локализации:
 
 ```js
 const messages = {

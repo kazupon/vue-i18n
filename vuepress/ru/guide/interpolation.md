@@ -1,6 +1,6 @@
-# Component interpolation
+# Интерполяция компонента
 
-## Basic Usage
+## Базовое использование
 
 :::tip Поддерживаемая версия
 :new: 7.0+
@@ -29,7 +29,7 @@ And your localized template may look like this:
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
 ```
 
-Output:
+Результат:
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
