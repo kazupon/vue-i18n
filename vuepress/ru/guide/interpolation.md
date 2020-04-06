@@ -172,14 +172,14 @@ In Vue 2.6 and later, you can use the following slots syntax in templates:
 </div>
 ```
 
-:::warning Limitation
+:::warning Ограничение
 :warning: In `i18n` component, slots props are not supported.
 :::
 
 
 ## Places syntax usage
 
-:::danger Important!!
+:::danger Важно!!
 In the next major version, the `place` and `places` props will be deprecated. Please switch to slots syntax.
 :::
 
@@ -187,7 +187,7 @@ In the next major version, the `place` and `places` props will be deprecated. Pl
 :new: 7.2+
 :::
 
-:::warning Notice
+:::warning Обратите внимание
 :warning: In `i18n` component, text content consisting of only white spaces will be omitted.
 :::
 
@@ -239,7 +239,7 @@ Outputs:
 </div>
 ```
 
-:::warning Notice
+:::warning Обратите внимание
 :warning: To use named formatting, all children of `i18n` component must have `place` attribute set. Otherwise it will fallback to list formatting.
 :::
 

@@ -44,7 +44,7 @@ export default {
 </script>
 ```
 
-:::warning Notice
+:::warning Обратите внимание
 :warning: Locale changing is ignored for components that use `sync: false`.
 :::
 

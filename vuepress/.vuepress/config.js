@@ -247,7 +247,7 @@ module.exports = {
             text: 'Экосистема',
             items: [
               {
-                text: 'Офиц. инструментарий',
+                text: 'Оф. инструментарий',
                 items: [
                   {
                     text: 'Плагин для Vue CLI',

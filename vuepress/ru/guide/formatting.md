@@ -66,13 +66,13 @@ const messages = {
 
 ## HTML формат
 
-:::warning Notice
+:::warning Обратите внимание
 :warning: Dynamically localizing arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content.
 
 We recommended using the [component interpolation](interpolation.md) feature.
 :::
 
-:::warning Notice
+:::warning Обратите внимание
 > :new: 8.11+
 
 You can control the use of HTML formatting. see the detail  `warnHtmlInMessage` constructor option and property API.
