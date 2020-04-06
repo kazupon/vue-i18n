@@ -55,9 +55,9 @@ const messages = {
     tos: 'Term of Service',
     term: 'I accept xxx {0}.'
   },
-  ja: {
-    tos: '利用規約',
-    term: '私は xxx の{0}に同意します。'
+  ru: {
+    tos: 'Условия обслуживания',
+    term: 'Я соглашаюсь с xxx {0}.'
   }
 }
 

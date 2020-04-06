@@ -19,7 +19,7 @@ const dateTimeFormats = {
       weekday: 'short', hour: 'numeric', minute: 'numeric'
     }
   },
-  'ja-JP': {
+  'ru-RU': {
     short: {
       year: 'numeric', month: 'short', day: 'numeric'
     },
@@ -50,7 +50,7 @@ Template the below:
 ```html
 <div id="app">
   <p>{{ $d(new Date(), 'short') }}</p>
-  <p>{{ $d(new Date(), 'long', 'ja-JP') }}</p>
+  <p>{{ $d(new Date(), 'long', 'ru-RU') }}</p>
 </div>
 ```
 

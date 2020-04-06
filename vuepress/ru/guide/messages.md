@@ -18,7 +18,7 @@ Based on the above syntax, You can configure the following Locale Messages struc
 
 ```json
 {
-  "en": {  // 'en' Locale
+  "en": {  // локализация 'en'
     "key1": "this is message1", // basic
     "nested": { // nested
       "message1": "this is nested message1"
@@ -33,7 +33,7 @@ Based on the above syntax, You can configure the following Locale Messages struc
       ]
     ]
   },
-  "ja": { // 'ja' Locale
+  "ru": { // локализация 'ru'
     // ...
   }
 }

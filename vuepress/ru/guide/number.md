@@ -15,9 +15,9 @@ const numberFormats = {
       style: 'currency', currency: 'USD'
     }
   },
-  'ja-JP': {
+  'ru-RU': {
     currency: {
-      style: 'currency', currency: 'JPY', currencyDisplay: 'symbol'
+      style: 'currency', currency: 'RUB', currencyDisplay: 'symbol'
     }
   }
 }
@@ -42,7 +42,7 @@ Template the below:
 ```html
 <div id="app">
   <p>{{ $n(100, 'currency') }}</p>
-  <p>{{ $n(100, 'currency', 'ja-JP') }}</p>
+  <p>{{ $n(100, 'currency', 'ru-RU') }}</p>
 </div>
 ```
 
@@ -72,7 +72,7 @@ The following template:
 <div id="app">
   <i18n-n :value="100"></i18n-n>
   <i18n-n :value="100" format="currency"></i18n-n>
-  <i18n-n :value="100" format="currency" locale="ja-JP"></i18n-n>
+  <i18n-n :value="100" format="currency" locale="ru-RU"></i18n-n>
 </div>
 ```
 

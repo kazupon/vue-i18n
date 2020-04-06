@@ -14,9 +14,9 @@ Use `VueI18n` class constructor `locale` option, or `VueI18n#locale` property:
   const app = new Vue({ i18n }).$mount('#app')
 
   // change locale
-  i18n.locale = 'ja'
+  i18n.locale = 'ru'
   // or
-  app.$i18n.locale = 'ja'
+  app.$i18n.locale = 'ru'
 ```
 
 ### fallbackLang replaced
@@ -26,7 +26,7 @@ Use `VueI18n` class constructor `fallbackLocale` option, or
 
 ```js
   const i18n = new VueI18n({
-    locale: 'ja',
+    locale: 'ru',
     fallbackLocale: 'en',
     // ...
   })
@@ -114,7 +114,7 @@ Use `VueI18n` class constructor `messages` option, or
         hello: 'hello world',
         // ...
       },
-      ja: {
+      ru: {
         hello: 'こんにちは、世界',
         // ...
       }
@@ -129,9 +129,9 @@ Use `VueI18n` class constructor `messages` option, or
   // set locale message
   i18n.setLocaleMessage('en', en)
   // or
-  const ja = app.$i18n.getLocaleMessage('ja')
+  const ja = app.$i18n.getLocaleMessage('ru')
   ja.greeting = 'やあ！'
-  app.$i18n.setLocaleMessage('ja', ja)
+  app.$i18n.setLocaleMessage('ru', ja)
 ```
 
 ### Vue.t replaced
@@ -187,7 +187,7 @@ const i18n = new VueI18n({
 })
 
 i18n.te('hello') // -> true
-i18n.te('hallo', 'ja') // -> false
+i18n.te('hallo', 'ru') // -> false
 i18n.te('hello') // -> true
 ```
 
@@ -235,9 +235,9 @@ const i18n = new VueI18n({
 const app = new Vue({ i18n }).$mount('#app')
 
 // change locale
-i18n.locale = 'ja'
+i18n.locale = 'ru'
 // or
-app.$i18n.locale = 'ja'
+app.$i18n.locale = 'ru'
 ```
 
 ## Features

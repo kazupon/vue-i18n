@@ -19,7 +19,7 @@ new Vue({
     locale: 'en',
     messages: {
       en: { hello: 'hi there!' },
-      ja: { hello: 'こんにちは！' }
+      ru: { hello: 'привет всем！' }
     }
   }),
   data: { path: 'hello' }
@@ -58,7 +58,7 @@ new Vue({
     locale: 'en',
     messages: {
       en: { hello: 'hi {name}!' },
-      ja: { hello: 'こんにちは、{name}！' }
+      ru: { hello: 'привет {name}！' }
     }
   }),
   computed: {
@@ -73,7 +73,7 @@ Templates:
 ```html
 <div id="object-syntax">
   <!-- literal -->
-  <p v-t="{ path: 'hello', locale: 'ja', args: { name: 'kazupon' } }"></p>
+  <p v-t="{ path: 'hello', locale: 'ru', args: { name: 'kazupon' } }"></p>
   <!-- data binding via data -->
   <p v-t="{ path: path, args: { name: nickName } }"></p>
 </div>

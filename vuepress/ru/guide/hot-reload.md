@@ -24,10 +24,10 @@ const app = new Vue({
 if (module.hot) {
   module.hot.accept(['./en', './ja'], function () {
     i18n.setLocaleMessage('en', require('./en').default)
-    i18n.setLocaleMessage('ja', require('./ja').default)
+    i18n.setLocaleMessage('ru', require('./ru').default)
     // Or the following hot updates via $i18n property
     // app.$i18n.setLocaleMessage('en', require('./en').default)
-    // app.$i18n.setLocaleMessage('ja', require('./ja').default)
+    // app.$i18n.setLocaleMessage('ru', require('./ru').default)
   })
 }
 ```

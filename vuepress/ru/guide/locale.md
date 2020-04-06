@@ -7,7 +7,7 @@ Sometimes you might want to dynamically change the locale. In that case you can 
 
 ```js
 const i18n = new VueI18n({
-  locale: 'ja', // set locale
+  locale: 'ru', // set locale
   ...
 })
 
@@ -38,7 +38,7 @@ Example:
 export default {
   name: 'locale-changer',
   data () {
-    return { langs: ['ja', 'en'] }
+    return { langs: ['ru', 'en'] }
   }
 }
 </script>

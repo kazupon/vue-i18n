@@ -12,8 +12,8 @@ The following in [single file components example](https://github.com/kazupon/vue
   "en": {
     "hello": "hello world!"
   },
-  "ja": {
-    "hello": "こんにちは、世界！"
+  "ru": {
+    "hello": "Привет мир！"
   }
 }
 </i18n>
@@ -23,7 +23,7 @@ The following in [single file components example](https://github.com/kazupon/vue
     <label for="locale">locale</label>
     <select v-model="locale">
       <option>en</option>
-      <option>ja</option>
+      <option>ru</option>
     </select>
     <p>message: {{ $t('hello') }}</p>
   </div>
@@ -204,8 +204,8 @@ the `i18n` custom blocks below of `YAML` format:
 <i18n>
 en:
   hello: "hello world!"
-ja:
-  hello: "こんにちは、世界！"
+ru:
+  hello: "привет мир!"
 </i18n>
 ```
 
@@ -267,8 +267,8 @@ You can use locale messages with multiple `i18n` custom blocks.
     "en": {
       "hello": "hello world!"
     },
-    "ja": {
-      "hello": "こんにちは、世界！"
+    "ru": {
+      "hello": "Привет мир！"
     }
   }
 </i18n>
@@ -289,10 +289,10 @@ __Translation contains only text__ (Work without deep selector)
 <i18n>
 {
   "en": {
-    "hello": "helloworld!"
+    "hello": "hello world!"
   },
-  "ja": {
-    "hello": "こんにちは、世界"
+  "ru": {
+    "hello": "Привет мир!"
   }
 }
 </i18n>
@@ -319,8 +319,8 @@ __Translation with HTML element__ (Must use deep selector)
   "en": {
     "hello": "hello<span>world!</span>"
   },
-  "ja": {
-    "hello": "こんにちは、<span>世界！</span>"
+  "ru": {
+    "hello": "привет <span>мир!</span>"
   }
 }
 </i18n>
@@ -368,8 +368,8 @@ For example, the following code cannot localize with the locale message of `i18n
   "en": {
     "hello": "hello world"
   },
-  "ja": {
-    "hello": "こんにちは、世界"
+  "ru": {
+    "hello": "привет мир"
   }
 }
 </i18n>

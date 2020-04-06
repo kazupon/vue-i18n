@@ -54,8 +54,8 @@ E.g.
 
 ```javascript
 const messages = {
-  ja: {
-    'Hello, world!': 'こんにちは、世界!'
+  ru: {
+    'Hello, world!': 'Привет мир!'
   }
 }
 ```

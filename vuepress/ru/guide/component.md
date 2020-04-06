@@ -9,7 +9,7 @@ Component based localization example:
 ```js
 // setup locale info for root Vue instance
 const i18n = new VueI18n({
-  locale: 'ja',
+  locale: 'ru',
   messages: {
     en: {
       message: {
@@ -17,7 +17,7 @@ const i18n = new VueI18n({
         greeting: 'good morning'
       }
     },
-    ja: {
+    ru: {
       message: {
         hello: 'こんにちは、世界',
         greeting: 'おはようございます'
@@ -36,7 +36,7 @@ const Component1 = {
   i18n: { // `i18n` option, setup locale info for component
     messages: {
       en: { message: { hello: 'hello component1' } },
-      ja: { message: { hello: 'こんにちは、component1' } }
+      ru: { message: { hello: 'привет component1' } }
     }
   }
 }
@@ -71,7 +71,7 @@ Outputs the following:
 </div>
 ```
 
-As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: `locale: 'ja'`).
+As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: `locale: 'ru'`).
 
 Note that, by default, falling back to root locale generates two warnings in the console:
 
@@ -100,9 +100,9 @@ export default {
       // ...
     }
   },
-  ja: {
+  ru: {
     buttons: {
-      save: "保存",
+      save: "Сохранить",
       // ...
     }
   }
