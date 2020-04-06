@@ -26,7 +26,7 @@ new Vue({
 }).$mount('#string-syntax')
 ```
 
-Templates:
+Шаблон:
 
 ```html
 <div id="string-syntax">
@@ -68,7 +68,7 @@ new Vue({
 }).$mount('#object-syntax')
 ```
 
-Templates:
+Шаблон:
 
 ```html
 <div id="object-syntax">
@@ -112,7 +112,7 @@ new Vue({
 }).$mount('#in-transitions')
 ```
 
-Templates:
+Шаблон:
 
 ```html
 <div id="in-transitions">
@@ -140,7 +140,7 @@ new Vue({
 }).$mount('#in-transitions')
 ```
 
-Templates:
+Шаблон:
 
 ```html
 <div id="in-transitions">
@@ -159,11 +159,11 @@ About the above examples, see the [example](https://github.com/kazupon/vue-i18n/
 
 `$t` is an extended Vue instance method. It has the following pros and cons:
 
-#### Pros
+#### Плюсы
 
 You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
-#### Cons
+#### Минусы
 
 `$t` is executed **every time** when re-render occurs, so it does have translation costs.
 
@@ -171,12 +171,12 @@ You can **flexibly** use mustash syntax `{{}}` in templates and also computed pr
 
 `v-t` is a custom directive. It has the following pros and cons:
 
-#### Pros
+#### Плюсы
 
 `v-t` has **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions).
 
 Therefore it's possible to make **more performance optimizations**.
 
-#### Cons
+#### Минусы
 
 `v-t` cannot be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of the `createRenderer` function.

@@ -73,7 +73,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-the following output:
+Результат:
 
 ```html
 <div id="app">
