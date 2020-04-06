@@ -24,7 +24,7 @@ const i18n = new VueI18n({
 })
 ```
 
-Template:
+Шаблон:
 
 ```html
 <p>{{ $t('hello') }}</p>

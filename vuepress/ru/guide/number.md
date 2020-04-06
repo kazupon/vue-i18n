@@ -37,7 +37,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Template the below:
+Шаблон:
 
 ```html
 <div id="app">
@@ -47,7 +47,7 @@ Template the below:
 ```
 
 
-Output the below:
+Результат:
 
 ```html
 <div id="app">

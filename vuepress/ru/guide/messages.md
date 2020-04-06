@@ -91,7 +91,7 @@ const messages = {
 }
 ```
 
-Template:
+Шаблон:
 
 ```html
 <p>{{ $t('message.linked') }}</p>
@@ -132,7 +132,7 @@ const messages = {
 <p class="error">{{ $t('message.missingHomeAddress') }}</p>
 ```
 
-Output the below:
+Результат:
 
 ```html
 <label>Home address</label>
@@ -174,7 +174,7 @@ const messages = {
 }
 ```
 
-Template:
+Шаблон:
 
 ```html
 <p>{{ $t('message.linked') }}</p>

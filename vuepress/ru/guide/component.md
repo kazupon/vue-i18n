@@ -19,8 +19,8 @@ const i18n = new VueI18n({
     },
     ru: {
       message: {
-        hello: 'こんにちは、世界',
-        greeting: 'おはようございます'
+        hello: 'привет мир',
+        greeting: 'доброе утро'
       }
     }
   }
@@ -49,8 +49,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Template:
-
+Шаблон:
 
 ```html
 <div id="app">
@@ -59,7 +58,7 @@ Template:
 </div>
 ```
 
-Outputs the following:
+Результат:
 
 ```html
 <div id="app">
@@ -109,7 +108,8 @@ export default {
 }
 ```
 
-Components:
+Компоненты:
+
 ```js
 import commonMessage from './locales/common' // import common locale messages
 
