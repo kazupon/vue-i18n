@@ -1,4 +1,4 @@
-# Форматы сообщений
+# Формат сообщений локализации
 
 ## Именованный формат
 
@@ -10,6 +10,11 @@ const messages = {
     message: {
       hello: '{msg} world'
     }
+  },
+  ru: {
+    message: {
+      hello: '{msg} мир'
+    }
   }
 }
 ```
@@ -17,13 +22,13 @@ const messages = {
 Шаблон:
 
 ```html
-<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
+<p>{{ $t('message.hello', { msg: 'привет' }) }}</p>
 ```
 
 Результат:
 
 ```html
-<p>hello world</p>
+<p>привет мир</p>
 ```
 
 ## Формат списков
@@ -36,6 +41,11 @@ const messages = {
     message: {
       hello: '{0} world'
     }
+  },
+  ru: {
+    message: {
+      hello: '{0} мир'
+    }
   }
 }
 ```
@@ -43,42 +53,42 @@ const messages = {
 Шаблон:
 
 ```html
-<p>{{ $t('message.hello', ['hello']) }}</p>
+<p>{{ $t('message.hello', ['привееет']) }}</p>
 ```
 
 Результат:
 
 ```html
-<p>hello world</p>
+<p>привееет мир</p>
 ```
 
-Форматирование списков также принимает array-like объекты:
+Форматирование списков также принимает объекты, соответствующие по структуре массиву:
 
 ```html
-<p>{{ $t('message.hello', {'0': 'hello'}) }}</p>
+<p>{{ $t('message.hello', {'0': 'привееет'}) }}</p>
 ```
 
 Результат:
 
 ```html
-<p>hello world</p>
+<p>привееет мир</p>
 ```
 
 ## HTML формат
 
 :::warning Обратите внимание
-:warning: Dynamically localizing arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content.
+:warning: Динамическая локализация произвольного HTML на вебсайте может быть очень опасна, потому что легко может привести к XSS-уязвимостям. Используйте HTML-интерполяцию только для доверенного контента и никогда на пользовательском.
 
-We recommended using the [component interpolation](interpolation.md) feature.
+Рекомендуем в таких случаях использовать возможность [интерполяции компонента](interpolation.md).
 :::
 
 :::warning Обратите внимание
 > :new: 8.11+
 
-You can control the use of HTML formatting. see the detail  `warnHtmlInMessage` constructor option and property API.
+Можно управлять использованием HTML форматирования. Для подробностей см. опцию конструктора `warnHtmlInMessage` и свойства API.
 :::
 
-In some cases you might want to render your translation as an HTML message and not a static string.
+Иногда требуется отобразить перевод HTML-сообщением, а не статической строкой.
 
 
 ```js
@@ -86,6 +96,11 @@ const messages = {
   en: {
     message: {
       hello: 'hello <br> world'
+    }
+  },
+  ru: {
+    message: {
+      hello: 'привет <br> мир'
     }
   }
 }
@@ -98,17 +113,16 @@ const messages = {
 <p v-html="$t('message.hello')"></p>
 ```
 
-Output (instead of the pre-formatted message )
-
+Результат (вместо отформатированного сообщения)
 
 ```html
 <p>hello
-<!--<br> exists but is rendered as html and not a string-->
+<!-- <br> существует, но отрендерен как html, а не как строка -->
 world</p>
 ```
 
 
-## Поддержка формата ruby on rails i18n
+## Формат ruby on rails i18n
 
 Сообщения локализации:
 
@@ -118,6 +132,11 @@ const messages = {
     message: {
       hello: '%{msg} world'
     }
+  },
+  ru: {
+    message: {
+      hello: '%{msg} мир'
+    }
   }
 }
 ```
@@ -125,25 +144,25 @@ const messages = {
 Шаблон:
 
 ```html
-<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
+<p>{{ $t('message.hello', { msg: 'привет' }) }}</p>
 ```
 
 Результат:
 
 ```html
-<p>hello world</p>
+<p>привет мир</p>
 ```
 
 ## Пользовательский формат
 
-Sometimes, you may need to translate using custom formatting (e.g. [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
+Иногда может потребоваться осуществлять перевод для собственного формата (например, для [синтаксиса сообщений ICU](http://userguide.icu-project.org/formatparse/messages)).
 
-You can do that with a custom formatter that implements the [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
+Это возможно реализовать с помощью специального пользовательского Formatter, который реализует [интерфейс Formatter](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
 
-The following custom formatter with ES2015 class syntax:
+Пример пользовательского Formatter с синтаксисом класса ES2015:
 
 ```js
-// Custom Formatter implementation
+// Реализация пользовательского Formatter
 class CustomFormatter {
      constructor (options) {
        // ...
@@ -186,20 +205,23 @@ class CustomFormatter {
      }
 }
 
-// register with `formatter` option
+// Регистрация через опцию `formatter`
 const i18n = new VueI18n({
   locale: 'en-US',
-  formatter: new CustomFormatter(/* here the constructor options */),
+  formatter: new CustomFormatter(/* опции конструктора */),
   messages: {
     'en-US': {
+      // ...
+    },
+    'ru-RU': {
       // ...
     },
     // ...
   }
 })
 
-// Run!
+// Запускаем приложение!
 new Vue({ i18n }).$mount('#app')
 ```
 
-You can check [the custom formatter official example](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom).
+Можете изучить [официальный пример пользовательского formatter](https://github.com/kazupon/vue-i18n/tree/dev/examples/formatting/custom).
