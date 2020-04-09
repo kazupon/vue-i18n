@@ -90,7 +90,7 @@ new Vue({
 
 ## Use with transitions
 
-:::tip Поддерживаемая версия
+:::tip Поддержка с версии
 :new: 8.7+
 :::
 
