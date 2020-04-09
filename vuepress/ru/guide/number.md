@@ -12,12 +12,15 @@
 const numberFormats = {
   'en-US': {
     currency: {
-      style: 'currency', currency: 'USD'
+      style: 'currency',
+      currency: 'USD'
     }
   },
   'ru-RU': {
     currency: {
-      style: 'currency', currency: 'RUB', currencyDisplay: 'symbol'
+      style: 'currency',
+      currency: 'RUB',
+      currencyDisplay: 'symbol'
     }
   }
 }

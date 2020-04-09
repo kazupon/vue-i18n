@@ -17,7 +17,7 @@ In the above message, if you use `$t`, you will probably try to compose the foll
 ```js
 const messages = {
   en: {
-    term1: 'I Accept xxx\'s',
+    term1: "I Accept xxx's",
     term2: 'Terms of Service Agreement'
   }
 }
@@ -49,6 +49,7 @@ You can avoid it using the `i18n` functional component. For example:
   <!-- ... -->
 </div>
 ```
+
 ```js
 const messages = {
   en: {
@@ -93,7 +94,7 @@ The children of `i18n` functional component are interpolated with locale message
 :::
 is interpolated with `term` locale message.
 
-In the above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their order of appearance.
+In the above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their order of appearance.
 
 ## Использование синтаксиса слотов
 
@@ -149,7 +150,8 @@ new Vue({
 <div id="app">
   <!-- ... -->
   <p>
-    You can <a href="/change">change your flight</a> until <span>15</span> minutes from departure.
+    You can <a href="/change">change your flight</a> until
+    <span>15</span> minutes from departure.
   </p>
   <!-- ... -->
 </div>
@@ -202,6 +204,7 @@ Named formatting is supported with the help of `place` attribute. For example:
   <!-- ... -->
 </div>
 ```
+
 ```js
 const messages = {
   en: {
@@ -232,7 +235,8 @@ new Vue({
 <div id="app">
   <!-- ... -->
   <p>
-    You can <a href="/change">change your flight</a> until <span>15</span> minutes from departure.
+    You can <a href="/change">change your flight</a> until
+    <span>15</span> minutes from departure.
   </p>
   <!-- ... -->
 </div>
@@ -260,7 +264,8 @@ If you still want to interpolate text content in named formatting, you could def
 <div id="app">
   <!-- ... -->
   <p>
-    You can <a href="/refund">refund your ticket</a> until 30 minutes from departure.
+    You can <a href="/refund">refund your ticket</a> until 30 minutes from
+    departure.
   </p>
   <!-- ... -->
 </div>

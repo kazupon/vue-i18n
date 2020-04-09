@@ -1,16 +1,15 @@
 # Запасная локализация
 
-*Summary: Use `fallbackLocale: '<lang>'` to choose which language to use when your preferred language lacks a translation.*
+_Summary: Use `fallbackLocale: '<lang>'` to choose which language to use when your preferred language lacks a translation._
 
-Sometimes some items will not be translated into some languages.  In this example, the item `hello` is available in English but not Japanese:
+Sometimes some items will not be translated into some languages. In this example, the item `hello` is available in English but not Japanese:
 
 ```js
 const messages = {
   en: {
     hello: 'Hello, world!'
   },
-  ru: {
-  }
+  ru: {}
 }
 ```
 
@@ -47,7 +46,7 @@ To suppress these warnings (while keeping those which warn of the total absence 
 
 ## Fallback interpolation
 
-*Summary: Set `formatFallbackMessages: true` to do template interpolation on translation keys when your language lacks a translation for a key.*
+_Summary: Set `formatFallbackMessages: true` to do template interpolation on translation keys when your language lacks a translation for a key._
 
 Since the keys to the translations are strings, you can use a user-readable message (for a particular language) as a key.
 E.g.
@@ -62,7 +61,7 @@ const messages = {
 
 This is useful because you don't have to specify a translation for the string "Hello, world!" into English.
 
-In fact, you can even include template parameters in a key.  Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys *are* your templates.
+In fact, you can even include template parameters in a key. Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys _are_ your templates.
 
 ```javascript
 const messages = {

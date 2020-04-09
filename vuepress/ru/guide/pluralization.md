@@ -2,7 +2,7 @@
 
 Есть возможность использовать плюрализацию в переводимых сообщениях. Для этого необходимо определять переводы для различных случаев с помощью разделителя `|`.
 
-*В шаблоне в таких случаях вместо `$t()` необходимо использовать `$tc()`.*
+_В шаблоне в таких случаях вместо `$t()` необходимо использовать `$tc()`._
 
 Сообщения локализации:
 
@@ -95,29 +95,29 @@ const messages = {
  * @param choice {number} индекс выбора, переданный в $tc: `$tc('path.to.rule', choiceIndex)`
  * @param choicesLength {number} общее количество доступных вариантов
  * @returns финальный индекс для выбора соответственного варианта слова
-**/
-VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
+ **/
+VueI18n.prototype.getChoiceIndex = function(choice, choicesLength) {
   // this === экземпляр VueI18n, поэтому свойство locale также здесь существует
   if (this.locale !== 'ru') {
     // возвращаемся к реализации по умолчанию
   }
 
   if (choice === 0) {
-    return 0;
+    return 0
   }
 
-  const teen = choice > 10 && choice < 20;
-  const endsWithOne = choice % 10 === 1;
+  const teen = choice > 10 && choice < 20
+  const endsWithOne = choice % 10 === 1
 
   if (!teen && endsWithOne) {
-    return 1;
+    return 1
   }
 
   if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-    return 2;
+    return 2
   }
 
-  return (choicesLength < 4) ? 2 : 3;
+  return choicesLength < 4 ? 2 : 3
 }
 ```
 

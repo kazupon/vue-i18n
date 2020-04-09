@@ -2,21 +2,21 @@
 
 ## Глобальная конфигурация
 
-### lang  replaced
+### lang replaced
 
 Use `VueI18n` class constructor `locale` option, or `VueI18n#locale` property:
 
 ```js
-  const i18n = new VueI18n({
-    locale: 'en',
-    // ...
-  })
-  const app = new Vue({ i18n }).$mount('#app')
+const i18n = new VueI18n({
+  locale: 'en'
+  // ...
+})
+const app = new Vue({ i18n }).$mount('#app')
 
-  // change locale
-  i18n.locale = 'ru'
-  // or
-  app.$i18n.locale = 'ru'
+// change locale
+i18n.locale = 'ru'
+// or
+app.$i18n.locale = 'ru'
 ```
 
 ### fallbackLang replaced
@@ -25,17 +25,17 @@ Use `VueI18n` class constructor `fallbackLocale` option, or
 `VueI18n#fallbackLocale` property:
 
 ```js
-  const i18n = new VueI18n({
-    locale: 'ru',
-    fallbackLocale: 'en',
-    // ...
-  })
-  const app = new Vue({ i18n }).$mount('#app')
+const i18n = new VueI18n({
+  locale: 'ru',
+  fallbackLocale: 'en'
+  // ...
+})
+const app = new Vue({ i18n }).$mount('#app')
 
-  // change fallback locale
-  i18n.fallbackLocale = 'zh'
-  // or
-  app.$i18n.fallbackLocale = 'zh'
+// change fallback locale
+i18n.fallbackLocale = 'zh'
+// or
+app.$i18n.fallbackLocale = 'zh'
 ```
 
 ### missingHandler replaced
@@ -48,7 +48,7 @@ const i18n = new VueI18n({
   // ...
   missing: (locale, key, vm, values) => {
     // handle translation missing
-  },
+  }
   // ...
 })
 const app = new Vue({ i18n }).$mount('#app')
@@ -69,34 +69,34 @@ Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter`
 property:
 
 ```js
-  class CustomFormatter {
-    format (message, ...values) {
-      // something render logic
-      return 'something string'
-    }
+class CustomFormatter {
+  format(message, ...values) {
+    // something render logic
+    return 'something string'
   }
+}
 
-  const i18n = new VueI18n({
-    // ...
-    formatter: new CustomFormatter(),
-    // ...
-  })
-  const app = new Vue({ i18n }).$mount('#app')
+const i18n = new VueI18n({
+  // ...
+  formatter: new CustomFormatter()
+  // ...
+})
+const app = new Vue({ i18n }).$mount('#app')
 
-  // change custom formatter
-  i18n.formatter = {
-    format: (message, ...values) => {
-      // something render logic
-      return 'something string'
-    }
+// change custom formatter
+i18n.formatter = {
+  format: (message, ...values) => {
+    // something render logic
+    return 'something string'
   }
-  // or
-  app.$i18n.formatter = {
-    format: (message, ...values) => {
-      // something render logic
-      return 'something string'
-    }
+}
+// or
+app.$i18n.formatter = {
+  format: (message, ...values) => {
+    // something render logic
+    return 'something string'
   }
+}
 ```
 
 ## Глобальные методы
@@ -107,31 +107,31 @@ Use `VueI18n` class constructor `messages` option, or
 `VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage` methods:
 
 ```js
-  const i18n = new VueI18n({
-    // ...
-    messages: {
-      en: {
-        hello: 'hello world',
-        // ...
-      },
-      ru: {
-        hello: 'привет мир',
-        // ...
-      }
+const i18n = new VueI18n({
+  // ...
+  messages: {
+    en: {
+      hello: 'hello world'
+      // ...
     },
-    // ...
-  })
-  const app = new Vue({ i18n }).$mount('#app')
+    ru: {
+      hello: 'привет мир'
+      // ...
+    }
+  }
+  // ...
+})
+const app = new Vue({ i18n }).$mount('#app')
 
-  // get locale message
-  const en = i18n.getLocaleMessage('en')
-  en.greeting = 'hi!'
-  // set locale message
-  i18n.setLocaleMessage('en', en)
-  // or
-  const ru = app.$i18n.getLocaleMessage('ru')
-  ru.greeting = 'Привет!'
-  app.$i18n.setLocaleMessage('ru', ru)
+// get locale message
+const en = i18n.getLocaleMessage('en')
+en.greeting = 'hi!'
+// set locale message
+i18n.setLocaleMessage('en', en)
+// or
+const ru = app.$i18n.getLocaleMessage('ru')
+ru.greeting = 'Привет!'
+app.$i18n.setLocaleMessage('ru', ru)
 ```
 
 ### Vue.t replaced
@@ -145,7 +145,7 @@ const i18n = new VueI18n({
     en: {
       greeting: 'hi {name}'
     }
-  },
+  }
   // ...
 })
 
@@ -163,7 +163,7 @@ const i18n = new VueI18n({
     en: {
       apple: 'no apples | one apple | {count} apples'
     }
-  },
+  }
   // ...
 })
 
@@ -182,7 +182,7 @@ const i18n = new VueI18n({
     en: {
       hello: 'hello world'
     }
-  },
+  }
   // ...
 })
 
@@ -205,7 +205,7 @@ const i18n = new VueI18n({
     en: {
       greeting: 'hi {name}'
     }
-  },
+  }
   // ...
 })
 
@@ -223,13 +223,13 @@ const Component1 = {
 
 ## Свойства экземпляра
 
-### $lang replaced
+### \$lang replaced
 
 Use `VueI18n#locale` property:
 
 ```js
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: 'en'
   // ...
 })
 const app = new Vue({ i18n }).$mount('#app')
@@ -253,26 +253,30 @@ const app = new Vue({
   data: { loading: '' }
 }).$mount('#app')
 
-function loadLocaleMessage (locale, cb) {
+function loadLocaleMessage(locale, cb) {
   return fetch('/locales/' + locale, {
     method: 'get',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     }
-  }).then((res) => {
-    return res.json()
-  }).then((json) => {
-    if (Object.keys(json).length === 0) {
-      return Promise.reject(new Error('locale empty !!'))
-    } else {
-      return Promise.resolve(json)
-    }
-  }).then((message) => {
-    cb(null, message)
-  }).catch((error) => {
-    cb(error)
   })
+    .then(res => {
+      return res.json()
+    })
+    .then(json => {
+      if (Object.keys(json).length === 0) {
+        return Promise.reject(new Error('locale empty !!'))
+      } else {
+        return Promise.resolve(json)
+      }
+    })
+    .then(message => {
+      cb(null, message)
+    })
+    .catch(error => {
+      cb(error)
+    })
 }
 
 app.loading = 'loading ...'

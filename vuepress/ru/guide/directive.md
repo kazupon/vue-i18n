@@ -61,7 +61,9 @@ new Vue({
     }
   }),
   computed: {
-    nickName () { return 'kazupon' }
+    nickName() {
+      return 'kazupon'
+    }
   },
   data: { path: 'hello' }
 }).$mount('#object-syntax')
@@ -104,7 +106,7 @@ new Vue({
   i18n: new VueI18n({
     locale: 'en',
     messages: {
-      en: { preserve: 'with preserve' },
+      en: { preserve: 'with preserve' }
     }
   }),
   data: { toggle: true }
@@ -131,7 +133,7 @@ new Vue({
   i18n: new VueI18n({
     locale: 'en',
     messages: {
-      en: { preserve: 'with preserve' },
+      en: { preserve: 'with preserve' }
     },
     preserveDirectiveContent: true
   }),

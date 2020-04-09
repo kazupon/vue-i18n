@@ -13,7 +13,7 @@ The following in [single file components example](https://github.com/kazupon/vue
     "hello": "hello world!"
   },
   "ru": {
-    "hello": "Привет мир！"
+    "hello": "Привет мир!"
   }
 }
 </i18n>
@@ -58,6 +58,7 @@ npm i --save-dev @kazupon/vue-i18n-loader
 For Webpack the configuration below is required:
 
 for vue-loader v15 or later:
+
 ```js
 module.exports = {
   // ...
@@ -65,7 +66,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue-loader'
       },
       {
         resourceQuery: /blockType=i18n/,
@@ -74,12 +75,13 @@ module.exports = {
       }
       // ...
     ]
-  },
+  }
   // ...
 }
 ```
 
 for vue-loader v14:
+
 ```js
 module.exports = {
   // ...
@@ -94,10 +96,10 @@ module.exports = {
             i18n: '@kazupon/vue-i18n-loader'
           }
         }
-      },
+      }
       // ...
     ]
-  },
+  }
   // ...
 }
 ```
@@ -109,21 +111,23 @@ module.exports = {
 In order to do that we have to create a `vue.config.js` at the root of our project. Once we have done that, we have to include the following:
 
 for vue-loader v15 or later:
+
 ```js
 module.exports = {
   chainWebpack: config => {
     config.module
-      .rule("i18n")
+      .rule('i18n')
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
-      .use("i18n")
-        .loader("@kazupon/vue-i18n-loader")
-        .end();
+      .use('i18n')
+      .loader('@kazupon/vue-i18n-loader')
+      .end()
   }
 }
 ```
 
 for vue-loader v14:
+
 ```js
 const merge = require('deepmerge')
 
@@ -142,6 +146,7 @@ module.exports = {
   }
 }
 ```
+
 _Don 't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
 
 If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/ru/guide/webpack.html).
@@ -149,6 +154,7 @@ If you want to read more about modifying the existing configuration [click here]
 ## Laravel-Mix
 
 for Laravel-mix 4 with vue-loader v15 or later:
+
 ```js
 // Extend Mix with the "i18n" method, that loads the vue-i18n-loader
 mix.extend( 'i18n', new class {
@@ -202,35 +208,37 @@ the `i18n` custom blocks below of `YAML` format:
 
 ```html
 <i18n>
-en:
-  hello: "hello world!"
-ru:
-  hello: "привет мир!"
+  en:
+    hello: "hello world!"
+  ru:
+    hello: "привет мир!"
 </i18n>
 ```
 
 Webpack conf the below:
 
 for vue-loader v15 or later:
+
 ```js
 // Vue CLI 3.0
 module.exports = {
   chainWebpack: config => {
     config.module
-      .rule("i18n")
+      .rule('i18n')
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
-      .use("i18n")
-        .loader("@kazupon/vue-i18n-loader")
-        .end()
+      .use('i18n')
+      .loader('@kazupon/vue-i18n-loader')
+      .end()
       .use('yaml')
-        .loader('yaml-loader')
-        .end()
+      .loader('yaml-loader')
+      .end()
   }
 }
 ```
 
 for vue-loader v14:
+
 ```js
 module.exports = {
   // ...
@@ -247,10 +255,10 @@ module.exports = {
             i18n: '@kazupon/vue-i18n-loader'
           }
         }
-      },
+      }
       // ...
     ]
-  },
+  }
   // ...
 }
 ```
@@ -267,7 +275,7 @@ You can use locale messages with multiple `i18n` custom blocks.
       "hello": "hello world!"
     },
     "ru": {
-      "hello": "Привет мир！"
+      "hello": "Привет мир!"
     }
   }
 </i18n>
@@ -279,21 +287,21 @@ In this way, multiple custom blocks useful when want to be used as module.
 
 ## Локальные стили
 
-When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/ru/guide/scoped-css.html#%D0%BA%D0%BE%D1%80%D0%BD%D0%B5%D0%B2%D0%BE%D0%B9-%D1%8Dn%D0%B5%D0%BC%D0%B5%D0%BD%D1%82-%D0%B4%D0%BE%D1%87%D0%B5%D1%80%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0) for styling an element __*inside*__ the translation string. For example:
+When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/ru/guide/scoped-css.html#%D0%BA%D0%BE%D1%80%D0%BD%D0%B5%D0%B2%D0%BE%D0%B9-%D1%8Dn%D0%B5%D0%BC%D0%B5%D0%BD%D1%82-%D0%B4%D0%BE%D1%87%D0%B5%D1%80%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0) for styling an element **_inside_** the translation string. For example:
 
-__Translation contains only text__ (Work without deep selector)
+**Translation contains only text** (Work without deep selector)
 
 ```html
 ...
 <i18n>
-{
-  "en": {
-    "hello": "hello world!"
-  },
-  "ru": {
-    "hello": "Привет мир!"
+  {
+    "en": {
+      "hello": "hello world!"
+    },
+    "ru": {
+      "hello": "Привет мир!"
+    }
   }
-}
 </i18n>
 ...
 <template>
@@ -304,24 +312,25 @@ __Translation contains only text__ (Work without deep selector)
 ...
 <!-- Will work -->
 <style>
-.parent p {
-  color: #42b883;
-}
+  .parent p {
+    color: #42b883;
+  }
 </style>
 ```
 
-__Translation with HTML element__ (Must use deep selector)
+**Translation with HTML element** (Must use deep selector)
+
 ```html
 ...
 <i18n>
-{
-  "en": {
-    "hello": "hello<span>world!</span>"
-  },
-  "ru": {
-    "hello": "привет <span>мир!</span>"
+  {
+    "en": {
+      "hello": "hello<span>world!</span>"
+    },
+    "ru": {
+      "hello": "привет <span>мир!</span>"
+    }
   }
-}
 </i18n>
 ...
 <template>
@@ -332,24 +341,24 @@ __Translation with HTML element__ (Must use deep selector)
 ...
 <!-- Won't work -->
 <style>
-.parent p {
-  color: #42b883;
-}
+  .parent p {
+    color: #42b883;
+  }
 
-.parent p span{
-  color: red;
-}
+  .parent p span {
+    color: red;
+  }
 </style>
 
 <!-- Will work -->
 <style>
-.parent p {
-  color: #42b883;
-}
+  .parent p {
+    color: #42b883;
+  }
 
-.parent p >>> span{
-  color: red;
-}
+  .parent p >>> span {
+    color: red;
+  }
 </style>
 ```
 
@@ -361,18 +370,18 @@ For example, the following code cannot localize with the locale message of `i18n
 
 ```html
 <i18n>
-{
-  "en": {
-    "hello": "hello world"
-  },
-  "ru": {
-    "hello": "привет мир"
+  {
+    "en": {
+      "hello": "hello world"
+    },
+    "ru": {
+      "hello": "привет мир"
+    }
   }
-}
 </i18n>
 
 <template functional>
-  <!-- 'hello' of locale messages of parent instance -->
+  <!-- Сообщение локализации 'hello' из родительского экземпляра -->
   <p>{{ parent.$t('hello') }}</p>
 </template>
 ```

@@ -33,7 +33,8 @@ const Component1 = {
      <p>Component1 locale messages: {{ $t("message.hello") }}</p>
      <p>Fallback global locale messages: {{ $t("message.greeting") }}</p>
    </div>`,
-  i18n: { // `i18n` option, setup locale info for component
+  i18n: {
+    // `i18n` option, setup locale info for component
     messages: {
       en: { message: { hello: 'hello component1' } },
       ru: { message: { hello: 'привет component1' } }
@@ -90,17 +91,18 @@ Sometimes you may want to import shared locale messages for certain components, 
 You can use `sharedMessages` options of `i18n`.
 
 Common Locale Messages example:
+
 ```js
 export default {
   en: {
     buttons: {
-      save: "Save",
+      save: 'Save'
       // ...
     }
   },
   ru: {
     buttons: {
-      save: "Сохранить",
+      save: 'Сохранить'
       // ...
     }
   }
@@ -140,11 +142,8 @@ When using a functional component, all data (including props, children, slots, p
 ```html
 ...
 <div>
-  <a
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer">
-    <img src="" :alt="parent.$t('message.hello')">
+  <a href="#" target="_blank" rel="noopener noreferrer">
+    <img src="" :alt="parent.$t('message.hello')" />
   </a>
 </div>
 ...

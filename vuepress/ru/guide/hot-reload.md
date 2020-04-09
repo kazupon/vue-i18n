@@ -16,13 +16,13 @@ const i18n = new VueI18n({
 
 // Run app
 const app = new Vue({
-  i18n,
+  i18n
   // ...
 }).$mount('#app')
 
 // Hot updates
 if (module.hot) {
-  module.hot.accept(['./en', './ru'], function () {
+  module.hot.accept(['./en', './ru'], function() {
     i18n.setLocaleMessage('en', require('./en').default)
     i18n.setLocaleMessage('ru', require('./ru').default)
     // Or the following hot updates via $i18n property

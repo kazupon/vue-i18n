@@ -10,23 +10,23 @@ sidebar: auto
 
 #### i18n
 
-  * **Тип:** `I18nOptions`
+- **Тип:** `I18nOptions`
 
 Component based localization option.
 
-  * **См. также:** `VueI18n` class constructor options
+- **См. также:** `VueI18n` class constructor options
 
 ### Внедряемые методы
 
-#### $t
+#### \$t
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{Locale} locale`: опционально
-    * `{Array | Object} values`: опционально
+  - `{Path} key`: обязательный
+  - `{Locale} locale`: опционально
+  - `{Array | Object} values`: опционально
 
-  * **Возвращает:** `TranslateResult`
+- **Возвращает:** `TranslateResult`
 
 Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
 
@@ -34,31 +34,31 @@ Localize the locale message of `key`. Localize in preferentially component local
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
 :::
 
-#### $tc
+#### \$tc
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{number} choice`: опционально, по умолчанию `1`
-    * `{Locale} locale`: опционально
-    * `{string | Array | Object} values`: опционально
+  - `{Path} key`: обязательный
+  - `{number} choice`: опционально, по умолчанию `1`
+  - `{Locale} locale`: опционально
+  - `{string | Array | Object} values`: опционально
 
-  * **Возвращает:** `TranslateResult`
+- **Возвращает:** `TranslateResult`
 
-Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of $t.
+Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of \$t.
 
 :::danger Совет
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $tc = this.$tc.bind(this)`).
 :::
 
-#### $te
+#### \$te
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{Locale} locale`: опционально
+  - `{Path} key`: обязательный
+  - `{Locale} locale`: опционально
 
-  * **Возвращает:** `boolean`
+- **Возвращает:** `boolean`
 
 Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
 
@@ -66,17 +66,17 @@ Check whether key exists. In Vue instance, If not specified component locale mes
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $te = this.$te.bind(this)`).
 :::
 
-#### $d
+#### \$d
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{number | Date} value`: обязательный
-    * `{Path | Object} key`: опционально
-    * `{Locale | Object} locale`: опционально
+  - `{number | Date} value`: обязательный
+  - `{Path | Object} key`: опционально
+  - `{Locale | Object} locale`: опционально
 
-  * **Возвращает:** `DateTimeFormatResult`
+- **Возвращает:** `DateTimeFormatResult`
 
 Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
@@ -86,17 +86,17 @@ If the datetime format of `key` not exist in `dateTimeFormats` option, fallback 
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
 :::
 
-#### $n
+#### \$n
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{number} value`: обязательный
-    * `{Path | Object} format`: опционально
-    * `{Locale} locale`: опционально
+  - `{number} value`: обязательный
+  - `{Path | Object} format`: опционально
+  - `{Locale} locale`: опционально
 
-  * **Возвращает:** `NumberFormatResult`
+- **Возвращает:** `NumberFormatResult`
 
 Localize the number of `value` with number format of `format`. The number format of `format` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
 
@@ -104,19 +104,19 @@ If the number format of `format` not exist in `numberFormats` option, fallback t
 
 If the second `format` argument specified as an object, it should have the following properties:
 
-* `key {Path}`: опционально, форматируемое число
-* `locale {Locale}`: опционально, локализация
-* `style {string}`: опционально, опция форматирования чисел
-* `currency {string}`: опционально, опция форматирования чисел
-* `currencyDisplay {string}`: опционально, опция форматирования чисел
-* `useGrouping {string}`: опционально, опция форматирования чисел
-* `minimumIntegerDigits {string}`: опционально, опция форматирования чисел
-* `minimumFractionDigits {string}`: опционально, опция форматирования чисел
-* `maximumFractionDigits {string}`: опционально, опция форматирования чисел
-* `minimumSignificantDigits {string}`: опционально, опция форматирования чисел
-* `maximumSignificantDigits {string}`: опционально, опция форматирования чисел
-* `localeMatcher {string}`: опционально, опция форматирования чисел
-* `formatMatcher {string}`: опционально, опция форматирования чисел
+- `key {Path}`: опционально, форматируемое число
+- `locale {Locale}`: опционально, локализация
+- `style {string}`: опционально, опция форматирования чисел
+- `currency {string}`: опционально, опция форматирования чисел
+- `currencyDisplay {string}`: опционально, опция форматирования чисел
+- `useGrouping {string}`: опционально, опция форматирования чисел
+- `minimumIntegerDigits {string}`: опционально, опция форматирования чисел
+- `minimumFractionDigits {string}`: опционально, опция форматирования чисел
+- `maximumFractionDigits {string}`: опционально, опция форматирования чисел
+- `minimumSignificantDigits {string}`: опционально, опция форматирования чисел
+- `maximumSignificantDigits {string}`: опционально, опция форматирования чисел
+- `localeMatcher {string}`: опционально, опция форматирования чисел
+- `formatMatcher {string}`: опционально, опция форматирования чисел
 
 Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
@@ -126,11 +126,11 @@ Note that you need to guarantee this context equal to component instance in life
 
 ### Внедряемые свойства
 
-#### $i18n
+#### \$i18n
 
-  * **Тип:** `I18n`
+- **Тип:** `I18n`
 
-  * **Только для чтения**
+- **Только для чтения**
 
 Get a `VueI18n` instance. If you are specify.
 
@@ -138,13 +138,13 @@ If you have specified an `i18n` option at component options, you will be able to
 
 ## Класс `VueI18n`
 
-`Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+`VueI18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Статические свойства
 
 #### version
 
-  * **Тип:** `string`
+- **Тип:** `string`
 
 vue-i18n version.
 
@@ -152,13 +152,13 @@ vue-i18n version.
 
 > :new: 7.0+
 
-  * **Тип:** `IntlAvailability`
+- **Тип:** `IntlAvailability`
 
 Whether the following internationalization features are available:
 
-  * `{boolean} dateTimeFormat`: locale sensitive datetime formatting
+- `{boolean} dateTimeFormat`: locale sensitive datetime formatting
 
-  * `{boolean} numberFormat`: locale sensitive number formatting
+- `{boolean} numberFormat`: locale sensitive number formatting
 
 The above internationalization features are depends on [the browser environments](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
 
@@ -168,25 +168,25 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 #### locale
 
-  * **Тип:** `Locale`
+- **Тип:** `Locale`
 
-  * **По умолчанию:** `'en-US'`
+- **По умолчанию:** `'en-US'`
 
 The locale of localization.
 
 #### fallbackLocale
 
-  * **Тип:** `Locale`
+- **Тип:** `Locale`
 
-  * **По умолчанию:** `'en-US'`
+- **По умолчанию:** `'en-US'`
 
 The locale of fallback localization.
 
 #### messages
 
-  * **Тип:** `LocaleMessages`
+- **Тип:** `LocaleMessages`
 
-  * **По умолчанию:** `{}`
+- **По умолчанию:** `{}`
 
 The locale messages of localization.
 
@@ -194,43 +194,43 @@ The locale messages of localization.
 
 > :new: 7.0+
 
-  * **Тип:** `DateTimeFormats`
+- **Тип:** `DateTimeFormats`
 
-  * **По умолчанию:** `{}`
+- **По умолчанию:** `{}`
 
 The datetime formats of localization.
 
-  * **См. также:** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+- **См. также:** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
 > :new: 7.0+
 
-  * **Тип:** `NumberFormats`
+- **Тип:** `NumberFormats`
 
-  * **По умолчанию:** `{}`
+- **По умолчанию:** `{}`
 
 The number formats of localization.
 
-  * **См. также:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+- **См. также:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### availableLocales
 
 > :new: 8.9.0+
 
-  * **Тип:** `Locale[]`
+- **Тип:** `Locale[]`
 
-  * **По умолчанию:** `[]`
+- **По умолчанию:** `[]`
 
-  * **Примеры:** `["en", "ru"]`
+- **Примеры:** `["en", "ru"]`
 
 The list of available locales in `messages` in lexical order.
 
 #### formatter
 
-  * **Тип:** `Formatter`
+- **Тип:** `Formatter`
 
-  * **По умолчанию:** Built in formatter
+- **По умолчанию:** Built in formatter
 
 The formatter that implemented with `Formatter` interface.
 
@@ -238,17 +238,17 @@ The formatter that implemented with `Formatter` interface.
 
 > :new: 8.15.0+
 
-  * **Тип:** `Modifier`
+- **Тип:** `Modifier`
 
-  * **По умолчанию:** `lower` and `upper` modifiers
+- **По умолчанию:** `lower` and `upper` modifiers
 
 Modifiers functions for linked messages
 
 #### missing
 
-  * **Тип:** `MissingHandler`
+- **Тип:** `MissingHandler`
 
-  * **По умолчанию:** `null`
+- **По умолчанию:** `null`
 
 A handler for localization missing. The handler gets called with the localization target locale, localization path key, the Vue instance and values.
 
@@ -256,9 +256,9 @@ If missing handler is assigned, and occurred localization missing, it's not warn
 
 #### fallbackRoot
 
-  * **Тип:** `Boolean`
+- **Тип:** `Boolean`
 
-  * **По умолчанию:** `true`
+- **По умолчанию:** `true`
 
 In the component localization, whether to fall back to root level (global) localization when localization fails.
 
@@ -266,9 +266,9 @@ If `false`, it's warned, and is returned the key.
 
 #### sync
 
-  * **Тип:** `Boolean`
+- **Тип:** `Boolean`
 
-  * **По умолчанию:** `true`
+- **По умолчанию:** `true`
 
 Whether synchronize the root level locale to the component localization locale.
 
@@ -278,9 +278,9 @@ If `false`, regardless of the root level locale, localize for each component loc
 
 > 6.1+, :up: 8.13
 
-  * **Тип:** `Boolean | RegExp`
+- **Тип:** `Boolean | RegExp`
 
-  * **По умолчанию:** `false`
+- **По умолчанию:** `false`
 
 Whether suppress warnings outputted when localization fails.
 
@@ -291,9 +291,9 @@ If you use regular expression, you can suppress localization fail warnings that 
 
 > :new: 8.8+, :up: 8.13
 
-  * **Тип:** `Boolean | RegExp`
+- **Тип:** `Boolean | RegExp`
 
-  * **По умолчанию:** `false`
+- **По умолчанию:** `false`
 
 Whether suppress warnings when falling back to either `fallbackLocale` or `root`.
 
@@ -304,9 +304,9 @@ If you use regular expression, you can suppress the fallback warnings that it ma
 
 > 8.7+
 
-  * **Тип:** `Boolean`
+- **Тип:** `Boolean`
 
-  * **По умолчанию:** `false`
+- **По умолчанию:** `false`
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
@@ -314,9 +314,9 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 
 > 8.11+
 
-  * **Тип:** `WarnHtmlInMessageLevel`
+- **Тип:** `WarnHtmlInMessageLevel`
 
-  * **По умолчанию:** `off`
+- **По умолчанию:** `off`
 
 Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
 
@@ -328,9 +328,9 @@ In next major version, `warnHtmlInMessage` option is `warn` as default.
 
 > 8.12+
 
-  * **Тип:** `LocaleMessages`
+- **Тип:** `LocaleMessages`
 
-  * **По умолчанию:** `undefined`
+- **По умолчанию:** `undefined`
 
 The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
 
@@ -338,11 +338,11 @@ The shared locale messages of localization for components. More detail see [Comp
 
 > 8.16+
 
-  * **Тип:** `PostTranslationHandler`
+- **Тип:** `PostTranslationHandler`
 
-  * **По умолчанию:** `null`
+- **По умолчанию:** `null`
 
-A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, $tc, and `tc`.
+A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, \$tc, and `tc`.
 
 This handler is useful if you want to filter on translated text such as space trimming.
 
@@ -350,25 +350,25 @@ This handler is useful if you want to filter on translated text such as space tr
 
 #### locale
 
-  * **Тип:** `Locale`
+- **Тип:** `Locale`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 The locale of localization.
 
 #### fallbackLocale
 
-  * **Тип:** `Locale`
+- **Тип:** `Locale`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 The locale of fallback localization.
 
 #### messages
 
-  * **Тип:** `LocaleMessages`
+- **Тип:** `LocaleMessages`
 
-  * **Только для чтения**
+- **Только для чтения**
 
 The locale messages of localization.
 
@@ -376,9 +376,9 @@ The locale messages of localization.
 
 > :new: 7.0+
 
-  * **Тип:** `DateTimeFormats`
+- **Тип:** `DateTimeFormats`
 
-  * **Только для чтения**
+- **Только для чтения**
 
 The datetime formats of localization.
 
@@ -386,25 +386,25 @@ The datetime formats of localization.
 
 > :new: 7.0+
 
-  * **Тип:** `NumberFormats`
+- **Тип:** `NumberFormats`
 
-  * **Только для чтения**
+- **Только для чтения**
 
 The number formats of localization.
 
 #### missing
 
-  * **Тип:** `MissingHandler`
+- **Тип:** `MissingHandler`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 A handler for localization missing.
 
 #### formatter
 
-  * **Тип:** `Formatter`
+- **Тип:** `Formatter`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 The formatter that implemented with `Formatter` interface.
 
@@ -412,9 +412,9 @@ The formatter that implemented with `Formatter` interface.
 
 > 6.1+, :up: 8.13
 
-  * **Тип:** `Boolean | RegExp`
+- **Тип:** `Boolean | RegExp`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 Whether suppress warnings outputted when localization fails.
 
@@ -422,9 +422,9 @@ Whether suppress warnings outputted when localization fails.
 
 > :new: 8.8+, :up: 8.13
 
-  * **Тип:** `Boolean | RegExp`
+- **Тип:** `Boolean | RegExp`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 Whether suppress fallback warnings when localization fails.
 
@@ -432,9 +432,9 @@ Whether suppress fallback warnings when localization fails.
 
 > 8.7+
 
-  * **Тип:** `Boolean`
+- **Тип:** `Boolean`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
 
@@ -442,13 +442,13 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 
 > 8.11+
 
-  * **Тип:** `WarnHtmlInMessageLevel`
+- **Тип:** `WarnHtmlInMessageLevel`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 Whether to allow the use locale messages of HTML formatting.
 
-If you set `warn` or` error`, will check the locale messages on the VueI18n instance.
+If you set `warn` or`error`, will check the locale messages on the VueI18n instance.
 
 If you are specified `warn`, a warning will be output at console.
 If you are specified `error` will occured an Error.
@@ -459,9 +459,9 @@ In VueI18n instance, set the `off` as default.
 
 > 8.16+
 
-  * **Тип:** `PostTranslationHandler`
+- **Тип:** `PostTranslationHandler`
 
-  * **Чтение/Запись**
+- **Чтение/Запись**
 
 A handler for post processing of translation.
 
@@ -469,12 +469,12 @@ A handler for post processing of translation.
 
 #### getChoiceIndex
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{number} choice`
-    * `{number} choicesLength`
+  - `{number} choice`
+  - `{number} choicesLength`
 
-  * **Возвращает:** `finalChoice {number}`
+- **Возвращает:** `finalChoice {number}`
 
 Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
 
@@ -484,90 +484,92 @@ VueI18n.prototype.getChoiceIndex = /* custom implementation */
 
 #### getLocaleMessage( locale )
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
+  - `{Locale} locale`
 
-  * **Возвращает:** `LocaleMessageObject`
+- **Возвращает:** `LocaleMessageObject`
 
 Get the locale message of locale.
 
 #### setLocaleMessage( locale, message )
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{LocaleMessageObject} message`
+  - `{Locale} locale`
+  - `{LocaleMessageObject} message`
 
 Set the locale message of locale.
 
 :::tip ПРИМЕЧАНИЕ
+
 > 8.11+
 
-If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+If you set `warn` or`error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
 :::
 
 #### mergeLocaleMessage( locale, message )
 
 > 6.1+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{LocaleMessageObject} message`
+  - `{Locale} locale`
+  - `{LocaleMessageObject} message`
 
 Merge the registered locale messages with the locale message of locale.
 
 :::tip ПРИМЕЧАНИЕ
+
 > 8.11+
 
-If you set `warn` or` error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+If you set `warn` or`error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
 :::
 
 #### t( key, [locale], [values] )
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{Locale} locale`: опционально
-    * `{Array | Object} values`: опционально
+  - `{Path} key`: обязательный
+  - `{Locale} locale`: опционально
+  - `{Array | Object} values`: опционально
 
-  * **Возвращает:** : `TranslateResult`
+- **Возвращает:** : `TranslateResult`
 
-This is the same as the `Function` returned with `$t` method. More detail see [$t](#t).
+This is the same as the `Function` returned with `$t` method. More detail see [\$t](#t).
 
 #### i( key, [locale], [values] )
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{Locale} locale`: опционально
-    * `{Array} values`: опционально
+  - `{Path} key`: обязательный
+  - `{Locale} locale`: опционально
+  - `{Array} values`: опционально
 
-  * **Возвращает:** : `TranslateResult`
+- **Возвращает:** : `TranslateResult`
 
 #### tc( key, [choice], [values] )
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Path} key`: обязательный
-    * `{number} choice`: опционально, по умолчанию `1`
-    * `{string | Array | Object} values`: опционально
+  - `{Path} key`: обязательный
+  - `{number} choice`: опционально, по умолчанию `1`
+  - `{string | Array | Object} values`: опционально
 
-  * **Возвращает:** `TranslateResult`
+- **Возвращает:** `TranslateResult`
 
-This is the same as the `Function` returned `$tc` method. More detail see [$tc](#tc).
+This is the same as the `Function` returned `$tc` method. More detail see [\$tc](#tc).
 
 #### te( key, [locale] )
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{string} key`: обязательный
-    * `{Locale} locale`: опционально
+  - `{string} key`: обязательный
+  - `{Locale} locale`: опционально
 
-  * **Возвращает:** `boolean`
+- **Возвращает:** `boolean`
 
 Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
 
@@ -575,11 +577,11 @@ Check whether key path exists in global locale message. If you specified `locale
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
+  - `{Locale} locale`
 
-  * **Возвращает:** `DateTimeFormat`
+- **Возвращает:** `DateTimeFormat`
 
 Get the datetime format of locale.
 
@@ -587,10 +589,10 @@ Get the datetime format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{DateTimeFormat} format`
+  - `{Locale} locale`
+  - `{DateTimeFormat} format`
 
 Set the datetime format of locale.
 
@@ -598,10 +600,10 @@ Set the datetime format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{DateTimeFormat} format`
+  - `{Locale} locale`
+  - `{DateTimeFormat} format`
 
 Merge the registered datetime formats with the datetime format of locale.
 
@@ -609,25 +611,25 @@ Merge the registered datetime formats with the datetime format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{number | Date} value`: обязательный
-    * `{Path | Object} key`: опционально
-    * `{Locale | Object} locale`: опционально
+  - `{number | Date} value`: обязательный
+  - `{Path | Object} key`: опционально
+  - `{Locale | Object} locale`: опционально
 
-  * **Возвращает:** `DateTimeFormatResult`
+- **Возвращает:** `DateTimeFormatResult`
 
-This is the same as `$d` method of Vue instance method. More detail see [$d](#d).
+This is the same as `$d` method of Vue instance method. More detail see [\$d](#d).
 
 #### getNumberFormat ( locale )
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
+  - `{Locale} locale`
 
-  * **Возвращает:** `NumberFormat`
+- **Возвращает:** `NumberFormat`
 
 Get the number format of locale.
 
@@ -635,10 +637,10 @@ Get the number format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{NumberFormat} format`
+  - `{Locale} locale`
+  - `{NumberFormat} format`
 
 Set the number format of locale.
 
@@ -646,10 +648,10 @@ Set the number format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{Locale} locale`
-    * `{NumberFormat} format`
+  - `{Locale} locale`
+  - `{NumberFormat} format`
 
 Merge the registered number formats with the number format of locale.
 
@@ -657,15 +659,15 @@ Merge the registered number formats with the number format of locale.
 
 > :new: 7.0+
 
-  * **Аргументы:**
+- **Аргументы:**
 
-    * `{number} value`: обязательный
-    * `{Path | Object} format`: опционально
-    * `{Locale} locale`: опционально
+  - `{number} value`: обязательный
+  - `{Path | Object} format`: опционально
+  - `{Locale} locale`: опционально
 
-  * **Возвращает:** `NumberFormatResult`
+- **Возвращает:** `NumberFormatResult`
 
-This is the same as `$n` method of Vue instance method. More detail see [$n](#n).
+This is the same as `$n` method of Vue instance method. More detail see [\$n](#n).
 
 ## Директивы
 
@@ -673,13 +675,13 @@ This is the same as `$n` method of Vue instance method. More detail see [$n](#n)
 
 ### v-t
 
-  * **Ожидает:** `string | Object`
+- **Ожидает:** `string | Object`
 
-  * **Модификаторы:**
+- **Модификаторы:**
 
-    * `.preserve`: (8.7.0+) preserves element `textContent` when directive is unbinded.
+  - `.preserve`: (8.7.0+) preserves element `textContent` when directive is unbinded.
 
-  * **Подробности:**
+- **Подробности:**
 
 Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
 
@@ -691,7 +693,8 @@ Update the element `textContent` that localized with locale messages. You can us
 The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://ru.vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
 :::
 
-  * **Примеры:**
+- **Примеры:**
+
 ```html
 <!-- string syntax: literal -->
 <p v-t="'foo.bar'"></p>
@@ -709,7 +712,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
-  * **См. также:** [Custom directive localization](../guide/directive.md)
+- **См. также:** [Custom directive localization](../guide/directive.md)
 
 ## Компоненты
 
@@ -719,10 +722,10 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 
 #### Входные параметры:
 
-  * `path {Path}`: обязательный, путь к сообщению локализации
-  * `locale {Locale}`: опционально, локализация
-  * `tag {string}`: опционально, по умолчанию `span`
-  * `places {Array | Object}`: опционально (7.2+)
+- `path {Path}`: обязательный, путь к сообщению локализации
+- `locale {Locale}`: опционально, локализация
+- `tag {string}`: опционально, по умолчанию `span`
+- `places {Array | Object}`: опционально (7.2+)
 
 :::danger Внимание!
 In next major version, `places` prop is deprecated. Please switch to slots syntax.
@@ -739,6 +742,7 @@ In next major version, `places` prop is deprecated. Please switch to slots synta
   <!-- ... -->
 </div>
 ```
+
 ```js
 const messages = {
   en: {
@@ -773,10 +777,10 @@ new Vue({
 
 #### Входные параметры:
 
-  * `value {number}`: обязательный, число для форматирования
-  * `format {string | NumberFormatOptions}`: опционально, форматируемое число name or object with explicit format options
-  * `locale {Locale}`: опционально, локализация
-  * `tag {string}`: опционально, по умолчанию `span`
+- `value {number}`: обязательный, число для форматирования
+- `format {string | NumberFormatOptions}`: опционально, форматируемое число name or object with explicit format options
+- `locale {Locale}`: опционально, локализация
+- `tag {string}`: опционально, по умолчанию `span`
 
 #### Использование:
 
@@ -789,16 +793,19 @@ new Vue({
   <!-- ... -->
 </div>
 ```
+
 ```js
 var numberFormats = {
   'en-US': {
     currency: {
-      style: 'currency', currency: 'USD'
+      style: 'currency',
+      currency: 'USD'
     }
   },
   'ru-RU': {
     currency: {
-      style: 'currency', currency: 'RUB'
+      style: 'currency',
+      currency: 'RUB'
     }
   }
 }
@@ -810,7 +817,7 @@ const i18n = new VueI18n({
 new Vue({
   i18n,
   data: {
-    money: 10234,
+    money: 10234
   }
 }).$mount('#app')
 ```
@@ -819,23 +826,23 @@ new Vue({
 
 `<i18n-n>` functional component can accept a number of named scoped slots. List of supported slot names is based on [`Intl.NumberFormat.formatToParts()` output types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts):
 
-* `currency`
-* `decimal`
-* `fraction`
-* `group`
-* `infinity`
-* `integer`
-* `literal`
-* `minusSign`
-* `nan`
-* `plusSign`
-* `percentSign`
+- `currency`
+- `decimal`
+- `fraction`
+- `group`
+- `infinity`
+- `integer`
+- `literal`
+- `minusSign`
+- `nan`
+- `plusSign`
+- `percentSign`
 
 Each of these named scoped slots will accept three scope parameters:
 
-* `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer`)
-* `index {Number}`: index of the specific part in the array of number parts
-* `parts {Array}`: array of all formatted number parts
+- `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer`)
+- `index {Number}`: index of the specific part in the array of number parts
+- `parts {Array}`: array of all formatted number parts
 
 #### См. также:
 

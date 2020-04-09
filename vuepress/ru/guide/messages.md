@@ -6,34 +6,40 @@
 
 ```typescript
 // As Flowtype definition, Locale Messages syntax like BNF annotation
-type LocaleMessages = { [key: Locale]: LocaleMessageObject };
-type LocaleMessageObject = { [key: Path]: LocaleMessage };
-type LocaleMessageArray = LocaleMessage[];
-type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
-type Locale = string;
-type Path = string;
+type LocaleMessages = { [key: Locale]: LocaleMessageObject }
+type LocaleMessageObject = { [key: Path]: LocaleMessage }
+type LocaleMessageArray = LocaleMessage[]
+type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray
+type Locale = string
+type Path = string
 ```
 
 Используя синтаксис выше, можно создать следующую структуру сообщений локализации:
 
 ```json
 {
-  "en": {  // локализация 'en'
+  // локализация 'en'
+  "en": {
     "key1": "это сообщение 1", // обычное использование
-    "nested": { // вложенное
+    "nested": {
+      // вложенное
       "message1": "это вложенное сообщение 1"
     },
-    "errors": [ // массив
+    "errors": [
+      // массив
       "это сообщение кода ошибки 0",
-      {  // объект в массиве
+      {
+        // объект в массиве
         "internal1": "это внутреннее сообщение кода ошибки 1"
       },
-      [  // массив в массиве
+      [
+        // массив в массиве
         "это вложенный массив ошибки 1"
       ]
     ]
   },
-  "ru": { // локализация 'ru'
+  // локализация 'ru'
+  "ru": {
     // ...
   }
 }
@@ -106,12 +112,12 @@ const messages = {
 ### Formatting linked locale messages
 
 If the language distinguish cases of character, you may need control the case of the linked locale messages.
-Linked messages can be formatted with modifier  `@.modifier:key`
+Linked messages can be formatted with modifier `@.modifier:key`
 
 The below modifiers are available currently.
 
-* `upper`: Uppercase all characters in the linked message.
-* `lower`: Lowercase all characters in the linked message.
+- `upper`: Uppercase all characters in the linked message.
+- `lower`: Lowercase all characters in the linked message.
 
 Сообщения локализации:
 
@@ -149,7 +155,7 @@ const i18n = new VueI18n({
     // ...
   },
   modifiers: {
-    snakeCase: (str) => str.split(' ').join('-')
+    snakeCase: str => str.split(' ').join('-')
   }
 })
 ```
@@ -167,7 +173,7 @@ const messages = {
   en: {
     message: {
       dio: 'DIO',
-      linked: 'There\'s a reason, you lost, @:(message.dio).'
+      linked: "There's a reason, you lost, @:(message.dio)."
     }
   }
 }
