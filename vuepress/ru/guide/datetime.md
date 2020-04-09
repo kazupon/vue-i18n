@@ -1,12 +1,12 @@
-# Локализация DateTime
+# Локализация дат
 
 :::tip Поддержка с версии
 :new: 7.0+
 :::
 
-You can localize the datetime with your definition formats.
+Можно выполнять локализацию дат в соответствии с определённым форматом.
 
-DateTime formats the below:
+Формат для DateTime:
 
 ```js
 const dateTimeFormats = {
@@ -19,21 +19,12 @@ const dateTimeFormats = {
       weekday: 'short', hour: 'numeric', minute: 'numeric'
     }
   },
-  'ru-RU': {
-    short: {
-      year: 'numeric', month: 'short', day: 'numeric'
-    },
-    long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true
-    }
-  }
 }
 ```
 
-As seen above, you can define named datetime format (e.g. `short`, `long`, etc), and you need to use [the options with ECMA-402 Intl.DateTimeFormat](http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor)
+Как видно выше, можно определять именованный формат даты (например, `short`, `long` и т.д.) используя [опции ECMA-402 Intl.DateTimeFormat](http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor)
 
-After that, when using the locale messages, you need to specify the `dateTimeFormats` option of the `VueI18n` constructor:
+После этого, для использования в сообщениях локализации, необходимо указать опцию `dateTimeFormats` в конструкторе `VueI18n`:
 
 ```js
 const i18n = new VueI18n({
