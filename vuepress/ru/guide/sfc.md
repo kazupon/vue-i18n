@@ -144,7 +144,7 @@ module.exports = {
 ```
 _Don 't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
 
-If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/guide/webpack.html).
+If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/ru/guide/webpack.html).
 
 ## Laravel-Mix
 
@@ -279,7 +279,7 @@ In this way, multiple custom blocks useful when want to be used as module.
 
 ## Локальные стили
 
-When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) for styling an element __*inside*__ the translation string. For example:
+When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/ru/guide/scoped-css.html#%D0%BA%D0%BE%D1%80%D0%BD%D0%B5%D0%B2%D0%BE%D0%B9-%D1%8Dn%D0%B5%D0%BC%D0%B5%D0%BD%D1%82-%D0%B4%D0%BE%D1%87%D0%B5%D1%80%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0) for styling an element __*inside*__ the translation string. For example:
 
 __Translation contains only text__ (Work without deep selector)
 
