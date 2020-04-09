@@ -1,8 +1,8 @@
 # Плюрализация
 
-Можно использовать плюрализацию в переводимых сообщениях. Для этого необходимо определять переводы для различных случаев с помощью разделителя `|`.
+Есть возможность использовать плюрализацию в переводимых сообщениях. Для этого необходимо определять переводы для различных случаев с помощью разделителя `|`.
 
-*В шаблоне необходимо использовать `$tc()` вместо `$t()`.*
+*В шаблоне в таких случаях вместо `$t()` необходимо использовать `$tc()`.*
 
 Сообщения локализации:
 
@@ -41,11 +41,9 @@ const messages = {
 <p>10 яблок</p>
 ```
 
-## Accessing the number via the pre-defined argument
+## Доступ к числу через предопределённый аргумент
 
-You don't need to explicitly give the number for pluralization.
-The number can be accessed within locale messages via pre-defined named arguments `{count}` and/or `{n}`.
-You can overwrite those pre-defined named arguments if necessary.
+Не требуется явно указывать число для плюрализации. Доступ к числу в сообщениях локализации можно получить через предопределённые именованные аргументы `{count}` и/или `{n}`. При необходимости их можно переопределить.
 
 Сообщения локализации:
 
@@ -54,11 +52,15 @@ const messages = {
   en: {
     apple: 'no apples | one apple | {count} apples',
     banana: 'no bananas | {n} banana | {n} bananas'
+  },
+  ru: {
+    apple: 'нет яблок | одно яблоко | {count} яблок',
+    banana: 'нет бананов | {n} банан | {n} бананов'
   }
 }
 ```
 
-Template below:
+Шаблон:
 
 ```html
 <p>{{ $tc('apple', 10, { count: 10 }) }}</p>
@@ -66,38 +68,39 @@ Template below:
 
 <p>{{ $tc('banana', 1, { n: 1 }) }}</p>
 <p>{{ $tc('banana', 1) }}</p>
-<p>{{ $tc('banana', 100, { n: 'too many' }) }}</p>
+<p>{{ $tc('banana', 100, { n: 'слишком много' }) }}</p>
 ```
 
-Output below:
+Результат:
 
 ```html
-<p>10 apples</p>
-<p>10 apples</p>
+<p>10 яблок</p>
+<p>10 яблок</p>
 
-<p>1 banana</p>
-<p>1 banana</p>
-<p>too many bananas</p>
+<p>1 банан</p>
+<p>1 банан</p>
+<p>слишком много бананов</p>
 ```
 
 
-## Custom pluralization
+## Пользовательская плюрализация
 
-Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
+Однако подобная плюрализация не применима ко всем языкам (к примеру, в Славянских языках другие правила множественности).
 
-In order to implement these rules you can override the `VueI18n.prototype.getChoiceIndex` function.
+Реализовать эти правила можно переопределив функцию `VueI18n.prototype.getChoiceIndex`.
 
-Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
+Очень упрощённый пример правил для Славянских языков (Русский, Украинский и другие):
+
 ```js
 /**
- * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choicesLength {number} an overall amount of available choices
- * @returns a final choice index to select plural word by
+ * @param choice {number} индекс выбора, переданный в $tc: `$tc('path.to.rule', choiceIndex)`
+ * @param choicesLength {number} общее количество доступных вариантов
+ * @returns финальный индекс для выбора соответственного варианта слова
 **/
 VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n instance, so the locale property also exists here
+  // this === экземпляр VueI18n, поэтому свойство locale также здесь существует
   if (this.locale !== 'ru') {
-    // proceed to the default implementation
+    // возвращаемся к реализации по умолчанию
   }
 
   if (choice === 0) {
@@ -119,8 +122,7 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
 }
 ```
 
-This would effectively give this:
-
+Это позволит использовать:
 
 ```javascript
 const messages = {
@@ -130,9 +132,10 @@ const messages = {
   }
 }
 ```
-Where the format is `0 things | 1 thing | few things | multiple things`.
 
-Your template still needs to use `$tc()`, not `$t()`:
+Например для такого формата `0 вещей | 1 вещь | несколько вещей | множество вещей`.
+
+В шаблоне по-прежнему требуется использовать `$tc()` вместо `$t()`:
 
 ```html
 <p>{{ $tc('car', 1) }}</p>
@@ -147,7 +150,7 @@ Your template still needs to use `$tc()`, not `$t()`:
 <p>{{ $tc('banana', 31) }}</p>
 ```
 
-Which results in:
+Результат:
 
 ```html
 <p>1 машина</p>
