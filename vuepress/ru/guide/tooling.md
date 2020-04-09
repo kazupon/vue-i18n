@@ -4,19 +4,19 @@ To support the i18n of Vue applications, some tools are officially provided.
 
 There are also tools from third vendors integrating Vue I18n.
 
-## Official tooling
+## Официальный инструментарий
 
-### Vue CLI Plugin
+### Плагин для Vue CLI
 
 [vue-cli-plugin-i18n](https://github.com/kazupon/vue-cli-plugin-i18n) is officially provided as the Vue CLI Plugin.
 
 With this plugin, you can setup the i18n environment for the Vue application, and support the i18n development environment.
 
-### Nuxt Module
+### Модуль для Nuxt
 
 [nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module.
 
-### Webpack loader
+### Загрузчик для Webpack
 
 [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) is an officially provided webpack loader.
 
@@ -24,19 +24,19 @@ With this loader, you can use the `i18n` custom block in the Single file compone
 
 In about `i18n` custom block, see the [Single file components section](./sfc.md)
 
-### ESLint Plugin
+### Плагин для ESLint
 
 [eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
 
 It easily integrates some localization lint features to your Vue.js Application.
 
-### Extensions
+### Расширения
 
 [vue-i18n-extensions](https://github.com/kazupon/vue-i18n-extensions) provides some extensions for Vue I18n.
 
 You can use this extension to enable SSR and improve i18n performance.
 
-## 3rd party tooling
+## Сторонние разработки
 
 ### BabelEdit
 

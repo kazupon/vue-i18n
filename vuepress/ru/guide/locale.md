@@ -23,7 +23,7 @@ i18n.locale = 'en'
 
 Each component contains a `VueI18n` instance referenced as the `$i18n` property that can also be used to change the locale.
 
-Example:
+Пример:
 
 ```html
 <template>

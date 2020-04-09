@@ -1,6 +1,6 @@
 # Миграция с версии v5.x
 
-## Global config
+## Глобальная конфигурация
 
 ### lang  replaced
 
@@ -99,7 +99,7 @@ property:
   }
 ```
 
-## Global methods
+## Глобальные методы
 
 ### Vue.locale replaced
 
@@ -115,7 +115,7 @@ Use `VueI18n` class constructor `messages` option, or
         // ...
       },
       ru: {
-        hello: 'こんにちは、世界',
+        hello: 'привет мир',
         // ...
       }
     },
@@ -129,9 +129,9 @@ Use `VueI18n` class constructor `messages` option, or
   // set locale message
   i18n.setLocaleMessage('en', en)
   // or
-  const ja = app.$i18n.getLocaleMessage('ru')
-  ja.greeting = 'やあ！'
-  app.$i18n.setLocaleMessage('ru', ja)
+  const ru = app.$i18n.getLocaleMessage('ru')
+  ru.greeting = 'Привет!'
+  app.$i18n.setLocaleMessage('ru', ru)
 ```
 
 ### Vue.t replaced
@@ -191,7 +191,7 @@ i18n.te('hallo', 'ru') // -> false
 i18n.te('hello') // -> true
 ```
 
-## Constructor options
+## Опции конструктора
 
 ### locales replaced
 
@@ -221,7 +221,7 @@ const Component1 = {
 }
 ```
 
-## Instance properties
+## Свойства экземпляра
 
 ### $lang replaced
 
@@ -240,7 +240,7 @@ i18n.locale = 'ru'
 app.$i18n.locale = 'ru'
 ```
 
-## Features
+## Другие возможности
 
 ### Dynamic locale removed
 

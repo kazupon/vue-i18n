@@ -95,7 +95,7 @@ is interpolated with `term` locale message.
 
 In the above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their order of appearance.
 
-## Slots syntax usage
+## Использование синтаксиса слотов
 
 :::tip Поддержка с версии
 :new: 8.14+
@@ -176,11 +176,10 @@ In Vue 2.6 and later, you can use the following slots syntax in templates:
 :warning: In `i18n` component, slots props are not supported.
 :::
 
+## Использование синтаксиса places
 
-## Places syntax usage
-
-:::danger Важно!!
-In the next major version, the `place` and `places` props will be deprecated. Please switch to slots syntax.
+:::danger Внимание!
+В следующей мажорной версии входные параметры `place` и `places` будут объявлены устаревшими. Рекомендуем использовать синтаксис слотов.
 :::
 
 :::tip Поддержка с версии

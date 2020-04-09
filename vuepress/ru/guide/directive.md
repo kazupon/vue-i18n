@@ -1,17 +1,16 @@
-# Пользовательская директива для локализации
+# Пользовательская директива
 
 :::tip Поддержка с версии
 :new: 7.3+
 :::
 
-You can translate not only with `v-t` custom directive, but also with the `$t`
-method.
+Можно переводить не только с помощью пользовательской директивы `v-t`, но и с помощью метода `$t`.
 
-## String syntax
+## Строковый синтаксис
 
-You can pass the keypath of locale messages with string syntax.
+Можно передать путь к сообщению локализации строкой.
 
-Javascript:
+JavaScript:
 
 ```js
 new Vue({
@@ -19,7 +18,7 @@ new Vue({
     locale: 'en',
     messages: {
       en: { hello: 'hi there!' },
-      ru: { hello: 'привет всем！' }
+      ru: { hello: 'привет всем!' }
     }
   }),
   data: { path: 'hello' }
@@ -30,9 +29,9 @@ new Vue({
 
 ```html
 <div id="string-syntax">
-  <!-- string literal -->
+  <!-- строковый литерал -->
   <p v-t="'hello'"></p>
-  <!-- keypath binding via data -->
+  <!-- привязка пути к сообщению из данных -->
   <p v-t="path"></p>
 </div>
 ```
@@ -41,16 +40,16 @@ new Vue({
 
 ```html
 <div id="string-syntax">
-  <p>hi there!</p>
-  <p>hi there!</p>
+  <p>привет всем!</p>
+  <p>привет всем!</p>
 </div>
 ```
 
-## Object syntax
+## Объектный синтаксис
 
-You can use object syntax.
+Можно использовать синтаксис объекта.
 
-Javascript:
+JavaScript:
 
 ```js
 new Vue({
@@ -72,9 +71,9 @@ new Vue({
 
 ```html
 <div id="object-syntax">
-  <!-- literal -->
+  <!-- литерал -->
   <p v-t="{ path: 'hello', locale: 'ru', args: { name: 'kazupon' } }"></p>
-  <!-- data binding via data -->
+  <!-- привязка к данным -->
   <p v-t="{ path: path, args: { name: nickName } }"></p>
 </div>
 ```
@@ -88,7 +87,7 @@ new Vue({
 </div>
 ```
 
-## Use with transitions
+## Использование с transition
 
 :::tip Поддержка с версии
 :new: 8.7+
@@ -125,7 +124,7 @@ new Vue({
 
 It is also possible to set global settings on the `VueI18n` instance itself, which will affect all `v-t` directives without modifier.
 
-Javascript:
+JavaScript:
 
 ```js
 new Vue({

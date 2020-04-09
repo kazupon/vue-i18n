@@ -45,7 +45,7 @@ export default {
 </script>
 ```
 
-## Installing vue-i18n-loader
+## Установка vue-i18n-loader
 
 You need to install `vue-loader` and `vue-i18n-loader` due to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
 
@@ -194,7 +194,7 @@ mix.i18n()
    ...
 ```
 
-## YAML loading
+## Загрузка YAML
 
 `i18n` custom blocks need to specify `JSON` format, also you can use `YAML` format by using pre-loader feature of `vue-loader`.
 
@@ -256,7 +256,7 @@ module.exports = {
 }
 ```
 
-## Multiple custom blocks
+## Несколько пользовательских блоков
 
 You can use locale messages with multiple `i18n` custom blocks.
 
@@ -278,7 +278,7 @@ In the above, first custom block load the common locale message with `src` attri
 
 In this way, multiple custom blocks useful when want to be used as module.
 
-## Scoped style
+## Локальные стили
 
 When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/guide/scoped-css.html#child-component-root-elements) for styling an element __*inside*__ the translation string. For example:
 
@@ -354,9 +354,7 @@ __Translation with HTML element__ (Must use deep selector)
 </style>
 ```
 
-
-
-## Custom blocks in functional component
+## Пользовательские блоки в функциональном компоненте
 
 If the single file components have the template using a functional component, and you had been defined `i18n` custom blocks, note you cannot localize using locale messages.
 

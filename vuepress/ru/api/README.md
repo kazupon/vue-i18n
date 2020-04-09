@@ -315,7 +315,7 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 
 Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
 
-:::danger Важно!!
+:::danger Внимание!
 In next major version, `warnHtmlInMessage` option is `warn` as default.
 :::
 
@@ -708,7 +708,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
   * `tag {string}`: optional, default `span`
   * `places {Array | Object}`: optional (7.2+)
 
-:::danger Важно!!
+:::danger Внимание!
 In next major version, `places` prop is deprecated. Please switch to slots syntax.
 :::
 

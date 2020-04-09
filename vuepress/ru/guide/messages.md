@@ -2,7 +2,7 @@
 
 ## Структура
 
-Locale Messages syntax below:
+Синтаксис сообщений локализации:
 
 ```typescript
 // As Flowtype definition, Locale Messages syntax like BNF annotation
@@ -14,22 +14,22 @@ type Locale = string;
 type Path = string;
 ```
 
-Based on the above syntax, You can configure the following Locale Messages structure:
+Используя синтаксис выше, можно создать следующую структуру сообщений локализации:
 
 ```json
 {
   "en": {  // локализация 'en'
-    "key1": "this is message1", // basic
-    "nested": { // nested
-      "message1": "this is nested message1"
+    "key1": "это сообщение 1", // обычное использование
+    "nested": { // вложенное
+      "message1": "это вложенное сообщение 1"
     },
-    "errors": [ // array
-      "this is 0 error code message",
-      {  // object in array
-        "internal1": "this is internal 1 error message"
+    "errors": [ // массив
+      "это сообщение кода ошибки 0",
+      {  // объект в массиве
+        "internal1": "это внутреннее сообщение кода ошибки 1"
       },
-      [  // array in array
-        "this is nested array error 1"
+      [  // массив в массиве
+        "это вложенный массив ошибки 1"
       ]
     ]
   },
@@ -39,19 +39,19 @@ Based on the above syntax, You can configure the following Locale Messages struc
 }
 ```
 
-In the above Locale Messages structure, You can translate using below key paths.
+Для такой структуры сообщений локализации, можно переводить сообщения используя ключи:
 
 ```html
 <div id="app">
-  <!-- basic -->
+  <!-- обычное использование -->
   <p>{{ $t('key1') }}</p>
-  <!-- nested -->
+  <!-- вложенное -->
   <p>{{ $t('nested.message1') }}</p>
-  <!-- array -->
+  <!-- массив -->
   <p>{{ $t('errors[0]') }}</p>
-  <!-- object in array -->
+  <!-- объект в массиве -->
   <p>{{ $t('errors[1].internal1') }}</p>
-  <!-- array in array -->
+  <!-- массив в массиве -->
   <p>{{ $t('errors[2][0]') }}</p>
 </div>
 ```
@@ -60,16 +60,16 @@ In the above Locale Messages structure, You can translate using below key paths.
 
 ```html
 <div id="app">
-  <!-- basic -->
-  <p>this is message1</p>
-  <!-- nested -->
-  <p>this is nested message1</p>
-  <!-- array -->
-  <p>this is 0 error code message</p>
-  <!-- object in array -->
-  <p>this is internal 1 error message</p>
-  <!-- array in array -->
-  <p>this is nested array error 1</p>
+  <!-- обычное использование -->
+  <p>это сообщение 1</p>
+  <!-- вложенное -->
+  <p>это вложенное сообщение 1</p>
+  <!-- массив -->
+  <p>это сообщение кода ошибки 0</p>
+  <!-- объект в массиве -->
+  <p>это внутреннее сообщение кода ошибки 1</p>
+  <!-- массив в массиве -->
+  <p>это вложенный массив ошибки 1</p>
 </div>
 ```
 
