@@ -1,4 +1,4 @@
-# Component based localization
+# Локализация на основе компонентов
 
 In general, locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance and it sets `i18n` option as root Vue instance.
 
@@ -84,7 +84,7 @@ To suppress these warnings (while keeping those which warn of the total absence 
 
 If you want to localize using the component locale, you can do that with `sync: false` and `locale` in the `i18n` option.
 
-## Shared locale messages for components
+## Общие сообщения локализации для компонентов
 
 Sometimes you may want to import shared locale messages for certain components, not fallback from global locale messages (e.g. common messages of certain feature for components.
 
@@ -109,20 +109,22 @@ export default {
 }
 ```
 
-Компоненты:
+Компонент:
 
 ```js
-import commonMessage from './locales/common' // import common locale messages
+import commonMessage from './locales/common' // импорт общих сообщений локализации
 
 export default {
   name: 'ServiceModal',
   template: `
     <div class="modal">
       <div class="body">
-        <p>This is good service</p>
+        <p>Это хороший сервис</p>
       </div>
       <div class="footer">
-        <button type="button">{{ $t('buttons.save') }}</button>
+        <button type="button">
+          {{ $t('buttons.save') }}
+        </button>
       </div>
     </div>
   `,
@@ -133,11 +135,11 @@ export default {
 }
 ```
 
-If `sharedMessages` option is specified along with the `messages` option, those messages will be merged into locale messages into the VueI18n instance of the target component.
+Если указать опцию `sharedMessages` вместе с опцией `messages`, то эти сообщения будут объединены в сообщения локализации в экземпляре VueI18n этого компонента.
 
-## Translation in functional component
+## Локализация в функциональных компонентах
 
-When using a functional component, all data (including props, children, slots, parent, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
+При использовании функционального компонента все данные (включая props, children, slots, parent, и т.д.) передаются через `context`, содержащий все атрибуты, а также нет возможности использовать `this`, поэтому при использовании vue-i18n с функциональными компонентами необходимо обращаться к `$t` как к `parent.$t`, например так:
 
 ```html
 ...

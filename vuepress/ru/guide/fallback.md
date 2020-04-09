@@ -1,19 +1,21 @@
 # Запасная локализация
 
-_Summary: Use `fallbackLocale: '<lang>'` to choose which language to use when your preferred language lacks a translation._
+_Вкратце: Используйте `fallbackLocale: '<lang>'` для определения языка, который будет использоваться, если нет перевода в выбранной локализации._
 
-Sometimes some items will not be translated into some languages. In this example, the item `hello` is available in English but not Japanese:
+Иногда не все элементы переведены на некоторые языки. В этом примере, пункт `hello` доступен в английской локализации, но отсутствует в русской:
 
 ```js
 const messages = {
   en: {
     hello: 'Hello, world!'
   },
-  ru: {}
+  ru: {
+    // упс, не все переведено
+  }
 }
 ```
 
-If you want to use (say) `en` items when an item is not available in your desired locale, set the `fallbackLocale` option in the VueI18n constructor:
+Если вы хотите использовать (скажем) строки локализации из `en`, когда перевод отсутствует в нужной вам локализации, установите опцию `fallbackLocale` в конструкторе VueI18n:
 
 ```js
 const i18n = new VueI18n({
@@ -35,7 +37,7 @@ const i18n = new VueI18n({
 <p>Hello, world!</p>
 ```
 
-By default, falling back to `fallbackLocale` generates two console warnings:
+По умолчанию, при использовании строк переводов из запасной локализации `fallbackLocale` будут генерироваться два предупреждения в консоли:
 
 ```console
 [vue-i18n] Value of key 'hello' is not a string!
