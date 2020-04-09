@@ -83,7 +83,6 @@ To suppress these warnings (while keeping those which warn of the total absence 
 
 If you want to localize using the component locale, you can do that with `sync: false` and `locale` in the `i18n` option.
 
-
 ## Shared locale messages for components
 
 Sometimes you may want to import shared locale messages for certain components, not fallback from global locale messages (e.g. common messages of certain feature for components.
@@ -133,7 +132,6 @@ export default {
 ```
 
 If `sharedMessages` option is specified along with the `messages` option, those messages will be merged into locale messages into the VueI18n instance of the target component.
-
 
 ## Translation in functional component
 

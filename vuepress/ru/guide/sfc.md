@@ -209,7 +209,6 @@ ru:
 </i18n>
 ```
 
-
 Webpack conf the below:
 
 for vue-loader v15 or later:

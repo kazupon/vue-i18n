@@ -4,7 +4,6 @@ Normally, using the root Vue instance as the starting point, all child component
 
 Sometimes you might want to dynamically change the locale. In that case you can change the value of the `locale` property of the `VueI18n` instance.
 
-
 ```js
 const i18n = new VueI18n({
   locale: 'ru', // set locale

@@ -46,7 +46,6 @@ const i18n = new VueI18n({
   messages, // установка сообщений локализаций
 })
 
-
 // Создание экземпляра Vue с опцией `i18n`
 new Vue({ i18n }).$mount('#app')
 

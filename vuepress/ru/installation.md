@@ -12,7 +12,6 @@
 
 Подключите vue-i18n после Vue и плагин установит себя автоматически:
 
-
 ```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
@@ -31,7 +30,6 @@ yarn add vue-i18n
 ```
 
 При использовании системы модулей нужно явно устанавливать `vue-i18n` через `Vue.use()`:
-
 
 ```javascript
 import Vue from 'vue'

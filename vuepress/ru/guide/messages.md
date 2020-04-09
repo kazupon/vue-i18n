@@ -154,7 +154,6 @@ const i18n = new VueI18n({
 })
 ```
 
-
 ### Grouping by brackets
 
 A translation key of linked locale message can also have the form of `@:(message.foo.bar.baz)` in which the link to another translation key is within brackets `()`.

@@ -90,7 +90,6 @@ const messages = {
 
 Иногда требуется отобразить перевод HTML-сообщением, а не статической строкой.
 
-
 ```js
 const messages = {
   en: {
@@ -108,7 +107,6 @@ const messages = {
 
 Шаблон:
 
-
 ```html
 <p v-html="$t('message.hello')"></p>
 ```
@@ -120,7 +118,6 @@ const messages = {
 <!-- <br> существует, но отрендерен как html, а не как строка -->
 world</p>
 ```
-
 
 ## Формат ruby on rails i18n
 
