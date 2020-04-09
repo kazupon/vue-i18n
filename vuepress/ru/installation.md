@@ -8,7 +8,7 @@
 
 <https://unpkg.com/vue-i18n/dist/vue-i18n>
 
-[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like <https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.js>
+[unpkg.com](https://unpkg.com) предоставляет CDN-ссылки на основе NPM. Ссылка выше всегда будет указывать на последнюю версию на NPM. Можно также указать конкретную версию/тег с помощью URL следующего вида <https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.js>
 
 Подключите vue-i18n после Vue и плагин установит себя автоматически:
 
@@ -42,44 +42,45 @@ Vue.use(VueI18n)
 
 Этого не требуется делать при использовании глобальных тегов script.
 
-## Vue Cli 3.x
+## Vue CLI 3.x
 
 ```sh
 vue add i18n
 ```
 
-You need Vue cli 3.x as pre-requisite, you can install it on your shell with the next command:
+Предварительно должен быть установлен Vue CLI 3.x, его можно установить следующей командой:
 
 ```sh
 npm install @vue/cli -g
 ```
 
-## Dev Build
+## Dev-сборка
 
-You will have to clone directly from GitHub and build `vue-i18n` yourself if you want to use the latest dev build.
+Если требуется использовать последнюю dev-сборку необходимо склонировать репозиторий непосредственно с GitHub и собрать `vue-i18n` самостоятельно.
 
 ```sh
 git clone https://github.com/kazupon/vue-i18n.git node_modules/vue-i18n
 cd node_modules/vue-i18n
-npm install # or `yarn`
-npm run build  # or `yarn run build`
+npm install # или `yarn`
+npm run build  # или `yarn run build`
 ```
 
-## Explanation of Different Builds
+## Отличия различных сборок
 
-In the dist/ [directory of the NPM package](https://cdn.jsdelivr.net/npm/vue-i18n/dist/) you will find many different builds of VueI18n. Here’s an overview of the difference between them:
+[Внутри каталога dist/ NPM-пакета](https://cdn.jsdelivr.net/npm/vue-i18n/dist/) можно обнаружить несколько различных сборок VueI18n. Вот следующие отличия между ними:
 
 - UMD: `vue-i18n.js`
 - CommonJS: `vue-i18n.common.js`
-- ES Module for bundlers: `vue-i18n.esm.js`
-- ES Module for browsers: `vue-i18n.esm.browser.js`
+- ES Module для систем сборки: `vue-i18n.esm.js`
+- ES Module для браузеров: `vue-i18n.esm.browser.js`
 
-### Terms
+### Термины
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD builds can be used directly in the browser via a `<script>` tag. The default file from Unpkg CDN at [https://unpkg.com/vue-i18n](https://unpkg.com/vue-i18n) is the UMD build (`vue-i18n.js`).
+- **[UMD](https://github.com/umdjs/umd)**: UMD-сборки можно использовать непосредственно в браузере через тег `<script>`. Файл по умолчанию с Unpkg CDN [https://unpkg.com/vue-i18n](https://unpkg.com/vue-i18n) будет UMD-сборка (`vue-i18n.js`).
 
-- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS builds are intended for use with older bundlers like [browserify](http://browserify.org/) or [webpack 1](https://webpack.github.io). The default file for these bundlers (`pkg.main`) is the Runtime only CommonJS build (`vue-i18n.common.js`).
+- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS сборки предназначены для использования со старыми системами сборки, такими как [browserify](http://browserify.org/) или [webpack 1](https://webpack.github.io). Файл по умолчанию для этих систем сборки (`pkg.main`) будет сборка CommonJS (`vue-i18n.common.js`).
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: starting in 8.11 VueI18n provides two ES Modules (ESM) builds:
-  - ESM for bundlers: intended for use with modern bundlers like [webpack 2](https://webpack.js.org) or [Rollup](https://rollupjs.org/). ESM format is designed to be statically analyzable so the bundlers can take advantage of that to perform "tree-shaking" and eliminate unused code from your final bundle. The default file for these bundlers (`pkg.module`) is the Runtime only ES Module build (`vue-i18n.esm.js`).
-  - ESM for browsers (8.11+ only, `vue-i18n.esm.browser.js`): intended for direct imports in modern browsers via `<script type="module">`.
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: VueI18n, начиная с версии 8.11, предоставляет две сборки ES-модулей (ESM):
+
+  - ESM для систем сборки: предназначен для использования с современными системами сборки, такими как [webpack 2](https://webpack.js.org) или [Rollup](https://rollupjs.org/). Формат ESM разработан для возможности статического анализа, чтобы системы сборки могли применять "tree-shaking" и удалять неиспользуемый код из финальной сборки приложения. Файл по умолчанию для этих систем сборки (`pkg.module`) будет ES-сборка (`vue-i18n.esm.js`).
+  - ESM для браузеров (только для 8.11+, `vue-i18n.esm.browser.js`): предназначен для импорта напрямую в современных браузерах через `<script type="module">`.
