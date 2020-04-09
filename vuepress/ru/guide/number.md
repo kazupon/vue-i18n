@@ -1,12 +1,12 @@
-# Локализация Number
+# Локализация чисел
 
 :::tip Поддержка с версии
 :new: 7.0+
 :::
 
-You can localize the number with your definition formats.
+Можно локализовывать числа в соответствии с указанным форматом.
 
-Number formats the below:
+Пример числовых форматов:
 
 ```js
 const numberFormats = {
@@ -23,9 +23,9 @@ const numberFormats = {
 }
 ```
 
-As the above, you can define named number formats (e.g. `currency`, etc), and you need to use [the options with ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat)
+Как указано выше, можно определить числовые форматы (например, `currency` для валюты), для этого можно использовать [опции ECMA-402 Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat).
 
-After that, when using the locale messages, you need to specify the `numberFormats` option of the `VueI18n` constructor:
+После этого, при использовании сообщений локализации, необходимо указать опцию `numberFormats` конструктора `VueI18n`:
 
 ```js
 const i18n = new VueI18n({
@@ -52,21 +52,21 @@ new Vue({
 ```html
 <div id="app">
   <p>$100.00</p>
-  <p>￥100</p>
+  <p>100,00 ₽</p>
 </div>
 ```
 
-## Custom formatting
+## Пользовательское форматирование
 
 :::tip Поддержка с версии
 :new: 8.10+
 :::
 
-`$n` method returns resulting string with fully formatted number, which can only be used as a whole. In situations when you need to style some part of the formatted number (like fraction digits), `$n` is not enough. In such cases `<i18n-n>` functional component will be of help.
+Метод `$n` возвращает строку результата с полностью отформатированным числом, которое может быть использовано только целиком. В случаях, когда необходимо стилизовать некоторую часть отформатированного числа (например, дробную часть), `$n` будет недостаточно. В таких случаях потребуется использовать функциональный компонент `<i18n-n>`.
 
-With a minimum set of properties, `<i18n-n>` generates the same output as `$n`, wrapped into configured DOM element.
+При минимальном наборе свойств `<i18n-n>` генерирует тот же результат, что и `$n` обернутый в сконфигурированный DOM-элемент.
 
-The following template:
+Шаблон:
 
 ```html
 <div id="app">
@@ -76,44 +76,54 @@ The following template:
 </div>
 ```
 
-will produce the below output:
+Результат:
 
 ```html
 <div id="app">
   <span>100</span>
   <span>$100.00</span>
-  <span>￥100</span>
+  <span>100,00 ₽</span>
 </div>
 ```
 
-But the real power of this component comes into play when it is used with [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+Но настоящая сила этого компонента приходит тогда, когда он используется вместе с [слотами с ограниченной областью видимости](https://ru.vuejs.org/v2/guide/components-slots.html#%D0%A1%D0%BB%D0%BE%D1%82%D1%8B-%D1%81-%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9-%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%D1%8E-%D0%B2%D0%B8%D0%B4%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8).
 
-Let's say there is a requirement to render the integer part of the number with a bolder font. This can be achieved by specifying `integer` scoped slot element:
+Допустим, есть требование вывести целую часть числа жирным шрифтом. Этого можно добиться с помощью слота `integer`:
 
 ```html
 <i18n-n :value="100" format="currency">
-  <span v-slot:integer="slotProps" styles="font-weight: bold">{{ slotProps.integer }}</span>
+  <span v-slot:integer="slotProps" styles="font-weight: bold">
+    {{ slotProps.integer }}
+  </span>
 </i18n-n>
 ```
 
-Template above will result in the following HTML:
+Результат:
 
 ```html
 <span>$<span styles="font-weight: bold">100</span>.00</span>
 ```
 
-It is possible to specify multiple scoped slots at the same time:
+Можно указывать несколько слотов с ограниченной областью видимости одновременно:
 
 ```html
 <i18n-n :value="1234" :format="{ key: 'currency', currency: 'EUR' }">
-  <span v-slot:currency="slotProps" styles="color: green">{{ slotProps.currency }}</span>
-  <span v-slot:integer="slotProps" styles="font-weight: bold">{{ slotProps.integer }}</span>
-  <span v-slot:group="slotProps" styles="font-weight: bold">{{ slotProps.group }}</span>
-  <span v-slot:fraction="slotProps" styles="font-size: small">{{ slotProps.fraction }}</span>
+  <span v-slot:currency="slotProps" styles="color: green">
+    {{ slotProps.currency }}
+  </span>
+  <span v-slot:integer="slotProps" styles="font-weight: bold">
+    {{ slotProps.integer }}
+  </span>
+  <span v-slot:group="slotProps" styles="font-weight: bold">
+    {{ slotProps.group }}
+  </span>
+  <span v-slot:fraction="slotProps" styles="font-size: small">
+    {{ slotProps.fraction }}
+  </span>
 </i18n-n>
 ```
 
-(this resulting HTML was formatted for better readability)
+(полученный в результате HTML был отформатирован для лучшей читаемости)
 
 ```html
 <span>
@@ -126,4 +136,4 @@ It is possible to specify multiple scoped slots at the same time:
 </span>
 ```
 
-Full list of the supported scoped slots as well as other `<i18n-n>` properties can be found [on API page](../api/readme.md#i18n-n-functional-component).
+Полный список поддерживаемых слотов с ограниченной областью видимости, а также другие свойства `<i18n-n>` можно найти [на странице справочника API](../api/readme.md#i18n-n-functional-component).
