@@ -235,7 +235,7 @@ export default class VueI18n {
 
   get fallbackLocale (): Locale { return this._vm.fallbackLocale }
   set fallbackLocale (locale: Locale): void {
-    this._vm.$set(this._vm, '_localeChainCache', new Map())
+    this._localeChainCache = new Map()
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
