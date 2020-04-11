@@ -1,4 +1,20 @@
 
+## v8.17.0 (2020-04-11)
+
+#### :star: New Features
+* [#829](https://github.com/kazupon/vue-i18n/pull/829) #138 Fallback Locale as array for cascading fallbacks ([@mmokross](https://github.com/mmokross))
+
+#### :pencil: Documentation
+* [#834](https://github.com/kazupon/vue-i18n/pull/834) Add capitalize default modifier in doc ([@alexandreDavid](https://github.com/alexandreDavid))
+* [#832](https://github.com/kazupon/vue-i18n/pull/832) fix in examples of "Custom pluralization" ([@Perlover](https://github.com/Perlover))
+
+#### Committers: 4
+- Alexandre David ([@alexandreDavid](https://github.com/alexandreDavid))
+- Kobayashi Kazuhiro ([@kzhrk](https://github.com/kzhrk))
+- Michael Mokroß ([@mmokross](https://github.com/mmokross))
+- Perlover ([@Perlover](https://github.com/Perlover))
+
+
 ## v8.16.0 (2020-03-27)
 
 #### :star: New Features
