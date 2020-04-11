@@ -34,7 +34,7 @@
     "babel-plugin-istanbul": "^3.1.2",
     "babel-preset-power-assert": "^3.0.0",
     "buble": "^0.19.3",
-    "chromedriver": "^80.0.0",
+    "chromedriver": "^81.0.0",
     "cross-env": "^5.1.6",
     "cross-spawn": "^6.0.0",
     "eslint": "^5.6.0",
