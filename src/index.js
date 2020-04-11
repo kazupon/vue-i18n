@@ -53,7 +53,7 @@ export default class VueI18n {
   _dataListeners: Array<any>
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
-  _postTranslation: PostTranslationHandler
+  _postTranslation: ?PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -598,7 +598,7 @@ export default class VueI18n {
       return this._root.$t(key, ...values)
     } else {
       ret = this._warnDefault(locale, key, ret, host, values, 'string')
-      if (this._postTranslation) {
+      if (this._postTranslation && ret !== null && ret !== undefined) {
         ret = this._postTranslation(ret)
       }
       return ret
