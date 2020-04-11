@@ -460,19 +460,8 @@ export default class VueI18n {
     return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
   }
 
-  resetFallbackLocale (
-    fallbackLocale: any
-  ) {
-    this._localeChainCache = new Map()
-    this.fallbackLocale = fallbackLocale
-  }
-
-  _appendItemToChain (
-    chain: Array<Locale>,
-    item: Locale,
-    blocks: any
-  ): any {
-    var follow = false
+  _appendItemToChain (chain: Array<Locale>, item: Locale, blocks: any): any {
+    let follow = false
     if (!chain.includes(item)) {
       follow = true
       if (item) {
@@ -487,53 +476,43 @@ export default class VueI18n {
     return follow
   }
 
-  _appendLocaleToChain (
-    chain: Array<Locale>,
-    locale: Locale,
-    blocks: any
-  ): any {
-    var follow
-    var tokens = locale.split('-')
+  _appendLocaleToChain (chain: Array<Locale>, locale: Locale, blocks: any): any {
+    let follow
+    const tokens = locale.split('-')
     do {
-      var item = tokens.join('-')
+      const item = tokens.join('-')
       follow = this._appendItemToChain(chain, item, blocks)
       tokens.splice(-1, 1)
     } while (tokens.length && (follow === true))
     return follow
   }
 
-  _appendBlockToChain (
-    chain: Array<Locale>,
-    block: Array<Locale>,
-    blocks: any
-  ): any {
-    var follow = true
-    for (var i = 0; (i < block.length) && (typeof follow === 'boolean'); i++) {
-      var locale = block[i]
+  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale>, blocks: any): any {
+    let follow = true
+    for (let i = 0; (i < block.length) && (typeof follow === 'boolean'); i++) {
+      const locale = block[i]
       follow = this._appendLocaleToChain(chain, locale, blocks)
     }
     return follow
   }
 
-  getLocaleChain (
-    start: Locale,
-    fallbackLocale: any
-  ): Array<Locale> {
-    if (start === '--') {
-      return []
-    }
-    //
+  _getLocaleChain (start: Locale, fallbackLocale: any): Array<Locale> {
+    if (start === '') { return [] }
+
     if (!this._localeChainCache) {
       this._localeChainCache = new Map()
     }
-    var chain = this._localeChainCache.get(start)
+
+    let chain = this._localeChainCache.get(start)
     if (!chain) {
       if (!fallbackLocale) {
         fallbackLocale = this.fallbackLocale
       }
       chain = []
+
       // first block defined by start
-      var block = [start]
+      let block = [start]
+
       // while any intervening block found
       while (Array.isArray(block)) {
         block = this._appendBlockToChain(
@@ -542,8 +521,9 @@ export default class VueI18n {
           fallbackLocale
         )
       }
+
       // last block defined by default
-      var defaults
+      let defaults
       if (Array.isArray(fallbackLocale)) {
         defaults = fallbackLocale
       } else if (fallbackLocale instanceof Object) {
@@ -555,6 +535,7 @@ export default class VueI18n {
       } else {
         defaults = fallbackLocale
       }
+
       // convert defaults to array
       if (typeof defaults === 'string') {
         block = [defaults]
@@ -582,10 +563,10 @@ export default class VueI18n {
     interpolateMode: string,
     args: any
   ): any {
-    var chain = this.getLocaleChain(locale, fallback)
-    var res
-    for (var i = 0; i < chain.length; i++) {
-      var step = chain[i]
+    const chain = this._getLocaleChain(locale, fallback)
+    let res
+    for (let i = 0; i < chain.length; i++) {
+      const step = chain[i]
       res =
         this._interpolate(step, messages[step], key, host, interpolateMode, args, [key])
       if (!isNull(res)) {

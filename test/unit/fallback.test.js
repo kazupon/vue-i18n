@@ -1,7 +1,7 @@
 import messages from './fixture/index'
 
 describe('kazupon#138 mmokross#2 - Fallback Locale as array for cascading fallbacks ...', () => {
-  var types = [
+  const types = [
     {
       description: '... none',
       fallbackLocale: false,
@@ -72,7 +72,7 @@ describe('kazupon#138 mmokross#2 - Fallback Locale as array for cascading fallba
       type.tests.forEach(function (test) {
         it(test.description + ': ' + test.locale + ' should fallback to ' + test.expected, () => {
           // console.log(test.locale + ': --> ' + i18n.getLocaleChain(test.locale))
-          assert.deepEqual(i18n.getLocaleChain(test.locale), test.expected)
+          assert.deepEqual(i18n._getLocaleChain(test.locale), test.expected)
         })
       })
     })
