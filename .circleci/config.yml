@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.0-browsers
+      - image: circleci/node:10.20-browsers
         environment:
           TZ: Asia/Tokyo
           CHROME_BIN: "/usr/bin/google-chrome"
