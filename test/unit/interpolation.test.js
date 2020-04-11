@@ -453,7 +453,7 @@ describe('component interpolation', () => {
         nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
-            '一: <a href=\"/term\">tos</a>'
+            '一: <a href=\"/term\">Term of service</a>'
           )
         }).then(done)
       })
