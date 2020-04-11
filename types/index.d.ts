@@ -3,6 +3,7 @@ import Vue, { PluginFunction } from 'vue';
 declare namespace VueI18n {
   type Path = string;
   type Locale = string;
+  type FallbackLocale = string | string[] | false | { [locale: string]: string[] }
   type Values = any[] | { [key: string]: any };
   type Choice = number;
   type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
@@ -95,7 +96,7 @@ declare namespace VueI18n {
   // tslint:disable-next-line:interface-name
   interface I18nOptions {
     locale?: Locale;
-    fallbackLocale?: Locale;
+    fallbackLocale?: FallbackLocale;
     messages?: LocaleMessages;
     dateTimeFormats?: DateTimeFormats;
     numberFormats?: NumberFormats;
@@ -117,6 +118,7 @@ declare namespace VueI18n {
 
 export type Path = VueI18n.Path;
 export type Locale = VueI18n.Locale;
+export type FallbackLocale = VueI18n.FallbackLocale;
 export type Values = VueI18n.Values;
 export type Choice = VueI18n.Choice;
 export type LocaleMessage = VueI18n.LocaleMessage;
@@ -146,7 +148,7 @@ export declare interface IVueI18n {
   readonly numberFormats: VueI18n.NumberFormats;
 
   locale: VueI18n.Locale;
-  fallbackLocale: VueI18n.Locale;
+  fallbackLocale: VueI18n.FallbackLocale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   formatFallbackMessages: boolean;
@@ -166,7 +168,7 @@ declare class VueI18n {
   readonly availableLocales: VueI18n.Locale[];
 
   locale: VueI18n.Locale;
-  fallbackLocale: VueI18n.Locale;
+  fallbackLocale: VueI18n.FallbackLocale;
   missing: VueI18n.MissingHandler;
   formatter: VueI18n.Formatter;
   formatFallbackMessages: boolean;
