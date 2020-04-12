@@ -22,7 +22,7 @@ our-cool-project
 The `lang` folder is where all of our translation files reside. The `setup` folder is where our arbitrary setup files like the i18n-setup, global component inits, plugin inits and other reside.
 
 ```js
-//i18n-setup.js
+// i18n-setup.js
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import messages from '@/lang/en'
@@ -31,12 +31,12 @@ import axios from 'axios'
 Vue.use(VueI18n)
 
 export const i18n = new VueI18n({
-  locale: 'en', // set locale
+  locale: 'en', // установка локализации
   fallbackLocale: 'en',
-  messages // set locale messages
+  messages // установка сообщений локализации
 })
 
-const loadedLanguages = ['en'] // our default language that is preloaded
+const loadedLanguages = ['en'] // список локализаций, которые пред-загружены
 
 function setI18nLanguage(lang) {
   i18n.locale = lang
@@ -46,17 +46,17 @@ function setI18nLanguage(lang) {
 }
 
 export function loadLanguageAsync(lang) {
-  // If the same language
+  // Если локализация та же
   if (i18n.locale === lang) {
     return Promise.resolve(setI18nLanguage(lang))
   }
 
-  // If the language was already loaded
+  // Если локализация уже была загружена
   if (loadedLanguages.includes(lang)) {
     return Promise.resolve(setI18nLanguage(lang))
   }
 
-  // If the language hasn't been loaded yet
+  // Если локализация ещё не была загружена
   return import(
     /* webpackChunkName: "lang-[request]" */ `@/i18n/messages/${lang}.js`
   ).then(messages => {

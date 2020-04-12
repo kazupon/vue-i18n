@@ -1,20 +1,20 @@
 # Инструментарий
 
-To support the i18n of Vue applications, some tools are officially provided.
+Для поддержки i18n приложений Vue некоторые инструменты предоставляются официально.
 
-There are also tools from third vendors integrating Vue I18n.
+Также есть инструменты от сторонних производителей, которые интегрируются в Vue I18n.
 
 ## Официальный инструментарий
 
 ### Плагин для Vue CLI
 
-[vue-cli-plugin-i18n](https://github.com/kazupon/vue-cli-plugin-i18n) is officially provided as the Vue CLI Plugin.
+[vue-cli-plugin-i18n](https://github.com/kazupon/vue-cli-plugin-i18n) — официальный плагин для Vue CLI.
 
-With this plugin, you can setup the i18n environment for the Vue application, and support the i18n development environment.
+С помощью этого плагина можно настроить среду i18n для приложения Vue и поддерживать среду разработки i18n.
 
 ### Модуль для Nuxt
 
-[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) is corresponding Nuxt.js module.
+[nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n/) — соответствующий модуль для Nuxt.js.
 
 ### Загрузчик для Webpack
 
