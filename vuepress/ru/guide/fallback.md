@@ -105,7 +105,7 @@ _Summary: Set `formatFallbackMessages: true` to do template interpolation on tra
 Since the keys to the translations are strings, you can use a user-readable message (for a particular language) as a key.
 E.g.
 
-```javascript
+```js
 const messages = {
   ru: {
     'Hello, world!': 'Привет мир!'
@@ -117,7 +117,7 @@ This is useful because you don't have to specify a translation for the string "H
 
 In fact, you can even include template parameters in a key. Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys _are_ your templates.
 
-```javascript
+```js
 const messages = {
   ru: {
     'Hello {name}': 'Здравствуйте {name}'

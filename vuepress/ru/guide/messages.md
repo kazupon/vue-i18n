@@ -122,7 +122,7 @@ The below modifiers are available currently.
 
 Сообщения локализации:
 
-```javascript
+```js
 const messages = {
   en: {
     message: {
@@ -149,7 +149,7 @@ const messages = {
 
 You can add modifiers or overwrite the existing ones passing the `modifiers` options to the `VueI18n` constructor.
 
-```javascript
+```js
 const i18n = new VueI18n({
   locale: 'en',
   messages: {

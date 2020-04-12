@@ -126,7 +126,7 @@ VueI18n.prototype.getChoiceIndex = function(choice, choicesLength) {
 
 Это позволит использовать:
 
-```javascript
+```js
 const messages = {
   ru: {
     car: '0 машин | {n} машина | {n} машины | {n} машин',

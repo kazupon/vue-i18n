@@ -31,7 +31,7 @@ yarn add vue-i18n
 
 При использовании системы модулей нужно явно устанавливать `vue-i18n` через `Vue.use()`:
 
-```javascript
+```js
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
