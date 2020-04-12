@@ -85,6 +85,9 @@ In order to implement these rules you can override the `VueI18n.prototype.getCho
 
 Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
+
+const defaultImpl = VueI18n.prototype.getChoiceIndex
+
 /**
  * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
  * @param choicesLength {number} an overall amount of available choices
@@ -94,6 +97,7 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
   // this === VueI18n instance, so the locale property also exists here
   if (this.locale !== 'ru') {
     // proceed to the default implementation
+    return defaultImpl.apply(this, arguments)
   }
 
   if (choice === 0) {

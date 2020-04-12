@@ -81,6 +81,9 @@ const messages = {
 
 使用斯拉夫语言规则的简化示例 (俄语、乌克兰语等)：
 ```js
+
+const defaultImpl = VueI18n.prototype.getChoiceIndex
+
 /**
  * @param choice {number} 由 $tc 输入的选择索引：`$tc('path.to.rule', choiceIndex)`
  * @param choicesLength {number} 总体可用选择
@@ -90,6 +93,7 @@ VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
   // this === VueI18n 实例，所以语言环境属性也存在于此处
   if (this.locale !== 'ru') {
     // 继续执行默认实现
+    return defaultImpl.apply(this, arguments)
   }
 
   if (choice === 0) {

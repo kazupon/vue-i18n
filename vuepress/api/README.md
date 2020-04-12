@@ -167,15 +167,15 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   * **Default:** `'en-US'`
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-  * **Type:** `Locale`
+  * **Type:** `FallbackLocale`
 
-  * **Default:** `'en-US'`
+  * **Default:** `false`
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 
@@ -348,15 +348,15 @@ This handler is useful if you want to filter on translated text such as space tr
 
   * **Read/Write**
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-  * **Type:** `Locale`
+  * **Type:** `FallbackLocale`
 
   * **Read/Write**
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 

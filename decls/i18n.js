@@ -2,6 +2,7 @@ declare var Intl: any;
 
 declare type Path = string;
 declare type Locale = string;
+declare type FallbackLocale = string | string[] | false | { [locale: string]: string[] };
 declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
 declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
 declare type LocaleMessageArray = Array<LocaleMessage>;
@@ -65,7 +66,7 @@ declare type WarnHtmlInMessageLevel = 'off' | 'warn' | 'error';
 
 declare type I18nOptions = {
   locale?: Locale,
-  fallbackLocale?: Locale,
+  fallbackLocale?: FallbackLocale,
   messages?: LocaleMessages,
   dateTimeFormats?: DateTimeFormats,
   numberFormats?: NumberFormats,
@@ -101,8 +102,8 @@ declare interface I18n {
   get vm (): any, // for internal
   get locale (): Locale,
   set locale (locale: Locale): void,
-  get fallbackLocale (): Locale,
-  set fallbackLocale (locale: Locale): void,
+  get fallbackLocale (): FallbackLocale,
+  set fallbackLocale (locale: FallbackLocale): void,
   get messages (): LocaleMessages,
   get dateTimeFormats (): DateTimeFormats,
   get numberFormats (): NumberFormats,
