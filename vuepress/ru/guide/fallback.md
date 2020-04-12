@@ -2,6 +2,20 @@
 
 _Вкратце: Используйте `fallbackLocale: '<lang>'` для определения языка, который будет использоваться, если нет перевода в выбранной локализации._
 
+## Implicit fallback using locales
+
+If a `locale` is given containing a territory and an optional dialect, the implicit fallback is activated automatically.
+
+For example `de-DE-bavarian` would fallback
+
+1. `de-DE-bavarian`
+1. `de-DE`
+1. `de`
+
+To supress the automatic fallback, add the postfix exclamation mark `!`, for example `de-DE!`
+
+## Explicit fallback with one locale
+
 Иногда не все элементы переведены на некоторые языки. В этом примере, пункт `hello` доступен в английской локализации, но отсутствует в русской:
 
 ```js
@@ -45,6 +59,44 @@ const i18n = new VueI18n({
 ```
 
 To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
+
+## Explicit fallback with an array of locales
+
+It is possible to set more than one fallback locale by using an array of locales. For example
+
+```js
+fallbackLocale: [ 'fr', en' ],
+```
+
+## Explicit fallback with decision maps
+
+If more complex decision maps for fallback locales are required, it is possible to define decision maps with according fallback locales.
+
+Using the following decision map
+
+```js
+fallbackLocale: {
+  /* 1 */ 'de-CH':   ['fr', 'it'],
+  /* 2 */ 'zh-Hant': ['zh-Hans'],
+  /* 3 */ 'es-CL':   ['es-AR'],
+  /* 4 */ 'es':      ['en-GB'],
+  /* 5 */ 'pt':      ['es-AR'],
+  /* 6 */ 'default': ['en', 'da']
+},
+```
+
+will result in the following fallback chains
+
+| locale      | fallback chains                           |
+| ----------- | ----------------------------------------- |
+| `'de-CH'`   | de-CH > fr > it > en > da                 |
+| `'de'`      | de > en > da                              |
+| `'zh-Hant'` | zh-Hant > zh-Hans > zh > en > da          |
+| `'es-SP'`   | es-SP > es > en-GB > en > da              |
+| `'es-SP!'`  | es-SP > en > da                           |
+| `'fr'`      | fr > en > da                              |
+| `'pt-BR'`   | pt-BR > pt > es-AR > es > en-GB > en > da |
+| `'es-CL'`   | es-CL > es-AR > es > en-GB > en > da      |
 
 ## Fallback interpolation
 

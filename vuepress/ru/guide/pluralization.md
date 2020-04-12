@@ -91,6 +91,8 @@ const messages = {
 Очень упрощённый пример правил для Славянских языков (Русский, Украинский и другие):
 
 ```js
+const defaultImpl = VueI18n.prototype.getChoiceIndex
+
 /**
  * @param choice {number} индекс выбора, переданный в $tc: `$tc('path.to.rule', choiceIndex)`
  * @param choicesLength {number} общее количество доступных вариантов
@@ -100,6 +102,7 @@ VueI18n.prototype.getChoiceIndex = function(choice, choicesLength) {
   // this === экземпляр VueI18n, поэтому свойство locale также здесь существует
   if (this.locale !== 'ru') {
     // возвращаемся к реализации по умолчанию
+    return defaultImpl.apply(this, arguments)
   }
 
   if (choice === 0) {

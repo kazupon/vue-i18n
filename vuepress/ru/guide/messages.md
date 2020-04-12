@@ -118,6 +118,7 @@ The below modifiers are available currently.
 
 - `upper`: Uppercase all characters in the linked message.
 - `lower`: Lowercase all characters in the linked message.
+- `capitalize`: Capitalize the first character in the linked message.
 
 Сообщения локализации:
 

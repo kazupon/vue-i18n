@@ -172,15 +172,15 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **По умолчанию:** `'en-US'`
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-- **Тип:** `Locale`
+- **Тип:** `FallbackLocale`
 
-- **По умолчанию:** `'en-US'`
+- **По умолчанию:** `false`
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 
@@ -354,15 +354,15 @@ This handler is useful if you want to filter on translated text such as space tr
 
 - **Чтение/Запись**
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-- **Тип:** `Locale`
+- **Тип:** `FallbackLocale`
 
 - **Чтение/Запись**
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 
@@ -814,6 +814,7 @@ const i18n = new VueI18n({
   locale: 'en-US',
   numberFormats
 })
+
 new Vue({
   i18n,
   data: {
