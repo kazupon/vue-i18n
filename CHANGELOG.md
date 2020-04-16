@@ -1,4 +1,17 @@
 
+## v8.17.1 (2020-04-16)
+
+#### :bug: Bug Fixes
+* [#840](https://github.com/kazupon/vue-i18n/pull/840) fix: altnative endsWidth ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#837](https://github.com/kazupon/vue-i18n/pull/837) Fix typo ([@ninofiliu](https://github.com/ninofiliu))
+
+#### Committers: 2
+- Nino Filiu ([@ninofiliu](https://github.com/ninofiliu))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.17.0 (2020-04-11)
 
 #### :star: New Features
