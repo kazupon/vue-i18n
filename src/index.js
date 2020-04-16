@@ -465,7 +465,7 @@ export default class VueI18n {
     if (!chain.includes(item)) {
       follow = true
       if (item) {
-        follow = !item.endsWith('!')
+        follow = item[item.length - 1] !== '!'
         item = item.replace(/!/g, '')
         chain.push(item)
         if (blocks && blocks[item]) {
