@@ -385,7 +385,7 @@ export default class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches: any = ret.match(linkKeyMatcher)
-    for (const idx in matches) {
+    for (let idx in matches) {
       // ie compatible: filter custom array
       // prototype method
       if (!matches.hasOwnProperty(idx)) {
@@ -834,7 +834,7 @@ export default class VueI18n {
   }
 
   _clearNumberFormat (locale: Locale, format: NumberFormat): void {
-    for (const key in format) {
+    for (let key in format) {
       const id = `${locale}__${key}`
 
       if (!this._numberFormatters.hasOwnProperty(id)) {
