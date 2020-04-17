@@ -5140,12 +5140,24 @@ eslint-plugin-ie11@^1.0.0:
   dependencies:
     requireindex "~1.1.0"
 
+eslint-plugin-no-autofix@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-autofix/-/eslint-plugin-no-autofix-1.0.1.tgz#e2ef47ec92346519c081322360ed201bbe62b223"
+  integrity sha512-ZwQF1S+tsl9alr8DuoHX9KcNI+BxCK+D08I1n6NXlitIJg3AB+1EtHYMoxz0LFKKsewoUYo2M4QcHZxGqV1T7w==
+  dependencies:
+    eslint-rule-composer "^0.3.0"
+
 eslint-plugin-vue-libs@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue-libs/-/eslint-plugin-vue-libs-2.1.0.tgz#e7faf4ae11dad58553f63f907d6642e2d816dcef"
   integrity sha512-FFiJJ3apqnXkb3+mIgr4juPKWXL/Bo4jORbW8qYpY78+iRzOLBDcOJGyD6z52h2kO5EqMRfzrfo4Q/28CUPuJw==
   dependencies:
     eslint-plugin-html "^4.0.1"
+
+eslint-rule-composer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-rule-composer/-/eslint-rule-composer-0.3.0.tgz#79320c927b0c5c0d3d3d2b76c8b4a488f25bbaf9"
+  integrity sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==
 
 eslint-scope@3.7.1:
   version "3.7.1"
