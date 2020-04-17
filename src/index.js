@@ -41,7 +41,7 @@ export default class VueI18n {
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
-  _localeChainCache: Map<string, Array<Locale>>
+  _localeChainCache: { [key: string]: Array<Locale>; }
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean | RegExp
@@ -237,7 +237,7 @@ export default class VueI18n {
 
   get fallbackLocale (): Locale { return this._vm.fallbackLocale }
   set fallbackLocale (locale: Locale): void {
-    this._localeChainCache = new Map()
+    this._localeChainCache = {}
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
@@ -500,10 +500,10 @@ export default class VueI18n {
     if (start === '') { return [] }
 
     if (!this._localeChainCache) {
-      this._localeChainCache = new Map()
+      this._localeChainCache = {}
     }
 
-    let chain = this._localeChainCache.get(start)
+    let chain = this._localeChainCache[start]
     if (!chain) {
       if (!fallbackLocale) {
         fallbackLocale = this.fallbackLocale
@@ -549,7 +549,7 @@ export default class VueI18n {
           null
         )
       }
-      this._localeChainCache.set(start, chain)
+      this._localeChainCache[start] = chain
     }
     return chain
   }
