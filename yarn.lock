@@ -5133,6 +5133,13 @@ eslint-plugin-html@^4.0.1:
   dependencies:
     htmlparser2 "^3.8.2"
 
+eslint-plugin-ie11@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ie11/-/eslint-plugin-ie11-1.0.0.tgz#8990e5d9a7212cc12f621e89c86a32d6d37fdfc5"
+  integrity sha512-PPv2Cbq5roUmoIZJfPWbEEILHvi2Yfp/cRVzaVKL/YJiYGGLJ0/Qrq1HKd2OZKb3RQQOXweCd/hh261bljEe8A==
+  dependencies:
+    requireindex "~1.1.0"
+
 eslint-plugin-vue-libs@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue-libs/-/eslint-plugin-vue-libs-2.1.0.tgz#e7faf4ae11dad58553f63f907d6642e2d816dcef"
@@ -11002,6 +11009,11 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
 
 requires-port@^1.0.0:
   version "1.0.0"
