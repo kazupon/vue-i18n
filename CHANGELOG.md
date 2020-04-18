@@ -1,4 +1,13 @@
 
+## v8.17.2 (2020-04-18)
+
+#### :zap: Improved Features
+* [#844](https://github.com/kazupon/vue-i18n/pull/844) Use plain object instead of Map, which is not supported in IE9/10 ([@exoego](https://github.com/exoego))
+
+#### Committers: 1
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
 ## v8.17.1 (2020-04-16)
 
 #### :bug: Bug Fixes
