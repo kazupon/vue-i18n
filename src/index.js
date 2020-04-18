@@ -599,7 +599,7 @@ export default class VueI18n {
     } else {
       ret = this._warnDefault(locale, key, ret, host, values, 'string')
       if (this._postTranslation && ret !== null && ret !== undefined) {
-        ret = this._postTranslation(ret)
+        ret = this._postTranslation(ret, key)
       }
       return ret
     }

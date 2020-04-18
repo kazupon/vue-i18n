@@ -86,7 +86,7 @@ declare namespace VueI18n {
   }
 
   type MissingHandler = (locale: Locale, key: Path, vm: Vue | null, values: any) => string | void;
-  type PostTranslationHandler = (str: string) => string;
+  type PostTranslationHandler = (str: string, key?: string) => string;
 
   interface IntlAvailability {
     dateTimeFormat: boolean;
