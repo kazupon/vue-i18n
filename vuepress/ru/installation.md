@@ -19,13 +19,13 @@
 
 ## NPM
 
-```sh
+```bash
 npm install vue-i18n
 ```
 
 ## Yarn
 
-```sh
+```bash
 yarn add vue-i18n
 ```
 
@@ -42,13 +42,13 @@ Vue.use(VueI18n)
 
 ## Vue CLI 3.x
 
-```sh
+```bash
 vue add i18n
 ```
 
 Предварительно должен быть установлен Vue CLI 3.x, его можно установить следующей командой:
 
-```sh
+```bash
 npm install @vue/cli -g
 ```
 
@@ -56,7 +56,7 @@ npm install @vue/cli -g
 
 Если требуется использовать последнюю dev-сборку необходимо склонировать репозиторий непосредственно с GitHub и собрать `vue-i18n` самостоятельно.
 
-```sh
+```bash
 git clone https://github.com/kazupon/vue-i18n.git node_modules/vue-i18n
 cd node_modules/vue-i18n
 npm install # или `yarn`
