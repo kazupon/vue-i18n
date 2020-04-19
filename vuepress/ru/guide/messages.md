@@ -81,7 +81,7 @@ type Path = string
 
 ## Связанные сообщения локализации
 
-If there's a translation key that will always have the same concrete text as another one you can just link to it. To link to another translation key, all you have to do is to prefix its contents with an `@:` sign followed by the full name of the translation key including the namespace you want to link to.
+Если есть ключ для перевода, который также встречается этим же конкретным текстом в другом, то можно просто сослаться на него. Чтобы сделать ссылку на другой ключ сообщений перевода, всё что нужно сделать, это добавить префикс к его содержимому с помощью сочетания `@:` после которого указать полное имя ключа перевода, включая пространство имён, к которому требуется сделать ссылку.
 
 Сообщения локализации:
 
@@ -109,16 +109,15 @@ const messages = {
 <p>DIO: the world !!!!</p>
 ```
 
-### Formatting linked locale messages
+### Форматирование связанных сообщений локализации
 
-If the language distinguish cases of character, you may need control the case of the linked locale messages.
-Linked messages can be formatted with modifier `@.modifier:key`
+Если для языка важен регистр символов, то может потребоваться управлять регистром связанного сообщения локализации. Связанные сообщения можно отформатировать используя модификатор `@.modifier:key`
 
-The below modifiers are available currently.
+В настоящий момент доступны следующие модификаторы.
 
-- `upper`: Uppercase all characters in the linked message.
-- `lower`: Lowercase all characters in the linked message.
-- `capitalize`: Capitalize the first character in the linked message.
+- `upper`: Перевести в верхний регистр все символы в связанном сообщении.
+- `lower`: Перевести в нижний регистр все символы в связанном сообщении.
+- `capitalize`: Сделать заглавной первую букву в связанном сообщении.
 
 Сообщения локализации:
 
@@ -128,6 +127,12 @@ const messages = {
     message: {
       homeAddress: 'Home address',
       missingHomeAddress: 'Please provide @.lower:message.homeAddress'
+    }
+  },
+  ru: {
+    message: {
+      homeAddress: 'Домашний адрес',
+      missingHomeAddress: 'Пожалуйста укажите @.lower:message.homeAddress'
     }
   }
 }
@@ -142,16 +147,16 @@ const messages = {
 Результат:
 
 ```html
-<label>Home address</label>
+<label>Домашний адрес</label>
 
-<p class="error">Please provide home address</p>
+<p class="error">Пожалуйста укажите домашний адрес</p>
 ```
 
-You can add modifiers or overwrite the existing ones passing the `modifiers` options to the `VueI18n` constructor.
+Можно добавлять новые модификаторы или перезаписывать существующие, с помощью опции `modifiers` конструктора `VueI18n`.
 
 ```js
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: 'ru',
   messages: {
     // ...
   },
@@ -161,13 +166,13 @@ const i18n = new VueI18n({
 })
 ```
 
-### Grouping by brackets
+### Группировка в скобках
 
-A translation key of linked locale message can also have the form of `@:(message.foo.bar.baz)` in which the link to another translation key is within brackets `()`.
+Ключ перевода связанного сообщения также может иметь форму `@:(message.foo.bar.baz)` в которой ссылка на другой ключ перевода заключена в скобки `()`.
 
-This can be useful if the link `@:message.something` is followed by period `.`, which otherwise would be part of the link and may not need to be.
+Это может быть полезно, если за ссылкой `@:message.something` указана точка `.`, которая в противном случае считалась бы частью ссылки и, возможно, не должна быть её частью.
 
-Locale messages:
+Сообщения локализации:
 
 ```js
 const messages = {
