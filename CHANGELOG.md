@@ -1,4 +1,17 @@
 
+## v8.17.3 (2020-04-19)
+
+#### :zap: Improved Features
+* [#846](https://github.com/kazupon/vue-i18n/pull/846) add key to postTranslation ([@dmitryuk](https://github.com/dmitryuk))
+
+#### :pencil: Documentation
+* [#847](https://github.com/kazupon/vue-i18n/pull/847) docs: Update /api/README.md ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+#### Committers: 2
+- Alexander Dmitryuk ([@dmitryuk](https://github.com/dmitryuk))
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+
 ## v8.17.2 (2020-04-18)
 
 #### :zap: Improved Features
