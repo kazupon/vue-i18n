@@ -1,31 +1,31 @@
 # Горячая перезагрузка переводов
 
-You can watch for changes in localization files and hot reload changes into your application.
+Можно отслеживать изменения в файлах локализации и осуществлять горячую перезагрузку.
 
 ```js
-// Something locale messages
+// Какие-то сообщения локализации
 const messages = {
   // ...
 }
 
-// VueI18n instance
+// Экземпляр VueI18n
 const i18n = new VueI18n({
   locale: 'en',
   messages
 })
 
-// Run app
+// Запускаем приложение
 const app = new Vue({
   i18n
   // ...
 }).$mount('#app')
 
-// Hot updates
+// Настраиваем горячую перезагрузку
 if (module.hot) {
   module.hot.accept(['./en', './ru'], function() {
     i18n.setLocaleMessage('en', require('./en').default)
     i18n.setLocaleMessage('ru', require('./ru').default)
-    // Or the following hot updates via $i18n property
+    // Или настраиваем горячую перезагрузку через свойство $i18n
     // app.$i18n.setLocaleMessage('en', require('./en').default)
     // app.$i18n.setLocaleMessage('ru', require('./ru').default)
   })

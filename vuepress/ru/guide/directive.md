@@ -84,7 +84,7 @@ new Vue({
 
 ```html
 <div id="object-syntax">
-  <p>こんにちは、kazupon！</p>
+  <p>привет、kazupon！</p>
   <p>hi kazupon!</p>
 </div>
 ```

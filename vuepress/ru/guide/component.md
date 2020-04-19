@@ -63,10 +63,10 @@ new Vue({
 
 ```html
 <div id="app">
-  <p>こんにちは、世界</p>
+  <p>привет мир</p>
   <div class="container">
-    <p>Component1 locale messages: こんにちは、component1</p>
-    <p>Fallback global locale messages: おはようございます</p>
+    <p>Component1 locale messages: привет component1</p>
+    <p>Fallback global locale messages: доброе утро</p>
   </div>
 </div>
 ```

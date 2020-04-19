@@ -6,17 +6,17 @@ Sometimes you might want to dynamically change the locale. In that case you can 
 
 ```js
 const i18n = new VueI18n({
-  locale: 'ru', // set locale
+  locale: 'ru', // устанавливаем локализацию по умолчанию
   ...
 })
 
-// create root Vue instance
+// Создаём корневой экземпляр Vue
 new Vue({
   i18n,
   ...
 }).$mount('#app')
 
-// change other locale
+// Переключаем на другую локализацию
 i18n.locale = 'en'
 ```
 
@@ -24,7 +24,7 @@ Each component contains a `VueI18n` instance referenced as the `$i18n` property 
 
 Пример:
 
-```html
+```vue
 <template>
   <div class="locale-changer">
     <select v-model="$i18n.locale">
