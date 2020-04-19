@@ -1,8 +1,8 @@
 # Переключение локализации
 
-Normally, using the root Vue instance as the starting point, all child components are localized using the `locale` property of the `VueI18n` class as a reference.
+Обычно используется корневой экземпляр Vue в качестве стартовой точки, все дочерние компоненты локализуются используя свойство `locale` класса `VueI18n` передаваемого по ссылке.
 
-Sometimes you might want to dynamically change the locale. In that case you can change the value of the `locale` property of the `VueI18n` instance.
+Иногда может потребоваться динамически менять локализацию. В таком случае можно изменить значение свойства `locale` экземпляра `VueI18n`.
 
 ```js
 const i18n = new VueI18n({
@@ -20,7 +20,7 @@ new Vue({
 i18n.locale = 'en'
 ```
 
-Each component contains a `VueI18n` instance referenced as the `$i18n` property that can also be used to change the locale.
+Каждый компонент содержит экземпляр `VueI18n`, ссылающийся на свойство `$i18n`, которое также можно использовать для изменения локализации.
 
 Пример:
 
@@ -46,10 +46,9 @@ Each component contains a `VueI18n` instance referenced as the `$i18n` property 
 ```
 
 :::warning Обратите внимание
-:warning: Locale changing is ignored for components that use `sync: false`.
+:warning: Изменение локализации игнорируется компонентами использующими `sync: false`.
 :::
 
-:::warning Component vs. root scope
-:warning: Changing `$i18n.locale` inside a component does not update the root locale.
-If you rely on the root locale, for example when using [root fallbacks](./fallback.html), use `$root.$i18n.locale` instead of `$i18n.locale`.
+:::warning Компонент vs. корневая область видимости
+:warning: Изменение `$i18n.locale` внутри компонента не приводит к изменению корневой локализации. Если вы полагаетесь на корневую локализацию, например, при использовании [корневой запасной локализации](./fallback.html), используйте `$root.$i18n.locale` вместо `$i18n.locale`.
 :::
