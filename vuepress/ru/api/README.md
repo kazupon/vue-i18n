@@ -12,9 +12,9 @@ sidebar: auto
 
 - **Тип:** `I18nOptions`
 
-Component based localization option.
+Опция локализации на основе компонентов.
 
-- **См. также:** `VueI18n` class constructor options
+- **См. также:** Опции конструктора класса `VueI18n`
 
 ### Внедряемые методы
 
@@ -28,10 +28,10 @@ Component based localization option.
 
 - **Возвращает:** `TranslateResult`
 
-Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
+Получение переведённого сообщения локализации по ключу `key`. Локализация в сообщениях компонента предпочтительнее, чем в глобальных сообщениях локализации. Если не определены сообщения локализации в компоненте, то локализация осуществляется с помощью глобальных сообщений локализации. Если была определена `locale`, то используются сообщения локализации из `locale`. Если был указан `key` именованного формата / формата списков сообщений локализации, то необходимо указывать также `values`. Подробнее про значения `values` можно изучить в разделе [Формат сообщений локализации](../guide/formatting.md).
 
 :::danger Совет
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
+Обратите внимание, что в хуках жизненного цикла контекст должен быть экземпляром компонента (например в опции `data`, `const $t = this.$t.bind(this)`).
 :::
 
 #### \$tc
@@ -45,10 +45,10 @@ Note that you need to guarantee this context equal to component instance in life
 
 - **Возвращает:** `TranslateResult`
 
-Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of \$t.
+Получение переведённого сообщения локализации по ключу `key` с плюрализацией. Локализация в сообщениях компонента предпочтительнее, чем в глобальных сообщениях локализации. Если не определены сообщения локализации в компоненте, то локализация осуществляется с помощью глобальных сообщений локализации. Если была определена `locale`, то используются сообщения локализации из `locale`. Если укажете строковое значение для `values`, то локализуйте сообщения для этого значения. Если укажете значением Array или Object в `values`, то необходимо указывать с `values` из \$t.
 
 :::danger Совет
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $tc = this.$tc.bind(this)`).
+Обратите внимание, что в хуках жизненного цикла контекст должен быть экземпляром компонента (например в опции `data`, `const $tc = this.$tc.bind(this)`).
 :::
 
 #### \$te
@@ -60,10 +60,10 @@ Note that you need to guarantee this context equal to component instance in life
 
 - **Возвращает:** `boolean`
 
-Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
+Проверяет существует ли ключ в сообщениях локализации. В экземпляре Vue, если не указаны сообщения локализации в компоненте, проверяются в глобальных сообщениях локализации. Если указали `locale`, проверяются сообщения локализации `locale`.
 
 :::danger Совет
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $te = this.$te.bind(this)`).
+Обратите внимание, что в хуках жизненного цикла контекст должен быть экземпляром компонента (например в опции `data`, `const $te = this.$te.bind(this)`).
 :::
 
 #### \$d
@@ -78,12 +78,12 @@ Note that you need to guarantee this context equal to component instance in life
 
 - **Возвращает:** `DateTimeFormatResult`
 
-Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
+Локализация даты из `value` с помощью формата даты из `key`. Формат даты из `key` должен быть зарегистрирован в опции `dateTimeFormats` класса `VueI18n`, и зависит от опции `locale` конструктора `VueI18n`. Если указать аргумент `locale`, то он будет иметь приоритет над опцией `locale` конструктора `VueI18n`.
 
-If the datetime format of `key` not exist in `dateTimeFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
+Если формат даты для `key` не указан в опции `dateTimeFormats`, будет использован запасной формат, основываясь на опции `fallbackLocale` конструктора `VueI18n`.
 
 :::danger Совет
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
+Обратите внимание, что в хуках жизненного цикла контекст должен быть экземпляром компонента (например в опции `data`, `const $d = this.$d.bind(this)`).
 :::
 
 #### \$n
@@ -98,11 +98,11 @@ Note that you need to guarantee this context equal to component instance in life
 
 - **Возвращает:** `NumberFormatResult`
 
-Localize the number of `value` with number format of `format`. The number format of `format` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
+Локализация числа `value` с помощью формата чисел `format`. Числовой формат из `format` должен быть зарегистрирован в опции `numberFormats` класса `VueI18n`, и зависит от опции `locale` конструктора `VueI18n`. Если указать аргумент `locale`, то он будет иметь приоритет над опцией `locale` конструктора `VueI18n`.
 
-If the number format of `format` not exist in `numberFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
+Если формат чисел для `format` не указан в опции `numberFormats`, будет использован запасной формат, основываясь на опции `fallbackLocale` конструктора `VueI18n`.
 
-If the second `format` argument specified as an object, it should have the following properties:
+Если второй аргумент `format` указан объектом, то в нём должны быть следующие свойства:
 
 - `key {Path}`: опционально, форматируемое число
 - `locale {Locale}`: опционально, локализация
@@ -118,10 +118,10 @@ If the second `format` argument specified as an object, it should have the follo
 - `localeMatcher {string}`: опционально, опция форматирования чисел
 - `formatMatcher {string}`: опционально, опция форматирования чисел
 
-Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
+Любые указанные опции форматирования числа будут иметь приоритет над значениями `numberFormats` из конструктора `VueI18n`.
 
 :::danger Совет
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
+Обратите внимание, что в хуках жизненного цикла контекст должен быть экземпляром компонента (например в опции `data`, `const $n = this.$n.bind(this)`).
 :::
 
 ### Внедряемые свойства
@@ -132,13 +132,13 @@ Note that you need to guarantee this context equal to component instance in life
 
 - **Только для чтения**
 
-Get a `VueI18n` instance. If you are specify.
+Получение экземпляра `VueI18n`, если был определён.
 
-If you have specified an `i18n` option at component options, you will be able to get a `VueI18n` instance at the component, Otherwise, you will be able get root `VueI18n` instance.
+При указании в компоненте опции `i18n`  будет возможность получить экземпляр `VueI18n` в компоненте. В противном случае, можно получить корневой экземпляр `VueI18n`.
 
 ## Класс `VueI18n`
 
-`VueI18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+Класс `VueI18n` реализует интерфейс `I18n` из [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Статические свойства
 
@@ -146,7 +146,7 @@ If you have specified an `i18n` option at component options, you will be able to
 
 - **Тип:** `string`
 
-vue-i18n version.
+Версия `vue-i18n`.
 
 #### availabilities
 
@@ -154,17 +154,17 @@ vue-i18n version.
 
 - **Тип:** `IntlAvailability`
 
-Whether the following internationalization features are available:
+Проверка доступности следующих возможностей интернационализации:
 
-- `{boolean} dateTimeFormat`: locale sensitive datetime formatting
+- `{boolean} dateTimeFormat`: форматирование дат для локалей
 
-- `{boolean} numberFormat`: locale sensitive number formatting
+- `{boolean} numberFormat`: форматирование чисел для локалей
 
-The above internationalization features are depends on [the browser environments](http://kangax.github.io/compat-table/esintl/), due to implement with ECMAScript Internationalization API (ECMA-402).
+Указанные выше возможности интернационализации зависят от [окружения браузера](http://kangax.github.io/compat-table/esintl/), в котором реализован ECMAScript Internationalization API (ECMA-402).
 
 ### Опции конструктора
 
-You can specify the below some options of `I18nOptions` constructor options of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+Можно указывать некоторые опции конструктора `I18nOptions`, основываясь на [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### locale
 
@@ -172,7 +172,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **По умолчанию:** `'en-US'`
 
-The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
+Локаль используемая для локализации. Если локаль содержит территорию и диалект, то эта локаль явно указывает на запасную локализацию.
 
 #### fallbackLocale
 
@@ -180,7 +180,7 @@ The locale of localization. If the locale contains a territory and a dialect, th
 
 - **По умолчанию:** `false`
 
-The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
+Запасная локаль для локализации. Подробнее можно изучить в разделе [Запасная локализация](../guide/fallback.md).
 
 #### messages
 
@@ -188,7 +188,7 @@ The locale of fallback localization. For more complex fallback definitions see [
 
 - **По умолчанию:** `{}`
 
-The locale messages of localization.
+Сообщения локализации для локали.
 
 #### dateTimeFormats
 
@@ -198,9 +198,9 @@ The locale messages of localization.
 
 - **По умолчанию:** `{}`
 
-The datetime formats of localization.
+Форматы дат для локализации.
 
-- **См. также:** `DateTimeFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+- **См. также:** тип `DateTimeFormats` в [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
@@ -210,9 +210,9 @@ The datetime formats of localization.
 
 - **По умолчанию:** `{}`
 
-The number formats of localization.
+Форматы чисел для локализации.
 
-- **См. также:** `NumberFormats` type of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+- **См. также:** тип `NumberFormats` в [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### availableLocales
 
@@ -224,15 +224,15 @@ The number formats of localization.
 
 - **Примеры:** `["en", "ru"]`
 
-The list of available locales in `messages` in lexical order.
+Список доступных локалей в `messages` в лексическом порядке.
 
 #### formatter
 
 - **Тип:** `Formatter`
 
-- **По умолчанию:** Built in formatter
+- **По умолчанию:** Встроенный formatter
 
-The formatter that implemented with `Formatter` interface.
+Форматтер, реализующий интерфейс `Formatter`.
 
 #### modifiers
 
@@ -240,9 +240,9 @@ The formatter that implemented with `Formatter` interface.
 
 - **Тип:** `Modifier`
 
-- **По умолчанию:** `lower` and `upper` modifiers
+- **По умолчанию:** модификаторы `lower` и `upper`
 
-Modifiers functions for linked messages
+Функции модификаторов для связанных сообщений
 
 #### missing
 
@@ -250,9 +250,9 @@ Modifiers functions for linked messages
 
 - **По умолчанию:** `null`
 
-A handler for localization missing. The handler gets called with the localization target locale, localization path key, the Vue instance and values.
+Обработчик для отсутствующих сообщений локализации. Обработчик будет вызван с локалью, ключом для сообщений локализаций и значениями values.
 
-If missing handler is assigned, and occurred localization missing, it's not warned.
+Если указан этот обработчик и произойдёт попытка доступа к отсутствующему сообщению локализации, то предупреждения в консоли не будет.
 
 #### fallbackRoot
 

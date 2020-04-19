@@ -172,35 +172,35 @@ class CustomFormatter {
   // interpolate
   //
   // @param {string} message
-  //   string of list or named format.
-  //   e.g.
-  //   - named formatting: 'Hi {name}'
-  //   - list formatting: 'Hi {0}'
+  //   строка или список или именованный формат.
+  //   напр.
+  //   - именованное форматирование: 'Hi {name}'
+  //   - форматирование списком: 'Hi {0}'
   //
   // @param {Object | Array} values
-  //   values of `message` interpolation.
-  //   passed values with `$t`, `$tc` and `i18n` functional component.
-  //   e.g.
-  //   - $t('hello', { name: 'kazupon' }) -> passed values: Object `{ name: 'kazupon' }`
-  //   - $t('hello', ['kazupon']) -> passed values: Array `['kazupon']`
-  //   - `i18n` functional component (component interpolation)
+  //   значения интерполяции `message`.
+  //   переданные значения с `$t`, `$tc` и функциональным компонентом `i18n`.
+  //   напр.
+  //   - $t('hello', { name: 'Alex' }) -> переданные значения: Object `{ name: 'Alex' }`
+  //   - $t('hello', ['Alex']) -> переданные значения: Array `['Alex']`
+  //   - функциональный компонент `i18n` (интерполяция в компоненте)
   //     <i18n path="hello">
-  //       <p>kazupon</p>
+  //       <p>Alex</p>
   //       <p>how are you?</p>
   //     </i18n>
-  //     -> passed values: Array (included VNode):
-  //        `[VNode{ tag: 'p', text: 'kazupon', ...}, VNode{ tag: 'p', text: 'how are you?', ...}]`
+  //     -> переданные значения: Array (included VNode):
+  //        `[VNode{ tag: 'p', text: 'Alex', ...}, VNode{ tag: 'p', text: 'how are you?', ...}]`
   //
   // @return {Array<any>}
-  //   interpolated values. you need to return the following:
-  //   - array of string, when is using `$t` or `$tc`.
-  //   - array included VNode object, when is using `i18n` functional component.
+  //   интерполированные значения. Они необходимы чтобы вернуть следующее:
+  //   - массив строк, когда используется `$t` или `$tc`.
+  //   - массив, включая объект VNode, когда используется функциональный компонент `i18n`.
   //
   interpolate(message, values) {
-    // implement interpolation logic here
+    // реализуем логику интерполяции здесь
     // ...
 
-    // return the interpolated array
+    // возвращаем интерполированный массив
     return ['resolved message string']
   }
 }

@@ -1,13 +1,13 @@
 ---
 home: true
-heroImage: ./vue-i18n-logo.png
+heroImage: ./../vue-i18n-logo.png
 actionText: Введение →
 actionLink: introduction.md
 footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 0 0 24px 0;">
-  <h4>Silver Sponsors</h4>
+  <h4>Серебряные спонсоры</h4>
   <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img src="/vue-i18n/patrons/babeledit.png">
   </a>
@@ -27,15 +27,15 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 
 <div class="features">
   <div class="feature">
-    <h2>Easy</h2>
-    <p>You can introduce internationalization into your app with simple API</p>
+    <h2>Простой</h2>
+    <p>Позволяет легко добавить интернационализацию в приложение с помощью простого API</p>
   </div>
   <div class="feature">
-    <h2>Powerful</h2>
-    <p>In addition to simple translation, support localization such as pluralization, number, datetime ... etc</p>
+    <h2>Функциональный</h2>
+    <p>В дополнение к переводам, поддерживает плюрализацию, локализацию для чисел, дат ... и т.д.</p>
   </div>
   <div class="feature">
-    <h2>Component-oriented</h2>
-    <p>You can manage locale messages on single file component</p>
+    <h2>Ориентированный на компоненты</h2>
+    <p>Можно управлять сообщениями локализации в однофайловых компонентах</p>
   </div>
 </div>
