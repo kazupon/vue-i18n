@@ -2,11 +2,11 @@
 
 ## Базовое использование
 
-If you are building Vue component or Vue application using single file components, you can manage the locale messages `i18n` custom block.
+При создании компонента Vue или приложения Vue с использованием однофайловых компонентов, можно управлять сообщениями локализации с помощью пользовательского блока `i18n`.
 
-The following in [single file components example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
+Код компонента из [примера использования с однофайловыми компонентами](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
-```js
+```vue
 <i18n>
 {
   "en": {
@@ -20,12 +20,12 @@ The following in [single file components example](https://github.com/kazupon/vue
 
 <template>
   <div id="app">
-    <label for="locale">locale</label>
+    <label for="locale">Язык</label>
     <select v-model="locale">
       <option>en</option>
       <option>ru</option>
     </select>
-    <p>message: {{ $t('hello') }}</p>
+    <p>Сообщение: {{ $t('hello') }}</p>
   </div>
 </template>
 
@@ -33,8 +33,8 @@ The following in [single file components example](https://github.com/kazupon/vue
 export default {
   name: 'app',
   data () {
-    this.$i18n.locale = 'en';
-    return { locale: 'en' }
+    this.$i18n.locale = 'ru';
+    return { locale: 'ru' }
   },
   watch: {
     locale (val) {
@@ -47,7 +47,7 @@ export default {
 
 ## Установка vue-i18n-loader
 
-You need to install `vue-loader` and `vue-i18n-loader` due to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
+Необходимо установить `vue-loader` и `vue-i18n-loader` для использования пользовательских блоков `<i18n>`. Скорее всего [vue-loader](https://github.com/vuejs/vue-loader) уже используется в вашем проекте, если работаете с однофайловыми компонентами, но необходимо дополнительно установить [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader):
 
 ```bash
 npm i --save-dev @kazupon/vue-i18n-loader
@@ -55,9 +55,9 @@ npm i --save-dev @kazupon/vue-i18n-loader
 
 ## Webpack
 
-For Webpack the configuration below is required:
+Для Webpack требуется следующая конфигурация:
 
-for vue-loader v15 or later:
+Для vue-loader v15 или более поздних версий:
 
 ```js
 module.exports = {
@@ -80,7 +80,7 @@ module.exports = {
 }
 ```
 
-for vue-loader v14:
+Для vue-loader v14:
 
 ```js
 module.exports = {
@@ -92,7 +92,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // you need to specify `i18n` loaders key with `vue-i18n-loader` (https://github.com/kazupon/vue-i18n-loader)
+            // необходимо указать ключ `i18n` для загрузчика `vue-i18n-loader`
+            // (https://github.com/kazupon/vue-i18n-loader)
             i18n: '@kazupon/vue-i18n-loader'
           }
         }
@@ -106,11 +107,11 @@ module.exports = {
 
 ## Vue CLI 3.0
 
-[Vue CLI 3.0](https://github.com/vuejs/vue-cli) hides the webpack configuration, so, if we want to add support to the `<i18n>` tag inside a single file component we need to modify the existing configuration.
+[Vue CLI 3.0](https://github.com/vuejs/vue-cli) скрывает конфигурацию Webpack, поэтому при необходимости добавить поддержку тегов `<i18n>` внутри однофайловых компонентов, потребуется изменить существующую конфигурацию.
 
-In order to do that we have to create a `vue.config.js` at the root of our project. Once we have done that, we have to include the following:
+Для этого потребуется создать файл `vue.config.js` в корне проекта. После этого, необходимо добавить в него следующее:
 
-for vue-loader v15 or later:
+Для vue-loader v15 или более поздних версий:
 
 ```js
 module.exports = {
@@ -126,7 +127,7 @@ module.exports = {
 }
 ```
 
-for vue-loader v14:
+Для vue-loader v14:
 
 ```js
 const merge = require('deepmerge')
@@ -147,16 +148,16 @@ module.exports = {
 }
 ```
 
-_Don 't forget to install [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` or `yarn add deepmerge -D`)_
+_Не забудьте установить [deepmerge](https://github.com/KyleAMathews/deepmerge)! (`npm i deepmerge -D` или `yarn add deepmerge -D`)_
 
-If you want to read more about modifying the existing configuration [click here](https://cli.vuejs.org/ru/guide/webpack.html).
+Подробнее изучить возможности по изменению существующей конфигурации Webpack [можно здесь](https://cli.vuejs.org/ru/guide/webpack.html).
 
 ## Laravel-Mix
 
-for Laravel-mix 4 with vue-loader v15 or later:
+Для Laravel-mix 4 с vue-loader v15 или более поздней версии:
 
 ```js
-// Extend Mix with the "i18n" method, that loads the vue-i18n-loader
+// Расширяем Mix с помощью метода "i18n", который загрузит vue-i18n-loader
 mix.extend( 'i18n', new class {
         webpackRules() {
             return [
@@ -170,31 +171,31 @@ mix.extend( 'i18n', new class {
     }(),
 );
 
-// Make sure to call the .i18n() (to load the loader) before .js(..., ...)
+// Убедитесь что вызвали .i18n() (для загрузки загрузчика) перед .js(..., ...)
 mix.i18n()
    .js( 'resources/js/App.js', 'public/js/app.js' )
    ...
 ```
 
-for Laravel-mix 2 with vue-loader v14:
+Для Laravel-mix 2 с vue-loader v14:
 
-As of [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) of Laravel-mix, you can add custom rules via mix.extend(). Laravel mix already has its own rules for handling .vue files. To add the `vue-i18n-loader`, add the following to `webpack.mix.js`
+Начиная с версии [V2.1](https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1) Laravel-mix, можно добавлять пользовательские правила с помощью mix.extend(). Laravel mix уже имеет собственные правила для обработки .vue файлов. Чтобы добавить `vue-i18n-loader`, нужно добавить в `webpack.mix.js` следующее:
 
 ```js
-// The below code will inject i18n Kazupon/vue-18-loader as a loader for .vue files.
+// Код ниже внедрит загрузчик i18n (@kazupon/vue-i18n-loader) в качестве загрузчика .vue файлов.
 mix.extend( 'i18n', function( webpackConfig, ...args ) {
     webpackConfig.module.rules.forEach( ( module ) => {
-        // Search for the "vue-loader" component, which handles .vue files.
+        // Поиск компонента "vue-loader", который обрабатывает .vue файлы.
         if( module.loader !== 'vue-loader' ) {
             return;
         }
 
-        // Within this module, add the vue-i18n-loader for the i18n tag.
+        // В этом модуле добавляем vue-i18n-loader для тега i18n.
         module.options.loaders.i18n = '@kazupon/vue-i18n-loader';
     } );
 } );
 
-// Make sure to call .i18n() before .js(..., ...)
+// Убедитесь что вызвали .i18n() (для загрузки загрузчика) перед .js(..., ...)
 mix.i18n()
    .js( 'resources/assets/js/App.js', 'public/js/app.js' )
    ...
@@ -202,11 +203,11 @@ mix.i18n()
 
 ## Загрузка YAML
 
-`i18n` custom blocks need to specify `JSON` format, also you can use `YAML` format by using pre-loader feature of `vue-loader`.
+Пользовательские блоки `i18n` должны быть указаны в формате `JSON`, также можно использовать формат `YAML` используя функцию предварительного загрузчика `vue-loader`.
 
-the `i18n` custom blocks below of `YAML` format:
+Пользовательский блок `i18n` в формате `YAML`:
 
-```html
+```vue
 <i18n>
   en:
     hello: "hello world!"
@@ -215,9 +216,9 @@ the `i18n` custom blocks below of `YAML` format:
 </i18n>
 ```
 
-Webpack conf the below:
+Конфигурация Webpack:
 
-for vue-loader v15 or later:
+Для vue-loader v15 или более поздних версий:
 
 ```js
 // Vue CLI 3.0
@@ -237,7 +238,7 @@ module.exports = {
 }
 ```
 
-for vue-loader v14:
+Для vue-loader v14:
 
 ```js
 module.exports = {
@@ -265,9 +266,9 @@ module.exports = {
 
 ## Несколько пользовательских блоков
 
-You can use locale messages with multiple `i18n` custom blocks.
+Можно использовать сообщения локализации из нескольких пользовательских блоков `i18n`.
 
-```html
+```vue
 <i18n src="./common/locales.json"></i18n>
 <i18n>
   {
@@ -281,17 +282,17 @@ You can use locale messages with multiple `i18n` custom blocks.
 </i18n>
 ```
 
-In the above, first custom block load the common locale message with `src` attribute, second custom block load the locale message that is defined only at single file component. These locale messages will be merged as locale message of component.
+В примере выше, первый пользовательский блок загружает общие сообщения локализации с помощью атрибута `src`, второй пользовательский блок загружает сообщения локализации, которые определены только в этом однофайловом компоненте. Эти сообщения локализации будут объединены в качестве сообщения локализации компонента.
 
-In this way, multiple custom blocks useful when want to be used as module.
+Таким образом, несколько пользовательских блоков полезны, когда хочется использовать их в качестве модуля.
 
 ## Локальные стили
 
-When using `vue-i18n` with `scoped style`, it's important to remember to use a [deep selector](https://vue-loader.vuejs.org/ru/guide/scoped-css.html#%D0%BA%D0%BE%D1%80%D0%BD%D0%B5%D0%B2%D0%BE%D0%B9-%D1%8Dn%D0%B5%D0%BC%D0%B5%D0%BD%D1%82-%D0%B4%D0%BE%D1%87%D0%B5%D1%80%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0) for styling an element **_inside_** the translation string. For example:
+При использовании `vue-i18n` с локальными стилями `style scoped` важно помнить об использовании [глубокого селектора](https://vue-loader.vuejs.org/ru/guide/scoped-css.html#%D0%BA%D0%BE%D1%80%D0%BD%D0%B5%D0%B2%D0%BE%D0%B9-%D1%8Dn%D0%B5%D0%BC%D0%B5%D0%BD%D1%82-%D0%B4%D0%BE%D1%87%D0%B5%D1%80%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D0%B0) для стилизации элемента **_внутри_** строки перевода. Например:
 
-**Translation contains only text** (Work without deep selector)
+**Перевод содержит только текст** (работает без глубокого селектора)
 
-```html
+```vue
 ...
 <i18n>
   {
@@ -306,11 +307,11 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 ...
 <template>
   <div class="parent">
-    <p>message: {{ $t('hello') }}</p>
+    <p>Сообщение: {{ $t('hello') }}</p>
   </div>
 </template>
 ...
-<!-- Will work -->
+<!-- Будет работать -->
 <style>
   .parent p {
     color: #42b883;
@@ -318,9 +319,9 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 </style>
 ```
 
-**Translation with HTML element** (Must use deep selector)
+**Перевод с HTML-элементом** (необходимо использовать глубокий селектор)
 
-```html
+```vue
 ...
 <i18n>
   {
@@ -339,7 +340,7 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
   </div>
 </template>
 ...
-<!-- Won't work -->
+<!-- НЕ ЗАРАБОТАЕТ -->
 <style>
   .parent p {
     color: #42b883;
@@ -350,7 +351,7 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
   }
 </style>
 
-<!-- Will work -->
+<!-- Будет работать -->
 <style>
   .parent p {
     color: #42b883;
@@ -364,11 +365,11 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 
 ## Пользовательские блоки в функциональном компоненте
 
-If the single file components have the template using a functional component, and you had been defined `i18n` custom blocks, note you cannot localize using locale messages.
+Если в шаблоне однофайловых компонентов используется функциональный компонент, и определены пользовательские блоки `i18n`, обратите внимание что вы не можете локализовать с помощью сообщения локализации.
 
-For example, the following code cannot localize with the locale message of `i18n` custom block.
+Например, следующий код не может использовать локализацию с сообщениями локализации из пользовательского блока `i18n`.
 
-```html
+```vue
 <i18n>
   {
     "en": {
