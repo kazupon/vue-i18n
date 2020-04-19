@@ -336,7 +336,7 @@ The shared locale messages of localization for components. More detail see [Comp
 
   * **Default:** `null`
 
-A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, $tc, and `tc`.
+A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, `$tc`, and `tc`.
 
 This handler is useful if you want to filter on translated text such as space trimming.
 
