@@ -79,7 +79,7 @@ Localize the datetime of `value` with datetime format of `key`. The datetime for
 If the datetime format of `key` not exist in `dateTimeFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
 
 :::danger Tip
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
 :::
 
 #### $n
@@ -116,7 +116,7 @@ If the second `format` argument specified as an object, it should have the follo
 Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
 :::danger Tip
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
 :::
 
 ### Injected properties
