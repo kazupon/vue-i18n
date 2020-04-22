@@ -20,7 +20,7 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 
 <p align="center">
   <a href="https://zenarchitects.co.jp/" target="_blank">
-    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/zenarchitects.png">
+    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png">
   </a>
 </p>
 
