@@ -18,7 +18,11 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 
 <h2 align="center">Bronze Sponsors</h2>
 
-- Kazuyuki Miyake
+<p align="center">
+  <a href="https://zenarchitects.co.jp/" target="_blank">
+    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/zenarchitects.png">
+  </a>
+</p>
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=100.0)
 
@@ -29,6 +33,5 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 <h2 align="center">Awesome Supporters</h2>
 
 - Shinya Katayama
-- 直博 中島
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=20.0)

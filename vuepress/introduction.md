@@ -18,6 +18,14 @@ Go to [Get Started](./started.md)
   </a>
 </p>
 
+### Bronze
+
+<p style="text-align: center;">
+  <a href="https://zenarchitects.co.jp/" target="_blank">
+    <img src="/vue-i18n/patrons/zenarchitects.png">
+  </a>
+</p>
+
 ## Become a Patreon
 
 Is your company using vue-i18n or vue-cli-plugin-i18n to build awesome apps? Join the other patrons and become a sponsor to add your logo on this documentation! Supporting me on Patreon allows me to work less for a job and to work more on Free Open Source Software such as vue-i18n! Thank you!
