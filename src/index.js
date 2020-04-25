@@ -10,6 +10,7 @@ import {
   isObject,
   looseClone,
   remove,
+  includes,
   merge,
   numberFormatKeys
 } from './util'
@@ -398,7 +399,7 @@ export default class VueI18n {
       // Remove the leading @:, @.case: and the brackets
       const linkPlaceholder: string = link.replace(linkPrefix, '').replace(bracketsMatcher, '')
 
-      if (visitedLinkStack.includes(linkPlaceholder)) {
+      if (includes(visitedLinkStack, linkPlaceholder)) {
         if (process.env.NODE_ENV !== 'production') {
           warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
         }
@@ -462,7 +463,7 @@ export default class VueI18n {
 
   _appendItemToChain (chain: Array<Locale>, item: Locale, blocks: any): any {
     let follow = false
-    if (!chain.includes(item)) {
+    if (!includes(chain, item)) {
       follow = true
       if (item) {
         follow = item[item.length - 1] !== '!'
@@ -931,7 +932,7 @@ export default class VueI18n {
 
         // Filter out number format options only
         options = Object.keys(args[0]).reduce((acc, key) => {
-          if (numberFormatKeys.includes(key)) {
+          if (includes(numberFormatKeys, key)) {
             return Object.assign({}, acc, { [key]: args[0][key] })
           }
           return acc
