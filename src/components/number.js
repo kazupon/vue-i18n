@@ -1,6 +1,6 @@
 /* @flow */
 
-import { warn, isObject, numberFormatKeys } from '../util'
+import { warn, isObject, includes, numberFormatKeys } from '../util'
 
 export default {
   name: 'i18n-n',
@@ -43,7 +43,7 @@ export default {
 
       // Filter out number format options only
       options = Object.keys(props.format).reduce((acc, prop) => {
-        if (numberFormatKeys.includes(prop)) {
+        if (includes(numberFormatKeys, prop)) {
           return Object.assign({}, acc, { [prop]: props.format[prop] })
         }
         return acc

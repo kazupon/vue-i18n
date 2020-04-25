@@ -92,6 +92,10 @@ export function remove (arr: Array<any>, item: any): Array<any> | void {
   }
 }
 
+export function includes (arr: Array<any>, item: any): boolean {
+  return !!~arr.indexOf(item)
+}
+
 const hasOwnProperty = Object.prototype.hasOwnProperty
 export function hasOwn (obj: Object | Array<*>, key: string): boolean {
   return hasOwnProperty.call(obj, key)
