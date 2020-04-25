@@ -72,4 +72,39 @@ desc('number format', () => {
       assert.deepEqual(percent, i18n.getNumberFormat('en-US').percent)
     })
   })
+
+  describe('fallback', () => {
+    it('should be fallback', done => {
+      const i18n = new VueI18n({
+        locale: 'en-uk',
+        fallbackLocale: ['de', 'en-us'],
+        numberFormats: {
+          de: {
+            currency: {
+              currency: 'EUR',
+              style: 'currency',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          }
+        }
+      })
+      const el = document.createElement('div')
+      document.body.appendChild(el)
+
+      const money = 101
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$n(money, 'currency')])
+        }
+      }).$mount(el)
+
+      const { text } = vm.$refs
+
+      nextTick(() => {
+        assert.strictEqual(text.textContent, '101,00 €')
+      }).then(done)
+    })
+  })
 })

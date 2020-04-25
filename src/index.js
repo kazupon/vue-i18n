@@ -746,13 +746,20 @@ export default class VueI18n {
     let _locale: Locale = locale
     let formats: DateTimeFormat = dateTimeFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = dateTimeFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' datetime formats from '${current}' datetime formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = dateTimeFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -857,13 +864,20 @@ export default class VueI18n {
     let _locale: Locale = locale
     let formats: NumberFormat = numberFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = numberFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' number formats from '${current}' number formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = numberFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
