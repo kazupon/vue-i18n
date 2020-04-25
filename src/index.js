@@ -730,10 +730,24 @@ export default class VueI18n {
 
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, format)
+    this._clearDateTimeFormat(locale, format)
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format))
+    this._clearDateTimeFormat(locale, format)
+  }
+
+  _clearDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
+    for (let key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._dateTimeFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._dateTimeFormatters[id]
+    }
   }
 
   _localizeDateTime (
