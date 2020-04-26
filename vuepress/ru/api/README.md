@@ -68,7 +68,7 @@ sidebar: auto
 
 #### \$d
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -88,7 +88,7 @@ sidebar: auto
 
 #### \$n
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -150,7 +150,7 @@ sidebar: auto
 
 #### availabilities
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Тип:** `IntlAvailability`
 
@@ -192,7 +192,7 @@ sidebar: auto
 
 #### dateTimeFormats
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Тип:** `DateTimeFormats`
 
@@ -204,7 +204,7 @@ sidebar: auto
 
 #### numberFormats
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Тип:** `NumberFormats`
 
@@ -216,7 +216,7 @@ sidebar: auto
 
 #### availableLocales
 
-> :new: 8.9.0+
+> :new: Добавлено в версии 8.9.0+
 
 - **Тип:** `Locale[]`
 
@@ -236,7 +236,7 @@ sidebar: auto
 
 #### modifiers
 
-> :new: 8.15.0+
+> :new: Добавлено в версии 8.15.0+
 
 - **Тип:** `Modifier`
 
@@ -289,7 +289,7 @@ If you use regular expression, you can suppress localization fail warnings that 
 
 #### silentFallbackWarn
 
-> :new: 8.8+, :up: 8.13
+> :new: Добавлено в версии 8.8+, :up: 8.13
 
 - **Тип:** `Boolean | RegExp`
 
@@ -342,9 +342,9 @@ The shared locale messages of localization for components. More detail see [Comp
 
 - **По умолчанию:** `null`
 
-A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, \$tc, and `tc`.
+Пост-обработчик локализации. Выполняется после вызова `$t`, `t`, `$tc` и `tc`.
 
-This handler is useful if you want to filter on translated text such as space trimming.
+Это может пригодиться, если необходимо дополнительно обработать текст перевода, например избавиться от висящих пробелов.
 
 ### Свойства
 
@@ -374,7 +374,7 @@ The locale messages of localization.
 
 #### dateTimeFormats
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Тип:** `DateTimeFormats`
 
@@ -384,7 +384,7 @@ The datetime formats of localization.
 
 #### numberFormats
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Тип:** `NumberFormats`
 
@@ -420,7 +420,7 @@ Whether suppress warnings outputted when localization fails.
 
 #### silentFallbackWarn
 
-> :new: 8.8+, :up: 8.13
+> :new: Добавлено в версии 8.8+, :up: 8.13
 
 - **Тип:** `Boolean | RegExp`
 
@@ -449,7 +449,6 @@ Whether `v-t` directive's element should preserve `textContent` after directive 
 Whether to allow the use locale messages of HTML formatting.
 
 If you set `warn` or`error`, will check the locale messages on the VueI18n instance.
-
 If you are specified `warn`, a warning will be output at console.
 If you are specified `error` will occured an Error.
 
@@ -479,7 +478,7 @@ A handler for post processing of translation.
 Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
 
 ```js
-VueI18n.prototype.getChoiceIndex = /* custom implementation */
+VueI18n.prototype.getChoiceIndex = /* пользовательская реализация */
 ```
 
 #### getLocaleMessage( locale )
@@ -540,7 +539,7 @@ This is the same as the `Function` returned with `$t` method. More detail see [\
 
 #### i( key, [locale], [values] )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -575,7 +574,7 @@ Check whether key path exists in global locale message. If you specified `locale
 
 #### getDateTimeFormat ( locale )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -587,7 +586,7 @@ Get the datetime format of locale.
 
 #### setDateTimeFormat ( locale, format )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -598,7 +597,7 @@ Set the datetime format of locale.
 
 #### mergeDateTimeFormat ( locale, format )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -609,7 +608,7 @@ Merge the registered datetime formats with the datetime format of locale.
 
 #### d( value, [key], [locale] )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -623,7 +622,7 @@ This is the same as `$d` method of Vue instance method. More detail see [\$d](#d
 
 #### getNumberFormat ( locale )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -635,7 +634,7 @@ Get the number format of locale.
 
 #### setNumberFormat ( locale, format )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -646,7 +645,7 @@ Set the number format of locale.
 
 #### mergeNumberFormat ( locale, format )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -657,7 +656,7 @@ Merge the registered number formats with the number format of locale.
 
 #### n( value, [format], [locale] )
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 - **Аргументы:**
 
@@ -671,7 +670,7 @@ This is the same as `$n` method of Vue instance method. More detail see [\$n](#n
 
 ## Директивы
 
-> :new: 7.3+
+> :new: Добавлено в версии 7.3+
 
 ### v-t
 
@@ -718,7 +717,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 
 ### Функциональный компонент i18n
 
-> :new: 7.0+
+> :new: Добавлено в версии 7.0+
 
 #### Входные параметры:
 
@@ -773,7 +772,7 @@ new Vue({
 
 ### Функциональный компонент i18n-n
 
-> :new: 8.10+
+> :new: Добавлено в версии 8.10+
 
 #### Входные параметры:
 
@@ -853,7 +852,7 @@ Each of these named scoped slots will accept three scope parameters:
 
 ### place
 
-> :new: 7.2+
+> :new: Добавлено в версии 7.2+
 
 #### Ожидает: `{number | string}`
 
