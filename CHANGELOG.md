@@ -1,4 +1,15 @@
 
+## v8.17.4 (2020-04-26)
+
+#### :bug: Bug Fixes
+* [#859](https://github.com/kazupon/vue-i18n/pull/859) fix datetime format cache ([@kazupon](https://github.com/kazupon))
+* [#858](https://github.com/kazupon/vue-i18n/pull/858) fix datetime and number format fallbacking ([@kazupon](https://github.com/kazupon))
+* [#857](https://github.com/kazupon/vue-i18n/pull/857) fix: alternative array includes ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.17.3 (2020-04-19)
 
 #### :zap: Improved Features
