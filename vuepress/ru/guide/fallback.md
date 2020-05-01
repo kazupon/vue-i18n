@@ -2,19 +2,19 @@
 
 _Вкратце: Используйте `fallbackLocale: '<lang>'` для определения языка, который будет использоваться, если нет перевода в выбранной локализации._
 
-## Implicit fallback using locales
+## Неявное использование запасных локализации при использовании локалей
 
-If a `locale` is given containing a territory and an optional dialect, the implicit fallback is activated automatically.
+Если `locale` содержит территорию и опционально диалект, неявные запасные локали активируются автоматически.
 
-For example `de-DE-bavarian` would fallback
+Например для `de-DE-bavarian` в качестве запасных будут использованы следующие:
 
 1. `de-DE-bavarian`
-1. `de-DE`
-1. `de`
+2. `de-DE`
+3. `de`
 
-To supress the automatic fallback, add the postfix exclamation mark `!`, for example `de-DE!`
+Для отключения автоматического использования запасных локализаций, добавьте символ `!`, например `de-DE!`
 
-## Explicit fallback with one locale
+## Явное использование запасной локализации при одной локали
 
 Иногда не все элементы переведены на некоторые языки. В этом примере, пункт `hello` доступен в английской локализации, но отсутствует в русской:
 
