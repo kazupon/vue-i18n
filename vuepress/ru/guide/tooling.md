@@ -18,38 +18,38 @@
 
 ### Загрузчик для Webpack
 
-[vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) is an officially provided webpack loader.
+[vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) — официальный загрузчик для webpack.
 
-With this loader, you can use the `i18n` custom block in the Single file components.
+С помощью этого загрузчика можно использовать пользовательские блоки `i18n` в однофайловых компонентах.
 
-In about `i18n` custom block, see the [Single file components section](./sfc.md)
+Подробнее о пользовательских блоках `i18n` можно изучить в разделе [Однофайловых компонентов](./sfc.md)
 
 ### Плагин для ESLint
 
-[eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) is ESLint plugin for Vue I18n.
+[eslint-plugin-vue-i18n](https://intlify.github.io/eslint-plugin-vue-i18n/) — ESLint-плагин для Vue I18n.
 
-It easily integrates some localization lint features to your Vue.js Application.
+Позволяет легко интегрировать функции проверки локализацией в ваше приложение Vue.js.
 
 ### Расширения
 
-[vue-i18n-extensions](https://github.com/kazupon/vue-i18n-extensions) provides some extensions for Vue I18n.
+[vue-i18n-extensions](https://github.com/kazupon/vue-i18n-extensions) — предоставляет некоторые расширения дляVue I18n.
 
-You can use this extension to enable SSR and improve i18n performance.
+Эти расширения позволяет использовать в рендеринге на стороне сервера (SSR) и улучшить производительность i18n.
 
 ## Сторонние разработки
 
 ### BabelEdit
 
-[BabelEdit](https://www.codeandweb.com/babeledit) is translation editor for web apps.
+[BabelEdit](https://www.codeandweb.com/babeledit) — редактор переводов для веб-приложений.
 
-BabelEdit can translate `json` files, and it can also translate `i18n` custom block of Single-file components.
+BabelEdit может переводить файлы `json`, а также умеет работать с пользовательскими блоками `i18n` однофайловых компонентов.
 
-Read more about BabelEdit in [tutorial page](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).
+Подробнее про BabelEdit можно узнать [на странице введения](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n).
 
 ### i18n Ally
 
-[i18n Ally](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally) is i18n extension for VSCode.
+[i18n Ally](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally) — расширение i18n для VSCode.
 
-i18n Ally give awesome DX for your i18n development.
+i18n Ally предоставляет потрясающий DX для разработки с использованием i18n.
 
-Read more about i18n Ally in [README](https://github.com/antfu/i18n-ally/blob/master/README.md).
+Подробнее о расширении i18n Ally можно изучить в [README](https://github.com/antfu/i18n-ally/blob/master/README.md).

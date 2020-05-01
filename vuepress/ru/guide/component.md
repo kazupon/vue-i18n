@@ -1,13 +1,13 @@
 # Локализация на основе компонентов
 
-In general, locale info (e.g. `locale`,`messages`, etc) is set as constructor option of `VueI18n` instance and it sets `i18n` option as root Vue instance.
+В основном данные локализации (например, `locale`,`messages`, и т.д.) задаются в качестве опции конструктора экземпляра `VueI18n` и устанавливаются опцией `i18n` корневого экземпляра Vue.
 
-Therefore you can globally translate using `$t` or `$tc` in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vue components oriented design.
+Поэтому вы можете глобально переводить, используя методы `$t` или `$tc` в корневом экземпляре Vue и любом из его компонентов. Также можно управлять данными локализации для каждого компонента в отдельности, что может быть удобнее благодаря дизайну ориентированному на компоненты Vue.
 
-Component based localization example:
+Пример локализации на основе компонентов:
 
 ```js
-// setup locale info for root Vue instance
+// Установка локализации в корневой экземпляр Vue
 const i18n = new VueI18n({
   locale: 'ru',
   messages: {
@@ -26,7 +26,7 @@ const i18n = new VueI18n({
   }
 })
 
-// Define component
+// Определение компонента
 const Component1 = {
   template: `
     <div class="container">
@@ -34,7 +34,7 @@ const Component1 = {
      <p>Fallback global locale messages: {{ $t("message.greeting") }}</p>
    </div>`,
   i18n: {
-    // `i18n` option, setup locale info for component
+    // опция `i18n`, определение данных локализации для компонента
     messages: {
       en: { message: { hello: 'hello component1' } },
       ru: { message: { hello: 'привет component1' } }

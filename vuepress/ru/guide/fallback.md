@@ -58,17 +58,17 @@ const i18n = new VueI18n({
 [vue-i18n] Fall back to translate the keypath 'hello' with 'en' locale.
 ```
 
-To suppress these warnings (while keeping those which warn of the total absence of translation for the given key) set `silentFallbackWarn: true` when initializing the `VueI18n` instance.
+Чтобы убрать эти предупреждения (оставляя при этом те, которые предупреждают о полном отсутствии перевода для данного ключа) установите `silentFallbackWarn: true` при инициализации экземпляра `VueI18n`.
 
-## Explicit fallback with an array of locales
+## Явное указание запасной локализации с помощью массива локализаций
 
-It is possible to set more than one fallback locale by using an array of locales. For example
+Можно установить более одной резервной локализации, используя массив локалей. Например:
 
 ```js
-fallbackLocale: [ 'fr', en' ],
+fallbackLocale: [ 'ru', 'en' ],
 ```
 
-## Explicit fallback with decision maps
+## Явное указание запасной локализации с помощью карты принятий решений
 
 If more complex decision maps for fallback locales are required, it is possible to define decision maps with according fallback locales.
 
@@ -81,24 +81,24 @@ fallbackLocale: {
   /* 3 */ 'es-CL':   ['es-AR'],
   /* 4 */ 'es':      ['en-GB'],
   /* 5 */ 'pt':      ['es-AR'],
-  /* 6 */ 'default': ['en', 'da']
+  /* 6 */ 'default': ['en', 'ru']
 },
 ```
 
 will result in the following fallback chains
 
-| locale      | fallback chains                           |
+| Локаль      | Цепочка выбора                            |
 | ----------- | ----------------------------------------- |
-| `'de-CH'`   | de-CH > fr > it > en > da                 |
-| `'de'`      | de > en > da                              |
-| `'zh-Hant'` | zh-Hant > zh-Hans > zh > en > da          |
-| `'es-SP'`   | es-SP > es > en-GB > en > da              |
-| `'es-SP!'`  | es-SP > en > da                           |
-| `'fr'`      | fr > en > da                              |
-| `'pt-BR'`   | pt-BR > pt > es-AR > es > en-GB > en > da |
-| `'es-CL'`   | es-CL > es-AR > es > en-GB > en > da      |
+| `'de-CH'`   | de-CH > fr > it > en > ru                 |
+| `'de'`      | de > en > ru                              |
+| `'zh-Hant'` | zh-Hant > zh-Hans > zh > en > ru          |
+| `'es-SP'`   | es-SP > es > en-GB > en > ru              |
+| `'es-SP!'`  | es-SP > en > ru                           |
+| `'fr'`      | fr > en > ru                              |
+| `'pt-BR'`   | pt-BR > pt > es-AR > es > en-GB > en > ru |
+| `'es-CL'`   | es-CL > es-AR > es > en-GB > en > ru      |
 
-## Fallback interpolation
+## Резервная интерполяция
 
 _Summary: Set `formatFallbackMessages: true` to do template interpolation on translation keys when your language lacks a translation for a key._
 
