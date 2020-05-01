@@ -10,6 +10,8 @@
 
 <p align="center">Internationalization plugin for Vue.js</p>
 
+<br/>
+
 <h3 align="center">Silver Sponsors</h3>
 
 <p align="center">
@@ -17,6 +19,16 @@
     <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png">
   </a>
 </p>
+
+<h3 align="center">Bronze Sponsors</h3>
+
+<p align="center">
+  <a href="https://zenarchitects.co.jp/" target="_blank">
+    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png">
+  </a>
+</p>
+
+<br/>
 
 <p align="center">
   <a href="https://www.patreon.com/kazupon" target="_blank">
@@ -28,13 +40,13 @@
 
 ## :loudspeaker: Notice
 
-vue-i18n will soon be transferred to [intlify organaization](https://github.com/intlify). After that, it will be developed and maintained on intlify.
+vue-i18n will soon be transferred to [intlify organization](https://github.com/intlify). After that, it will be developed and maintained on intlify.
 
 The `vue-i18n` that has been released on npm will be released as `@intlify/vue-i18n` in near future.
 
 `@intlify/vue-i18n` repo is [here](https://github.com/intlify/vue-i18n-next)
 
-Intlify is a new i18n project kickoff by @kazupon. 😉 
+Intlify is a new i18n project kickoff by @kazupon. 😉
 
 ## :book: Documentation
 

@@ -1,4 +1,50 @@
 
+## v8.17.4 (2020-04-26)
+
+#### :bug: Bug Fixes
+* [#859](https://github.com/kazupon/vue-i18n/pull/859) fix datetime format cache ([@kazupon](https://github.com/kazupon))
+* [#858](https://github.com/kazupon/vue-i18n/pull/858) fix datetime and number format fallbacking ([@kazupon](https://github.com/kazupon))
+* [#857](https://github.com/kazupon/vue-i18n/pull/857) fix: alternative array includes ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.17.3 (2020-04-19)
+
+#### :zap: Improved Features
+* [#846](https://github.com/kazupon/vue-i18n/pull/846) add key to postTranslation ([@dmitryuk](https://github.com/dmitryuk))
+
+#### :pencil: Documentation
+* [#847](https://github.com/kazupon/vue-i18n/pull/847) docs: Update /api/README.md ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+#### Committers: 2
+- Alexander Dmitryuk ([@dmitryuk](https://github.com/dmitryuk))
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+
+## v8.17.2 (2020-04-18)
+
+#### :zap: Improved Features
+* [#844](https://github.com/kazupon/vue-i18n/pull/844) Use plain object instead of Map, which is not supported in IE9/10 ([@exoego](https://github.com/exoego))
+
+#### Committers: 1
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
+## v8.17.1 (2020-04-16)
+
+#### :bug: Bug Fixes
+* [#840](https://github.com/kazupon/vue-i18n/pull/840) fix: altnative endsWidth ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#837](https://github.com/kazupon/vue-i18n/pull/837) Fix typo ([@ninofiliu](https://github.com/ninofiliu))
+
+#### Committers: 2
+- Nino Filiu ([@ninofiliu](https://github.com/ninofiliu))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.17.0 (2020-04-11)
 
 #### :star: New Features

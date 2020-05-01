@@ -10,6 +10,7 @@ import {
   isObject,
   looseClone,
   remove,
+  includes,
   merge,
   numberFormatKeys
 } from './util'
@@ -41,7 +42,7 @@ export default class VueI18n {
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
-  _localeChainCache: Map<string, Array<Locale>>
+  _localeChainCache: { [key: string]: Array<Locale>; }
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean | RegExp
@@ -237,7 +238,7 @@ export default class VueI18n {
 
   get fallbackLocale (): Locale { return this._vm.fallbackLocale }
   set fallbackLocale (locale: Locale): void {
-    this._localeChainCache = new Map()
+    this._localeChainCache = {}
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
@@ -385,7 +386,7 @@ export default class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches: any = ret.match(linkKeyMatcher)
-    for (const idx in matches) {
+    for (let idx in matches) {
       // ie compatible: filter custom array
       // prototype method
       if (!matches.hasOwnProperty(idx)) {
@@ -398,7 +399,7 @@ export default class VueI18n {
       // Remove the leading @:, @.case: and the brackets
       const linkPlaceholder: string = link.replace(linkPrefix, '').replace(bracketsMatcher, '')
 
-      if (visitedLinkStack.includes(linkPlaceholder)) {
+      if (includes(visitedLinkStack, linkPlaceholder)) {
         if (process.env.NODE_ENV !== 'production') {
           warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
         }
@@ -462,10 +463,10 @@ export default class VueI18n {
 
   _appendItemToChain (chain: Array<Locale>, item: Locale, blocks: any): any {
     let follow = false
-    if (!chain.includes(item)) {
+    if (!includes(chain, item)) {
       follow = true
       if (item) {
-        follow = !item.endsWith('!')
+        follow = item[item.length - 1] !== '!'
         item = item.replace(/!/g, '')
         chain.push(item)
         if (blocks && blocks[item]) {
@@ -500,10 +501,10 @@ export default class VueI18n {
     if (start === '') { return [] }
 
     if (!this._localeChainCache) {
-      this._localeChainCache = new Map()
+      this._localeChainCache = {}
     }
 
-    let chain = this._localeChainCache.get(start)
+    let chain = this._localeChainCache[start]
     if (!chain) {
       if (!fallbackLocale) {
         fallbackLocale = this.fallbackLocale
@@ -549,7 +550,7 @@ export default class VueI18n {
           null
         )
       }
-      this._localeChainCache.set(start, chain)
+      this._localeChainCache[start] = chain
     }
     return chain
   }
@@ -599,7 +600,7 @@ export default class VueI18n {
     } else {
       ret = this._warnDefault(locale, key, ret, host, values, 'string')
       if (this._postTranslation && ret !== null && ret !== undefined) {
-        ret = this._postTranslation(ret)
+        ret = this._postTranslation(ret, key)
       }
       return ret
     }
@@ -729,10 +730,24 @@ export default class VueI18n {
 
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, format)
+    this._clearDateTimeFormat(locale, format)
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format))
+    this._clearDateTimeFormat(locale, format)
+  }
+
+  _clearDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
+    for (let key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._dateTimeFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._dateTimeFormatters[id]
+    }
   }
 
   _localizeDateTime (
@@ -745,13 +760,20 @@ export default class VueI18n {
     let _locale: Locale = locale
     let formats: DateTimeFormat = dateTimeFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = dateTimeFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' datetime formats from '${current}' datetime formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = dateTimeFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -834,7 +856,7 @@ export default class VueI18n {
   }
 
   _clearNumberFormat (locale: Locale, format: NumberFormat): void {
-    for (const key in format) {
+    for (let key in format) {
       const id = `${locale}__${key}`
 
       if (!this._numberFormatters.hasOwnProperty(id)) {
@@ -856,13 +878,20 @@ export default class VueI18n {
     let _locale: Locale = locale
     let formats: NumberFormat = numberFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = numberFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' number formats from '${current}' number formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = numberFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -931,7 +960,7 @@ export default class VueI18n {
 
         // Filter out number format options only
         options = Object.keys(args[0]).reduce((acc, key) => {
-          if (numberFormatKeys.includes(key)) {
+          if (includes(numberFormatKeys, key)) {
             return Object.assign({}, acc, { [key]: args[0][key] })
           }
           return acc

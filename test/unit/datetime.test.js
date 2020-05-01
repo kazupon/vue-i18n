@@ -66,4 +66,34 @@ desc('datetime format', () => {
       assert.deepEqual(foo, i18n.getDateTimeFormat('en-US').foo)
     })
   })
+
+  describe('fallback', () => {
+    it('should be fallbacked', done => {
+      const i18n = new VueI18n({
+        locale: 'en-uk',
+        fallbackLocale: ['de', 'en-us'],
+        dateTimeFormats: {
+          de: {
+            short: { day: '2-digit', month: '2-digit', year: '2-digit' }
+          }
+        }
+      })
+      const el = document.createElement('div')
+      document.body.appendChild(el)
+
+      const dt = new Date(Date.UTC(2012, 11, 20, 3, 0, 0))
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$d(dt, 'short')])
+        }
+      }).$mount(el)
+
+      const { text } = vm.$refs
+
+      nextTick(() => {
+        assert.strictEqual(text.textContent, '20.12.12')
+      }).then(done)
+    })
+  })
 })

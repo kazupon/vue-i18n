@@ -51,7 +51,7 @@ declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => string | void;
-declare type PostTranslationHandler = (str: string) => string;
+declare type PostTranslationHandler = (str: string, key?: string) => string;
 
 declare type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 declare type FormattedNumberPart = {
