@@ -260,9 +260,9 @@ sidebar: auto
 
 - **По умолчанию:** `true`
 
-In the component localization, whether to fall back to root level (global) localization when localization fails.
+При использовании компонентной локализации определяет обращаться ли к локализации корневого уровня (глобальной), когда локализация не удалась.
 
-If `false`, it's warned, and is returned the key.
+При значении `false` будет выбрасываться предупреждение и возвращаться ключ.
 
 #### sync
 
@@ -270,9 +270,9 @@ If `false`, it's warned, and is returned the key.
 
 - **По умолчанию:** `true`
 
-Whether synchronize the root level locale to the component localization locale.
+Синхронизировать ли локализацию корневого уровня с локализацией компонента.
 
-If `false`, regardless of the root level locale, localize for each component locale.
+При значении `false`, независимо от определённой локали корневого уровня, будет использоваться локаль указанная для каждого компонента.
 
 #### silentTranslationWarn
 
@@ -282,10 +282,9 @@ If `false`, regardless of the root level locale, localize for each component loc
 
 - **По умолчанию:** `false`
 
-Whether suppress warnings outputted when localization fails.
+Отключение предупреждений, отображаемых при неудаче локализации.
 
-If `true`, suppress localization fail warnings.
-If you use regular expression, you can suppress localization fail warnings that it match with translation `key` (e.g. `$t`).
+При значении `true`, отключаются предупреждения об ошибках локализации. Если использовать регулярное выражение, то можно отключать предупреждения об ошибках, которые будут соответствовать `key` (например, `$t`).
 
 #### silentFallbackWarn
 
@@ -295,48 +294,47 @@ If you use regular expression, you can suppress localization fail warnings that 
 
 - **По умолчанию:** `false`
 
-Whether suppress warnings when falling back to either `fallbackLocale` or `root`.
+Отключение предупреждений при использовании запасной локали из `fallbackLocale` или `root`.
 
-If `true`, warnings will be generated only when no translation is available at all, and not for fallbacks.
-If you use regular expression, you can suppress the fallback warnings that it match `key` (e.g. `$t`).
+При значении `true` предупреждения будут генерироваться только если недоступна локализация вообще, а не для случаев использования запасной локали. При использовании регулярного выражения можно отключать предупреждения которые будут соответствовать `key` (например, `$t`).
 
 #### preserveDirectiveContent
 
-> 8.7+
+> Добавлено в версии 8.7+
 
 - **Тип:** `Boolean`
 
 - **По умолчанию:** `false`
 
-Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
+Определяет должен ли элемент директивы `v-t` сохранять `textContent` после того как директива будет отвязана (unbinded).
 
 #### warnHtmlInMessage
 
-> 8.11+
+> Добавлено в версии 8.11+
 
 - **Тип:** `WarnHtmlInMessageLevel`
 
 - **По умолчанию:** `off`
 
-Whether to allow the use locale messages of HTML formatting. See the `warnHtmlInMessage` property.
+Разрешить ли использование HTML-форматирования в сообщениях локализации. См. также свойство `warnHtmlInMessage`.
 
 :::danger Внимание!
-In next major version, `warnHtmlInMessage` option is `warn` as default.
+Со следующей мажорной версии значение по умолчанию `warnHtmlInMessage` будет `warn`.
 :::
 
 #### sharedMessages
 
-> 8.12+
+> Добавлено в версии 8.12+
 
 - **Тип:** `LocaleMessages`
 
 - **По умолчанию:** `undefined`
 
-The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
+Общие сообщения локализации при локализации в компонентах. Подробнее в разделе [Локализация на основе компонентов](../guide/component.md#локаnизация-на-основе-компонентов).
 
 #### postTranslation
 
-> 8.16+
+> Добавлено в версии 8.16+
 
 - **Тип:** `PostTranslationHandler`
 
@@ -354,7 +352,7 @@ The shared locale messages of localization for components. More detail see [Comp
 
 - **Чтение/Запись**
 
-The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
+Локаль для локализации. Если локаль содержит территорию и диалект, то эта локаль указывает на неявные запасные варианты.
 
 #### fallbackLocale
 
@@ -362,7 +360,7 @@ The locale of localization. If the locale contains a territory and a dialect, th
 
 - **Чтение/Запись**
 
-The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
+Локаль для запасной локализации. Более сложные определения переклюдчения на запасную локализацию можно изучить в разделе [Запасная локализация](../guide/fallback.md).
 
 #### messages
 
@@ -370,7 +368,7 @@ The locale of fallback localization. For more complex fallback definitions see [
 
 - **Только для чтения**
 
-The locale messages of localization.
+Сообщения локали для использования в локализации.
 
 #### dateTimeFormats
 
@@ -380,7 +378,7 @@ The locale messages of localization.
 
 - **Только для чтения**
 
-The datetime formats of localization.
+Форматы форматирования дат для локализации.
 
 #### numberFormats
 
@@ -390,7 +388,7 @@ The datetime formats of localization.
 
 - **Только для чтения**
 
-The number formats of localization.
+Форматы форматирования чисел для локализации.
 
 #### missing
 
@@ -398,7 +396,7 @@ The number formats of localization.
 
 - **Чтение/Запись**
 
-A handler for localization missing.
+Обработчик для отсутствующих локализаций.
 
 #### formatter
 
@@ -406,7 +404,7 @@ A handler for localization missing.
 
 - **Чтение/Запись**
 
-The formatter that implemented with `Formatter` interface.
+Форматтер, который реализует интерфейс `Formatter`.
 
 #### silentTranslationWarn
 
@@ -416,7 +414,7 @@ The formatter that implemented with `Formatter` interface.
 
 - **Чтение/Запись**
 
-Whether suppress warnings outputted when localization fails.
+Отключение предупреждений выводимых при ошибке локализации.
 
 #### silentFallbackWarn
 
@@ -426,43 +424,43 @@ Whether suppress warnings outputted when localization fails.
 
 - **Чтение/Запись**
 
-Whether suppress fallback warnings when localization fails.
+Отключение предупреждений выводимых при ошибке использования запасной локализации.
 
 #### preserveDirectiveContent
 
-> 8.7+
+> Добавлено в версии 8.7+
 
 - **Тип:** `Boolean`
 
 - **Чтение/Запись**
 
-Whether `v-t` directive's element should preserve `textContent` after directive is unbinded.
+Должен ли элемент директивы `v-t` сохранять `textContent` после того как директива отвязана (unbinded).
 
 #### warnHtmlInMessage
 
-> 8.11+
+> Добавлено в версии 8.11+
 
 - **Тип:** `WarnHtmlInMessageLevel`
 
 - **Чтение/Запись**
 
-Whether to allow the use locale messages of HTML formatting.
+Разрешить ли использование HTML-форматирования в сообщениях локализации.
 
-If you set `warn` or`error`, will check the locale messages on the VueI18n instance.
-If you are specified `warn`, a warning will be output at console.
-If you are specified `error` will occured an Error.
+При установке `warn` или `error` будут проверяться сообщения локализации экземпляра VueI18n.
+При установке `warn` предупреждения будут выводиться в консоль.
+При установке `error` будет генерироваться Error.
 
-In VueI18n instance, set the `off` as default.
+В экземпляре VueI18n в качестве значения по умолчанию установлено `off`.
 
 #### postTranslation
 
-> 8.16+
+> Добавлено в версии 8.16+
 
 - **Тип:** `PostTranslationHandler`
 
 - **Чтение/Запись**
 
-A handler for post processing of translation.
+Обработчик для пост-обработки перевода.
 
 ### Методы
 
@@ -475,7 +473,7 @@ A handler for post processing of translation.
 
 - **Возвращает:** `finalChoice {number}`
 
-Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
+Получение индекса для плюрализации для текущего числа и заданного количества вариантов. Реализация может быть переопределена через изменение прототипа:
 
 ```js
 VueI18n.prototype.getChoiceIndex = /* пользовательская реализация */
@@ -489,7 +487,7 @@ VueI18n.prototype.getChoiceIndex = /* пользовательская реал�
 
 - **Возвращает:** `LocaleMessageObject`
 
-Get the locale message of locale.
+Получение сообщений локализации для локали.
 
 #### setLocaleMessage( locale, message )
 
@@ -498,13 +496,13 @@ Get the locale message of locale.
   - `{Locale} locale`
   - `{LocaleMessageObject} message`
 
-Set the locale message of locale.
+Установка сообщений локализации для локали.
 
 :::tip ПРИМЕЧАНИЕ
 
-> 8.11+
+> Добавлено в версии 8.11+
 
-If you set `warn` or`error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+При использовании `warn` или `error` в свойстве `warnHtmlInMessage`, при выполнении этого метода будет проверено используется ли HTML-форматирование для сообщения локализации.
 :::
 
 #### mergeLocaleMessage( locale, message )
@@ -516,13 +514,13 @@ If you set `warn` or`error` in the `warnHtmlInMessage` property, when this metho
   - `{Locale} locale`
   - `{LocaleMessageObject} message`
 
-Merge the registered locale messages with the locale message of locale.
+Объединение указанных сообщений локализации с сообщениями локализации локали.
 
 :::tip ПРИМЕЧАНИЕ
 
-> 8.11+
+> Добавлено в версии 8.11+
 
-If you set `warn` or`error` in the `warnHtmlInMessage` property, when this method is executed, it will check if HTML formatting is used for locale message.
+При использовании `warn` или `error` в свойстве `warnHtmlInMessage`, при выполнении этого метода будет проверено используется ли HTML-форматирование для сообщения локализации.
 :::
 
 #### t( key, [locale], [values] )
@@ -535,7 +533,7 @@ If you set `warn` or`error` in the `warnHtmlInMessage` property, when this metho
 
 - **Возвращает:** : `TranslateResult`
 
-This is the same as the `Function` returned with `$t` method. More detail see [\$t](#t).
+Аналогично функции возвращаемой методом `$t`. Подробнее см. [\$t](#t).
 
 #### i( key, [locale], [values] )
 
@@ -559,7 +557,7 @@ This is the same as the `Function` returned with `$t` method. More detail see [\
 
 - **Возвращает:** `TranslateResult`
 
-This is the same as the `Function` returned `$tc` method. More detail see [\$tc](#tc).
+Аналогично функции возвращаемой методом `$tc`. Подробнее см. [\$tc](#tc).
 
 #### te( key, [locale] )
 
@@ -570,7 +568,7 @@ This is the same as the `Function` returned `$tc` method. More detail see [\$tc]
 
 - **Возвращает:** `boolean`
 
-Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
+Проверяет существует ли указанный ключ в глобальных сообщениях локализации. Если указать `locale`, проверка будет осуществляться в сообщениях локализации `locale`.
 
 #### getDateTimeFormat ( locale )
 
@@ -582,7 +580,7 @@ Check whether key path exists in global locale message. If you specified `locale
 
 - **Возвращает:** `DateTimeFormat`
 
-Get the datetime format of locale.
+Получение форматов форматирования дат локализации.
 
 #### setDateTimeFormat ( locale, format )
 
@@ -593,7 +591,7 @@ Get the datetime format of locale.
   - `{Locale} locale`
   - `{DateTimeFormat} format`
 
-Set the datetime format of locale.
+Установка форматов форматирования дат для локализации.
 
 #### mergeDateTimeFormat ( locale, format )
 
@@ -604,7 +602,7 @@ Set the datetime format of locale.
   - `{Locale} locale`
   - `{DateTimeFormat} format`
 
-Merge the registered datetime formats with the datetime format of locale.
+Объединение указанных форматов форматирования дат с форматами локализации.
 
 #### d( value, [key], [locale] )
 
@@ -618,7 +616,7 @@ Merge the registered datetime formats with the datetime format of locale.
 
 - **Возвращает:** `DateTimeFormatResult`
 
-This is the same as `$d` method of Vue instance method. More detail see [\$d](#d).
+Аналогично функции возвращаемой методом `$d`. Подробнее см. [\$d](#d).
 
 #### getNumberFormat ( locale )
 
@@ -630,7 +628,7 @@ This is the same as `$d` method of Vue instance method. More detail see [\$d](#d
 
 - **Возвращает:** `NumberFormat`
 
-Get the number format of locale.
+Получение форматов форматирования чисел для локализации.
 
 #### setNumberFormat ( locale, format )
 
@@ -641,7 +639,7 @@ Get the number format of locale.
   - `{Locale} locale`
   - `{NumberFormat} format`
 
-Set the number format of locale.
+Установка форматов форматирования чисел для локализации.
 
 #### mergeNumberFormat ( locale, format )
 
@@ -652,7 +650,7 @@ Set the number format of locale.
   - `{Locale} locale`
   - `{NumberFormat} format`
 
-Merge the registered number formats with the number format of locale.
+Объединение указанных форматов форматирования чисел с форматами локализации.
 
 #### n( value, [format], [locale] )
 
@@ -666,7 +664,7 @@ Merge the registered number formats with the number format of locale.
 
 - **Возвращает:** `NumberFormatResult`
 
-This is the same as `$n` method of Vue instance method. More detail see [\$n](#n).
+Аналогично функции возвращаемой методом `$n`. Подробнее см. [\$n](#n).
 
 ## Директивы
 
@@ -678,40 +676,40 @@ This is the same as `$n` method of Vue instance method. More detail see [\$n](#n
 
 - **Модификаторы:**
 
-  - `.preserve`: (8.7.0+) preserves element `textContent` when directive is unbinded.
+  - `.preserve`: (8.7.0+) сохраняет `textContent` элемента при отвязывании директивы (unbinded).
 
 - **Подробности:**
 
-Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
+Обновление `textContent` элемента, который был переведён с помощью сообщений локализации. Можно использовать строковый синтаксис или синтаксис объекта. Строковый синтаксис может быть задан в качестве пути к сообщению локализации. При использовании объектного синтаксиса необходимо указать следующие свойства:
 
-    * path: обязательный, key of locale messages
+    * path: обязательный, ключ сообщения локализации
     * locale: опционально, локализация
-    * args: опционально, for list or named formatting
+    * args: опционально, для списка или именованного форматирования
 
 :::tip ПРИМЕЧАНИЕ
-The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://ru.vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
+Значение `textContent` элемента мо умолчанию очищается при отвязывании директивы `v-t`. Это может быть нежелательной ситуацией например при [анимировании списков](https://ru.vuejs.org/v2/guide/transitions.html). Для сохранения данных `textContent` после отвязывании директивы следует использовать модификатор `.preserve` или глобальную опцию [`preserveDirectiveContent`](#preservedirectivecontent).
 :::
 
 - **Примеры:**
 
 ```html
-<!-- string syntax: literal -->
+<!-- строковый синтаксис: литерал -->
 <p v-t="'foo.bar'"></p>
 
-<!-- string syntax: binding via data or computed props -->
+<!-- строковый синтаксис: привязка к данным -->
 <p v-t="msg"></p>
 
-<!-- object syntax: literal -->
+<!-- объектный синтаксис: литерал -->
 <p v-t="{ path: 'hi', локализация: 'ru', args: { name: 'kazupon' } }"></p>
 
-<!-- object syntax: binding via data or computed props -->
+<!-- объектный синтаксис: привязка к данным -->
 <p v-t="{ path: greeting, args: { name: fullName } }"></p>
 
-<!-- with preserve modifier -->
+<!-- с модификатором preserve -->
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
-- **См. также:** [Custom directive localization](../guide/directive.md)
+- **См. также:** [Пользовательская директива для локализации](../guide/directive.md)
 
 ## Компоненты
 
@@ -727,7 +725,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 - `places {Array | Object}`: опционально (7.2+)
 
 :::danger Внимание!
-In next major version, `places` prop is deprecated. Please switch to slots syntax.
+Со следующей мажорной версии опция `places` будет удалена. Используйте синтаксис слотов.
 :::
 
 #### Использование:
@@ -768,7 +766,7 @@ new Vue({
 
 #### См. также:
 
-[Component interpolation](../guide/interpolation.md)
+[Интерполяция компонента](../guide/interpolation.md)
 
 ### Функциональный компонент i18n-n
 
@@ -777,7 +775,7 @@ new Vue({
 #### Входные параметры:
 
 - `value {number}`: обязательный, число для форматирования
-- `format {string | NumberFormatOptions}`: опционально, форматируемое число name or object with explicit format options
+- `format {string | NumberFormatOptions}`: опционально, форматируемое число или объект с указанными опциями форматирования
 - `locale {Locale}`: опционально, локализация
 - `tag {string}`: опционально, по умолчанию `span`
 
@@ -787,7 +785,9 @@ new Vue({
 <div id="app">
   <!-- ... -->
   <i18n-n :value="money" format="currency" tag="label">
-    <span v-slot:currency="slotProps" class="font-weight: bold">{{ slotProps.currency }}<span>
+    <span v-slot:currency="slotProps" class="font-weight: bold">
+      {{ slotProps.currency }}
+    <span>
   </i18n-n>
   <!-- ... -->
 </div>
@@ -822,9 +822,9 @@ new Vue({
 }).$mount('#app')
 ```
 
-#### Scoped slots
+#### Слоты с ограниченной областью видимости
 
-`<i18n-n>` functional component can accept a number of named scoped slots. List of supported slot names is based on [`Intl.NumberFormat.formatToParts()` output types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts):
+Функциональный компонент `<i18n-n>` может принимать различные слоты с ограниченной областью видимости. Список поддерживаемых имён слотов основан на [выходных типах `Intl.NumberFormat.formatToParts()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat/formatToParts):
 
 - `currency`
 - `decimal`
@@ -838,15 +838,15 @@ new Vue({
 - `plusSign`
 - `percentSign`
 
-Each of these named scoped slots will accept three scope parameters:
+Каждый из слотов предоставляет доступ к значениям трёх параметров:
 
-- `[slotName] {FormattedNumberPartType}`: parameter of the same name as actual slot name (like `integer`)
-- `index {Number}`: index of the specific part in the array of number parts
-- `parts {Array}`: array of all formatted number parts
+- `[slotName] {FormattedNumberPartType}`: параметр с тем же именем, что и имя слота (например, `integer`)
+- `index {Number}`: индекс конкретной части в массиве частей числа
+- `parts {Array}`: массив со всеми отформатированными частями числа
 
 #### См. также:
 
-[Number custom formatting](../guide/number.md#custom-formatting)
+[Локализация чисел](../guide/number.md#custom-formatting)
 
 ## Специальный атрибуты
 
@@ -856,10 +856,10 @@ Each of these named scoped slots will accept three scope parameters:
 
 #### Ожидает: `{number | string}`
 
-Used on component interpolation to indicate which index of list formatting or key of named formatting.
+Используется при интерполяции компонента для указания индекса при форматировании списком или ключа при именованном форматировании.
 
-For detailed usage, see the guide section linked below.
+Подробнее об использовании можно изучить в разделе по ссылке ниже.
 
 #### См. также:
 
-[Component interpolation](../guide/interpolation.md)
+[Интерполяция компонента](../guide/interpolation.md)
