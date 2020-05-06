@@ -2,9 +2,9 @@
 
 ## Глобальная конфигурация
 
-### lang replaced
+### Заменён lang
 
-Use `VueI18n` class constructor `locale` option, or `VueI18n#locale` property:
+Используйте у конструктора класса `VueI18n` опцию `locale` или свойство `VueI18n#locale`:
 
 ```js
 const i18n = new VueI18n({
@@ -13,16 +13,16 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// change locale
+// переключение локализации
 i18n.locale = 'ru'
-// or
+// или
 app.$i18n.locale = 'ru'
 ```
 
-### fallbackLang replaced
+### Заменён fallbackLang
 
-Use `VueI18n` class constructor `fallbackLocale` option, or
-`VueI18n#fallbackLocale` property:
+Используйте у конструктора класса `VueI18n` опцию `fallbackLocale` или свойство
+`VueI18n#fallbackLocale`:
 
 ```js
 const i18n = new VueI18n({
@@ -32,46 +32,44 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// change fallback locale
+// изменение запасной локализации
 i18n.fallbackLocale = 'zh'
-// or
+// или
 app.$i18n.fallbackLocale = 'zh'
 ```
 
-### missingHandler replaced
+### Заменён missingHandler
 
-Use `VueI18n` class constructor `missing` option, or `VueI18n#missing`
-property:
+Используйте у конструктора класса `VueI18n` опцию `missing` или свойство `VueI18n#missing`:
 
 ```js
 const i18n = new VueI18n({
   // ...
   missing: (locale, key, vm, values) => {
-    // handle translation missing
+    // обработка отсутствующих переводов
   }
   // ...
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// change missing handler
+// изменение обработчика для отсутствующих переводов
 i18n.missing = (locale, key, vm, values) => {
-  // handle translation missing
+  // обработка отсутствующих переводов
 }
-// or
+// или
 app.$i18n.missing = (locale, key, vm, values) => {
-  // handle translation missing
+  // обработка отсутствующих переводов
 }
 ```
 
-### i18nFormatter replaced
+### Заменён i18nFormatter
 
-Use `VueI18n` class constructor `formatter` option, or `VueI18n#formatter`
-property:
+Используйте у конструктора класса `VueI18n` опцию `formatter` или свойство `VueI18n#formatter`:
 
 ```js
 class CustomFormatter {
   format(message, ...values) {
-    // something render logic
+    // какая-то логика
     return 'something string'
   }
 }
@@ -83,17 +81,17 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// change custom formatter
+// изменение пользовательского форматтера
 i18n.formatter = {
   format: (message, ...values) => {
-    // something render logic
+    // какая-то логика
     return 'something string'
   }
 }
-// or
+// или
 app.$i18n.formatter = {
   format: (message, ...values) => {
-    // something render logic
+    // какая-то логика
     return 'something string'
   }
 }
@@ -101,10 +99,9 @@ app.$i18n.formatter = {
 
 ## Глобальные методы
 
-### Vue.locale replaced
+### Заменён Vue.locale
 
-Use `VueI18n` class constructor `messages` option, or
-`VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage` methods:
+Используйте у конструктора класса `VueI18n` опцию `messages` или методы `VueI18n#GetLocaleMessage` / `VueI18n#setLocaleMessage`:
 
 ```js
 const i18n = new VueI18n({
@@ -123,20 +120,20 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// get locale message
+// получение сообщений локализации
 const en = i18n.getLocaleMessage('en')
 en.greeting = 'hi!'
-// set locale message
+// установка сообщений локализации
 i18n.setLocaleMessage('en', en)
-// or
+// или
 const ru = app.$i18n.getLocaleMessage('ru')
 ru.greeting = 'Привет!'
 app.$i18n.setLocaleMessage('ru', ru)
 ```
 
-### Vue.t replaced
+### Заменён Vue.t
 
-Use `VueI18n#t` method:
+Используйте метод `VueI18n#t`:
 
 ```js
 const i18n = new VueI18n({
@@ -152,9 +149,9 @@ const i18n = new VueI18n({
 i18n.t('greeting', { name: 'kazupon' }) // -> hi kazupon
 ```
 
-### Vue.tc replaced
+### Заменён Vue.tc
 
-Use `VueI18n#tc` method:
+Используйте метод `VueI18n#tc`:
 
 ```js
 const i18n = new VueI18n({
@@ -171,9 +168,9 @@ const count = 10
 i18n.tc('apple', count, { count }) // -> 10 apples
 ```
 
-### Vue.te replaced
+### Заменён Vue.te
 
-Use `VueI18n#te` method:
+Используйте метод `VueI18n#te`:
 
 ```js
 const i18n = new VueI18n({
@@ -193,10 +190,9 @@ i18n.te('hello') // -> true
 
 ## Опции конструктора
 
-### locales replaced
+### Заменён locales
 
-Use `messages` of `VueI18n` class constructor option, or `messages` of `i18n`
-option (for Component option):
+Используйте у конструктора класса `VueI18n` опцию `messages` или `messages` из `i18n` (для компонента):
 
 ```js
 const i18n = new VueI18n({
@@ -209,7 +205,7 @@ const i18n = new VueI18n({
   // ...
 })
 
-// for Component
+// для компонента
 const Component1 = {
   i18n: {
     messages: {
@@ -223,9 +219,9 @@ const Component1 = {
 
 ## Свойства экземпляра
 
-### \$lang replaced
+### Заменён \$lang
 
-Use `VueI18n#locale` property:
+Используйте свойство `VueI18n#locale`:
 
 ```js
 const i18n = new VueI18n({
@@ -234,17 +230,17 @@ const i18n = new VueI18n({
 })
 const app = new Vue({ i18n }).$mount('#app')
 
-// change locale
+// переключение локализации
 i18n.locale = 'ru'
-// or
+// или
 app.$i18n.locale = 'ru'
 ```
 
 ## Другие возможности
 
-### Dynamic locale removed
+### Динамическая локализация удалена
 
-If you need to dynamic set locale messages, you should implement the below:
+При необходимости динамически устанавливать сообщения локализации потребуется добавить реализацию самостоятельно:
 
 ```js
 const i18n = new VueI18n({ locale: 'en' })
