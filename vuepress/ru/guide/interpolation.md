@@ -6,13 +6,13 @@
 :new: 7.0+
 :::
 
-Sometimes, we need to localize with a locale message that was included in a HTML tag or component. For example:
+Иногда требуется перевести сообщения в которых есть HTML теги или компоненты. Например:
 
 ```html
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-In the above message, if you use `$t`, you will probably try to compose the following locale messages:
+Для такого сообщения, если хотим использовать `$t`, то, вероятно, попробуем достичь скомпоновав из следующих сообщений локализации:
 
 ```js
 const messages = {
@@ -23,7 +23,7 @@ const messages = {
 }
 ```
 
-And your localized template may look like this:
+И в итоге шаблон станет выглядеть так:
 
 ```html
 <p>{{ $t('term1') }}<a href="/term">{{ $t('term2') }}</a></p>
@@ -35,10 +35,9 @@ And your localized template may look like this:
 <p>I accept xxx <a href="/term">Terms of Service Agreement</a></p>
 ```
 
-This is very cumbersome, and if you configure the `<a>` tag in a locale message, there is a possibility of XSS vulnerabilities due to localizing with
-`v-html="$t('term')"`.
+Это выглядит очень громоздко, но если перенести тег `<a>` в сообщение локализации, то добавится вероятность XSS-уязвимости из-за применения `v-html="$t('term')"`.
 
-You can avoid it using the `i18n` functional component. For example:
+Этого можно избежать воспользовавшись функциональным компонентом `i18n`. Например:
 
 ```html
 <div id="app">
@@ -86,15 +85,17 @@ new Vue({
 </div>
 ```
 
-About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
+Подробнее о примере можно изучить [здесь](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
 
-The children of `i18n` functional component are interpolated with locale message of `path` prop. In the above example,
+Потомки функционального компонента `i18n` интерполируют сообщения локализации по входному параметру `path`. В примере выше,
+
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
-is interpolated with `term` locale message.
 
-In the above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their order of appearance.
+интерполируется с сообщением локализации `term`.
+
+В примере выше интерполяция компонента использует **формат в виде списка**. Потомки функционального компонента `i18n` интерполируются по порядку их появления.
 
 ## Использование синтаксиса слотов
 
@@ -102,7 +103,7 @@ In the above example, the component interpolation follows the **list formatting*
 :new: 8.14+
 :::
 
-It's more convenient to use the named slots syntax. For example:
+Гораздо удобнее использовать синтаксис именованных слотов. Например:
 
 ```html
 <div id="app">
@@ -157,7 +158,7 @@ new Vue({
 </div>
 ```
 
-In Vue 2.6 and later, you can use the following slots syntax in templates:
+С версии Vue 2.6 можно использовать сокращённый синтаксис слотов в шаблонах:
 
 ```html
 <div id="app">
@@ -175,7 +176,7 @@ In Vue 2.6 and later, you can use the following slots syntax in templates:
 ```
 
 :::warning Ограничение
-:warning: In `i18n` component, slots props are not supported.
+:warning: В компоненте `i18n` входные параметры слота не поддерживаются.
 :::
 
 ## Использование синтаксиса places
@@ -189,10 +190,10 @@ In Vue 2.6 and later, you can use the following slots syntax in templates:
 :::
 
 :::warning Обратите внимание
-:warning: In `i18n` component, text content consisting of only white spaces will be omitted.
+:warning: В компоненте `i18n` содержимое, состоящее только из пробелов, будет опущено.
 :::
 
-Named formatting is supported with the help of `place` attribute. For example:
+Именованное форматирование поддерживается с помощью атрибута `place`. Например:
 
 ```html
 <div id="app">
@@ -243,10 +244,10 @@ new Vue({
 ```
 
 :::warning Обратите внимание
-:warning: To use named formatting, all children of `i18n` component must have `place` attribute set. Otherwise it will fallback to list formatting.
+:warning: Для использования именованного форматирования все потомки компонента `i18n` должны иметь установленный атрибут `place`. В противном случае будет использовано форматирование списком.
 :::
 
-If you still want to interpolate text content in named formatting, you could define `places` property on `i18n` component. For example:
+Если всё же необходимо интерполировать текстовое содержимое с помощью именованного форматирования, можно определить свойство `places` на компоненте `i18n`. Например:
 
 ```html
 <div id="app">

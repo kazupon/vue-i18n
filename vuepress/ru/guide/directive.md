@@ -4,11 +4,11 @@
 :new: 7.3+
 :::
 
-Можно переводить не только с помощью пользовательской директивы `v-t`, но и с помощью метода `$t`.
+Переводы можно осуществлять не только используя пользовательскую директиву `v-t`, но и с помощью метода `$t`.
 
 ## Строковый синтаксис
 
-Можно передать путь к сообщению локализации строкой.
+Можно передавать ключ сообщения локализации строкой.
 
 JavaScript:
 
@@ -47,7 +47,7 @@ new Vue({
 
 ## Объектный синтаксис
 
-Можно использовать синтаксис объекта.
+Можно использовать объектный синтаксис.
 
 JavaScript:
 
@@ -95,9 +95,9 @@ new Vue({
 :new: 8.7+
 :::
 
-When `v-t` directive is applied to an element inside [`<transition>` component](https://ru.vuejs.org/v2/api/#transition), you may notice that the translated message disappears during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in the disappearing element inside the `<transition>` component will be destroyed **before the transition starts**. This behavior may result in content flickering on short animations, but is most noticable on long transitions.
+При использовании директивы `v-t` на элементе внутри [компонента `<transition>`](https://ru.vuejs.org/v2/api/#transition), можно заметить как переведённое сообщение исчезает во время анимации перехода. Это поведение связано с реализацией самого компонента `<transition>` — все директивы в исчезающем элементе внутри компонента `<transition>` должны быть уничтожены **до начала анимации**. Это может привести к мерцанию содержимого на коротких анимациях, но наиболее заметно при длинных анимациях переходов.
 
-To make sure directive content stays un-touched during a transition, just add the [`.preserve` modifier](../api/#v-t) to the `v-t` directive defintion.
+Чтобы сохранить содержимое директивы во время анимации перехода, необходимо добавить [модификатор `.preserve`](../api/#v-t) при определении директивы `v-t`.
 
 Javascript:
 
@@ -124,7 +124,7 @@ new Vue({
 </div>
 ```
 
-It is also possible to set global settings on the `VueI18n` instance itself, which will affect all `v-t` directives without modifier.
+Также можно глобально установить настройку `preserveDirectiveContent` в экземпляре `VueI18n`, что повлияет на все директивы `v-t` без добавления модификатора к ним.
 
 JavaScript:
 
@@ -152,32 +152,32 @@ new Vue({
 </div>
 ```
 
-About the above examples, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/directive)
+Подробнее о примерах выше можно изучить [здесь](https://github.com/kazupon/vue-i18n/tree/dev/examples/directive)
 
-## `$t` vs `v-t`
+## `$t` или `v-t`
 
 ### `$t`
 
-`$t` is an extended Vue instance method. It has the following pros and cons:
+`$t` — это метод, добавленный в экземпляр Vue. У него следующие плюсы и минусы:
 
 #### Плюсы
 
-You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
+Предоставляет **гибкость** в использовании синтаксиса фигурных скобок `{{}}` в шаблонах, а также применять в вычисляемых свойствах и методах экземпляра Vue.
 
 #### Минусы
 
-`$t` is executed **every time** when re-render occurs, so it does have translation costs.
+`$t` выполняется **каждый раз** когда происходит перерисовка, поэтому у него есть расходы на осуществление перевода.
 
 ### `v-t`
 
-`v-t` is a custom directive. It has the following pros and cons:
+`v-t` — пользовательская директива. У неё следующие плюсы и минусы:
 
 #### Плюсы
 
-`v-t` has **better performance** than the `$t` method due to its cache with the custom directive, when translated once. Also, pre-translation is possible with the Vue compiler module which was provided by [`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions).
+`v-t` имеет **лучшую производительность** в сравнении с методом `$t`, благодаря кэшу в пользовательской директиве после выполнения перевода. Также можно реализовать предварительный перевод с помощью модуля для компилятора Vue, который предоставляет плагин [`vue-i18n-extensions`](https://github.com/kazupon/vue-i18n-extensions).
 
-Therefore it's possible to make **more performance optimizations**.
+Таким образом, можно достичь **большей оптимизации производительности**.
 
 #### Минусы
 
-`v-t` cannot be flexibly used like `$t`, it's rather **complex**. The translated content with `v-t` is inserted into the `textContent` of the element. Also, when you use server-side rendering, you need to set the [custom directive](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) to `directives` option of the `createRenderer` function.
+`v-t` нельзя использовать также гибко, как `$t`, и это добавляет **сложности**. Перевод с помощью `v-t` вставляется в `textContent` элемента. Также, при использовании рендеринга на стороне сервера необходимо установить [пользовательскую директиву](https://github.com/kazupon/vue-i18n-extensions#directive-v-t-custom-directive-for-server-side) через опцию `directives` функции `createRenderer`.

@@ -1,10 +1,10 @@
 # Ленивая загрузка переводов
 
-Loading all of your translation files at once is overkill and unnecessary.
+Одновременная загрузка всех файлов переводов может быть излишней и ненужной.
 
-Lazy loading or asynchronously loading the translation files is really easy when using Webpack.
+Ленивая или асинхронная загрузка файлов переводов очень просто реализуется при использовании Webpack.
 
-Let´s assume we have a project directory similar to the one below:
+Предположим, что у нас есть каталог проекта следующей структуры:
 
 ```
 our-cool-project
@@ -19,7 +19,7 @@ our-cool-project
 ---it.js
 ```
 
-The `lang` folder is where all of our translation files reside. The `setup` folder is where our arbitrary setup files like the i18n-setup, global component inits, plugin inits and other reside.
+В каталоге `lang` располагаются все файлы переводов. В каталоге `setup` сгруппированы различные файлы настроек, например настройки i18n, регистрация глобальных компонентов, инициализации плагинов и другое.
 
 ```js
 // i18n-setup.js
@@ -67,13 +67,13 @@ export function loadLanguageAsync(lang) {
 }
 ```
 
-In short we are creating a new VueI18n instance as we normally would. Then we are creating a `loadedLanguages` array that will keep track of our loaded languages. Next is the `setI18nLanguage` function that will actually change the language in our vueI18n instance, axios and where ever else is needed.
+Для начала создаём новый экземпляр VueI18n как обычно. Затем определяем массив `loadedLanguages` в котором будем хранить список загруженных языков. Далее создаём функцию `setI18nLanguage`, которая будет переключать локализацию в экземпляре vueI18n, axios и где ещё это необходимо.
 
-The `loadLanguageAsync` function is what we will actually use to change the languages. Loading the new files is done via the `import` function, which is generously provided by Webpack and it allows us to load files dynamically, and because it uses promises we can easily wait for the loading to finish.
+Функция `loadLanguageAsync` будет использоваться для изменения языка. Загрузка новых файлов осуществляется функцией `import`, которую предоставляет Webpack и позволяет загружать файлы динамически, а поскольку она возвращает Promise, то можем легко дождаться окончания загрузки.
 
-You can learn more about the import function in the [Webpack documentation](https://webpack.js.org/guides/code-splitting/#dynamic-imports).
+Подробнее о динамических импортах можно изучить в [документации Webpack](https://webpack.js.org/guides/code-splitting/#dynamic-imports).
 
-Using the `loadLanguageAsync` function is straightforward. A common use case is inside a vue-router beforeEach hook.
+Использовать `loadLanguageAsync` очень просто. Например, в хуке beforeEach vue-router.
 
 ```js
 router.beforeEach((to, from, next) => {
@@ -82,4 +82,4 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
-We could improve this by checking if the `lang` is actually supported by us or not, call `reject` so we can catch that in the `beforeEach` stopping the route transition.
+Можно доработать реализацию, например добавив проверку поддерживается ли переданный `lang` или нет и вызывать `reject` чтобы отловить подобные случаи в хуке `beforeEach` и остановить навигацию.
