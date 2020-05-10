@@ -1,4 +1,19 @@
 
+## v8.17.5 (2020-05-10)
+
+#### :bug: Bug Fixes
+* [#869](https://github.com/kazupon/vue-i18n/pull/869) fix: not string method access error ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#867](https://github.com/kazupon/vue-i18n/pull/867) docs: [RU] Translation ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#865](https://github.com/kazupon/vue-i18n/pull/865) improvement(docs): extend Hot reloading section ([@caugner](https://github.com/caugner))
+
+#### Committers: 3
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Claas Augner ([@caugner](https://github.com/caugner))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.17.4 (2020-04-26)
 
 #### :bug: Bug Fixes
