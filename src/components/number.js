@@ -1,6 +1,6 @@
 /* @flow */
 
-import { warn, isObject, includes, numberFormatKeys } from '../util'
+import { warn, isString, isObject, includes, numberFormatKeys } from '../util'
 
 export default {
   name: 'i18n-n',
@@ -34,7 +34,7 @@ export default {
     let key: ?string = null
     let options: ?NumberFormatOptions = null
 
-    if (typeof props.format === 'string') {
+    if (isString(props.format)) {
       key = props.format
     } else if (isObject(props.format)) {
       if (props.format.key) {
