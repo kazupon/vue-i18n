@@ -78,3 +78,21 @@ describe('kazupon#138 mmokross#2 - Fallback Locale as array for cascading fallba
     })
   })
 })
+
+describe('issue #868', () => {
+  it('should be fallbacked', () => {
+    const i18n = new VueI18n({
+      locale: 'de-CH',
+      fallbackLocale: {
+        'de-CH': ['fr', 'it'],
+        'zh-Hant': ['zh-Hans'],
+        'es-CL': ['es-AR'],
+        'es': ['en-GB'],
+        'pt': ['es-AR'],
+        default: ['en-US', 1, {}, null, false, undefined, 'en']
+      },
+      messages
+    })
+    assert.deepEqual(i18n.t('message.hello'), 'the world')
+  })
+})

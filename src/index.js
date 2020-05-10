@@ -8,6 +8,9 @@ import {
   parseArgs,
   isPlainObject,
   isObject,
+  isArray,
+  isBoolean,
+  isString,
   looseClone,
   remove,
   includes,
@@ -490,9 +493,11 @@ export default class VueI18n {
 
   _appendBlockToChain (chain: Array<Locale>, block: Array<Locale>, blocks: any): any {
     let follow = true
-    for (let i = 0; (i < block.length) && (typeof follow === 'boolean'); i++) {
+    for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
       const locale = block[i]
-      follow = this._appendLocaleToChain(chain, locale, blocks)
+      if (isString(locale)) {
+        follow = this._appendLocaleToChain(chain, locale, blocks)
+      }
     }
     return follow
   }
@@ -515,7 +520,7 @@ export default class VueI18n {
       let block = [start]
 
       // while any intervening block found
-      while (Array.isArray(block)) {
+      while (isArray(block)) {
         block = this._appendBlockToChain(
           chain,
           block,
@@ -525,9 +530,9 @@ export default class VueI18n {
 
       // last block defined by default
       let defaults
-      if (Array.isArray(fallbackLocale)) {
+      if (isArray(fallbackLocale)) {
         defaults = fallbackLocale
-      } else if (fallbackLocale instanceof Object) {
+      } else if (isObject(fallbackLocale)) {
         if (fallbackLocale['default']) {
           defaults = fallbackLocale['default']
         } else {
@@ -538,7 +543,7 @@ export default class VueI18n {
       }
 
       // convert defaults to array
-      if (typeof defaults === 'string') {
+      if (isString(defaults)) {
         block = [defaults]
       } else {
         block = defaults
