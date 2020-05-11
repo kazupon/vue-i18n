@@ -430,17 +430,6 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 
 这与 `$t` 方法返回的 `Function` 相同。更多细节见[$t](#t)。
 
-#### i( key, [locale], [values] )
-
-> :new: 7.0 新增
-
-  * **参数：**
-
-    * `{Path} key`：必填
-    * `{Locale} locale`：可选
-    * `{Array} values`：可选
-  * **返回值：**：`TranslateResult`
-
 #### tc( key, [choice], [values] )
 
   * **参数：**

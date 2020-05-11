@@ -106,7 +106,7 @@ Output:
 ### Formatting linked locale messages
 
 If the language distinguish cases of character, you may need control the case of the linked locale messages.
-Linked messages can be formatted with modifier  `@.modifier:key`
+Linked messages can be formatted with modifier `@.modifier:key`
 
 The below modifiers are available currently.
 

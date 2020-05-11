@@ -93,7 +93,7 @@ The children of `i18n` functional component are interpolated with locale message
 :::
 is interpolated with `term` locale message.
 
-In the above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their order of appearance.
+In the above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their order of appearance.
 
 ## Slots syntax usage
 

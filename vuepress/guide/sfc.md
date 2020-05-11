@@ -289,7 +289,7 @@ __Translation contains only text__ (Work without deep selector)
 <i18n>
 {
   "en": {
-    "hello": "helloworld!"
+    "hello": "hello world!"
   },
   "ja": {
     "hello": "こんにちは、世界"

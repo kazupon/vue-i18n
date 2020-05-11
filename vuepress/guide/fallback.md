@@ -11,11 +11,11 @@ For example `de-DE-bavarian` would fallback
 1. `de-DE`
 1. `de`
 
-To supress the automatic fallback, add the postfix exclamation mark `!`, for example `de-DE!`
+To suppress the automatic fallback, add the postfix exclamation mark `!`, for example `de-DE!`
 
 ## Explicit fallback with one locale
 
-Sometimes some items will not be translated into some languages.  In this example, the item `hello` is available in English but not Japanese:
+Sometimes some items will not be translated into some languages. In this example, the item `hello` is available in English but not Japanese:
 
 ```js
 const messages = {
@@ -108,7 +108,7 @@ const messages = {
 
 This is useful because you don't have to specify a translation for the string "Hello, world!" into English.
 
-In fact, you can even include template parameters in a key.  Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys *are* your templates.
+In fact, you can even include template parameters in a key. Together with `formatFallbackMessages: true`, this lets you skip writing templates for your "base" language; the keys *are* your templates.
 
 ```javascript
 const messages = {
