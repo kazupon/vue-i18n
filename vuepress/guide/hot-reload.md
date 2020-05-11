@@ -18,7 +18,7 @@ const messages = {
 }
 
 // VueI18n instance
-const i18n = new Vuei18n({
+const i18n = new VueI18n({
   locale: 'en',
   messages
 })

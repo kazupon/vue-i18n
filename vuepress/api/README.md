@@ -133,7 +133,7 @@ If you have specified an `i18n` option at component options, you will be able to
 
 ## `VueI18n` class
 
-`Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+`VueI18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Static properties
 
@@ -326,7 +326,7 @@ In next major version, `warnHtmlInMessage` option is `warn` as default.
 
   * **Default:** `undefined`
 
-The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
+The shared locale messages of localization for components. More detail see [Component based localization](../guide/component.md#shared-locale-messages-for-components).
 
 #### postTranslation
 
@@ -445,7 +445,7 @@ Whether to allow the use locale messages of HTML formatting.
 If you set `warn` or` error`, will check the locale messages on the VueI18n instance.
 
 If you are specified `warn`, a warning will be output at console.
-If you are specified `error` will occured an Error.
+If you are specified `error` will occurred an Error.
 
 In VueI18n instance, set the `off` as default.
 
@@ -526,17 +526,6 @@ If you set `warn` or` error` in the `warnHtmlInMessage` property, when this meth
   * **Return:** : `TranslateResult`
 
 This is the same as the `Function` returned with `$t` method. More detail see [$t](#t).
-
-#### i( key, [locale], [values] )
-
-> :new: 7.0+
-
-  * **Arguments:**
-
-    * `{Path} key`: required
-    * `{Locale} locale`: optional
-    * `{Array} values`: optional
-  * **Return:** : `TranslateResult`
 
 #### tc( key, [choice], [values] )
 

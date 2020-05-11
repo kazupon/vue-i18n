@@ -9,7 +9,7 @@ const messages = {
 }
 
 // VueI18n 实例
-const i18n = new Vuei18n({
+const i18n = new VueI18n({
   locale: 'en',
   messages
 })
