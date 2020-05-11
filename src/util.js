@@ -43,8 +43,18 @@ export function error (msg: string, err: ?Error): void {
   }
 }
 
+export const isArray = Array.isArray
+
 export function isObject (obj: mixed): boolean %checks {
   return obj !== null && typeof obj === 'object'
+}
+
+export function isBoolean (val: mixed): boolean %checks {
+  return typeof val === 'boolean'
+}
+
+export function isString (val: mixed): boolean %checks {
+  return typeof val === 'string'
 }
 
 const toString: Function = Object.prototype.toString

@@ -8,6 +8,9 @@ import {
   parseArgs,
   isPlainObject,
   isObject,
+  isArray,
+  isBoolean,
+  isString,
   looseClone,
   remove,
   includes,
@@ -161,7 +164,7 @@ export default class VueI18n {
             paths.pop()
           }
         })
-      } else if (typeof message === 'string') {
+      } else if (isString(message)) {
         const ret = htmlTagMatcher.test(message)
         if (ret) {
           const msg = `Detected HTML in message '${message}' of keypath '${paths.join('')}' at '${locale}'. Consider component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
@@ -283,7 +286,7 @@ export default class VueI18n {
     if (!isNull(result)) { return result }
     if (this._missing) {
       const missingRet = this._missing.apply(null, [locale, key, vm, values])
-      if (typeof missingRet === 'string') {
+      if (isString(missingRet)) {
         return missingRet
       }
     } else {
@@ -342,7 +345,7 @@ export default class VueI18n {
       /* istanbul ignore else */
       if (isPlainObject(message)) {
         ret = message[key]
-        if (typeof ret !== 'string') {
+        if (!isString(ret)) {
           if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
             warn(`Value of key '${key}' is not a string!`)
           }
@@ -353,7 +356,7 @@ export default class VueI18n {
       }
     } else {
       /* istanbul ignore else */
-      if (typeof pathRet === 'string') {
+      if (isString(pathRet)) {
         ret = pathRet
       } else {
         if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
@@ -458,7 +461,7 @@ export default class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && !isString(ret) ? ret.join('') : ret
   }
 
   _appendItemToChain (chain: Array<Locale>, item: Locale, blocks: any): any {
@@ -490,9 +493,11 @@ export default class VueI18n {
 
   _appendBlockToChain (chain: Array<Locale>, block: Array<Locale>, blocks: any): any {
     let follow = true
-    for (let i = 0; (i < block.length) && (typeof follow === 'boolean'); i++) {
+    for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
       const locale = block[i]
-      follow = this._appendLocaleToChain(chain, locale, blocks)
+      if (isString(locale)) {
+        follow = this._appendLocaleToChain(chain, locale, blocks)
+      }
     }
     return follow
   }
@@ -515,7 +520,7 @@ export default class VueI18n {
       let block = [start]
 
       // while any intervening block found
-      while (Array.isArray(block)) {
+      while (isArray(block)) {
         block = this._appendBlockToChain(
           chain,
           block,
@@ -525,9 +530,9 @@ export default class VueI18n {
 
       // last block defined by default
       let defaults
-      if (Array.isArray(fallbackLocale)) {
+      if (isArray(fallbackLocale)) {
         defaults = fallbackLocale
-      } else if (fallbackLocale instanceof Object) {
+      } else if (isObject(fallbackLocale)) {
         if (fallbackLocale['default']) {
           defaults = fallbackLocale['default']
         } else {
@@ -538,7 +543,7 @@ export default class VueI18n {
       }
 
       // convert defaults to array
-      if (typeof defaults === 'string') {
+      if (isString(defaults)) {
         block = [defaults]
       } else {
         block = defaults
@@ -628,7 +633,7 @@ export default class VueI18n {
     /* istanbul ignore if */
     if (!key) { return '' }
 
-    if (typeof locale !== 'string') {
+    if (!isString(locale)) {
       locale = this.locale
     }
 
@@ -657,7 +662,7 @@ export default class VueI18n {
 
   fetchChoice (message: string, choice: number): ?string {
     /* istanbul ignore if */
-    if (!message && typeof message !== 'string') { return null }
+    if (!message && !isString(message)) { return null }
     const choices: Array<string> = message.split('|')
 
     choice = this.getChoiceIndex(choice, choices.length)
@@ -819,7 +824,7 @@ export default class VueI18n {
     let key: ?string = null
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -830,10 +835,10 @@ export default class VueI18n {
         }
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1]
       }
     }
@@ -948,7 +953,7 @@ export default class VueI18n {
     let options: ?NumberFormatOptions = null
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -967,10 +972,10 @@ export default class VueI18n {
         }, null)
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1]
       }
     }
