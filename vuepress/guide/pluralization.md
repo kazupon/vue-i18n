@@ -4,7 +4,7 @@ You can translate with pluralization. You must define the locale that have a pip
 
 *Your template will need to use `$tc()` instead of `$t()`.*
 
-Locale messages the below:
+Locale messages below:
 
 ```js
 const messages = {
