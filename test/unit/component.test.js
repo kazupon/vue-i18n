@@ -135,8 +135,6 @@ describe('component translation', () => {
       assert.strictEqual(subChild2.textContent, 'sub-child2')
 
       vm.$destroy()
-    }).then(() => {
-      assert(vm.$i18n === null)
     }).then(done)
   })
 })
