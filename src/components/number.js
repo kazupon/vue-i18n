@@ -7,7 +7,7 @@ export default {
   functional: true,
   props: {
     tag: {
-      type: String,
+      type: [String, Boolean],
       default: 'span'
     },
     value: {
@@ -58,10 +58,13 @@ export default {
       return slot ? slot({ [part.type]: part.value, index, parts }) : part.value
     })
 
-    return h(props.tag, {
-      attrs: data.attrs,
-      'class': data['class'],
-      staticClass: data.staticClass
-    }, values)
+    const tag = (!!props.tag && props.tag !== true) || props.tag === false ? props.tag : 'span'
+    return tag
+      ? h(tag, {
+        attrs: data.attrs,
+        'class': data['class'],
+        staticClass: data.staticClass
+      }, values)
+      : values
   }
 }
