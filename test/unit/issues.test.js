@@ -693,4 +693,20 @@ describe('issues', () => {
       assert.strictEqual(vm.$te('message.empty'), true)
     })
   })
+
+  describe('#722', () => {
+    it('$tb should translate', () => {
+      i18n = new VueI18n({
+        locale: 'en',
+        messages: {
+          en: {
+            validity: 'valid | invalid'
+          }
+        }
+      })
+      vm = new Vue({ i18n })
+
+      assert.strictEqual(vm.$tb('validity', true), 'valid')
+    })
+  })
 })

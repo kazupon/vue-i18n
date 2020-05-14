@@ -54,7 +54,8 @@ export default {
         named: 'Hello {name}, how are you? | Hi {name}, you look fine',
         list: 'Hello {0}, how are you? | Hi {0}, you look fine'
       },
-      fallback: 'this is fallback | this is a plural fallback'
+      fallback: 'this is fallback | this is a plural fallback',
+      validity: 'valid | invalid'
     },
     errors: [
       'this is 0 error code message',
@@ -95,7 +96,8 @@ export default {
         named: 'こんにちは {name}, ごきげんいかが？ | こんにちは {name}, ごきげんいかが？',
         list: 'こんにちは {0}, ごきげんいかが？| こんにちは {0}, ごきげんいかが？'
       },
-      fallback: 'これはフォールバック | ザ・ワールド'
+      fallback: 'これはフォールバック | ザ・ワールド',
+      validity: '有効 | 無効'
     },
     errors: [
       'これはエラーコード0のエラーメッセージです。',

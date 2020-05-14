@@ -711,6 +711,23 @@ export default class VueI18n {
     return this._te(key, this.locale, this._getMessages(), locale)
   }
 
+  _tb (
+    key: Path,
+    _locale: Locale,
+    messages: LocaleMessages,
+    flag?: boolean,
+    ...values: any): any {
+    if (!key) { return '' }
+
+    const parsedArgs = parseArgs(...values)
+    values = parsedArgs.locale === null ? [parsedArgs.params] : [parsedArgs.locale, parsedArgs.params]
+    return this.fetchChoice(this._t(key, _locale, messages, null, ...values), flag ? 1 : 2)
+  }
+
+  tb (key: Path, flag: boolean, ...values: any): TranslateResult {
+    return this._tb(key, this.locale, this._getMessages(), flag, ...values)
+  }
+
   getLocaleMessage (locale: Locale): LocaleMessageObject {
     return looseClone(this._vm.messages[locale] || {})
   }
