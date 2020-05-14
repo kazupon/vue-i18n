@@ -693,7 +693,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 
   * `path {Path}`: required, keypath of locale messages
   * `locale {Locale}`: optional, locale
-  * `tag {string}`: optional, default `span`
+  * `tag {string|boolean}`: optional, default `'span'`
   * `places {Array | Object}`: optional (7.2+)
 
 :::danger Important!!
@@ -748,7 +748,7 @@ new Vue({
   * `value {number}`: required, number to format
   * `format {string | NumberFormatOptions}`: optional, number format name or object with explicit format options
   * `locale {Locale}`: optional, locale
-  * `tag {string}`: optional, default `span`
+  * `tag {string|boolean}`: optional, default `'span'`
 
 #### Usage:
 

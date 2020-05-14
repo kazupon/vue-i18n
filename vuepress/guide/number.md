@@ -126,4 +126,6 @@ It is possible to specify multiple scoped slots at the same time:
 </span>
 ```
 
+You can choose the root container's node type by specifying a `tag` prop. If omitted, it defaults to `'span'`. You can also set it to the boolean value `false` to insert the child nodes directly without creating a root element.
+
 Full list of the supported scoped slots as well as other `<i18n-n>` properties can be found [on API page](../api/readme.md#i18n-n-functional-component).
