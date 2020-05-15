@@ -77,6 +77,19 @@ desc('number custom formatting', () => {
   })
 
   describe('tag', () => {
+    it('should default to span', done => {
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n-n', { props: { value } })
+        },
+        el: document.createElement('div')
+      })
+      nextTick(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>10,100</span>')
+      }).then(done)
+    })
+
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
@@ -87,6 +100,34 @@ desc('number custom formatting', () => {
       })
       nextTick(() => {
         assert.strictEqual(vm.$el.outerHTML, '<p>10,100</p>')
+      }).then(done)
+    })
+
+    it('of value true defaults to span', done => {
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n-n', { props: { value, tag: true } })
+        },
+        el: document.createElement('div')
+      })
+      nextTick(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>10,100</span>')
+      }).then(done)
+    })
+
+    it('of value false does not apply a root container', done => {
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n-n', { props: { value, tag: false } })
+        },
+        el: document.createElement('div')
+      })
+      nextTick(() => {
+        console.log('\n\n\n\n\n\n\n', vm.$el, '\n\n', vm.$el.nodeType)
+        assert.strictEqual(vm.$el.nodeType, Node.TEXT_NODE)
+        assert.strictEqual(vm.$el.data, '10,100')
       }).then(done)
     })
   })

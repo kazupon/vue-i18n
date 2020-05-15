@@ -47,6 +47,61 @@ describe('component interpolation', () => {
     })
   })
 
+  describe('tag', () => {
+    it('defaults to span', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text' } }, [this._v('1')])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
+      }).then(done)
+    })
+
+    it('of type string should be correctly applied', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: 'b' } }, [this._v('1')])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<b>one: 1</b>')
+      }).then(done)
+    })
+
+    it('of value true defaults to span', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: true } }, [this._v('1')])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
+      }).then(done)
+    })
+
+    it('of value false does not apply a root container', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: false } }, [this._v('1')])
+        }
+      }).$mount(el)
+      nextTick(() => {
+        assert.strictEqual(vm.$el.nodeType, Node.TEXT_NODE)
+        assert.strictEqual(vm.$el.data, 'one: 1')
+      }).then(done)
+    })
+  })
+
   describe('children', () => {
     describe('text nodes', () => {
       it('should be interpolated', done => {

@@ -7,7 +7,8 @@ export default {
   functional: true,
   props: {
     tag: {
-      type: String
+      type: [String, Boolean],
+      default: 'span'
     },
     path: {
       type: String,
@@ -39,7 +40,7 @@ export default {
         : params
     )
 
-    const tag = props.tag || 'span'
+    const tag = (!!props.tag && props.tag !== true) || props.tag === false ? props.tag : 'span'
     return tag ? h(tag, data, children) : children
   }
 }
