@@ -693,4 +693,22 @@ describe('issues', () => {
       assert.strictEqual(vm.$te('message.empty'), true)
     })
   })
+
+  describe('#879', () => {
+    it('$t should not throw when invoked on a destroyed component', async () => {
+      const vm = new Vue({
+        i18n: new VueI18n({ locale: 'en' }),
+        methods: {
+          test: async function () {
+            // Long running async method that terminates after the component is destroyed.
+            await new Promise((resolve) => setTimeout(resolve, 50))
+            this.$t('anything')
+          }
+        }
+      })
+      const promise = vm.test() // invocation before being destroyed
+      vm.$destroy()
+      await promise // should not throw
+    })
+  })
 })

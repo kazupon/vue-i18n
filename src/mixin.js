@@ -127,8 +127,6 @@ export default {
         self._localeWatcher()
         delete self._localeWatcher
       }
-
-      self._i18n = null
     })
   }
 }
