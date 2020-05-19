@@ -1,4 +1,13 @@
 
+## v8.17.7 (2020-05-19)
+
+#### :bug: Bug Fixes
+* [#882](https://github.com/kazupon/vue-i18n/pull/882) fix v-t pluralisation when choice is 0 ([@mikejacoutot](https://github.com/mikejacoutot))
+
+#### Committers: 1
+- [@mikejacoutot](https://github.com/mikejacoutot)
+
+
 ## v8.17.6 (2020-05-15)
 
 #### :bug: Bug Fixes
