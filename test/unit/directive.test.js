@@ -198,6 +198,26 @@ describe('custom directive', () => {
           assert.strictEqual(vm.$refs.text._vt, 'cars')
         }).then(done)
       })
+
+      it('should allow a zero choice', done => {
+        const vm = createVM({
+          i18n,
+          render (h) {
+            // <p ref="text" v-t="{path: 'plurals.apple', choice: 0}"></p>
+            return h('p', { ref: 'text', directives: [{
+              name: 't', rawName: 'v-t', value: ({ path: 'plurals.apple', choice: 0 }), expression: { path: 'plurals.apple', choice: 0 }
+            }] })
+          }
+        })
+        nextTick(() => {
+          assert.strictEqual(vm.$refs.text.textContent, 'no apples')
+          assert.strictEqual(vm.$refs.text._vt, 'no apples')
+          vm.$forceUpdate()
+        }).then(() => {
+          assert.strictEqual(vm.$refs.text.textContent, 'no apples')
+          assert.strictEqual(vm.$refs.text._vt, 'no apples')
+        }).then(done)
+      })
     })
 
     describe('preserve content', () => {
