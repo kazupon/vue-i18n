@@ -2,6 +2,7 @@
 .*/node_modules/.*
 .*/docs/.*
 .*/test/.*
+.*/types/.*
 .*/config/.*
 .*/examples/.*
 
