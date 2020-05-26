@@ -344,6 +344,18 @@ sidebar: auto
 
 Может пригодиться при необходимости дополнительно обработать итоговый текст перевода, например избавиться от висящих пробелов.
 
+#### componentInstanceCreatedListener
+
+> 8.18+
+
+  * **Type:** `ComponentInstanceCreatedListener`
+
+  * **Default:** `null`
+
+A handler for getting notified when component-local instance was created. The handler gets called with new and old (root) VueI18n instances.
+
+This handler is useful when extending the root VueI18n instance and wanting to also apply those extensions to component-local instance.
+
 ### Свойства
 
 #### locale
