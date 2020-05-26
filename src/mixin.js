@@ -29,16 +29,19 @@ export default {
         this._i18n = options.i18n
         this._i18nWatcher = this._i18n.watchI18nData()
       } else if (isPlainObject(options.i18n)) {
+        const rootI18n = this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n
+          ? this.$root.$i18n
+          : null
         // component local i18n
-        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+        if (rootI18n) {
           options.i18n.root = this.$root
-          options.i18n.formatter = this.$root.$i18n.formatter
-          options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale
-          options.i18n.formatFallbackMessages = this.$root.$i18n.formatFallbackMessages
-          options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn
-          options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn
-          options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules
-          options.i18n.preserveDirectiveContent = this.$root.$i18n.preserveDirectiveContent
+          options.i18n.formatter = rootI18n.formatter
+          options.i18n.fallbackLocale = rootI18n.fallbackLocale
+          options.i18n.formatFallbackMessages = rootI18n.formatFallbackMessages
+          options.i18n.silentTranslationWarn = rootI18n.silentTranslationWarn
+          options.i18n.silentFallbackWarn = rootI18n.silentFallbackWarn
+          options.i18n.pluralizationRules = rootI18n.pluralizationRules
+          options.i18n.preserveDirectiveContent = rootI18n.preserveDirectiveContent
         }
 
         // init locale messages via custom blocks
@@ -66,6 +69,10 @@ export default {
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
           this._localeWatcher = this.$i18n.watchLocale()
+        }
+
+        if (rootI18n) {
+          rootI18n.onComponentInstanceCreated(this._i18n)
         }
       } else {
         if (process.env.NODE_ENV !== 'production') {

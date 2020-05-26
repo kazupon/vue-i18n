@@ -55,6 +55,7 @@ export default class VueI18n {
   _numberFormatters: Object
   _path: I18nPath
   _dataListeners: Array<any>
+  _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
   _postTranslation: ?PostTranslationHandler
@@ -101,6 +102,7 @@ export default class VueI18n {
     this._numberFormatters = {}
     this._path = new I18nPath()
     this._dataListeners = []
+    this._componentInstanceCreatedListener = options.componentInstanceCreatedListener || null
     this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
       : !!options.preserveDirectiveContent
@@ -225,6 +227,12 @@ export default class VueI18n {
       target.$set(target, 'locale', val)
       target.$forceUpdate()
     }, { immediate: true })
+  }
+
+  onComponentInstanceCreated (newI18n: I18n) {
+    if (this._componentInstanceCreatedListener) {
+      this._componentInstanceCreatedListener(newI18n, this)
+    }
   }
 
   get vm (): any { return this._vm }

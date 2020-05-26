@@ -87,6 +87,7 @@ declare namespace VueI18n {
 
   type MissingHandler = (locale: Locale, key: Path, vm: Vue | null, values: any) => string | void;
   type PostTranslationHandler = (str: string, key?: string) => string;
+  type ComponentInstanceCreatedListener = (newVm: VueI18n & IVueI18n, rootVm: VueI18n & IVueI18n) => void;
 
   interface IntlAvailability {
     dateTimeFormat: boolean;
@@ -113,6 +114,7 @@ declare namespace VueI18n {
     warnHtmlInMessage?: WarnHtmlInMessageLevel;
     sharedMessages?: LocaleMessages;
     postTranslation?: PostTranslationHandler;
+    componentInstanceCreatedListener?: ComponentInstanceCreatedListener;
   }
 }
 
