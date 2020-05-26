@@ -1,4 +1,16 @@
 
+## v8.18.0 (2020-05-26)
+
+#### :star: New Features
+* [#892](https://github.com/kazupon/vue-i18n/pull/892) Add onComponentInstanceCreated constructor option ([@rchl](https://github.com/rchl))
+
+#### :zap: Improved Features
+* [#890](https://github.com/kazupon/vue-i18n/pull/890) chore: set up linting for typescript definitions ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
 ## v8.17.7 (2020-05-19)
 
 #### :bug: Bug Fixes
