@@ -73,7 +73,7 @@ export default class VueI18n {
     }
 
     const locale: Locale = options.locale || 'en-US'
-    const fallbackLocale: any = options.fallbackLocale === false
+    const fallbackLocale: FallbackLocale = options.fallbackLocale === false
       ? false
       : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
@@ -184,7 +184,7 @@ export default class VueI18n {
 
   _initVM (data: {
     locale: Locale,
-    fallbackLocale: Locale,
+    fallbackLocale: FallbackLocale,
     messages: LocaleMessages,
     dateTimeFormats: DateTimeFormats,
     numberFormats: NumberFormats
@@ -231,6 +231,7 @@ export default class VueI18n {
 
   onComponentInstanceCreated (newI18n: I18n) {
     if (this._componentInstanceCreatedListener) {
+      // $FlowFixMe
       this._componentInstanceCreatedListener(newI18n, this)
     }
   }
@@ -247,8 +248,8 @@ export default class VueI18n {
     this._vm.$set(this._vm, 'locale', locale)
   }
 
-  get fallbackLocale (): Locale { return this._vm.fallbackLocale }
-  set fallbackLocale (locale: Locale): void {
+  get fallbackLocale (): FallbackLocale { return this._vm.fallbackLocale }
+  set fallbackLocale (locale: FallbackLocale): void {
     this._localeChainCache = {}
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
@@ -499,7 +500,7 @@ export default class VueI18n {
     return follow
   }
 
-  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale>, blocks: any): any {
+  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale> | Object, blocks: any): any {
     let follow = true
     for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
       const locale = block[i]
@@ -510,7 +511,7 @@ export default class VueI18n {
     return follow
   }
 
-  _getLocaleChain (start: Locale, fallbackLocale: any): Array<Locale> {
+  _getLocaleChain (start: Locale, fallbackLocale: FallbackLocale): Array<Locale> {
     if (start === '') { return [] }
 
     if (!this._localeChainCache) {
@@ -541,6 +542,7 @@ export default class VueI18n {
       if (isArray(fallbackLocale)) {
         defaults = fallbackLocale
       } else if (isObject(fallbackLocale)) {
+        /* $FlowFixMe */
         if (fallbackLocale['default']) {
           defaults = fallbackLocale['default']
         } else {
@@ -571,7 +573,7 @@ export default class VueI18n {
   _translate (
     messages: LocaleMessages,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     key: Path,
     host: any,
     interpolateMode: string,
@@ -766,7 +768,7 @@ export default class VueI18n {
   _localizeDateTime (
     value: number | Date,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     dateTimeFormats: DateTimeFormats,
     key: string
   ): ?DateTimeFormatResult {
@@ -883,7 +885,7 @@ export default class VueI18n {
   _getNumberFormatter (
     value: number,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     numberFormats: NumberFormats,
     key: string,
     options: ?NumberFormatOptions
