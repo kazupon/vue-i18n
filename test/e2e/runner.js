@@ -13,7 +13,11 @@ if (args.indexOf('--config') === -1) {
   args = args.concat(['--config', 'config/nightwatch.conf.js'])
 }
 if (args.indexOf('--env') === -1) {
-  args = args.concat(['--env', 'chrome,headless'])
+  if (process.env.CI) {
+    args = args.concat(['--env', 'headless'])
+  } else {
+    args = args.concat(['--env', 'chrome,headless'])
+  }
 }
 const i = args.indexOf('--test')
 if (i > -1) {

@@ -52,5 +52,6 @@ jobs:
       #- run: yarn flow
       - run: yarn test:types
       - run: yarn test:cover
+      - run: yarn test:unit:ci
       - run: yarn test:e2e
       - run: yarn run coverage && bash <(curl -s https://codecov.io/bash)
