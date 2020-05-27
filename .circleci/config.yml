@@ -41,7 +41,10 @@ jobs:
       - run:
           name: Lint
           command: yarn lint
-      #- run: yarn flow
+      - run:
+          name: Flow Types
+          # https://discuss.circleci.com/t/circleci-terminal-is-a-tty-but-term-is-not-set/9965/8
+          command: TERM=dumb yarn flow
       - run:
           name: TS Types
           command: yarn test:types

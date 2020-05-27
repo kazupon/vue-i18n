@@ -569,7 +569,7 @@ describe('issues', () => {
         locale: 'ru',
         messages: {
           ru: {
-            car: '0 машин | 1 машина | {n} машины | {n} машин'
+            car: '0 машин | {n} машина | {n} машины | {n} машин'
           }
         },
         pluralizationRules: {
@@ -578,12 +578,12 @@ describe('issues', () => {
       })
       vm = new Vue({ i18n })
 
-      assert(vm.$tc('car', 0), '0 машин')
-      assert(vm.$tc('car', 1), '1 машина')
-      assert(vm.$tc('car', 2), '2 машины')
-      assert(vm.$tc('car', 4), '4 машины')
-      assert(vm.$tc('car', 12), '12 машин')
-      assert(vm.$tc('car', 21), '21 машина')
+      assert.strictEqual(vm.$tc('car', 0), '0 машин')
+      assert.strictEqual(vm.$tc('car', 1), '1 машина')
+      assert.strictEqual(vm.$tc('car', 2), '2 машины')
+      assert.strictEqual(vm.$tc('car', 4), '4 машины')
+      assert.strictEqual(vm.$tc('car', 12), '12 машин')
+      assert.strictEqual(vm.$tc('car', 21), '21 машина')
     })
 
     it('ensures backward-compatibility with #451', () => {
@@ -617,21 +617,21 @@ describe('issues', () => {
 
 
       i18n = new VueI18n({
-        locale: 'en',
+        locale: 'ru',
         messages: {
           ru: {
-            car: '0 машин | 1 машина | {n} машины | {n} машин'
+            car: '0 машин | {n} машина | {n} машины | {n} машин'
           }
         }
       })
       vm = new Vue({ i18n })
 
-      assert(vm.$tc('car', 0), '0 машин')
-      assert(vm.$tc('car', 1), '1 машина')
-      assert(vm.$tc('car', 2), '2 машины')
-      assert(vm.$tc('car', 4), '4 машины')
-      assert(vm.$tc('car', 12), '12 машин')
-      assert(vm.$tc('car', 21), '21 машина')
+      assert.strictEqual(vm.$tc('car', 0), '0 машин')
+      assert.strictEqual(vm.$tc('car', 1), '1 машина')
+      assert.strictEqual(vm.$tc('car', 2), '2 машины')
+      assert.strictEqual(vm.$tc('car', 4), '4 машины')
+      assert.strictEqual(vm.$tc('car', 12), '12 машин')
+      assert.strictEqual(vm.$tc('car', 21), '21 машина')
 
       // Set the default implementation back
       VueI18n.prototype.getChoiceIndex = defaultImpl
@@ -662,14 +662,14 @@ describe('issues', () => {
         },
         formatter: {
           interpolate (message, values, path) {
-            assert(path, testPath)
+            assert.strictEqual(path, testPath)
 
             return null // pass the case to the default formatter
           }
         }
       })
 
-      assert(i18n.t(testPath), 'Hello!')
+      assert.strictEqual(i18n.t(testPath), 'Hello!')
     })
   })
 
