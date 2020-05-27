@@ -1,4 +1,13 @@
 
+## v8.18.1 (2020-05-27)
+
+#### :bug: Bug Fixes
+* [#896](https://github.com/kazupon/vue-i18n/pull/896) Fix flow types and enable flow types testing on CI ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
 ## v8.18.0 (2020-05-26)
 
 #### :star: New Features
