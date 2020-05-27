@@ -81,7 +81,7 @@
     "vue": "^2.5.17",
     "vue-github-button": "^1.1.2",
     "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.0",
+    "vuepress": "^1.5.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.1.1",
     "webpack-dev-middleware": "^3.7.2",

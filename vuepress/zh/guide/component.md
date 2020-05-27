@@ -75,7 +75,7 @@ new Vue({
 
 注意，在默认情况下，回退到根语言环境会在控制台中生成两个警告：
 
-```console
+```
 [vue-i18n] Value of key 'message.greeting' is not a string!
 [vue-i18n] Fall back to translate the keypath 'message.greeting' with root locale.
 ```
