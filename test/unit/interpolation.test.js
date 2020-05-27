@@ -56,7 +56,7 @@ describe('component interpolation', () => {
           return h('i18n', { props: { path: 'text' } }, [this._v('1')])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
       }).then(done)
     })
@@ -69,7 +69,7 @@ describe('component interpolation', () => {
           return h('i18n', { props: { path: 'text', tag: 'b' } }, [this._v('1')])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.outerHTML, '<b>one: 1</b>')
       }).then(done)
     })
@@ -82,7 +82,7 @@ describe('component interpolation', () => {
           return h('i18n', { props: { path: 'text', tag: true } }, [this._v('1')])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
       }).then(done)
     })
@@ -95,7 +95,7 @@ describe('component interpolation', () => {
           return h('i18n', { props: { path: 'text', tag: false } }, [this._v('1')])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.nodeType, Node.TEXT_NODE)
         assert.strictEqual(vm.$el.data, 'one: 1')
       }).then(done)
@@ -112,7 +112,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text' } }, [this._v('1')])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -130,7 +130,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
         }).then(done)
       })
@@ -149,7 +149,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
         }).then(done)
       })
@@ -168,7 +168,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -183,7 +183,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text', places: [1] } })
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -202,7 +202,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -221,7 +221,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -239,7 +239,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: <p place="y">bar</p>')
         }).then(done)
       })
@@ -258,7 +258,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: ')
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
@@ -277,7 +277,7 @@ describe('component interpolation', () => {
             return h('fallback')
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'fallback from <p>child</p>')
         }).then(done)
       })
@@ -301,7 +301,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'element: <p>1</p>, component: <div><div class="nested">element: <p>2</p>, component: <p>nested</p></div></div>'
@@ -323,7 +323,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
       }).then(done)
     })
@@ -340,7 +340,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, '一: 1')
       }).then(done)
     })
@@ -357,7 +357,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$el.innerHTML,
           'I accept xxx <a href=\"/term\">Term of service</a>.'
@@ -376,7 +376,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text' }, slot: '' }, [this._v('1')])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -394,7 +394,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'header: <p>header</p>, footer: <p>footer</p>'
@@ -415,7 +415,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
         }).then(done)
       })
@@ -433,7 +433,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
         }).then(done)
       })
@@ -452,7 +452,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'I accept xxx <a href=\"/term\">Term of service</a>.'
@@ -484,7 +484,7 @@ describe('component interpolation', () => {
           }
         }).$mount(el)
 
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'I am <a href=\"/term\">Term of service</a>'
@@ -505,7 +505,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick().then(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             '一: <a href=\"/term\">Term of service</a>'
@@ -532,7 +532,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick().then(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             '一: <a href=\"/term\">Term of service</a>'

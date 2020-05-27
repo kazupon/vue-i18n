@@ -16,7 +16,7 @@ desc('number format', () => {
         locale: 'en-US',
         numberFormats
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.deepEqual(numberFormats, i18n.numberFormats)
       }).then(done)
     })
@@ -45,7 +45,7 @@ desc('number format', () => {
           style: 'currency', currency: 'CNY', currencyDisplay: 'name'
         }
       }
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(text.textContent, '$101.00')
         i18n.setNumberFormat('zh-CN', zhFormat)
         assert.deepEqual(i18n.getNumberFormat('zh-CN'), zhFormat)
@@ -102,7 +102,7 @@ desc('number format', () => {
 
       const { text } = vm.$refs
 
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(text.textContent, '101,00 €')
       }).then(done)
     })

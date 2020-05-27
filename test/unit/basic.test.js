@@ -669,7 +669,7 @@ describe('basic', () => {
           return h('p', {}, [this.$t('message.hello')])
         }
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, messages.en.message.hello)
         i18n.locale = 'ja' // set japanese
       }).then(() => {
@@ -692,7 +692,7 @@ describe('basic', () => {
           return h('p', {}, [this.$t('message.fallback1')])
         }
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, 'message.fallback1')
         i18n.fallbackLocale = 'ja' // set fallback locale
       }).then(() => {

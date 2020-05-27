@@ -8,7 +8,7 @@ desc('datetime format', () => {
         locale: 'en-US',
         dateTimeFormats
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.deepEqual(dateTimeFormats, i18n.dateTimeFormats)
       }).then(done)
     })
@@ -39,7 +39,7 @@ desc('datetime format', () => {
         }
       }
 
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
         isChrome && assert.strictEqual(text.textContent, '12/19/2012, 10:00 PM')
         i18n.setDateTimeFormat('zh-CN', zhFormat)
@@ -91,7 +91,7 @@ desc('datetime format', () => {
 
       const { text } = vm.$refs
 
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(text.textContent, '20.12.12')
       }).then(done)
     })

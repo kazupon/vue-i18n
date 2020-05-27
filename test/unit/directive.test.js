@@ -26,7 +26,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
           assert.strictEqual(vm.$refs.text._vt, messages.en.message.hello)
           vm.$forceUpdate()
@@ -54,7 +54,7 @@ describe('custom directive', () => {
           }
         })
         const expected = 'こんにちは kazupon, ごきげんいかが？'
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, expected)
           assert.strictEqual(vm.$refs.text._vt, expected)
           vm.$forceUpdate()
@@ -82,7 +82,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           expected = 'Hello kazupon, how are you?'
           assert.strictEqual(vm.$refs.text.textContent, expected)
           assert.strictEqual(vm.$refs.text._vt, expected)
@@ -110,7 +110,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
           spy.restore()
@@ -132,7 +132,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
           spy.restore()
@@ -150,7 +150,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
           spy.restore()
@@ -169,7 +169,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, 'car')
           assert.strictEqual(vm.$refs.text._vt, 'car')
           vm.$forceUpdate()
@@ -189,7 +189,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, 'cars')
           assert.strictEqual(vm.$refs.text._vt, 'cars')
           vm.$forceUpdate()
@@ -209,7 +209,7 @@ describe('custom directive', () => {
             }] })
           }
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, 'no apples')
           assert.strictEqual(vm.$refs.text._vt, 'no apples')
           vm.$forceUpdate()
@@ -234,7 +234,7 @@ describe('custom directive', () => {
           }
         })
 
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
 
           vm.visible = false
@@ -257,7 +257,7 @@ describe('custom directive', () => {
           }
         })
 
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
 
           vm.visible = false
@@ -284,7 +284,7 @@ describe('custom directive', () => {
           }
         })
 
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$refs.text.textContent, messages.en.message.hello)
 
           vm.visible = false
