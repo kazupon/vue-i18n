@@ -711,4 +711,61 @@ describe('issues', () => {
       await promise // should not throw
     })
   })
+
+  describe('#892)', () => {
+    it('should not call "componentInstanceCreatedListener" on not creating local instance', () => {
+      const componentInstanceCreatedListener = sinon.spy()
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          componentInstanceCreatedListener
+        }),
+        components: {
+          child: {
+            render (h) {
+              return h('p', ['hello child'])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [
+            h('child', { ref: 'child' })
+          ])
+        }
+      }).$mount()
+
+      assert(componentInstanceCreatedListener.called === false)
+    })
+
+    it('should call "componentInstanceCreatedListener" on creating local instance', () => {
+      const componentInstanceCreatedListener = sinon.spy()
+      const i18n = new VueI18n({
+        locale: 'en',
+        componentInstanceCreatedListener
+      })
+      new Vue({
+        i18n,
+        components: {
+          child: {
+            i18n: {
+              locale: 'ja'
+            },
+            render (h) {
+              return h('p', ['hello child'])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [
+            h('child', { ref: 'child' })
+          ])
+        }
+      }).$mount()
+
+      assert(componentInstanceCreatedListener.calledOnce === true)
+      console.info(componentInstanceCreatedListener.args)
+      assert(componentInstanceCreatedListener.args[0][0] instanceof VueI18n) // new instance
+      assert.strictEqual(componentInstanceCreatedListener.args[0][1], i18n)
+    })
+  })
 })
