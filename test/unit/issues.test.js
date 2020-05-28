@@ -3,6 +3,8 @@ import { parse } from '../../src/format'
 import VueI18n from '../../src'
 const compiler = require('vue-template-compiler')
 
+const delay = time => new Promise(resolve => setTimeout(resolve, time))
+
 describe('issues', () => {
   let vm, i18n
   beforeEach(() => {
@@ -84,7 +86,7 @@ describe('issues', () => {
         }
       })
       const vm = new Component({ i18n }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
@@ -108,7 +110,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$el.innerHTML,
           'the world: <strong>underscore the wolrd</strong> <strong>the world</strong>'
@@ -140,7 +142,7 @@ describe('issues', () => {
           return h('div', [h('comp', { ref: 'comp' })])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$refs.comp.$refs.title.textContent,
           'billy-bob\'s fine steaks. - yeee hawwww!!!'
@@ -162,7 +164,7 @@ describe('issues', () => {
       const vm = new Component({
         i18n: new VueI18n({ locale: 'en' })
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
@@ -201,7 +203,7 @@ describe('issues', () => {
       }).$mount()
       const el1 = vm.$refs.comp.$refs.el1
       const el2 = vm.$refs.comp.$refs.el2
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(el1.textContent, 'こんにちは')
         assert.strictEqual(el2.textContent, 'メッセージ')
       }).then(done)
@@ -236,7 +238,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.el1.textContent, '[EN] alpha injected value')
         assert.strictEqual(vm.$refs.el2.textContent, '[XX] bravo injected value')
         assert.strictEqual(vm.$refs.el3.textContent, '[EN] charlie injected value')
@@ -295,7 +297,7 @@ describe('issues', () => {
           })
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, 'hello 203')
       }).then(done)
     })
@@ -356,7 +358,7 @@ describe('issues', () => {
         staticRenderFns
       }).$mount(el)
 
-      Vue.nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
         vm.startLoading()
         delay(50).then(() => {
@@ -410,7 +412,7 @@ describe('issues', () => {
         }
       }).$mount(document.createElement('div'))
 
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.text.textContent, 'hi there!')
       }).then(() => {
         vm.$i18n.setLocaleMessage('en', {
@@ -475,7 +477,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         vm.$i18n.mergeLocaleMessage('en', {
           key1: 'Hello Module 1',
           shared: {

@@ -53,7 +53,7 @@ const i18n = new VueI18n({
 
 По умолчанию, если использовались сообщения запасной локализации из `fallbackLocale`, то в консоли будут выведены соответствующие предупреждения:
 
-```console
+```
 [vue-i18n] Value of key 'hello' is not a string!
 [vue-i18n] Fall back to translate the keypath 'hello' with 'en' locale.
 ```

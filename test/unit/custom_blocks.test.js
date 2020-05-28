@@ -32,7 +32,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.who.textContent, '子')
         i18n.locale = 'en'
       }).then(() => {
@@ -61,7 +61,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'ルート')
         i18n.locale = 'en'
       }).then(() => {
@@ -99,7 +99,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.foo.textContent, 'フー')
         i18n.locale = 'en'
       }).then(() => {

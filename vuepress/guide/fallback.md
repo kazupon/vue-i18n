@@ -51,7 +51,7 @@ Output:
 
 By default, falling back to `fallbackLocale` generates two console warnings:
 
-```console
+```
 [vue-i18n] Value of key 'hello' is not a string!
 [vue-i18n] Fall back to translate the keypath 'hello' with 'en' locale.
 ```

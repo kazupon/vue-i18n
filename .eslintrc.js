@@ -5,7 +5,6 @@ module.exports = {
   },
   plugins: ['flowtype', 'ie11', 'no-autofix'],
   extends: [
-    'plugin:vue-libs/recommended',
     'plugin:flowtype/recommended'
   ],
   rules: {

@@ -75,7 +75,7 @@ new Vue({
 
 Обратите внимание, по умолчанию при обращении к данным корневой локализации будут генерироваться предупреждения в консоли:
 
-```console
+```
 [vue-i18n] Value of key 'message.greeting' is not a string!
 [vue-i18n] Fall back to translate the keypath 'message.greeting' with root locale.
 ```
