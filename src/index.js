@@ -55,12 +55,14 @@ export default class VueI18n {
   _numberFormatters: Object
   _path: I18nPath
   _dataListeners: Array<any>
+  _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
   _postTranslation: ?PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
+  getChoiceIndex: GetChoiceIndex
 
   constructor (options: I18nOptions = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -72,7 +74,7 @@ export default class VueI18n {
     }
 
     const locale: Locale = options.locale || 'en-US'
-    const fallbackLocale: any = options.fallbackLocale === false
+    const fallbackLocale: FallbackLocale = options.fallbackLocale === false
       ? false
       : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
@@ -101,12 +103,48 @@ export default class VueI18n {
     this._numberFormatters = {}
     this._path = new I18nPath()
     this._dataListeners = []
+    this._componentInstanceCreatedListener = options.componentInstanceCreatedListener || null
     this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
     this._postTranslation = options.postTranslation || null
+
+    /**
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index
+    */
+    this.getChoiceIndex = (choice: number, choicesLength: number): number => {
+      const thisPrototype = Object.getPrototypeOf(this)
+      if (thisPrototype && thisPrototype.getChoiceIndex) {
+        const prototypeGetChoiceIndex = (thisPrototype.getChoiceIndex: any)
+        return (prototypeGetChoiceIndex: GetChoiceIndex).call(this, choice, choicesLength)
+      }
+
+      // Default (old) getChoiceIndex implementation - english-compatible
+      const defaultImpl = (_choice: number, _choicesLength: number) => {
+        _choice = Math.abs(_choice)
+
+        if (_choicesLength === 2) {
+          return _choice
+            ? _choice > 1
+              ? 1
+              : 0
+            : 1
+        }
+
+        return _choice ? Math.min(_choice, 2) : 0
+      }
+
+      if (this.locale in this.pluralizationRules) {
+        return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
+      } else {
+        return defaultImpl(choice, choicesLength)
+      }
+    }
+
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -182,7 +220,7 @@ export default class VueI18n {
 
   _initVM (data: {
     locale: Locale,
-    fallbackLocale: Locale,
+    fallbackLocale: FallbackLocale,
     messages: LocaleMessages,
     dateTimeFormats: DateTimeFormats,
     numberFormats: NumberFormats
@@ -227,6 +265,12 @@ export default class VueI18n {
     }, { immediate: true })
   }
 
+  onComponentInstanceCreated (newI18n: I18n) {
+    if (this._componentInstanceCreatedListener) {
+      this._componentInstanceCreatedListener(newI18n, this)
+    }
+  }
+
   get vm (): any { return this._vm }
 
   get messages (): LocaleMessages { return looseClone(this._getMessages()) }
@@ -239,8 +283,8 @@ export default class VueI18n {
     this._vm.$set(this._vm, 'locale', locale)
   }
 
-  get fallbackLocale (): Locale { return this._vm.fallbackLocale }
-  set fallbackLocale (locale: Locale): void {
+  get fallbackLocale (): FallbackLocale { return this._vm.fallbackLocale }
+  set fallbackLocale (locale: FallbackLocale): void {
     this._localeChainCache = {}
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
@@ -491,7 +535,7 @@ export default class VueI18n {
     return follow
   }
 
-  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale>, blocks: any): any {
+  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale> | Object, blocks: any): any {
     let follow = true
     for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
       const locale = block[i]
@@ -502,7 +546,7 @@ export default class VueI18n {
     return follow
   }
 
-  _getLocaleChain (start: Locale, fallbackLocale: any): Array<Locale> {
+  _getLocaleChain (start: Locale, fallbackLocale: FallbackLocale): Array<Locale> {
     if (start === '') { return [] }
 
     if (!this._localeChainCache) {
@@ -533,6 +577,7 @@ export default class VueI18n {
       if (isArray(fallbackLocale)) {
         defaults = fallbackLocale
       } else if (isObject(fallbackLocale)) {
+        /* $FlowFixMe */
         if (fallbackLocale['default']) {
           defaults = fallbackLocale['default']
         } else {
@@ -563,7 +608,7 @@ export default class VueI18n {
   _translate (
     messages: LocaleMessages,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     key: Path,
     host: any,
     interpolateMode: string,
@@ -670,34 +715,6 @@ export default class VueI18n {
     return choices[choice].trim()
   }
 
-  /**
-   * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choicesLength {number} an overall amount of available choices
-   * @returns a final choice index
-  */
-  getChoiceIndex (choice: number, choicesLength: number): number {
-    // Default (old) getChoiceIndex implementation - english-compatible
-    const defaultImpl = (_choice: number, _choicesLength: number) => {
-      _choice = Math.abs(_choice)
-
-      if (_choicesLength === 2) {
-        return _choice
-          ? _choice > 1
-            ? 1
-            : 0
-          : 1
-      }
-
-      return _choice ? Math.min(_choice, 2) : 0
-    }
-
-    if (this.locale in this.pluralizationRules) {
-      return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
-    } else {
-      return defaultImpl(choice, choicesLength)
-    }
-  }
-
   tc (key: Path, choice?: number, ...values: any): TranslateResult {
     return this._tc(key, this.locale, this._getMessages(), null, choice, ...values)
   }
@@ -758,7 +775,7 @@ export default class VueI18n {
   _localizeDateTime (
     value: number | Date,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     dateTimeFormats: DateTimeFormats,
     key: string
   ): ?DateTimeFormatResult {
@@ -875,7 +892,7 @@ export default class VueI18n {
   _getNumberFormatter (
     value: number,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     numberFormats: NumberFormats,
     key: string,
     options: ?NumberFormatOptions

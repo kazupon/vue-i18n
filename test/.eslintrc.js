@@ -5,12 +5,12 @@ module.exports = {
   },
   globals: {
     isChrome: true,
-    waitForUpdate: true,
-    nextTick: true,
-    delay: true,
     assert: true,
     sinon: true,
     Vue: true,
     VueI18n: true
-  }
+  },
+  extends: [
+    "plugin:vue/recommended"
+  ]
 }

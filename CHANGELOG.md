@@ -1,4 +1,54 @@
 
+## v8.18.1 (2020-05-27)
+
+#### :bug: Bug Fixes
+* [#896](https://github.com/kazupon/vue-i18n/pull/896) Fix flow types and enable flow types testing on CI ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
+## v8.18.0 (2020-05-26)
+
+#### :star: New Features
+* [#892](https://github.com/kazupon/vue-i18n/pull/892) Add onComponentInstanceCreated constructor option ([@rchl](https://github.com/rchl))
+
+#### :zap: Improved Features
+* [#890](https://github.com/kazupon/vue-i18n/pull/890) chore: set up linting for typescript definitions ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
+## v8.17.7 (2020-05-19)
+
+#### :bug: Bug Fixes
+* [#882](https://github.com/kazupon/vue-i18n/pull/882) fix v-t pluralisation when choice is 0 ([@mikejacoutot](https://github.com/mikejacoutot))
+
+#### Committers: 1
+- [@mikejacoutot](https://github.com/mikejacoutot)
+
+
+## v8.17.6 (2020-05-15)
+
+#### :bug: Bug Fixes
+* [#880](https://github.com/kazupon/vue-i18n/pull/880) Don't delete _i18n in beforeDestroy ([@danimoh](https://github.com/danimoh))
+
+#### :zap: Improved Features
+* [#878](https://github.com/kazupon/vue-i18n/pull/878) Allow component interpolation without root element ([@danimoh](https://github.com/danimoh))
+
+#### :pencil: Documentation
+* [#875](https://github.com/kazupon/vue-i18n/pull/875) Add new 3rd party tool ([@danigayosog](https://github.com/danigayosog))
+* [#872](https://github.com/kazupon/vue-i18n/pull/872) docs: fixes ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#871](https://github.com/kazupon/vue-i18n/pull/871) update pluralization.md ([@Timibadass](https://github.com/Timibadass))
+
+#### Committers: 4
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Daniel ([@danigayosog](https://github.com/danigayosog))
+- Timi Omoyeni ([@Timibadass](https://github.com/Timibadass))
+- [@danimoh](https://github.com/danimoh)
+
+
 ## v8.17.5 (2020-05-10)
 
 #### :bug: Bug Fixes

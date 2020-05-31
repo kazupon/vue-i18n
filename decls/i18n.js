@@ -45,13 +45,15 @@ declare type NumberFormatOptions = {
 };
 declare type NumberFormat = { [key: string]: NumberFormatOptions };
 declare type NumberFormats = { [key: Locale]: NumberFormat };
-declare type Modifiers = { [key: string]: (str : string) => string };
+declare type Modifiers = { [key: string]: (str: string) => string };
 
 declare type TranslateResult = string | LocaleMessages;
 declare type DateTimeFormatResult = string;
 declare type NumberFormatResult = string;
 declare type MissingHandler = (locale: Locale, key: Path, vm?: any) => string | void;
 declare type PostTranslationHandler = (str: string, key?: string) => string;
+declare type GetChoiceIndex = (choice: number, choicesLength: number) => number
+declare type ComponentInstanceCreatedListener = (newI18n: I18n, rootI18n: I18n) => void;
 
 declare type FormattedNumberPartType = 'currency' | 'decimal' | 'fraction' | 'group' | 'infinity' | 'integer' | 'literal' | 'minusSign' | 'nan' | 'plusSign' | 'percentSign';
 declare type FormattedNumberPart = {
@@ -84,6 +86,7 @@ declare type I18nOptions = {
   warnHtmlInMessage?: WarnHtmlInMessageLevel,
   sharedMessages?: LocaleMessage,
   postTranslation?: PostTranslationHandler,
+  componentInstanceCreatedListener?: ComponentInstanceCreatedListener,
 };
 
 declare type IntlAvailability = {
@@ -142,7 +145,7 @@ declare interface I18n {
   setNumberFormat (locale: Locale, format: NumberFormat): void,
   mergeNumberFormat (locale: Locale, format: NumberFormat): void,
   n (value: number, ...args: any): NumberFormatResult,
-  getChoiceIndex: (choice: number, choicesLength: number) => number,
+  getChoiceIndex: GetChoiceIndex,
   pluralizationRules: PluralizationRules,
   preserveDirectiveContent: boolean
 };

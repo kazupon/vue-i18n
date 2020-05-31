@@ -122,7 +122,7 @@ describe('component translation', () => {
     // change locale
     i18n.locale = 'en-US'
     vm.$refs.child1.$i18n.locale = 'ja-JP'
-    nextTick(() => {
+    Vue.nextTick().then(() => {
       assert.strictEqual(root.textContent, 'root')
       assert.strictEqual(child1.textContent, '子1')
       assert.strictEqual(child1Fallback.textContent, 'fallback')
@@ -135,8 +135,6 @@ describe('component translation', () => {
       assert.strictEqual(subChild2.textContent, 'sub-child2')
 
       vm.$destroy()
-    }).then(() => {
-      assert(vm.$i18n === null)
     }).then(done)
   })
 })

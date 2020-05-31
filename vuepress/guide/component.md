@@ -75,7 +75,7 @@ As in the example above, if the component doesn't have the locale message, it fa
 
 Note that, by default, falling back to root locale generates two warnings in the console:
 
-```console
+```
 [vue-i18n] Value of key 'message.greeting' is not a string!
 [vue-i18n] Fall back to translate the keypath 'message.greeting' with root locale.
 ```

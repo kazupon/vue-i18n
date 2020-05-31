@@ -79,7 +79,7 @@ sidebar: auto
 如果 `dateTimeFormats` 选项中不存在日期时间格式的 `key`，则根据 `VueI18n` 构造函数的 `fallbackLocale` 选项回退。
 
 :::danger 提示
-注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $n = this.$n.bind(this)`)。
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $d = this.$d.bind(this)`)。
 :::
 
 #### $n
@@ -116,7 +116,7 @@ sidebar: auto
 任何指定数字的格式选项将优先于 `VueI18n` 构造函数的 `numberFormats`。
 
 :::danger 提示
-注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $d = this.$d.bind(this)`)。
+注意，你需要在生命周期方法中保证上下文是组件实例 (例如在 `data` 选项中，`const $n = this.$n.bind(this)`)。
 :::
 
 ### 注入属性
@@ -429,17 +429,6 @@ VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
   * **返回值：**：`TranslateResult`
 
 这与 `$t` 方法返回的 `Function` 相同。更多细节见[$t](#t)。
-
-#### i( key, [locale], [values] )
-
-> :new: 7.0 新增
-
-  * **参数：**
-
-    * `{Path} key`：必填
-    * `{Locale} locale`：可选
-    * `{Array} values`：可选
-  * **返回值：**：`TranslateResult`
 
 #### tc( key, [choice], [values] )
 
