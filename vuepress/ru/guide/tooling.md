@@ -53,3 +53,9 @@ BabelEdit может переводить файлы `json`, а также ум�
 i18n Ally предоставляет потрясающий DX для разработки с использованием i18n.
 
 Подробнее о расширении i18n Ally можно изучить в [README](https://github.com/antfu/i18n-ally/blob/master/README.md).
+
+### i18nPlugin (платформа intellij)
+
+[i18nPlugin](https://github.com/nyavro/i18nPlugin) — плагин Intellij idea для поддержки i18next ([Jetbrains plugin page](https://plugins.jetbrains.com/plugin/12981-i18n-support)).
+
+Плагин для i18n typescript/javascript/PHP. Поддерживает vue-i18n. Для включения поддержки vue-i18n в настройках -> Tools -> i18n Plugin configuration выберите "Vue-i18n". Необходимо установить каталоги с файлами локализаций (по умолчанию locales).
