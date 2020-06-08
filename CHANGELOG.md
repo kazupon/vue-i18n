@@ -1,4 +1,20 @@
 
+## v8.18.2 (2020-06-08)
+
+#### :zap: Improved Features
+* [#917](https://github.com/kazupon/vue-i18n/pull/917) fix: improve IVueI18n interface ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#902](https://github.com/kazupon/vue-i18n/pull/902) docs: [RU] Translation update ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#901](https://github.com/kazupon/vue-i18n/pull/901) docs: (zh) inverse $d $n ([@stan-chen](https://github.com/stan-chen))
+
+#### Committers: 4
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+- Stanley Chen ([@stan-chen](https://github.com/stan-chen))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.18.1 (2020-05-27)
 
 #### :bug: Bug Fixes
