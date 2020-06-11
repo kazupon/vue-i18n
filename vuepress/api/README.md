@@ -29,6 +29,8 @@ Component based localization option.
 
 Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
 
+If default pluralization does not suit your needs, see [pluralization rules in constructor options](#pluralizationrules) and [custom pluralization](../guide/pluralization.md).
+
 :::danger Tip
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
 :::
@@ -233,7 +235,7 @@ The formatter that implemented with `Formatter` interface.
 
 > :new: 8.15.0+
 
-  * **Type:** `Modifier`
+  * **Type:** `Modifiers`
 
   * **Default:** `lower` and `upper` modifiers
 
@@ -293,6 +295,25 @@ Whether suppress warnings when falling back to either `fallbackLocale` or `root`
 
 If `true`, warnings will be generated only when no translation is available at all, and not for fallbacks.
 If you use regular expression, you can suppress the fallback warnings that it match `key` (e.g. `$t`).
+
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Default:** `{}`
+
+  A set of rules for word pluralization in a following format:
+  ```js
+    {
+      // Key - locale for the rule to be applied to.
+      // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word. (See getChoiceIndex for details)
+      'ru': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'en': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'jp': function(choice, choiceIndex) => Number/* index of the plural word */;
+    }
+  ```
 
 #### preserveDirectiveContent
 
@@ -434,6 +455,16 @@ Whether suppress warnings outputted when localization fails.
 
 Whether suppress fallback warnings when localization fails.
 
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Read/Write**
+
+A set of locale-dependent rules for word pluralization.
+
 #### preserveDirectiveContent
 
 > 8.7+
@@ -481,11 +512,14 @@ A handler for post processing of translation.
 
   * **Return:** `finalChoice {number}`
 
-Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
+Get pluralization index for current pluralizing number and a given amount of choices.
+Can be overridden through prototype mutation:
 
 ```js
 VueI18n.prototype.getChoiceIndex = /* custom implementation */
 ```
+
+However, for most usages [pluralizationRules constructor option](#pluralizationrules) should be enough.
 
 #### getLocaleMessage( locale )
 

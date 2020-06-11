@@ -95,7 +95,7 @@ declare type IntlAvailability = {
 };
 
 declare type PluralizationRules = {
-  [lang: string]: (choice: number, choicesLength: number) => number,
+  [lang: string]: GetChoiceIndex,
 }
 
 declare interface I18n {
