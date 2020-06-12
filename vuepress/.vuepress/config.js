@@ -33,17 +33,12 @@ module.exports = {
         lastUpdated: 'Last Updated',
         nav: [
           {
-            text: 'Learn',
-            items: [
-              {
-                text: 'Guide',
-                link: '/guide/formatting',
-              },
-              {
-                text: 'API',
-                link: '/api/'
-              }
-            ]
+            text: 'Guide',
+            link: '/guide/formatting'
+          },
+          {
+            text: 'API',
+            link: '/api/'
           },
           {
             text: 'Ecosystem',
@@ -134,17 +129,12 @@ module.exports = {
         lastUpdated: '最近一次更新',
         nav: [
           {
-            text: '学习',
-            items: [
-              {
-                text: '指南',
-                link: '/zh/guide/formatting',
-              },
-              {
-                text: 'API',
-                link: '/zh/api/'
-              }
-            ]
+            text: '指南',
+            link: '/zh/guide/formatting',
+          },
+          {
+            text: 'API',
+            link: '/zh/api/'
           },
           {
             text: '生态',
@@ -231,17 +221,12 @@ module.exports = {
         lastUpdated: 'Последнее обновление',
         nav: [
           {
-            text: 'Документация',
-            items: [
-              {
-                text: 'Руководство',
-                link: '/ru/guide/formatting',
-              },
-              {
-                text: 'Справочник API',
-                link: '/ru/api/'
-              }
-            ]
+            text: 'Руководство',
+            link: '/ru/guide/formatting',
+          },
+          {
+            text: 'Справочник API',
+            link: '/ru/api/'
           },
           {
             text: 'Экосистема',
