@@ -118,7 +118,7 @@
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
     "dev": "cross-env BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
-    "docs:build": "node config/version.js && vuepress build vuepress -d docs",
+    "docs:build": "cross-env NODE_ENV=production node config/version.js && cross-env NODE_ENV=production vuepress build vuepress -d docs",
     "docs:clean": "rm -rf docs/**",
     "docs:dev": "vuepress dev vuepress",
     "flow": "flow check",
