@@ -54,7 +54,7 @@ The following will be the output:
 It is possible to set more than one fallback locale by using an array of locales. For example
 
 ```javascript
-fallbackLocale: [ 'fr', en' ],
+fallbackLocale: [ 'fr', 'en' ],
 ```
 
 
