@@ -96,8 +96,14 @@
     "dist/vue-i18n.esm.browser.min.js",
     "src/**/*.js",
     "types/*.d.ts",
-    "decls"
+    "decls",
+    "vetur/tags.json",
+    "vetur/attributes.json"
   ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
   "keywords": [
     "i18n",
