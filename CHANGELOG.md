@@ -1,4 +1,20 @@
 
+## v8.19.0 (2020-07-25)
+
+#### :star: New Features
+* [#942](https://github.com/kazupon/vue-i18n/pull/942) Add vetur support for tags and attributes ([@phiter](https://github.com/phiter))
+
+#### :pencil: Documentation
+* [#925](https://github.com/kazupon/vue-i18n/pull/925) Added missing quote ([@fschlag](https://github.com/fschlag))
+* [#921](https://github.com/kazupon/vue-i18n/pull/921) Add lost pluralizationRules option to documentation ([@AleksandrSl](https://github.com/AleksandrSl))
+* [#920](https://github.com/kazupon/vue-i18n/pull/920) Make link to API and Guide top level ([@AleksandrSl](https://github.com/AleksandrSl))
+
+#### Committers: 3
+- Aleksandr ([@AleksandrSl](https://github.com/AleksandrSl))
+- Florian Schlag ([@fschlag](https://github.com/fschlag))
+- Phiter Fernandes ([@phiter](https://github.com/phiter))
+
+
 ## v8.18.2 (2020-06-08)
 
 #### :zap: Improved Features
