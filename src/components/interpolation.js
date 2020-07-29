@@ -7,7 +7,7 @@ export default {
   functional: true,
   props: {
     tag: {
-      type: [String, Boolean],
+      type: [String, Boolean, Object],
       default: 'span'
     },
     path: {
