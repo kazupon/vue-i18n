@@ -1,4 +1,15 @@
 
+## v8.20.0 (2020-07-30)
+
+#### :star: New Features
+* [#959](https://github.com/kazupon/vue-i18n/pull/959) i18n-n component local components passing ([@kazupon](https://github.com/kazupon))
+* [#928](https://github.com/kazupon/vue-i18n/pull/928) :zap: improvement(interpolation): enable passage of local components to tag prop ([@vhoyer](https://github.com/vhoyer))
+
+#### Committers: 2
+- Vinícius Hoyer ([@vhoyer](https://github.com/vhoyer))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.19.0 (2020-07-25)
 
 #### :star: New Features
