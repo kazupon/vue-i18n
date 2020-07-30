@@ -18,6 +18,10 @@ export default {
     },
     places: {
       type: [Array, Object]
+    },
+    count: {
+      type: Number,
+      default: 1
     }
   },
   render (h: Function, { data, parent, props, slots }: Object) {
@@ -29,14 +33,15 @@ export default {
       return
     }
 
-    const { path, locale, places } = props
+    const { path, locale, places, count } = props
     const params = slots()
     const children = $i18n.i(
       path,
       locale,
       onlyHasDefaultPlace(params) || places
         ? useLegacyPlaces(params.default, places)
-        : params
+        : params,
+      count
     )
 
     const tag = props.tag || 'span'
