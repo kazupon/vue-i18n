@@ -84,44 +84,45 @@ const messages = {
 
 ## Пользовательская плюрализация
 
-Стандартная реализация плюрализации может быть не применима ко всем языкам (к примеру, в Славянских языках другие правила множественности).
+Стандартная реализация плюрализации не подходит для некоторых языков (к примеру, в славянских языках другие правила множественности).
 
-Можно указать собственную реализацию переопределив функцию `VueI18n.prototype.getChoiceIndex`.
+Можно предоставить собственную реализацию, передав `pluralizationRules` в конструктор `VueI18n`.
 
-Очень упрощённый пример правил для Славянских языков (Русский, Украинский и другие):
-
+Упрощенный пример для славянских языков (Русский, Украинский и другие):
 ```js
-const defaultImpl = VueI18n.prototype.getChoiceIndex
+new VueI18n({
+  // Ключ - язык, для которого будет применяться правило, в этом примере - `'ru'`
+  // Value - функция плюрализации
+  pluralizationRules: {
+    /**
+     * @param choice {number} индекс выбора, переданный в $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} общее количество доступных вариантов
+     * @returns финальный индекс для выбора соответственного варианта слова
+     */
+    'ru': function(choice, choicesLength) {
+      // this === VueI18n instance, so the locale property also exists here
 
-/**
- * @param choice {number} индекс выбора, переданный в $tc: `$tc('path.to.rule', choiceIndex)`
- * @param choicesLength {number} общее количество доступных вариантов
- * @returns финальный индекс для выбора соответственного варианта слова
- **/
-VueI18n.prototype.getChoiceIndex = function(choice, choicesLength) {
-  // this === экземпляр VueI18n, поэтому свойство locale также здесь существует
-  if (this.locale !== 'ru') {
-    // возвращаемся к реализации по умолчанию
-    return defaultImpl.apply(this, arguments)
+      if (choice === 0) {
+        return 0;
+      }
+
+      const teen = choice > 10 && choice < 20;
+      const endsWithOne = choice % 10 === 1;
+
+      if (choicesLength < 4) {
+        return (!teen && endsWithOne) ? 1 : 2;
+      }
+      if (!teen && endsWithOne) {
+        return 1;
+      }
+      if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+        return 2;
+      }
+
+      return (choicesLength < 4) ? 2 : 3;
+    }
   }
-
-  if (choice === 0) {
-    return 0
-  }
-
-  const teen = choice > 10 && choice < 20
-  const endsWithOne = choice % 10 === 1
-
-  if (!teen && endsWithOne) {
-    return 1
-  }
-
-  if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-    return 2
-  }
-
-  return choicesLength < 4 ? 2 : 3
-}
+})
 ```
 
 Такая реализация позволит использовать:
@@ -135,7 +136,7 @@ const messages = {
 }
 ```
 
-Для такого формата вариантов `0 вещей | 1 вещь | несколько вещей | множество вещей`.
+Для такого формата вариантов `0 вещей | количество вещей заканчивается на 1 | количество вещей заканчивается на 2-4 | количество вещей заканчивается на 5-9, 0 и числа от 11 до 19`.
 
 В шаблоне, по-прежнему, необходимо использовать `$tc()` вместо `$t()`:
 
@@ -166,3 +167,7 @@ const messages = {
 <p>11 бананов</p>
 <p>31 банан</p>
 ```
+
+### Плюрализация по умолчанию
+
+Если для используемой локали не предоставить правило плюрализации, [по умолчанию](#pluralization) будет использовано правило для английского языка

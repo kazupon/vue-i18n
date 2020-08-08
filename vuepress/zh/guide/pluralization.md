@@ -75,58 +75,59 @@ const messages = {
 
 ## 自定义复数
 
-然而，这种复数并不适用于所有语言 (例如，斯拉夫语言具有不同的复数规则)。
+Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
 
-为了实现这些规则，你可以覆盖 `VueI18n.prototype.getChoiceIndex` 函数。
+In order to implement these rules you can pass an optional `pluralizationRules` object into `VueI18n` constructor options.
 
-使用斯拉夫语言规则的简化示例 (俄语、乌克兰语等)：
+Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
 ```js
+new VueI18n({
+  // Key - language to use the rule for, `'ru'`, in this case
+  // Value - function to choose right plural form
+  pluralizationRules: {
+    /**
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index to select plural word by
+     */
+    'ru': function(choice, choicesLength) {
+      // this === VueI18n instance, so the locale property also exists here
 
-const defaultImpl = VueI18n.prototype.getChoiceIndex
+      if (choice === 0) {
+        return 0;
+      }
 
-/**
- * @param choice {number} 由 $tc 输入的选择索引：`$tc('path.to.rule', choiceIndex)`
- * @param choicesLength {number} 总体可用选择
- * @returns 选择复数单词的最终选择索引
-**/
-VueI18n.prototype.getChoiceIndex = function (choice, choicesLength) {
-  // this === VueI18n 实例，所以语言环境属性也存在于此处
-  if (this.locale !== 'ru') {
-    // 继续执行默认实现
-    return defaultImpl.apply(this, arguments)
+      const teen = choice > 10 && choice < 20;
+      const endsWithOne = choice % 10 === 1;
+
+      if (choicesLength < 4) {
+        return (!teen && endsWithOne) ? 1 : 2;
+      }
+      if (!teen && endsWithOne) {
+        return 1;
+      }
+      if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
+        return 2;
+      }
+
+      return (choicesLength < 4) ? 2 : 3;
+    }
   }
-
-  if (choice === 0) {
-    return 0;
-  }
-
-  const teen = choice > 10 && choice < 20;
-  const endsWithOne = choice % 10 === 1;
-
-  if (!teen && endsWithOne) {
-    return 1;
-  }
-
-  if (!teen && choice % 10 >= 2 && choice % 10 <= 4) {
-    return 2;
-  }
-
-  return (choicesLength < 4) ? 2 : 3;
-}
+})
 ```
 
-这将有效地实现这一目标：
-
+This would effectively give this:
 
 ```javascript
 const messages = {
   ru: {
-    car: '0 машин | 1 машина | {n} машины | {n} машин',
-    banana: 'нет бананов | 1 банан | {n} банана | {n} бананов'
+    car: '0 машин | {n} машина | {n} машины | {n} машин',
+    banana: 'нет бананов | {n} банан | {n} банана | {n} бананов'
   }
 }
 ```
-格式为 `0 things | 1 thing | few things | multiple things`.
+Where the format is `0 things | things count ends with 1 | things count ends with 2-4 | things count ends with 5-9, 0 and teens (10-19)`.
+P.S. Slavic pluralization is a pain, you can read more about it [here](http://www.russianlessons.net/lessons/lesson11_main.php).
 
 你的模板仍然需要使用 `$tc()`，而不是 `$t()` ：
 
@@ -157,3 +158,7 @@ const messages = {
 <p>11 бананов</p>
 <p>31 банан</p>
 ```
+
+### Default pluralization
+
+If your current locale is not found in a pluralization map, the [default](#pluralization) rule of the english language will be used.

@@ -282,6 +282,25 @@ vue-i18n 版本
 
 如果为 `true`，则仅在根本没有可用的转换时生成警告，而不是在回退时。
 
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Default:** `{}`
+
+  A set of rules for word pluralization in a following format:
+  ```js
+    {
+      // Key - locale for the rule to be applied to.
+      // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word. (See getChoiceIndex for details)
+      'ru': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'en': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'jp': function(choice, choiceIndex) => Number/* index of the plural word */;
+    }
+  ```
+
 #### preserveDirectiveContent
 
 > 8.7 新增
@@ -364,6 +383,16 @@ vue-i18n 版本
 
 是否取消本地化失败时输出的警告。
 
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Read/Write**
+
+A set of locale-dependent rules for word pluralization.
+
 #### preserveDirectiveContent
 
 > 8.7 新增
@@ -389,6 +418,8 @@ vue-i18n 版本
 ```js
 VueI18n.prototype.getChoiceIndex = /* 自定义实现 */
 ```
+
+However, for most usages [pluralizationRules constructor option](#pluralizationrules) should be enough.
 
 #### getLocaleMessage( locale )
 

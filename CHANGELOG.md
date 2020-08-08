@@ -1,4 +1,47 @@
 
+## v8.20.0 (2020-07-30)
+
+#### :star: New Features
+* [#959](https://github.com/kazupon/vue-i18n/pull/959) i18n-n component local components passing ([@kazupon](https://github.com/kazupon))
+* [#928](https://github.com/kazupon/vue-i18n/pull/928) :zap: improvement(interpolation): enable passage of local components to tag prop ([@vhoyer](https://github.com/vhoyer))
+
+#### Committers: 2
+- Vinícius Hoyer ([@vhoyer](https://github.com/vhoyer))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.19.0 (2020-07-25)
+
+#### :star: New Features
+* [#942](https://github.com/kazupon/vue-i18n/pull/942) Add vetur support for tags and attributes ([@phiter](https://github.com/phiter))
+
+#### :pencil: Documentation
+* [#925](https://github.com/kazupon/vue-i18n/pull/925) Added missing quote ([@fschlag](https://github.com/fschlag))
+* [#921](https://github.com/kazupon/vue-i18n/pull/921) Add lost pluralizationRules option to documentation ([@AleksandrSl](https://github.com/AleksandrSl))
+* [#920](https://github.com/kazupon/vue-i18n/pull/920) Make link to API and Guide top level ([@AleksandrSl](https://github.com/AleksandrSl))
+
+#### Committers: 3
+- Aleksandr ([@AleksandrSl](https://github.com/AleksandrSl))
+- Florian Schlag ([@fschlag](https://github.com/fschlag))
+- Phiter Fernandes ([@phiter](https://github.com/phiter))
+
+
+## v8.18.2 (2020-06-08)
+
+#### :zap: Improved Features
+* [#917](https://github.com/kazupon/vue-i18n/pull/917) fix: improve IVueI18n interface ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#902](https://github.com/kazupon/vue-i18n/pull/902) docs: [RU] Translation update ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#901](https://github.com/kazupon/vue-i18n/pull/901) docs: (zh) inverse $d $n ([@stan-chen](https://github.com/stan-chen))
+
+#### Committers: 4
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+- Stanley Chen ([@stan-chen](https://github.com/stan-chen))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.18.1 (2020-05-27)
 
 #### :bug: Bug Fixes

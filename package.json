@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n",
   "description": "Internationalization plugin for Vue.js",
-  "version": "8.18.1",
+  "version": "8.20.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -96,8 +96,14 @@
     "dist/vue-i18n.esm.browser.min.js",
     "src/**/*.js",
     "types/*.d.ts",
-    "decls"
+    "decls",
+    "vetur/tags.json",
+    "vetur/attributes.json"
   ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
   "homepage": "https://github.com/kazupon/vue-i18n#readme",
   "keywords": [
     "i18n",
@@ -118,7 +124,7 @@
     "clean": "rm -rf coverage && rm -rf dist/*.js* && rm ./*.log",
     "coverage": "cat ./coverage/lcov.info",
     "dev": "cross-env BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
-    "docs:build": "node config/version.js && vuepress build vuepress -d docs",
+    "docs:build": "cross-env NODE_ENV=production node config/version.js && cross-env NODE_ENV=production vuepress build vuepress -d docs",
     "docs:clean": "rm -rf docs/**",
     "docs:dev": "vuepress dev vuepress",
     "flow": "flow check",

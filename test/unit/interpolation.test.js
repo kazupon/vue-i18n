@@ -61,6 +61,43 @@ describe('component interpolation', () => {
       }).then(done)
     })
 
+    it('of type object (Component) should be correctly applied', done => {
+      const MockElement = {
+        render(h) {
+          return h('strong', Object.values(this.$slots));
+        },
+      }
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: MockElement } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<strong>one: 1</strong>')
+      }).then(done).catch(done)
+    })
+
+    it('of type object (Functional Component) should be correctly applied', done => {
+      const MockElement = {
+        functional: true,
+        render(h, { data, children }) {
+          return h('em', data, children);
+        },
+      }
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: MockElement } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<em>one: 1</em>')
+      }).then(done).catch(done)
+    })
+
     it('of type string should be correctly applied', done => {
       const el = document.createElement('div')
       const vm = new Vue({
