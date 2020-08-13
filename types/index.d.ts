@@ -6,7 +6,12 @@ declare namespace VueI18n {
   type FallbackLocale = string | string[] | false | { [locale: string]: string[] }
   type Values = any[] | { [key: string]: any };
   type Choice = number;
-  type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+  interface MessageContext {
+    list(index: number): unknown
+    named(key: string): unknown
+  }
+  type MessageFunction = (ctx: MessageContext) => string;
+  type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
   interface LocaleMessageObject { [key: string]: LocaleMessage; }
   interface LocaleMessageArray { [index: number]: LocaleMessage; }
   interface LocaleMessages { [key: string]: LocaleMessageObject; }
@@ -123,6 +128,8 @@ export type Locale = VueI18n.Locale;
 export type FallbackLocale = VueI18n.FallbackLocale;
 export type Values = VueI18n.Values;
 export type Choice = VueI18n.Choice;
+export type MessageContext = VueI18n.MessageContext;
+export type MessageFunction = VueI18n.MessageFunction;
 export type LocaleMessage = VueI18n.LocaleMessage;
 export type LocaleMessageObject = VueI18n.LocaleMessageObject;
 export type LocaleMessageArray = VueI18n.LocaleMessageArray;
