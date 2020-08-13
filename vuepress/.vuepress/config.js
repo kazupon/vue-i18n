@@ -24,6 +24,7 @@ module.exports = {
   themeConfig: {
     repo: 'kazupon/vue-i18n',
     editLinks: true,
+    sidebarDepth: 3,
     docsDir: 'vuepress',
     locales: {
       '/': {
