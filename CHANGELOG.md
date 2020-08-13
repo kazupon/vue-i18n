@@ -1,4 +1,18 @@
 
+## v8.21.0 (2020-08-13)
+
+#### :star: New Features
+* [#972](https://github.com/kazupon/vue-i18n/pull/972) feat: message function ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#961](https://github.com/kazupon/vue-i18n/pull/961) Update link to Formatter Interface ([@JohJohan](https://github.com/JohJohan))
+
+#### Committers: 3
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Johan ([@JohJohan](https://github.com/JohJohan))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.20.0 (2020-07-30)
 
 #### :star: New Features
