@@ -249,7 +249,7 @@ function parse (path: Path): ?Array<string> {
   }
 }
 
-export type PathValue = PathValueObject | PathValueArray | string | number | boolean | null
+export type PathValue = PathValueObject | PathValueArray | Function | string | number | boolean | null
 export type PathValueObject = { [key: string]: PathValue }
 export type PathValueArray = Array<PathValue>
 

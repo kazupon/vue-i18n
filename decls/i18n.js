@@ -2,8 +2,13 @@ declare var Intl: any;
 
 declare type Path = string;
 declare type Locale = string;
+declare type MessageContext = {
+  list: (index: number) => mixed,
+  named: (key: string) => mixed
+}
+declare type MessageFunction = (ctx: MessageContext) => string
 declare type FallbackLocale = string | string[] | false | { [locale: string]: string[] };
-declare type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+declare type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
 declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
 declare type LocaleMessageArray = Array<LocaleMessage>;
 declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };

@@ -67,11 +67,15 @@ export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
 
+export function isFunction (val: mixed): boolean %checks {
+  return typeof val === 'function'
+}
+
 export function parseArgs (...args: Array<mixed>): Object {
   let locale: ?string = null
   let params: mixed = null
   if (args.length === 1) {
-    if (isObject(args[0]) || Array.isArray(args[0])) {
+    if (isObject(args[0]) || isArray(args[0])) {
       params = args[0]
     } else if (typeof args[0] === 'string') {
       locale = args[0]
@@ -81,7 +85,7 @@ export function parseArgs (...args: Array<mixed>): Object {
       locale = args[0]
     }
     /* istanbul ignore if */
-    if (isObject(args[1]) || Array.isArray(args[1])) {
+    if (isObject(args[1]) || isArray(args[1])) {
       params = args[1]
     }
   }
@@ -137,8 +141,8 @@ export function looseEqual (a: any, b: any): boolean {
   const isObjectB: boolean = isObject(b)
   if (isObjectA && isObjectB) {
     try {
-      const isArrayA: boolean = Array.isArray(a)
-      const isArrayB: boolean = Array.isArray(b)
+      const isArrayA: boolean = isArray(a)
+      const isArrayB: boolean = isArray(b)
       if (isArrayA && isArrayB) {
         return a.length === b.length && a.every((e: any, i: number): boolean => {
           return looseEqual(e, b[i])
