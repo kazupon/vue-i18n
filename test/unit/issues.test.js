@@ -738,6 +738,23 @@ describe('issues', () => {
 
       assert(componentInstanceCreatedListener.called === false)
     })
+    
+  describe('#996', () => {
+    it('should merge __i18n and i18n', done => {
+      const component = Vue.extend({
+        __i18n: [JSON.stringify({en: { custom: 'custom block!' }})],
+        i18n: {messages: {en: {another: 'another block!'}}}
+        render (h) {
+          return h('p')
+        }
+      })
+      const vm = new Component({ i18n }).$mount()
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$t('custom'), 'custom block!')
+        assert.strictEqual(vm.$t('another'), 'another block!')
+      }).then(done)
+    })
+  })
 
     it('should call "componentInstanceCreatedListener" on creating local instance', () => {
       const componentInstanceCreatedListener = sinon.spy()
