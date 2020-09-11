@@ -1,4 +1,13 @@
 
+## v8.21.1 (2020-09-11)
+
+#### :bug: Bug Fixes
+* [#995](https://github.com/kazupon/vue-i18n/pull/995) Update mixin.js ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+#### Committers: 1
+- Ferenc Beutel ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+
 ## v8.21.0 (2020-08-13)
 
 #### :star: New Features
