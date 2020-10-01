@@ -1622,7 +1622,7 @@ VueI18n.prototype.getChoiceIndex = function getChoiceIndex (choice, choicesLengt
         : 1
     }
 
-    return _choice ? Math.min(0 < _choice && _choice < 1 ? 1 : _choice, 2) : 0
+    return _choice ? Math.min(0 < _choice && _choice < 1 ? 1 : Math.floor(_choice), 2) : 0
   };
 
   if (this.locale in this.pluralizationRules) {
