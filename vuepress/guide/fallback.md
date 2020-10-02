@@ -63,7 +63,7 @@ To suppress these warnings (while keeping those which warn of the total absence 
 It is possible to set more than one fallback locale by using an array of locales. For example
 
 ```javascript
-fallbackLocale: [ 'fr', en' ],
+fallbackLocale: [ 'fr', 'en' ],
 ```
 
 ## Explicit fallback with decision maps
