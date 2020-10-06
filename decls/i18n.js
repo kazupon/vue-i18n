@@ -92,6 +92,7 @@ declare type I18nOptions = {
   sharedMessages?: LocaleMessage,
   postTranslation?: PostTranslationHandler,
   componentInstanceCreatedListener?: ComponentInstanceCreatedListener,
+  escapeParameterHtml?: boolean,
 };
 
 declare type IntlAvailability = {

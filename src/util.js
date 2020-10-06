@@ -167,3 +167,36 @@ export function looseEqual (a: any, b: any): boolean {
     return false
   }
 }
+
+/**
+ * Sanitizes html special characters from input strings. For mitigating risk of XSS attacks.
+ * @param rawText The raw input from the user that should be escaped.
+ */
+function escapeHtml(rawText: string): string {
+  return rawText
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+/**
+ * Escapes html tags and special symbols from all provided params which were returned from parseArgs().params.
+ * This method performs an in-place operation on the params object.
+ *
+ * @param {any} params Parameters as provided from `parseArgs().params`.
+ *                     May be either an array of strings or a string->any map.
+ *
+ * @returns The manipulated `params` object.
+ */
+export function escapeParams(params: any): any {
+  if(params != null) {
+    Object.keys(params).forEach(key => {
+      if(typeof(params[key]) == 'string') {
+        params[key] = escapeHtml(params[key])
+      }
+    })
+  }
+  return params
+}

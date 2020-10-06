@@ -373,6 +373,23 @@ A handler for getting notified when component-local instance was created. The ha
 
 This handler is useful when extending the root VueI18n instance and wanting to also apply those extensions to component-local instance.
 
+#### espaceParameterHtml
+
+> 8.22+
+
+  * **Type:** `Boolean`
+
+  * **Default:** `false`
+
+If `escapeParameterHtml` is configured as true then interpolation parameters are escaped before the message is translated.
+This is useful when translation output is used in `v-html` and the translation resource contains html markup (e.g. `<b>`
+around a user provided value). This usage pattern mostly occurs when passing precomputed text strings into UI compontents.
+
+The escape process involves replacing the following symbols with their respective HTML character entities: `<`, `>`, `"`, `'`, `&`.
+
+Setting `escapeParameterHtml` as true should not break existing functionality but provides a safeguard against a subtle
+type of XSS attack vectors.
+
 ### Properties
 
 #### locale
