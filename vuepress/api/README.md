@@ -373,7 +373,7 @@ A handler for getting notified when component-local instance was created. The ha
 
 This handler is useful when extending the root VueI18n instance and wanting to also apply those extensions to component-local instance.
 
-#### espaceParameterHtml
+#### escapeParameterHtml
 
 > 8.22+
 
