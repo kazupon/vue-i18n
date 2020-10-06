@@ -120,6 +120,7 @@ declare namespace VueI18n {
     sharedMessages?: LocaleMessages;
     postTranslation?: PostTranslationHandler;
     componentInstanceCreatedListener?: ComponentInstanceCreatedListener;
+    escapeParameterHtml?: boolean;
   }
 }
 

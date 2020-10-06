@@ -16,7 +16,8 @@ import {
   remove,
   includes,
   merge,
-  numberFormatKeys
+  numberFormatKeys,
+  escapeParams
 } from './util'
 import BaseFormatter from './format'
 import I18nPath from './path'
@@ -59,6 +60,7 @@ export default class VueI18n {
   _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
+  _escapeParameterHtml: boolean
   _postTranslation: ?PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
@@ -111,6 +113,7 @@ export default class VueI18n {
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
     this._postTranslation = options.postTranslation || null
+    this._escapeParameterHtml = options.escapeParameterHtml || false
 
     /**
      * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
@@ -650,6 +653,10 @@ export default class VueI18n {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)
+    if(this._escapeParameterHtml) {
+      parsedArgs.params = escapeParams(parsedArgs.params)
+    }
+
     const locale: Locale = parsedArgs.locale || _locale
 
     let ret: any = this._translate(
