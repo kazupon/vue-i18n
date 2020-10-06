@@ -1,4 +1,19 @@
 
+## v8.22.0 (2020-10-06)
+
+#### :star: New Features
+* [#1009](https://github.com/kazupon/vue-i18n/pull/1009) Add escapeParameterHtml parameter. #1002 ([@gardarh](https://github.com/gardarh))
+
+#### :bug: Bug Fixes
+* [#1003](https://github.com/kazupon/vue-i18n/pull/1003) Bugfix in index.js: wrong if condition in fetchChoice ([@cimchd](https://github.com/cimchd))
+
+#### Committers: 4
+- Andreas ([@devmount](https://github.com/devmount))
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+- Raffaele Pizzari ([@pixari](https://github.com/pixari))
+- [@cimchd](https://github.com/cimchd)
+
+
 ## v8.21.1 (2020-09-11)
 
 #### :bug: Bug Fixes
