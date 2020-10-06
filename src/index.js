@@ -723,7 +723,7 @@ export default class VueI18n {
 
   fetchChoice (message: string, choice: number): ?string {
     /* istanbul ignore if */
-    if (!message && !isString(message)) { return null }
+    if (!message || !isString(message)) { return null }
     const choices: Array<string> = message.split('|')
 
     choice = this.getChoiceIndex(choice, choices.length)
