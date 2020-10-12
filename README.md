@@ -12,19 +12,46 @@
 
 <br/>
 
-<h3 align="center">Silver Sponsors</h3>
+<h3 align="center">🥈 Silver Sponsors</h3>
 
 <p align="center">
-  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
-    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png">
+  <a
+    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
+    style="width:320px; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png"
+      style="width:320px; display: inline-block; vertical-align: middle;"
+    />
   </a>
 </p>
 
-<h3 align="center">Bronze Sponsors</h3>
+<h3 align="center">🥉 Bronze Sponsors</h3>
 
 <p align="center">
-  <a href="https://zenarchitects.co.jp/" target="_blank">
-    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png">
+  <a
+    href="https://zenarchitects.co.jp/"
+    style="width:200px; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png"
+      style="width:200px; display: inline-block; vertical-align: middle;"
+    />
+  </a>
+  <a
+    href="https://www.sendcloud.com/"
+    style="width:200px; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.svg"
+      style="width:200px; display: inline-block; vertical-align: middle;"
+    />
   </a>
 </p>
 
