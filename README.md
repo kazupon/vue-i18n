@@ -49,7 +49,7 @@
     rel="noopener"
   >
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.svg"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.png"
       style="width:200px; display: inline-block; vertical-align: middle;"
     />
   </a>
