@@ -39,6 +39,7 @@
   >
     <img
       src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png"
+      width="200"
       style="width:200px; display: inline-block; vertical-align: middle;"
     />
   </a>
@@ -50,6 +51,7 @@
   >
     <img
       src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.png"
+      width="200"
       style="width:200px; display: inline-block; vertical-align: middle;"
     />
   </a>
