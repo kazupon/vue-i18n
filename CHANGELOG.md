@@ -1,4 +1,13 @@
 
+## v8.22.1 (2020-10-19)
+
+#### :boom: Breaking Change
+* [#1020](https://github.com/kazupon/vue-i18n/pull/1020) escapeParameterHtml flag: Don't escape ampersand #1019 ([@gardarh](https://github.com/gardarh))
+
+#### Committers: 1
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+
+
 ## v8.22.0 (2020-10-06)
 
 #### :star: New Features
