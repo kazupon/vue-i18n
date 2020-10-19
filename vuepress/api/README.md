@@ -385,7 +385,7 @@ If `escapeParameterHtml` is configured as true then interpolation parameters are
 This is useful when translation output is used in `v-html` and the translation resource contains html markup (e.g. `<b>`
 around a user provided value). This usage pattern mostly occurs when passing precomputed text strings into UI compontents.
 
-The escape process involves replacing the following symbols with their respective HTML character entities: `<`, `>`, `"`, `'`, `&`.
+The escape process involves replacing the following symbols with their respective HTML character entities: `<`, `>`, `"`, `'`.
 
 Setting `escapeParameterHtml` as true should not break existing functionality but provides a safeguard against a subtle
 type of XSS attack vectors.
