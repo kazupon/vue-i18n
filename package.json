@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n",
   "description": "Internationalization plugin for Vue.js",
-  "version": "8.20.0",
+  "version": "8.22.1",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -36,7 +36,7 @@
     "babel-plugin-istanbul": "^6.0.0",
     "babel-preset-power-assert": "^3.0.0",
     "buble": "^0.19.3",
-    "chromedriver": "^83.0.0",
+    "chromedriver": "^85.0.0",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
     "cross-spawn": "^7.0.3",
@@ -74,7 +74,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "^3.141.59",
-    "shipjs": "^0.17.0",
+    "shipjs": "^0.22.0",
     "sinon": "^9.0.2",
     "terser": "^3.17.0",
     "typescript": "^3.9.3",

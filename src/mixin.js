@@ -13,7 +13,7 @@ export default {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            let localeMessages = {}
+            let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {}
             options.__i18n.forEach(resource => {
               localeMessages = merge(localeMessages, JSON.parse(resource))
             })
@@ -47,7 +47,7 @@ export default {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            let localeMessages = {}
+            let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {}
             options.__i18n.forEach(resource => {
               localeMessages = merge(localeMessages, JSON.parse(resource))
             })

@@ -770,4 +770,24 @@ describe('issues', () => {
       assert.strictEqual(componentInstanceCreatedListener.args[0][1], i18n)
     })
   })
+
+  describe('#996', () => {
+    it('should merge __i18n and i18n', done => {
+      const Component = Vue.extend({
+        __i18n: [JSON.stringify({ en: { custom: 'custom block!' } })],
+        render (h) {
+          return h('p')
+        }
+      })
+      const vm = new Component({
+        i18n: new VueI18n({ locale: 'en', messages: { en: { another: 'another block!' } } })
+      }).$mount()
+
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$t('another'), 'another block!')
+        assert.strictEqual(vm.$t('custom'), 'custom block!')
+      }).then(done)
+        .catch(console.error)
+    })
+  })
 })

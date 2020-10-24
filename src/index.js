@@ -11,11 +11,13 @@ import {
   isArray,
   isBoolean,
   isString,
+  isFunction,
   looseClone,
   remove,
   includes,
   merge,
-  numberFormatKeys
+  numberFormatKeys,
+  escapeParams
 } from './util'
 import BaseFormatter from './format'
 import I18nPath from './path'
@@ -58,6 +60,7 @@ export default class VueI18n {
   _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
+  _escapeParameterHtml: boolean
   _postTranslation: ?PostTranslationHandler
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
@@ -110,6 +113,7 @@ export default class VueI18n {
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
     this._postTranslation = options.postTranslation || null
+    this._escapeParameterHtml = options.escapeParameterHtml || false
 
     /**
      * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
@@ -188,7 +192,7 @@ export default class VueI18n {
             paths.pop()
           }
         })
-      } else if (Array.isArray(message)) {
+      } else if (isArray(message)) {
         message.forEach((item, index) => {
           if (isPlainObject(item)) {
             paths.push(`[${index}]`)
@@ -382,16 +386,16 @@ export default class VueI18n {
     if (!message) { return null }
 
     const pathRet: PathValue = this._path.getPathValue(message, key)
-    if (Array.isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
+    if (isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
 
     let ret: mixed
     if (isNull(pathRet)) {
       /* istanbul ignore else */
       if (isPlainObject(message)) {
         ret = message[key]
-        if (!isString(ret)) {
+        if (!(isString(ret) || isFunction(ret))) {
           if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-            warn(`Value of key '${key}' is not a string!`)
+            warn(`Value of key '${key}' is not a string or function !`)
           }
           return null
         }
@@ -400,18 +404,18 @@ export default class VueI18n {
       }
     } else {
       /* istanbul ignore else */
-      if (isString(pathRet)) {
+      if (isString(pathRet) || isFunction(pathRet)) {
         ret = pathRet
       } else {
         if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-          warn(`Value of key '${key}' is not a string!`)
+          warn(`Value of key '${key}' is not a string or function!`)
         }
         return null
       }
     }
 
     // Check for the existence of links within the translated string
-    if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
+    if (isString(ret) && (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0)) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
 
@@ -476,7 +480,7 @@ export default class VueI18n {
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values],
+        isArray(values) ? values : [values],
         interpolateMode
       )
 
@@ -495,7 +499,22 @@ export default class VueI18n {
     return ret
   }
 
-  _render (message: string, interpolateMode: string, values: any, path: string): any {
+  _createMessageContext (values: any): MessageContext {
+    const _list = isArray(values) ? values : []
+    const _named = isObject(values) ? values : {}
+    const list = (index: number): mixed => _list[index]
+    const named = (key: string): mixed => _named[key]
+    return {
+      list,
+      named
+    }
+  }
+
+  _render (message: string | MessageFunction, interpolateMode: string, values: any, path: string): any {
+    if (isFunction(message)) {
+      return message(this._createMessageContext(values))
+    }
+
     let ret = this._formatter.interpolate(message, values, path)
 
     // If the custom formatter refuses to work - apply the default one
@@ -634,6 +653,10 @@ export default class VueI18n {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)
+    if(this._escapeParameterHtml) {
+      parsedArgs.params = escapeParams(parsedArgs.params)
+    }
+
     const locale: Locale = parsedArgs.locale || _locale
 
     let ret: any = this._translate(
@@ -707,7 +730,7 @@ export default class VueI18n {
 
   fetchChoice (message: string, choice: number): ?string {
     /* istanbul ignore if */
-    if (!message && !isString(message)) { return null }
+    if (!message || !isString(message)) { return null }
     const choices: Array<string> = message.split('|')
 
     choice = this.getChoiceIndex(choice, choices.length)

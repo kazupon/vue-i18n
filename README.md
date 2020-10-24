@@ -12,19 +12,33 @@
 
 <br/>
 
-<h3 align="center">Silver Sponsors</h3>
+<h3 align="center">🥈 Silver Sponsors</h3>
 
 <p align="center">
   <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
-    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png"
+      width="320px"
+    />
   </a>
 </p>
 
-<h3 align="center">Bronze Sponsors</h3>
+<h3 align="center">🥉 Bronze Sponsors</h3>
 
 <p align="center">
   <a href="https://zenarchitects.co.jp/" target="_blank">
-    <img src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png"
+      width="200px"
+    />
+  </a>
+</p>
+<p align="center">
+  <a href="https://www.sendcloud.com/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.png"
+      width="200px"
+    />
   </a>
 </p>
 

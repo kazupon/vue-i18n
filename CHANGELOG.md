@@ -1,4 +1,51 @@
 
+## v8.22.1 (2020-10-19)
+
+#### :boom: Breaking Change
+* [#1020](https://github.com/kazupon/vue-i18n/pull/1020) escapeParameterHtml flag: Don't escape ampersand #1019 ([@gardarh](https://github.com/gardarh))
+
+#### Committers: 1
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+
+
+## v8.22.0 (2020-10-06)
+
+#### :star: New Features
+* [#1009](https://github.com/kazupon/vue-i18n/pull/1009) Add escapeParameterHtml parameter. #1002 ([@gardarh](https://github.com/gardarh))
+
+#### :bug: Bug Fixes
+* [#1003](https://github.com/kazupon/vue-i18n/pull/1003) Bugfix in index.js: wrong if condition in fetchChoice ([@cimchd](https://github.com/cimchd))
+
+#### Committers: 4
+- Andreas ([@devmount](https://github.com/devmount))
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+- Raffaele Pizzari ([@pixari](https://github.com/pixari))
+- [@cimchd](https://github.com/cimchd)
+
+
+## v8.21.1 (2020-09-11)
+
+#### :bug: Bug Fixes
+* [#995](https://github.com/kazupon/vue-i18n/pull/995) Update mixin.js ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+#### Committers: 1
+- Ferenc Beutel ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+
+## v8.21.0 (2020-08-13)
+
+#### :star: New Features
+* [#972](https://github.com/kazupon/vue-i18n/pull/972) feat: message function ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#961](https://github.com/kazupon/vue-i18n/pull/961) Update link to Formatter Interface ([@JohJohan](https://github.com/JohJohan))
+
+#### Committers: 3
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Johan ([@JohJohan](https://github.com/JohJohan))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v8.20.0 (2020-07-30)
 
 #### :star: New Features
