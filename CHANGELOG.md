@@ -1,4 +1,14 @@
 
+## v8.22.2 (2020-11-18)
+
+#### :bug: Bug Fixes
+* [#1048](https://github.com/kazupon/vue-i18n/pull/1048) fix: number format keys missing compared the Intl.Number object ([@jevillard](https://github.com/jevillard))
+
+#### Committers: 2
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Jérémy Villard ([@jevillard](https://github.com/jevillard))
+
+
 ## v8.22.1 (2020-10-19)
 
 #### :boom: Breaking Change
