@@ -42,6 +42,9 @@ export default {
           options.i18n.silentFallbackWarn = rootI18n.silentFallbackWarn
           options.i18n.pluralizationRules = rootI18n.pluralizationRules
           options.i18n.preserveDirectiveContent = rootI18n.preserveDirectiveContent
+          vm.$once('hook:beforeDestroy', () => {
+            options.i18n = null;
+          })
         }
 
         // init locale messages via custom blocks
