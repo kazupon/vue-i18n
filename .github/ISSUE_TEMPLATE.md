@@ -30,6 +30,9 @@ Remove the template from below and provide thoughtful commentary *and code sampl
 ### vue & vue-i18n version
 ex: 2.1.0, 5.0
 
+**NOTE: vue-i18n does not support Vue.js 3.0 yet.**
+**Check https://github.com/intlify/vue-i18n-next** 
+
 ### Reproduction Link
 <!-- A minimal JSBin, JSFiddle, Codepen, or a GitHub reprository that can reproduce the bug. -->
 
