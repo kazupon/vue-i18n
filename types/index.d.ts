@@ -184,7 +184,7 @@ export declare interface IVueI18n {
     locale?: VueI18n.Locale,
   ): VueI18n.DateTimeFormatResult;
   d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
-  d(value: number, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;
+  d(value: number | Date, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;
   n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
   n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
   n(value: number, options?: VueI18n.NumberFormatOptions): VueI18n.NumberFormatResult;
@@ -227,7 +227,7 @@ declare class VueI18n {
   te(key: VueI18n.Path, locale?: VueI18n.Locale): boolean;
   d(value: number | Date, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.DateTimeFormatResult;
   d(value: number | Date, args?: { [key: string]: string }): VueI18n.DateTimeFormatResult;
-  d(value: number, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;  
+  d(value: number | Date, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;  
   n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
   n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
   n(value: number, options?: VueI18n.NumberFormatOptions): VueI18n.NumberFormatResult;
