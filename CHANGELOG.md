@@ -1,3 +1,17 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.22.3 (2021-01-08)
+
+#### :zap: Improved Features
+* [#1096](https://github.com/kazupon/vue-i18n/pull/1096) @types: Fixed too narrow option types in n() and d() methods ([@gehlert](https://github.com/gehlert))
+
+#### Committers: 3
+- MASONGZHI ([@masongzhi](https://github.com/masongzhi))
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+- [@gehlert](https://github.com/gehlert)
+
 
 ## v8.22.2 (2020-11-18)
 
