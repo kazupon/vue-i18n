@@ -58,7 +58,7 @@ vue-i18n will soon be transferred to [intlify organization](https://github.com/i
 
 The `vue-i18n` that has been released on npm will be released as `@intlify/vue-i18n` in near future.
 
-`@intlify/vue-i18n` repo is [here](https://github.com/intlify/vue-i18n-next)
+`vue-i18n` next major version repo is [here](https://github.com/intlify/vue-i18n-next)
 
 Intlify is a new i18n project kickoff by @kazupon. 😉
 
