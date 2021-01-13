@@ -30,7 +30,7 @@ yarn add vue-i18n
 ```
 
 Ao usar o sistema de módulos, você deve definir explicitamente `vue-i18n`
-via ` Vue.use()`:
+via `Vue.use()`:
 
 ```js
 import Vue from 'vue'

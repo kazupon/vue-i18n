@@ -2,7 +2,7 @@
 
 Em geral, as informações de localidade (por exemplo, `locale`, `messages`, etc) são definidas como opção de construtor na instância `VueI18n` e define a opção `i18n` como a instância raiz do Vue.
 
-Portanto, você pode realizar traduções globalmente usando os métodos `$t` ou ` $tc` na instância raiz do Vue e qualquer um dos componentes nela. Mas também é possível especificar dados para localização em cada componente separadamente, o que pode ser mais conveniente devido ao design orientado a componentes.
+Portanto, você pode realizar traduções globalmente usando os métodos `$t` ou `$tc` na instância raiz do Vue e qualquer um dos componentes nela. Mas também é possível especificar dados para localização em cada componente separadamente, o que pode ser mais conveniente devido ao design orientado a componentes.
 
 Um exemplo de localização baseada em componente:
 
@@ -86,7 +86,7 @@ Se você precisar traduzir com base na localidade do componente, pode fazê-lo u
 
 ## Mensagens de localização comuns para componentes
 
-Às vezes, você pode querer importar mensagens de localidade compartilhadas para determinados componentes, não fallback de mensagens de localidade global (por exemplo, mensagens comuns de determinado recurso para componentes.
+Às vezes, você pode querer importar as mensagens de localidade compartilhadas para determinados componentes, não o fallback de mensagens na localidade global (por exemplo, mensagens comuns de determinado recurso para componentes.
 
 Para fazer isso, você pode usar a opção `sharedMessages` na propriedade `i18n` do componente.
 
@@ -102,7 +102,7 @@ export default {
   },
   pt: {
     buttons: {
-      save: 'Salve'
+      save: 'Salvar'
       // ...
     }
   }
@@ -112,7 +112,7 @@ export default {
 Componente:
 
 ```js
-import commonMessage from './locales/common' // importação de mensagens de localidade em comum
+import commonMessage from './locales/common' // importação de mensagens da localidade em comum
 
 export default {
   name: 'ServiceModal',
