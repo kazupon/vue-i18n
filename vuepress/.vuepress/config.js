@@ -16,6 +16,11 @@ module.exports = {
       title: 'Vue I18n',
       description: 'Vue I18n — плагин для интернационализации во Vue.js'
     },
+    '/pt/': {
+      lang: 'pt-BR',
+      title: 'Vue I18n',
+      description: 'Vue I18n é um internacionalizador de idiomas para Vue.js'
+    },
   },
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
@@ -307,6 +312,102 @@ module.exports = {
             children: [
               '/ru/legacy/',
               '/ru/legacy/v5'
+            ]
+          }
+        ]
+      },
+      '/pt/': {
+        label: 'Português',
+        selectText: 'Idiomas',
+        editLinkText: 'Editar esta página no GitHub',
+        lastUpdated: 'Última atualização',
+        nav: [
+          {
+            text: 'Guia',
+            link: '/pt/guide/formatting'
+          },
+          {
+            text: 'API',
+            link: '/pt/api/'
+          },
+          {
+            text: 'Ecossistema',
+            items: [
+              {
+                text: 'Ferramentas Oficiais',
+                items: [
+                  {
+                    text: 'Vue CLI Plugin',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Webpack Loader',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'ESLint Plugin',
+                    link: 'https://intlify.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: 'Extensoes',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: 'Ferramentas de terceiros',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  },
+                  {
+                    text: 'i18n Ally',
+                    link: 'https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: 'Patreon',
+            link: 'https://www.patreon.com/kazupon'
+          },
+          {
+            text: 'Notas de Lançamento',
+            link: 'https://github.com/kazupon/vue-i18n/releases'
+          }
+        ],
+        sidebar: [
+          '/pt/introduction',
+          '/pt/started',
+          '/pt/installation',
+          {
+            title: 'Guia',
+            collapsable: false,
+            children: [
+              '/pt/guide/formatting',
+              '/pt/guide/pluralization',
+              '/pt/guide/datetime',
+              '/pt/guide/number',
+              '/pt/guide/messages',
+              '/pt/guide/fallback',
+              '/pt/guide/component',
+              '/pt/guide/directive',
+              '/pt/guide/interpolation',
+              '/pt/guide/sfc',
+              '/pt/guide/hot-reload',
+              '/pt/guide/locale',
+              '/pt/guide/lazy-loading',
+              '/pt/guide/tooling'
+            ]
+          },
+          {
+            title: 'Legado',
+            collapsable: false,
+            children: [
+              '/pt/legacy/',
+              '/pt/legacy/v5'
             ]
           }
         ]
