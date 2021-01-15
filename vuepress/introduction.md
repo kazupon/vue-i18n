@@ -21,6 +21,7 @@ Go to [Get Started](./started.md)
   >
     <img
       src="/vue-i18n/patrons/nuxt.png"
+      alt="Nuxt.js"
       style="display: inline-block; vertical-align: middle;"
     />
   </a>
@@ -31,13 +32,13 @@ Go to [Get Started](./started.md)
 <p style="text-align: center;">
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="width:300px; display: inline-block; vertical-align: middle;"
+    style="max-width: 320px; width: 100%; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/babeledit.png"
-      style="width:320px; display: inline-block; vertical-align: middle;"
+      alt="BabelEdit translation editor for apps (web apps)"
     />
   </a>
 </p>
@@ -47,24 +48,24 @@ Go to [Get Started](./started.md)
 <p style="text-align: center;">
   <a
     href="https://zenarchitects.co.jp/"
-    style="width:200px; display: inline-block; vertical-align: middle;"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/zenarchitects.png"
-      style="width:200px; display: inline-block; vertical-align: middle;"
+      alt="zenarchitects"
     />
   </a>
   <a
     href="https://www.sendcloud.com/"
-    style="width:200px; display: inline-block; vertical-align: middle;"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/sendcloud.svg"
-      style="width:200px; display: inline-block; vertical-align: middle;"
+      alt="sendcloud"
     />
   </a>
 </p>

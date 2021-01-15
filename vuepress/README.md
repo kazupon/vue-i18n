@@ -16,48 +16,56 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   >
     <img
       src="/vue-i18n/patrons/nuxt.png"
-      style="display: inline-block; vertical-align: middle;"
+      alt="Nuxt.js"
     />
   </a>
   <h4 style="padding: 12px 0 0 0;">🥈 Silver Sponsors</h4>
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="width:320px; display: inline-block; vertical-align: middle;"
+    style="max-width: 320px; width: 100%; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/babeledit.png"
-      style="width:320px; display: inline-block; vertical-align: middle;"
+      alt="BabelEdit translation editor for apps (web apps)"
     />
   </a>
   <h4 style="padding: 12px 0 0 0;">🥉 Bronze Sponsors</h4>
   <a
     href="https://zenarchitects.co.jp/"
-    style="width:200px; display: inline-block; vertical-align: middle;"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/zenarchitects.png"
-      style="width:200px; display: inline-block; vertical-align: middle;"
+      alt="zenarchitects"
     />
   </a>
   <a
     href="https://www.sendcloud.com/"
-    style="width:200px; display: inline-block; vertical-align: middle;"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/sendcloud.svg"
-      style="width:200px; display: inline-block; vertical-align: middle;"
+      alt="sendcloud"
     />
   </a>
 </div>
 
 <div class="github" style="text-align:center; padding: 0 0 24px 0;">
   <sponsor-button />
+</div>
+
+<div class="patreon" style="padding: 0 0 24px 0;">
+  <p style="text-align: center;">
+    <a href="https://www.patreon.com/kazupon" target="_blank">
+      <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
+    </a>
+  </p>
 </div>
 
 <div class="features">
