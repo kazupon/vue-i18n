@@ -210,7 +210,7 @@ const Component1 = {
   i18n: {
     messages: {
       en: {
-        title: 'Title1'
+        title: 'Title 1'
       }
     }
   }

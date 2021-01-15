@@ -150,7 +150,7 @@ const i18n = new VueI18n({
 })
 
 i18n.t('greeting', { name: 'kazupon' }) // -> hi kazupon
-``` 
+```
 
 ### Vue.tc replaced
 
@@ -169,7 +169,7 @@ const i18n = new VueI18n({
 
 const count = 10
 i18n.tc('apple', count, { count }) // -> 10 apples
-``` 
+```
 
 ### Vue.te replaced
 
@@ -214,7 +214,7 @@ const Component1 = {
   i18n: {
     messages: {
       en: {
-        title: 'Title1'
+        title: 'Title 1'
       }
     }
   }

@@ -10,23 +10,23 @@ sidebar: auto
 
 #### i18n
 
-- **Tipo:** `I18nOptions`
+* **Tipo:** `I18nOptions`
 
 Opção de localização baseada em componentes.
 
-- **Veja também:** Opções do construtor `VueI18n`
+* **Veja também:** Opções do construtor `VueI18n`
 
 ### Métodos injetados no Vue
 
 #### $t
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Path} key`: obrigatório
-  - `{Locale} locale`: opcional
-  - `{Array | Object} values`: opcional
+  * `{Path} key`: obrigatório
+  * `{Locale} locale`: opcional
+  * `{Array | Object} values`: opcional
 
-- **Retorno:** `TranslateResult`
+* **Retorno:** `TranslateResult`
 
 Obtendo uma mensagem traduzida usando a chave `key`. As mensagens de localização em um componente têm precedência sobre as mensagens globais. Se não houver mensagens de localização no componente, a localização será executada usando as mensagens de localização globais. Se `locale` for especificado, as mensagens de localização do `locale` serão usadas. Se `key` foi especificada para a lista / formato nomeado das mensagens de localização, então os `values` também devem ser especificados. Você pode aprender mais sobre `values` na seção [Formato das mensagens de localização](../guia/formatting.md).
 
@@ -36,14 +36,14 @@ Observe que você precisa garantir este contexto igual à instância do componen
 
 #### $tc
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Path} key`: obrigatório
-  - `{number} choice`: opcional, padrão `1`
-  - `{Locale} locale`: opcional
-  - `{string | Array | Object} values`: opcional
+  * `{Path} key`: obrigatório
+  * `{number} choice`: opcional, padrão `1`
+  * `{Locale} locale`: opcional
+  * `{string | Array | Object} values`: opcional
 
-- **Retorno:** `TranslateResult`
+* **Retorno:** `TranslateResult`
 
 Obtendo uma mensagem traduzida usando a `key` com pluralização. As mensagens de localização de componentes têm precedência sobre as mensagens globais. Se não houver mensagens de localização no componente, a localização será executada usando mensagens de localização globais. Se `locale` for especificado, as mensagens de localização de `locale` serão usadas. Se um valor de texto for especificado para `value`, a localização será realizada para esse valor. Se for um Array ou Object especificado em `value`, então deve ser especificado com `value` de $t.
 
@@ -55,12 +55,12 @@ Observe que você precisa garantir este contexto igual à instância do componen
 
 #### $te
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Path} key`: obrigatório
-  - `{Locale} locale`: opcional
+  * `{Path} key`: obrigatório
+  * `{Locale} locale`: opcional
 
-- **Retorno:** `boolean`
+* **Retorno:** `boolean`
 
 Verifica se existe uma tradução para uma chave nas mensagens de localização. Se não houver mensagens de localização no componente, ele verifica as mensagens de localização globais. Se `locale` for especificado, então a presença de `locale` nas mensagens é verificada.
 
@@ -72,13 +72,13 @@ Observe que você precisa garantir este contexto igual à instância do componen
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{number | Date} value`: obrigatório
-  - `{Path | Object} key`: opcional
-  - `{Locale | Object} locale`: opcional
+  * `{number | Date} value`: obrigatório
+  * `{Path | Object} key`: opcional
+  * `{Locale | Object} locale`: opcional
 
-- **Retorno:** `DateTimeFormatResult`
+* **Retorno:** `DateTimeFormatResult`
 
 Localização da data e hora de `value` com o formato de data e hora de `key`. O formato de data e hora da `key` precisa ser registrado na opção `dateTimeFormats` da classe `VueI18n`, e depende da opção `locale` do construtor `VueI18n`. Se você especificar o argumento `locale`, ele terá prioridade sobre a opção `locale` do construtor `VueI18n`.
 
@@ -92,13 +92,13 @@ Observe que você precisa garantir este contexto igual à instância do componen
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{number} value`: obrigatório
-  - `{Path | Object} format`: opcional
-  - `{Locale} locale`: opcional
+  * `{number} value`: obrigatório
+  * `{Path | Object} format`: opcional
+  * `{Locale} locale`: opcional
 
-- **Retorno:** `NumberFormatResult`
+* **Retorno:** `NumberFormatResult`
 
 Localização do número `value` usando o formato de número `format`. O formato de número de `format` deve ser registrado na opção `numberFormats` da classe `VueI18n`, e depende da opção `locale` do construtor `VueI18n`. Especificar o argumento `locale` sobrescreve a opção `locale` do construtor `VueI18n`.
 
@@ -106,25 +106,25 @@ Se o formato de número para `format` não for especificado na opção `numberFo
 
 Se o segundo argumento para `format` for especificado por um objeto, ele deverá conter as seguintes propriedades:
 
-- `key {Path}`: opcional, número formatado
-- `locale {Locale}`: opcional, localização
-- `compactDisplay {string}`: opcional, opção de formatação do número
-- `currency {string}`: opcional, opção de formatação do número
-- `currencyDisplay {string}`: opcional, opção de formatação do número
-- `currencySign {string}`: opcional, opção de formatação do número
-- `localeMatcher {string}`: opcional, opção de formatação do número
-- `notation {string}`: opcional, opção de formatação do número
-- `numberingSystem {string}`: opcional, opção de formatação do número
-- `signDisplay {string}`: opcional, opção de formatação do número
-- `style {string}`: opcional, opção de formatação do número
-- `unit {string}`: opcional, opção de formatação do número
-- `unitDisplay {string}`: opcional, opção de formatação do número
-- `useGrouping {string}`: opcional, opção de formatação do número
-- `minimumIntegerDigits {string}`: opcional, opção de formatação do número
-- `minimumFractionDigits {string}`: opcional, opção de formatação do número
-- `maximumFractionDigits {string}`: opcional, opção de formatação do número
-- `minimumSignificantDigits {string}`: opcional, opção de formatação do número
-- `maximumSignificantDigits {string}`: opcional, opção de formatação do número
+* `key {Path}`: opcional, número formatado
+* `locale {Locale}`: opcional, localização
+* `compactDisplay {string}`: opcional, opção de formatação do número
+* `currency {string}`: opcional, opção de formatação do número
+* `currencyDisplay {string}`: opcional, opção de formatação do número
+* `currencySign {string}`: opcional, opção de formatação do número
+* `localeMatcher {string}`: opcional, opção de formatação do número
+* `notation {string}`: opcional, opção de formatação do número
+* `numberingSystem {string}`: opcional, opção de formatação do número
+* `signDisplay {string}`: opcional, opção de formatação do número
+* `style {string}`: opcional, opção de formatação do número
+* `unit {string}`: opcional, opção de formatação do número
+* `unitDisplay {string}`: opcional, opção de formatação do número
+* `useGrouping {string}`: opcional, opção de formatação do número
+* `minimumIntegerDigits {string}`: opcional, opção de formatação do número
+* `minimumFractionDigits {string}`: opcional, opção de formatação do número
+* `maximumFractionDigits {string}`: opcional, opção de formatação do número
+* `minimumSignificantDigits {string}`: opcional, opção de formatação do número
+* `maximumSignificantDigits {string}`: opcional, opção de formatação do número
 
 Qualquer opções de formatação de número especificadas terão precedência sobre os valores `numberFormats` do construtor `VueI18n`.
 
@@ -136,9 +136,9 @@ Observe que você precisa garantir este contexto igual à instância do componen
 
 #### $i18n
 
-- **Tipo:** `I18n`
+* **Tipo:** `I18n`
 
-- **Somente leitura**
+* **Somente leitura**
 
 Obter uma instância de `VueI18n`, se definido.
 
@@ -152,7 +152,7 @@ A classe `VueI18n` implementa a interface `I18n` de [definições de tipo de flu
 
 #### version
 
-- **Tipo:** `string`
+* **Tipo:** `string`
 
 Versão `vue-i18n`.
 
@@ -160,13 +160,13 @@ Versão `vue-i18n`.
 
 > :new: Adicionado na versão 7.0+
 
-- **Tipo:** `IntlAvailability`
+* **Tipo:** `IntlAvailability`
 
 Verificar a disponibilidade dos seguintes recursos de internacionalização:
 
-- `{boolean} dateTimeFormat`: formatação de data sensível à localidade
+* `{boolean} dateTimeFormat`: formatação de data sensível à localidade
 
-- `{boolean} numberFormat`: formatação de número sensível à localidade
+* `{boolean} numberFormat`: formatação de número sensível à localidade
 
 Os recursos de internacionalização acima dependem do [ambiente do navegador](http://kangax.github.io/compat-table/esintl/), que implementa a API de internacionalização ECMAScript (ECMA-402).
 
@@ -176,25 +176,25 @@ Os recursos de internacionalização acima dependem do [ambiente do navegador](h
 
 #### locale
 
-- **Tipo:** `Locale`
+* **Tipo:** `Locale`
 
-- **Padrão:** `'en-US'`
+* **Padrão:** `'en-US'`
 
 O local usado para localização. Se uma localidade contém território e dialeto, esta localidade contém um fallback implícito.
 
 #### fallbackLocale
 
-- **Tipo:** `FallbackLocale`
+* **Tipo:** `FallbackLocale`
 
-- **Padrão:** `false`
+* **Padrão:** `false`
 
 Localidade reserva para localização. Para obter mais detalhes e definições de fallback mais complexos, consulte a seção [fallback](../guide/fallback.md).
 
 #### messages
 
-- **Tipo:** `LocaleMessages`
+* **Tipo:** `LocaleMessages`
 
-- **Padrão:** `{}`
+* **Padrão:** `{}`
 
 Mensagens de localização para o local.
 
@@ -202,43 +202,43 @@ Mensagens de localização para o local.
 
 > :new: Adicionado na versão 7.0+
 
-- **Tipo:** `DateTimeFormats`
+* **Tipo:** `DateTimeFormats`
 
-- **Padrão:** `{}`
+* **Padrão:** `{}`
 
 Formatos de data para localização.
 
-- **Veja também:** `DateTimeFormats` tipo de [definições de flowtype](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+* **Veja também:** `DateTimeFormats` tipo de [definições de flowtype](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### numberFormats
 
 > :new: Adicionado na versão 7.0+
 
-- **Tipo:** `NumberFormats`
+* **Tipo:** `NumberFormats`
 
-- **Padrão:** `{}`
+* **Padrão:** `{}`
 
 Formatos de número para localização.
 
-- **Veja também:** `NumberFormats` tipo de [definições de flowtype](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+* **Veja também:** `NumberFormats` tipo de [definições de flowtype](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 #### availableLocales
 
 > :new: Adicionado na versão 8.9.0+
 
-- **Tipo:** `Locale[]`
+* **Tipo:** `Locale[]`
 
-- **Padrão:** `[]`
+* **Padrão:** `[]`
 
-- **Exemplos:** `["en", "ru"]`
+* **Exemplos:** `["en", "ru"]`
 
 Lista de localidades disponíveis em `messages` em ordem lexical.
 
 #### formatter
 
-- **Tipo:** `Formatter`
+* **Tipo:** `Formatter`
 
-- **Padrão:** Formatador integrado
+* **Padrão:** Formatador integrado
 
 Um método de formatação que implementa a interface `Formatter`.
 
@@ -246,17 +246,17 @@ Um método de formatação que implementa a interface `Formatter`.
 
 > :new: Adicionado na versão 8.15.0+
 
-- **Tipo:** `Modifiers`
+* **Tipo:** `Modifiers`
 
-- **Padrão:** modificadores `lower` e `upper`
+* **Padrão:** modificadores `lower` e `upper`
 
 Funções modificadoras para mensagens relacionadas
 
 #### missing
 
-- **Tipo:** `MissingHandler`
+* **Tipo:** `MissingHandler`
 
-- **Padrão:** `null`
+* **Padrão:** `null`
 
 Manipulador para mensagens de localização ausentes. O manipulador será chamado com `locale`, a `key` da mensagem de localização e os `values`.
 
@@ -264,9 +264,9 @@ Se este manipulador for especificado e for feita uma tentativa de acessar a mens
 
 #### fallbackRoot
 
-- **Tipo:** `Boolean`
+* **Tipo:** `Boolean`
 
-- **Padrão:** `true`
+* **Padrão:** `true`
 
 Ao usar a localização em componentes, determina se deve consultar a localização de nível raiz (global) quando no caso da localização falhar.
 
@@ -274,9 +274,9 @@ Se definido como `false`, um aviso será lançado e uma chave retornada.
 
 #### sync
 
-- **Tipo:** `Boolean`
+* **Tipo:** `Boolean`
 
-- **Padrão:** `true`
+* **Padrão:** `true`
 
 Se sincroniza a localidade de nível raiz com a localidade de localização do componente.
 
@@ -286,9 +286,9 @@ Se o valor for `false`, independentemente da localidade definida no nível raiz,
 
 > 6.1+, :up: 8.13
 
-- **Tipo:** `Boolean | RegExp`
+* **Tipo:** `Boolean | RegExp`
 
-- **Padrão:** `false`
+* **Padrão:** `false`
 
 Desativa os avisos exibidos quando a localização falha.
 
@@ -298,9 +298,9 @@ Se verdadeiro, desativa os avisos de erro de localização. Se você usar uma ex
 
 > :new: Adicionado na versão 8.8+, :up: 8.13
 
-- **Tipo:** `Boolean | RegExp`
+* **Tipo:** `Boolean | RegExp`
 
-- **Padrão:** `false`
+* **Padrão:** `false`
 
 Desative os avisos ao retornar para fallback de `fallbackLocale` ou `root`.
 
@@ -331,9 +331,9 @@ Se você usar uma expressão regular, poderá suprimir os avisos de fallback que
 
 > Adicionado na versão 8.7+
 
-- **Tipo:** `Boolean`
+* **Tipo:** `Boolean`
 
-- **Padrão:** `false`
+* **Padrão:** `false`
 
 Determina se o elemento da diretiva `v-t` deve reter o `textContent` após a diretiva ser removida do elemento.
 
@@ -341,9 +341,9 @@ Determina se o elemento da diretiva `v-t` deve reter o `textContent` após a dir
 
 > Adicionado na versão 8.11+
 
-- **Tipo:** `WarnHtmlInMessageLevel`
+* **Tipo:** `WarnHtmlInMessageLevel`
 
-- **Padrão:** `off`
+* **Padrão:** `off`
 
 Permitir ou não o uso de formatação HTML em mensagens de localização. Veja também a propriedade `warnHtmlInMessage`.
 
@@ -355,9 +355,9 @@ A partir da próxima versão principal, o valor padrão `warnHtmlInMessage` ser�
 
 > Adicionado na versão 8.12+
 
-- **Tipo:** `LocaleMessages`
+* **Tipo:** `LocaleMessages`
 
-- **Padrão:** `undefined`
+* **Padrão:** `undefined`
 
 Mensagens de localização comuns quando localizadas em componentes. Ver [localização baseada em componentes](../guide/component.md#shared-locale-messages-for-components) para mais detalhes.
 
@@ -365,9 +365,9 @@ Mensagens de localização comuns quando localizadas em componentes. Ver [locali
 
 > Adicionado na versão 8.16+
 
-- **Tipo:** `PostTranslationHandler`
+* **Tipo:** `PostTranslationHandler`
 
-- **Padrão:** `null`
+* **Padrão:** `null`
 
 Um manipulador para pós-processamento da tradução. Executado após chamar `$t`, `t`, `$tc` e `tc`.
 
@@ -377,9 +377,9 @@ Pode ser útil se você precisar processar adicionalmente o texto final da tradu
 
 > Adicionado na versão 8.18+
 
-- **Tipo:** `ComponentInstanceCreatedListener`
+* **Tipo:** `ComponentInstanceCreatedListener`
 
-- **Padrão:** `null`
+* **Padrão:** `null`
 
 Um manipulador para receber uma notificação sobre a criação de uma instância local de um componente. O manipulador é chamado com instâncias VueI18n novas e antigas (raiz).
 
@@ -403,25 +403,25 @@ Definir `escapeParameterHtml` como `true` não deve quebrar a funcionalidade exi
 
 #### locale
 
-- **Tipo:** `Locale`
+* **Tipo:** `Locale`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 O local usado para localização. Se uma localidade contém um território e um dialeto, essa localidade contém um fallback implícito.
 
 #### fallbackLocale
 
-- **Tipo:** `FallbackLocale`
+* **Tipo:** `FallbackLocale`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 O local usado para localização de fallback. Para obter mais definições de fallback, consulte a seção [fallback](../ guide/fallback.md).
 
 #### messages
 
-- **Tipo:** `LocaleMessages`
+* **Tipo:** `LocaleMessages`
 
-- **Somente leitura**
+* **Somente leitura**
 
 As mensagens de localização usadas para a localização da tradução.
 
@@ -429,9 +429,9 @@ As mensagens de localização usadas para a localização da tradução.
 
 > :new: Adicionado na versão 7.0+
 
-- **Tipo:** `DateTimeFormats`
+* **Tipo:** `DateTimeFormats`
 
-- **Somente leitura**
+* **Somente leitura**
 
 Formatação de data para localização.
 
@@ -439,25 +439,25 @@ Formatação de data para localização.
 
 > :new: Adicionado na versão 7.0+
 
-- **Tipo:** `NumberFormats`
+* **Tipo:** `NumberFormats`
 
-- **Somente leitura**
+* **Somente leitura**
 
 Os formatos para formatação de números da localização.
 
 #### missing
 
-- **Tipo:** `MissingHandler`
+* **Tipo:** `MissingHandler`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Manipulador para chaves de localização ausentes.
 
 #### formatter
 
-- **Tipo:** `Formatter`
+* **Tipo:** `Formatter`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Um método de formatação que implementa a interface `Formatter`.
 
@@ -465,9 +465,9 @@ Um método de formatação que implementa a interface `Formatter`.
 
 > 6.1+, :up: 8.13
 
-- **Tipo:** `Boolean | RegExp`
+* **Tipo:** `Boolean | RegExp`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Desative os avisos exibidos em erros de localização.
 
@@ -475,9 +475,9 @@ Desative os avisos exibidos em erros de localização.
 
 > :new: Adicionado na versão 8.8+, :up: 8.13
 
-- **Tipo:** `Boolean | RegExp`
+* **Tipo:** `Boolean | RegExp`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Desative os avisos de fallback quando a localização falha.
 
@@ -485,9 +485,9 @@ Desative os avisos de fallback quando a localização falha.
 
 > 8.5+
 
-- **Tipo:** `PluralizationRules`
+* **Tipo:** `PluralizationRules`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Um conjunto de regras de pluralização dependentes da localidade.
 
@@ -495,9 +495,9 @@ Um conjunto de regras de pluralização dependentes da localidade.
 
 > Adicionado na versão 8.7+
 
-- **Tipo:** `Boolean`
+* **Tipo:** `Boolean`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Se o elemento da diretiva `v-t` deve preservar o `textContent` após a diretiva ser removida do elemento.
 
@@ -505,15 +505,18 @@ Se o elemento da diretiva `v-t` deve preservar o `textContent` após a diretiva 
 
 > Adicionado na versão 8.11+
 
-- **Tipo:** `WarnHtmlInMessageLevel`
+* **Tipo:** `WarnHtmlInMessageLevel`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Permitir ou não o uso de formatação HTML em mensagens de localização.
 
-- Se você definir `warn` ou `error`, irá verificar as mensagens de localidade na instância VueI18n.
-- Se você definir `warn` um aviso será gerado no console.
-- Se você definir `error` gera o erro.
+
+Se você definir `warn` ou `error`, irá verificar as mensagens de localidade na instância VueI18n.
+
+Se você definir `warn` um aviso será gerado no console.
+
+Se você definir `error` gera o erro.
 
 O valor padrão na instância VueI18n é definido como `off`.
 
@@ -521,9 +524,9 @@ O valor padrão na instância VueI18n é definido como `off`.
 
 > Adicionado na versão 8.16+
 
-- **Tipo:** `PostTranslationHandler`
+* **Tipo:** `PostTranslationHandler`
 
-- **Leitura/Escrita**
+* **Leitura/Escrita**
 
 Um manipulador para o pós-processamento da tradução.
 
@@ -531,12 +534,12 @@ Um manipulador para o pós-processamento da tradução.
 
 #### getChoiceIndex
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{number} choice`
-  - `{number} choicesLength`
+  * `{number} choice`
+  * `{number} choicesLength`
 
-- **Retorno:** `finalChoice {number}`
+* **Retorno:** `finalChoice {number}`
 
 Obter um índice para pluralizar o número atual e o número de opções fornecido.
 A implementação pode ser substituída pela mutação do protótipo:
@@ -549,20 +552,20 @@ No entanto, na maioria dos casos, é suficiente passar a função desejada para 
 
 #### getLocaleMessage( locale )
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
+  * `{Locale} locale`
 
-- **Retorno:** `LocaleMessageObject`
+* **Retorno:** `LocaleMessageObject`
 
 Obtendo a mensagem da localidade.
 
 #### setLocaleMessage( locale, message )
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{LocaleMessageObject} message`
+  * `{Locale} locale`
+  * `{LocaleMessageObject} message`
 
 Defina a mensagem de localidade.
 
@@ -577,10 +580,10 @@ Se você definir `warn` ou `error` na propriedade `warnHtmlInMessage`, quando es
 
 > 6.1+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{LocaleMessageObject} message`
+  * `{Locale} locale`
+  * `{LocaleMessageObject} message`
 
 Mesclar as mensagens de localidade registradas com a mensagem de localidade.
 
@@ -593,36 +596,36 @@ Se você definir `warn` ou `error` na propriedade `warnHtmlInMessage`, quando es
 
 #### t( key, [locale], [values] )
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Path} key`: obrigatório
-  - `{Locale} locale`: opcional
-  - `{Array | Object} values`: opcional
+  * `{Path} key`: obrigatório
+  * `{Locale} locale`: opcional
+  * `{Array | Object} values`: opcional
 
-- **Retorno:** : `TranslateResult`
+* **Retorno:** : `TranslateResult`
 
 Semelhante à função retornada pelo método `$t`. Veja [$t](#t) para detalhes.
 
 #### tc( key, [choice], [values] )
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Path} key`: obrigatório
-  - `{number} choice`: opcional, padrão `1`
-  - `{string | Array | Object} values`: opcional
+  * `{Path} key`: obrigatório
+  * `{number} choice`: opcional, padrão `1`
+  * `{string | Array | Object} values`: opcional
 
-- **Retorno:** `TranslateResult`
+* **Retorno:** `TranslateResult`
 
 Semelhante à função retornada pelo método `$tc`. Veja [$tc](#tc) para detalhes.
 
 #### te( key, [locale] )
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{string} key`: obrigatório
-  - `{Locale} locale`: opcional
+  * `{string} key`: obrigatório
+  * `{Locale} locale`: opcional
 
-- **Retorno:** `boolean`
+* **Retorno:** `boolean`
 
 Verifica se a chave especificada existe nas mensagens de localização global. Se você especificar `locale`, a verificação será feita nas mensagens de `locale`.
 
@@ -630,11 +633,11 @@ Verifica se a chave especificada existe nas mensagens de localização global. S
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
+  * `{Locale} locale`
 
-- **Retorno:** `DateTimeFormat`
+* **Retorno:** `DateTimeFormat`
 
 Obtenha o formato de data e hora do local.
 
@@ -642,10 +645,10 @@ Obtenha o formato de data e hora do local.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{DateTimeFormat} format`
+  * `{Locale} locale`
+  * `{DateTimeFormat} format`
 
 Configurando formatos de formatação de data para localização.
 
@@ -653,10 +656,10 @@ Configurando formatos de formatação de data para localização.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{DateTimeFormat} format`
+  * `{Locale} locale`
+  * `{DateTimeFormat} format`
 
 Mescle os formatos de data e hora registrados com o formato de data e hora do local.
 
@@ -664,13 +667,13 @@ Mescle os formatos de data e hora registrados com o formato de data e hora do lo
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{number | Date} value`: obrigatório
-  - `{Path | Object} key`: opcional
-  - `{Locale | Object} locale`: opcional
+  * `{number | Date} value`: obrigatório
+  * `{Path | Object} key`: opcional
+  * `{Locale | Object} locale`: opcional
 
-- **Retorno:** `DateTimeFormatResult`
+* **Retorno:** `DateTimeFormatResult`
 
 Semelhante à função retornada pelo método `$d`. Veja [$d](#d) para detalhes.
 
@@ -678,11 +681,11 @@ Semelhante à função retornada pelo método `$d`. Veja [$d](#d) para detalhes.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
+  * `{Locale} locale`
 
-- **Retorno:** `NumberFormat`
+* **Retorno:** `NumberFormat`
 
 Obtenha o formato de número da localidade.
 
@@ -690,10 +693,10 @@ Obtenha o formato de número da localidade.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{NumberFormat} format`
+  * `{Locale} locale`
+  * `{NumberFormat} format`
 
 Defina o formato de número do local.
 
@@ -701,10 +704,10 @@ Defina o formato de número do local.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{Locale} locale`
-  - `{NumberFormat} format`
+  * `{Locale} locale`
+  * `{NumberFormat} format`
 
 Mescle os formatos de número registrados com o formato de número do local.
 
@@ -712,13 +715,13 @@ Mescle os formatos de número registrados com o formato de número do local.
 
 > :new: Adicionado na versão 7.0+
 
-- **Argumentos:**
+* **Argumentos:**
 
-  - `{number} value`: obrigatório
-  - `{Path | Object} format`: opcional
-  - `{Locale} locale`: opcional
+  * `{number} value`: obrigatório
+  * `{Path | Object} format`: opcional
+  * `{Locale} locale`: opcional
 
-- **Retorno:** `NumberFormatResult`
+* **Retorno:** `NumberFormatResult`
 
 Semelhante à função retornada pelo método `$n`. Veja [$n](#n) para detalhes.
 
@@ -728,25 +731,25 @@ Semelhante à função retornada pelo método `$n`. Veja [$n](#n) para detalhes.
 
 ### v-t
 
-- **Aguarda:** `string | Object`
+* **Aguarda:** `string | Object`
 
-- **Modificadores:**
+* **Modificadores:**
 
   * `.preserve`: (8.7.0+) preserva o `textContent` de um elemento quando a diretiva é desvinculada.
 
-- **Detalhes:**
+* **Detalhes:**
 
 Atualizar o `textContent` de um elemento que foi traduzido usando mensagens de localização. Você pode usar string ou sintaxe de objeto. A sintaxe da string pode ser especificada como o caminho para a mensagem de localização. Ao usar a sintaxe de objeto, você deve especificar as seguintes propriedades:
 
-    * path: obrigatório, chave da mensagem de localização
-    * locale: opcional, localização
-    * args: opcional, para lista ou formatação nomeada
+  * `path`: obrigatório, chave da mensagem de localização
+  * `locale`: opcional, localização
+  * `args`: opcional, para lista ou formatação nomeada
 
 :::tip NOTA
 O elemento `textContent` será limpo por padrão quando a diretiva `v-t` for desassociada. Isso pode ser uma situação indesejável quando usado dentro de [transições](https://br.vuejs.org/v2/guide/transitions.html). Para preservar os dados `textContent` após a desvinculação da diretiva, use o modificador `.preserve` ou a opção global [ `preserveDirectiveContent`](#preserveirectivecontent).
 :::
 
-- **Exemplos:**
+* **Exemplos:**
 
 ```html
 <!-- sintaxe de string: literal -->
@@ -765,7 +768,7 @@ O elemento `textContent` será limpo por padrão quando a diretiva `v-t` for des
 <p v-t.preserve="'foo.bar'"></p>
 ```
 
-- **Veja também:** [Diretiva personalizada para localização](../guide/directive.md)
+* **Veja também:** [Diretiva personalizada para localização](../guide/directive.md)
 
 ## Componentes
 
@@ -775,10 +778,10 @@ O elemento `textContent` será limpo por padrão quando a diretiva `v-t` for des
 
 #### Props:
 
-- `path {Path}`: obrigatório, caminho-chave de mensagens de localização
-- `locale {Locale}`: opcional, localização
-- `tag {string | boolean | Object}`: opcional, padrão `'span'`
-- `places {Array | Object}`: opcional (7.2+)
+* `path {Path}`: obrigatório, caminho-chave de mensagens de localização
+* `locale {Locale}`: opcional, localização
+* `tag {string | boolean | Object}`: opcional, padrão `'span'`
+* `places {Array | Object}`: opcional (7.2+)
 
 :::danger Atenção!
 A partir da próxima versão principal, a opção `places` será removida. Use a sintaxe de slot.
@@ -830,10 +833,10 @@ new Vue({
 
 #### Props:
 
-- `value {number}`: obrigatório, número para formatar
-- `format {string | NumberFormatOptions}`: opcional, nome de formato de número ou objeto com opções de formato explícito
-- `locale {Locale}`: opcional, localização
-- `tag {string | boolean | Object}`: opcional, padrão `'span'`
+* `value {number}`: obrigatório, número para formatar
+* `format {string | NumberFormatOptions}`: opcional, nome de formato de número ou objeto com opções de formato explícito
+* `locale {Locale}`: opcional, localização
+* `tag {string | boolean | Object}`: opcional, padrão `'span'`
 
 #### Usando:
 
