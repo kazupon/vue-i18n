@@ -2,7 +2,7 @@
 
 ## Nota de compatibilidade
 
-- Vue.js versões `2.0.0+`
+- Vue.js versões `2.0.0`+
 
 ## Download direto / CDN
 
