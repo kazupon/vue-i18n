@@ -7,7 +7,19 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 24px 0 24px 0;">
-  <h4>🥈 Silver Sponsors</h4>
+  <h4>🥇 Gold Sponsors</h4>
+  <a
+    href="https://nuxtjs.org/"
+    style="display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/nuxt.png"
+      style="display: inline-block; vertical-align: middle;"
+    />
+  </a>
+  <h4 style="padding: 12px 0 0 0;">🥈 Silver Sponsors</h4>
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
     style="width:320px; display: inline-block; vertical-align: middle;"

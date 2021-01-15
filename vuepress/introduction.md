@@ -10,12 +10,28 @@ Go to [Get Started](./started.md)
 
 ## Sponsors
 
+### 🥇 Gold
+
+<p style="text-align: center;">
+  <a
+    href="https://nuxtjs.org/"
+    style="display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/nuxt.png"
+      style="display: inline-block; vertical-align: middle;"
+    />
+  </a>
+</p>
+
 ### 🥈 Silver
 
 <p style="text-align: center;">
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="width:320px; display: inline-block; vertical-align: middle;"
+    style="width:300px; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >

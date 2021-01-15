@@ -12,12 +12,22 @@
 
 <br/>
 
+<h3 align="center">🥇 Gold Sponsors</h3>
+
+<p align="center">
+  <a href="https://nuxtjs.org/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/nuxt.png"
+    />
+  </a>
+</p>
+
 <h3 align="center">🥈 Silver Sponsors</h3>
 
 <p align="center">
   <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/dev/vuepress/.vuepress/public/patrons/babeledit.png"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/babeledit.png"
       width="320px"
     />
   </a>
