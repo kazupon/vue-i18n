@@ -766,7 +766,12 @@ export default class VueI18n {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
     }
-    this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message))
+    this._vm.$set(this._vm.messages, locale, merge(
+      typeof this._vm.messages[locale] !== 'undefined' && Object.keys(this._vm.messages[locale]).length
+        ? this._vm.messages[locale]
+        : {},
+      message
+    ))
   }
 
   getDateTimeFormat (locale: Locale): DateTimeFormat {
