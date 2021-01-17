@@ -133,7 +133,6 @@ new Vue({
   <span styles="font-weight: bold">1</span>
   <span styles="font-weight: bold">,</span>
   <span styles="font-weight: bold">234</span>
-  .
   <span styles="font-size: small">00</span>
 </span>
 ```
