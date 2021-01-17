@@ -151,15 +151,15 @@ You can add modifiers or overwrite the existing ones passing the `modifiers` opt
 ```javascript
 const i18n = new VueI18n({
   locale: 'en',
+  modifiers: {
+    // Adding a new modifier
+    snakeCase: (str) => str.split(' ').join('-')
+  },
   messages: {
     // ...
   },
-  modifiers: {
-    snakeCase: (str) => str.split(' ').join('-')
-  }
 })
 ```
-
 
 ### Grouping by brackets
 

@@ -121,9 +121,9 @@ Mensagens relacionadas podem ser formatadas com o modificador `@.modifier:key`
 
 Mensagens de localização a seguir:
 
-- `upper`: Letras maiúsculas em todos os caracteres na mensagem vinculada.
-- `lower`: Letras minúsculas em todos os caracteres na mensagem vinculada.
-- `capitalize`: Primeiro caractere em maiúsculo da mensagem vinculada.
+* `upper`: Letras maiúsculas em todos os caracteres na mensagem vinculada.
+* `lower`: Letras minúsculas em todos os caracteres na mensagem vinculada.
+* `capitalize`: Primeiro caractere em maiúsculo da mensagem vinculada.
 
 Mensagens de localização:
 
@@ -163,12 +163,12 @@ Você pode adicionar modificadores ou sobrescrever os existentes passando as op�
 ```js
 const i18n = new VueI18n({
   locale: 'pt',
-  messages: {
-    // ...
-  },
   modifiers: {
     // Adicionando um novo modificador
     snakeCase: str => str.split(' ').join('-')
+  },
+  messages: {
+    // ...
   },
 })
 ```
