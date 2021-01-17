@@ -131,7 +131,7 @@ const messages = {
 }
 ```
 Where the format is `0 things | things count ends with 1 | things count ends with 2-4 | things count ends with 5-9, 0 and teens (10-19)`.
-P.S. Slavic pluralization is a pain, you can read more about it [here](http://www.russianlessons.net/lessons/lesson11_main.php).
+P.S. Slavic pluralization is difficult, you can read more about it [here](http://www.russianlessons.net/lessons/lesson11_main.php).
 
 Your template still needs to use `$tc()`, not `$t()`:
 
