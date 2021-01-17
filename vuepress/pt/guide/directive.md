@@ -61,9 +61,7 @@ new Vue({
     }
   }),
   computed: {
-    nickName() {
-      return 'kazupon'
-    }
+    nickName() { return 'kazupon' }
   },
   data: { path: 'hello' }
 }).$mount('#object-syntax')
