@@ -12,20 +12,33 @@ DateTime formats the below:
 const dateTimeFormats = {
   'en-US': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric'
     }
   },
   'ja-JP': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
     }
   }
 }
@@ -58,7 +71,7 @@ Output the below:
 
 ```html
 <div id="app">
-  <p>Apr 19, 2017</p>
-  <p>2017年4月19日(水) 午前2:19</p>
+  <p>Jan 18, 2021</p>
+  <p>2021年1月18日日曜日 午前5:47</p>
 </div>
 ```

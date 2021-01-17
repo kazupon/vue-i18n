@@ -12,20 +12,33 @@ Formato de exemplo para DateTime:
 const dateTimeFormats = {
   'en-US': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'long', day: 'numeric',
-      weekday: 'long', hour: 'numeric', minute: 'numeric'
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric'
     }
   },
   'pt-BR': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'long', day: 'numeric',
-      weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
     }
   }
 }
@@ -58,7 +71,7 @@ O resultado será o seguinte:
 
 ```html
 <div id="app">
-  <p>12 de jan. de 2021</p>
-  <p>terça-feira, 12 de janeiro de 2021 1:12 AM</p>
+  <p>Jan 18, 2021</p>
+  <p>domingo, 18 de janeiro de 2021 5:49 AM</p>
 </div>
 ```

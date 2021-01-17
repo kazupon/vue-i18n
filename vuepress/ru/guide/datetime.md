@@ -18,11 +18,27 @@ const dateTimeFormats = {
     },
     long: {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric',
-      weekday: 'short',
+      weekday: 'long',
       hour: 'numeric',
       minute: 'numeric'
+    }
+  },
+  'pt-BR': {
+    short: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    },
+    long: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
     }
   }
 }
@@ -47,7 +63,7 @@ new Vue({
 ```html
 <div id="app">
   <p>{{ $d(new Date(), 'short') }}</p>
-  <p>{{ $d(new Date(), 'long', 'ru-RU') }}</p>
+  <p>{{ $d(new Date(), 'long', 'pt-BR') }}</p>
 </div>
 ```
 
@@ -55,7 +71,7 @@ new Vue({
 
 ```html
 <div id="app">
-  <p>Apr 19, 2017</p>
-  <p>2017年4月19日(水) 午前2:19</p>
+  <p>Jan 18, 2021</p>
+  <p>domingo, 18 de janeiro de 2021 5:47 AM</p>
 </div>
 ```
