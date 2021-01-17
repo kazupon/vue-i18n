@@ -6,7 +6,7 @@ If you are building Vue component or Vue application using single file component
 
 The following in [single file components example](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
-```js
+```vue
 <i18n>
 {
   "en": {
@@ -200,7 +200,7 @@ mix.i18n()
 
 the `i18n` custom blocks below of `YAML` format:
 
-```html
+```vue
 <i18n>
 en:
   hello: "hello world!"
@@ -260,7 +260,7 @@ module.exports = {
 
 You can use locale messages with multiple `i18n` custom blocks.
 
-```html
+```vue
 <i18n src="./common/locales.json"></i18n>
 <i18n>
   {
@@ -284,8 +284,7 @@ When using `vue-i18n` with `scoped style`, it's important to remember to use a [
 
 __Translation contains only text__ (Work without deep selector)
 
-```html
-...
+```vue
 <i18n>
 {
   "en": {
@@ -296,24 +295,24 @@ __Translation contains only text__ (Work without deep selector)
   }
 }
 </i18n>
-...
+
 <template>
   <div class="parent">
     <p>message: {{ $t('hello') }}</p>
   </div>
 </template>
-...
+
 <!-- Will work -->
-<style>
-.parent p {
-  color: #42b883;
-}
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
 </style>
 ```
 
 __Translation with HTML element__ (Must use deep selector)
-```html
-...
+
+```vue
 <i18n>
 {
   "en": {
@@ -324,37 +323,57 @@ __Translation with HTML element__ (Must use deep selector)
   }
 }
 </i18n>
-...
+
 <template>
   <div class="parent">
     <p v-html="$t('hello')"></p>
   </div>
 </template>
-...
-<!-- Won't work -->
-<style>
-.parent p {
-  color: #42b883;
-}
 
-.parent p span{
-  color: red;
-}
+<!-- Won't work -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p span {
+    color: red;
+  }
 </style>
 
-<!-- Will work -->
-<style>
-.parent p {
-  color: #42b883;
-}
+<!-- Will work >>> -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
 
-.parent p >>> span{
-  color: red;
-}
+  .parent p >>> span {
+    color: red;
+  }
+</style>
+
+<!-- Will work /deep/ -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p /deep/ span {
+    color: red;
+  }
+</style>
+
+<!-- Will work ::v-deep -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  ::v-deep .parent p span {
+    color: red;
+  }
 </style>
 ```
-
-
 
 ## Custom blocks in functional component
 
@@ -362,7 +381,7 @@ If the single file components have the template using a functional component, an
 
 For example, the following code cannot localize with the locale message of `i18n` custom block.
 
-```html
+```vue
 <i18n>
 {
   "en": {
