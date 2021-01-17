@@ -61,14 +61,6 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   <sponsor-button />
 </div>
 
-<div class="patreon" style="padding: 0 0 24px 0;">
-  <p style="text-align: center;">
-    <a href="https://www.patreon.com/kazupon" target="_blank">
-      <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
-    </a>
-  </p>
-</div>
-
 <div class="features">
   <div class="feature">
     <h2>简单</h2>
