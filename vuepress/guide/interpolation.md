@@ -87,7 +87,9 @@ the following output:
 
 About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
 
-The children of `i18n` functional component are interpolated with locale message of `path` prop. In the above example,
+The children of `i18n` functional component are interpolated with locale message of `path` prop.
+
+In the above example:
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
