@@ -1,13 +1,12 @@
 # Fallback Localização
 
-* Resumo: Use `fallbackLocale: '<lang>'` para escolher qual idioma usar quando seu idioma preferido não tiver uma tradução. *
+*Resumo: Use `fallbackLocale: '<lang>'` para escolher qual idioma usar quando seu idioma preferido não tiver uma tradução.*
 
 ## Fallback implícito usando localidades
 
 Se um `locale` é fornecido contendo um território e um dialeto opcional, o fallback implícito é ativado automaticamente.
 
 Por exemplo, para `de-DE-bavarian` o seguinte será considerado como fallback:
-
 1. `de-DE-bavarian`
 2. `de-DE`
 3. `de`
@@ -24,7 +23,7 @@ const messages = {
     hello: 'Hello, world!'
   },
   pt: {
-    // Localizacao sem tradução para `hello`
+    // Localização sem tradução para `hello`
   }
 }
 ```
