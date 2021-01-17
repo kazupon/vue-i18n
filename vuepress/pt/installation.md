@@ -2,7 +2,7 @@
 
 ## Nota de compatibilidade
 
-- Vue.js versões `2.0.0+`
+- Vue.js versões `2.0.0`+
 
 ## Download direto / CDN
 
@@ -82,4 +82,4 @@ npm run build  # ou `yarn run build`
 - **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: VueI18n desde a versão 8.11 fornece duas compilações de Módulos ES (ESM):
 
   - ESM para sistemas de compilação: projetado para uso com sistemas de compilação modernos, como [webpack 2](https://webpack.js.org) ou [Rollup](https://rollupjs.org/). O formato ESM é projetado para análise estática para que os sistemas de construção possam realizar uma "agitação de árvore" e remover o código não utilizado no pacote final. O arquivo padrão para esses sistemas de construção (`pkg.module`) é a construção do Módulo ES somente em tempo de execução (`vue-i18n.esm.js`).
-  - ESM para navegadores (apenas para 8.11+, `vue-i18n.esm.browser.js`): destinado a importações diretas em navegadores modernos usando a tag `<script type = "module">`.
+  - ESM para navegadores (apenas para 8.11+, `vue-i18n.esm.browser.js`): destinado a importações diretas em navegadores modernos usando a tag `<script type="module">`.

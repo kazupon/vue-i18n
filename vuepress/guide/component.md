@@ -92,6 +92,7 @@ Sometimes you may want to import shared locale messages for certain components, 
 You can use `sharedMessages` options of `i18n`.
 
 Common Locale Messages example:
+
 ```js
 export default {
   en: {
@@ -121,7 +122,9 @@ export default {
         <p>This is good service</p>
       </div>
       <div class="footer">
-        <button type="button">{{ $t('buttons.save') }}</button>
+        <button type="button">
+          {{ $t('buttons.save') }}
+        </button>
       </div>
     </div>
   `,
@@ -137,16 +140,13 @@ If `sharedMessages` option is specified along with the `messages` option, those 
 
 ## Translation in functional component
 
-When using a functional component, all data (including props, children, slots, parent, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
+When using a functional component, all data (including `props`, `children`, `slots`, `parent`, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
 
 ```html
 ...
 <div>
-  <a
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer">
-    <img src="" :alt="parent.$t('message.hello')">
+  <a href="#" target="_blank" rel="noopener noreferrer">
+    <img src="./assets/example.jpg" :alt="parent.$t('message.hello')">
   </a>
 </div>
 ...

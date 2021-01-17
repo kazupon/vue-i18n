@@ -121,8 +121,8 @@ module.exports = {
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
       .use('i18n')
-      .loader('@kazupon/vue-i18n-loader')
-      .end()
+        .loader('@kazupon/vue-i18n-loader')
+        .end()
   }
 }
 ```
@@ -229,11 +229,11 @@ module.exports = {
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
       .use('i18n')
-      .loader('@kazupon/vue-i18n-loader')
-      .end()
+        .loader('@kazupon/vue-i18n-loader')
+        .end()
       .use('yaml')
-      .loader('yaml-loader')
-      .end()
+        .loader('yaml-loader')
+        .end()
   }
 }
 ```
@@ -313,7 +313,7 @@ __Quando a tradução contém apenas texto__ (funciona sem deep selector)
 </template>
 
 <!-- Vai funcionar por exemplo -->
-<style>
+<style scoped>
   .parent p {
     color: #42b883;
   }
@@ -341,7 +341,7 @@ __Tradução que contém elemento HTML__ (deve usar deep selector)
 </template>
 
 <!-- Não vai funcionar por exemplo -->
-<style>
+<style scoped>
   .parent p {
     color: #42b883;
   }
@@ -351,13 +351,35 @@ __Tradução que contém elemento HTML__ (deve usar deep selector)
   }
 </style>
 
-<!-- Vai funcionar por exemplo -->
-<style>
+<!-- Vai funcionar por exemplo >>> -->
+<style scoped>
   .parent p {
     color: #42b883;
   }
 
   .parent p >>> span {
+    color: red;
+  }
+</style>
+
+<!-- Vai funcionar por exemplo /deep/ -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p /deep/ span {
+    color: red;
+  }
+</style>
+
+<!-- Vai funcionar por exemplo ::v-deep -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  ::v-deep .parent p span {
     color: red;
   }
 </style>

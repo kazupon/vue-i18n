@@ -84,6 +84,58 @@ new Vue({
 
 如果你希望在组件语言环境中进行本地化，可以在 `i18n` 选项中用 `sync: false` 和 `locale`。
 
+## 组件的共享语言环境消息
+
+有时您可能想为某些组件导入共享的语言环境消息，而不是从全局语言环境消息（例如，组件某些功能的常用消息）回退。
+
+您可以使用 `i18n` 的 `sharedMessages` 选项。
+
+通用语言环境消息示例：
+
+```js
+export default {
+  en: {
+    buttons: {
+      save: "Save",
+      // ...
+    }
+  },
+  ja: {
+    buttons: {
+      save: "保存",
+      // ...
+    }
+  }
+}
+```
+
+Components:
+```js
+import commonMessage from './locales/common' // 导入通用语言环境消息
+
+export default {
+  name: 'ServiceModal',
+  template: `
+    <div class="modal">
+      <div class="body">
+        <p>This is good service</p>
+      </div>
+      <div class="footer">
+        <button type="button">
+          {{ $t('buttons.save') }}
+        </button>
+      </div>
+    </div>
+  `,
+  i18n: {
+    messages: { ... },
+    sharedMessages: commonMessages
+  }
+}
+```
+
+如果将 `sharedMessages` 选项与 `messages` 选项一起指定，则这些消息将被合并为语言环境消息，并进入目标组件的VueI18n实例。
+
 ## 函数式组件的翻译
 
 使用函数式组件时，所有数据 (包括 prop、子内容、插槽、父级内容等) 都通过包含属性的 `context` 传递，并且它无法识别 `this` 的范围，因此在函数式组件上使用 vue-i18n 时，你必须将 `$t` 称为 `parent.$t`，请查看以下示例：
@@ -91,11 +143,8 @@ new Vue({
 ```html
 ...
 <div>
-  <a
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer">
-    <img src="" :alt="parent.$t('message.hello')">
+  <a href="#" target="_blank" rel="noopener noreferrer">
+    <img src="./assets/example.jpg" :alt="parent.$t('message.hello')">
   </a>
 </div>
 ...

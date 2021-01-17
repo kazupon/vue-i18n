@@ -2,6 +2,8 @@
 
 你可以使用复数进行翻译。你必须定义具有管道 `|` 分隔符的语言环境，并在管道分隔符中定义复数。
 
+*您的模板将需要使用 `$tc()` 而不是 `$t()`。
+
 语言环境信息如下：
 
 ```js
@@ -75,23 +77,23 @@ const messages = {
 
 ## 自定义复数
 
-Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
+但是，这种多元化并不适用于所有语言（例如，斯拉夫语言具有不同的多元化规则）。
 
-In order to implement these rules you can pass an optional `pluralizationRules` object into `VueI18n` constructor options.
+为了实现这些规则，您可以将可选的 `pluralizationRules` 对象传递给`VueI18n` 构造函数选项。
 
-Very simplified example using rules for Slavic languages (Russian, Ukrainian, etc.):
+使用针对斯拉夫语言（俄语，乌克兰语等）的规则的非常简化的示例：
 ```js
 new VueI18n({
-  // Key - language to use the rule for, `'ru'`, in this case
-  // Value - function to choose right plural form
+  // Key - 在这种情况下，用于规则 `'ru'` 的语言
+  // Value - 选择正确的复数形式的功能
   pluralizationRules: {
     /**
-     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-     * @param choicesLength {number} an overall amount of available choices
-     * @returns a final choice index to select plural word by
+     * @param choice {number} 输入给$的选择索引 $tc：`$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} 可用选择总数
+     * @returns 最终选择索引以选择复数单词
      */
     'ru': function(choice, choicesLength) {
-      // this === VueI18n instance, so the locale property also exists here
+      // this === VueI18n 实例，因此本地属性也存在于此
 
       if (choice === 0) {
         return 0;
@@ -116,7 +118,7 @@ new VueI18n({
 })
 ```
 
-This would effectively give this:
+这将有效地实现以下目的：
 
 ```javascript
 const messages = {
@@ -126,8 +128,8 @@ const messages = {
   }
 }
 ```
-Where the format is `0 things | things count ends with 1 | things count ends with 2-4 | things count ends with 5-9, 0 and teens (10-19)`.
-P.S. Slavic pluralization is a pain, you can read more about it [here](http://www.russianlessons.net/lessons/lesson11_main.php).
+格式在哪里 `0 东西 | 事情以结尾结束 1 | 事情以结尾结束 2-4 | 事情以结尾结束 5-9, 0 和青少年 (10-19)`.
+附言 斯拉夫多元化是困难的，您可以阅读有关它的更多信息 [这里](http://www.russianlessons.net/lessons/lesson11_main.php).
 
 你的模板仍然需要使用 `$tc()`，而不是 `$t()` ：
 
@@ -159,6 +161,6 @@ P.S. Slavic pluralization is a pain, you can read more about it [here](http://ww
 <p>31 банан</p>
 ```
 
-### Default pluralization
+### 默认多元
 
-If your current locale is not found in a pluralization map, the [default](#pluralization) rule of the english language will be used.
+如果在多元化地图中找不到您当前的语言环境，则将使用英语的 [默认](#复数) 规则。

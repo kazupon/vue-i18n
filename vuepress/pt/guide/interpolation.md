@@ -91,12 +91,12 @@ O resultado será o seguinte:
 
 Mais detalhes sobre o exemplo acima, veja o [exemplo](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
 
-Descendentes do componente funcional `i18n` interpola mensagens de localização pelo caminho do parâmetro de `path`. No exemplo acima,
+Descendentes do componente funcional `i18n` interpola mensagens de localização pelo caminho do parâmetro de `path`.
 
+No exemplo acima:
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
-
 interpolado com o `term` da mensagem de localização.
 
 No exemplo acima, a interpolação de componentes usa **formatação de lista**. Os descendentes do componente da função `i18n` são interpolados na ordem em que aparecem.

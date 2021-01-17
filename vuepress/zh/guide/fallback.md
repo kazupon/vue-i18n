@@ -1,5 +1,20 @@
 # 回退本地化
 
+*总结：使用`fallbackLocale：'<lang>'`选择首选语言缺少翻译时要使用的语言。*
+
+## 使用语言环境的隐式回退
+
+如果给出的 `locale` 包含领土和可选的方言，则隐式回退将自动激活。
+
+例如，对于 `de-DE-bavarian`，以下内容将被视为备用：
+1. `de-DE-Bavarian`
+2. `de-DE`
+3. `de`
+
+要禁止自动回退，请添加后缀感叹号 `!`，例如 `de-DE!`。
+
+# 具有一个语言环境的显式回退
+
 以下语言环境信息的 `ja` 语言环境中不存在 `message` 键：
 
 ```js
@@ -8,6 +23,7 @@ const messages = {
     message: 'hello world'
   },
   ja: {
+    // 没有翻译的本地化 `hello`
   }
 }
 ```
@@ -80,7 +96,7 @@ const i18n = new VueI18n({
 })
 ```
 
-当模板`template`如下时：
+模板如下：
 
 ```html
 <p>{{ $t('Hello {name}', { name: 'John' }}) }}</p>

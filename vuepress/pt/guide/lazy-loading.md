@@ -7,7 +7,7 @@ Lazy loading (carregamento lento) ou carregamento assíncrono de arquivos de tra
 Suponde que temos um diretório de projeto com a seguinte estrutura:
 
 ```
-our-cool-project
+nosso-projeto-legal
 -dist
 -src
 --routes

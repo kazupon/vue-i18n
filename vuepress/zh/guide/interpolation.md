@@ -3,7 +3,7 @@
 ## 基本用法
 
 :::tip 支持版本
-:new: 7.0 新增
+:new: 7.0+ 新增
 :::
 
 有时，我们需要使用包含 HTML 标签或组件的语言环境信息进行本地化。例如：
@@ -86,7 +86,9 @@ new Vue({
 
 关于上面的例子，见[示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation)
 
-`i18n` 函数式组件的子元素用 `path` 属性的语言环境信息进行插值。在上面的例子中，
+`i18n` 函数式组件的子元素用 `path` 属性的语言环境信息进行插值。
+
+在上面的例子中:
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
@@ -97,7 +99,7 @@ new Vue({
 ## 高级用法
 
 :::tip 支持版本
-:new: 7.2 新增
+:new: 7.2+ 新增
 :::
 :::warning 提示
 :warning: 在 `i18n` 组件中，仅包含空格的文本内容将被省略。

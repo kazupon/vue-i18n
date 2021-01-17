@@ -25,6 +25,7 @@ Component based localization option.
     * `{Path} key`: required
     * `{Locale} locale`: optional
     * `{Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
@@ -43,6 +44,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number} choice`: optional, default 1
     * `{Locale} locale`: optional
     * `{string | Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of $t.
@@ -57,6 +59,7 @@ Note that you need to guarantee this context equal to component instance in life
 
     * `{Path} key`: required
     * `{Locale} locale`: optional
+
   * **Return:** `boolean`
 
 Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
@@ -74,6 +77,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number | Date} value`: required
     * `{Path | Object} key`: optional
     * `{Locale | Object} locale`: optional
+
   * **Return:** `DateTimeFormatResult`
 
 Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
@@ -93,6 +97,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number} value`: required
     * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
+
   * **Return:** `NumberFormatResult`
 
 Localize the number of `value` with number format of `format`. The number format of `format` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
@@ -315,6 +320,7 @@ If you use regular expression, you can suppress the fallback warnings that it ma
     {
       // Key - locale for the rule to be applied to.
       // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word. (See getChoiceIndex for details)
+      'pt': function(choice, choiceIndex) => Number/* index of the plural word */;
       'ru': function(choice, choiceIndex) => Number/* index of the plural word */;
       'en': function(choice, choiceIndex) => Number/* index of the plural word */;
       'jp': function(choice, choiceIndex) => Number/* index of the plural word */;
@@ -511,6 +517,7 @@ Whether to allow the use locale messages of HTML formatting.
 If you set `warn` or` error`, will check the locale messages on the VueI18n instance.
 
 If you are specified `warn`, a warning will be output at console.
+
 If you are specified `error` will occurred an Error.
 
 In VueI18n instance, set the `off` as default.
@@ -530,6 +537,7 @@ A handler for post processing of translation.
 #### getChoiceIndex
 
   * **Arguments:**
+
     * `{number} choice`
     * `{number} choicesLength`
 
@@ -549,6 +557,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `LocaleMessageObject`
 
 Get the locale message of locale.
@@ -592,6 +601,7 @@ If you set `warn` or` error` in the `warnHtmlInMessage` property, when this meth
     * `{Path} key`: required
     * `{Locale} locale`: optional
     * `{Array | Object} values`: optional
+
   * **Return:** : `TranslateResult`
 
 This is the same as the `Function` returned with `$t` method. More detail see [$t](#t).
@@ -603,6 +613,7 @@ This is the same as the `Function` returned with `$t` method. More detail see [$
     * `{Path} key`: required
     * `{number} choice`: optional, default `1`
     * `{string | Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 This is the same as the `Function` returned `$tc` method. More detail see [$tc](#tc).
@@ -613,6 +624,7 @@ This is the same as the `Function` returned `$tc` method. More detail see [$tc](
 
     * `{string} key`: required
     * `{Locale} locale`: optional
+
   * **Return:** `boolean`
 
 Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
@@ -624,6 +636,7 @@ Check whether key path exists in global locale message. If you specified `locale
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `DateTimeFormat`
 
 Get the datetime format of locale.
@@ -659,6 +672,7 @@ Merge the registered datetime formats with the datetime format of locale.
     * `{number | Date} value`: required
     * `{Path | Object} key`: optional
     * `{Locale | Object} locale`: optional
+
   * **Return:** `DateTimeFormatResult`
 
 This is the same as `$d` method of Vue instance method. More detail see [$d](#d).
@@ -670,6 +684,7 @@ This is the same as `$d` method of Vue instance method. More detail see [$d](#d)
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `NumberFormat`
 
 Get the number format of locale.
@@ -705,6 +720,7 @@ Merge the registered number formats with the number format of locale.
     * `{number} value`: required
     * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
+
   * **Return:** `NumberFormatResult`
 
 This is the same as `$n` method of Vue instance method. More detail see [$n](#n).
@@ -725,14 +741,16 @@ This is the same as `$n` method of Vue instance method. More detail see [$n](#n)
 
 Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
 
-    * path: required, key of locale messages
-    * locale: optional, locale
-    * args: optional, for list or named formatting
+  * `path`: required, key of locale messages
+  * `locale`: optional, locale
+  * `args`: optional, for list or named formatting
 
 :::tip NOTE
 The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
 :::
+
   * **Examples:**
+
 ```html
 <!-- string syntax: literal -->
 <p v-t="'foo.bar'"></p>

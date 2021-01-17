@@ -10,21 +10,22 @@ sidebar: auto
 
 #### i18n
 
-  * **类型：**`I18nOptions`
+  * **类型：** `I18nOptions`
 
 基于组件的本地化选项
 
-  * **请参阅：**`VueI18n` 类构造函数选项
+  * **请参阅：** `VueI18n` 类构造函数选项
 
 ### Vue 注入方法
 
 #### $t
 
-  * **参数：**
+  * **参数**
 
     * `{Path} key`：必填
     * `{Locale} locale`：可选
     * `{Array | Object} values`：可选
+
   * **返回值：**`TranslateResult`
 
 本地化语言环境信息 `key`，在本地化时组件的语言环境信息优先于全局语言环境信息。如果未指定组件的语言环境信息，就使用全局语言环境信息进行本地化。如果你指定了 `locale` 参数，则使用 `locale` 提供的语言环境进行本地化。如果你为列表/格式化的语言环境信息指定了 `key`，就必须同时指定 `values`。有关 `values` 的详细信息，请参阅[格式化](../guide/formatting.md)。
@@ -41,6 +42,7 @@ sidebar: auto
     * `{number} choice`：可选，默认为 1
     * `{Locale} locale`：可选
     * `{string | Array | Object} values`：可选
+
   * **返回值：**`TranslateResult`
 
 以复数形式将语言环境信息 `key` 本地化。在本地化时组件的语言环境信息优先于全局语言环境信息。如果未指定组件的语言环境信息，就使用全局语言环境信息进行本地化。如果你指定了 `locale` 参数，则使用 `locale` 提供的语言环境进行本地化。如果将 `values` 指定为字符串，则该字符串会作为语言环境信息进行本地化。如果将 `values` 指定为 Array 或 Object，则格式必须为 `$t` 的 `values`。
@@ -55,6 +57,7 @@ sidebar: auto
 
     * `{Path} key`：必填
     * `{Locale} locale`：可选
+
   * **返回值：**`boolean`
 
 检查 key 是否存在。在 Vue 实例中，如果未指定组件语言环境信息，则使用全局语言环境信息。如果指定了 `locale`，则使用 `locale` 的语言环境。
@@ -65,13 +68,14 @@ sidebar: auto
 
 #### $d
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{number | Date} value`：必填
     * `{Path | Object} key`：可选
     * `{Locale | Object} locale`：可选
+
   * **返回值：**`DateTimeFormatResult`
 
 将日期时间 `value` 以 `key` 的格式本地化。日期时间格式 `key` 需要注册到 `VueI18n` 类的 `dateTimeFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
@@ -84,13 +88,14 @@ sidebar: auto
 
 #### $n
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{number} value`：必填
     * `{Path | Object} key`：可选
     * `{Locale} locale`：可选
+
   * **返回值：**`NumberFormatResult`
 
 将数字 `value` 以 `key` 的格式本地化。数字格式 `key` 需要注册到 `VueI18n` 类的 `numberFormats` 选项，并依赖于 `VueI18n` 构造函数的 `locale` 选项。如果要指定 `locale` 参数，它将优先于 `VueI18n` 构造函数的 `locale` 选项。
@@ -145,7 +150,7 @@ vue-i18n 版本
 
 #### 可用性
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **类型：**`IntlAvailability`
 
@@ -187,7 +192,7 @@ vue-i18n 版本
 
 #### dateTimeFormats
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **类型：**`DateTimeFormats`
 
@@ -199,7 +204,7 @@ vue-i18n 版本
 
 #### numberFormats
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **类型：**`NumberFormats`
 
@@ -211,7 +216,7 @@ vue-i18n 版本
 
 #### availableLocales
 
-> :new: 8.9.0 新增
+> :new: 8.9.0+ 新增
 
   * **类型：**`Locale[]`
 
@@ -261,7 +266,7 @@ vue-i18n 版本
 
 #### silentTranslationWarn
 
-> 6.1 新增
+> 6.1+ 新增
 
   * **类型：**`Boolean`
 
@@ -295,6 +300,7 @@ vue-i18n 版本
     {
       // Key - locale for the rule to be applied to.
       // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word. (See getChoiceIndex for details)
+      'pt': function(choice, choiceIndex) => Number/* index of the plural word */;
       'ru': function(choice, choiceIndex) => Number/* index of the plural word */;
       'en': function(choice, choiceIndex) => Number/* index of the plural word */;
       'jp': function(choice, choiceIndex) => Number/* index of the plural word */;
@@ -303,7 +309,7 @@ vue-i18n 版本
 
 #### preserveDirectiveContent
 
-> 8.7 新增
+> 8.7+ 新增
 
   * **类型：**`Boolean`
 
@@ -339,7 +345,7 @@ vue-i18n 版本
 
 #### dateTimeFormats
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **类型：**`DateTimeFormats`
 
@@ -349,7 +355,7 @@ vue-i18n 版本
 
 #### numberFormats
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **类型：**`NumberFormats`
 
@@ -395,7 +401,7 @@ A set of locale-dependent rules for word pluralization.
 
 #### preserveDirectiveContent
 
-> 8.7 新增
+> 8.7+ 新增
 
   * **类型：**`boolean`
 
@@ -408,6 +414,7 @@ A set of locale-dependent rules for word pluralization.
 #### getChoiceIndex
 
   * **参数：**
+
     * `{number} choice`
     * `{number} choicesLength`
 
@@ -426,6 +433,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
   * **参数：**
 
     * `{Locale} locale`
+
   * **返回值：**`LocaleMessageObject`
 
 获取语言环境的 `locale` 信息。
@@ -441,7 +449,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 #### mergeLocaleMessage( locale, message )
 
-> 6.1 新增
+> 6.1+ 新增
 
   * **参数：**
 
@@ -457,6 +465,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
     * `{Path} key`：必填
     * `{Locale} locale`：可选
     * `{Array | Object} values`：可选
+
   * **返回值：**：`TranslateResult`
 
 这与 `$t` 方法返回的 `Function` 相同。更多细节见[$t](#t)。
@@ -468,6 +477,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
     * `{Path} key`：必填
     * `{number} choice`：可选，默认为 1
     * `{string | Array | Object} values`：可选
+
   * **返回值：**`TranslateResult`
 
 这与 `$tc` 方法返回的 `Function` 相同。更多细节见[$tc](#tc)。
@@ -478,24 +488,26 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
     * `{string} key`：必填
     * `{Locale} locale`：可选
+
   * **返回值：**`boolean`
 
 检查全局语言环境信息中是否存在键名路径。如果指定了 `locale`，请检查语言环境信息 `locale`。
 
 #### getDateTimeFormat ( locale )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{Locale} locale`
+
   * **返回值：**`DateTimeFormat`
 
 获取语言环境的日期时间格式。
 
 #### setDateTimeFormat ( locale, format )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
@@ -506,7 +518,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 #### mergeDateTimeFormat ( locale, format )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
@@ -517,31 +529,33 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 #### d( value, [key], [locale] )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{number | Date} value`：必填
     * `{Path | Object} key`：可选
     * `{Locale | Object} locale`：可选
+
   * **返回值：**`DateTimeFormatResult`
 
 这与 Vue 实例方法的 `$d` 方法相同。更多细节见[$d](#d)。
 
 #### getNumberFormat ( locale )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{Locale} locale`
+
   * **返回值：**`NumberFormat`
 
 获取语言环境的数字格式。
 
 #### setNumberFormat ( locale, format )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
@@ -552,7 +566,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 #### mergeNumberFormat ( locale, format )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
@@ -563,20 +577,21 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 #### n( value, [key], [locale] )
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
   * **参数：**
 
     * `{number} value`：必填
     * `{Path | Object} key`：可选
     * `{Locale} locale`：可选
+
   * **返回值：**`NumberFormatResult`
 
 这与 Vue 实例方法的 `$n` 方法相同。更多细节见[$n](#n)。
 
 ## 指令
 
-> :new: 7.3 新增
+> :new: 7.3+ 新增
 
 ### v-t
 
@@ -590,9 +605,9 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 更新使用语言环境信息进行本地化的元素 `textContent`。你可以使用字符串语法或对象语法。字符串语法可以指定为语言环境信息的关键字路径。如果可以使用对象语法，则需要将以下参数指定为对象键：
 
-    * `path`：必填，语言环境信息的关键字
-    * `locale`：可选，语言环境
-    * `args`：可选，用于列表或命名格式
+  * `path`：必填，语言环境信息的关键字
+  * `locale`：可选，语言环境
+  * `args`：可选，用于列表或命名格式
 
 ::::tip 注意
 当 `v-t` 指令解除绑定时，默认情况下将清除元素 `textContent`。在[过渡动画](https://cn.vuejs.org/v2/guide/transitions.html)内部使用的时候，可能出现不合预期的情况。为了在指令解除绑定之后保留 `textContent` 数据，可使用 `.preserve` 修饰符或全局的 [`preserveDirectiveContent` 选项](#preservedirectivecontent)。
@@ -621,7 +636,7 @@ However, for most usages [pluralizationRules constructor option](#pluralizationr
 
 ### i18n 函数式组件
 
-> :new: 7.0 新增
+> :new: 7.0+ 新增
 
 #### 参数：
 
@@ -673,7 +688,7 @@ new Vue({
 
 ### place
 
-> :new: 7.2 新增
+> :new: 7.2+ 新增
 
 #### 预期：`{number | string}`
 

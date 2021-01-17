@@ -145,7 +145,7 @@ Ao usar um componente funcional, todos os dados (incluindo `props`, `children`, 
 ...
 <div>
   <a href="#" target="_blank" rel="noopener noreferrer">
-    <img src="" :alt="parent.$t('message.hello')" />
+    <img src="./assets/example.jpg" :alt="parent.$t('message.hello')" />
   </a>
 </div>
 ...

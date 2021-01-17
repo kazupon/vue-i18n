@@ -44,7 +44,7 @@
 ```js
 const i18n = new VueI18n({
   // ...
-  missing: (locale, key, vm) => {
+  missing: (locale, key, vm, values) => {
     // 处理翻译缺失
   },
   // ...
@@ -52,11 +52,11 @@ const i18n = new VueI18n({
 const app = new Vue({ i18n }).$mount('#app')
 
 // 改变丢失的处理函数
-i18n.missing = (locale, key, vm) => {
+i18n.missing = (locale, key, vm, values) => {
   // 处理翻译缺失
 }
 // or
-app.$i18n.missing = (locale, key, vm) => {
+app.$i18n.missing = (locale, key, vm, values) => {
   // 处理翻译缺失
 }
 ```
@@ -209,7 +209,7 @@ const Component1 = {
   i18n: {
     messages: {
       en: {
-        title: 'Title1'
+        title: 'Title 1'
       }
     }
   }

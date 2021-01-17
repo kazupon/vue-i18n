@@ -43,7 +43,7 @@ O resultado será o seguinte:
 
 ## Acessando o número por meio do argumento predefinido
 
-Não há necessidade de passar explicitamente o número para pluralização. Em mensagens de localização, um número está disponível através dos argumentos nomeados `{contagem}` e/ou `{n}`. Você pode substituí-los, se desejar.
+Não há necessidade de passar explicitamente o número para pluralização. Em mensagens de localização, um número está disponível através dos argumentos nomeados `{count}` e/ou `{n}`. Você pode substituí-los, se desejar.
 
 Mensagens locais abaixo:
 
@@ -137,6 +137,7 @@ const messages = {
 ```
 
 Onde o formato é `0 coisas | número de itens termina em 1 | o número de coisas que termina em 2-4 | o número de coisas que termina com 5-9, 0 e o número coisas que termina de 11 a 19`.
+P.S. A pluralização eslava é complexa, você pode ler mais sobre isso [aqui](http://www.russianlessons.net/lessons/lesson11_main.php).
 
 No template, você ainda precisa usar `$tc()` em vez de `$t()`:
 

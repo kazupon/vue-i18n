@@ -12,12 +12,15 @@ Number formats the below:
 const numberFormats = {
   'en-US': {
     currency: {
-      style: 'currency', currency: 'USD'
+      style: 'currency',
+      currency: 'USD'
     }
   },
   'ja-JP': {
     currency: {
-      style: 'currency', currency: 'JPY', currencyDisplay: 'symbol'
+      style: 'currency',
+      currency: 'JPY',
+      currencyDisplay: 'symbol'
     }
   }
 }
@@ -121,7 +124,6 @@ It is possible to specify multiple scoped slots at the same time:
   <span styles="font-weight: bold">1</span>
   <span styles="font-weight: bold">,</span>
   <span styles="font-weight: bold">234</span>
-  .
   <span styles="font-size: small">00</span>
 </span>
 ```

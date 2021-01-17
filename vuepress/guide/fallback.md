@@ -23,6 +23,7 @@ const messages = {
     hello: 'Hello, world!'
   },
   ja: {
+    // Localization without translation to `hello`
   }
 }
 ```
