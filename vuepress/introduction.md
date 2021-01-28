@@ -15,14 +15,14 @@ Go to [Get Started](./started.md)
 <p style="text-align: center;">
   <a
     href="https://nuxtjs.org/"
-    style="display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/nuxt.png"
       alt="Nuxt.js"
-      style="display: inline-block; vertical-align: middle;"
     />
   </a>
 </p>
@@ -32,11 +32,12 @@ Go to [Get Started](./started.md)
 <p style="text-align: center;">
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="max-width: 320px; width: 100%; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 12rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/babeledit.png"
       alt="BabelEdit translation editor for apps (web apps)"
     />
@@ -48,24 +49,37 @@ Go to [Get Started](./started.md)
 <p style="text-align: center;">
   <a
     href="https://zenarchitects.co.jp/"
-    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/zenarchitects.png"
       alt="zenarchitects"
     />
   </a>
   <a
     href="https://www.sendcloud.com/"
-    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       src="/vue-i18n/patrons/sendcloud.svg"
       alt="sendcloud"
+    />
+  </a>
+  <a
+    href="https://www.vuemastery.com/"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/vuemastery.svg"
+      alt="vuemastery"
     />
   </a>
 </p>

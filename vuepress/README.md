@@ -10,11 +10,12 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   <h4>🥇 Gold Sponsors</h4>
   <a
     href="https://nuxtjs.org/"
-    style="display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/nuxt.png"
       alt="Nuxt.js"
     />
@@ -22,11 +23,12 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   <h4 style="padding: 12px 0 0 0;">🥈 Silver Sponsors</h4>
   <a
     href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="max-width: 320px; width: 100%; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 12rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/babeledit.png"
       alt="BabelEdit translation editor for apps (web apps)"
     />
@@ -34,24 +36,38 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   <h4 style="padding: 12px 0 0 0;">🥉 Bronze Sponsors</h4>
   <a
     href="https://zenarchitects.co.jp/"
-    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
+      style="max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/zenarchitects.png"
       alt="zenarchitects"
     />
   </a>
   <a
     href="https://www.sendcloud.com/"
-    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
-      src="/vue-i18n/patrons/sendcloud.svg"
+      style="max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/sendcloud.png"
       alt="sendcloud"
+    />
+  </a>
+  <a
+    href="https://www.vuemastery.com/"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/vuemastery.png"
+      alt="vuemastery"
     />
   </a>
 </div>
