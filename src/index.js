@@ -29,6 +29,7 @@ const defaultModifiers = {
 
 const defaultFormatter = new BaseFormatter()
 
+export { BaseFormatter };
 export default class VueI18n {
   static install: () => void
   static version: string
