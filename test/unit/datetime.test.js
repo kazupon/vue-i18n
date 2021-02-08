@@ -47,7 +47,7 @@ desc('datetime format', () => {
         i18n.locale = 'zh-CN'
       }).then(() => {
         // NOTE: avoid webkit(phatomjs/safari) & Intl polyfill wired localization...
-        isChrome && assert.strictEqual(text.textContent, '2012/12/20 下午12:00')
+        isChrome && assert.strictEqual(text.textContent, '2012/12/20下午12:00')
       }).then(done)
     })
   })
