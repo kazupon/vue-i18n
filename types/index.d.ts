@@ -17,8 +17,8 @@ declare namespace VueI18n {
   interface LocaleMessages { [key: string]: LocaleMessageObject; }
   type TranslateResult = string | LocaleMessages;
 
-  type LocaleMatcher = 'lookup' | 'best-fit';
-  type FormatMatcher = 'basic' | 'best-fit';
+  type LocaleMatcher = 'lookup' | 'best fit';
+  type FormatMatcher = 'basic' | 'best fit';
 
   type DateTimeHumanReadable = 'long' | 'short' | 'narrow';
   type DateTimeDigital = 'numeric' | '2-digit';
