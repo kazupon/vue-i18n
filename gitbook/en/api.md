@@ -536,6 +536,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - path: required, key of locale messages
   - locale: optional, locale
   - args: optional, for list or named formatting
+  - choice: optional, for pluralization
 
 - **Examples:**
 
