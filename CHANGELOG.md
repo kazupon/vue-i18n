@@ -1,11 +1,7 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
-
 ## v8.23.0 (2021-02-24)
 
 #### :zap: Improved Features
-* [#1118](https://github.com/kazupon/vue-i18n/pull/1118) Fix wrong type for LocaleMatcher ('best-fit' to 'best fit'). ([@mpawelski](https://github.com/mpawelski))
+* [#1118](https://github.com/kazupon/vue-i18n/pull/1118) Fix wrong LocaleMatcher type for TS 4.2 ('best-fit' to 'best fit'). ([@mpawelski](https://github.com/mpawelski))
 
 #### :pencil: Documentation
 * [#1124](https://github.com/kazupon/vue-i18n/pull/1124) Add documentation for directive `choice` argument ([@Gameghostify](https://github.com/Gameghostify))
