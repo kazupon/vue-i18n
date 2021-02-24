@@ -1,6 +1,19 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
+## v8.23.0 (2021-02-24)
+
+#### :zap: Improved Features
+* [#1118](https://github.com/kazupon/vue-i18n/pull/1118) Fix wrong LocaleMatcher type for TS 4.2 ('best-fit' to 'best fit'). ([@mpawelski](https://github.com/mpawelski))
+
+#### :pencil: Documentation
+* [#1124](https://github.com/kazupon/vue-i18n/pull/1124) Add documentation for directive `choice` argument ([@Gameghostify](https://github.com/Gameghostify))
+* [#1114](https://github.com/kazupon/vue-i18n/pull/1114) Update tooling.md ([@fanlinqiang](https://github.com/fanlinqiang))
+* [#1104](https://github.com/kazupon/vue-i18n/pull/1104) Documentation improvemation ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
+
+#### Committers: 4
+- Lucas ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
+- Mariusz Pawelski ([@mpawelski](https://github.com/mpawelski))
+- [@Gameghostify](https://github.com/Gameghostify)
+- [@fanlinqiang](https://github.com/fanlinqiang)
+
 
 ## v8.22.4 (2021-01-16)
 
@@ -11,9 +24,6 @@ https://github.com/highlightjs/highlight.js/issues/2877
 - Eric Lee ([@cslee](https://github.com/cslee))
 - Lucas ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
 
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
 
 ## v8.22.3 (2021-01-08)
 
