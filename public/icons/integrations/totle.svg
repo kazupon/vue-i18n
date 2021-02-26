@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="43.666668"
+   height="46.730995"
+   viewBox="0 0 43.666668 46.730995"
+   version="1.1"
+   id="svg27"
+   sodipodi:docname="totle.svg"
+   inkscape:version="0.92.4 (0.92.4+202003022015+8da6682)">
+  <metadata
+     id="metadata31">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Totle Logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="731"
+     inkscape:window-height="480"
+     id="namedview29"
+     showgrid="false"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.610687"
+     inkscape:cx="37.538012"
+     inkscape:cy="9.1210509"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg27" />
+  <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">Totle Logo</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs11">
+    <linearGradient
+       x1="19"
+       y1="0"
+       x2="19"
+       y2="38"
+       id="linearGradient-1"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#00B8FF"
+         offset="0%"
+         id="stop6" />
+      <stop
+         stop-color="#0098EB"
+         offset="100%"
+         id="stop8" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3738">
+      <rect
+         style="fill:none;fill-opacity:1"
+         id="rect3740"
+         width="52.476608"
+         height="52.093567"
+         x="-6.5116959"
+         y="-6.8157897" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4555">
+      <rect
+         style="fill:none;fill-opacity:1"
+         id="rect4557"
+         width="43.666668"
+         height="46.730995"
+         x="-2.6812866"
+         y="-3.3684211" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4559">
+      <rect
+         style="fill:none;fill-opacity:1"
+         id="rect4561"
+         width="43.666668"
+         height="46.730995"
+         x="-2.6812866"
+         y="-3.3684211" />
+    </clipPath>
+  </defs>
+  <g
+     id="Symbols"
+     clip-path="url(#clipPath4559)"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+     transform="translate(2.6812866,3.3684211)">
+    <g
+       id="Footer"
+       transform="translate(-132,-336)">
+      <g
+         transform="translate(0,272)"
+         id="Totle-Logo">
+        <g
+           transform="translate(132,64)"
+           id="g22">
+          <g
+             id="g20">
+            <g
+               id="Totle-logo-horizontal-vers-Copy"
+               style="fill-rule:nonzero">
+              <g
+                 id="g16">
+                <g
+                   id="logo-1">
+                  <rect
+                     id="Rectangle"
+                     x="0"
+                     y="0"
+                     width="38"
+                     height="38"
+                     rx="4"
+                     style="fill:url(#linearGradient-1)" />
+                  <polygon
+                     id="Combined-Shape"
+                     points="5.7,20.2856 5.7,9.5 32.3,9.5 32.3,20.2856 32.179473,20.400167 26.755129,25.556267 22.677497,29.442449 22.677497,15.263596 27.590469,15.263596 27.590469,17.721021 27.190134,17.721021 25.357672,17.721021 25.357672,23.572025 29.805816,19.22498 29.805816,11.958684 21.80923,11.957859 20.321397,11.957859 20.321397,31.667974 19.002969,32.933333 17.640311,31.634048 17.640311,11.957859 16.190357,11.957859 8.1937286,11.958684 8.1937286,19.224956 12.634578,23.563934 12.634578,17.806839 10.408164,17.806839 10.408164,15.349414 15.315209,15.349414 15.315209,29.434994 14.63471,28.786532 11.237497,25.549256 "
+                     style="fill:#ffffff" />
+                </g>
+              </g>
+            </g>
+            <path
+               d="M 58.962032,13.924731 H 54 V 11.41129 h 12.805244 v 2.513441 H 61.843212 V 27.58871 h -2.88118 z m 10.372079,5.52957 c 0,-1.294809 0.217229,-2.463928 0.651695,-3.507392 0.434466,-1.043464 1.036611,-1.930776 1.806454,-2.661963 0.769843,-0.731186 1.684494,-1.294801 2.743981,-1.69086 C 75.595728,11.198027 76.750475,11 78.000517,11 c 1.265286,0 2.431467,0.198027 3.498576,0.594086 1.067109,0.396059 1.989382,0.959674 2.766847,1.69086 0.777465,0.731187 1.383422,1.618499 1.817887,2.661963 0.434466,1.043464 0.651696,2.212583 0.651696,3.507392 0,1.264343 -0.21723,2.41823 -0.651696,3.461694 -0.434465,1.043464 -1.040422,1.9422 -1.817887,2.696236 -0.777465,0.754036 -1.699738,1.3405 -2.766847,1.759409 C 80.431984,27.790549 79.265803,28 78.000517,28 76.750475,28 75.595728,27.790549 74.536241,27.37164 73.476754,26.952731 72.562103,26.366267 71.79226,25.612231 71.022417,24.858195 70.420272,23.959459 69.985806,22.915995 69.55134,21.872531 69.334111,20.718644 69.334111,19.454301 Z m 3.132711,0 c 0,0.868284 0.133387,1.664199 0.400164,2.387769 0.266777,0.72357 0.647882,1.351924 1.143325,1.88508 0.495444,0.533157 1.082345,0.948252 1.760722,1.245296 0.678376,0.297045 1.429152,0.445565 2.25235,0.445565 0.823199,0 1.577786,-0.14852 2.263785,-0.445565 0.685999,-0.297044 1.276711,-0.712139 1.772154,-1.245296 0.495444,-0.533156 0.876548,-1.16151 1.143325,-1.88508 0.266778,-0.72357 0.400164,-1.519485 0.400164,-2.387769 0,-0.837818 -0.133386,-1.614692 -0.400164,-2.330645 -0.266777,-0.715954 -0.64407,-1.340499 -1.131892,-1.873656 -0.487821,-0.533157 -1.074722,-0.952059 -1.760721,-1.25672 -0.685998,-0.304661 -1.448208,-0.45699 -2.286651,-0.45699 -0.838442,0 -1.596841,0.152329 -2.275217,0.45699 -0.678377,0.304661 -1.261467,0.723563 -1.749288,1.25672 -0.487821,0.533157 -0.865115,1.157702 -1.131892,1.873656 -0.266777,0.715953 -0.400164,1.492827 -0.400164,2.330645 z m 21.759599,-5.52957 H 89.264389 V 11.41129 h 12.805241 v 2.513441 H 97.107601 V 27.58871 h -2.88118 z M 106.06196,11.41129 h 2.88118 v 13.61828 h 6.88281 v 2.55914 h -9.76399 z m 13.80205,0 h 10.72439 v 2.513441 h -7.84321 v 4.112903 h 7.43162 v 2.422043 h -7.43162 V 25.02957 H 131 v 2.55914 h -11.13599 z"
+               id="TOTLE"
+               inkscape:connector-curvature="0"
+               style="fill:#1b465c;fill-rule:nonzero" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <rect
+     style="fill:none;fill-opacity:1"
+     id="rect4551"
+     width="43.666668"
+     height="46.730995"
+     x="-2.6812866"
+     y="-3.3684211"
+     clip-path="url(#clipPath4555)"
+     transform="translate(2.6812866,3.3684211)" />
+</svg>

@@ -1,0 +1,179 @@
+<div class='blue window half-width info'>
+    <fieldset id='profit-info'>
+        <legend>
+        Profit in {{ profitIn }} {{ profitIn == 'USD' ? '[Virtual profit]' : profitIn == 'tokens' ? '[Impermanent Profit]' : 'tokens'}}
+            <span class='tooltip'>
+                <img class='icon small hoverpointer clear-cache-icon' :src="publicPath + 'sync-solid.svg'" @click='clearCache(); mounted()'>
+                <span class='tooltiptext inverse'>Clear profit cache</span>
+            </span>
+            <div class='showinoptions' v-show='!notinpricedata'>
+                <input id="showinUSD" type="radio" name="showinUSD" value='1' v-model='showinUSD'>
+                <label for="showinUSD">Show in USD [Virtual profit]</label>
+
+                <input id="showinBTC" type="radio" name="showinUSD" value='2' v-model='showinUSD'>
+                <label for="showinBTC" v-show="['ren', 'sbtc'].includes(currentPool)">Show in BTC</label>
+
+                <input id="showintokens" type="radio" name="showintokens" value='3' v-model='showinUSD'>
+                <label for="showintokens">Show in tokens [Impermanent profit]</label>
+            </div>
+        </legend>
+        <div class='info-message' v-show="showinUSD == 3">
+            Profit in tokens is affected by deposit slippage and fluctuations in token pricings
+        </div>
+        <ul id='profit'>
+            <li>
+            	<b>Deposits:</b> 
+            	<span :class="{'loading line': deposits == -1}">
+                	<span v-show='deposits != -1'> {{toFixed(showDeposits)}} </span>
+            	</span>
+        	</li>
+            <li>
+            	<b>Withdrawals:</b> 
+            	<span :class="{'loading line': withdrawals == -1}">
+            		<span v-show='withdrawals != -1'> {{showWithdrawals > 0 ? toFixed(showWithdrawals) : 0}} </span>
+            	</span>
+            </li>
+            <li>
+            	<b>Available:</b> 
+            	<span :class="{'loading line': available == -1}">
+            		<span v-show='available != -1'> {{toFixed(showAvailable)}} </span>
+            	</span>
+                <span v-if = "['susdv2', 'sbtc', 'y', 'iearn'].includes(currentPool)">
+                    (<span :class="{'loading line': getStakedBalance == -1}"></span>
+                    <span v-show='+showStakedBalance >= 0'>{{toFixed(+showStakedBalance >= 0 && showStakedBalance)}} </span> 
+                    <span v-show='showStakedTokens != -1'>[{{showStakedTokens}}]</span> staked)
+                </span>
+            </li>
+            <li>
+            	<b>
+                    Pool Profit {{ isInVault ? '+ yVault profit' : ''}}
+                    <span class='tooltip'>[?]
+                        <span class='tooltiptext long inverse'>
+                            Profit from Pool trading fees {{ isInVault ? '+ yVault profit' : ''}}
+                        </span>
+                    </span>:
+                </b>
+            	<span :class="{'loading line': available == -1}">
+            		<span v-show='available != -1 '> {{toFixed(showProfit)}}</span>
+            	</span>
+            </li>
+            <br>
+            <li>
+                <b>
+                    Daily profit(unstable)
+                    <span class='tooltip'>[?]
+                        <span class='tooltiptext long inverse'>
+                            Profit from Pool trading fees for a day using APY of {{ dailyAPY && dailyAPY.toFixed(2) }}% per day
+                        </span>
+                    </span>
+                    :
+                </b>
+                <span :class="{'loading line': dailyAPY === null}">
+                    <span v-show='dailyAPY !== null'> {{((showAvailable + showStakedBalance) * dailyAPY / 100).toFixed(2)}} {{ profitIn }}</span>
+                </span>
+            </li>
+            <br>
+            <ul v-if="['susdv2', 'sbtc'].includes(currentPool)" class='snxrewards'>
+
+                <a v-show="currentPool == 'susdv2'" href='https://blog.synthetix.io/new-curve-pool-launch/' class='tooltip'>[?]</a>
+                <a v-show="currentPool == 'sbtc'" 
+                    href='https://medium.com/renproject/introducing-an-incentivized-btc-liquidity-pool-by-ren-synthetix-and-curve-213d21691d9a' class='tooltip'>
+                    [?]
+                </a>
+
+                <li :class="{'loading line': earnedSNX === null}">
+                    <b>Pending SNX LP rewards:</b> <span v-show='earnedSNX !== null'> {{showEarnedSNX}} {{+showinUSD == 1 ? 'USD' : 'SNX'}}</span>
+                </li>
+                <li v-show="currentPool == 'sbtc'" :class="{'loading line': earnedREN === null}">
+                    <b>Pending REN LP rewards:</b> <span v-show='earnedREN !== null'> {{showEarnedREN}} {{+showinUSD == 1 ? 'USD' : 'REN'}}</span>
+                </li>
+
+                <li :class="{'loading line': earnedSNX === null}">
+                    <b>Paid SNX LP rewards:</b> <span v-show='paidRewardsSNX !== null'> {{showRewardsSNX}} {{+showinUSD == 1 ? 'USD' : 'SNX'}}</span>
+                </li>
+                <li v-show="currentPool == 'sbtc'" :class="{'loading line': earnedSNX === null}">
+                    <b>Paid REN LP rewards:</b> <span v-show='paidRewardsREN !== null'> {{showRewardsREN}} {{+showinUSD == 1 ? 'USD' : 'REN'}}</span>
+                </li>
+
+                <li :class="{'loading line': weeklyEstimateSNX === null}" v-show="currentPool == 'susdv2' && showStakedBalance > 0">
+                    <b>Estimated weekly SNX LP rewards:</b> <span v-show='weeklyEstimateSNX !== null'> {{showWeeklySNX}} {{+showinUSD == 1 ? 'USD' : 'SNX'}}</span>
+                </li>
+                <li v-show="currentPool == 'sbtc' && showStakedBalance > 0" :class="{'loading line': weeklyEstimateBPT === null}">
+                    <b>Estimated weekly BPT LP rewards:</b> <span v-show='weeklyEstimateBPT !== null'> {{showWeeklyBPT}} {{+showinUSD == 1 ? 'USD' : 'BPT'}}</span>
+                </li>
+
+                <li>
+                    <b>Total profit
+                        <span class='tooltip'>[?]
+                            <span class='tooltiptext long inverse'>
+                                Profit from Pool trading fees + incentives 
+                            </span>
+                        </span>
+                    :</b> 
+                    <span :class="{'loading line': available == -1}"> 
+                        <span v-show='available != -1'>
+                            {{ toFixed(+showProfit + +showEarnedSNXUSD + +showEarnedRENUSD + +showRewardsSNXUSD + +showRewardsRENUSD) }} {{+showinUSD == 1 ? 'USD' : '' }}
+                        </span>
+                    </span>
+                </li>
+
+                <br>
+
+                <li>
+                    <b>SNX price: </b><span :class="{'loading line': snxPrice === null}"></span><span>{{snxPrice && snxPrice.toFixed(2)}} USD</span>
+                </li>
+                <li v-if="currentPool == 'sbtc'">
+                    <b>REN price: </b><span :class="{'loading line': renPrice === null}"></span><span>{{renPrice && renPrice.toFixed(2)}} USD</span>
+                </li>
+                <li v-if="currentPool == 'sbtc'">
+                    <b>BPT price: </b><span :class="{'loading line': BPTPrice === null}"></span><span>{{BPTPrice && BPTPrice.toFixed(2)}} USD</span>
+                </li>
+            </ul>
+            <ul v-if="['y', 'iearn'].includes(currentPool)" class='snxrewards'>
+
+                <a href='https://medium.com/iearn/earning-yfi-y-curve-fi-53b5fd347f0f' class='tooltip'>[?]</a>
+
+                <li :class="{'loading line': earnedYFI === null}">
+                    <b>Pending YFI LP rewards:</b> <span v-show='earnedYFI !== null'> {{showEarnedYFI}} {{+showinUSD == 1 ? 'USD' : 'YFI'}}</span>
+                </li>
+                <li :class="{'loading line': earnedYFI === null}">
+                    <b>Paid YFI LP rewards:</b> <span v-show='paidRewardsYFI !== null'> {{showRewardsYFI}} {{+showinUSD == 1 ? 'USD' : 'YFI'}}</span>
+                </li>
+                <li v-show="showStakedBalance > 0" :class="{'loading line': weeklyEstimateYFI === null}">
+                    <b>Estimated weekly YFI LP rewards:</b> <span v-show='weeklyEstimateYFI !== null'> {{showWeeklyYFI}} {{+showinUSD == 1 ? 'USD' : 'YFI'}}</span>
+                </li>
+                <!-- <li :class="{'loading line': claimableADAI === null}">
+                    <b>Claimable aDAI:</b> <span v-show='claimableADAI !== null'> {{claimableADAI && claimableADAI.toFixed(2)}} aDAI</span>
+                    <span class='tooltip'> [?]
+                        <span class='tooltiptext long inverse'>
+                            Amount of aDAI you'll receive by burning your YFI tokens for aDAI tokens
+                        </span>
+                    </span>
+                </li> -->
+
+                <li>
+                    <b>
+                        Total profit
+                        <span class='tooltip'>[?]
+                            <span class='tooltiptext long inverse'>
+                                Profit from Pool trading fees + incentives 
+                            </span>
+                        </span>
+                        :
+                    </b> 
+                    <span :class="{'loading line': available == -1}"> 
+                        <span v-show='available != -1'>
+                            {{ toFixed(+showProfit + +showEarnedYFIUSD + +showRewardsYFIUSD) }} {{showinUSD ? 'USD' : '' }}
+                        </span>
+                    </span>
+                </li>
+
+                <br>
+
+                <li class='profitprices'>
+                    <b>YFI price: </b><span :class="{'loading line': yfiPrice === null}"></span><span>{{yfiPrice && yfiPrice.toFixed(2)}} USD</span>
+                </li>
+            </ul>
+        </ul>
+    </fieldset>
+</div>

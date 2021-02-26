@@ -1,0 +1,16 @@
+{
+  "language": "node_js",
+  "os": [
+    "linux"
+  ],
+  "dist": "trusty",
+  "node_js": [
+    "stable"
+  ],
+  "before_script": [
+    "npm install"
+  ],
+  "script": [
+    "npm run build"
+  ]
+}

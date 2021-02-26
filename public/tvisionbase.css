@@ -1,0 +1,545 @@
+html {
+  background: #a5a4ce;
+  font-family: System, monospace;
+  font-size: 10pt
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.screencontainer {
+  flex: 1 0 auto;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('JetBrains Mono Regular'), local('JetBrainsMono-Regular'), url(https://curve.fi/JetBrainsMono-Regular.woff2) format('woff2');
+}
+
+fieldset {
+  min-width: 0;
+}
+
+.window {
+  position: relative;
+  cursor: default;
+  margin: 2em auto; width: 80%;
+  background: #3465a4; color: white;
+  border: 6px double white;
+  padding: 1em;
+  box-shadow:
+    0   0   0   3px #3465a4,
+    1em 1em 3px 0 rgba(0,0,0,.5);
+  max-width: 640px;
+}
+
+.window.error {
+    background: red;
+    box-shadow:
+        0   0   0   3px red,
+        1em 1em 3px 0 rgba(0,0,0,.5);
+}
+
+.window.white {
+  background: silver;
+  color: black;
+  border-color: white;
+  box-shadow:
+    0   0   0   3px silver,
+    1em 1em 3px 0 rgba(0,0,0,.5);
+}
+
+.window.half-width {
+  width: 80%;
+}
+
+.window :link {
+  color: inherit;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.window :link:hover {
+  text-decoration: underline;
+}
+
+.window h1 {
+  text-align: center;
+}
+
+
+.window.blue p {
+  /*color: white; text-shadow: 0 0 2px white;*/
+}
+
+button {
+  margin:0;padding:0;border:none;
+  cursor: pointer;
+}
+
+button,
+.button,
+.button:link,
+select.tvision {
+  display: inline-block;
+  font-weight: bolder;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  background: green;
+  padding: 0 1em;
+  box-shadow: .5em .5em 3px rgba(0,0,0,.5);
+  position: relative;
+  transition: .2s all ease-in;
+  border: 1px outset green;
+}
+
+button[class*='svelte'] {
+  box-shadow: none;
+}
+
+select.tvision {
+  background: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") 
+          no-repeat right green;
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+  padding-right: 24px;
+}
+
+button[disabled] {
+  background: gray;
+  box-shadow: none;
+  border: none;
+}
+button[disabled]:hover {
+  transform: none;
+  box-shadow: none;
+  background: gray;
+}
+
+button.full-width,
+.button.full-width {
+  display: block;
+  text-align: center;
+}
+
+button:before,
+.button:before {
+  top: 0;
+  left: 0;
+  /*commenting this because of chrome accessibility feature*/
+  /*right: 0;*/
+  bottom: 0;
+  content: "";
+  position: absolute;
+  /*background: rgba(255,255,0,.5); /* DEBUG CLICK AREA */
+}
+
+button:hover,
+.button:active,
+.button:focus,
+.button:hover
+{
+  transform: translate3d(.25em,.25em,10em);
+  box-shadow: 0 0 0 rgba(0,0,0,.5);
+  background: limegreen;
+}
+
+button[class*='svelte'] {
+  transform: none;
+}
+
+button:hover:before,
+.button:hover:before,
+button:focus:before,
+.button:focus:before
+{
+  top: -1em;
+  left: -1em;
+}
+
+.button.pressed {
+    box-shadow: none;
+    left: 0.25em;
+    top: 0.25em;
+    margin-right: 0.25em;
+    background: gray;
+    border: 1px outset #707070;
+}
+
+button:first-letter,
+.button:first-letter {
+  color: yellow;
+}
+
+button[class*='svelte']:first-letter {
+  color: inherit;
+}
+
+input, textarea {
+  background: blue;
+  color: aqua;
+  width: 100%;
+  max-width: 100%;
+  font-size: 12pt;
+}
+
+input {
+  padding: 1px 0 1px 0;
+  border-radius: 0;
+}
+
+input:disabled {
+  background: #505070;
+  color: #d0d0d0;
+  /*border: 2px solid #505070;*/
+}
+
+input[type=radio],
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=radio] + label[for]:before,
+input[type=checkbox] + label[for]:before {
+  text-align:center;
+  display: inline-block;
+  height: 1em; width: 2em;
+}
+
+input[type=checkbox] + label[for]:before {
+  margin-right: 0.2em;
+}
+
+input[type=radio] + label[for]:before {
+  content: "( ) ";
+  cursor: pointer;
+}
+
+input[type=checkbox] + label[for]:before {
+  content: "[ ] ";
+  cursor: pointer;
+}
+
+input[type=radio]:checked + label[for]:before {
+  content: "(•) ";
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked + label[for]:before {
+  content: "[X] ";
+  cursor: pointer;
+}
+
+.window > textarea {
+  width: 100%;
+  border: none;
+}
+
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input[type=range] {
+  background: inherit;
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 7.3px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #ffffff;
+  border-radius: 0px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 23px;
+  width: 16px;
+  border-radius: 0px;
+  background: #008000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #ffffff;
+  border-radius: 0px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 23px;
+  width: 16px;
+  border-radius: 0px;
+  background: #008000;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ededed;
+  border: 0.2px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ffffff;
+  border: 0.2px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 23px;
+  width: 16px;
+  border-radius: 0px;
+  background: #008000;
+  cursor: pointer;
+  height: 8.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #ffffff;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.01, 1.01, 1.01);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-timing-function: linear;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.tui-table thead tr {
+  border-bottom: 1px solid #a8a8a8;
+}
+.tui-table thead tr th {
+  color: #202020;
+}
+.tui-table tbody tr td {
+  padding: 0;
+  color: black;
+}
+
+.tui-table {
+    border: 2px solid #a8a8a8;
+    padding: 5px;
+    border-collapse: collapse; }
+    .tui-table.hovered-blue tbody tr:hover {
+      background-color: blue !important;
+      color: black; }
+    .tui-table.hovered-green tbody tr:hover {
+      background-color: lime !important;
+      color: black; }
+    .tui-table.hovered-cyan tbody tr:hover {
+      background-color: cyan !important;
+      color: black; }
+    .tui-table.hovered-red tbody tr:hover {
+      background-color: red !important;
+      color: white; }
+    .tui-table.hovered-purple tbody tr:hover {
+      background-color: magenta !important;
+      color: white; }
+    .tui-table.hovered-yellow tbody tr:hover {
+      background-color: yellow !important;
+      color: black; }
+    .tui-table.hovered-white tbody tr:hover {
+      background-color: white !important;
+      color: black; }
+    .tui-table.hovered-orange tbody tr:hover {
+      background-color: #ffa800 !important;
+      color: black; }
+    .tui-table.hovered tbody tr:hover {
+      background-color: cyan !important;
+      color: black; }
+    .tui-table.striped-blue tbody tr:nth-child(even) {
+      background-color: #0000a8; }
+    .tui-table.striped-green tbody tr:nth-child(even) {
+      background-color: #00a800; }
+    .tui-table.striped-cyan tbody tr:nth-child(even) {
+      background-color: #00a8a8; }
+    .tui-table.striped-red tbody tr:nth-child(even) {
+      background-color: #a80000; }
+    .tui-table.striped-purple tbody tr:nth-child(even) {
+      background-color: #a800a8; }
+    .tui-table.striped-yellow tbody tr:nth-child(even) {
+      background-color: #a8a800; }
+    .tui-table.striped-white tbody tr:nth-child(even) {
+      background-color: #a8a8a8;
+      color: black; }
+    .tui-table.striped-orange tbody tr:nth-child(even) {
+      background-color: #a85600; }
+
+  .tui-table tbody {
+    background-color: inherit;
+    color: white; }
+
+  .tui-table tbody tr td {
+    border-right: 2px solid #a8a8a8;
+    padding: 0px 2px; }
+
+  .tui-table thead {
+    background-color: inherit;
+    color: yellow;
+    text-align: center; }
+
+  .tui-table tfoot {
+    background-color: inherit;
+    color: yellow;
+    text-align: center; }
+
+  .tui-table-grid {
+    border-collapse: collapse;
+    width: 100%; }
+
+  .tui-table-grid thead tr td,
+  .tui-table-grid tbody tr td,
+  .tui-table-grid thead tr th,
+  .tui-table-grid tbody tr th {
+    border: 2px solid black;
+    padding: 10px;
+    vertical-align: top; }
+
+
+/* Tooltip container */
+.tooltip {
+  margin-left: 3px;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  font-size: 0.8em;
+  visibility: hidden;
+  width: 140px;
+  background-color: #3465a4e6;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  box-shadow: 2px 3px 0px -1px rgba(0,0,0,0.51);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -70px;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltiptext.long {
+  width: 300px;
+  margin-left: -150px;
+  padding: 1em;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #3465a4e6 transparent transparent transparent;
+}
+
+.tooltip .tooltiptext.long::after {
+  margin-left: -1em;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  text-align: center;
+  visibility: visible;
+}
+
+.tooltiptext.inverse {
+  background-color: #aaaaaa;
+}
+
+.tooltiptext.inverse::after {
+  border-color: #aaaaaa transparent transparent transparent;
+}
+
+footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: silver;
+  font-weight: bolder;
+  text-align: center;
+}
+
+@media only screen and (max-device-widtH: 730px) {
+  footer {
+    display: block;
+  }
+  footer a {
+    display: block;
+  }
+}

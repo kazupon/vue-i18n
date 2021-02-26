@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="320px" viewBox="0 0 320 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#4F3EFF" offset="0%"></stop>
+            <stop stop-color="#A160FE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-4" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo">
+            <rect id="Mask" fill="url(#linearGradient-1)" x="0" y="0" width="320" height="320" rx="160"></rect>
+            <polygon id="Path-3" fill="#FFFFFF" transform="translate(160.125933, 160.234740) scale(-1, 1) rotate(56.000000) translate(-160.125933, -160.234740) " points="161.005008 85.2347403 95.8402189 180.824907 145.957926 181.220112 109.142784 235.23474 158.682356 235.23474 224.411647 139.121061 174.292187 139.251965 210.696792 85.2347403"></polygon>
+        </g>
+    </g>
+</svg>
