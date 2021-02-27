@@ -62,20 +62,19 @@
 
 <br/>
 
-## :loudspeaker: Notice
+## :warning: NOTICE
 
-vue-i18n will soon be transferred to [intlify organization](https://github.com/intlify). After that, it will be developed and maintained on intlify.
+This repository is for Vue I18n v8.x.
 
-The `vue-i18n` that has been released on npm will be released as `@intlify/vue-i18n` in near future.
+If you want to know about Vue I18n v9, See the [this repository](https://github.com/intlify/vue-i18n-next))
 
-`vue-i18n` next major version repo is [here](https://github.com/intlify/vue-i18n-next)
-
-Intlify is a new i18n project kickoff by @kazupon. 😉
+This repository will be transferred to [intlify organization](https://github.com/intlify). After that, it will be developed and maintained on intlify.
 
 ## :book: Documentation
 
-See [here](http://kazupon.github.io/vue-i18n/)
+About Vue I18n v8.x, See [here](http://kazupon.github.io/vue-i18n/)
 
+If you want to read Vue I18n v9 docs, See [here](https://vue-i18n.intlify.dev/)
 
 ## :scroll: Changelog
 
