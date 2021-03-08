@@ -114,6 +114,12 @@ export default {
     }
   },
 
+  mounted (): void {
+    if (this !== this.$root && this.$options.__INTLIFY_META__ && this.$el) {
+      this.$el.setAttribute('data-intlify', this.$options.__INTLIFY_META__)
+    }
+  },
+
   beforeDestroy (): void {
     if (!this._i18n) { return }
 
