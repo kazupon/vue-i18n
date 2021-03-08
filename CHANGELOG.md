@@ -1,3 +1,11 @@
+## v8.24.0 (2021-03-08)
+
+#### :star: New Features
+* [#1139](https://github.com/kazupon/vue-i18n/pull/1139) experimental: add meta info for intlify tools ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.23.0 (2021-02-24)
 
 #### :zap: Improved Features
