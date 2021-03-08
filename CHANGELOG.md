@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.24.0 (2021-03-08)
+
+#### :star: New Features
+* [#1139](https://github.com/kazupon/vue-i18n/pull/1139) experimental: add meta info for intlify tools ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.23.0 (2021-02-24)
 
 #### :zap: Improved Features
