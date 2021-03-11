@@ -89,4 +89,10 @@ describe('path', () => {
       assert.strictEqual(path.getPathValue({}, 'a.b.c[]d'), null)
     })
   })
+  
+  describe('obj: null child', () => {
+    it('should return null if parent is null', () => {
+      assert.strictEqual(path.getPathValue({ a: null }, 'a.b'), null)
+    })
+  })
 })

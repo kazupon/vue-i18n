@@ -289,7 +289,7 @@ export default class I18nPath {
       let i: number = 0
       while (i < length) {
         const value: any = last[paths[i]]
-        if (value === undefined) {
+        if (value === undefined || value === null) {
           return null
         }
         last = value
