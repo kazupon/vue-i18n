@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.24.1 (2021-03-11)
+
+#### :bug: Bug Fixes
+* [#1145](https://github.com/kazupon/vue-i18n/pull/1145) Allowing paths to be null for lookups. ([@martinheidegger](https://github.com/martinheidegger))
+
+#### Committers: 1
+- Martin Heidegger ([@martinheidegger](https://github.com/martinheidegger))
+
 ## v8.24.0 (2021-03-08)
 
 #### :star: New Features
