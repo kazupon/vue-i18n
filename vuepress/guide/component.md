@@ -137,7 +137,7 @@ If `sharedMessages` option is specified along with the `messages` option, those 
 
 ## Translation in functional component
 
-When using a functional component, all data (including props, children, slots, parent, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `parent.$t`, check the example below:
+When using a functional component, all data (including props, children, slots, parent, etc.) is passed through the `context` containing the attributes, and it doesn't recognize the `this` scope, so when using the vue-i18n on functional components, you must refer to `$t` as `$root.$t`, check the example below:
 
 ```html
 ...
@@ -146,7 +146,7 @@ When using a functional component, all data (including props, children, slots, p
     href="#"
     target="_blank"
     rel="noopener noreferrer">
-    <img src="" :alt="parent.$t('message.hello')">
+    <img src="" :alt="$root.$t('message.hello')">
   </a>
 </div>
 ...
