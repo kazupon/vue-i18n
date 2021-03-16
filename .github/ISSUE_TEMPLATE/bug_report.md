@@ -10,6 +10,7 @@ assignees: ''
 **Reporting a bug?**
  - Try to search for your issue, it may have already been answered or even fixed in the development branch.
  - Check if the issue is reproducible with the latest version of Vue I18n v8.x. If you are using a pre-release, please indicate the specific version you are using.
+ - **If you want to open the issue of Vue I18n v9.x, Please here: https://github.com/intlify/vue-i18n-next/issues
  - For bugs that involves build setups, you can create a reproduction repository with steps in the .github/CONTRIBUTING.md
  - If your issue is resolved but still open, don’t hesitate to close it. In case you found a solution by yourself, it could be helpful to explain how you fixed it.
 
