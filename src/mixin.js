@@ -42,6 +42,16 @@ export default {
           options.i18n.silentFallbackWarn = rootI18n.silentFallbackWarn
           options.i18n.pluralizationRules = rootI18n.pluralizationRules
           options.i18n.preserveDirectiveContent = rootI18n.preserveDirectiveContent
+          this.$root.$once('hook:beforeDestroy', () => {
+            options.i18n.root = null;
+            options.i18n.formatter = null;
+            options.i18n.fallbackLocale = null;
+            options.i18n.formatFallbackMessages = null;
+            options.i18n.silentTranslationWarn = null;
+            options.i18n.silentFallbackWarn = null;
+            options.i18n.pluralizationRules = null;
+            options.i18n.preserveDirectiveContent = null;
+          });
         }
 
         // init locale messages via custom blocks
