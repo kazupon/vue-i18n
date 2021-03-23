@@ -92,6 +92,10 @@ module.exports = {
           {
             text: 'Release Notes',
             link: 'https://github.com/kazupon/vue-i18n/releases'
+          },
+          {
+            text: 'v9',
+            link: 'https://vue-i18n.intlify.dev'
           }
         ],
         sidebar: [
@@ -184,6 +188,10 @@ module.exports = {
           {
             text: '发布日志',
             link: 'https://github.com/kazupon/vue-i18n/releases'
+          },
+          {
+            text: 'v9',
+            link: 'https://vue-i18n.intlify.dev'
           }
         ],
         sidebar: [
@@ -280,6 +288,10 @@ module.exports = {
           {
             text: 'История изменений',
             link: 'https://github.com/kazupon/vue-i18n/releases'
+          },
+          {
+            text: 'v9',
+            link: 'https://vue-i18n.intlify.dev'
           }
         ],
         sidebar: [
@@ -376,6 +388,10 @@ module.exports = {
           {
             text: 'Notas de Lançamento',
             link: 'https://github.com/kazupon/vue-i18n/releases'
+          },
+          {
+            text: 'v9',
+            link: 'https://vue-i18n.intlify.dev'
           }
         ],
         sidebar: [
