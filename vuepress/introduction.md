@@ -20,7 +20,7 @@ Go to [Get Started](./started.md)
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 15rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/nuxt.png"
       alt="Nuxt.js"
     />
@@ -37,8 +37,8 @@ Go to [Get Started](./started.md)
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/babeledit.png"
+      style="width: 12.5rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/babeledit.svg"
       alt="BabelEdit translation editor for apps (web apps)"
     />
   </a>
@@ -54,7 +54,7 @@ Go to [Get Started](./started.md)
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/zenarchitects.png"
       alt="zenarchitects"
     />
@@ -66,7 +66,8 @@ Go to [Get Started](./started.md)
     rel="noopener"
   >
     <img
-      src="/vue-i18n/patrons/sendcloud.svg"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/sendcloud.png"
       alt="sendcloud"
     />
   </a>
@@ -77,7 +78,7 @@ Go to [Get Started](./started.md)
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/vuemastery.svg"
       alt="vuemastery"
     />

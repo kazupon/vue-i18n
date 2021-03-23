@@ -15,7 +15,7 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 15rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/nuxt.png"
       alt="Nuxt.js"
     />
@@ -28,8 +28,8 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/babeledit.png"
+      style="width: 12.5rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/babeledit.svg"
       alt="BabelEdit translation editor for apps (web apps)"
     />
   </a>
@@ -41,7 +41,7 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/zenarchitects.png"
       alt="zenarchitects"
     />
@@ -53,7 +53,7 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/sendcloud.png"
       alt="sendcloud"
     />
@@ -65,7 +65,7 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     rel="noopener"
   >
     <img
-      style="max-width: 100%; vertical-align: midele;"
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/vuemastery.png"
       alt="vuemastery"
     />
