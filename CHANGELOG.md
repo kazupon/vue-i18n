@@ -1,3 +1,19 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.24.2 (2021-03-23)
+
+#### :bug: Bug Fixes
+* [#1151](https://github.com/kazupon/vue-i18n/pull/1151) fix: i18n reference to root causes memory leak (#1044) ([@lzxb](https://github.com/lzxb))
+
+#### :pencil: Documentation
+* [#1152](https://github.com/kazupon/vue-i18n/pull/1152) $tc return type ([@Glandos](https://github.com/Glandos))
+
+#### Committers: 2
+- Glandos ([@Glandos](https://github.com/Glandos))
+- 狼族小狈 ([@lzxb](https://github.com/lzxb))
+
 ## v8.24.1 (2021-03-11)
 
 #### :bug: Bug Fixes
