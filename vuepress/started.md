@@ -9,7 +9,7 @@ code samples in the guide.
 
 ```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+<script src="https://unpkg.com/vue-i18n@8"></script>
 
 <div id="app">
   <p>{{ $t("message.hello") }}</p>
