@@ -6,7 +6,7 @@
 
 ## Direct Download / CDN
 
-<https://unpkg.com/vue-i18n/dist/vue-i18n>
+<https://unpkg.com/vue-i18n@8>
 
 [unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like <https://unpkg.com/vue-i18n@8.17.5/dist/vue-i18n.js>
 
@@ -15,7 +15,7 @@ Include vue-i18n after Vue and it will install itself automatically:
 
 ```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+<script src="https://unpkg.com/vue-i18n@8"></script>
 ```
 
 ## NPM
