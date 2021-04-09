@@ -56,7 +56,7 @@ export default class VueI18n {
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
-  _dataListeners: Array<any>
+  _dataListeners: Set<any>
   _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
@@ -105,7 +105,7 @@ export default class VueI18n {
     this._dateTimeFormatters = {}
     this._numberFormatters = {}
     this._path = new I18nPath()
-    this._dataListeners = []
+    this._dataListeners = new Set()
     this._componentInstanceCreatedListener = options.componentInstanceCreatedListener || null
     this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
@@ -240,7 +240,7 @@ export default class VueI18n {
   }
 
   subscribeDataChanging (vm: any): void {
-    this._dataListeners.push(vm)
+    this._dataListeners.add(vm)
   }
 
   unsubscribeDataChanging (vm: any): void {
@@ -250,12 +250,11 @@ export default class VueI18n {
   watchI18nData (): Function {
     const self = this
     return this._vm.$watch('$data', () => {
-      let i = self._dataListeners.length
-      while (i--) {
+      self._dataListeners.forEach(e => {
         Vue.nextTick(() => {
-          self._dataListeners[i] && self._dataListeners[i].$forceUpdate()
+          e && e.$forceUpdate()
         })
-      }
+      })
     }, { deep: true })
   }
 
