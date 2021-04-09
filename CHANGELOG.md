@@ -1,6 +1,13 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
+## v8.24.3 (2021-04-09)
+
+#### :bug: Bug Fixes
+* [#1175](https://github.com/kazupon/vue-i18n/pull/1175) [perf] Use Set so lookup of _dataListeners can be O(1) ([@exoego](https://github.com/exoego))
+
+#### :chart_with_upwards_trend: Performance Fixes
+* [#1175](https://github.com/kazupon/vue-i18n/pull/1175) [perf] Use Set so lookup of _dataListeners can be O(1) ([@exoego](https://github.com/exoego))
+
+#### Committers: 1
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
 
 ## v8.24.2 (2021-03-23)
 
