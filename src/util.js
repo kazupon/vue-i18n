@@ -102,12 +102,9 @@ export function looseClone (obj: Object): Object {
   return JSON.parse(JSON.stringify(obj))
 }
 
-export function remove (arr: Array<any>, item: any): Array<any> | void {
-  if (arr.length) {
-    const index = arr.indexOf(item)
-    if (index > -1) {
-      return arr.splice(index, 1)
-    }
+export function remove (arr: Set<any>, item: any): Set<any> | void {
+  if (arr.delete(item)) {
+    return arr
   }
 }
 
