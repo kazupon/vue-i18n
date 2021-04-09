@@ -17,15 +17,6 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
 
 <h2 align="center">Sliver Sponsors</h2>
 
-<p align="center">
-  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/babeledit.png"
-      width="320px"
-    />
-  </a>
-</p>
-
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=250.0)
 
 <h2 align="center">Bronze Sponsors</h2>
