@@ -6,7 +6,7 @@
 
 ## Загрузка файла / CDN
 
-<https://unpkg.com/vue-i18n/dist/vue-i18n>
+<https://unpkg.com/vue-i18n@8>
 
 Сервис [unpkg.com](https://unpkg.com) предоставляет CDN-ссылки на основе NPM-пакетов. Ссылка выше будет всегда указывать на последнюю версию на NPM. Можно использовать конкретную версию или тег с помощью URL следующего вида <https://unpkg.com/vue-i18n@8.17.5/dist/vue-i18n.js>
 
@@ -14,7 +14,7 @@
 
 ```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+<script src="https://unpkg.com/vue-i18n@8"></script>
 ```
 
 ## NPM
