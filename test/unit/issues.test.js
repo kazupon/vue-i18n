@@ -1,7 +1,6 @@
 import messages from './fixture/index'
 import { parse } from '../../src/format'
 import VueI18n from '../../src'
-import { Vue } from '../../src/install'
 const compiler = require('vue-template-compiler')
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time))
@@ -498,42 +497,6 @@ describe('issues', () => {
         assert.strictEqual(vm.$refs.text4.textContent, 'Hello Module 2 shared key 2')
       }).then(done)
     })
-  })
-  // 1044
-  describe('#1044', () => {
-    it('should be free memory', done => {
-      const i18n = {
-        messages: {
-          hello: 'hello world!'
-        }
-      }
-      const Test = {
-        i18n,
-      }
-      const vm = new Vue({
-        components: {
-          Test
-        },
-        i18n: {
-          locale: 'en',
-        },
-        render (h) {
-          return h('Test')
-        }
-      }).$mount()
-      vm.$destroy();
-
-      assert.strictEqual(i18n.root, null)
-      assert.strictEqual(i18n.formatter, null)
-      assert.strictEqual(i18n.fallbackLocale, null)
-      assert.strictEqual(i18n.formatFallbackMessages, null)
-      assert.strictEqual(i18n.silentTranslationWarn, null)
-      assert.strictEqual(i18n.silentFallbackWarn, null)
-      assert.strictEqual(i18n.pluralizationRules, null)
-      assert.strictEqual(i18n.preserveDirectiveContent, null)
-
-      done();
-    });
   })
 
   describe('#78, #464', () => {
