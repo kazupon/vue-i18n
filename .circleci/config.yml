@@ -57,6 +57,3 @@ jobs:
       - run:
           name: E2E Tests
           command: yarn test:e2e
-      - run:
-          name: Collect Coverage
-          command: yarn run coverage && bash <(curl -s https://codecov.io/bash)
