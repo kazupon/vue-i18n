@@ -1,3 +1,12 @@
+## v8.24.4 (2021-04-28)
+
+#### :bug: Bug Fixes
+* [#1192](https://github.com/kazupon/vue-i18n/pull/1192) Revert "fix: i18n reference to root causes memory leak (#1044)" ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 2
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.24.3 (2021-04-09)
 
 #### :bug: Bug Fixes
