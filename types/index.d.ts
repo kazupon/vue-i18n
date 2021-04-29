@@ -187,7 +187,7 @@ export declare interface IVueI18n {
   d(value: number | Date, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;
   n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
   n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
-  n(value: number, options?: VueI18n.NumberFormatOptions): VueI18n.NumberFormatResult;
+  n(value: number, options?: VueI18n.NumberFormatOptions, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
   getLocaleMessage(locale: VueI18n.Locale): VueI18n.LocaleMessageObject;
   setLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
   mergeLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
@@ -230,7 +230,7 @@ declare class VueI18n {
   d(value: number | Date, options?: VueI18n.DateTimeFormatOptions): VueI18n.DateTimeFormatResult;  
   n(value: number, key?: VueI18n.Path, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
   n(value: number, args?: { [key: string]: string }): VueI18n.NumberFormatResult;
-  n(value: number, options?: VueI18n.NumberFormatOptions): VueI18n.NumberFormatResult;
+  n(value: number, options?: VueI18n.NumberFormatOptions, locale?: VueI18n.Locale): VueI18n.NumberFormatResult;
 
   getLocaleMessage(locale: VueI18n.Locale): VueI18n.LocaleMessageObject;
   setLocaleMessage(locale: VueI18n.Locale, message: VueI18n.LocaleMessageObject): void;
