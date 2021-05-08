@@ -27,22 +27,23 @@ Go to [Get Started](./started.md)
   </a>
 </p>
 
-### 🥈 Silver
-
 <p style="text-align: center;">
   <a
-    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
-    style="margin: 1rem 1rem 0 1rem; width: 12.5rem; height: auto; display: inline-block; vertical-align: middle;"
+    href="https://rapidapi.com/"
+    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
-      style="width: 12.5rem; max-width: 100%; vertical-align: midele;"
-      src="https://secure.codeandweb.com/static/babeledit.svg"
-      alt="BabelEdit translation editor for apps (web apps)"
+      style="width: 15rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/RapidAPI.svg"
+      alt="RapidAPI"
     />
   </a>
 </p>
+
+### 🥈 Silver
+
 
 ### 🥉 Bronze
 

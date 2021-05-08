@@ -1,6 +1,6 @@
 # Backers
 
-You can join them in supporting vue-i18n development by [pledging on Patreon](https://www.patreon.com/kazupon)! Backers in the same pledge level appear in the order of pledge date.
+You can join them in supporting vue-i18n & Intlify project development by [pledging on GitHub](https://github.com/sponsors/kazupon)! Backers in the same pledge level appear in the order of pledge date.
 
 <h2 align="center">Gold Sponsors</h2>
 
@@ -13,18 +13,18 @@ You can join them in supporting vue-i18n development by [pledging on Patreon](ht
   </a>
 </p>
 
-[It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=500.0)
-
-<h2 align="center">Sliver Sponsors</h2>
-
 <p align="center">
-  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
+  <a href="https://rapidapi.com/" target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/babeledit.png"
-      width="320px"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/RapidAPI.svg"
+      width="400px"
     />
   </a>
 </p>
+
+[It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=500.0)
+
+<h2 align="center">Sliver Sponsors</h2>
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=250.0)
 

@@ -24,18 +24,18 @@
   </a>
 </p>
 
-<h3 align="center">🥈 Silver Sponsors</h3>
-
 <p align="center">
   <a
-    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" 
+    href="https://rapidapi.com/"
     target="_blank">
     <img
-      src="https://secure.codeandweb.com/static/babeledit.svg"
-      width="200px"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/RapidAPI.svg"
+      width="240px"
     />
   </a>
 </p>
+
+<h3 align="center">🥈 Silver Sponsors</h3>
 
 <h3 align="center">🥉 Bronze Sponsors</h3>
 
