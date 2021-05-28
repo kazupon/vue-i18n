@@ -70,6 +70,18 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
       alt="vuemastery"
     />
   </a>
+  <a
+    href="https://www.storyblok.com/"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/storyblok.svg"
+      alt="storyblok"
+    />
+  </a>
 </div>
 
 <div class="github" style="text-align:center; padding: 0 0 24px 0;">

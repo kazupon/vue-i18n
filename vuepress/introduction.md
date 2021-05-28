@@ -84,6 +84,18 @@ Go to [Get Started](./started.md)
       alt="vuemastery"
     />
   </a>
+  <a
+    href="https://www.storyblok.com/"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/storyblok.svg"
+      alt="storyblok"
+    />
+  </a>
 </p>
 
 ## Become a Sponsor

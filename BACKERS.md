@@ -54,6 +54,14 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
     />
   </a>
 </p>
+<p align="center">
+  <a href="https://www.storyblok.com/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/storyblok.svg"
+      width="200px"
+    />
+  </a>
+</p>
 
 - [Illyism](https://github.com/Illyism)
 
@@ -62,5 +70,6 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
 <h2 align="center">Awesome Supporters</h2>
 
 - [Shinya Katayama](https://github.com/ktsn)
+- [Jeffrey Rennie](https://github.com/surferjeff)
 
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=20.0)
