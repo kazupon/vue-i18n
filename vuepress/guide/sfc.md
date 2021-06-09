@@ -47,7 +47,7 @@ export default {
 
 ## Installing vue-i18n-loader
 
-You need to install `vue-loader` and `vue-i18n-loader` due to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
+You need to install `vue-loader` and `vue-i18n-loader` to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
 
 ```sh
 npm i --save-dev @kazupon/vue-i18n-loader
