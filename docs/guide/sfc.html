@@ -83,7 +83,7 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
-</code></pre></div><h2 id="installing-vue-i18n-loader"><a href="#installing-vue-i18n-loader" class="header-anchor">#</a> Installing vue-i18n-loader</h2> <p>You need to install <code>vue-loader</code> and <code>vue-i18n-loader</code> due to use <code>&lt;i18n&gt;</code> custom blocks. While <a href="https://github.com/vuejs/vue-loader" target="_blank" rel="noopener noreferrer">vue-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> most likely is already used in your project if you are working with single file components, you must install <a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer">vue-i18n-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> additionally:</p> <div class="language-sh extra-class"><pre class="language-text"><code>npm i --save-dev @kazupon/vue-i18n-loader
+</code></pre></div><h2 id="installing-vue-i18n-loader"><a href="#installing-vue-i18n-loader" class="header-anchor">#</a> Installing vue-i18n-loader</h2> <p>You need to install <code>vue-loader</code> and <code>vue-i18n-loader</code> due to use <code>&lt;i18n&gt;</code> custom blocks. While <a href="https://github.com/vuejs/vue-loader" target="_blank" rel="noopener noreferrer">vue-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> most likely is already used in your project if you are working with single file components, you must install <a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer">vue-i18n-loader<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> additionally:</p> <div class="language-sh extra-class"><pre class="language-text"><code>npm i --save-dev @intlify/vue-i18n-loader@next
 </code></pre></div><h2 id="webpack"><a href="#webpack" class="header-anchor">#</a> Webpack</h2> <p>For Webpack the configuration below is required:</p> <p>for vue-loader v15 or later:</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -95,7 +95,7 @@
       <span class="token punctuation">{</span>
         resourceQuery<span class="token operator">:</span> <span class="token regex">/blockType=i18n/</span><span class="token punctuation">,</span>
         type<span class="token operator">:</span> <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+        loader<span class="token operator">:</span> <span class="token string">'@intlify/vue-i18n-loader'</span>
       <span class="token punctuation">}</span>
       <span class="token comment">// ...</span>
     <span class="token punctuation">]</span>
@@ -112,7 +112,7 @@
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
           loaders<span class="token operator">:</span> <span class="token punctuation">{</span>
             <span class="token comment">// you need to specify `i18n` loaders key with `vue-i18n-loader` (https://github.com/kazupon/vue-i18n-loader)</span>
-            i18n<span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+            i18n<span class="token operator">:</span> <span class="token string">'@intlify/vue-i18n-loader'</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -128,7 +128,7 @@
       <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex">/blockType=i18n/</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@kazupon/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@intlify/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -142,7 +142,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token parameter">options</span> <span class="token operator">=&gt;</span>
         <span class="token function">merge</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token punctuation">{</span>
           loaders<span class="token operator">:</span> <span class="token punctuation">{</span>
-            i18n<span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+            i18n<span class="token operator">:</span> <span class="token string">'@intlify/vue-i18n-loader'</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
       <span class="token punctuation">)</span>
@@ -155,7 +155,7 @@ mix<span class="token punctuation">.</span><span class="token function">extend</
                 <span class="token punctuation">{</span>
                     resourceQuery<span class="token operator">:</span> <span class="token regex">/blockType=i18n/</span><span class="token punctuation">,</span>
                     type<span class="token operator">:</span>          <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
-                    loader<span class="token operator">:</span>        <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">,</span>
+                    loader<span class="token operator">:</span>        <span class="token string">'@intlify/vue-i18n-loader'</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -175,7 +175,7 @@ mix<span class="token punctuation">.</span><span class="token function">extend</
         <span class="token punctuation">}</span>
 
         <span class="token comment">// Within this module, add the vue-i18n-loader for the i18n tag.</span>
-        module<span class="token punctuation">.</span>options<span class="token punctuation">.</span>loaders<span class="token punctuation">.</span>i18n <span class="token operator">=</span> <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">;</span>
+        module<span class="token punctuation">.</span>options<span class="token punctuation">.</span>loaders<span class="token punctuation">.</span>i18n <span class="token operator">=</span> <span class="token string">'@intlify/vue-i18n-loader'</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -197,7 +197,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex">/blockType=i18n/</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">&quot;i18n&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@kazupon/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">&quot;@intlify/vue-i18n-loader&quot;</span><span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'yaml'</span><span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'yaml-loader'</span><span class="token punctuation">)</span>
@@ -216,7 +216,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             i18n<span class="token operator">:</span> <span class="token string">'yaml-loader'</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           loaders<span class="token operator">:</span> <span class="token punctuation">{</span>
-            i18n<span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+            i18n<span class="token operator">:</span> <span class="token string">'@intlify/vue-i18n-loader'</span>
           <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>

@@ -50,7 +50,7 @@ export default {
 You need to install `vue-loader` and `vue-i18n-loader` to use `<i18n>` custom blocks. While [vue-loader](https://github.com/vuejs/vue-loader) most likely is already used in your project if you are working with single file components, you must install [vue-i18n-loader](https://github.com/kazupon/vue-i18n-loader) additionally:
 
 ```sh
-npm i --save-dev @kazupon/vue-i18n-loader
+npm i --save-dev @intlify/vue-i18n-loader
 ```
 
 ## Webpack
@@ -70,7 +70,7 @@ module.exports = {
       {
         resourceQuery: /blockType=i18n/,
         type: 'javascript/auto',
-        loader: '@kazupon/vue-i18n-loader'
+        loader: '@intlify/vue-i18n-loader'
       }
       // ...
     ]
@@ -90,8 +90,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // you need to specify `i18n` loaders key with `vue-i18n-loader` (https://github.com/kazupon/vue-i18n-loader)
-            i18n: '@kazupon/vue-i18n-loader'
+            // you need to specify `i18n` loaders key with `vue-i18n-loader` (https://github.com/intlify/vue-i18n-loader)
+            i18n: '@intlify/vue-i18n-loader'
           }
         }
       },
@@ -117,7 +117,7 @@ module.exports = {
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
       .use("i18n")
-        .loader("@kazupon/vue-i18n-loader")
+        .loader("@intlify/vue-i18n-loader")
         .end();
   }
 }
@@ -135,7 +135,7 @@ module.exports = {
       .tap(options =>
         merge(options, {
           loaders: {
-            i18n: '@kazupon/vue-i18n-loader'
+            i18n: '@intlify/vue-i18n-loader'
           }
         })
       )
@@ -157,7 +157,7 @@ mix.extend( 'i18n', new class {
                 {
                     resourceQuery: /blockType=i18n/,
                     type:          'javascript/auto',
-                    loader:        '@kazupon/vue-i18n-loader',
+                    loader:        '@intlify/vue-i18n-loader',
                 },
             ];
         }
@@ -184,7 +184,7 @@ mix.extend( 'i18n', function( webpackConfig, ...args ) {
         }
 
         // Within this module, add the vue-i18n-loader for the i18n tag.
-        module.options.loaders.i18n = '@kazupon/vue-i18n-loader';
+        module.options.loaders.i18n = '@intlify/vue-i18n-loader';
     } );
 } );
 
@@ -222,7 +222,7 @@ module.exports = {
       .resourceQuery(/blockType=i18n/)
       .type('javascript/auto')
       .use("i18n")
-        .loader("@kazupon/vue-i18n-loader")
+        .loader("@intlify/vue-i18n-loader")
         .end()
       .use('yaml')
         .loader('yaml-loader')
@@ -245,7 +245,7 @@ module.exports = {
             i18n: 'yaml-loader'
           },
           loaders: {
-            i18n: '@kazupon/vue-i18n-loader'
+            i18n: '@intlify/vue-i18n-loader'
           }
         }
       },
