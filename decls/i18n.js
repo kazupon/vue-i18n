@@ -4,7 +4,10 @@ declare type Path = string;
 declare type Locale = string;
 declare type MessageContext = {
   list: (index: number) => mixed,
-  named: (key: string) => mixed
+  named: (key: string) => mixed,
+  values: any,
+  path: string,
+  formatter: Formatter
 }
 declare type MessageFunction = (ctx: MessageContext) => string
 declare type FallbackLocale = string | string[] | false | { [locale: string]: string[] };

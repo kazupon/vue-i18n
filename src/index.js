@@ -498,20 +498,23 @@ export default class VueI18n {
     return ret
   }
 
-  _createMessageContext (values: any): MessageContext {
+  _createMessageContext (values: any, formatter: Formatter, path: string): MessageContext {
     const _list = isArray(values) ? values : []
     const _named = isObject(values) ? values : {}
     const list = (index: number): mixed => _list[index]
     const named = (key: string): mixed => _named[key]
     return {
       list,
-      named
+      named,
+      values,
+      formatter,
+      path
     }
   }
 
   _render (message: string | MessageFunction, interpolateMode: string, values: any, path: string): any {
     if (isFunction(message)) {
-      return message(this._createMessageContext(values))
+      return message(this._createMessageContext(values, this._formatter || defaultFormatter, path))
     }
 
     let ret = this._formatter.interpolate(message, values, path)

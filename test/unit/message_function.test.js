@@ -52,4 +52,20 @@ describe('message function', () => {
       assert.strictEqual(i18n.t('hello', { name: 'kazupon' }), 'こんにちは、kazupon！')
     })
   })
+
+  it('receives formatter, values, path', () => {
+    i18n = new VueI18n({
+      locale: 'ja',
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join('')
+        },
+        ja: {
+          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join('')
+        }
+      }
+    })
+    assert.strictEqual(i18n.t('hello', { x: 'foo', y: 'bar' }), 'hey foo bar')
+  })
 })

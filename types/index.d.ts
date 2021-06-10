@@ -9,6 +9,9 @@ declare namespace VueI18n {
   interface MessageContext {
     list(index: number): unknown
     named(key: string): unknown
+    values: any
+    path: string
+    formatter: Formatter
   }
   type MessageFunction = (ctx: MessageContext) => string;
   type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
