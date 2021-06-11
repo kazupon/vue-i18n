@@ -142,13 +142,13 @@ sidebar: auto
 
 ### 静态属性
 
-#### 版本
+#### version
 
   * **类型：**`string`
 
 vue-i18n 版本
 
-#### 可用性
+#### availabilities
 
 > :new: 7.0+ 新增
 
