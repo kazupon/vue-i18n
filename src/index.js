@@ -503,12 +503,17 @@ export default class VueI18n {
     const _named = isObject(values) ? values : {}
     const list = (index: number): mixed => _list[index]
     const named = (key: string): mixed => _named[key]
+    const messages = this._getMessages()
+    const locale = this.locale
+
     return {
       list,
       named,
       values,
       formatter,
-      path
+      path,
+      messages,
+      locale
     }
   }
 

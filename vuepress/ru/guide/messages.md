@@ -14,7 +14,9 @@ type MessageContext = {
   named: (key: string) => mixed,
   values: any,
   path: string,
-  formatter: Formatter
+  formatter: Formatter,
+  messages: LocaleMessages,
+  locale: Locale
 };
 type MessageFunction = (ctx: MessageContext) => string;
 type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;

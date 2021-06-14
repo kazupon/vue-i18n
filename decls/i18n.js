@@ -7,7 +7,9 @@ declare type MessageContext = {
   named: (key: string) => mixed,
   values: any,
   path: string,
-  formatter: Formatter
+  formatter: Formatter,
+  messages: LocaleMessages,
+  locale: Locale
 }
 declare type MessageFunction = (ctx: MessageContext) => string
 declare type FallbackLocale = string | string[] | false | { [locale: string]: string[] };

@@ -53,19 +53,20 @@ describe('message function', () => {
     })
   })
 
-  it('receives formatter, values, path', () => {
+  it('receives formatter, values, path, messages, locale', () => {
     i18n = new VueI18n({
       locale: 'ja',
       fallbackLocale: 'en',
       messages: {
         en: {
-          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join('')
+          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join(''),
         },
         ja: {
-          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join('')
+          hello: (ctx) => ctx.formatter.interpolate(`hey {x} {y}`, ctx.values, ctx.path).join('') + ` ${ctx.messages[ctx.locale].world}`,
+          world: 'w0r1d'
         }
       }
     })
-    assert.strictEqual(i18n.t('hello', { x: 'foo', y: 'bar' }), 'hey foo bar')
+    assert.strictEqual(i18n.t('hello', { x: 'foo', y: 'bar' }), 'hey foo bar w0r1d')
   })
 })
