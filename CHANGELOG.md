@@ -1,3 +1,23 @@
+## v8.24.5 (2021-06-19)
+
+#### :bug: Bug Fixes
+* [#1278](https://github.com/kazupon/vue-i18n/pull/1278) fix: Ensure that the order at desroy is the same as before change to `Set` from `Array` ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improved Features
+* [#1194](https://github.com/kazupon/vue-i18n/pull/1194) fix: add locale arg type i18n.n method type signature ([@alireza4050](https://github.com/alireza4050))
+
+#### :pencil: Documentation
+* [#1273](https://github.com/kazupon/vue-i18n/pull/1273) docs(api:zh): update the Chinese docs of "API" ([@baboon-king](https://github.com/baboon-king))
+* [#1267](https://github.com/kazupon/vue-i18n/pull/1267) Documentation - Update @kazupon/vue-i18n-loader to @intlify/vue-i18n-loader ([@fbigand](https://github.com/fbigand))
+* [#1258](https://github.com/kazupon/vue-i18n/pull/1258) Grammar fix for Installing vue-i18n-loader ([@TerabyteTiger](https://github.com/TerabyteTiger))
+
+#### Committers: 5
+- Alireza Asgharizadeh ([@alireza4050](https://github.com/alireza4050))
+- BaboonKing ([@baboon-king](https://github.com/baboon-king))
+- Tyler V ([@TerabyteTiger](https://github.com/TerabyteTiger))
+- [@fbigand](https://github.com/fbigand)
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.24.4 (2021-04-28)
 
 #### :bug: Bug Fixes
