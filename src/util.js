@@ -108,6 +108,12 @@ export function remove (arr: Set<any>, item: any): Set<any> | void {
   }
 }
 
+export function arrayFrom (arr: Set<any>): Array<any> {
+  const ret = []
+  arr.forEach(a => ret.push(a))
+  return ret
+}
+
 export function includes (arr: Array<any>, item: any): boolean {
   return !!~arr.indexOf(item)
 }

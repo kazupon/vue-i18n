@@ -14,6 +14,7 @@ import {
   isFunction,
   looseClone,
   remove,
+  arrayFrom,
   includes,
   merge,
   numberFormatKeys,
@@ -250,11 +251,13 @@ export default class VueI18n {
   watchI18nData (): Function {
     const self = this
     return this._vm.$watch('$data', () => {
-      self._dataListeners.forEach(e => {
+      const listeners = arrayFrom(this._dataListeners)
+      let i = listeners.length
+      while(i--) {
         Vue.nextTick(() => {
-          e && e.$forceUpdate()
+          listeners[i] && listeners[i].$forceUpdate()
         })
-      })
+      }
     }, { deep: true })
   }
 
