@@ -11,6 +11,17 @@
 
 <br/>
 
+<h3 align="center">🏅 Platinum Sponsors</h3>
+
+<p align="center">
+  <a href="https://zenarchitects.co.jp/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png"
+      width="400px"
+    />
+  </a>
+</p>
+
 <h3 align="center">🥇 Gold Sponsors</h3>
 
 <p align="center">
@@ -39,14 +50,6 @@
 
 <h3 align="center">🥉 Bronze Sponsors</h3>
 
-<p align="center">
-  <a href="https://zenarchitects.co.jp/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/zenarchitects.png"
-      width="144px"
-    />
-  </a>
-</p>
 <p align="center">
   <a href="https://www.sendcloud.com/" target="_blank">
     <img

@@ -7,7 +7,21 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 ---
 
 <div class="sponsors" style="text-align:center; padding: 24px 0 24px 0;">
-  <h4>🥇 Gold Sponsors</h4>
+  <h4>🏅 Platinum Sponsors</h4>
+  <a
+    href="https://zenarchitects.co.jp/"
+    style="margin: 1rem 1rem 0 1rem; width: 24rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 24rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/zenarchitects.png"
+      alt="zenarchitects"
+    />
+  </a>
+
+  <h4 style="padding: 12px 0 0 0;">🥇 Gold Sponsors</h4>
   <a
     href="https://nuxtjs.org/"
     style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
@@ -34,18 +48,6 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   </a>
   <h4 style="padding: 12px 0 0 0;">🥈 Silver Sponsors</h4>
   <h4 style="padding: 12px 0 0 0;">🥉 Bronze Sponsors</h4>
-  <a
-    href="https://zenarchitects.co.jp/"
-    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
-    target="_blank"
-    rel="noopener"
-  >
-    <img
-      style="width: 9rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/zenarchitects.png"
-      alt="zenarchitects"
-    />
-  </a>
   <a
     href="https://www.sendcloud.com/"
     style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"

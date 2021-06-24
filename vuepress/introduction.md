@@ -10,6 +10,24 @@ Go to [Get Started](./started.md)
 
 ## Sponsors
 
+### 🏅 Platinum
+
+<p style="text-align: center;">
+  <a
+    href="https://zenarchitects.co.jp/"
+    style="margin: 1rem 1rem 0 1rem; width: 24rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 24rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/zenarchitects.png"
+      alt="zenarchitects"
+    />
+  </a>
+</p>
+
+
 ### 🥇 Gold
 
 <p style="text-align: center;">
@@ -48,18 +66,6 @@ Go to [Get Started](./started.md)
 ### 🥉 Bronze
 
 <p style="text-align: center;">
-  <a
-    href="https://zenarchitects.co.jp/"
-    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
-    target="_blank"
-    rel="noopener"
-  >
-    <img
-      style="width: 9rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/zenarchitects.png"
-      alt="zenarchitects"
-    />
-  </a>
   <a
     href="https://www.sendcloud.com/"
     style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
