@@ -66,14 +66,6 @@
     />
   </a>
 </p>
-<p align="center">
-  <a href="https://www.storyblok.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/storyblok.svg"
-      width="144px"
-    />
-  </a>
-</p>
 
 <br/>
 
