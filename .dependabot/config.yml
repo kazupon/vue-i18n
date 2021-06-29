@@ -1,6 +1,5 @@
-version: 2
-updates:
-  - package-ecosystem: "yarn"
+version: 1
+update_configs:
+  - package_manager: "javascript"
     directory: "/"
-    schedule:
-      interval: "weekly"
+    update_schedule: "weekly"
