@@ -1528,6 +1528,8 @@ VueI18n.prototype._link = function _link (
   // We are going to replace each of
   // them with its translation
   var matches = ret.match(linkKeyMatcher);
+    
+  // eslint-disable-next-line no-autofix/prefer-const
   for (var idx in matches) {
     // ie compatible: filter custom array
     // prototype method
@@ -1591,23 +1593,33 @@ VueI18n.prototype._link = function _link (
   return ret
 };
 
-VueI18n.prototype._createMessageContext = function _createMessageContext (values, formatter, path) {
+VueI18n.prototype._createMessageContext = function _createMessageContext (values, formatter, path, interpolateMode) {
+    var this$1 = this;
+
   var _list = isArray(values) ? values : [];
   var _named = isObject(values) ? values : {};
   var list = function (index) { return _list[index]; };
   var named = function (key) { return _named[key]; };
+  var messages = this._getMessages();
+  var locale = this.locale;
+
   return {
     list: list,
     named: named,
     values: values,
     formatter: formatter,
-    path: path
+    path: path,
+    messages: messages,
+    locale: locale,
+    linked: function (linkedKey) { return this$1._interpolate(locale, messages[locale] || {}, linkedKey, null, interpolateMode, undefined, [linkedKey]); }
   }
 };
 
 VueI18n.prototype._render = function _render (message, interpolateMode, values, path) {
   if (isFunction(message)) {
-    return message(this._createMessageContext(values, this._formatter || defaultFormatter, path))
+    return message(
+      this._createMessageContext(values, this._formatter || defaultFormatter, path, interpolateMode)
+    )
   }
 
   var ret = this._formatter.interpolate(message, values, path);
@@ -1902,6 +1914,7 @@ VueI18n.prototype.mergeDateTimeFormat = function mergeDateTimeFormat (locale, fo
 };
 
 VueI18n.prototype._clearDateTimeFormat = function _clearDateTimeFormat (locale, format) {
+  // eslint-disable-next-line no-autofix/prefer-const
   for (var key in format) {
     var id = locale + "__" + key;
 
@@ -2022,6 +2035,7 @@ VueI18n.prototype.mergeNumberFormat = function mergeNumberFormat (locale, format
 };
 
 VueI18n.prototype._clearNumberFormat = function _clearNumberFormat (locale, format) {
+  // eslint-disable-next-line no-autofix/prefer-const
   for (var key in format) {
     var id = locale + "__" + key;
 
