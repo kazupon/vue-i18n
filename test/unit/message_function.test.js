@@ -69,4 +69,17 @@ describe('message function', () => {
     })
     assert.strictEqual(i18n.t('hello', { x: 'foo', y: 'bar' }), 'hey foo bar w0r1d')
   })
+
+  it('receives linked function for resolving linked messages', () => {
+    i18n = new VueI18n({
+      locale: 'en',
+      messages: {
+        en: {
+          hello: (ctx) => `hello ${ctx.linked('foo')}`,
+          foo: 'world'
+        }
+      }
+    })
+    assert.strictEqual(i18n.t('hello'), 'hello world')
+  })
 })

@@ -12,6 +12,7 @@ type LocaleMessageArray = LocaleMessage[]
 type MessageContext = {
   list: (index: number) => mixed,
   named: (key: string) => mixed,
+  linked: (key: string) => TranslateResult,
   values: any,
   path: string,
   formatter: Formatter,

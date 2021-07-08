@@ -9,6 +9,7 @@ declare namespace VueI18n {
   interface MessageContext {
     list(index: number): unknown
     named(key: string): unknown
+    linked(key: string): VueI18n.TranslateResult
     values: any
     path: string
     formatter: Formatter

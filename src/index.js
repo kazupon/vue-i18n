@@ -436,6 +436,8 @@ export default class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches: any = ret.match(linkKeyMatcher)
+    
+    // eslint-disable-next-line no-autofix/prefer-const
     for (let idx in matches) {
       // ie compatible: filter custom array
       // prototype method
@@ -498,7 +500,7 @@ export default class VueI18n {
     return ret
   }
 
-  _createMessageContext (values: any, formatter: Formatter, path: string): MessageContext {
+  _createMessageContext (values: any, formatter: Formatter, path: string, interpolateMode: string): MessageContext {
     const _list = isArray(values) ? values : []
     const _named = isObject(values) ? values : {}
     const list = (index: number): mixed => _list[index]
@@ -513,13 +515,16 @@ export default class VueI18n {
       formatter,
       path,
       messages,
-      locale
+      locale,
+      linked: (linkedKey: string) => this._interpolate(locale, messages[locale] || {}, linkedKey, null, interpolateMode, undefined, [linkedKey])
     }
   }
 
   _render (message: string | MessageFunction, interpolateMode: string, values: any, path: string): any {
     if (isFunction(message)) {
-      return message(this._createMessageContext(values, this._formatter || defaultFormatter, path))
+      return message(
+        this._createMessageContext(values, this._formatter || defaultFormatter, path, interpolateMode)
+      )
     }
 
     let ret = this._formatter.interpolate(message, values, path)
@@ -796,6 +801,7 @@ export default class VueI18n {
   }
 
   _clearDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
+    // eslint-disable-next-line no-autofix/prefer-const
     for (let key in format) {
       const id = `${locale}__${key}`
 
@@ -913,6 +919,7 @@ export default class VueI18n {
   }
 
   _clearNumberFormat (locale: Locale, format: NumberFormat): void {
+    // eslint-disable-next-line no-autofix/prefer-const
     for (let key in format) {
       const id = `${locale}__${key}`
 
