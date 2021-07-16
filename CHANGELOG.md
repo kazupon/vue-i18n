@@ -1,19 +1,10 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
-
 ## v8.25.0 (2021-07-16)
 
 #### :star: New Features
-* [#1271](https://github.com/kazupon/vue-i18n/pull/1271) feat: Added formatter, values, path to MessageContext ([@fabis94](https://github.com/fabis94))
+* [#1271](https://github.com/kazupon/vue-i18n/pull/1271) feat: Added linked, locale, formatter, values, path to MessageContext ([@fabis94](https://github.com/fabis94))
 
 #### :bug: Bug Fixes
 * [#1321](https://github.com/kazupon/vue-i18n/pull/1321) fix broken mergeLocaleMessage ([@phonezawphyo](https://github.com/phonezawphyo))
-
-#### :lock: Security Fixes
-* [#1310](https://github.com/kazupon/vue-i18n/pull/1310) build(deps): [security] bump ws from 6.2.1 to 6.2.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-* [#1296](https://github.com/kazupon/vue-i18n/pull/1296) build(deps): [security] bump socket.io from 2.3.0 to 2.4.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-* [#1295](https://github.com/kazupon/vue-i18n/pull/1295) build(deps): [security] bump socket.io-parser from 3.3.0 to 3.3.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 #### Committers: 3
 - [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
