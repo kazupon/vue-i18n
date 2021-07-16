@@ -13,11 +13,11 @@ type MessageContext = {
   list: (index: number) => mixed,
   named: (key: string) => mixed,
   linked: (key: string) => TranslateResult,
-  values: any,
-  path: string,
-  formatter: Formatter,
-  messages: LocaleMessages,
-  locale: Locale
+  values: any, // NOTE: not compatible for vue-i18n@v9.x
+  path: string, // NOTE: not compatible for vue-i18n@v9.x
+  formatter: Formatter, // NOTE: not compatible for vue-i18n@v9.x
+  messages: LocaleMessages, // NOTE: not compatible for vue-i18n@v9.x
+  locale: Locale // NOTE: not compatible for vue-i18n@v9.x
 };
 type MessageFunction = (ctx: MessageContext) => string;
 type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
@@ -294,5 +294,13 @@ The message context has a list function. You need to specify the index that reso
 
 In the message function, the following functions, which are provided on a string basis, are not available via a message context:
 
-- Linked locale messages
 - Pluralization
+
+And also, the following props of message context is not compatible for vue-i18 v9.x or later:
+
+- `path`
+- `locale`
+- `messages`
+- `formatter`
+
+If you are using these message context props means that it will be difficult to migrate to vue-i18n v9.x or later.
