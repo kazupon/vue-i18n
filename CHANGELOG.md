@@ -1,3 +1,16 @@
+## v8.25.0 (2021-07-16)
+
+#### :star: New Features
+* [#1271](https://github.com/kazupon/vue-i18n/pull/1271) feat: Added linked, locale, formatter, values, path to MessageContext ([@fabis94](https://github.com/fabis94))
+
+#### :bug: Bug Fixes
+* [#1321](https://github.com/kazupon/vue-i18n/pull/1321) fix broken mergeLocaleMessage ([@phonezawphyo](https://github.com/phonezawphyo))
+
+#### Committers: 3
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+- [@fabis94](https://github.com/fabis94)
+- [@phonezawphyo](https://github.com/phonezawphyo)
+
 ## v8.24.5 (2021-06-19)
 
 #### :bug: Bug Fixes
