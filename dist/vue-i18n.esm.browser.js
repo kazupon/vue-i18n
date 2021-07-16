@@ -5,18 +5,23 @@
  */
 
 const numberFormatKeys = [
-  'style',
+  'compactDisplay',
   'currency',
   'currencyDisplay',
+  'currencySign',
+  'localeMatcher',
+  'notation',
+  'numberingSystem',
+  'signDisplay',
+  'style',
+  'unit',
+  'unitDisplay',
   'useGrouping',
   'minimumIntegerDigits',
   'minimumFractionDigits',
   'maximumFractionDigits',
   'minimumSignificantDigits',
-  'maximumSignificantDigits',
-  'localeMatcher',
-  'formatMatcher',
-  'unit'
+  'maximumSignificantDigits'
 ];
 
 /**
@@ -43,8 +48,18 @@ function error (msg, err) {
   }
 }
 
+const isArray = Array.isArray;
+
 function isObject (obj) {
   return obj !== null && typeof obj === 'object'
+}
+
+function isBoolean (val) {
+  return typeof val === 'boolean'
+}
+
+function isString (val) {
+  return typeof val === 'string'
 }
 
 const toString = Object.prototype.toString;
@@ -57,11 +72,15 @@ function isNull (val) {
   return val === null || val === undefined
 }
 
+function isFunction (val) {
+  return typeof val === 'function'
+}
+
 function parseArgs (...args) {
   let locale = null;
   let params = null;
   if (args.length === 1) {
-    if (isObject(args[0]) || Array.isArray(args[0])) {
+    if (isObject(args[0]) || isArray(args[0])) {
       params = args[0];
     } else if (typeof args[0] === 'string') {
       locale = args[0];
@@ -71,7 +90,7 @@ function parseArgs (...args) {
       locale = args[0];
     }
     /* istanbul ignore if */
-    if (isObject(args[1]) || Array.isArray(args[1])) {
+    if (isObject(args[1]) || isArray(args[1])) {
       params = args[1];
     }
   }
@@ -84,12 +103,13 @@ function looseClone (obj) {
 }
 
 function remove (arr, item) {
-  if (arr.length) {
-    const index = arr.indexOf(item);
-    if (index > -1) {
-      return arr.splice(index, 1)
-    }
+  if (arr.delete(item)) {
+    return arr
   }
+}
+
+function includes (arr, item) {
+  return !!~arr.indexOf(item)
 }
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -123,8 +143,8 @@ function looseEqual (a, b) {
   const isObjectB = isObject(b);
   if (isObjectA && isObjectB) {
     try {
-      const isArrayA = Array.isArray(a);
-      const isArrayB = Array.isArray(b);
+      const isArrayA = isArray(a);
+      const isArrayB = isArray(b);
       if (isArrayA && isArrayB) {
         return a.length === b.length && a.every((e, i) => {
           return looseEqual(e, b[i])
@@ -148,6 +168,38 @@ function looseEqual (a, b) {
   } else {
     return false
   }
+}
+
+/**
+ * Sanitizes html special characters from input strings. For mitigating risk of XSS attacks.
+ * @param rawText The raw input from the user that should be escaped.
+ */
+function escapeHtml(rawText) {
+  return rawText
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+/**
+ * Escapes html tags and special symbols from all provided params which were returned from parseArgs().params.
+ * This method performs an in-place operation on the params object.
+ *
+ * @param {any} params Parameters as provided from `parseArgs().params`.
+ *                     May be either an array of strings or a string->any map.
+ *
+ * @returns The manipulated `params` object.
+ */
+function escapeParams(params) {
+  if(params != null) {
+    Object.keys(params).forEach(key => {
+      if(typeof(params[key]) == 'string') {
+        params[key] = escapeHtml(params[key]);
+      }
+    });
+  }
+  return params
 }
 
 /*  */
@@ -196,7 +248,7 @@ var mixin = {
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            let localeMessages = {};
+            let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {};
             options.__i18n.forEach(resource => {
               localeMessages = merge(localeMessages, JSON.parse(resource));
             });
@@ -212,22 +264,25 @@ var mixin = {
         this._i18n = options.i18n;
         this._i18nWatcher = this._i18n.watchI18nData();
       } else if (isPlainObject(options.i18n)) {
+        const rootI18n = this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n
+          ? this.$root.$i18n
+          : null;
         // component local i18n
-        if (this.$root && this.$root.$i18n && this.$root.$i18n instanceof VueI18n) {
+        if (rootI18n) {
           options.i18n.root = this.$root;
-          options.i18n.formatter = this.$root.$i18n.formatter;
-          options.i18n.fallbackLocale = this.$root.$i18n.fallbackLocale;
-          options.i18n.formatFallbackMessages = this.$root.$i18n.formatFallbackMessages;
-          options.i18n.silentTranslationWarn = this.$root.$i18n.silentTranslationWarn;
-          options.i18n.silentFallbackWarn = this.$root.$i18n.silentFallbackWarn;
-          options.i18n.pluralizationRules = this.$root.$i18n.pluralizationRules;
-          options.i18n.preserveDirectiveContent = this.$root.$i18n.preserveDirectiveContent;
+          options.i18n.formatter = rootI18n.formatter;
+          options.i18n.fallbackLocale = rootI18n.fallbackLocale;
+          options.i18n.formatFallbackMessages = rootI18n.formatFallbackMessages;
+          options.i18n.silentTranslationWarn = rootI18n.silentTranslationWarn;
+          options.i18n.silentFallbackWarn = rootI18n.silentFallbackWarn;
+          options.i18n.pluralizationRules = rootI18n.pluralizationRules;
+          options.i18n.preserveDirectiveContent = rootI18n.preserveDirectiveContent;
         }
 
         // init locale messages via custom blocks
         if (options.__i18n) {
           try {
-            let localeMessages = {};
+            let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {};
             options.__i18n.forEach(resource => {
               localeMessages = merge(localeMessages, JSON.parse(resource));
             });
@@ -249,6 +304,10 @@ var mixin = {
 
         if (options.i18n.sync === undefined || !!options.i18n.sync) {
           this._localeWatcher = this.$i18n.watchLocale();
+        }
+
+        if (rootI18n) {
+          rootI18n.onComponentInstanceCreated(this._i18n);
         }
       } else {
         {
@@ -290,6 +349,12 @@ var mixin = {
     }
   },
 
+  mounted () {
+    if (this !== this.$root && this.$options.__INTLIFY_META__ && this.$el) {
+      this.$el.setAttribute('data-intlify', this.$options.__INTLIFY_META__);
+    }
+  },
+
   beforeDestroy () {
     if (!this._i18n) { return }
 
@@ -310,8 +375,6 @@ var mixin = {
         self._localeWatcher();
         delete self._localeWatcher;
       }
-
-      self._i18n = null;
     });
   }
 };
@@ -323,7 +386,8 @@ var interpolationComponent = {
   functional: true,
   props: {
     tag: {
-      type: String
+      type: [String, Boolean, Object],
+      default: 'span'
     },
     path: {
       type: String,
@@ -355,7 +419,7 @@ var interpolationComponent = {
         : params
     );
 
-    const tag = props.tag || 'span';
+    const tag = (!!props.tag && props.tag !== true) || props.tag === false ? props.tag : 'span';
     return tag ? h(tag, data, children) : children
   }
 };
@@ -422,7 +486,7 @@ var numberComponent = {
   functional: true,
   props: {
     tag: {
-      type: String,
+      type: [String, Boolean, Object],
       default: 'span'
     },
     value: {
@@ -449,7 +513,7 @@ var numberComponent = {
     let key = null;
     let options = null;
 
-    if (typeof props.format === 'string') {
+    if (isString(props.format)) {
       key = props.format;
     } else if (isObject(props.format)) {
       if (props.format.key) {
@@ -458,7 +522,7 @@ var numberComponent = {
 
       // Filter out number format options only
       options = Object.keys(props.format).reduce((acc, prop) => {
-        if (numberFormatKeys.includes(prop)) {
+        if (includes(numberFormatKeys, prop)) {
           return Object.assign({}, acc, { [prop]: props.format[prop] })
         }
         return acc
@@ -473,11 +537,14 @@ var numberComponent = {
       return slot ? slot({ [part.type]: part.value, index, parts }) : part.value
     });
 
-    return h(props.tag, {
-      attrs: data.attrs,
-      'class': data['class'],
-      staticClass: data.staticClass
-    }, values)
+    const tag = (!!props.tag && props.tag !== true) || props.tag === false ? props.tag : 'span';
+    return tag
+      ? h(tag, {
+        attrs: data.attrs,
+        'class': data['class'],
+        staticClass: data.staticClass
+      }, values)
+      : values
   }
 };
 
@@ -554,7 +621,7 @@ function t (el, binding, vnode) {
   }
 
   const vm = vnode.context;
-  if (choice) {
+  if (choice != null) {
     el._vt = el.textContent = vm.$i18n.tc(path, choice, ...makeParams(locale, args));
   } else {
     el._vt = el.textContent = vm.$i18n.t(path, ...makeParams(locale, args));
@@ -569,7 +636,7 @@ function parseValue (value) {
   let args;
   let choice;
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     path = value;
   } else if (isPlainObject(value)) {
     path = value.path;
@@ -1025,7 +1092,7 @@ class I18nPath {
       let i = 0;
       while (i < length) {
         const value = last[paths[i]];
-        if (value === undefined) {
+        if (value === undefined || value === null) {
           return null
         }
         last = value;
@@ -1076,6 +1143,11 @@ class VueI18n {
   
   
   
+  
+  
+  
+  
+  
 
   constructor (options = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -1087,7 +1159,9 @@ class VueI18n {
     }
 
     const locale = options.locale || 'en-US';
-    const fallbackLocale = options.fallbackLocale || 'en-US';
+    const fallbackLocale = options.fallbackLocale === false
+      ? false
+      : options.fallbackLocale || 'en-US';
     const messages = options.messages || {};
     const dateTimeFormats = options.dateTimeFormats || {};
     const numberFormats = options.numberFormats || {};
@@ -1113,12 +1187,50 @@ class VueI18n {
     this._dateTimeFormatters = {};
     this._numberFormatters = {};
     this._path = new I18nPath();
-    this._dataListeners = [];
+    this._dataListeners = new Set();
+    this._componentInstanceCreatedListener = options.componentInstanceCreatedListener || null;
     this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
       : !!options.preserveDirectiveContent;
     this.pluralizationRules = options.pluralizationRules || {};
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off';
+    this._postTranslation = options.postTranslation || null;
+    this._escapeParameterHtml = options.escapeParameterHtml || false;
+
+    /**
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index
+    */
+    this.getChoiceIndex = (choice, choicesLength) => {
+      const thisPrototype = Object.getPrototypeOf(this);
+      if (thisPrototype && thisPrototype.getChoiceIndex) {
+        const prototypeGetChoiceIndex = (thisPrototype.getChoiceIndex);
+        return (prototypeGetChoiceIndex).call(this, choice, choicesLength)
+      }
+
+      // Default (old) getChoiceIndex implementation - english-compatible
+      const defaultImpl = (_choice, _choicesLength) => {
+        _choice = Math.abs(_choice);
+
+        if (_choicesLength === 2) {
+          return _choice
+            ? _choice > 1
+              ? 1
+              : 0
+            : 1
+        }
+
+        return _choice ? Math.min(_choice, 2) : 0
+      };
+
+      if (this.locale in this.pluralizationRules) {
+        return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
+      } else {
+        return defaultImpl(choice, choicesLength)
+      }
+    };
+
 
     this._exist = (message, key) => {
       if (!message || !key) { return false }
@@ -1162,7 +1274,7 @@ class VueI18n {
             paths.pop();
           }
         });
-      } else if (Array.isArray(message)) {
+      } else if (isArray(message)) {
         message.forEach((item, index) => {
           if (isPlainObject(item)) {
             paths.push(`[${index}]`);
@@ -1176,7 +1288,7 @@ class VueI18n {
             paths.pop();
           }
         });
-      } else if (typeof message === 'string') {
+      } else if (isString(message)) {
         const ret = htmlTagMatcher.test(message);
         if (ret) {
           const msg = `Detected HTML in message '${message}' of keypath '${paths.join('')}' at '${locale}'. Consider component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`;
@@ -1204,7 +1316,7 @@ class VueI18n {
   }
 
   subscribeDataChanging (vm) {
-    this._dataListeners.push(vm);
+    this._dataListeners.add(vm);
   }
 
   unsubscribeDataChanging (vm) {
@@ -1214,12 +1326,11 @@ class VueI18n {
   watchI18nData () {
     const self = this;
     return this._vm.$watch('$data', () => {
-      let i = self._dataListeners.length;
-      while (i--) {
+      self._dataListeners.forEach(e => {
         Vue.nextTick(() => {
-          self._dataListeners[i] && self._dataListeners[i].$forceUpdate();
+          e && e.$forceUpdate();
         });
-      }
+      });
     }, { deep: true })
   }
 
@@ -1231,6 +1342,12 @@ class VueI18n {
       target.$set(target, 'locale', val);
       target.$forceUpdate();
     }, { immediate: true })
+  }
+
+  onComponentInstanceCreated (newI18n) {
+    if (this._componentInstanceCreatedListener) {
+      this._componentInstanceCreatedListener(newI18n, this);
+    }
   }
 
   get vm () { return this._vm }
@@ -1247,6 +1364,7 @@ class VueI18n {
 
   get fallbackLocale () { return this._vm.fallbackLocale }
   set fallbackLocale (locale) {
+    this._localeChainCache = {};
     this._vm.$set(this._vm, 'fallbackLocale', locale);
   }
 
@@ -1280,6 +1398,9 @@ class VueI18n {
     }
   }
 
+  get postTranslation () { return this._postTranslation }
+  set postTranslation (handler) { this._postTranslation = handler; }
+
   _getMessages () { return this._vm.messages }
   _getDateTimeFormats () { return this._vm.dateTimeFormats }
   _getNumberFormats () { return this._vm.numberFormats }
@@ -1288,7 +1409,7 @@ class VueI18n {
     if (!isNull(result)) { return result }
     if (this._missing) {
       const missingRet = this._missing.apply(null, [locale, key, vm, values]);
-      if (typeof missingRet === 'string') {
+      if (isString(missingRet)) {
         return missingRet
       }
     } else {
@@ -1340,16 +1461,16 @@ class VueI18n {
     if (!message) { return null }
 
     const pathRet = this._path.getPathValue(message, key);
-    if (Array.isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
+    if (isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
 
     let ret;
     if (isNull(pathRet)) {
       /* istanbul ignore else */
       if (isPlainObject(message)) {
         ret = message[key];
-        if (typeof ret !== 'string') {
+        if (!(isString(ret) || isFunction(ret))) {
           if (!this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-            warn(`Value of key '${key}' is not a string!`);
+            warn(`Value of key '${key}' is not a string or function !`);
           }
           return null
         }
@@ -1358,18 +1479,18 @@ class VueI18n {
       }
     } else {
       /* istanbul ignore else */
-      if (typeof pathRet === 'string') {
+      if (isString(pathRet) || isFunction(pathRet)) {
         ret = pathRet;
       } else {
         if (!this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-          warn(`Value of key '${key}' is not a string!`);
+          warn(`Value of key '${key}' is not a string or function!`);
         }
         return null
       }
     }
 
     // Check for the existence of links within the translated string
-    if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
+    if (isString(ret) && (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0)) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack);
     }
 
@@ -1391,7 +1512,9 @@ class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches = ret.match(linkKeyMatcher);
-    for (const idx in matches) {
+    
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let idx in matches) {
       // ie compatible: filter custom array
       // prototype method
       if (!matches.hasOwnProperty(idx)) {
@@ -1404,7 +1527,7 @@ class VueI18n {
       // Remove the leading @:, @.case: and the brackets
       const linkPlaceholder = link.replace(linkPrefix, '').replace(bracketsMatcher, '');
 
-      if (visitedLinkStack.includes(linkPlaceholder)) {
+      if (includes(visitedLinkStack, linkPlaceholder)) {
         {
           warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`);
         }
@@ -1434,7 +1557,7 @@ class VueI18n {
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values],
+        isArray(values) ? values : [values],
         interpolateMode
       );
 
@@ -1453,7 +1576,33 @@ class VueI18n {
     return ret
   }
 
+  _createMessageContext (values, formatter, path, interpolateMode) {
+    const _list = isArray(values) ? values : [];
+    const _named = isObject(values) ? values : {};
+    const list = (index) => _list[index];
+    const named = (key) => _named[key];
+    const messages = this._getMessages();
+    const locale = this.locale;
+
+    return {
+      list,
+      named,
+      values,
+      formatter,
+      path,
+      messages,
+      locale,
+      linked: (linkedKey) => this._interpolate(locale, messages[locale] || {}, linkedKey, null, interpolateMode, undefined, [linkedKey])
+    }
+  }
+
   _render (message, interpolateMode, values, path) {
+    if (isFunction(message)) {
+      return message(
+        this._createMessageContext(values, this._formatter || defaultFormatter, path, interpolateMode)
+      )
+    }
+
     let ret = this._formatter.interpolate(message, values, path);
 
     // If the custom formatter refuses to work - apply the default one
@@ -1463,7 +1612,104 @@ class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' && typeof ret !== 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && !isString(ret) ? ret.join('') : ret
+  }
+
+  _appendItemToChain (chain, item, blocks) {
+    let follow = false;
+    if (!includes(chain, item)) {
+      follow = true;
+      if (item) {
+        follow = item[item.length - 1] !== '!';
+        item = item.replace(/!/g, '');
+        chain.push(item);
+        if (blocks && blocks[item]) {
+          follow = blocks[item];
+        }
+      }
+    }
+    return follow
+  }
+
+  _appendLocaleToChain (chain, locale, blocks) {
+    let follow;
+    const tokens = locale.split('-');
+    do {
+      const item = tokens.join('-');
+      follow = this._appendItemToChain(chain, item, blocks);
+      tokens.splice(-1, 1);
+    } while (tokens.length && (follow === true))
+    return follow
+  }
+
+  _appendBlockToChain (chain, block, blocks) {
+    let follow = true;
+    for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
+      const locale = block[i];
+      if (isString(locale)) {
+        follow = this._appendLocaleToChain(chain, locale, blocks);
+      }
+    }
+    return follow
+  }
+
+  _getLocaleChain (start, fallbackLocale) {
+    if (start === '') { return [] }
+
+    if (!this._localeChainCache) {
+      this._localeChainCache = {};
+    }
+
+    let chain = this._localeChainCache[start];
+    if (!chain) {
+      if (!fallbackLocale) {
+        fallbackLocale = this.fallbackLocale;
+      }
+      chain = [];
+
+      // first block defined by start
+      let block = [start];
+
+      // while any intervening block found
+      while (isArray(block)) {
+        block = this._appendBlockToChain(
+          chain,
+          block,
+          fallbackLocale
+        );
+      }
+
+      // last block defined by default
+      let defaults;
+      if (isArray(fallbackLocale)) {
+        defaults = fallbackLocale;
+      } else if (isObject(fallbackLocale)) {
+        /* $FlowFixMe */
+        if (fallbackLocale['default']) {
+          defaults = fallbackLocale['default'];
+        } else {
+          defaults = null;
+        }
+      } else {
+        defaults = fallbackLocale;
+      }
+
+      // convert defaults to array
+      if (isString(defaults)) {
+        block = [defaults];
+      } else {
+        block = defaults;
+      }
+      if (block) {
+        this._appendBlockToChain(
+          chain,
+          block,
+          null
+        );
+      }
+      this._localeChainCache[start] = chain;
+    }
+    return chain
   }
 
   _translate (
@@ -1475,28 +1721,33 @@ class VueI18n {
     interpolateMode,
     args
   ) {
-    let res =
-      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, [key]);
-    if (!isNull(res)) { return res }
-
-    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key]);
-    if (!isNull(res)) {
-      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`);
+    const chain = this._getLocaleChain(locale, fallback);
+    let res;
+    for (let i = 0; i < chain.length; i++) {
+      const step = chain[i];
+      res =
+        this._interpolate(step, messages[step], key, host, interpolateMode, args, [key]);
+      if (!isNull(res)) {
+        if (step !== locale && "development" !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(("Fall back to translate the keypath '" + key + "' with '" + step + "' locale."));
+        }
+        return res
       }
-      return res
-    } else {
-      return null
     }
+    return null
   }
 
   _t (key, _locale, messages, host, ...values) {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values);
+    if(this._escapeParameterHtml) {
+      parsedArgs.params = escapeParams(parsedArgs.params);
+    }
+
     const locale = parsedArgs.locale || _locale;
 
-    const ret = this._translate(
+    let ret = this._translate(
       messages, locale, this.fallbackLocale, key,
       host, 'string', parsedArgs.params
     );
@@ -1508,7 +1759,11 @@ class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values, 'string')
+      ret = this._warnDefault(locale, key, ret, host, values, 'string');
+      if (this._postTranslation && ret !== null && ret !== undefined) {
+        ret = this._postTranslation(ret, key);
+      }
+      return ret
     }
   }
 
@@ -1534,7 +1789,7 @@ class VueI18n {
     /* istanbul ignore if */
     if (!key) { return '' }
 
-    if (typeof locale !== 'string') {
+    if (!isString(locale)) {
       locale = this.locale;
     }
 
@@ -1563,40 +1818,12 @@ class VueI18n {
 
   fetchChoice (message, choice) {
     /* istanbul ignore if */
-    if (!message && typeof message !== 'string') { return null }
+    if (!message || !isString(message)) { return null }
     const choices = message.split('|');
 
     choice = this.getChoiceIndex(choice, choices.length);
     if (!choices[choice]) { return message }
     return choices[choice].trim()
-  }
-
-  /**
-   * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choicesLength {number} an overall amount of available choices
-   * @returns a final choice index
-  */
-  getChoiceIndex (choice, choicesLength) {
-    // Default (old) getChoiceIndex implementation - english-compatible
-    const defaultImpl = (_choice, _choicesLength) => {
-      _choice = Math.abs(_choice);
-
-      if (_choicesLength === 2) {
-        return _choice
-          ? _choice > 1
-            ? 1
-            : 0
-          : 1
-      }
-
-      return _choice ? Math.min(_choice, 2) : 0
-    };
-
-    if (this.locale in this.pluralizationRules) {
-      return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
-    } else {
-      return defaultImpl(choice, choicesLength)
-    }
   }
 
   tc (key, choice, ...values) {
@@ -1619,7 +1846,6 @@ class VueI18n {
   setLocaleMessage (locale, message) {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message);
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, message);
   }
@@ -1627,9 +1853,13 @@ class VueI18n {
   mergeLocaleMessage (locale, message) {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message);
-      if (this._warnHtmlInMessage === 'error') { return }
     }
-    this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message));
+    this._vm.$set(this._vm.messages, locale, merge(
+      typeof this._vm.messages[locale] !== 'undefined' && Object.keys(this._vm.messages[locale]).length
+        ? this._vm.messages[locale]
+        : {},
+      message
+    ));
   }
 
   getDateTimeFormat (locale) {
@@ -1638,10 +1868,25 @@ class VueI18n {
 
   setDateTimeFormat (locale, format) {
     this._vm.$set(this._vm.dateTimeFormats, locale, format);
+    this._clearDateTimeFormat(locale, format);
   }
 
   mergeDateTimeFormat (locale, format) {
     this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format));
+    this._clearDateTimeFormat(locale, format);
+  }
+
+  _clearDateTimeFormat (locale, format) {
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let key in format) {
+      const id = `${locale}__${key}`;
+
+      if (!this._dateTimeFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._dateTimeFormatters[id];
+    }
   }
 
   _localizeDateTime (
@@ -1654,13 +1899,20 @@ class VueI18n {
     let _locale = locale;
     let formats = dateTimeFormats[_locale];
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`);
+    const chain = this._getLocaleChain(locale, fallback);
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale;
+      const step = chain[i];
+      formats = dateTimeFormats[step];
+      _locale = step;
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && "development" !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' datetime formats from '${current}' datetime formats.`);
+        }
+      } else {
+        break
       }
-      _locale = fallback;
-      formats = dateTimeFormats[_locale];
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -1706,7 +1958,7 @@ class VueI18n {
     let key = null;
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0];
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -1717,10 +1969,10 @@ class VueI18n {
         }
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0];
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1];
       }
     }
@@ -1734,10 +1986,25 @@ class VueI18n {
 
   setNumberFormat (locale, format) {
     this._vm.$set(this._vm.numberFormats, locale, format);
+    this._clearNumberFormat(locale, format);
   }
 
   mergeNumberFormat (locale, format) {
     this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format));
+    this._clearNumberFormat(locale, format);
+  }
+
+  _clearNumberFormat (locale, format) {
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let key in format) {
+      const id = `${locale}__${key}`;
+
+      if (!this._numberFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._numberFormatters[id];
+    }
   }
 
   _getNumberFormatter (
@@ -1751,13 +2018,20 @@ class VueI18n {
     let _locale = locale;
     let formats = numberFormats[_locale];
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (!this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`);
+    const chain = this._getLocaleChain(locale, fallback);
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale;
+      const step = chain[i];
+      formats = numberFormats[step];
+      _locale = step;
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && "development" !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' number formats from '${current}' number formats.`);
+        }
+      } else {
+        break
       }
-      _locale = fallback;
-      formats = numberFormats[_locale];
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -1814,7 +2088,7 @@ class VueI18n {
     let options = null;
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0];
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -1826,17 +2100,17 @@ class VueI18n {
 
         // Filter out number format options only
         options = Object.keys(args[0]).reduce((acc, key) => {
-          if (numberFormatKeys.includes(key)) {
+          if (includes(numberFormatKeys, key)) {
             return Object.assign({}, acc, { [key]: args[0][key] })
           }
           return acc
         }, null);
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0];
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1];
       }
     }
@@ -1890,6 +2164,6 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.15.5';
+VueI18n.version = '8.24.4';
 
 export default VueI18n;

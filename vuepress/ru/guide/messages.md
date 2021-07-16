@@ -11,7 +11,13 @@ type LocaleMessageObject = { [key: Path]: LocaleMessage }
 type LocaleMessageArray = LocaleMessage[]
 type MessageContext = {
   list: (index: number) => mixed,
-  named: (key: string) => mixed
+  named: (key: string) => mixed,
+  linked: (key: string) => TranslateResult,
+  values: any,
+  path: string,
+  formatter: Formatter,
+  messages: LocaleMessages,
+  locale: Locale
 };
 type MessageFunction = (ctx: MessageContext) => string;
 type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
