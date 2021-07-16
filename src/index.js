@@ -770,7 +770,7 @@ export default class VueI18n {
     }
     this._vm.$set(this._vm.messages, locale, merge(
       typeof this._vm.messages[locale] !== 'undefined' && Object.keys(this._vm.messages[locale]).length
-        ? this._vm.messages[locale]
+        ? Object.assign({}, this._vm.messages[locale])
         : {},
       message
     ))
