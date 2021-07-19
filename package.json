@@ -28,7 +28,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-flow": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.0.0",
     "@vue/babel-preset-app": "^4.4.1",
     "babel-eslint": "^10.1.0",
