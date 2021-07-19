@@ -47,7 +47,7 @@
     "eslint-plugin-no-autofix": "^1.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "eslint-plugin-vue-libs": "^4.0.0",
-    "flow-bin": "^0.38.0",
+    "flow-bin": "^0.155.1",
     "http-server": "^0.12.3",
     "intl": "^1.2.5",
     "karma": "^5.0.9",
