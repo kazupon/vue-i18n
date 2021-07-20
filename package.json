@@ -45,7 +45,7 @@
     "eslint-plugin-flowtype": "^4.7.0",
     "eslint-plugin-ie11": "^1.0.0",
     "eslint-plugin-no-autofix": "^1.0.1",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.14.0",
     "eslint-plugin-vue-libs": "^4.0.0",
     "flow-bin": "^0.38.0",
     "http-server": "^0.12.3",
