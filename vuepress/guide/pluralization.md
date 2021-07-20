@@ -79,6 +79,8 @@ Output below:
 
 ## Custom pluralization
 
+_This feature is available since version 8.0_
+
 Such pluralization, however, does not apply to all languages (Slavic languages, for example, have different pluralization rules).
 
 In order to implement these rules you can pass an optional `pluralizationRules` object into `VueI18n` constructor options.
