@@ -76,7 +76,7 @@
     "selenium-server": "^3.141.59",
     "shipjs": "^0.23.3",
     "sinon": "^11.1.1",
-    "terser": "^3.17.0",
+    "terser": "^5.7.1",
     "typescript": "^3.9.3",
     "vue": "^2.5.17",
     "vue-github-button": "^1.1.2",
