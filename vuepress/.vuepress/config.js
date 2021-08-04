@@ -1,5 +1,19 @@
+const head = []
+
+if (process.env.NODE_ENV === 'production') {
+  head.push([
+    'meta', { name: 'theme-color', content: '#3eaf7c' },
+    'script',
+    {
+      src: 'https://unpkg.com/thesemetrics@latest',
+      async: ''
+    }
+  ])
+}
+
 module.exports = {
   base: '/vue-i18n/',
+  head,
   locales: {
     '/': {
       lang: 'en-US',
@@ -22,9 +36,7 @@ module.exports = {
       description: 'Vue I18n é um internacionalizador de idiomas para Vue.js'
     },
   },
-  head: [
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-  ],
+  head: head,
   serviceWorker: false,
   themeConfig: {
     repo: 'kazupon/vue-i18n',
