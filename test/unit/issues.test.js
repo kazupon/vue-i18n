@@ -790,4 +790,27 @@ describe('issues', () => {
         .catch(console.error)
     })
   })
+
+  describe('#1380', () => {
+    it('should be translated', done => {
+      vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              'link-with-slash': '@:key/with/slash',
+              'key/with/slash': 'should be translated'
+            }
+          }
+        }),
+        render (h) {
+          return h('div', 
+          [ h('p', { ref: 'text' }, [this.$t('link-with-slash')]) ])
+        }
+      }).$mount()
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$refs.text.textContent, 'should be translated')
+      }).then(done)
+    })
+  })
 })
