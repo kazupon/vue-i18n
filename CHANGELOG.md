@@ -1,3 +1,19 @@
+## v8.25.1 (2021-09-13)
+
+#### :bug: Bug Fixes
+* [#1381](https://github.com/kazupon/vue-i18n/pull/1381) fix: linked messages containing slash symbol ([@Lamberthassel](https://github.com/Lamberthassel))
+
+#### :lock: Security Fixes
+* [#1353](https://github.com/kazupon/vue-i18n/pull/1353) build(deps): [security] bump tar from 6.0.2 to 6.1.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### :pencil: Documentation
+* [#1323](https://github.com/kazupon/vue-i18n/pull/1323) Added version notice for custom pluralizations ([@ingria](https://github.com/ingria))
+
+#### Committers: 3
+- Igor Nabebin ([@Lamberthassel](https://github.com/Lamberthassel))
+- Ingria ([@ingria](https://github.com/ingria))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v8.25.0 (2021-07-16)
 
 #### :star: New Features
