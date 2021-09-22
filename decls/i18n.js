@@ -82,6 +82,7 @@ declare type I18nOptions = {
   fallbackLocale?: FallbackLocale,
   messages?: LocaleMessages,
   dateTimeFormats?: DateTimeFormats,
+  datetimeFormats?: DateTimeFormats,
   numberFormats?: NumberFormats,
   formatter?: Formatter,
   missing?: MissingHandler,

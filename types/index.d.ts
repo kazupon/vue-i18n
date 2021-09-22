@@ -157,6 +157,9 @@ export type MissingHandler = VueI18n.MissingHandler;
 export type PostTranslationHandler = VueI18n.PostTranslationHandler;
 export type IntlAvailability = VueI18n.IntlAvailability;
 export type I18nOptions = VueI18n.I18nOptions;
+export type PluignOptions = {
+  bridge?: boolean
+}
 
 export declare interface IVueI18n {
   readonly messages: VueI18n.LocaleMessages;
@@ -257,7 +260,7 @@ declare class VueI18n {
   */
   getChoiceIndex: (choice: number, choicesLength: number) => number;
 
-  static install: PluginFunction<never>;
+  static install: PluginFunction<PluignOptions>;
   static version: string;
   static availabilities: VueI18n.IntlAvailability;
 }
