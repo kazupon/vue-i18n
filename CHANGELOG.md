@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.26.0 (2021-09-22)
+
+#### :star: New Features
+* [#1385](https://github.com/kazupon/vue-i18n/pull/1385) feat: support for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.25.1 (2021-09-13)
 
 #### :bug: Bug Fixes
