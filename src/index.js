@@ -82,7 +82,7 @@ export default class VueI18n {
       ? false
       : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
-    const dateTimeFormats = options.dateTimeFormats || {}
+    const dateTimeFormats = options.dateTimeFormats || options.datetimeFormats || {}
     const numberFormats = options.numberFormats || {}
 
     this._vm = null
@@ -232,7 +232,7 @@ export default class VueI18n {
   }): void {
     const silent = Vue.config.silent
     Vue.config.silent = true
-    this._vm = new Vue({ data })
+    this._vm = new Vue({ data, __VUE18N__INSTANCE__: true })
     Vue.config.silent = silent
   }
 
