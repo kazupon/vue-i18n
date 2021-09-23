@@ -174,6 +174,7 @@ export declare interface IVueI18n {
   silentTranslationWarn: boolean | RegExp;
   silentFallbackWarn: boolean | RegExp;
   preserveDirectiveContent: boolean;
+  sync: boolean;
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
   postTranslation: VueI18n.PostTranslationHandler;
@@ -228,6 +229,7 @@ declare class VueI18n {
   pluralizationRules: VueI18n.PluralizationRulesMap;
   warnHtmlInMessage: VueI18n.WarnHtmlInMessageLevel;
   postTranslation: VueI18n.PostTranslationHandler;
+  sync: boolean;
 
   t(key: VueI18n.Path, values?: VueI18n.Values): VueI18n.TranslateResult;
   t(key: VueI18n.Path, locale: VueI18n.Locale, values?: VueI18n.Values): VueI18n.TranslateResult;
