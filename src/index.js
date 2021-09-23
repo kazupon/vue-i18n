@@ -329,7 +329,7 @@ export default class VueI18n {
   set postTranslation (handler: PostTranslationHandler): void { this._postTranslation = handler }
 
   get sync (): boolean { return this._sync }
-  set sync (val: boolean): void { this._sync = value }
+  set sync (val: boolean): void { this._sync = val }
 
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
