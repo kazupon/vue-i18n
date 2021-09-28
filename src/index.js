@@ -63,6 +63,7 @@ export default class VueI18n {
   _warnHtmlInMessage: WarnHtmlInMessageLevel
   _escapeParameterHtml: boolean
   _postTranslation: ?PostTranslationHandler
+  __VUE_I18N_BRIDGE__: ?string
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
@@ -115,6 +116,10 @@ export default class VueI18n {
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
     this._postTranslation = options.postTranslation || null
     this._escapeParameterHtml = options.escapeParameterHtml || false
+
+    if ('__VUE_I18N_BRIDGE__' in options) {
+      this.__VUE_I18N_BRIDGE__ = options.__VUE_I18N_BRIDGE__
+    }
 
     /**
      * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
