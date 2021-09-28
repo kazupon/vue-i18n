@@ -1,3 +1,11 @@
+## v8.26.2 (2021-09-28)
+
+#### :zap: Improved Features
+* [#1390](https://github.com/kazupon/vue-i18n/pull/1390) improvement: add flags for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.26.1 (2021-09-23)
 
 #### :zap: Improved Features
