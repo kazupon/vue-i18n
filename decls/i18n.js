@@ -100,6 +100,7 @@ declare type I18nOptions = {
   postTranslation?: PostTranslationHandler,
   componentInstanceCreatedListener?: ComponentInstanceCreatedListener,
   escapeParameterHtml?: boolean,
+  __VUE_I18N_BRIDGE__?: string,
 };
 
 declare type IntlAvailability = {
