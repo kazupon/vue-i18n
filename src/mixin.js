@@ -21,15 +21,16 @@ export default function defineMixin (bridge: boolean = false) {
     : { // regulary 
     beforeCreate (): void {
       const options: any = this.$options
-      options.i18n = options.i18n || (options.__i18n ? {} : null)
+      options.i18n = options.i18n || ((options.__i18nBridge || options.__i18n) ? {} : null)
 
       if (options.i18n) {
         if (options.i18n instanceof VueI18n) {
           // init locale messages via custom blocks
-          if (options.__i18n) {
+          if ((options.__i18nBridge || options.__i18n)) {
             try {
               let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {}
-              options.__i18n.forEach(resource => {
+              const __i18n = options.__i18nBridge || options.__i18n
+              __i18n.forEach(resource => {
                 localeMessages = merge(localeMessages, JSON.parse(resource))
               })
               Object.keys(localeMessages).forEach((locale: Locale) => {
@@ -60,10 +61,11 @@ export default function defineMixin (bridge: boolean = false) {
           }
 
           // init locale messages via custom blocks
-          if (options.__i18n) {
+          if ((options.__i18nBridge || options.__i18n)) {
             try {
               let localeMessages = options.i18n && options.i18n.messages ? options.i18n.messages : {}
-              options.__i18n.forEach(resource => {
+              const __i18n = options.__i18nBridge || options.__i18n
+              __i18n.forEach(resource => {
                 localeMessages = merge(localeMessages, JSON.parse(resource))
               })
               options.i18n.messages = localeMessages
@@ -105,7 +107,7 @@ export default function defineMixin (bridge: boolean = false) {
 
     beforeMount (): void {
       const options: any = this.$options
-      options.i18n = options.i18n || (options.__i18n ? {} : null)
+      options.i18n = options.i18n || ((options.__i18nBridge || options.__i18n) ? {} : null)
 
       if (options.i18n) {
         if (options.i18n instanceof VueI18n) {
