@@ -1,3 +1,11 @@
+## v8.26.3 (2021-09-30)
+
+#### :zap: Improved Features
+* [#1392](https://github.com/kazupon/vue-i18n/pull/1392) improvement: vue-i18n-loader bridge mode ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.26.2 (2021-09-28)
 
 #### :zap: Improved Features
