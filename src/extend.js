@@ -1,10 +1,7 @@
 /* @flow */
 
-export default function extend (Vue: any, bridge: boolean = false): void {
-  /**
-   * if `bridge` mode is avialable, `$i18n` is defined at `vue-i18n-bridge`
-   */
-  if (!bridge && !Vue.prototype.hasOwnProperty('$i18n')) {
+export default function extend (Vue: any): void {
+  if (!Vue.prototype.hasOwnProperty('$i18n')) {
     // $FlowFixMe
     Object.defineProperty(Vue.prototype, '$i18n', {
       get () { return this._i18n }
