@@ -1,3 +1,11 @@
+## v8.26.4 (2021-10-01)
+
+#### :zap: Improved Features
+* [#1394](https://github.com/kazupon/vue-i18n/pull/1394) improvement:  $i18n property deinition for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.26.3 (2021-09-30)
 
 #### :zap: Improved Features
