@@ -1,6 +1,6 @@
 /* @flow */
 
-export default function extend (Vue: any, bridge = false): void {
+export default function extend (Vue: any, bridge: boolean = false): void {
   /**
    * if `bridge` mode is avialable, `$i18n` is defined at `vue-i18n-bridge`
    */
