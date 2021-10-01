@@ -24,7 +24,7 @@ export function install (_Vue, options = { bridge: false }) {
     return
   }
 
-  extend(Vue)
+  extend(Vue, options.bridge)
   Vue.mixin(defineMixin(options.bridge))
   Vue.directive('t', { bind, update, unbind })
   Vue.component(interpolationComponent.name, interpolationComponent)
