@@ -266,12 +266,16 @@ export default class VueI18n {
     }, { deep: true })
   }
 
-  watchLocale (): ?Function {
+  watchLocale (composer?: any): ?Function {
     /* istanbul ignore if */
     if (!this._sync || !this._root) { return null }
+    const self = this
     const target: any = this._vm
     return this._root.$i18n.vm.$watch('locale', (val) => {
       target.$set(target, 'locale', val)
+      if (self.__VUE_I18N_BRIDGE__ && composer) {
+        composer.locale.value = val
+      }
       target.$forceUpdate()
     }, { immediate: true })
   }
