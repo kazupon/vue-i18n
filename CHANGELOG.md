@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.26.7 (2021-11-02)
+
+#### :bug: Bug Fixes
+* [#1411](https://github.com/kazupon/vue-i18n/pull/1411) fix: cannot work watchLocale on vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 ## v8.26.6 (2021-11-02)
 
 #### :zap: Improved Features
