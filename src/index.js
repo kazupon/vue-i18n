@@ -267,17 +267,27 @@ export default class VueI18n {
   }
 
   watchLocale (composer?: any): ?Function {
-    /* istanbul ignore if */
-    if (!this._sync || !this._root) { return null }
-    const self = this
-    const target: any = this._vm
-    return this._root.$i18n.vm.$watch('locale', (val) => {
-      target.$set(target, 'locale', val)
-      if (self.__VUE_I18N_BRIDGE__ && composer) {
-        composer.locale.value = val
-      }
-      target.$forceUpdate()
-    }, { immediate: true })
+    if (!composer) {
+      /* istanbul ignore if */
+      if (!this._sync || !this._root) { return null }
+      const target: any = this._vm
+      return this._root.$i18n.vm.$watch('locale', (val) => {
+        target.$set(target, 'locale', val)
+        target.$forceUpdate()
+      }, { immediate: true })
+    } else {
+      // deal with vue-i18n-bridge
+      if (!this.__VUE_I18N_BRIDGE__) { return null }
+      const self = this
+      const target: any = this._vm
+      return this.vm.$watch('locale', (val) => {
+        target.$set(target, 'locale', val)
+        if (self.__VUE_I18N_BRIDGE__ && composer) {
+          composer.locale.value = val
+        }
+        target.$forceUpdate()
+      }, { immediate: true })
+    }
   }
 
   onComponentInstanceCreated (newI18n: I18n) {
