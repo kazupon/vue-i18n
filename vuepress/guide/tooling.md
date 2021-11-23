@@ -48,11 +48,11 @@ Read more about BabelEdit in [tutorial page](https://www.codeandweb.com/babeledi
 
 ### i18n Ally
 
-[i18n Ally](https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally) is i18n extension for VSCode.
+[i18n Ally](https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally) is i18n extension for VSCode.
 
 i18n Ally give awesome DX for your i18n development.
 
-Read more about i18n Ally in [README](https://github.com/antfu/i18n-ally/blob/master/README.md).
+Read more about i18n Ally in [README](https://github.com/lokalise/i18n-ally/blob/main/README.md).
 
 ### i18nPlugin (intellij platform)
 
