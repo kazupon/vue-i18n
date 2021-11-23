@@ -91,7 +91,7 @@ module.exports = {
                   },
                   {
                     text: 'i18n Ally',
-                    link: 'https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally'
+                    link: 'https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally'
                   }
                 ]
               }
