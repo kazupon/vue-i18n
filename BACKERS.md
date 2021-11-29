@@ -33,6 +33,15 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
   </a>
 </p>
 
+<p align="center">
+  <a href="https://cypress.io/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/cypress.svg"
+      width="400px"
+    />
+  </a>
+</p>
+
 [It could be you!](https://www.patreon.com/bePatron?c=1597144&patAmt=500.0)
 
 <h2 align="center">Sliver Sponsors</h2>

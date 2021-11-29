@@ -46,6 +46,17 @@
   </a>
 </p>
 
+<p align="center">
+  <a
+    href="https://cypress.io/"
+    target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/cypress.svg"
+      width="240px"
+    />
+  </a>
+</p>
+
 <h3 align="center">🥈 Silver Sponsors</h3>
 
 <h3 align="center">🥉 Bronze Sponsors</h3>
