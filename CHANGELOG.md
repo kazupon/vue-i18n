@@ -1,3 +1,15 @@
+## v8.26.8 (2021-12-28)
+
+#### :zap: Improved Features
+* [#1429](https://github.com/kazupon/vue-i18n/pull/1429) improvement: type definition order for vue-i18n-bridge integration ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#1416](https://github.com/kazupon/vue-i18n/pull/1416) Update links to i18n Ally in tooling docs ([@FloEdelmann](https://github.com/FloEdelmann))
+
+#### Committers: 2
+- Flo Edelmann ([@FloEdelmann](https://github.com/FloEdelmann))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
 Version 9 of Highlight.js has reached EOL and is no longer supported.
 Please upgrade or ask whatever dependency you are using to upgrade.
 https://github.com/highlightjs/highlight.js/issues/2877
