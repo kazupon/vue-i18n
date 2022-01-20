@@ -137,4 +137,131 @@ describe('component translation', () => {
       vm.$destroy()
     }).then(done)
   })
+
+  it('fallbackRootWithEmptyString default to be true', done => {
+    const el = document.createElement('div')
+    let vm = new Vue({
+      i18n,
+      components: {
+        child: { // translation with component
+          i18n: {
+            locale: 'en-US',
+            sync: false,
+            messages: {
+              'en-US': {
+                who: 'child'
+              },
+              'ja-JP': {
+                who: '子',
+              }
+            },
+          },
+          components: {
+            'sub-child': { // translation with root
+              i18n: {
+                locale: 'ja-JP',
+                sync: false,
+                messages: {
+                  'en-US': {
+                    who: 'sub-child'
+                  },
+                  'ja-JP': {
+                    who: ''
+                  }
+                },
+                sharedMessages: { // shared messages for child1 component
+                  'en-US': { foo: { bar: 'bar' } },
+                  'ja-JP': { foo: { bar: 'バー' } }
+                }
+              },
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('sub-child', { ref: 'sub-child' })
+            ])
+          }
+        },
+      },
+      render (h) {
+        return h('div', {}, [
+          h('p', { ref: 'who' }, [this.$t('who')]),
+          h('child', { ref: 'child' }),
+        ])
+      }
+    }).$mount(el)
+    Vue.nextTick().then(() => {
+      assert.strictEqual(vm.$refs.child.$refs['sub-child'].$refs.who.textContent, 'ルート')
+    }).then(done)
+  })
+
+  it('fallbackRootWithEmptyString should work when set to false', done => {
+    const el = document.createElement('div')
+    let vm = new Vue({
+      i18n,
+      components: {
+        child: { // translation with component
+          i18n: {
+            locale: 'en-US',
+            sync: false,
+            messages: {
+              'en-US': {
+                who: 'child'
+              },
+              'ja-JP': {
+                who: '子',
+              }
+            },
+          },
+          components: {
+            'sub-child': { // translation with root
+              i18n: {
+                locale: 'ja-JP',
+                sync: false,
+                fallbackRootWithEmptyString: false,
+                messages: {
+                  'en-US': {
+                    who: 'sub-child'
+                  },
+                  'ja-JP': {
+                    who: ''
+                  }
+                },
+                sharedMessages: { // shared messages for child1 component
+                  'en-US': { foo: { bar: 'bar' } },
+                  'ja-JP': { foo: { bar: 'バー' } }
+                }
+              },
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('sub-child', { ref: 'sub-child' })
+            ])
+          }
+        },
+      },
+      render (h) {
+        return h('div', {}, [
+          h('p', { ref: 'who' }, [this.$t('who')]),
+          h('child', { ref: 'child' }),
+        ])
+      }
+    }).$mount(el)
+    Vue.nextTick().then(() => {
+      assert.strictEqual(vm.$refs.child.$refs['sub-child'].$refs.who.textContent, '')
+    }).then(done)
+  })
 })
