@@ -89,6 +89,7 @@ declare type I18nOptions = {
   modifiers?: Modifiers,
   root?: I18n, // for internal
   fallbackRoot?: boolean,
+  fallbackRootWithEmptyString?: boolean,
   formatFallbackMessages?: boolean,
   sync?: boolean,
   silentTranslationWarn?: boolean | RegExp,

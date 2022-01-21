@@ -48,6 +48,7 @@ export default class VueI18n {
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
+  _fallbackRootWithEmptyString: boolean
   _localeChainCache: { [key: string]: Array<Locale>; }
   _missing: ?MissingHandler
   _exist: Function
@@ -95,6 +96,9 @@ export default class VueI18n {
     this._fallbackRoot = options.fallbackRoot === undefined
       ? true
       : !!options.fallbackRoot
+    this._fallbackRootWithEmptyString = options.fallbackRootWithEmptyString === undefined
+      ? true
+      : !!options.fallbackRootWithEmptyString
     this._formatFallbackMessages = options.formatFallbackMessages === undefined
       ? false
       : !!options.formatFallbackMessages
@@ -379,7 +383,7 @@ export default class VueI18n {
   }
 
   _isFallbackRoot (val: any): boolean {
-    return !val && !isNull(this._root) && this._fallbackRoot
+    return (this._fallbackRootWithEmptyString? !val : isNull(val)) && !isNull(this._root) && this._fallbackRoot
   }
 
   _isSilentFallbackWarn (key: Path): boolean {
@@ -461,7 +465,7 @@ export default class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches: any = ret.match(linkKeyMatcher)
-    
+
     // eslint-disable-next-line no-autofix/prefer-const
     for (let idx in matches) {
       // ie compatible: filter custom array
