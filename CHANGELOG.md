@@ -1,3 +1,11 @@
+## v8.27.0 (2022-01-21)
+
+#### :star: New Features
+* [#1441](https://github.com/kazupon/vue-i18n/pull/1441) feat: add a new option fallbackRootWithEmptyString ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+#### Committers: 1
+- Lee ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
 ## v8.26.8 (2021-12-28)
 
 #### :zap: Improved Features
