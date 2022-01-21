@@ -272,6 +272,20 @@ Ao usar a localização em componentes, determina se deve consultar a localizaç
 
 Se definido como `false`, um aviso será lançado e uma chave retornada.
 
+#### fallbackRootWithEmptyString
+
+> :new: Adicionado na versão 8.26+
+
+* **Tipo:** `Boolean`
+
+* **Padrão:** `true`
+
+Na localização do componente, se deve retornar à localização de nível raiz (global) quando a mensagem local for uma string vazia.
+
+Por favor, note que o comportamento padrão no vue-i18n 9.x é não voltar ao root para a mensagem local que é uma string vazia.
+
+Se for `false`, a mensagem local vazia não retornará ao root e será mantida como string vazia.
+
 #### sync
 
 * **Tipo:** `Boolean`

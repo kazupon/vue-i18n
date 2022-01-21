@@ -235,6 +235,20 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   If `false`, it's warned, and is returned the key.
 
+#### fallbackRootWithEmptyString
+
+> :new: 8.26+
+
+- **Type:** `Boolean`
+
+- **Default:** `true`
+
+  In the component localization, whether to fall back to root level (global) localization when local message is an empty string.
+
+  Please note the default behavior in vue-i18n 9.x is to not falling back to root for local message that is empty string.
+
+  If `false`, the empty local message will not fall back to root and will be kept as empty string.
+
 #### sync
 
 - **Type:** `Boolean`
