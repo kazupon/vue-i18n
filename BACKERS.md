@@ -13,6 +13,17 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
   </a>
 </p>
 
+<h2 align="center">Special Sponsors</h2>
+
+<p align="center">
+  <a href="ttps://plaid.co.jp/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/plaid.png"
+      width="400px"
+    />
+  </a>
+</p>
+
 <h2 align="center">Gold Sponsors</h2>
 
 <p align="center">
@@ -34,9 +45,11 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
 </p>
 
 <p align="center">
-  <a href="https://cypress.io/" target="_blank">
+  <a 
+    href="https://localazy.com/blog/how-to-localize-vuejs-app-with-vue-i18n-and-localazy?utm_source=kazupon&utm_medium=banner&utm_campaign=sponsorships_kazupon&utm_content=logo"
+    target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/cypress.svg"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/localazy.svg"
       width="400px"
     />
   </a>

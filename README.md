@@ -21,6 +21,19 @@
   </a>
 </p>
 
+<h3 align="center">✨ Special Sponsors</h3>
+
+<p align="center">
+  <a
+    href="https://plaid.co.jp/"
+    target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/plaid.svg"
+      width="240px"
+    />
+  </a>
+</p>
+
 <h3 align="center">🥇 Gold Sponsors</h3>
 
 <p align="center">
@@ -47,14 +60,15 @@
 
 <p align="center">
   <a
-    href="https://cypress.io/"
+    href="https://localazy.com/blog/how-to-localize-vuejs-app-with-vue-i18n-and-localazy?utm_source=kazupon&utm_medium=banner&utm_campaign=sponsorships_kazupon&utm_content=logo"
     target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/cypress.svg"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/localazy.svg"
       width="240px"
     />
   </a>
 </p>
+
 
 <h3 align="center">🥈 Silver Sponsors</h3>
 
