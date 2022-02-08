@@ -1,7 +1,7 @@
 # Introduction
 
 :::warning Notice
-:warning: This documentation is for Vue I18n v6.0 or later. if you use v5.x, see the [legacy](./legacy/) section.
+You are reading the documentation of Vue I18n v8.x **for Vue 2**. If you are working with Vue 3, use the Vue I18n v9 [documentation](https://vue-i18n.intlify.dev/) instead.
 :::
 
 Vue I18n is internationalization plugin of Vue.js. It easily integrates some localization features to your Vue.js Application.

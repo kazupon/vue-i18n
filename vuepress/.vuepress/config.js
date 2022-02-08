@@ -98,15 +98,11 @@ module.exports = {
             ]
           },
           {
-            text: 'Patreon',
-            link: 'https://www.patreon.com/kazupon'
-          },
-          {
             text: 'Release Notes',
             link: 'https://github.com/kazupon/vue-i18n/releases'
           },
           {
-            text: 'v9',
+            text: 'v9.x',
             link: 'https://vue-i18n.intlify.dev'
           }
         ],
@@ -132,14 +128,6 @@ module.exports = {
               '/guide/locale',
               '/guide/lazy-loading',
               '/guide/tooling'
-            ]
-          },
-          {
-            title: 'Legacy',
-            collapsable: false,
-            children: [
-              '/legacy/',
-              '/legacy/v5'
             ]
           }
         ]
@@ -228,14 +216,6 @@ module.exports = {
               '/zh/guide/locale',
               '/zh/guide/lazy-loading',
               '/zh/guide/tooling'
-            ]
-          },
-          {
-            title: 'Legacy',
-            collapsable: false,
-            children: [
-              '/zh/legacy/',
-              '/zh/legacy/v5'
             ]
           }
         ]
@@ -329,14 +309,6 @@ module.exports = {
               '/ru/guide/lazy-loading',
               '/ru/guide/tooling'
             ]
-          },
-          {
-            title: 'Устаревшие версии',
-            collapsable: false,
-            children: [
-              '/ru/legacy/',
-              '/ru/legacy/v5'
-            ]
           }
         ]
       },
@@ -428,14 +400,6 @@ module.exports = {
               '/pt/guide/locale',
               '/pt/guide/lazy-loading',
               '/pt/guide/tooling'
-            ]
-          },
-          {
-            title: 'Legado',
-            collapsable: false,
-            children: [
-              '/pt/legacy/',
-              '/pt/legacy/v5'
             ]
           }
         ]
