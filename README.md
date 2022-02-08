@@ -101,35 +101,33 @@
 
 <br/>
 
-## :warning: NOTICE
+## ⚠️  NOTICE
 
-This repository is for Vue I18n v8.x.
+**This repository is for Vue I18n v8.x and Vue 2**
 
-If you want to know about Vue I18n v9, See the [this repository](https://github.com/intlify/vue-i18n-next))
+**If you want to know about how to usage for Vue I18n v9 on Vue 3, See the [this repository](https://github.com/intlify/vue-i18n-next))**
 
-This repository will be transferred to [intlify organization](https://github.com/intlify). After that, it will be developed and maintained on intlify.
-
-## :book: Documentation
+## 📔 Documentation
 
 About Vue I18n v8.x, See [here](http://kazupon.github.io/vue-i18n/)
 
 If you want to read Vue I18n v9 docs, See [here](https://vue-i18n.intlify.dev/)
 
-## :scroll: Changelog
+## 📜 Changelog
 
 Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/kazupon/vue-i18n/blob/dev/CHANGELOG.md).
 
 
-## :exclamation: Issues
+## ❗ Issues
 
 Please make sure to read the [Issue Reporting Checklist](https://github.com/kazupon/vue-i18n/blob/dev/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
 
-## :muscle: Contribution
+## 💪 Contribution
 
 Please make sure to read the [Contributing Guide](https://github.com/kazupon/vue-i18n/blob/dev/CONTRIBUTING.md) before making a pull request.
 
 
-## :copyright: License
+## ©️ License
 
 [MIT](http://opensource.org/licenses/MIT)
