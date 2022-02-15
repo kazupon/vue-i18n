@@ -21,13 +21,13 @@ Include vue-i18n after Vue and it will install itself automatically:
 ## NPM
 
 ```sh
-npm install vue-i18n
+npm install vue-i18n@8
 ```
 
 ## Yarn
 
 ```sh
-yarn add vue-i18n
+yarn add vue-i18n@8
 ```
 
 When using with a module system, you must explicitly install the `vue-i18n`
