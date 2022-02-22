@@ -94,6 +94,15 @@ module.exports = {
                     link: 'https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally'
                   }
                 ]
+              },
+              {
+                text: '3rd Party Integrations',
+                items: [
+                  {
+                    text: 'Localazy',
+                    link: 'https://localazy.com/blog/how-to-localize-vuejs-app-with-vue-i18n-and-localazy?utm_source=kazupon&utm_medium=banner&utm_campaign=sponsorships_kazupon&utm_content=logo'
+                  }
+                ]
               }
             ]
           },
