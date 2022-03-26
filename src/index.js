@@ -26,7 +26,7 @@ import I18nPath from './path'
 import type { PathValue } from './path'
 
 const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
-const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|./]+|\([\w\-_|./]+\)))/g
+const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|./]+|\([\w\-_:|./]+\)))/g
 const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
 const bracketsMatcher = /[()]/g
 const defaultModifiers = {
