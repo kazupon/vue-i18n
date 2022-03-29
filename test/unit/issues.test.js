@@ -813,4 +813,11 @@ describe('issues', () => {
       }).then(done)
     })
   })
+
+  describe('#1488', () => {
+    it('should be translated', () => {
+      assert.strictEqual(vm.$i18n.t('message.linkColon'), messages.en['colon:hello'])
+      assert.strictEqual(vm.$i18n.t('message.linkPipe'), messages.en['pipe|hello'])
+    })
+  })
 })

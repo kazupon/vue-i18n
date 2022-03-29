@@ -19,6 +19,8 @@ export default {
       linkBrackets: 'Hello @:(message.hoge). Isn\'t @:(message.hello) great?',
       linkHyphen: '@:hyphen-hello',
       linkUnderscore: '@:underscore_hello',
+      linkPipe: '@:pipe|hello',
+      linkColon: '@:(colon:hello)',
       linkList: '@:message.hello: {0} {1}',
       linkCaseLower: 'Please provide @.lower:message.homeAddress',
       linkCaseUpper: '@.upper:message.homeAddress',
@@ -45,6 +47,8 @@ export default {
     'hyphen-hello': 'hyphen the wolrd',
     /* eslint-disable */
     underscore_hello: 'underscore the wolrd',
+    'colon:hello': 'hello colon',
+    'pipe|hello': 'hello pipe',
     /* eslint-enable */
     underscore: '{helloMsg} world',
     plurals: {

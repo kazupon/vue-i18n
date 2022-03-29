@@ -68,6 +68,13 @@ describe('basic', () => {
       it('should render link with custom formatting.', () => {
         assert.strictEqual(i18n.t('message.linkCaseCustom'), 'hxmx Addrxss')
       })
+
+      it('should translate link when keys have special characters', () => {
+        assert.strictEqual(i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
+        assert.strictEqual(i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
+        assert.strictEqual(i18n.t('message.linkColon'), messages.en['colon:hello'])
+        assert.strictEqual(i18n.t('message.linkPipe'), messages.en['pipe|hello'])
+      })
     })
 
     describe('ja locale', () => {
