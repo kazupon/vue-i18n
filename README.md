@@ -107,6 +107,10 @@
 
 **If you want to know about how to usage for Vue I18n v9 on Vue 3, See the [this repository](https://github.com/intlify/vue-i18n-next))**
 
+## 🙋‍♂️ About support for v8
+
+We will follow Vue v2 maintenance lifespan
+
 ## 📔 Documentation
 
 About Vue I18n v8.x, See [here](http://kazupon.github.io/vue-i18n/)
