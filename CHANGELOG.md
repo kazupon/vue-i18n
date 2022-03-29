@@ -1,3 +1,19 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.27.1 (2022-03-29)
+
+#### :zap: Improved Features
+* [#1488](https://github.com/kazupon/vue-i18n/pull/1488) Allow colon in locale message keys used in linked locale messages ([@ax-jmckenzie](https://github.com/ax-jmckenzie))
+
+#### :pencil: Documentation
+* [#1462](https://github.com/kazupon/vue-i18n/pull/1462) Restrict version to 8 for installing npm package ([@arpi17](https://github.com/arpi17))
+
+#### Committers: 2
+- James McKenzie ([@ax-jmckenzie](https://github.com/ax-jmckenzie))
+- Árpád Illyés ([@arpi17](https://github.com/arpi17))
+
 ## v8.27.0 (2022-01-21)
 
 #### :star: New Features
