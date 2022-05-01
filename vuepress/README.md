@@ -87,6 +87,18 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
       alt="Localazy"
     />
   </a>
+    <a
+    href="https://crowdin.com/teams/engineering?utm_source=vue-i18n.intlify.dev&utm_medium=referral"
+    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 15rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/crowdin.png"
+      alt="Crowdin"
+    />
+  </a>
   <h4 style="padding: 12px 0 0 0;">🥈 Silver Sponsors</h4>
   <h4 style="padding: 12px 0 0 0;">🥉 Bronze Sponsors</h4>
   <a

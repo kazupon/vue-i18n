@@ -91,6 +91,21 @@ Go to [Get Started](./started.md)
   </a>
 </p>
 
+<p style="text-align: center;">
+  <a
+    href="https://crowdin.com/teams/engineering?utm_source=vue-i18n.intlify.dev&utm_medium=referral"
+    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 15rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/crowdin.png"
+      alt="Crowdin"
+    />
+  </a>
+</p>
+
 ### 🥈 Silver
 
 
