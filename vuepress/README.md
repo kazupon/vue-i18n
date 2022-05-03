@@ -95,7 +95,7 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
   >
     <img
       style="width: 15rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/crowdin.png"
+      src="/vue-i18n/patrons/crowdin.svg"
       alt="Crowdin"
     />
   </a>

@@ -60,7 +60,7 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
     href="https://crowdin.com/teams/engineering?utm_source=vue-i18n.intlify.dev&utm_medium=referral"
     target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/crowdin.png"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/crowdin.svg"
       width="400px"
     />
   </a>
