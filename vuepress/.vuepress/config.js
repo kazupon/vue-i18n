@@ -39,6 +39,10 @@ module.exports = {
   head: head,
   serviceWorker: false,
   themeConfig: {
+    carbonAds: {
+      carbon: 'CEAIC53M',
+      placement: 'kazupongithubio'
+    },
     repo: 'kazupon/vue-i18n',
     editLinks: true,
     sidebarDepth: 3,

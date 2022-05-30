@@ -31,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
     "@vue/babel-preset-app": "^4.4.1",
+    "@vuepress/theme-vue": "^1.9.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-istanbul": "^6.0.0",
