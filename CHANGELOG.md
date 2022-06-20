@@ -2,6 +2,22 @@ Version 9 of Highlight.js has reached EOL and is no longer supported.
 Please upgrade or ask whatever dependency you are using to upgrade.
 https://github.com/highlightjs/highlight.js/issues/2877
 
+## v8.27.2 (2022-06-20)
+
+#### :bug: Bug Fixes
+* [#1512](https://github.com/kazupon/vue-i18n/pull/1512) Allow modifiers names in pascalCase ([@nofacez](https://github.com/nofacez))
+
+#### :pencil: Documentation
+* [#1505](https://github.com/kazupon/vue-i18n/pull/1505) Update interpolation.md ([@victor1014](https://github.com/victor1014))
+
+#### Committers: 2
+- Mikhail ([@nofacez](https://github.com/nofacez))
+- Victor ([@victor1014](https://github.com/victor1014))
+
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
 ## v8.27.1 (2022-03-29)
 
 #### :zap: Improved Features
