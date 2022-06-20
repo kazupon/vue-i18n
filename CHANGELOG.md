@@ -1,7 +1,3 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
-
 ## v8.27.2 (2022-06-20)
 
 #### :bug: Bug Fixes
@@ -13,10 +9,6 @@ https://github.com/highlightjs/highlight.js/issues/2877
 #### Committers: 2
 - Mikhail ([@nofacez](https://github.com/nofacez))
 - Victor ([@victor1014](https://github.com/victor1014))
-
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
 
 ## v8.27.1 (2022-03-29)
 
@@ -49,10 +41,6 @@ https://github.com/highlightjs/highlight.js/issues/2877
 #### Committers: 2
 - Flo Edelmann ([@FloEdelmann](https://github.com/FloEdelmann))
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
-
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
 
 ## v8.26.7 (2021-11-02)
 
