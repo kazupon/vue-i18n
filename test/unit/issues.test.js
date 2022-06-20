@@ -820,4 +820,24 @@ describe('issues', () => {
       assert.strictEqual(vm.$i18n.t('message.linkPipe'), messages.en['pipe|hello'])
     })
   })
+
+  describe('#1308', () => {
+    it('should be translated', () => {
+      const i18n = new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              'address': 'home Address',
+              'snakeAddress': '@.snakeCase:(address)'
+            }
+          },
+          name: 'test',
+          modifiers: {
+            snakeCase: str => str.split(' ').join('-')
+          },
+      })
+
+      assert.strictEqual(i18n.t('snakeAddress'), 'home-Address')
+    })
+  })
 })

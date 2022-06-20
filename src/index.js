@@ -26,8 +26,8 @@ import I18nPath from './path'
 import type { PathValue } from './path'
 
 const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
-const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|./]+|\([\w\-_:|./]+\)))/g
-const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
+const linkKeyMatcher = /(?:@(?:\.[a-zA-Z]+)?:(?:[\w\-_|./]+|\([\w\-_:|./]+\)))/g
+const linkKeyPrefixMatcher = /^@(?:\.([a-zA-Z]+))?:/
 const bracketsMatcher = /[()]/g
 const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
