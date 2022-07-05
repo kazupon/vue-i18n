@@ -139,6 +139,7 @@ declare namespace VueI18n {
     locale?: Locale;
     fallbackLocale?: FallbackLocale;
     messages?: LocaleMessages;
+    availableLocales?: Locale[];
     dateTimeFormats?: DateTimeFormats;
     numberFormats?: NumberFormats;
     formatter?: Formatter;
