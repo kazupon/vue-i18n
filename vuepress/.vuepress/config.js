@@ -35,6 +35,11 @@ module.exports = {
       title: 'Vue I18n',
       description: 'Vue I18n é um internacionalizador de idiomas para Vue.js'
     },
+    '/fr/': {
+      lang: 'fr-FR',
+      title: 'Vue I18n',
+      description: 'Vue I18n est un plugin d\'internationalisation pour Vue.js'
+    },
   },
   head: head,
   serviceWorker: false,
@@ -417,6 +422,103 @@ module.exports = {
           }
         ]
       },
+      '/fr/': {
+        label: 'Français',
+        selectText: 'Languages',
+        editLinkText: 'Modifier cette page sur GitHub',
+        lastUpdated: 'Dernières modifications',
+        nav: [
+          {
+            text: 'Apprendre',
+            items: [
+              {
+                text: 'Guide',
+                link: '/guide/formatting',
+              },
+              {
+                text: 'API',
+                link: '/api/'
+              }
+            ]
+          },
+          {
+            text: 'Écosystème',
+            items: [
+              {
+                text: 'Outils officiel',
+                items: [
+                  {
+                    text: 'Plugin Vue CLI',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Chargeur Webpack',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'Plugin ESLint',
+                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: 'Extensions',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: 'Outils de traduction',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: 'Patreon',
+            link: 'https://www.patreon.com/kazupon'
+          },
+          {
+            text: 'Notes de version',
+            link: 'https://github.com/kazupon/vue-i18n/releases'
+          }
+        ],
+        sidebar: [
+          '/fr/introduction',
+          '/fr/started',
+          '/fr/installation',
+          {
+            title: 'Guide',
+            collapsable: false,
+            children: [
+              '/fr/guide/formatting',
+              '/fr/guide/pluralization',
+              '/fr/guide/datetime',
+              '/fr/guide/number',
+              '/fr/guide/messages',
+              '/fr/guide/fallback',
+              '/guide/component',
+              '/fr/guide/directive',
+              '/fr/guide/interpolation',
+              '/fr/guide/sfc',
+              '/fr/guide/hot-reload',
+              '/fr/guide/locale',
+              '/fr/guide/lazy-loading',
+              '/fr/guide/tooling'
+            ]
+          },
+          {
+            title: 'Héritage',
+            collapsable: false,
+            children: [
+              '/fr/legacy/',
+              '/fr/legacy/v5'
+            ]
+          }
+        ]
+      }
     }
   }
 }
