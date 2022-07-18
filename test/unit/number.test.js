@@ -16,7 +16,7 @@ desc('number format', () => {
         locale: 'en-US',
         numberFormats
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.deepEqual(numberFormats, i18n.numberFormats)
       }).then(done)
     })
@@ -45,7 +45,7 @@ desc('number format', () => {
           style: 'currency', currency: 'CNY', currencyDisplay: 'name'
         }
       }
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(text.textContent, '$101.00')
         i18n.setNumberFormat('zh-CN', zhFormat)
         assert.deepEqual(i18n.getNumberFormat('zh-CN'), zhFormat)
@@ -70,6 +70,41 @@ desc('number format', () => {
       const percent = { style: 'percent' }
       i18n.mergeNumberFormat('en-US', { percent })
       assert.deepEqual(percent, i18n.getNumberFormat('en-US').percent)
+    })
+  })
+
+  describe('fallback', () => {
+    it('should be fallback', done => {
+      const i18n = new VueI18n({
+        locale: 'en-uk',
+        fallbackLocale: ['de', 'en-us'],
+        numberFormats: {
+          de: {
+            currency: {
+              currency: 'EUR',
+              style: 'currency',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          }
+        }
+      })
+      const el = document.createElement('div')
+      document.body.appendChild(el)
+
+      const money = 101
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$n(money, 'currency')])
+        }
+      }).$mount(el)
+
+      const { text } = vm.$refs
+
+      Vue.nextTick().then(() => {
+        assert.strictEqual(text.textContent, '101,00 €')
+      }).then(done)
     })
   })
 })

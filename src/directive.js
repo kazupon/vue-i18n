@@ -1,6 +1,6 @@
 /* @flow */
 
-import { warn, isPlainObject, looseEqual } from './util'
+import { warn, isString, isPlainObject, looseEqual } from './util'
 
 export function bind (el: any, binding: Object, vnode: any): void {
   if (!assert(el, vnode)) { return }
@@ -73,7 +73,7 @@ function t (el: any, binding: Object, vnode: any): void {
   }
 
   const vm: any = vnode.context
-  if (choice) {
+  if (choice != null) {
     el._vt = el.textContent = vm.$i18n.tc(path, choice, ...makeParams(locale, args))
   } else {
     el._vt = el.textContent = vm.$i18n.t(path, ...makeParams(locale, args))
@@ -88,7 +88,7 @@ function parseValue (value: any): Object {
   let args: any
   let choice: ?number
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     path = value
   } else if (isPlainObject(value)) {
     path = value.path

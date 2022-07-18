@@ -46,7 +46,7 @@ describe('message', () => {
       }).$mount(el)
 
       const { text } = vm.$refs
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(text.textContent, messages.en.message.hello)
         // hot reload (set reactivity messages)
         messages.en.message.hello = expectEnLocale
@@ -88,10 +88,10 @@ describe('message', () => {
       }
     })
     const uw = i18n._vm.$watch('messages.ru.foo', (newVal, oldVal, o) => {
-      assert.equal(newVal, 'бар');
-      uw();
-      done();
-    });
+      assert.equal(newVal, 'бар')
+      uw()
+      done()
+    })
     i18n.mergeLocaleMessage('ru', { foo: 'бар' })
     assert.deepEqual({ foo: 'бар' }, i18n.getLocaleMessage('ru'))
   })

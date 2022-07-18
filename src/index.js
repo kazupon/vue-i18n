@@ -8,10 +8,17 @@ import {
   parseArgs,
   isPlainObject,
   isObject,
+  isArray,
+  isBoolean,
+  isString,
+  isFunction,
   looseClone,
   remove,
+  arrayFrom,
+  includes,
   merge,
-  numberFormatKeys
+  numberFormatKeys,
+  escapeParams
 } from './util'
 import BaseFormatter from './format'
 import I18nPath from './path'
@@ -19,12 +26,13 @@ import I18nPath from './path'
 import type { PathValue } from './path'
 
 const htmlTagMatcher = /<\/?[\w\s="/.':;#-\/]+>/
-const linkKeyMatcher = /(?:@(?:\.[a-z]+)?:(?:[\w\-_|.]+|\([\w\-_|.]+\)))/g
-const linkKeyPrefixMatcher = /^@(?:\.([a-z]+))?:/
+const linkKeyMatcher = /(?:@(?:\.[a-zA-Z]+)?:(?:[\w\-_|./]+|\([\w\-_:|./]+\)))/g
+const linkKeyPrefixMatcher = /^@(?:\.([a-zA-Z]+))?:/
 const bracketsMatcher = /[()]/g
 const defaultModifiers = {
   'upper': str => str.toLocaleUpperCase(),
-  'lower': str => str.toLocaleLowerCase()
+  'lower': str => str.toLocaleLowerCase(),
+  'capitalize': str => `${str.charAt(0).toLocaleUpperCase()}${str.substr(1)}`
 }
 
 const defaultFormatter = new BaseFormatter()
@@ -40,6 +48,8 @@ export default class VueI18n {
   _root: any
   _sync: boolean
   _fallbackRoot: boolean
+  _fallbackRootWithEmptyString: boolean
+  _localeChainCache: { [key: string]: Array<Locale>; }
   _missing: ?MissingHandler
   _exist: Function
   _silentTranslationWarn: boolean | RegExp
@@ -48,12 +58,17 @@ export default class VueI18n {
   _dateTimeFormatters: Object
   _numberFormatters: Object
   _path: I18nPath
-  _dataListeners: Array<any>
+  _dataListeners: Set<any>
+  _componentInstanceCreatedListener: ?ComponentInstanceCreatedListener
   _preserveDirectiveContent: boolean
   _warnHtmlInMessage: WarnHtmlInMessageLevel
+  _escapeParameterHtml: boolean
+  _postTranslation: ?PostTranslationHandler
+  __VUE_I18N_BRIDGE__: ?string
   pluralizationRules: {
     [lang: string]: (choice: number, choicesLength: number) => number
   }
+  getChoiceIndex: GetChoiceIndex
 
   constructor (options: I18nOptions = {}) {
     // Auto install if it is not done yet and `window` has `Vue`.
@@ -65,9 +80,11 @@ export default class VueI18n {
     }
 
     const locale: Locale = options.locale || 'en-US'
-    const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
+    const fallbackLocale: FallbackLocale = options.fallbackLocale === false
+      ? false
+      : options.fallbackLocale || 'en-US'
     const messages: LocaleMessages = options.messages || {}
-    const dateTimeFormats = options.dateTimeFormats || {}
+    const dateTimeFormats = options.dateTimeFormats || options.datetimeFormats || {}
     const numberFormats = options.numberFormats || {}
 
     this._vm = null
@@ -79,6 +96,9 @@ export default class VueI18n {
     this._fallbackRoot = options.fallbackRoot === undefined
       ? true
       : !!options.fallbackRoot
+    this._fallbackRootWithEmptyString = options.fallbackRootWithEmptyString === undefined
+      ? true
+      : !!options.fallbackRootWithEmptyString
     this._formatFallbackMessages = options.formatFallbackMessages === undefined
       ? false
       : !!options.formatFallbackMessages
@@ -91,12 +111,54 @@ export default class VueI18n {
     this._dateTimeFormatters = {}
     this._numberFormatters = {}
     this._path = new I18nPath()
-    this._dataListeners = []
+    this._dataListeners = new Set()
+    this._componentInstanceCreatedListener = options.componentInstanceCreatedListener || null
     this._preserveDirectiveContent = options.preserveDirectiveContent === undefined
       ? false
       : !!options.preserveDirectiveContent
     this.pluralizationRules = options.pluralizationRules || {}
     this._warnHtmlInMessage = options.warnHtmlInMessage || 'off'
+    this._postTranslation = options.postTranslation || null
+    this._escapeParameterHtml = options.escapeParameterHtml || false
+
+    if ('__VUE_I18N_BRIDGE__' in options) {
+      this.__VUE_I18N_BRIDGE__ = options.__VUE_I18N_BRIDGE__
+    }
+
+    /**
+     * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
+     * @param choicesLength {number} an overall amount of available choices
+     * @returns a final choice index
+    */
+    this.getChoiceIndex = (choice: number, choicesLength: number): number => {
+      const thisPrototype = Object.getPrototypeOf(this)
+      if (thisPrototype && thisPrototype.getChoiceIndex) {
+        const prototypeGetChoiceIndex = (thisPrototype.getChoiceIndex: any)
+        return (prototypeGetChoiceIndex: GetChoiceIndex).call(this, choice, choicesLength)
+      }
+
+      // Default (old) getChoiceIndex implementation - english-compatible
+      const defaultImpl = (_choice: number, _choicesLength: number) => {
+        _choice = Math.abs(_choice)
+
+        if (_choicesLength === 2) {
+          return _choice
+            ? _choice > 1
+              ? 1
+              : 0
+            : 1
+        }
+
+        return _choice ? Math.min(_choice, 2) : 0
+      }
+
+      if (this.locale in this.pluralizationRules) {
+        return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
+      } else {
+        return defaultImpl(choice, choicesLength)
+      }
+    }
+
 
     this._exist = (message: Object, key: Path): boolean => {
       if (!message || !key) { return false }
@@ -140,7 +202,7 @@ export default class VueI18n {
             paths.pop()
           }
         })
-      } else if (Array.isArray(message)) {
+      } else if (isArray(message)) {
         message.forEach((item, index) => {
           if (isPlainObject(item)) {
             paths.push(`[${index}]`)
@@ -154,7 +216,7 @@ export default class VueI18n {
             paths.pop()
           }
         })
-      } else if (typeof message === 'string') {
+      } else if (isString(message)) {
         const ret = htmlTagMatcher.test(message)
         if (ret) {
           const msg = `Detected HTML in message '${message}' of keypath '${paths.join('')}' at '${locale}'. Consider component interpolation with '<i18n>' to avoid XSS. See https://bit.ly/2ZqJzkp`
@@ -172,14 +234,14 @@ export default class VueI18n {
 
   _initVM (data: {
     locale: Locale,
-    fallbackLocale: Locale,
+    fallbackLocale: FallbackLocale,
     messages: LocaleMessages,
     dateTimeFormats: DateTimeFormats,
     numberFormats: NumberFormats
   }): void {
     const silent = Vue.config.silent
     Vue.config.silent = true
-    this._vm = new Vue({ data })
+    this._vm = new Vue({ data, __VUE18N__INSTANCE__: true })
     Vue.config.silent = silent
   }
 
@@ -188,7 +250,7 @@ export default class VueI18n {
   }
 
   subscribeDataChanging (vm: any): void {
-    this._dataListeners.push(vm)
+    this._dataListeners.add(vm)
   }
 
   unsubscribeDataChanging (vm: any): void {
@@ -198,23 +260,44 @@ export default class VueI18n {
   watchI18nData (): Function {
     const self = this
     return this._vm.$watch('$data', () => {
-      let i = self._dataListeners.length
-      while (i--) {
+      const listeners = arrayFrom(this._dataListeners)
+      let i = listeners.length
+      while(i--) {
         Vue.nextTick(() => {
-          self._dataListeners[i] && self._dataListeners[i].$forceUpdate()
+          listeners[i] && listeners[i].$forceUpdate()
         })
       }
     }, { deep: true })
   }
 
-  watchLocale (): ?Function {
-    /* istanbul ignore if */
-    if (!this._sync || !this._root) { return null }
-    const target: any = this._vm
-    return this._root.$i18n.vm.$watch('locale', (val) => {
-      target.$set(target, 'locale', val)
-      target.$forceUpdate()
-    }, { immediate: true })
+  watchLocale (composer?: any): ?Function {
+    if (!composer) {
+      /* istanbul ignore if */
+      if (!this._sync || !this._root) { return null }
+      const target: any = this._vm
+      return this._root.$i18n.vm.$watch('locale', (val) => {
+        target.$set(target, 'locale', val)
+        target.$forceUpdate()
+      }, { immediate: true })
+    } else {
+      // deal with vue-i18n-bridge
+      if (!this.__VUE_I18N_BRIDGE__) { return null }
+      const self = this
+      const target: any = this._vm
+      return this.vm.$watch('locale', (val) => {
+        target.$set(target, 'locale', val)
+        if (self.__VUE_I18N_BRIDGE__ && composer) {
+          composer.locale.value = val
+        }
+        target.$forceUpdate()
+      }, { immediate: true })
+    }
+  }
+
+  onComponentInstanceCreated (newI18n: I18n) {
+    if (this._componentInstanceCreatedListener) {
+      this._componentInstanceCreatedListener(newI18n, this)
+    }
   }
 
   get vm (): any { return this._vm }
@@ -229,8 +312,9 @@ export default class VueI18n {
     this._vm.$set(this._vm, 'locale', locale)
   }
 
-  get fallbackLocale (): Locale { return this._vm.fallbackLocale }
-  set fallbackLocale (locale: Locale): void {
+  get fallbackLocale (): FallbackLocale { return this._vm.fallbackLocale }
+  set fallbackLocale (locale: FallbackLocale): void {
+    this._localeChainCache = {}
     this._vm.$set(this._vm, 'fallbackLocale', locale)
   }
 
@@ -264,15 +348,21 @@ export default class VueI18n {
     }
   }
 
+  get postTranslation (): ?PostTranslationHandler { return this._postTranslation }
+  set postTranslation (handler: PostTranslationHandler): void { this._postTranslation = handler }
+
+  get sync (): boolean { return this._sync }
+  set sync (val: boolean): void { this._sync = val }
+
   _getMessages (): LocaleMessages { return this._vm.messages }
   _getDateTimeFormats (): DateTimeFormats { return this._vm.dateTimeFormats }
   _getNumberFormats (): NumberFormats { return this._vm.numberFormats }
 
-  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any): ?string {
+  _warnDefault (locale: Locale, key: Path, result: ?any, vm: ?any, values: any, interpolateMode: string): ?string {
     if (!isNull(result)) { return result }
     if (this._missing) {
       const missingRet = this._missing.apply(null, [locale, key, vm, values])
-      if (typeof missingRet === 'string') {
+      if (isString(missingRet)) {
         return missingRet
       }
     } else {
@@ -286,14 +376,14 @@ export default class VueI18n {
 
     if (this._formatFallbackMessages) {
       const parsedArgs = parseArgs(...values)
-      return this._render(key, 'string', parsedArgs.params, key)
+      return this._render(key, interpolateMode, parsedArgs.params, key)
     } else {
       return key
     }
   }
 
   _isFallbackRoot (val: any): boolean {
-    return !val && !isNull(this._root) && this._fallbackRoot
+    return (this._fallbackRootWithEmptyString? !val : isNull(val)) && !isNull(this._root) && this._fallbackRoot
   }
 
   _isSilentFallbackWarn (key: Path): boolean {
@@ -324,16 +414,16 @@ export default class VueI18n {
     if (!message) { return null }
 
     const pathRet: PathValue = this._path.getPathValue(message, key)
-    if (Array.isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
+    if (isArray(pathRet) || isPlainObject(pathRet)) { return pathRet }
 
     let ret: mixed
     if (isNull(pathRet)) {
       /* istanbul ignore else */
       if (isPlainObject(message)) {
         ret = message[key]
-        if (typeof ret !== 'string') {
+        if (!(isString(ret) || isFunction(ret))) {
           if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-            warn(`Value of key '${key}' is not a string!`)
+            warn(`Value of key '${key}' is not a string or function !`)
           }
           return null
         }
@@ -342,18 +432,18 @@ export default class VueI18n {
       }
     } else {
       /* istanbul ignore else */
-      if (typeof pathRet === 'string') {
+      if (isString(pathRet) || isFunction(pathRet)) {
         ret = pathRet
       } else {
         if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallback(locale, key)) {
-          warn(`Value of key '${key}' is not a string!`)
+          warn(`Value of key '${key}' is not a string or function!`)
         }
         return null
       }
     }
 
     // Check for the existence of links within the translated string
-    if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
+    if (isString(ret) && (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0)) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
 
@@ -375,7 +465,9 @@ export default class VueI18n {
     // We are going to replace each of
     // them with its translation
     const matches: any = ret.match(linkKeyMatcher)
-    for (const idx in matches) {
+
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let idx in matches) {
       // ie compatible: filter custom array
       // prototype method
       if (!matches.hasOwnProperty(idx)) {
@@ -388,7 +480,7 @@ export default class VueI18n {
       // Remove the leading @:, @.case: and the brackets
       const linkPlaceholder: string = link.replace(linkPrefix, '').replace(bracketsMatcher, '')
 
-      if (visitedLinkStack.includes(linkPlaceholder)) {
+      if (includes(visitedLinkStack, linkPlaceholder)) {
         if (process.env.NODE_ENV !== 'production') {
           warn(`Circular reference found. "${link}" is already visited in the chain of ${visitedLinkStack.reverse().join(' <- ')}`)
         }
@@ -418,7 +510,8 @@ export default class VueI18n {
       }
       translated = this._warnDefault(
         locale, linkPlaceholder, translated, host,
-        Array.isArray(values) ? values : [values]
+        isArray(values) ? values : [values],
+        interpolateMode
       )
 
       if (this._modifiers.hasOwnProperty(formatterName)) {
@@ -436,7 +529,33 @@ export default class VueI18n {
     return ret
   }
 
-  _render (message: string, interpolateMode: string, values: any, path: string): any {
+  _createMessageContext (values: any, formatter: Formatter, path: string, interpolateMode: string): MessageContext {
+    const _list = isArray(values) ? values : []
+    const _named = isObject(values) ? values : {}
+    const list = (index: number): mixed => _list[index]
+    const named = (key: string): mixed => _named[key]
+    const messages = this._getMessages()
+    const locale = this.locale
+
+    return {
+      list,
+      named,
+      values,
+      formatter,
+      path,
+      messages,
+      locale,
+      linked: (linkedKey: string) => this._interpolate(locale, messages[locale] || {}, linkedKey, null, interpolateMode, undefined, [linkedKey])
+    }
+  }
+
+  _render (message: string | MessageFunction, interpolateMode: string, values: any, path: string): any {
+    if (isFunction(message)) {
+      return message(
+        this._createMessageContext(values, this._formatter || defaultFormatter, path, interpolateMode)
+      )
+    }
+
     let ret = this._formatter.interpolate(message, values, path)
 
     // If the custom formatter refuses to work - apply the default one
@@ -446,40 +565,142 @@ export default class VueI18n {
 
     // if interpolateMode is **not** 'string' ('row'),
     // return the compiled data (e.g. ['foo', VNode, 'bar']) with formatter
-    return interpolateMode === 'string' ? ret.join('') : ret
+    return interpolateMode === 'string' && !isString(ret) ? ret.join('') : ret
+  }
+
+  _appendItemToChain (chain: Array<Locale>, item: Locale, blocks: any): any {
+    let follow = false
+    if (!includes(chain, item)) {
+      follow = true
+      if (item) {
+        follow = item[item.length - 1] !== '!'
+        item = item.replace(/!/g, '')
+        chain.push(item)
+        if (blocks && blocks[item]) {
+          follow = blocks[item]
+        }
+      }
+    }
+    return follow
+  }
+
+  _appendLocaleToChain (chain: Array<Locale>, locale: Locale, blocks: any): any {
+    let follow
+    const tokens = locale.split('-')
+    do {
+      const item = tokens.join('-')
+      follow = this._appendItemToChain(chain, item, blocks)
+      tokens.splice(-1, 1)
+    } while (tokens.length && (follow === true))
+    return follow
+  }
+
+  _appendBlockToChain (chain: Array<Locale>, block: Array<Locale> | Object, blocks: any): any {
+    let follow = true
+    for (let i = 0; (i < block.length) && (isBoolean(follow)); i++) {
+      const locale = block[i]
+      if (isString(locale)) {
+        follow = this._appendLocaleToChain(chain, locale, blocks)
+      }
+    }
+    return follow
+  }
+
+  _getLocaleChain (start: Locale, fallbackLocale: FallbackLocale): Array<Locale> {
+    if (start === '') { return [] }
+
+    if (!this._localeChainCache) {
+      this._localeChainCache = {}
+    }
+
+    let chain = this._localeChainCache[start]
+    if (!chain) {
+      if (!fallbackLocale) {
+        fallbackLocale = this.fallbackLocale
+      }
+      chain = []
+
+      // first block defined by start
+      let block = [start]
+
+      // while any intervening block found
+      while (isArray(block)) {
+        block = this._appendBlockToChain(
+          chain,
+          block,
+          fallbackLocale
+        )
+      }
+
+      // last block defined by default
+      let defaults
+      if (isArray(fallbackLocale)) {
+        defaults = fallbackLocale
+      } else if (isObject(fallbackLocale)) {
+        /* $FlowFixMe */
+        if (fallbackLocale['default']) {
+          defaults = fallbackLocale['default']
+        } else {
+          defaults = null
+        }
+      } else {
+        defaults = fallbackLocale
+      }
+
+      // convert defaults to array
+      if (isString(defaults)) {
+        block = [defaults]
+      } else {
+        block = defaults
+      }
+      if (block) {
+        this._appendBlockToChain(
+          chain,
+          block,
+          null
+        )
+      }
+      this._localeChainCache[start] = chain
+    }
+    return chain
   }
 
   _translate (
     messages: LocaleMessages,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     key: Path,
     host: any,
     interpolateMode: string,
     args: any
   ): any {
-    let res: any =
-      this._interpolate(locale, messages[locale], key, host, interpolateMode, args, [key])
-    if (!isNull(res)) { return res }
-
-    res = this._interpolate(fallback, messages[fallback], key, host, interpolateMode, args, [key])
-    if (!isNull(res)) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to translate the keypath '${key}' with '${fallback}' locale.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    let res
+    for (let i = 0; i < chain.length; i++) {
+      const step = chain[i]
+      res =
+        this._interpolate(step, messages[step], key, host, interpolateMode, args, [key])
+      if (!isNull(res)) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(("Fall back to translate the keypath '" + key + "' with '" + step + "' locale."))
+        }
+        return res
       }
-      return res
-    } else {
-      return null
     }
+    return null
   }
 
   _t (key: Path, _locale: Locale, messages: LocaleMessages, host: any, ...values: any): any {
     if (!key) { return '' }
 
     const parsedArgs = parseArgs(...values)
+    if(this._escapeParameterHtml) {
+      parsedArgs.params = escapeParams(parsedArgs.params)
+    }
+
     const locale: Locale = parsedArgs.locale || _locale
 
-    const ret: any = this._translate(
+    let ret: any = this._translate(
       messages, locale, this.fallbackLocale, key,
       host, 'string', parsedArgs.params
     )
@@ -491,7 +712,11 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$t(key, ...values)
     } else {
-      return this._warnDefault(locale, key, ret, host, values)
+      ret = this._warnDefault(locale, key, ret, host, values, 'string')
+      if (this._postTranslation && ret !== null && ret !== undefined) {
+        ret = this._postTranslation(ret, key)
+      }
+      return ret
     }
   }
 
@@ -509,7 +734,7 @@ export default class VueI18n {
       if (!this._root) { throw Error('unexpected error') }
       return this._root.$i18n.i(key, locale, values)
     } else {
-      return this._warnDefault(locale, key, ret, host, [values])
+      return this._warnDefault(locale, key, ret, host, [values], 'raw')
     }
   }
 
@@ -517,7 +742,7 @@ export default class VueI18n {
     /* istanbul ignore if */
     if (!key) { return '' }
 
-    if (typeof locale !== 'string') {
+    if (!isString(locale)) {
       locale = this.locale
     }
 
@@ -546,40 +771,12 @@ export default class VueI18n {
 
   fetchChoice (message: string, choice: number): ?string {
     /* istanbul ignore if */
-    if (!message && typeof message !== 'string') { return null }
+    if (!message || !isString(message)) { return null }
     const choices: Array<string> = message.split('|')
 
     choice = this.getChoiceIndex(choice, choices.length)
     if (!choices[choice]) { return message }
     return choices[choice].trim()
-  }
-
-  /**
-   * @param choice {number} a choice index given by the input to $tc: `$tc('path.to.rule', choiceIndex)`
-   * @param choicesLength {number} an overall amount of available choices
-   * @returns a final choice index
-  */
-  getChoiceIndex (choice: number, choicesLength: number): number {
-    // Default (old) getChoiceIndex implementation - english-compatible
-    const defaultImpl = (_choice: number, _choicesLength: number) => {
-      _choice = Math.abs(_choice)
-
-      if (_choicesLength === 2) {
-        return _choice
-          ? _choice > 1
-            ? 1
-            : 0
-          : 1
-      }
-
-      return _choice ? Math.min(_choice, 2) : 0
-    }
-
-    if (this.locale in this.pluralizationRules) {
-      return this.pluralizationRules[this.locale].apply(this, [choice, choicesLength])
-    } else {
-      return defaultImpl(choice, choicesLength)
-    }
   }
 
   tc (key: Path, choice?: number, ...values: any): TranslateResult {
@@ -602,7 +799,6 @@ export default class VueI18n {
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
     this._vm.$set(this._vm.messages, locale, message)
   }
@@ -610,9 +806,13 @@ export default class VueI18n {
   mergeLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
-      if (this._warnHtmlInMessage === 'error') { return }
     }
-    this._vm.$set(this._vm.messages, locale, merge({}, this._vm.messages[locale] || {}, message))
+    this._vm.$set(this._vm.messages, locale, merge(
+      typeof this._vm.messages[locale] !== 'undefined' && Object.keys(this._vm.messages[locale]).length
+        ? Object.assign({}, this._vm.messages[locale])
+        : {},
+      message
+    ))
   }
 
   getDateTimeFormat (locale: Locale): DateTimeFormat {
@@ -621,29 +821,51 @@ export default class VueI18n {
 
   setDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, format)
+    this._clearDateTimeFormat(locale, format)
   }
 
   mergeDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
     this._vm.$set(this._vm.dateTimeFormats, locale, merge(this._vm.dateTimeFormats[locale] || {}, format))
+    this._clearDateTimeFormat(locale, format)
+  }
+
+  _clearDateTimeFormat (locale: Locale, format: DateTimeFormat): void {
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._dateTimeFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._dateTimeFormatters[id]
+    }
   }
 
   _localizeDateTime (
     value: number | Date,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     dateTimeFormats: DateTimeFormats,
     key: string
   ): ?DateTimeFormatResult {
     let _locale: Locale = locale
     let formats: DateTimeFormat = dateTimeFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' datetime formats from '${locale}' datetime formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = dateTimeFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' datetime formats from '${current}' datetime formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = dateTimeFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -689,7 +911,7 @@ export default class VueI18n {
     let key: ?string = null
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -700,10 +922,10 @@ export default class VueI18n {
         }
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1]
       }
     }
@@ -717,16 +939,31 @@ export default class VueI18n {
 
   setNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, format)
+    this._clearNumberFormat(locale, format)
   }
 
   mergeNumberFormat (locale: Locale, format: NumberFormat): void {
     this._vm.$set(this._vm.numberFormats, locale, merge(this._vm.numberFormats[locale] || {}, format))
+    this._clearNumberFormat(locale, format)
+  }
+
+  _clearNumberFormat (locale: Locale, format: NumberFormat): void {
+    // eslint-disable-next-line no-autofix/prefer-const
+    for (let key in format) {
+      const id = `${locale}__${key}`
+
+      if (!this._numberFormatters.hasOwnProperty(id)) {
+        continue
+      }
+
+      delete this._numberFormatters[id]
+    }
   }
 
   _getNumberFormatter (
     value: number,
     locale: Locale,
-    fallback: Locale,
+    fallback: FallbackLocale,
     numberFormats: NumberFormats,
     key: string,
     options: ?NumberFormatOptions
@@ -734,13 +971,20 @@ export default class VueI18n {
     let _locale: Locale = locale
     let formats: NumberFormat = numberFormats[_locale]
 
-    // fallback locale
-    if (isNull(formats) || isNull(formats[key])) {
-      if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
-        warn(`Fall back to '${fallback}' number formats from '${locale}' number formats.`)
+    const chain = this._getLocaleChain(locale, fallback)
+    for (let i = 0; i < chain.length; i++) {
+      const current = _locale
+      const step = chain[i]
+      formats = numberFormats[step]
+      _locale = step
+      // fallback locale
+      if (isNull(formats) || isNull(formats[key])) {
+        if (step !== locale && process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
+          warn(`Fall back to '${step}' number formats from '${current}' number formats.`)
+        }
+      } else {
+        break
       }
-      _locale = fallback
-      formats = numberFormats[_locale]
     }
 
     if (isNull(formats) || isNull(formats[key])) {
@@ -797,7 +1041,7 @@ export default class VueI18n {
     let options: ?NumberFormatOptions = null
 
     if (args.length === 1) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       } else if (isObject(args[0])) {
         if (args[0].locale) {
@@ -809,17 +1053,17 @@ export default class VueI18n {
 
         // Filter out number format options only
         options = Object.keys(args[0]).reduce((acc, key) => {
-          if (numberFormatKeys.includes(key)) {
+          if (includes(numberFormatKeys, key)) {
             return Object.assign({}, acc, { [key]: args[0][key] })
           }
           return acc
         }, null)
       }
     } else if (args.length === 2) {
-      if (typeof args[0] === 'string') {
+      if (isString(args[0])) {
         key = args[0]
       }
-      if (typeof args[1] === 'string') {
+      if (isString(args[1])) {
         locale = args[1]
       }
     }

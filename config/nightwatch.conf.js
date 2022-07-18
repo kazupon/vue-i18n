@@ -7,7 +7,7 @@ module.exports = {
 
   selenium: {
     start_process: true,
-    server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.53.1.jar',
+    server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-3.141.59.jar',
     host: '127.0.0.1',
     port: 4444,
     cli_args: {
@@ -32,7 +32,11 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        chromeOptions: {
+          // Issue https://github.com/nightwatchjs/nightwatch/issues/2149
+          w3c: false
+        }
       }
     },
 
@@ -48,7 +52,8 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions : {
-          args : ['headless']
+          args : ['headless'],
+          w3c: false
         },
         javascriptEnabled: true,
         acceptSslCerts: true

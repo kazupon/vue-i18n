@@ -5,18 +5,23 @@
  */
 
 export const numberFormatKeys = [
-  'style',
+  'compactDisplay',
   'currency',
   'currencyDisplay',
+  'currencySign',
+  'localeMatcher',
+  'notation',
+  'numberingSystem',
+  'signDisplay',
+  'style',
+  'unit',
+  'unitDisplay',
   'useGrouping',
   'minimumIntegerDigits',
   'minimumFractionDigits',
   'maximumFractionDigits',
   'minimumSignificantDigits',
-  'maximumSignificantDigits',
-  'localeMatcher',
-  'formatMatcher',
-  'unit'
+  'maximumSignificantDigits'
 ]
 
 /**
@@ -43,8 +48,18 @@ export function error (msg: string, err: ?Error): void {
   }
 }
 
+export const isArray = Array.isArray
+
 export function isObject (obj: mixed): boolean %checks {
   return obj !== null && typeof obj === 'object'
+}
+
+export function isBoolean (val: mixed): boolean %checks {
+  return typeof val === 'boolean'
+}
+
+export function isString (val: mixed): boolean %checks {
+  return typeof val === 'string'
 }
 
 const toString: Function = Object.prototype.toString
@@ -57,11 +72,15 @@ export function isNull (val: mixed): boolean {
   return val === null || val === undefined
 }
 
+export function isFunction (val: mixed): boolean %checks {
+  return typeof val === 'function'
+}
+
 export function parseArgs (...args: Array<mixed>): Object {
   let locale: ?string = null
   let params: mixed = null
   if (args.length === 1) {
-    if (isObject(args[0]) || Array.isArray(args[0])) {
+    if (isObject(args[0]) || isArray(args[0])) {
       params = args[0]
     } else if (typeof args[0] === 'string') {
       locale = args[0]
@@ -71,7 +90,7 @@ export function parseArgs (...args: Array<mixed>): Object {
       locale = args[0]
     }
     /* istanbul ignore if */
-    if (isObject(args[1]) || Array.isArray(args[1])) {
+    if (isObject(args[1]) || isArray(args[1])) {
       params = args[1]
     }
   }
@@ -83,13 +102,20 @@ export function looseClone (obj: Object): Object {
   return JSON.parse(JSON.stringify(obj))
 }
 
-export function remove (arr: Array<any>, item: any): Array<any> | void {
-  if (arr.length) {
-    const index = arr.indexOf(item)
-    if (index > -1) {
-      return arr.splice(index, 1)
-    }
+export function remove (arr: Set<any>, item: any): Set<any> | void {
+  if (arr.delete(item)) {
+    return arr
   }
+}
+
+export function arrayFrom (arr: Set<any>): Array<any> {
+  const ret = []
+  arr.forEach(a => ret.push(a))
+  return ret
+}
+
+export function includes (arr: Array<any>, item: any): boolean {
+  return !!~arr.indexOf(item)
 }
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
@@ -123,8 +149,8 @@ export function looseEqual (a: any, b: any): boolean {
   const isObjectB: boolean = isObject(b)
   if (isObjectA && isObjectB) {
     try {
-      const isArrayA: boolean = Array.isArray(a)
-      const isArrayB: boolean = Array.isArray(b)
+      const isArrayA: boolean = isArray(a)
+      const isArrayB: boolean = isArray(b)
       if (isArrayA && isArrayB) {
         return a.length === b.length && a.every((e: any, i: number): boolean => {
           return looseEqual(e, b[i])
@@ -148,4 +174,36 @@ export function looseEqual (a: any, b: any): boolean {
   } else {
     return false
   }
+}
+
+/**
+ * Sanitizes html special characters from input strings. For mitigating risk of XSS attacks.
+ * @param rawText The raw input from the user that should be escaped.
+ */
+function escapeHtml(rawText: string): string {
+  return rawText
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+/**
+ * Escapes html tags and special symbols from all provided params which were returned from parseArgs().params.
+ * This method performs an in-place operation on the params object.
+ *
+ * @param {any} params Parameters as provided from `parseArgs().params`.
+ *                     May be either an array of strings or a string->any map.
+ *
+ * @returns The manipulated `params` object.
+ */
+export function escapeParams(params: any): any {
+  if(params != null) {
+    Object.keys(params).forEach(key => {
+      if(typeof(params[key]) == 'string') {
+        params[key] = escapeHtml(params[key])
+      }
+    })
+  }
+  return params
 }

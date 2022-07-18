@@ -6,34 +6,34 @@
 
 ## Direct Download / CDN
 
-<https://unpkg.com/vue-i18n/dist/vue-i18n>
+<https://unpkg.com/vue-i18n@8>
 
-[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like <https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.js>
+[unpkg.com](https://unpkg.com) provides NPM-based CDN links. The above link will always point to the latest release on NPM. You can also use a specific version/tag via URLs like <https://unpkg.com/vue-i18n@8.17.5/dist/vue-i18n.js>
 
 Include vue-i18n after Vue and it will install itself automatically:
 
-    
-```html    
+
+```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+<script src="https://unpkg.com/vue-i18n@8"></script>
 ```
 
 ## NPM
-    
+
 ```sh
-npm install vue-i18n
-``` 
+npm install vue-i18n@8
+```
 
 ## Yarn
-    
+
 ```sh
-yarn add vue-i18n
+yarn add vue-i18n@8
 ```
 
 When using with a module system, you must explicitly install the `vue-i18n`
 via `Vue.use()`:
 
-    
+
 ```javascript
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
@@ -41,10 +41,10 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 ```
 
-You don't need to do this when using global script tags.
+You don't need to do this when using global script tags `<script>`.
 
 ## Vue Cli 3.x
-    
+
 ```sh
 vue add i18n
 ```

@@ -57,12 +57,23 @@ describe('basic', () => {
         assert.strictEqual(i18n.t('message.linkCaseUpper'), 'HOME ADDRESS')
       })
 
+      it('should translate link with the first letter as upper-case', () => {
+        assert.strictEqual(i18n.t('message.linkCaseCapitalize'), 'Home Address')
+      })
+
       it('should translate link without formatting if modifier is not known.', () => {
-        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'Home address')
+        assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'home Address')
       })
 
       it('should render link with custom formatting.', () => {
-        assert.strictEqual(i18n.t('message.linkCaseCustom'), 'Hxmx xddrxss')
+        assert.strictEqual(i18n.t('message.linkCaseCustom'), 'hxmx Addrxss')
+      })
+
+      it('should translate link when keys have special characters', () => {
+        assert.strictEqual(i18n.t('message.linkHyphen'), messages.en['hyphen-hello'])
+        assert.strictEqual(i18n.t('message.linkUnderscore'), messages.en.underscore_hello)
+        assert.strictEqual(i18n.t('message.linkColon'), messages.en['colon:hello'])
+        assert.strictEqual(i18n.t('message.linkPipe'), messages.en['pipe|hello'])
       })
     })
 
@@ -665,7 +676,7 @@ describe('basic', () => {
           return h('p', {}, [this.$t('message.hello')])
         }
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, messages.en.message.hello)
         i18n.locale = 'ja' // set japanese
       }).then(() => {
@@ -688,7 +699,7 @@ describe('basic', () => {
           return h('p', {}, [this.$t('message.fallback1')])
         }
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, 'message.fallback1')
         i18n.fallbackLocale = 'ja' // set fallback locale
       }).then(() => {

@@ -1,3 +1,536 @@
+## v8.27.2 (2022-06-20)
+
+#### :bug: Bug Fixes
+* [#1512](https://github.com/kazupon/vue-i18n/pull/1512) Allow modifiers names in pascalCase ([@nofacez](https://github.com/nofacez))
+
+#### :pencil: Documentation
+* [#1505](https://github.com/kazupon/vue-i18n/pull/1505) Update interpolation.md ([@victor1014](https://github.com/victor1014))
+
+#### Committers: 2
+- Mikhail ([@nofacez](https://github.com/nofacez))
+- Victor ([@victor1014](https://github.com/victor1014))
+
+## v8.27.1 (2022-03-29)
+
+#### :zap: Improved Features
+* [#1488](https://github.com/kazupon/vue-i18n/pull/1488) Allow colon in locale message keys used in linked locale messages ([@ax-jmckenzie](https://github.com/ax-jmckenzie))
+
+#### :pencil: Documentation
+* [#1462](https://github.com/kazupon/vue-i18n/pull/1462) Restrict version to 8 for installing npm package ([@arpi17](https://github.com/arpi17))
+
+#### Committers: 2
+- James McKenzie ([@ax-jmckenzie](https://github.com/ax-jmckenzie))
+- Árpád Illyés ([@arpi17](https://github.com/arpi17))
+
+## v8.27.0 (2022-01-21)
+
+#### :star: New Features
+* [#1441](https://github.com/kazupon/vue-i18n/pull/1441) feat: add a new option fallbackRootWithEmptyString ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+#### Committers: 1
+- Lee ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+## v8.26.8 (2021-12-28)
+
+#### :zap: Improved Features
+* [#1429](https://github.com/kazupon/vue-i18n/pull/1429) improvement: type definition order for vue-i18n-bridge integration ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#1416](https://github.com/kazupon/vue-i18n/pull/1416) Update links to i18n Ally in tooling docs ([@FloEdelmann](https://github.com/FloEdelmann))
+
+#### Committers: 2
+- Flo Edelmann ([@FloEdelmann](https://github.com/FloEdelmann))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.7 (2021-11-02)
+
+#### :bug: Bug Fixes
+* [#1411](https://github.com/kazupon/vue-i18n/pull/1411) fix: cannot work watchLocale on vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.6 (2021-11-02)
+
+#### :zap: Improved Features
+* [#1409](https://github.com/kazupon/vue-i18n/pull/1409) improvement: notify locale changing to composer ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.5 (2021-10-01)
+
+#### :zap: Improved Features
+* [#1396](https://github.com/kazupon/vue-i18n/pull/1396) Revert "improvement:  $i18n property deinition for vue-i18n-bridge" ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.4 (2021-10-01)
+
+#### :zap: Improved Features
+* [#1394](https://github.com/kazupon/vue-i18n/pull/1394) improvement:  $i18n property deinition for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.3 (2021-09-30)
+
+#### :zap: Improved Features
+* [#1392](https://github.com/kazupon/vue-i18n/pull/1392) improvement: vue-i18n-loader bridge mode ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.2 (2021-09-28)
+
+#### :zap: Improved Features
+* [#1390](https://github.com/kazupon/vue-i18n/pull/1390) improvement: add flags for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.1 (2021-09-23)
+
+#### :zap: Improved Features
+* [#1388](https://github.com/kazupon/vue-i18n/pull/1388) feat: add sync property ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.26.0 (2021-09-22)
+
+#### :star: New Features
+* [#1385](https://github.com/kazupon/vue-i18n/pull/1385) feat: support for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.25.1 (2021-09-13)
+
+#### :bug: Bug Fixes
+* [#1381](https://github.com/kazupon/vue-i18n/pull/1381) fix: linked messages containing slash symbol ([@Lamberthassel](https://github.com/Lamberthassel))
+
+#### :lock: Security Fixes
+* [#1353](https://github.com/kazupon/vue-i18n/pull/1353) build(deps): [security] bump tar from 6.0.2 to 6.1.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### :pencil: Documentation
+* [#1323](https://github.com/kazupon/vue-i18n/pull/1323) Added version notice for custom pluralizations ([@ingria](https://github.com/ingria))
+
+#### Committers: 3
+- Igor Nabebin ([@Lamberthassel](https://github.com/Lamberthassel))
+- Ingria ([@ingria](https://github.com/ingria))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+## v8.25.0 (2021-07-16)
+
+#### :star: New Features
+* [#1271](https://github.com/kazupon/vue-i18n/pull/1271) feat: Added linked, locale, formatter, values, path to MessageContext ([@fabis94](https://github.com/fabis94))
+
+#### :bug: Bug Fixes
+* [#1321](https://github.com/kazupon/vue-i18n/pull/1321) fix broken mergeLocaleMessage ([@phonezawphyo](https://github.com/phonezawphyo))
+
+#### Committers: 3
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+- [@fabis94](https://github.com/fabis94)
+- [@phonezawphyo](https://github.com/phonezawphyo)
+
+## v8.24.5 (2021-06-19)
+
+#### :bug: Bug Fixes
+* [#1278](https://github.com/kazupon/vue-i18n/pull/1278) fix: Ensure that the order at desroy is the same as before change to `Set` from `Array` ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improved Features
+* [#1194](https://github.com/kazupon/vue-i18n/pull/1194) fix: add locale arg type i18n.n method type signature ([@alireza4050](https://github.com/alireza4050))
+
+#### :pencil: Documentation
+* [#1273](https://github.com/kazupon/vue-i18n/pull/1273) docs(api:zh): update the Chinese docs of "API" ([@baboon-king](https://github.com/baboon-king))
+* [#1267](https://github.com/kazupon/vue-i18n/pull/1267) Documentation - Update @kazupon/vue-i18n-loader to @intlify/vue-i18n-loader ([@fbigand](https://github.com/fbigand))
+* [#1258](https://github.com/kazupon/vue-i18n/pull/1258) Grammar fix for Installing vue-i18n-loader ([@TerabyteTiger](https://github.com/TerabyteTiger))
+
+#### Committers: 5
+- Alireza Asgharizadeh ([@alireza4050](https://github.com/alireza4050))
+- BaboonKing ([@baboon-king](https://github.com/baboon-king))
+- Tyler V ([@TerabyteTiger](https://github.com/TerabyteTiger))
+- [@fbigand](https://github.com/fbigand)
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.24.4 (2021-04-28)
+
+#### :bug: Bug Fixes
+* [#1192](https://github.com/kazupon/vue-i18n/pull/1192) Revert "fix: i18n reference to root causes memory leak (#1044)" ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 2
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.24.3 (2021-04-09)
+
+#### :bug: Bug Fixes
+* [#1175](https://github.com/kazupon/vue-i18n/pull/1175) [perf] Use Set so lookup of _dataListeners can be O(1) ([@exoego](https://github.com/exoego))
+
+#### :chart_with_upwards_trend: Performance Fixes
+* [#1175](https://github.com/kazupon/vue-i18n/pull/1175) [perf] Use Set so lookup of _dataListeners can be O(1) ([@exoego](https://github.com/exoego))
+
+#### Committers: 1
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+## v8.24.2 (2021-03-23)
+
+#### :bug: Bug Fixes
+* [#1151](https://github.com/kazupon/vue-i18n/pull/1151) fix: i18n reference to root causes memory leak (#1044) ([@lzxb](https://github.com/lzxb))
+
+#### :pencil: Documentation
+* [#1152](https://github.com/kazupon/vue-i18n/pull/1152) $tc return type ([@Glandos](https://github.com/Glandos))
+
+#### Committers: 2
+- Glandos ([@Glandos](https://github.com/Glandos))
+- 狼族小狈 ([@lzxb](https://github.com/lzxb))
+
+## v8.24.1 (2021-03-11)
+
+#### :bug: Bug Fixes
+* [#1145](https://github.com/kazupon/vue-i18n/pull/1145) Allowing paths to be null for lookups. ([@martinheidegger](https://github.com/martinheidegger))
+
+#### Committers: 1
+- Martin Heidegger ([@martinheidegger](https://github.com/martinheidegger))
+
+## v8.24.0 (2021-03-08)
+
+#### :star: New Features
+* [#1139](https://github.com/kazupon/vue-i18n/pull/1139) experimental: add meta info for intlify tools ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+## v8.23.0 (2021-02-24)
+
+#### :zap: Improved Features
+* [#1118](https://github.com/kazupon/vue-i18n/pull/1118) Fix wrong LocaleMatcher type for TS 4.2 ('best-fit' to 'best fit'). ([@mpawelski](https://github.com/mpawelski))
+
+#### :pencil: Documentation
+* [#1124](https://github.com/kazupon/vue-i18n/pull/1124) Add documentation for directive `choice` argument ([@Gameghostify](https://github.com/Gameghostify))
+* [#1114](https://github.com/kazupon/vue-i18n/pull/1114) Update tooling.md ([@fanlinqiang](https://github.com/fanlinqiang))
+* [#1104](https://github.com/kazupon/vue-i18n/pull/1104) Documentation improvemation ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
+
+#### Committers: 4
+- Lucas ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
+- Mariusz Pawelski ([@mpawelski](https://github.com/mpawelski))
+- [@Gameghostify](https://github.com/Gameghostify)
+- [@fanlinqiang](https://github.com/fanlinqiang)
+
+
+## v8.22.4 (2021-01-16)
+
+#### :chart_with_upwards_trend: Performance Fixes
+* [#1101](https://github.com/kazupon/vue-i18n/pull/1101) Improve performance of mergeLocaleMessage (#1099) ([@cslee](https://github.com/cslee))
+
+#### Committers: 2
+- Eric Lee ([@cslee](https://github.com/cslee))
+- Lucas ([@lucasferreiralimax](https://github.com/lucasferreiralimax))
+
+
+## v8.22.3 (2021-01-08)
+
+#### :zap: Improved Features
+* [#1096](https://github.com/kazupon/vue-i18n/pull/1096) @types: Fixed too narrow option types in n() and d() methods ([@gehlert](https://github.com/gehlert))
+
+#### Committers: 3
+- MASONGZHI ([@masongzhi](https://github.com/masongzhi))
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+- [@gehlert](https://github.com/gehlert)
+
+
+## v8.22.2 (2020-11-18)
+
+#### :bug: Bug Fixes
+* [#1048](https://github.com/kazupon/vue-i18n/pull/1048) fix: number format keys missing compared the Intl.Number object ([@jevillard](https://github.com/jevillard))
+
+#### Committers: 2
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Jérémy Villard ([@jevillard](https://github.com/jevillard))
+
+
+## v8.22.1 (2020-10-19)
+
+#### :boom: Breaking Change
+* [#1020](https://github.com/kazupon/vue-i18n/pull/1020) escapeParameterHtml flag: Don't escape ampersand #1019 ([@gardarh](https://github.com/gardarh))
+
+#### Committers: 1
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+
+
+## v8.22.0 (2020-10-06)
+
+#### :star: New Features
+* [#1009](https://github.com/kazupon/vue-i18n/pull/1009) Add escapeParameterHtml parameter. #1002 ([@gardarh](https://github.com/gardarh))
+
+#### :bug: Bug Fixes
+* [#1003](https://github.com/kazupon/vue-i18n/pull/1003) Bugfix in index.js: wrong if condition in fetchChoice ([@cimchd](https://github.com/cimchd))
+
+#### Committers: 4
+- Andreas ([@devmount](https://github.com/devmount))
+- Gardar Hauksson ([@gardarh](https://github.com/gardarh))
+- Raffaele Pizzari ([@pixari](https://github.com/pixari))
+- [@cimchd](https://github.com/cimchd)
+
+
+## v8.21.1 (2020-09-11)
+
+#### :bug: Bug Fixes
+* [#995](https://github.com/kazupon/vue-i18n/pull/995) Update mixin.js ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+#### Committers: 1
+- Ferenc Beutel ([@ferencbeutel4711](https://github.com/ferencbeutel4711))
+
+
+## v8.21.0 (2020-08-13)
+
+#### :star: New Features
+* [#972](https://github.com/kazupon/vue-i18n/pull/972) feat: message function ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#961](https://github.com/kazupon/vue-i18n/pull/961) Update link to Formatter Interface ([@JohJohan](https://github.com/JohJohan))
+
+#### Committers: 3
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Johan ([@JohJohan](https://github.com/JohJohan))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.20.0 (2020-07-30)
+
+#### :star: New Features
+* [#959](https://github.com/kazupon/vue-i18n/pull/959) i18n-n component local components passing ([@kazupon](https://github.com/kazupon))
+* [#928](https://github.com/kazupon/vue-i18n/pull/928) :zap: improvement(interpolation): enable passage of local components to tag prop ([@vhoyer](https://github.com/vhoyer))
+
+#### Committers: 2
+- Vinícius Hoyer ([@vhoyer](https://github.com/vhoyer))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.19.0 (2020-07-25)
+
+#### :star: New Features
+* [#942](https://github.com/kazupon/vue-i18n/pull/942) Add vetur support for tags and attributes ([@phiter](https://github.com/phiter))
+
+#### :pencil: Documentation
+* [#925](https://github.com/kazupon/vue-i18n/pull/925) Added missing quote ([@fschlag](https://github.com/fschlag))
+* [#921](https://github.com/kazupon/vue-i18n/pull/921) Add lost pluralizationRules option to documentation ([@AleksandrSl](https://github.com/AleksandrSl))
+* [#920](https://github.com/kazupon/vue-i18n/pull/920) Make link to API and Guide top level ([@AleksandrSl](https://github.com/AleksandrSl))
+
+#### Committers: 3
+- Aleksandr ([@AleksandrSl](https://github.com/AleksandrSl))
+- Florian Schlag ([@fschlag](https://github.com/fschlag))
+- Phiter Fernandes ([@phiter](https://github.com/phiter))
+
+
+## v8.18.2 (2020-06-08)
+
+#### :zap: Improved Features
+* [#917](https://github.com/kazupon/vue-i18n/pull/917) fix: improve IVueI18n interface ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#902](https://github.com/kazupon/vue-i18n/pull/902) docs: [RU] Translation update ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#901](https://github.com/kazupon/vue-i18n/pull/901) docs: (zh) inverse $d $n ([@stan-chen](https://github.com/stan-chen))
+
+#### Committers: 4
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+- Stanley Chen ([@stan-chen](https://github.com/stan-chen))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.18.1 (2020-05-27)
+
+#### :bug: Bug Fixes
+* [#896](https://github.com/kazupon/vue-i18n/pull/896) Fix flow types and enable flow types testing on CI ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
+## v8.18.0 (2020-05-26)
+
+#### :star: New Features
+* [#892](https://github.com/kazupon/vue-i18n/pull/892) Add onComponentInstanceCreated constructor option ([@rchl](https://github.com/rchl))
+
+#### :zap: Improved Features
+* [#890](https://github.com/kazupon/vue-i18n/pull/890) chore: set up linting for typescript definitions ([@rchl](https://github.com/rchl))
+
+#### Committers: 1
+- Rafał Chłodnicki ([@rchl](https://github.com/rchl))
+
+
+## v8.17.7 (2020-05-19)
+
+#### :bug: Bug Fixes
+* [#882](https://github.com/kazupon/vue-i18n/pull/882) fix v-t pluralisation when choice is 0 ([@mikejacoutot](https://github.com/mikejacoutot))
+
+#### Committers: 1
+- [@mikejacoutot](https://github.com/mikejacoutot)
+
+
+## v8.17.6 (2020-05-15)
+
+#### :bug: Bug Fixes
+* [#880](https://github.com/kazupon/vue-i18n/pull/880) Don't delete _i18n in beforeDestroy ([@danimoh](https://github.com/danimoh))
+
+#### :zap: Improved Features
+* [#878](https://github.com/kazupon/vue-i18n/pull/878) Allow component interpolation without root element ([@danimoh](https://github.com/danimoh))
+
+#### :pencil: Documentation
+* [#875](https://github.com/kazupon/vue-i18n/pull/875) Add new 3rd party tool ([@danigayosog](https://github.com/danigayosog))
+* [#872](https://github.com/kazupon/vue-i18n/pull/872) docs: fixes ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#871](https://github.com/kazupon/vue-i18n/pull/871) update pluralization.md ([@Timibadass](https://github.com/Timibadass))
+
+#### Committers: 4
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Daniel ([@danigayosog](https://github.com/danigayosog))
+- Timi Omoyeni ([@Timibadass](https://github.com/Timibadass))
+- [@danimoh](https://github.com/danimoh)
+
+
+## v8.17.5 (2020-05-10)
+
+#### :bug: Bug Fixes
+* [#869](https://github.com/kazupon/vue-i18n/pull/869) fix: not string method access error ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#867](https://github.com/kazupon/vue-i18n/pull/867) docs: [RU] Translation ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+* [#865](https://github.com/kazupon/vue-i18n/pull/865) improvement(docs): extend Hot reloading section ([@caugner](https://github.com/caugner))
+
+#### Committers: 3
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+- Claas Augner ([@caugner](https://github.com/caugner))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.17.4 (2020-04-26)
+
+#### :bug: Bug Fixes
+* [#859](https://github.com/kazupon/vue-i18n/pull/859) fix datetime format cache ([@kazupon](https://github.com/kazupon))
+* [#858](https://github.com/kazupon/vue-i18n/pull/858) fix datetime and number format fallbacking ([@kazupon](https://github.com/kazupon))
+* [#857](https://github.com/kazupon/vue-i18n/pull/857) fix: alternative array includes ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.17.3 (2020-04-19)
+
+#### :zap: Improved Features
+* [#846](https://github.com/kazupon/vue-i18n/pull/846) add key to postTranslation ([@dmitryuk](https://github.com/dmitryuk))
+
+#### :pencil: Documentation
+* [#847](https://github.com/kazupon/vue-i18n/pull/847) docs: Update /api/README.md ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+#### Committers: 2
+- Alexander Dmitryuk ([@dmitryuk](https://github.com/dmitryuk))
+- Alexander Sokolov ([@Alex-Sokolov](https://github.com/Alex-Sokolov))
+
+
+## v8.17.2 (2020-04-18)
+
+#### :zap: Improved Features
+* [#844](https://github.com/kazupon/vue-i18n/pull/844) Use plain object instead of Map, which is not supported in IE9/10 ([@exoego](https://github.com/exoego))
+
+#### Committers: 1
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
+## v8.17.1 (2020-04-16)
+
+#### :bug: Bug Fixes
+* [#840](https://github.com/kazupon/vue-i18n/pull/840) fix: altnative endsWidth ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#837](https://github.com/kazupon/vue-i18n/pull/837) Fix typo ([@ninofiliu](https://github.com/ninofiliu))
+
+#### Committers: 2
+- Nino Filiu ([@ninofiliu](https://github.com/ninofiliu))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.17.0 (2020-04-11)
+
+#### :star: New Features
+* [#829](https://github.com/kazupon/vue-i18n/pull/829) #138 Fallback Locale as array for cascading fallbacks ([@mmokross](https://github.com/mmokross))
+
+#### :pencil: Documentation
+* [#834](https://github.com/kazupon/vue-i18n/pull/834) Add capitalize default modifier in doc ([@alexandreDavid](https://github.com/alexandreDavid))
+* [#832](https://github.com/kazupon/vue-i18n/pull/832) fix in examples of "Custom pluralization" ([@Perlover](https://github.com/Perlover))
+
+#### Committers: 4
+- Alexandre David ([@alexandreDavid](https://github.com/alexandreDavid))
+- Kobayashi Kazuhiro ([@kzhrk](https://github.com/kzhrk))
+- Michael Mokroß ([@mmokross](https://github.com/mmokross))
+- Perlover ([@Perlover](https://github.com/Perlover))
+
+
+## v8.16.0 (2020-03-27)
+
+#### :star: New Features
+* [#822](https://github.com/kazupon/vue-i18n/pull/822) post translation hooking feature ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## v8.15.7 (2020-03-25)
+
+#### :bug: Bug Fixes
+* [#819](https://github.com/kazupon/vue-i18n/pull/819) Fixed bug when changing number format runtime ([@slischka](https://github.com/slischka))
+
+#### Committers: 1
+- Jiří Slischka ([@slischka](https://github.com/slischka))
+
+
+## v8.15.6 (2020-03-23)
+
+#### :bug: Bug Fixes
+* [#817](https://github.com/kazupon/vue-i18n/pull/817) Bugfix : 'setLocaleMessage' / 'mergeLocaleMessage' doesn't work if 'warnHtmlInMessage' is set to 'error'  ([@aym3nb](https://github.com/aym3nb))
+
+#### :pencil: Documentation
+* [#816](https://github.com/kazupon/vue-i18n/pull/816) Update fallback.md ([@scoutrul](https://github.com/scoutrul))
+
+#### Committers: 3
+- Anton ([@scoutrul](https://github.com/scoutrul))
+- Aymen Bareche ([@aym3nb](https://github.com/aym3nb))
+- TATSUNO Yasuhiro ([@exoego](https://github.com/exoego))
+
+
+## v8.15.5 (2020-03-07)
+
+#### :star: Features
+* [#787](https://github.com/kazupon/vue-i18n/pull/787) Add a 'capitalize' default modifier for linked message ([@charlesmass](https://github.com/charlesmass))
+
+#### :zap: Improvement Features
+* [#794](https://github.com/kazupon/vue-i18n/pull/794) Support returning 'string' type for customized interpolation ([@sihyeonn](https://github.com/sihyeonn))
+
+#### :pencil: Documentation
+* [#791](https://github.com/kazupon/vue-i18n/pull/791) Revise fallback.md ([@jlebar](https://github.com/jlebar))
+
+#### Committers: 4
+- Justin Lebar ([@jlebar](https://github.com/jlebar))
+- L M ([@charlesmass](https://github.com/charlesmass))
+- Sihyeon Jang ([@sihyeonn](https://github.com/sihyeonn))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+<a name="8.15.4"></a>
+## [8.15.4](https://github.com/kazupon/vue-i18n/compare/v8.15.3...v8.15.4) (2020-02-25)
+
+
+### :bug: Bug Fixes
+
+* **index:** improve formatFallbackMessages code (#779) (#783) by [@masongzhi](https://github.com/masongzhi) ([53895b9](https://github.com/kazupon/vue-i18n/commit/53895b9)))
+
+### :up: Updates
+
+* some fixes ([8a9a950](https://github.com/kazupon/vue-i18n/commit/8a9a950))
+
+
+
 <a name="8.15.3"></a>
 ## [8.15.3](https://github.com/kazupon/vue-i18n/compare/v8.15.2...v8.15.3) (2019-12-18)
 
@@ -382,7 +915,7 @@ see the [API docs](https://kazupon.github.io/vue-i18n/api/)
 
 ### NOTE
 
-* extend: 
+* extend:
 
 
 
@@ -943,7 +1476,7 @@ In the examples, please refer to this [examples](https://github.com/kazupon/vue-
 - locales <sup>DEPRECATED, use `messages` of `i18n` option (e.g `{ i18n: { messaes: ... } }`)</sup>
 
 ### Instance Properties
-- $lang <sup>DEPRECATED, use `locale` of Vue instance property `$i18n` (e.g `vm.$i18n.locale = 'en'`) 
+- $lang <sup>DEPRECATED, use `locale` of Vue instance property `$i18n` (e.g `vm.$i18n.locale = 'en'`)
 
 ### VueI18n class <sup>NEW</sup>
 - constructor options: See the [`I18nOptions` type](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L7-L15) of flowtype.
@@ -1269,7 +1802,7 @@ In the examples, please refer to this [examples](https://github.com/kazupon/vue-
 ### DEPRECATED
 
 * **index:** plugin install `Vue.use` options (`options.locales`, `options.lang`). See [README](https://github.com/kazupon/vue-i18n/blob/dev/README.md)
-    
+
 
 <a name="2.4.1"></a>
 ## [2.4.1](https://github.com/kazupon/vue-i18n/compare/v2.4.0...v2.4.1) (2016-02-29)

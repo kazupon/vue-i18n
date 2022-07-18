@@ -87,13 +87,17 @@ the following output:
 
 About the above example, see the [example](https://github.com/kazupon/vue-i18n/tree/dev/examples/interpolation/places)
 
-The children of `i18n` functional component are interpolated with locale message of `path` prop. In the above example,
+The children of `i18n` functional component are interpolated with locale message of `path` prop.
+
+In the above example:
 :::v-pre
 `<a :href="url" target="_blank">{{ $t('tos') }}</a>`
 :::
 is interpolated with `term` locale message.
 
-In the above example, the component interpolation follows the **list formatting**.  The children of `i18n` functional component are interpolated by their order of appearance.
+In the above example, the component interpolation follows the **list formatting**. The children of `i18n` functional component are interpolated by their order of appearance.
+
+You can choose the root container's node type by specifying a `tag` prop. If omitted, it defaults to `'span'`. You can also set it to the boolean value `false` to insert the child nodes directly without creating a root element.
 
 ## Slots syntax usage
 
@@ -155,7 +159,7 @@ Outputs:
 </div>
 ```
 
-In Vue 2.6 and later, you can can use the following slots syntax in templates:
+In Vue 2.6 and later, you can use the following slots syntax in templates:
 
 ```html
 <div id="app">

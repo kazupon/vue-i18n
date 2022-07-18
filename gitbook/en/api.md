@@ -34,7 +34,7 @@
   - `{Locale} locale`: optional
   - `{string | Array | Object} values`: optional
 
-- **Return:** `TranslateResult`
+- **Return:** `string`
 
   Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of [$t](#t).
 
@@ -97,17 +97,23 @@
   If the second `key` argument specified as an object, it should have the following properties:
   - `key {Path}`: optional, number format
   - `locale {Locale}`: optional, locale
-  - `style {string}`: optional, number format option
+  - `compactDisplay {string}`: optional, number format option
   - `currency {string}`: optional, number format option
   - `currencyDisplay {string}`: optional, number format option
+  - `currencySign {string}`: optional, number format option
+  - `localeMatcher {string}`: optional, number format option
+  - `notation {string}`: optional, number format option
+  - `numberingSystem {string}`: optional, number format option
+  - `signDisplay {string}`: optional, number format option
+  - `style {string}`: optional, number format option
+  - `unit {string}`: optional, number format option
+  - `unitDisplay {string}`: optional, number format option
   - `useGrouping {string}`: optional, number format option
   - `minimumIntegerDigits {string}`: optional, number format option
   - `minimumFractionDigits {string}`: optional, number format option
   - `maximumFractionDigits {string}`: optional, number format option
   - `minimumSignificantDigits {string}`: optional, number format option
   - `maximumSignificantDigits {string}`: optional, number format option
-  - `localeMatcher {string}`: optional, number format option
-  - `formatMatcher {string}`: optional, number format option
 
   Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
@@ -159,7 +165,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `'en-US'`
 
-  The locale of localization.
+  The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
@@ -167,7 +173,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
 - **Default:** `'en-US'`
 
-  The locale of fallback localization.
+  The locale of fallback localization. For more complex fallback definitions see fallback.
 
 #### messages
 
@@ -228,6 +234,20 @@ You can specify the below some options of `I18nOptions` constructor options of [
   In the component localization, whether to fall back to root level (global) localization when localization fails.
 
   If `false`, it's warned, and is returned the key.
+
+#### fallbackRootWithEmptyString
+
+> :new: 8.26+
+
+- **Type:** `Boolean`
+
+- **Default:** `true`
+
+  In the component localization, whether to fall back to root level (global) localization when local message is an empty string.
+
+  Please note the default behavior in vue-i18n 9.x is to not falling back to root for local message that is empty string.
+
+  If `false`, the empty local message will not fall back to root and will be kept as empty string.
 
 #### sync
 
@@ -530,6 +550,7 @@ You can specify the below some options of `I18nOptions` constructor options of [
   - path: required, key of locale messages
   - locale: optional, locale
   - args: optional, for list or named formatting
+  - choice: optional, for pluralization
 
 - **Examples:**
 

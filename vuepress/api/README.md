@@ -25,9 +25,12 @@ Component based localization option.
     * `{Path} key`: required
     * `{Locale} locale`: optional
     * `{Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 Localize the locale message of `key`. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you specified `key` of list / named formatting local messages, you must specify `values` too. For `values` more details see [Formatting](../guide/formatting.md).
+
+If default pluralization does not suit your needs, see [pluralization rules in constructor options](#pluralizationrules) and [custom pluralization](../guide/pluralization.md).
 
 :::danger Tip
 Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $t = this.$t.bind(this)`).
@@ -41,6 +44,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number} choice`: optional, default 1
     * `{Locale} locale`: optional
     * `{string | Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 Localize the locale message of `key` with pluralization. Localize in preferentially component locale messages than global locale messages. If not specified component locale messages, localize with global locale messages. If you specified `locale`, localize the locale messages of `locale`. If you will specify string value to `values`, localize the locale messages of value. If you will specify Array or Object value to `values`, you must specify with `values` of $t.
@@ -55,6 +59,7 @@ Note that you need to guarantee this context equal to component instance in life
 
     * `{Path} key`: required
     * `{Locale} locale`: optional
+
   * **Return:** `boolean`
 
 Check whether key exists. In Vue instance, If not specified component locale messages, check with global locale messages. If you specified `locale`, check the locale messages of `locale`.
@@ -72,6 +77,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number | Date} value`: required
     * `{Path | Object} key`: optional
     * `{Locale | Object} locale`: optional
+
   * **Return:** `DateTimeFormatResult`
 
 Localize the datetime of `value` with datetime format of `key`. The datetime format of `key` need to register to `dateTimeFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
@@ -79,7 +85,7 @@ Localize the datetime of `value` with datetime format of `key`. The datetime for
 If the datetime format of `key` not exist in `dateTimeFormats` option, fallback to depend on `fallbackLocale` option of `VueI18n` constructor.
 
 :::danger Tip
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
 :::
 
 #### $n
@@ -91,6 +97,7 @@ Note that you need to guarantee this context equal to component instance in life
     * `{number} value`: required
     * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
+
   * **Return:** `NumberFormatResult`
 
 Localize the number of `value` with number format of `format`. The number format of `format` need to register to `numberFormats` option of `VueI18n` class, and depend on `locale` option of `VueI18n` constructor. If you will specify `locale` argument, it will have priority over `locale` option of `VueI18n` constructor.
@@ -101,22 +108,28 @@ If the second `format` argument specified as an object, it should have the follo
 
 * `key {Path}`: optional, number format
 * `locale {Locale}`: optional, locale
-* `style {string}`: optional, number format option
+* `compactDisplay {string}`: optional, number format option
 * `currency {string}`: optional, number format option
 * `currencyDisplay {string}`: optional, number format option
+* `currencySign {string}`: optional, number format option
+* `localeMatcher {string}`: optional, number format option
+* `notation {string}`: optional, number format option
+* `numberingSystem {string}`: optional, number format option
+* `signDisplay {string}`: optional, number format option
+* `style {string}`: optional, number format option
+* `unit {string}`: optional, number format option
+* `unitDisplay {string}`: optional, number format option
 * `useGrouping {string}`: optional, number format option
 * `minimumIntegerDigits {string}`: optional, number format option
 * `minimumFractionDigits {string}`: optional, number format option
 * `maximumFractionDigits {string}`: optional, number format option
 * `minimumSignificantDigits {string}`: optional, number format option
 * `maximumSignificantDigits {string}`: optional, number format option
-* `localeMatcher {string}`: optional, number format option
-* `formatMatcher {string}`: optional, number format option
 
 Any specified number format options will have priority over `numberFormats` of `VueI18n` constructor.
 
 :::danger Tip
-Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $d = this.$d.bind(this)`).
+Note that you need to guarantee this context equal to component instance in lifecycle methods (e.g. in `data` options, `const $n = this.$n.bind(this)`).
 :::
 
 ### Injected properties
@@ -133,7 +146,7 @@ If you have specified an `i18n` option at component options, you will be able to
 
 ## `VueI18n` class
 
-`Vuei18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
+`VueI18n` class implement `I18n` interface of [flowtype definitions](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js)
 
 ### Static properties
 
@@ -167,15 +180,15 @@ You can specify the below some options of `I18nOptions` constructor options of [
 
   * **Default:** `'en-US'`
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-  * **Type:** `Locale`
+  * **Type:** `FallbackLocale`
 
-  * **Default:** `'en-US'`
+  * **Default:** `false`
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 
@@ -233,7 +246,7 @@ The formatter that implemented with `Formatter` interface.
 
 > :new: 8.15.0+
 
-  * **Type:** `Modifier`
+  * **Type:** `Modifiers`
 
   * **Default:** `lower` and `upper` modifiers
 
@@ -258,6 +271,20 @@ If missing handler is assigned, and occurred localization missing, it's not warn
 In the component localization, whether to fall back to root level (global) localization when localization fails.
 
 If `false`, it's warned, and is returned the key.
+
+#### fallbackRootWithEmptyString
+
+> :new: 8.26+
+
+- **Type:** `Boolean`
+
+- **Default:** `true`
+
+  In the component localization, whether to fall back to root level (global) localization when local message is an empty string.
+
+  Please note the default behavior in vue-i18n 9.x is to not falling back to root for local message that is empty string.
+
+  If `false`, the empty local message will not fall back to root and will be kept as empty string.
 
 #### sync
 
@@ -294,6 +321,26 @@ Whether suppress warnings when falling back to either `fallbackLocale` or `root`
 If `true`, warnings will be generated only when no translation is available at all, and not for fallbacks.
 If you use regular expression, you can suppress the fallback warnings that it match `key` (e.g. `$t`).
 
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Default:** `{}`
+
+  A set of rules for word pluralization in a following format:
+  ```js
+    {
+      // Key - locale for the rule to be applied to.
+      // Value - mapping function that maps a choice index from `$tc` to the actual choice of the plural word. (See getChoiceIndex for details)
+      'pt': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'ru': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'en': function(choice, choiceIndex) => Number/* index of the plural word */;
+      'jp': function(choice, choiceIndex) => Number/* index of the plural word */;
+    }
+  ```
+
 #### preserveDirectiveContent
 
 > 8.7+
@@ -326,8 +373,48 @@ In next major version, `warnHtmlInMessage` option is `warn` as default.
 
   * **Default:** `undefined`
 
-The shared locale messages of localization for components. More detail see [Component based localizatrion](../guide/component.md#shared-locale-messages-for-components).
+The shared locale messages of localization for components. More detail see [Component based localization](../guide/component.md#shared-locale-messages-for-components).
 
+#### postTranslation
+
+> 8.16+
+
+  * **Type:** `PostTranslationHandler`
+
+  * **Default:** `null`
+
+A handler for post processing of translation. The handler gets after being called with the `$t`, `t`, `$tc`, and `tc`.
+
+This handler is useful if you want to filter on translated text such as space trimming.
+
+#### componentInstanceCreatedListener
+
+> 8.18+
+
+  * **Type:** `ComponentInstanceCreatedListener`
+
+  * **Default:** `null`
+
+A handler for getting notified when component-local instance was created. The handler gets called with new and old (root) VueI18n instances.
+
+This handler is useful when extending the root VueI18n instance and wanting to also apply those extensions to component-local instance.
+
+#### escapeParameterHtml
+
+> 8.22+
+
+  * **Type:** `Boolean`
+
+  * **Default:** `false`
+
+If `escapeParameterHtml` is configured as true then interpolation parameters are escaped before the message is translated.
+This is useful when translation output is used in `v-html` and the translation resource contains html markup (e.g. `<b>`
+around a user provided value). This usage pattern mostly occurs when passing precomputed text strings into UI compontents.
+
+The escape process involves replacing the following symbols with their respective HTML character entities: `<`, `>`, `"`, `'`.
+
+Setting `escapeParameterHtml` as true should not break existing functionality but provides a safeguard against a subtle
+type of XSS attack vectors.
 
 ### Properties
 
@@ -337,15 +424,15 @@ The shared locale messages of localization for components. More detail see [Comp
 
   * **Read/Write**
 
-The locale of localization.
+The locale of localization. If the locale contains a territory and a dialect, this locale contains an implicit fallback.
 
 #### fallbackLocale
 
-  * **Type:** `Locale`
+  * **Type:** `FallbackLocale`
 
   * **Read/Write**
 
-The locale of fallback localization.
+The locale of fallback localization. For more complex fallback definitions see [fallback](../guide/fallback.md).
 
 #### messages
 
@@ -411,6 +498,16 @@ Whether suppress warnings outputted when localization fails.
 
 Whether suppress fallback warnings when localization fails.
 
+#### pluralizationRules
+
+> 8.5+
+
+  * **Type:** `PluralizationRules`
+
+  * **Read/Write**
+
+A set of locale-dependent rules for word pluralization.
+
 #### preserveDirectiveContent
 
 > 8.7+
@@ -434,32 +531,47 @@ Whether to allow the use locale messages of HTML formatting.
 If you set `warn` or` error`, will check the locale messages on the VueI18n instance.
 
 If you are specified `warn`, a warning will be output at console.
-If you are specified `error` will occured an Error.
+
+If you are specified `error` will occurred an Error.
 
 In VueI18n instance, set the `off` as default.
 
+#### postTranslation
+
+> 8.16+
+
+  * **Type:** `PostTranslationHandler`
+
+  * **Read/Write**
+
+A handler for post processing of translation.
 
 ### Methods
 
 #### getChoiceIndex
 
   * **Arguments:**
+
     * `{number} choice`
     * `{number} choicesLength`
 
   * **Return:** `finalChoice {number}`
 
-Get pluralization index for current pluralizing number and a given amount of choices. Can be overridden through prototype mutation:
+Get pluralization index for current pluralizing number and a given amount of choices.
+Can be overridden through prototype mutation:
 
 ```js
 VueI18n.prototype.getChoiceIndex = /* custom implementation */
 ```
+
+However, for most usages [pluralizationRules constructor option](#pluralizationrules) should be enough.
 
 #### getLocaleMessage( locale )
 
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `LocaleMessageObject`
 
 Get the locale message of locale.
@@ -503,20 +615,10 @@ If you set `warn` or` error` in the `warnHtmlInMessage` property, when this meth
     * `{Path} key`: required
     * `{Locale} locale`: optional
     * `{Array | Object} values`: optional
+
   * **Return:** : `TranslateResult`
 
 This is the same as the `Function` returned with `$t` method. More detail see [$t](#t).
-
-#### i( key, [locale], [values] )
-
-> :new: 7.0+
-
-  * **Arguments:**
-
-    * `{Path} key`: required
-    * `{Locale} locale`: optional
-    * `{Array} values`: optional
-  * **Return:** : `TranslateResult`
 
 #### tc( key, [choice], [values] )
 
@@ -525,6 +627,7 @@ This is the same as the `Function` returned with `$t` method. More detail see [$
     * `{Path} key`: required
     * `{number} choice`: optional, default `1`
     * `{string | Array | Object} values`: optional
+
   * **Return:** `TranslateResult`
 
 This is the same as the `Function` returned `$tc` method. More detail see [$tc](#tc).
@@ -535,6 +638,7 @@ This is the same as the `Function` returned `$tc` method. More detail see [$tc](
 
     * `{string} key`: required
     * `{Locale} locale`: optional
+
   * **Return:** `boolean`
 
 Check whether key path exists in global locale message. If you specified `locale`, check the locale message of `locale`.
@@ -546,6 +650,7 @@ Check whether key path exists in global locale message. If you specified `locale
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `DateTimeFormat`
 
 Get the datetime format of locale.
@@ -581,6 +686,7 @@ Merge the registered datetime formats with the datetime format of locale.
     * `{number | Date} value`: required
     * `{Path | Object} key`: optional
     * `{Locale | Object} locale`: optional
+
   * **Return:** `DateTimeFormatResult`
 
 This is the same as `$d` method of Vue instance method. More detail see [$d](#d).
@@ -592,6 +698,7 @@ This is the same as `$d` method of Vue instance method. More detail see [$d](#d)
   * **Arguments:**
 
     * `{Locale} locale`
+
   * **Return:** `NumberFormat`
 
 Get the number format of locale.
@@ -627,6 +734,7 @@ Merge the registered number formats with the number format of locale.
     * `{number} value`: required
     * `{Path | Object} format`: optional
     * `{Locale} locale`: optional
+
   * **Return:** `NumberFormatResult`
 
 This is the same as `$n` method of Vue instance method. More detail see [$n](#n).
@@ -647,14 +755,16 @@ This is the same as `$n` method of Vue instance method. More detail see [$n](#n)
 
 Update the element `textContent` that localized with locale messages. You can use string syntax or object syntax. string syntax can be specified as a keypath of locale messages. If you can be used object syntax, you need to specify as the object key the following params:
 
-    * path: required, key of locale messages
-    * locale: optional, locale
-    * args: optional, for list or named formatting
+  * `path`: required, key of locale messages
+  * `locale`: optional, locale
+  * `args`: optional, for list or named formatting
 
 :::tip NOTE
 The element `textContent` will be cleared by default when `v-t` directive is unbinded. This might be undesirable situation when used inside [transitions](https://vuejs.org/v2/guide/transitions.html). To preserve `textContent` data after directive unbind use `.preserve` modifier or global [`preserveDirectiveContent` option](#preservedirectivecontent).
 :::
+
   * **Examples:**
+
 ```html
 <!-- string syntax: literal -->
 <p v-t="'foo.bar'"></p>
@@ -684,7 +794,7 @@ The element `textContent` will be cleared by default when `v-t` directive is unb
 
   * `path {Path}`: required, keypath of locale messages
   * `locale {Locale}`: optional, locale
-  * `tag {string}`: optional, default `span`
+  * `tag {string | boolean | Object}`: optional, default `'span'`
   * `places {Array | Object}`: optional (7.2+)
 
 :::danger Important!!
@@ -739,7 +849,7 @@ new Vue({
   * `value {number}`: required, number to format
   * `format {string | NumberFormatOptions}`: optional, number format name or object with explicit format options
   * `locale {Locale}`: optional, locale
-  * `tag {string}`: optional, default `span`
+  * `tag {string | boolean | Object}`: optional, default `'span'`
 
 #### Usage:
 

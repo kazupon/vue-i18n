@@ -1,4 +1,4 @@
-import mixin from '../../src/mixin'
+import defineMixin from '../../src/mixin'
 
 describe('mixin', () => {
   describe('beforeCreate', () => {
@@ -19,7 +19,7 @@ describe('mixin', () => {
   describe('beforeDestroy', () => {
     describe('not assign VueI18n instance', () => {
       it('should be succeeded', () => {
-        assert(mixin.beforeDestroy() === undefined)
+        assert(defineMixin().beforeDestroy() === undefined)
       })
     })
   })

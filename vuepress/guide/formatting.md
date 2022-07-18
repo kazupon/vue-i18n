@@ -75,7 +75,7 @@ We recommended using the [component interpolation](interpolation.md) feature.
 :::warning Notice
 > :new: 8.11+
 
-You can control the use of HTML formatting. see the detail  `warnHtmlInMessage` constructor option and property API.
+You can control the use of HTML formatting. see the detail `warnHtmlInMessage` constructor option and property API.
 :::
 
 In some cases you might want to render your translation as an HTML message and not a static string.
@@ -138,7 +138,7 @@ Output:
 
 Sometimes, you may need to translate using custom formatting (e.g. [ICU message syntax](http://userguide.icu-project.org/formatparse/messages)).
 
-You can do that with a custom formatter that implements the [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L41-L43).
+You can do that with a custom formatter that implements the [Formatter Interface](https://github.com/kazupon/vue-i18n/blob/dev/decls/i18n.js#L145-L147).
 
 The following custom formatter with ES2015 class syntax:
 

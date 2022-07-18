@@ -13,7 +13,8 @@ const messages = {
     fallback: 'fallback from {0}'
   },
   ja: {
-    text: '一: {0}'
+    text: '一: {0}',
+    'I am {0}': '一: {0}'
   }
 }
 const components = {
@@ -46,6 +47,98 @@ describe('component interpolation', () => {
     })
   })
 
+  describe('tag', () => {
+    it('defaults to span', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text' } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
+      }).then(done)
+    })
+
+    it('of type object (Component) should be correctly applied', done => {
+      const MockElement = {
+        render(h) {
+          return h('strong', Object.values(this.$slots));
+        },
+      }
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: MockElement } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<strong>one: 1</strong>')
+      }).then(done).catch(done)
+    })
+
+    it('of type object (Functional Component) should be correctly applied', done => {
+      const MockElement = {
+        functional: true,
+        render(h, { data, children }) {
+          return h('em', data, children);
+        },
+      }
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: MockElement } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<em>one: 1</em>')
+      }).then(done).catch(done)
+    })
+
+    it('of type string should be correctly applied', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: 'b' } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<b>one: 1</b>')
+      }).then(done)
+    })
+
+    it('of value true defaults to span', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: true } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>one: 1</span>')
+      }).then(done)
+    })
+
+    it('of value false does not apply a root container', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('i18n', { props: { path: 'text', tag: false } }, [this._v('1')])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.nodeType, Node.TEXT_NODE)
+        assert.strictEqual(vm.$el.data, 'one: 1')
+      }).then(done)
+    })
+  })
+
   describe('children', () => {
     describe('text nodes', () => {
       it('should be interpolated', done => {
@@ -56,7 +149,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text' } }, [this._v('1')])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -74,7 +167,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
         }).then(done)
       })
@@ -93,7 +186,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
         }).then(done)
       })
@@ -112,7 +205,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -127,7 +220,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text', places: [1] } })
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -146,7 +239,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -165,7 +258,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'element: <p>1</p>, component: <p>foo</p>')
         }).then(done)
       })
@@ -183,7 +276,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: <p place="y">bar</p>')
         }).then(done)
       })
@@ -202,7 +295,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'text: foo, component: ')
           assert(spy.notCalled === false)
           assert(spy.callCount === 1)
@@ -221,7 +314,7 @@ describe('component interpolation', () => {
             return h('fallback')
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'fallback from <p>child</p>')
         }).then(done)
       })
@@ -245,7 +338,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'element: <p>1</p>, component: <div><div class="nested">element: <p>2</p>, component: <p>nested</p></div></div>'
@@ -267,7 +360,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, 'one: <p>1</p>, two: <p>2</p>')
       }).then(done)
     })
@@ -284,7 +377,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, '一: 1')
       }).then(done)
     })
@@ -301,7 +394,7 @@ describe('component interpolation', () => {
           ])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$el.innerHTML,
           'I accept xxx <a href=\"/term\">Term of service</a>.'
@@ -320,7 +413,7 @@ describe('component interpolation', () => {
             return h('i18n', { props: { path: 'text' }, slot: '' }, [this._v('1')])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'one: 1')
         }).then(done)
       })
@@ -338,7 +431,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'header: <p>header</p>, footer: <p>footer</p>'
@@ -359,7 +452,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
         }).then(done)
       })
@@ -377,7 +470,7 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.innerHTML, 'one: 1, two: 2')
         }).then(done)
       })
@@ -396,10 +489,90 @@ describe('component interpolation', () => {
             ])
           }
         }).$mount(el)
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(
             vm.$el.innerHTML,
             'I accept xxx <a href=\"/term\">Term of service</a>.'
+          )
+        }).then(done)
+      })
+    })
+
+    describe('formatFallbackMessages', () => {
+      let i18n
+      beforeEach(() => {
+        i18n = new VueI18n({
+          locale: 'en',
+          messages,
+          formatFallbackMessages: true
+        })
+      })
+
+      it('should be interpolated', done => {
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+
+        Vue.nextTick().then(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            'I am <a href=\"/term\">Term of service</a>'
+          )
+        }).then(done)
+      })
+
+      it('use ja message', done => {
+        i18n.locale = 'ja'
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        Vue.nextTick().then(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            '一: <a href=\"/term\">Term of service</a>'
+          )
+        }).then(done)
+      })
+
+      it('fallbackRoot has higher priority than formatFallbackMessages', done => {
+        i18n = new VueI18n({
+          locale: 'ja',
+          messages,
+          fallbackLocale: 'en',
+          formatFallbackMessages: true,
+          fallbackRoot: true
+        })
+        const el = document.createElement('div')
+        const vm = new Vue({
+          i18n,
+          render (h) {
+            return h('i18n', { props: { path: 'I am {0}' } }, [
+              h('template', { slot: '0' }, [
+                h('a', { domProps: { href: '/term', textContent: this.$t('tos') } })
+              ])
+            ])
+          }
+        }).$mount(el)
+        Vue.nextTick().then(() => {
+          assert.strictEqual(
+            vm.$el.innerHTML,
+            '一: <a href=\"/term\">Term of service</a>'
           )
         }).then(done)
       })

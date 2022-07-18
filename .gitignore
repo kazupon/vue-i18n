@@ -9,6 +9,7 @@ vuepress/.vuepress/dist
 .DS_Store
 .idea
 .vscode
+.env
 *.log
 *.swp
 *~

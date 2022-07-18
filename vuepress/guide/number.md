@@ -12,12 +12,15 @@ Number formats the below:
 const numberFormats = {
   'en-US': {
     currency: {
-      style: 'currency', currency: 'USD'
+      style: 'currency',
+      currency: 'USD'
     }
   },
   'ja-JP': {
     currency: {
-      style: 'currency', currency: 'JPY', currencyDisplay: 'symbol'
+      style: 'currency',
+      currency: 'JPY',
+      currencyDisplay: 'symbol'
     }
   }
 }
@@ -92,23 +95,34 @@ Let's say there is a requirement to render the integer part of the number with a
 
 ```html
 <i18n-n :value="100" format="currency">
-  <span v-slot:integer="slotProps" styles="font-weight: bold">{{ slotProps.integer }}</span>
+  <template v-slot:integer="slotProps">
+    <span style="font-weight: bold">{{ slotProps.integer }}</span>
+  </template>
 </i18n-n>
 ```
 
 Template above will result in the following HTML:
 
 ```html
-<span>$<span styles="font-weight: bold">100</span>.00</span>
+<span>$<span style="font-weight: bold">100</span>.00</span>
 ```
 
 It is possible to specify multiple scoped slots at the same time:
 
 ```html
 <i18n-n :value="1234" :format="{ key: 'currency', currency: 'EUR' }">
-  <span v-slot:integer="slotProps" styles="font-weight: bold">{{ slotProps.integer }}</span>
-  <span v-slot:group="slotProps" styles="font-weight: bold">{{ slotProps.group }}</span>
-  <span v-slot:fraction="slotProps" styles="font-size: small">{{ slotProps.fraction }}</span>
+  <template v-slot:currency="slotProps">
+    <span style="color: green">{{ slotProps.currency }}</span>
+  </template>
+  <template v-slot:integer="slotProps">
+    <span style="font-weight: bold">{{ slotProps.integer }}</span>
+  </template>
+  <template v-slot:group="slotProps">
+    <span style="font-weight: bold">{{ slotProps.group }}</span>
+  </template>
+  <template v-slot:fraction="slotProps">
+    <span style="font-size: small">{{ slotProps.fraction }}</span>
+  </template>
 </i18n-n>
 ```
 
@@ -116,13 +130,14 @@ It is possible to specify multiple scoped slots at the same time:
 
 ```html
 <span>
-  €
-  <span styles="font-weight: bold">1</span>
-  <span styles="font-weight: bold">,</span>
-  <span styles="font-weight: bold">234</span>
-  .
-  <span styles="font-size: small">00</span>
+  <span style="color: green">€</span>
+  <span style="font-weight: bold">1</span>
+  <span style="font-weight: bold">,</span>
+  <span style="font-weight: bold">234</span>
+  <span style="font-size: small">00</span>
 </span>
 ```
+
+You can choose the root container's node type by specifying a `tag` prop. If omitted, it defaults to `'span'`. You can also set it to the boolean value `false` to insert the child nodes directly without creating a root element.
 
 Full list of the supported scoped slots as well as other `<i18n-n>` properties can be found [on API page](../api/readme.md#i18n-n-functional-component).

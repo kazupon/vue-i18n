@@ -3,6 +3,8 @@ import { parse } from '../../src/format'
 import VueI18n from '../../src'
 const compiler = require('vue-template-compiler')
 
+const delay = time => new Promise(resolve => setTimeout(resolve, time))
+
 describe('issues', () => {
   let vm, i18n
   beforeEach(() => {
@@ -84,7 +86,7 @@ describe('issues', () => {
         }
       })
       const vm = new Component({ i18n }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
@@ -108,7 +110,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$el.innerHTML,
           'the world: <strong>underscore the wolrd</strong> <strong>the world</strong>'
@@ -140,7 +142,7 @@ describe('issues', () => {
           return h('div', [h('comp', { ref: 'comp' })])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(
           vm.$refs.comp.$refs.title.textContent,
           'billy-bob\'s fine steaks. - yeee hawwww!!!'
@@ -162,7 +164,7 @@ describe('issues', () => {
       const vm = new Component({
         i18n: new VueI18n({ locale: 'en' })
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.custom.textContent, 'custom block!')
       }).then(done)
     })
@@ -201,7 +203,7 @@ describe('issues', () => {
       }).$mount()
       const el1 = vm.$refs.comp.$refs.el1
       const el2 = vm.$refs.comp.$refs.el2
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(el1.textContent, 'こんにちは')
         assert.strictEqual(el2.textContent, 'メッセージ')
       }).then(done)
@@ -236,7 +238,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.el1.textContent, '[EN] alpha injected value')
         assert.strictEqual(vm.$refs.el2.textContent, '[XX] bravo injected value')
         assert.strictEqual(vm.$refs.el3.textContent, '[EN] charlie injected value')
@@ -295,7 +297,7 @@ describe('issues', () => {
           })
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, 'hello 203')
       }).then(done)
     })
@@ -356,7 +358,7 @@ describe('issues', () => {
         staticRenderFns
       }).$mount(el)
 
-      Vue.nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.el1.outerHTML, '<div><span>SHOULD_NOT_DISPLAY_WHEN_TIMEOUT_EQUAL_TRUE</span></div>')
         vm.startLoading()
         delay(50).then(() => {
@@ -410,7 +412,7 @@ describe('issues', () => {
         }
       }).$mount(document.createElement('div'))
 
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.text.textContent, 'hi there!')
       }).then(() => {
         vm.$i18n.setLocaleMessage('en', {
@@ -475,7 +477,7 @@ describe('issues', () => {
           ])
         }
       }).$mount()
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         vm.$i18n.mergeLocaleMessage('en', {
           key1: 'Hello Module 1',
           shared: {
@@ -569,7 +571,7 @@ describe('issues', () => {
         locale: 'ru',
         messages: {
           ru: {
-            car: '0 машин | 1 машина | {n} машины | {n} машин'
+            car: '0 машин | {n} машина | {n} машины | {n} машин'
           }
         },
         pluralizationRules: {
@@ -578,12 +580,12 @@ describe('issues', () => {
       })
       vm = new Vue({ i18n })
 
-      assert(vm.$tc('car', 0), '0 машин')
-      assert(vm.$tc('car', 1), '1 машина')
-      assert(vm.$tc('car', 2), '2 машины')
-      assert(vm.$tc('car', 4), '4 машины')
-      assert(vm.$tc('car', 12), '12 машин')
-      assert(vm.$tc('car', 21), '21 машина')
+      assert.strictEqual(vm.$tc('car', 0), '0 машин')
+      assert.strictEqual(vm.$tc('car', 1), '1 машина')
+      assert.strictEqual(vm.$tc('car', 2), '2 машины')
+      assert.strictEqual(vm.$tc('car', 4), '4 машины')
+      assert.strictEqual(vm.$tc('car', 12), '12 машин')
+      assert.strictEqual(vm.$tc('car', 21), '21 машина')
     })
 
     it('ensures backward-compatibility with #451', () => {
@@ -617,21 +619,21 @@ describe('issues', () => {
 
 
       i18n = new VueI18n({
-        locale: 'en',
+        locale: 'ru',
         messages: {
           ru: {
-            car: '0 машин | 1 машина | {n} машины | {n} машин'
+            car: '0 машин | {n} машина | {n} машины | {n} машин'
           }
         }
       })
       vm = new Vue({ i18n })
 
-      assert(vm.$tc('car', 0), '0 машин')
-      assert(vm.$tc('car', 1), '1 машина')
-      assert(vm.$tc('car', 2), '2 машины')
-      assert(vm.$tc('car', 4), '4 машины')
-      assert(vm.$tc('car', 12), '12 машин')
-      assert(vm.$tc('car', 21), '21 машина')
+      assert.strictEqual(vm.$tc('car', 0), '0 машин')
+      assert.strictEqual(vm.$tc('car', 1), '1 машина')
+      assert.strictEqual(vm.$tc('car', 2), '2 машины')
+      assert.strictEqual(vm.$tc('car', 4), '4 машины')
+      assert.strictEqual(vm.$tc('car', 12), '12 машин')
+      assert.strictEqual(vm.$tc('car', 21), '21 машина')
 
       // Set the default implementation back
       VueI18n.prototype.getChoiceIndex = defaultImpl
@@ -662,14 +664,14 @@ describe('issues', () => {
         },
         formatter: {
           interpolate (message, values, path) {
-            assert(path, testPath)
+            assert.strictEqual(path, testPath)
 
             return null // pass the case to the default formatter
           }
         }
       })
 
-      assert(i18n.t(testPath), 'Hello!')
+      assert.strictEqual(i18n.t(testPath), 'Hello!')
     })
   })
 
@@ -691,6 +693,151 @@ describe('issues', () => {
   describe('#515', () => {
     it('$te should return true for empty string', () => {
       assert.strictEqual(vm.$te('message.empty'), true)
+    })
+  })
+
+  describe('#879', () => {
+    it('$t should not throw when invoked on a destroyed component', async () => {
+      const vm = new Vue({
+        i18n: new VueI18n({ locale: 'en' }),
+        methods: {
+          test: async function () {
+            // Long running async method that terminates after the component is destroyed.
+            await new Promise((resolve) => setTimeout(resolve, 50))
+            this.$t('anything')
+          }
+        }
+      })
+      const promise = vm.test() // invocation before being destroyed
+      vm.$destroy()
+      await promise // should not throw
+    })
+  })
+
+  describe('#892)', () => {
+    it('should not call "componentInstanceCreatedListener" on not creating local instance', () => {
+      const componentInstanceCreatedListener = sinon.spy()
+      new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          componentInstanceCreatedListener
+        }),
+        components: {
+          child: {
+            render (h) {
+              return h('p', ['hello child'])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [
+            h('child', { ref: 'child' })
+          ])
+        }
+      }).$mount()
+
+      assert(componentInstanceCreatedListener.called === false)
+    })
+
+    it('should call "componentInstanceCreatedListener" on creating local instance', () => {
+      const componentInstanceCreatedListener = sinon.spy()
+      const i18n = new VueI18n({
+        locale: 'en',
+        componentInstanceCreatedListener
+      })
+      new Vue({
+        i18n,
+        components: {
+          child: {
+            i18n: {
+              locale: 'ja'
+            },
+            render (h) {
+              return h('p', ['hello child'])
+            }
+          }
+        },
+        render (h) {
+          return h('div', [
+            h('child', { ref: 'child' })
+          ])
+        }
+      }).$mount()
+
+      assert(componentInstanceCreatedListener.calledOnce === true)
+      console.info(componentInstanceCreatedListener.args)
+      assert(componentInstanceCreatedListener.args[0][0] instanceof VueI18n) // new instance
+      assert.strictEqual(componentInstanceCreatedListener.args[0][1], i18n)
+    })
+  })
+
+  describe('#996', () => {
+    it('should merge __i18n and i18n', done => {
+      const Component = Vue.extend({
+        __i18n: [JSON.stringify({ en: { custom: 'custom block!' } })],
+        render (h) {
+          return h('p')
+        }
+      })
+      const vm = new Component({
+        i18n: new VueI18n({ locale: 'en', messages: { en: { another: 'another block!' } } })
+      }).$mount()
+
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$t('another'), 'another block!')
+        assert.strictEqual(vm.$t('custom'), 'custom block!')
+      }).then(done)
+        .catch(console.error)
+    })
+  })
+
+  describe('#1380', () => {
+    it('should be translated', done => {
+      vm = new Vue({
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              'link-with-slash': '@:key/with/slash',
+              'key/with/slash': 'should be translated'
+            }
+          }
+        }),
+        render (h) {
+          return h('div', 
+          [ h('p', { ref: 'text' }, [this.$t('link-with-slash')]) ])
+        }
+      }).$mount()
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$refs.text.textContent, 'should be translated')
+      }).then(done)
+    })
+  })
+
+  describe('#1488', () => {
+    it('should be translated', () => {
+      assert.strictEqual(vm.$i18n.t('message.linkColon'), messages.en['colon:hello'])
+      assert.strictEqual(vm.$i18n.t('message.linkPipe'), messages.en['pipe|hello'])
+    })
+  })
+
+  describe('#1308', () => {
+    it('should be translated', () => {
+      const i18n = new VueI18n({
+          locale: 'en',
+          messages: {
+            en: {
+              'address': 'home Address',
+              'snakeAddress': '@.snakeCase:(address)'
+            }
+          },
+          name: 'test',
+          modifiers: {
+            snakeCase: str => str.split(' ').join('-')
+          },
+      })
+
+      assert.strictEqual(i18n.t('snakeAddress'), 'home-Address')
     })
   })
 })
