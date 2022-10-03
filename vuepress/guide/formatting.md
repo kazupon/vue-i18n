@@ -8,7 +8,7 @@ Locale messages:
 const messages = {
   en: {
     message: {
-      hello: '{msg} world'
+      toWorld: '{msg} world'
     }
   }
 }
@@ -17,7 +17,7 @@ const messages = {
 Template:
 
 ```html
-<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
+<p>{{ $t('message.toWorld', { msg: 'hello' }) }}</p>
 ```
 
 Output:
@@ -34,7 +34,7 @@ Locale messages:
 const messages = {
   en: {
     message: {
-      hello: '{0} world'
+      toWorld: '{0} world'
     }
   }
 }
@@ -43,7 +43,7 @@ const messages = {
 Template:
 
 ```html
-<p>{{ $t('message.hello', ['hello']) }}</p>
+<p>{{ $t('message.toWorld', ['hello']) }}</p>
 ```
 
 Output:
@@ -55,7 +55,7 @@ Output:
 List formatting also accepts array-like objects:
 
 ```html
-<p>{{ $t('message.hello', {'0': 'hello'}) }}</p>
+<p>{{ $t('message.toWorld', {'0': 'hello'}) }}</p>
 ```
 
 Output:
@@ -85,7 +85,7 @@ In some cases you might want to render your translation as an HTML message and n
 const messages = {
   en: {
     message: {
-      hello: 'hello <br> world'
+      toWorld: 'hello <br> world'
     }
   }
 }
@@ -95,7 +95,7 @@ Template:
 
 
 ```html
-<p v-html="$t('message.hello')"></p>
+<p v-html="$t('message.toWorld')"></p>
 ```
 
 Output (instead of the pre-formatted message )
@@ -116,7 +116,7 @@ Locale messages:
 const messages = {
   en: {
     message: {
-      hello: '%{msg} world'
+      toWorld: '%{msg} world'
     }
   }
 }
@@ -125,7 +125,7 @@ const messages = {
 Template:
 
 ```html
-<p>{{ $t('message.hello', { msg: 'hello' }) }}</p>
+<p>{{ $t('message.toWorld', { msg: 'hello' }) }}</p>
 ```
 
 Output:
