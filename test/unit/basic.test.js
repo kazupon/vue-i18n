@@ -62,11 +62,11 @@ describe('basic', () => {
       })
 
       it('should translate singular word with the first letter as upper-case', () => {
-        assert.strictEqual(i18n.tc('message.Car', 1), 'Car')
+        assert.strictEqual(i18n.tc('plurals.Car', 1), 'Car')
       })
 
       it('should translate plural word with the first letter as upper-case', () => {
-        assert.strictEqual(i18n.tc('message.Car', 2), 'Cars')
+        assert.strictEqual(i18n.tc('plurals.Car', 2), 'Cars')
       })
 
       it('should translate link without formatting if modifier is not known.', () => {
