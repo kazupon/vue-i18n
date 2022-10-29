@@ -24,6 +24,18 @@ export const numberFormatKeys = [
   'maximumSignificantDigits'
 ]
 
+export const dateTimeFormatKeys = [
+  'weekday',
+  'era',
+  'year',
+  'month',
+  'day',
+  'hour',
+  'minute',
+  'second',
+  'timeZoneName'
+]
+
 /**
  * utilities
  */
