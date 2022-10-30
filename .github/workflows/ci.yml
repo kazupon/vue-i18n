@@ -26,10 +26,9 @@ jobs:
         os: [ubuntu-latest]
         node: [16]
     steps:
-      - name: Setup google crhome
-        run: |
-          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_107.0.5304.87_amd64.deb
-          sudo dpkg -i google-chrome-stable_107.0.5304.87_amd64.deb
+      - uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
       - run: chrome --version
 #      - name: Checkout
 #        uses: actions/checkout@v2
