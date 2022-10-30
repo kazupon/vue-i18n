@@ -31,11 +31,16 @@ jobs:
         with:
           chrome-version: stable
       - run: chrome --version
+
       - name: Setup firefox
         uses: browser-actions/setup-firefox@latest
         with:
           firefox-version: latest
       - run: firefox --version
+
+      - name: Setup for nightwatch
+        run: sudo apt-get install xvfb
+
       - name: Checkout codes
         uses: actions/checkout@v3
 
@@ -44,19 +49,24 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+
       - name: Install
         run: yarn install --frozen-lockfile
+
       - name: Lint
         run: yarn lint
+
       - name: Flow Types
         run: yarn flow
+
       - name: TS Types
         run: yarn test:types
+
       - name: Test Coverage
         run: yarn test:cover
-      # - name: Setup for firefox
-      #   run: export DISPLAY=:0
-      # - name: Unit tests
-      #   run: yarn test:unit:ci
+
+      - name: Unit tests
+        run: yarn test:unit:ci
+
       - name: E2E Tests
-        run: yarn test:e2e
+        run: xvfb-run --auto-servernum yarn test:e2e
