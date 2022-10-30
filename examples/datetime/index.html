@@ -10,25 +10,32 @@
   <body>
     <div id="app">
       <select v-model="locale">
-        <option>en-US</option>
-        <option>ja-JP</option>
+        <option value="en-US">en-US</option>
+        <option value="ja-JP">ja-JP</option>
       </select>
       <p>{{ $t('current_datetime')}}: {{ $d(now, 'long') }}</p>
+      <p data-testid="pastDatetime">{{ $t('past_datetime')}}: {{ $d(pastDatetime, 'long') }}</p>
+      <p data-testid="pastYear">{{ $t('past_year')}}: {{ $d(pastDatetime, {year: '2-digit'}) }}</p>
     </div>
     <script>
       var messages = {
         'en-US': {
-          current_datetime: 'current datetime'
+          current_datetime: 'current datetime',
+          past_datetime: 'past datetime',
+          past_year: 'past year'
         },
         'ja-JP': {
-          current_datetime: '現在の日時'
+          current_datetime: '現在の日時',
+          past_datetime: '過去の日時',
+          past_year: '過去の年'
         }
       }
       var dateTimeFormats = {
         'en-US': {
           long: {
             year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            timeZone: 'America/Los_Angeles'
           }
         },
         'ja-JP': {
@@ -36,6 +43,7 @@
             year: 'numeric', month: '2-digit', day: '2-digit',
             hour: '2-digit', minute: '2-digit', second: '2-digit',
             hour12: true,
+            timeZone: 'Asia/Tokyo'
           }
         }
       }
@@ -53,7 +61,8 @@
         i18n: i18n,
         data: {
           locale: initial,
-          now: new Date()
+          now: new Date(),
+          pastDatetime: new Date(Date.UTC(2012, 11, 20, 3, 0, 0))
         },
         watch: {
           locale: function (val) {

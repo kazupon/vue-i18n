@@ -18,6 +18,7 @@ import {
   includes,
   merge,
   numberFormatKeys,
+  dateTimeFormatKeys,
   escapeParams
 } from './util'
 import BaseFormatter from './format'
@@ -847,7 +848,8 @@ export default class VueI18n {
     locale: Locale,
     fallback: FallbackLocale,
     dateTimeFormats: DateTimeFormats,
-    key: string
+    key: string,
+    options: ?DateTimeFormatOptions
   ): ?DateTimeFormatResult {
     let _locale: Locale = locale
     let formats: DateTimeFormat = dateTimeFormats[_locale]
@@ -872,16 +874,23 @@ export default class VueI18n {
       return null
     } else {
       const format: ?DateTimeFormatOptions = formats[key]
-      const id = `${_locale}__${key}`
-      let formatter = this._dateTimeFormatters[id]
-      if (!formatter) {
-        formatter = this._dateTimeFormatters[id] = new Intl.DateTimeFormat(_locale, format)
+
+      let formatter
+      if (options) {
+        formatter = new Intl.DateTimeFormat(_locale, Object.assign({}, format, options))
+      } else {
+        const id = `${_locale}__${key}`
+        formatter = this._dateTimeFormatters[id]
+        if (!formatter) {
+          formatter = this._dateTimeFormatters[id] = new Intl.DateTimeFormat(_locale, format)
+        }
       }
+
       return formatter.format(value)
     }
   }
 
-  _d (value: number | Date, locale: Locale, key: ?string): DateTimeFormatResult {
+  _d (value: number | Date, locale: Locale, key: ?string, options: ?DateTimeFormatOptions): DateTimeFormatResult {
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && !VueI18n.availabilities.dateTimeFormat) {
       warn('Cannot format a Date value due to not supported Intl.DateTimeFormat.')
@@ -889,11 +898,12 @@ export default class VueI18n {
     }
 
     if (!key) {
-      return new Intl.DateTimeFormat(locale).format(value)
+      const dtf = !options ? new Intl.DateTimeFormat(locale) : new Intl.DateTimeFormat(locale, options)
+      return dtf.format(value)
     }
 
     const ret: ?DateTimeFormatResult =
-      this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key)
+      this._localizeDateTime(value, locale, this.fallbackLocale, this._getDateTimeFormats(), key, options)
     if (this._isFallbackRoot(ret)) {
       if (process.env.NODE_ENV !== 'production' && !this._isSilentTranslationWarn(key) && !this._isSilentFallbackWarn(key)) {
         warn(`Fall back to datetime localization of root: key '${key}'.`)
@@ -909,6 +919,7 @@ export default class VueI18n {
   d (value: number | Date, ...args: any): DateTimeFormatResult {
     let locale: Locale = this.locale
     let key: ?string = null
+    let options: ?DateTimeFormatOptions = null
 
     if (args.length === 1) {
       if (isString(args[0])) {
@@ -921,6 +932,14 @@ export default class VueI18n {
           key = args[0].key
         }
       }
+
+      options = Object.keys(args[0]).reduce((acc, key) => {
+        if (includes(dateTimeFormatKeys, key)) {
+          return Object.assign({}, acc, { [key]: args[0][key] })
+        }
+        return acc
+      }, null)
+
     } else if (args.length === 2) {
       if (isString(args[0])) {
         key = args[0]
@@ -930,7 +949,7 @@ export default class VueI18n {
       }
     }
 
-    return this._d(value, locale, key)
+    return this._d(value, locale, key, options)
   }
 
   getNumberFormat (locale: Locale): NumberFormat {
