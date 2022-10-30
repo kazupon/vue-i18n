@@ -119,7 +119,7 @@ Se o segundo argumento para `format` for especificado por um objeto, ele deverá
 * `style {string}`: opcional, opção de formatação do número
 * `unit {string}`: opcional, opção de formatação do número
 * `unitDisplay {string}`: opcional, opção de formatação do número
-* `useGrouping {string}`: opcional, opção de formatação do número
+* `useGrouping {boolean}`: opcional, opção de formatação do número
 * `minimumIntegerDigits {string}`: opcional, opção de formatação do número
 * `minimumFractionDigits {string}`: opcional, opção de formatação do número
 * `maximumFractionDigits {string}`: opcional, opção de formatação do número

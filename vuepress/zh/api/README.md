@@ -109,7 +109,7 @@ sidebar: auto
 * `style {string}`：可选，数字格式选项
 * `currency {string}`：可选，数字格式选项
 * `currencyDisplay {string}`：可选，数字格式选项
-* `useGrouping {string}`：可选，数字格式选项
+* `useGrouping {boolean}`：可选，数字格式选项
 * `minimumIntegerDigits {string}`：可选，数字格式选项
 * `minimumFractionDigits {string}`：可选，数字格式选项
 * `maximumFractionDigits {string}`：可选，数字格式选项

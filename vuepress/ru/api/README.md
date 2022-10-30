@@ -119,7 +119,7 @@ sidebar: auto
 * `style {string}`: опционально, опция форматирования чисел
 * `unit {string}`: опционально, опция форматирования чисел
 * `unitDisplay {string}`: опционально, опция форматирования чисел
-* `useGrouping {string}`: опционально, опция форматирования чисел
+* `useGrouping {boolean}`: опционально, опция форматирования чисел
 * `minimumIntegerDigits {string}`: опционально, опция форматирования чисел
 * `minimumFractionDigits {string}`: опционально, опция форматирования чисел
 * `maximumFractionDigits {string}`: опционально, опция форматирования чисел

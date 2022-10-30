@@ -108,7 +108,7 @@
   - `style {string}`: optional, number format option
   - `unit {string}`: optional, number format option
   - `unitDisplay {string}`: optional, number format option
-  - `useGrouping {string}`: optional, number format option
+  - `useGrouping {boolean}`: optional, number format option
   - `minimumIntegerDigits {string}`: optional, number format option
   - `minimumFractionDigits {string}`: optional, number format option
   - `maximumFractionDigits {string}`: optional, number format option
