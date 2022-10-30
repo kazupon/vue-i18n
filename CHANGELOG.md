@@ -1,3 +1,11 @@
+## v8.28.0 (2022-10-30)
+
+#### :star: New Features
+* [#1569](https://github.com/kazupon/vue-i18n/pull/1569) fix(datetime): $d supports key format object (#1502) ([@horitaka](https://github.com/horitaka))
+
+#### Committers: 1
+- [@horitaka](https://github.com/horitaka)
+
 ## v8.27.2 (2022-06-20)
 
 #### :bug: Bug Fixes
