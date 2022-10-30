@@ -1,0 +1,42 @@
+name: Test
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+      - releases/**
+  pull_request:
+    branches-ignore:
+      - gh-pages
+      - releases/**
+    types:
+      - opened
+      - synchronize
+      - reopened
+env:
+  CI: true
+
+jobs:
+  test:
+    name: "Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    steps:
+       - uses: browser-actions/setup-chrome@latest
+         with:
+           chrome-version: 107
+       - run: chrome --version
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#      - name: Setup Node.js ${{ matrix.node }}
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ matrix.node }}
+#      - name: Install
+#        run: yarn install
+#      - name: Test
+#        run: yarn test
+#      - name: Test (end-to-end)
+#        run: yarn test:e2e
