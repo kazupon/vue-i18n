@@ -26,10 +26,10 @@ jobs:
         os: [ubuntu-latest]
         node: [16]
     steps:
-      - name: Setup google chrome
-        uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: stable
+      # - name: Setup google chrome
+      #   uses: browser-actions/setup-chrome@latest
+      #   with:
+      #     chrome-version: stable
       - run: chrome --version
 
       - name: Setup firefox
