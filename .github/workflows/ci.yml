@@ -26,10 +26,10 @@ jobs:
         os: [ubuntu-latest]
         node: [16]
     steps:
-      # - name: Setup google chrome
-      #   uses: browser-actions/setup-chrome@latest
-      #   with:
-      #     chrome-version: stable
+      - name: Setup google chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
       - run: chrome --version
 
       - name: Setup firefox
@@ -38,8 +38,8 @@ jobs:
           firefox-version: latest
       - run: firefox --version
 
-      - name: Setup for nightwatch
-        run: sudo apt-get install xvfb
+      # - name: Setup for nightwatch
+      #   run: sudo apt-get install xvfb
 
       - name: Checkout codes
         uses: actions/checkout@v3
