@@ -2,7 +2,7 @@ const base = require('./karma.base.conf')
 
 module.exports = config => {
   config.set(Object.assign(base, {
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
     reporters: ['progress'],
     singleRun: true,
     plugins: base.plugins.concat([
