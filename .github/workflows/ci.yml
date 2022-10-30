@@ -18,7 +18,61 @@ env:
   CHROME_BIN: /usr/bin/google-chrome
 
 jobs:
+  build:
+    name: "Build on Node.js ${{ matrix.node }} OS: ${{matrix.os}}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node}}
+          cache: 'yarn'
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Cache dist
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-${{ github.sha }}
+
+  lint:
+    name: "Lint on Node.js ${{ matrix.node }} OS: ${{matrix.os}}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
   test:
+    needs:
+      - build
     name: "Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}}"
     runs-on: ${{ matrix.os }}
     strategy:
@@ -38,23 +92,17 @@ jobs:
           firefox-version: latest
       - run: firefox --version
 
-      # - name: Setup for nightwatch
-      #   run: sudo apt-get install xvfb
-
       - name: Checkout codes
         uses: actions/checkout@v3
 
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
           cache: 'yarn'
 
       - name: Install
         run: yarn install --frozen-lockfile
-
-      - name: Lint
-        run: yarn lint
 
       - name: Flow Types
         run: yarn flow
@@ -67,6 +115,12 @@ jobs:
 
       - name: Unit tests
         run: yarn test:unit:ci
+
+      - name: Restore dist cache
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-${{ github.sha }}
 
       - name: E2E Tests
         run: xvfb-run --auto-servernum yarn test:e2e

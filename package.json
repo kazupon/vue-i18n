@@ -138,7 +138,7 @@
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
     "test": "npm run lint && npm run flow && npm run test:types && npm run test:cover && npm run test:e2e",
     "test:cover": "cross-env BABEL_ENV=test karma start config/karma.cover.conf.js",
-    "test:e2e": "npm run build && node test/e2e/runner.js",
+    "test:e2e": "node test/e2e/runner.js",
     "test:types": "tsc -p types",
     "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js",
     "test:unit:ci": "cross-env BABEL_ENV=test karma start config/karma.unit.ci.conf.js"
