@@ -54,9 +54,9 @@ jobs:
         run: yarn test:types
       - name: Test Coverage
         run: yarn test:cover
-      - name: Setup for firefox
-        run: export DISPLAY=:0
-      - name: Unit tests
-        run: yarn test:unit:ci
+      # - name: Setup for firefox
+      #   run: export DISPLAY=:0
+      # - name: Unit tests
+      #   run: yarn test:unit:ci
       - name: E2E Tests
         run: yarn test:e2e
