@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.28.0 (2022-10-30)
+
+#### :star: New Features
+* [#1569](https://github.com/kazupon/vue-i18n/pull/1569) fix(datetime): $d supports key format object (#1502) ([@horitaka](https://github.com/horitaka))
+
+#### Committers: 1
+- [@horitaka](https://github.com/horitaka)
+
 ## v8.27.2 (2022-06-20)
 
 #### :bug: Bug Fixes
