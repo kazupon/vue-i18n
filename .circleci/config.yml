@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimage/node:16.18.0-browsers
+      - image: circleci/node:16.18.0-browsers
         environment:
           TZ: Asia/Tokyo
           CHROME_BIN: "/usr/bin/google-chrome"
