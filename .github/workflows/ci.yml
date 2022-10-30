@@ -14,6 +14,8 @@ on:
       - reopened
 env:
   CI: true
+  TZ: Asia/Tokyo
+  CHROME_BIN: /usr/bin/google-chrome
 
 jobs:
   test:
@@ -25,13 +27,9 @@ jobs:
         node: [16]
     steps:
       - run: |
-        VERSION_STRING="88.0.4324.96-1"
-        wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${VERSION_STRING}_amd64.deb"
-        sudo dpkg -i "google-chrome-stable_${VERSION_STRING}_amd64.deb
+        wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_107.0.5304.87_amd64.deb"
+        sudo dpkg -i "google-chrome-stable_107.0.5304.87_amd64.deb
       - run: chrome --version
-        env:
-          TZ: Asia/Tokyo
-          CHROME_BIN: /usr/bin/google-chrome
 #      - name: Checkout
 #        uses: actions/checkout@v2
 #      - name: Setup Node.js ${{ matrix.node }}
