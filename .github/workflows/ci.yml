@@ -30,15 +30,25 @@ jobs:
         with:
           chrome-version: stable
       - run: chrome --version
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#      - name: Setup Node.js ${{ matrix.node }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node }}
-#      - name: Install
-#        run: yarn install
-#      - name: Test
-#        run: yarn test
-#      - name: Test (end-to-end)
-#        run: yarn test:e2e
+      - name: Checkout codes
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+      - name: Flow Types
+        run: yarn flow
+      - name: TS Types
+        run: yarn test:types
+      - name: Test Coverage
+        run: yarn test:cover
+      - name: Unit tests
+        run: yarn test:unit:ci
+      - name: E2E Tests
+        run: yarn test:e2e
