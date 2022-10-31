@@ -1,3 +1,15 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+## v8.28.2 (2022-10-31)
+
+#### :bug: Bug Fixes
+* [#1575](https://github.com/kazupon/vue-i18n/pull/1575) fix(datetime): fixing calender typo ([@MKhasib](https://github.com/MKhasib))
+
+#### Committers: 1
+- Majd Khasib ([@MKhasib](https://github.com/MKhasib))
+
 ## v8.28.1 (2022-10-31)
 
 #### :zap: Improved Features
