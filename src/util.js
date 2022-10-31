@@ -25,6 +25,14 @@ export const numberFormatKeys = [
 ]
 
 export const dateTimeFormatKeys = [
+  'dateStyle',
+  'timeStyle',
+  'calender',
+  'localeMatcher',
+  "hour12",
+  "hourCycle",
+  "timeZone",
+  "formatMatcher",
   'weekday',
   'era',
   'year',
@@ -33,7 +41,7 @@ export const dateTimeFormatKeys = [
   'hour',
   'minute',
   'second',
-  'timeZoneName'
+  'timeZoneName',
 ]
 
 /**
