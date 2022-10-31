@@ -27,7 +27,7 @@ export const numberFormatKeys = [
 export const dateTimeFormatKeys = [
   'dateStyle',
   'timeStyle',
-  'calender',
+  'calendar',
   'localeMatcher',
   "hour12",
   "hourCycle",
