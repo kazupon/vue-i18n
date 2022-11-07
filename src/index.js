@@ -66,14 +66,15 @@ export default class VueI18n {
 
     const locale: Locale = options.locale || 'en-US'
     const fallbackLocale: Locale = options.fallbackLocale || 'en-US'
-    const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || {}
     const numberFormats = options.numberFormats || {}
+    const prefix: Object = this.prefixedConstructor(options.prefix)
+    const messages: LocaleMessages = this.createPrefixedMessages(prefix, options.messages)
 
     this._vm = null
     this._formatter = options.formatter || defaultFormatter
     this._modifiers = options.modifiers || {}
-    this._missing = options.missing || null
+    this._missing = prefix.active ? this.createPrefixedMissingHandler(prefix, options.missing) : options.missing || null
     this._root = options.root || null
     this._sync = options.sync === undefined ? true : !!options.sync
     this._fallbackRoot = options.fallbackRoot === undefined
@@ -193,6 +194,56 @@ export default class VueI18n {
 
   unsubscribeDataChanging (vm: any): void {
     remove(this._dataListeners, vm)
+  }
+
+  prefixedConstructor (prefix: any): Object {
+    const prefix_  = typeof prefix === 'object'
+    if (prefix_) {
+      return {
+        active: prefix.active !== undefined ? prefix.active : true,
+        untranslated: prefix.untranslated !== undefined ? prefix.untranslated : '🔥',
+        translated: prefix.translated !== undefined ? prefix.translated : '✅'
+      }
+    } else {
+      if (prefix) {
+        return {
+          active: true,
+          untranslated: '🔥',
+          translated: '✅'
+        }
+      } else {
+        return {
+          active: false,
+          untranslated: '',
+          translated: ''
+        }
+      }
+    }
+  }
+
+  createPrefixedMessages (prefix: String, messages: Object): Object {
+    if (!prefix.active) {
+      return messages || {}
+    } else {
+      return JSON.parse(JSON.stringify(messages).replace(/":"/g, `":"${prefix.translated} `).replace(/\|/g, `| ${prefix.translated} `))
+    }
+  }
+
+  createPrefixedMissingHandler (prefix: Object, missing: Function): any {
+    if (!prefix.active) {
+      return null
+    } else {
+      if (missing === undefined) {
+        return (locale, key) => {
+          return `${prefix.untranslated} ${key}`
+        }
+      } else {
+        return (locale, key, vm) => {
+          return `${prefix.untranslated} ${missing(locale, key, vm)}`
+        }
+      }
+      
+    }
   }
 
   watchI18nData (): Function {
@@ -356,7 +407,7 @@ export default class VueI18n {
     if (ret.indexOf('@:') >= 0 || ret.indexOf('@.') >= 0) {
       ret = this._link(locale, message, ret, host, 'raw', values, visitedLinkStack)
     }
-
+    
     return this._render(ret, interpolateMode, values, key)
   }
 

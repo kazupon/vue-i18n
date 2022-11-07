@@ -89,4 +89,18 @@ describe('missing', () => {
       done()
     })
   })
+
+  describe('missing handler return fixed text', () => {
+    it('should be returned missing handler', done => {
+      const i18n = new VueI18n({
+        locale: 'en',
+        missing: (locale, key, vm) => {
+          return 'fixed text'
+        }
+      })
+
+      assert.strictEqual(i18n.t('foo.bar.buz'), 'fixed text')
+      done()
+    })
+  })
 })
