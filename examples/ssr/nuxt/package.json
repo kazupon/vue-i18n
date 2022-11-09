@@ -14,7 +14,7 @@
     "postinstall": "npm link ../../../"
   },
   "dependencies": {
-    "nuxt": "^1.4.0"
+    "nuxt": "^2.15.8"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
