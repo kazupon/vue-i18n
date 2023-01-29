@@ -11,6 +11,11 @@ module.exports = {
       title: 'Vue I18n',
       description: 'Vue I18n 是 Vue.js 的国际化插件'
     },
+    '/ja/': {
+      lang: 'ja-JP',
+      title: 'Vue I18n',
+      description: 'Vue I18n は、Vue.js のための国際化プラグインです。'
+    },
   },
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
@@ -214,7 +219,103 @@ module.exports = {
             ]
           }
         ]
-      }
+      },
+      '/ja/': {
+        label: '日本語',
+        selectText: '言語',
+        editLinkText: 'このページを GitHub で編集する',
+        lastUpdated: '最終更新日時',
+        nav: [
+          {
+            text: '学ぶ',
+            items: [
+              {
+                text: 'ガイド',
+                link: '/ja/guide/formatting'
+              },
+              {
+                text: 'API',
+                link: '/ja/api/'
+              }
+            ]
+          },
+          {
+            text: 'エコシステム',
+            items: [
+              {
+                text: '公式ツール',
+                items: [
+                  {
+                    text: 'Vue CLI プラグイン',
+                    link: 'https://github.com/kazupon/vue-cli-plugin-i18n'
+                  },
+                  {
+                    text: 'Webpack ローダー',
+                    link: 'https://github.com/kazupon/vue-i18n-loader'
+                  },
+                  {
+                    text: 'ESLint プラグイン',
+                    link: 'https://kazupon.github.io/eslint-plugin-vue-i18n/'
+                  },
+                  {
+                    text: '拡張',
+                    link: 'https://github.com/kazupon/vue-i18n-extensions'
+                  }
+                ]
+              },
+              {
+                text: '翻訳ツール',
+                items: [
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: 'Patreon',
+            link: 'https://www.patreon.com/kazupon'
+          },
+          {
+            text: 'リリースノート',
+            link: 'https://github.com/kazupon/vue-i18n/releases'
+          }
+        ],
+        sidebar: [
+          '/ja/introduction',
+          '/ja/started',
+          '/ja/installation',
+          {
+            title: 'ガイド',
+            collapsable: false,
+            children: [
+              '/ja/guide/formatting',
+              '/ja/guide/pluralization',
+              '/ja/guide/datetime',
+              '/ja/guide/number',
+              '/ja/guide/messages',
+              '/ja/guide/fallback',
+              '/ja/guide/component',
+              '/ja/guide/directive',
+              '/ja/guide/interpolation',
+              '/ja/guide/sfc',
+              '/ja/guide/hot-reload',
+              '/ja/guide/locale',
+              '/ja/guide/lazy-loading'
+            ]
+          },
+          {
+            title: 'レガシー',
+            collapsable: false,
+            children: [
+              '/ja/legacy/',
+              '/ja/legacy/v5'
+            ]
+          }
+        ]
+      },
     }
   }
 }
