@@ -14,3 +14,5 @@ rm -rf docs/patrons/nuxt.png
 rm -rf docs/patrons/plaid.svg
 rm -rf docs/patrons/storyblok.svg
 rm -rf docs/patrons/vuemastery.*
+rm -rf docs/patrons/crowdin.png
+rm -rf docs/patrons/crowdin.svg
