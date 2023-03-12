@@ -113,18 +113,6 @@ Go to [Get Started](./started.md)
 
 <p style="text-align: center;">
   <a
-    href="https://www.sendcloud.com/"
-    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
-    target="_blank"
-    rel="noopener"
-  >
-    <img
-      style="width: 9rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/sendcloud.png"
-      alt="sendcloud"
-    />
-  </a>
-  <a
     href="https://www.vuemastery.com/"
     style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
@@ -134,18 +122,6 @@ Go to [Get Started](./started.md)
       style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/vuemastery.svg"
       alt="vuemastery"
-    />
-  </a>
-  <a
-    href="https://www.deci-bel.com/"
-    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
-    target="_blank"
-    rel="noopener"
-  >
-    <img
-      style="width: 9rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/decibel.png"
-      alt="DECIBEL"
     />
   </a>
 </p>

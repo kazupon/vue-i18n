@@ -85,25 +85,9 @@
 <h3 align="center">🥉 Bronze Sponsors</h3>
 
 <p align="center">
-  <a href="https://www.sendcloud.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.png"
-      width="144px"
-    />
-  </a>
-</p>
-<p align="center">
   <a href="https://www.vuemastery.com/" target="_blank">
     <img
       src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/vuemastery.png"
-      width="144px"
-    />
-  </a>
-</p>
-<p align="center">
-  <a href="https://www.deci-bel.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/decibel.png"
       width="144px"
     />
   </a>

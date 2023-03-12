@@ -75,25 +75,9 @@ You can join them in supporting vue-i18n & Intlify project development by [pledg
 <h2 align="center">Bronze Sponsors</h2>
 
 <p align="center">
-  <a href="https://www.sendcloud.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/sendcloud.png"
-      width="200px"
-    />
-  </a>
-</p>
-<p align="center">
   <a href="https://www.vuemastery.com/" target="_blank">
     <img
       src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/vuemastery.png"
-      width="200px"
-    />
-  </a>
-</p>
-<p align="center">
-  <a href="https://www.deci-bel.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/decibel.png"
       width="200px"
     />
   </a>
