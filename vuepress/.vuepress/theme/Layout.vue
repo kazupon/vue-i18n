@@ -35,8 +35,8 @@ export default {
     display: block;
     /* top: 87px; */
     /* right: -12px; */
-    float: right;
-    height: 221px;
+    /* float: right; */
+    /* height: 221px; */
     /* width: 0; */
     padding: 0 0 20px 30px;
     margin-top: 20px;
