@@ -38,10 +38,10 @@
 
 <p align="center">
   <a
-    href="https://nuxtjs.org/"
+    href="https://nuxtlabs.com/"
     target="_blank">
     <img
-      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/nuxt.png"
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/nuxtlabs.svg"
       width="240px"
     />
   </a>
@@ -92,6 +92,16 @@
     />
   </a>
 </p>
+
+<p align="center">
+  <a href="https://froggly.pl/" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/kazupon/vue-i18n/v8.x/vuepress/.vuepress/public/patrons/Froggly.svg"
+      width="144px"
+    />
+  </a>
+</p>
+
 
 <br/>
 

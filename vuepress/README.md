@@ -52,15 +52,15 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
 
   <h4 style="padding: 12px 0 0 0;">🥇 Gold Sponsors</h4>
   <a
-    href="https://nuxtjs.org/"
+    href="https://nuxtlabs.com/"
     style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
     rel="noopener"
   >
     <img
       style="width: 15rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/nuxt.png"
-      alt="Nuxt.js"
+      src="/vue-i18n/patrons/nuxtlabs.svg"
+      alt="NuxtLabs"
     />
   </a>
   <a
@@ -110,6 +110,18 @@ footer: MIT Licensed | Copyright © 2020 kazuya kawaguchi
     <img
       style="width: 9rem; max-width: 100%; vertical-align: midele;"
       src="/vue-i18n/patrons/vuemastery.png"
+      alt="vuemastery"
+    />
+  </a>
+  <a
+    href="https://froggly.pl/"
+    style="margin: 1rem 1rem 0 1rem; width: 9rem; height: auto; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      style="width: 9rem; max-width: 100%; vertical-align: midele;"
+      src="/vue-i18n/patrons/Froggly.svg"
       alt="vuemastery"
     />
   </a>
