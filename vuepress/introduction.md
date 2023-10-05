@@ -63,21 +63,6 @@ Go to [Get Started](./started.md)
 
 <p style="text-align: center;">
   <a
-    href="https://rapidapi.com/"
-    style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
-    target="_blank"
-    rel="noopener"
-  >
-    <img
-      style="width: 15rem; max-width: 100%; vertical-align: midele;"
-      src="/vue-i18n/patrons/RapidAPI.svg"
-      alt="RapidAPI"
-    />
-  </a>
-</p>
-
-<p style="text-align: center;">
-  <a
     href="https://localazy.com/blog/how-to-localize-vuejs-app-with-vue-i18n-and-localazy?utm_source=kazupon&utm_medium=banner&utm_campaign=sponsorships_kazupon&utm_content=logo"
     style="margin: 1rem 1rem 0 1rem; width: 15rem; height: auto; display: inline-block; vertical-align: middle;"
     target="_blank"
