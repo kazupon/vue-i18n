@@ -137,7 +137,7 @@
     "sauce:ie": "karma start config/karma.sauce.conf.js -- 1",
     "sauce:mobile": "karma start config/karma.sauce.conf.js -- 2",
     "test": "npm run lint && npm run flow && npm run test:types && npm run test:cover && npm run test:e2e",
-    "test:cover": "cross-env BABEL_ENV=test karma start config/karma.cover.conf.js",
+    "test:cover": "cross-env NODE_OPTIONS=--openssl-legacy-provider BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:e2e": "cross-env NODE_OPTIONS=--openssl-legacy-provider node test/e2e/runner.js",
     "test:types": "tsc -p types",
     "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js",
