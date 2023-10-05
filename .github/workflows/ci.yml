@@ -16,6 +16,7 @@ env:
   CI: true
   TZ: Asia/Tokyo
   CHROME_BIN: /usr/bin/google-chrome
+  NODE_OPTIONS: --openssl-legacy-provider
 
 jobs:
   build:
