@@ -53,6 +53,7 @@ export default {
     underscore: '{helloMsg} world',
     plurals: {
       car: 'car | cars',
+      Car: '@.capitalize:car',
       apple: 'no apples | one apple | {count} apples',
       format: {
         named: 'Hello {name}, how are you? | Hi {name}, you look fine',
