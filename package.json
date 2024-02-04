@@ -127,7 +127,7 @@
     "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
     "docs:build": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production node config/version.js && cross-env NODE_ENV=production vuepress build vuepress -d docs",
     "docs:clean": "rm -rf docs/**",
-    "docs:dev": "vuepress dev vuepress",
+    "docs:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider vuepress dev vuepress",
     "flow": "flow check",
     "lint": "eslint --fix src test types/**/*.ts",
     "release:prepare": "shipjs prepare",
