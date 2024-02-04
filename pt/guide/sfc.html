@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Componentes de arquivo único | Vue I18n</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Vue I18n é um internacionalizador de idiomas para Vue.js">
+    <meta name="theme-color" content="#3eaf7c">
+    
+    <link rel="preload" href="/vue-i18n/assets/css/0.styles.dc7beab8.css" as="style"><link rel="preload" href="/vue-i18n/assets/js/app.d80a2095.js" as="script"><link rel="preload" href="/vue-i18n/assets/js/3.d86befc6.js" as="script"><link rel="preload" href="/vue-i18n/assets/js/2.6307267c.js" as="script"><link rel="preload" href="/vue-i18n/assets/js/41.61f75801.js" as="script"><link rel="prefetch" href="/vue-i18n/assets/js/10.c1277640.js"><link rel="prefetch" href="/vue-i18n/assets/js/11.208ba717.js"><link rel="prefetch" href="/vue-i18n/assets/js/12.5820d0d0.js"><link rel="prefetch" href="/vue-i18n/assets/js/13.3075be29.js"><link rel="prefetch" href="/vue-i18n/assets/js/14.7b4ef339.js"><link rel="prefetch" href="/vue-i18n/assets/js/15.86b2b656.js"><link rel="prefetch" href="/vue-i18n/assets/js/16.b1f10e5a.js"><link rel="prefetch" href="/vue-i18n/assets/js/17.91caebad.js"><link rel="prefetch" href="/vue-i18n/assets/js/18.71d9fded.js"><link rel="prefetch" href="/vue-i18n/assets/js/19.f25e213e.js"><link rel="prefetch" href="/vue-i18n/assets/js/20.7d9d9bba.js"><link rel="prefetch" href="/vue-i18n/assets/js/21.bd95e2eb.js"><link rel="prefetch" href="/vue-i18n/assets/js/22.caf9c8c3.js"><link rel="prefetch" href="/vue-i18n/assets/js/23.78943b5d.js"><link rel="prefetch" href="/vue-i18n/assets/js/24.984dce40.js"><link rel="prefetch" href="/vue-i18n/assets/js/25.990df6a4.js"><link rel="prefetch" href="/vue-i18n/assets/js/26.dcf006a1.js"><link rel="prefetch" href="/vue-i18n/assets/js/27.f494b7ef.js"><link rel="prefetch" href="/vue-i18n/assets/js/28.43fb7398.js"><link rel="prefetch" href="/vue-i18n/assets/js/29.1c6f155b.js"><link rel="prefetch" href="/vue-i18n/assets/js/30.ca0a973d.js"><link rel="prefetch" href="/vue-i18n/assets/js/31.7af93a86.js"><link rel="prefetch" href="/vue-i18n/assets/js/32.9481b78b.js"><link rel="prefetch" href="/vue-i18n/assets/js/33.1ab82d1a.js"><link rel="prefetch" href="/vue-i18n/assets/js/34.7ac76657.js"><link rel="prefetch" href="/vue-i18n/assets/js/35.559f515b.js"><link rel="prefetch" href="/vue-i18n/assets/js/36.12b5c8f1.js"><link rel="prefetch" href="/vue-i18n/assets/js/37.bf462a77.js"><link rel="prefetch" href="/vue-i18n/assets/js/38.c39f4a0c.js"><link rel="prefetch" href="/vue-i18n/assets/js/39.8f349d44.js"><link rel="prefetch" href="/vue-i18n/assets/js/4.6beafeae.js"><link rel="prefetch" href="/vue-i18n/assets/js/40.d6997c86.js"><link rel="prefetch" href="/vue-i18n/assets/js/42.9e9944d5.js"><link rel="prefetch" href="/vue-i18n/assets/js/43.834000b6.js"><link rel="prefetch" href="/vue-i18n/assets/js/44.763c4471.js"><link rel="prefetch" href="/vue-i18n/assets/js/45.7739aa38.js"><link rel="prefetch" href="/vue-i18n/assets/js/46.0b939b46.js"><link rel="prefetch" href="/vue-i18n/assets/js/47.b5f169d9.js"><link rel="prefetch" href="/vue-i18n/assets/js/48.b8034773.js"><link rel="prefetch" href="/vue-i18n/assets/js/49.695e87b4.js"><link rel="prefetch" href="/vue-i18n/assets/js/5.e0528640.js"><link rel="prefetch" href="/vue-i18n/assets/js/50.55d35f64.js"><link rel="prefetch" href="/vue-i18n/assets/js/51.e9002c0c.js"><link rel="prefetch" href="/vue-i18n/assets/js/52.0b9989d9.js"><link rel="prefetch" href="/vue-i18n/assets/js/53.cf633379.js"><link rel="prefetch" href="/vue-i18n/assets/js/54.0cfc2588.js"><link rel="prefetch" href="/vue-i18n/assets/js/55.0d7c2175.js"><link rel="prefetch" href="/vue-i18n/assets/js/56.a18ff3cd.js"><link rel="prefetch" href="/vue-i18n/assets/js/57.3a91604a.js"><link rel="prefetch" href="/vue-i18n/assets/js/58.6ea00651.js"><link rel="prefetch" href="/vue-i18n/assets/js/59.20927d69.js"><link rel="prefetch" href="/vue-i18n/assets/js/6.67de8626.js"><link rel="prefetch" href="/vue-i18n/assets/js/60.a98d09bf.js"><link rel="prefetch" href="/vue-i18n/assets/js/61.61deb75e.js"><link rel="prefetch" href="/vue-i18n/assets/js/62.5952e461.js"><link rel="prefetch" href="/vue-i18n/assets/js/63.032fd9b0.js"><link rel="prefetch" href="/vue-i18n/assets/js/64.074caebe.js"><link rel="prefetch" href="/vue-i18n/assets/js/65.136c520c.js"><link rel="prefetch" href="/vue-i18n/assets/js/66.d8876f80.js"><link rel="prefetch" href="/vue-i18n/assets/js/67.b32f85f2.js"><link rel="prefetch" href="/vue-i18n/assets/js/68.23975d30.js"><link rel="prefetch" href="/vue-i18n/assets/js/69.93f22579.js"><link rel="prefetch" href="/vue-i18n/assets/js/7.695a0b02.js"><link rel="prefetch" href="/vue-i18n/assets/js/70.12dacca3.js"><link rel="prefetch" href="/vue-i18n/assets/js/71.ce6c1b35.js"><link rel="prefetch" href="/vue-i18n/assets/js/72.2336ec2a.js"><link rel="prefetch" href="/vue-i18n/assets/js/73.35bb5ca7.js"><link rel="prefetch" href="/vue-i18n/assets/js/74.69bff409.js"><link rel="prefetch" href="/vue-i18n/assets/js/75.3a570b24.js"><link rel="prefetch" href="/vue-i18n/assets/js/76.44799a1f.js"><link rel="prefetch" href="/vue-i18n/assets/js/77.fadd7778.js"><link rel="prefetch" href="/vue-i18n/assets/js/78.3ffafeba.js"><link rel="prefetch" href="/vue-i18n/assets/js/79.f31b0c4c.js"><link rel="prefetch" href="/vue-i18n/assets/js/8.6b33f1e1.js"><link rel="prefetch" href="/vue-i18n/assets/js/80.08f8b672.js"><link rel="prefetch" href="/vue-i18n/assets/js/81.1ebb04e7.js"><link rel="prefetch" href="/vue-i18n/assets/js/82.33a498ef.js"><link rel="prefetch" href="/vue-i18n/assets/js/83.07090fc9.js"><link rel="prefetch" href="/vue-i18n/assets/js/84.37fb7201.js"><link rel="prefetch" href="/vue-i18n/assets/js/9.188dcf09.js">
+    <link rel="stylesheet" href="/vue-i18n/assets/css/0.styles.dc7beab8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="main-container" data-v-7e986b1b><div class="theme-container" data-v-7e986b1b><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-i18n/pt/" class="home-link router-link-active"><!----> <span class="site-name">Vue I18n</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-i18n/pt/guide/formatting.html" class="nav-link">
+  Guia
+</a></div><div class="nav-item"><a href="/vue-i18n/pt/api/" class="nav-link">
+  API
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Ecossistema" class="dropdown-title"><span class="title">Ecossistema</span> <span class="arrow down"></span></button> <button type="button" aria-label="Ecossistema" class="mobile-dropdown-title"><span class="title">Ecossistema</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Ferramentas Oficiais
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-cli-plugin-i18n" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue CLI Plugin
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Webpack Loader
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://intlify.github.io/eslint-plugin-vue-i18n/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ESLint Plugin
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-i18n-extensions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Extensoes
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          Ferramentas de terceiros
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  BabelEdit
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  i18n Ally
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://www.patreon.com/kazupon" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Patreon
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-i18n/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Notas de Lançamento
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://vue-i18n.intlify.dev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  v9
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Idiomas</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Idiomas</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-i18n/guide/sfc.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/zh/guide/sfc.html" class="nav-link">
+  简体中文
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/ru/guide/sfc.html" class="nav-link">
+  Русский
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/pt/guide/sfc.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Português
+</a></li></ul></div></div> <a href="https://github.com/kazupon/vue-i18n" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-i18n/pt/guide/formatting.html" class="nav-link">
+  Guia
+</a></div><div class="nav-item"><a href="/vue-i18n/pt/api/" class="nav-link">
+  API
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Ecossistema" class="dropdown-title"><span class="title">Ecossistema</span> <span class="arrow down"></span></button> <button type="button" aria-label="Ecossistema" class="mobile-dropdown-title"><span class="title">Ecossistema</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Ferramentas Oficiais
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-cli-plugin-i18n" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue CLI Plugin
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Webpack Loader
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://intlify.github.io/eslint-plugin-vue-i18n/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ESLint Plugin
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/kazupon/vue-i18n-extensions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Extensoes
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          Ferramentas de terceiros
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  BabelEdit
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  i18n Ally
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://www.patreon.com/kazupon" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Patreon
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/kazupon/vue-i18n/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Notas de Lançamento
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://vue-i18n.intlify.dev" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  v9
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">Idiomas</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">Idiomas</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-i18n/guide/sfc.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/zh/guide/sfc.html" class="nav-link">
+  简体中文
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/ru/guide/sfc.html" class="nav-link">
+  Русский
+</a></li><li class="dropdown-item"><!----> <a href="/vue-i18n/pt/guide/sfc.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Português
+</a></li></ul></div></div> <a href="https://github.com/kazupon/vue-i18n" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/vue-i18n/pt/introduction.html" class="sidebar-link">Introdução</a></li><li><a href="/vue-i18n/pt/started.html" class="sidebar-link">Iniciando</a></li><li><a href="/vue-i18n/pt/installation.html" class="sidebar-link">Instalação</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Guia</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-i18n/pt/guide/formatting.html" class="sidebar-link">Formatação</a></li><li><a href="/vue-i18n/pt/guide/pluralization.html" class="sidebar-link">Pluralização</a></li><li><a href="/vue-i18n/pt/guide/datetime.html" class="sidebar-link">Localização de datas</a></li><li><a href="/vue-i18n/pt/guide/number.html" class="sidebar-link">Localização de números</a></li><li><a href="/vue-i18n/pt/guide/messages.html" class="sidebar-link">Sintaxe mensagens locais</a></li><li><a href="/vue-i18n/pt/guide/fallback.html" class="sidebar-link">Fallback Localização</a></li><li><a href="/vue-i18n/pt/guide/component.html" class="sidebar-link">Localização baseada em componentes</a></li><li><a href="/vue-i18n/pt/guide/directive.html" class="sidebar-link">Diretiva personalizada</a></li><li><a href="/vue-i18n/pt/guide/interpolation.html" class="sidebar-link">Interpolação de componentes</a></li><li><a href="/vue-i18n/pt/guide/sfc.html" aria-current="page" class="active sidebar-link">Componentes de arquivo único</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#uso-basico" class="sidebar-link">Uso básico</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#instalacao-vue-i18n-loader" class="sidebar-link">Instalação vue-i18n-loader</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#webpack" class="sidebar-link">Webpack</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#vue-cli-3-0" class="sidebar-link">Vue CLI 3.0</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#laravel-mix" class="sidebar-link">Laravel-Mix</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#carregando-yaml" class="sidebar-link">Carregando YAML</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#varios-blocos-personalizados" class="sidebar-link">Vários blocos personalizados</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#estilos-locais" class="sidebar-link">Estilos Locais</a></li><li class="sidebar-sub-header"><a href="/vue-i18n/pt/guide/sfc.html#blocos-personalizados-em-componente-funcional" class="sidebar-link">Blocos personalizados em componente funcional</a></li></ul></li><li><a href="/vue-i18n/pt/guide/hot-reload.html" class="sidebar-link">Hot reloading</a></li><li><a href="/vue-i18n/pt/guide/locale.html" class="sidebar-link">Alternando localização</a></li><li><a href="/vue-i18n/pt/guide/lazy-loading.html" class="sidebar-link">Lazy loading traduções</a></li><li><a href="/vue-i18n/pt/guide/tooling.html" class="sidebar-link">Ferramentas</a></li></ul></section></li></ul> </aside> <main class="page"><div class="carbon-ads" data-v-7e986b1b></div> <div class="theme-default-content content__default"><h1 id="componentes-de-arquivo-unico"><a href="#componentes-de-arquivo-unico" class="header-anchor">#</a> Componentes de arquivo único</h1> <h2 id="uso-basico"><a href="#uso-basico" class="header-anchor">#</a> Uso básico</h2> <p>Se você estiver construindo um componente ou aplicativo Vue usando componentes de arquivo único, você pode gerenciar as mensagens de localização usando um bloco <code>i18n</code> personalizado.</p> <p>Código de componente com <a href="https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc" target="_blank" rel="noopener noreferrer">exemplo de componentes de arquivo único<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>:</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+{
+  &quot;en&quot;: {
+    &quot;hello&quot;: &quot;Hello World!&quot;
+  },
+  &quot;pt&quot;: {
+    &quot;hello&quot;: &quot;Olá Mundo!&quot;
+  }
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>app<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>locale<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Idiomas<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>locale<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span><span class="token punctuation">&gt;</span></span>en<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span><span class="token punctuation">&gt;</span></span>pt<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Mensagem: {{ $t('hello') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'app'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$i18n<span class="token punctuation">.</span>locale <span class="token operator">=</span> <span class="token string">'pt'</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">locale</span><span class="token operator">:</span> <span class="token string">'pt'</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">watch</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">locale</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$i18n<span class="token punctuation">.</span>locale <span class="token operator">=</span> val
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="instalacao-vue-i18n-loader"><a href="#instalacao-vue-i18n-loader" class="header-anchor">#</a> Instalação vue-i18n-loader</h2> <p>Você precisa instalar <code>vue-loader</code> e <code>vue-i18n-loader</code> devido ao uso de blocos personalizados <code>&lt;i18n&gt;</code>. Embora <a href="https://github.com/vuejs/vue-loader" target="_blank" rel="noopener noreferrer">vue-loader<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> provavelmente já seja usado em seu projeto se você estiver trabalhando com componentes de arquivo único, mas você vai precisar instalar <a href="https://github.com/kazupon/vue-i18n-loader" target="_blank" rel="noopener noreferrer">vue-i18n-loader<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> adicionalmente:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> i --save-dev @kazupon/vue-i18n-loader
+</code></pre></div><h2 id="webpack"><a href="#webpack" class="header-anchor">#</a> Webpack</h2> <p>O Webpack requer a seguinte configuração:</p> <p>Para vue-loader v15 ou posterior:</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.vue$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'vue-loader'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">resourceQuery</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blockType=i18n</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Para vue-loader v14:</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.vue$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token literal-property property">loaders</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token comment">// você precisa especificar a chave do carregador `i18n` com o `vue-i18n-loader`</span>
+            <span class="token comment">// (https://github.com/kazupon/vue-i18n-loader)</span>
+            <span class="token literal-property property">i18n</span><span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="vue-cli-3-0"><a href="#vue-cli-3-0" class="header-anchor">#</a> Vue CLI 3.0</h2> <p><a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener noreferrer">Vue CLI 3.0<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> ocultar a configuração do Webpack, portanto, para adicionar suporte para tags <code>&lt;i18n&gt;</code> em componentes de arquivo único, precisamos modificar a configuração existente.</p> <p>Para fazer isso, temos que criar um <code>vue.config.js</code> na raiz do nosso projeto. Depois de fazer isso, devemos incluir o seguinte código:</p> <p>Para vue-loader v15 ou posterior:</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token operator">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'i18n'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blockType=i18n</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'i18n'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Para vue-loader v14:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> merge <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'deepmerge'</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token operator">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'vue'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'vue-loader'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token parameter">options</span> <span class="token operator">=&gt;</span>
+        <span class="token function">merge</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token literal-property property">loaders</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">i18n</span><span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><em>Não se esqueça de instalar o <a href="https://github.com/KyleAMathews/deepmerge" target="_blank" rel="noopener noreferrer">deepmerge<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>! (<code>npm i deepmerge -D</code> ou <code>yarn add deepmerge -D</code>)</em></p> <p>Você pode aprender mais sobre as possibilidades de modificar a configuração do Webpack existente <a href="https://cli.vuejs.org/guide/webpack.html" target="_blank" rel="noopener noreferrer">neste guia<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>.</p> <h2 id="laravel-mix"><a href="#laravel-mix" class="header-anchor">#</a> Laravel-Mix</h2> <p>Para Laravel-mix 4 com vue-loader v15 ou posterior:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Estenda o Mix usando o método &quot;i18n&quot;, que carrega o vue-i18n-loader</span>
+mix<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> <span class="token string">'i18n'</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">class</span> <span class="token punctuation">{</span>
+        <span class="token function">webpackRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token literal-property property">resourceQuery</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blockType=i18n</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">type</span><span class="token operator">:</span>          <span class="token string">'javascript/auto'</span><span class="token punctuation">,</span>
+                    <span class="token literal-property property">loader</span><span class="token operator">:</span>        <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Certifique-se de chamar .i18n() para carregar o loader antes do .js(..., ...)</span>
+mix<span class="token punctuation">.</span><span class="token function">i18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">js</span><span class="token punctuation">(</span> <span class="token string">'resources/js/App.js'</span><span class="token punctuation">,</span> <span class="token string">'public/js/app.js'</span> <span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+</code></pre></div><p>para Laravel-mix 2 com vue-loader v14:</p> <p>No Laravel-mix, começando na versão <a href="https://github.com/JeffreyWay/laravel-mix/releases/tag/v2.1" target="_blank" rel="noopener noreferrer">V2.1<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>, você pode adicionar regras personalizadas usando <code>mix.extend()</code>. O Laravel-mix já possui suas próprias regras para lidar com arquivos <code>.vue</code>. Para adicionar <code>vue-i18n-loader</code>, no arquivo <code>webpack.mix.js</code> adicione o seguinte código:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// O código a seguir injetará o i18n Kazupon/vue-18-loader como o loader de arquivos .vue</span>
+mix<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> <span class="token string">'i18n'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span> <span class="token parameter">webpackConfig<span class="token punctuation">,</span> <span class="token operator">...</span>args</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    webpackConfig<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token parameter">module</span> <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Procure o componente &quot;vue-loader&quot;, que processa os arquivos .vue</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> module<span class="token punctuation">.</span>loader <span class="token operator">!==</span> <span class="token string">'vue-loader'</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Neste módulo, adicione o vue-i18n-loader para a tag i18n.</span>
+        module<span class="token punctuation">.</span>options<span class="token punctuation">.</span>loaders<span class="token punctuation">.</span>i18n <span class="token operator">=</span> <span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Certifique-se de chamar .i18n() para carregar o loader antes de .js(..., ...)</span>
+mix<span class="token punctuation">.</span><span class="token function">i18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">js</span><span class="token punctuation">(</span> <span class="token string">'resources/assets/js/App.js'</span><span class="token punctuation">,</span> <span class="token string">'public/js/app.js'</span> <span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+</code></pre></div><h2 id="carregando-yaml"><a href="#carregando-yaml" class="header-anchor">#</a> Carregando YAML</h2> <p>Os blocos personalizados <code>i18n</code> podem ser especificados no formato <code>JSON</code> ou <code>YAML</code> usando o recurso de pré-carregador do <code>vue-loader</code>.</p> <p>Os blocos personalizados <code>i18n</code> no formato <code>YAML</code>:</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  en:
+    hello: &quot;Hello World!&quot;
+  pt:
+    hello: &quot;Olá Mundo!&quot;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>Configuração do Webpack:</p> <p>Para vue-loader v15 ou posterior:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Vue CLI 3.0</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token operator">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>module
+      <span class="token punctuation">.</span><span class="token function">rule</span><span class="token punctuation">(</span><span class="token string">'i18n'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">resourceQuery</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">blockType=i18n</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">'javascript/auto'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'i18n'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'@kazupon/vue-i18n-loader'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'yaml'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">loader</span><span class="token punctuation">(</span><span class="token string">'yaml-loader'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Para vue-loader v14:</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.vue$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token literal-property property">preLoaders</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">i18n</span><span class="token operator">:</span> <span class="token string">'yaml-loader'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">loaders</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">i18n</span><span class="token operator">:</span> <span class="token string">'@kazupon/vue-i18n-loader'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="varios-blocos-personalizados"><a href="#varios-blocos-personalizados" class="header-anchor">#</a> Vários blocos personalizados</h2> <p>Você pode usar mensagens de localização com vários blocos personalizados <code>i18n</code>.</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./common/locales.json<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  {
+    &quot;en&quot;: {
+      &quot;hello&quot;: &quot;Hello World!&quot;
+    },
+    &quot;pt&quot;: {
+      &quot;hello&quot;: &quot;Olá Mundo!&quot;
+    }
+  }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>No exemplo acima, o primeiro bloco personalizado carrega as mensagens de localização genérica usando o atributo <code>src</code>, o segundo bloco personalizado carrega as mensagens de localização que são definidas apenas neste componente de arquivo único. Todos eles serão mesclados com mensagens de localização de componentes.</p> <p>Desta forma, vários blocos personalizados são úteis quando usados ​​como módulos.</p> <h2 id="estilos-locais"><a href="#estilos-locais" class="header-anchor">#</a> Estilos Locais</h2> <p>Ao usar <code>vue-i18n</code> com estilos locais <code>style scoped</code>, é importante lembrar de usar <a href="https://vue-loader.vuejs.org/guide/scoped-css.html#deep-selectors" target="_blank" rel="noopener noreferrer">deep selector<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> para estilizar o elemento <strong><em>dentro</em></strong> da string de tradução.</p> <p>Por exemplo:</p> <p><strong>Quando a tradução contém apenas texto</strong> (funciona sem deep selector)</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  {
+    &quot;en&quot;: {
+      &quot;hello&quot;: &quot;Hello World!&quot;
+    },
+    &quot;pt&quot;: {
+      &quot;hello&quot;: &quot;Olá Mundo!&quot;
+    }
+  }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Mensagem: {{ $t('hello') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Vai funcionar por exemplo --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p><strong>Tradução que contém elemento HTML</strong> (deve usar deep selector)</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  {
+    &quot;en&quot;: {
+      &quot;hello&quot;: &quot;Hello <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>World!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>&quot;
+    },
+    &quot;pt&quot;: {
+      &quot;hello&quot;: &quot;Olá <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>Mundo!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>&quot;
+    }
+  }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">v-html</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>$t(<span class="token punctuation">'</span>hello<span class="token punctuation">'</span>)<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Não vai funcionar por exemplo --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.parent p span</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Vai funcionar por exemplo &gt;&gt;&gt; --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.parent p &gt;&gt;&gt; span</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Vai funcionar por exemplo /deep/ --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.parent p /deep/ span</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Vai funcionar por exemplo ::v-deep --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.parent p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #42b883<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">::v-deep .parent p span</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="blocos-personalizados-em-componente-funcional"><a href="#blocos-personalizados-em-componente-funcional" class="header-anchor">#</a> Blocos personalizados em componente funcional</h2> <p>Se os componentes de arquivo único têm o template usando um componente funcional, e você definiu blocos personalizados <code>i18n</code>, observe que você não pode localizar usando mensagens de local.</p> <p>Por exemplo, o código a seguir não pode usar mensagens de localização do bloco <code>i18n</code>.</p> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i18n</span><span class="token punctuation">&gt;</span></span>
+  {
+    &quot;en&quot;: {
+      &quot;hello&quot;: &quot;Hello World&quot;
+    },
+    &quot;pt&quot;: {
+      &quot;hello&quot;: &quot;Olá Mundo&quot;
+    }
+  }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i18n</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">functional</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- Mensagem de localização 'hello' na instância pai --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>{{ parent.$t('hello') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/kazupon/vue-i18n/edit/master/vuepress/pt/guide/sfc.md" target="_blank" rel="noopener noreferrer">Editar esta página no GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Última atualização:</span> <span class="time">18/01/2021, 02:09:22</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-i18n/pt/guide/interpolation.html" class="prev">
+        Interpolação de componentes
+      </a></span> <span class="next"><a href="/vue-i18n/pt/guide/hot-reload.html">
+        Hot reloading
+      </a>
+      →
+    </span></p></div> </main></div></div><div class="global-ui"></div></div>
+    <script src="/vue-i18n/assets/js/app.d80a2095.js" defer></script><script src="/vue-i18n/assets/js/3.d86befc6.js" defer></script><script src="/vue-i18n/assets/js/2.6307267c.js" defer></script><script src="/vue-i18n/assets/js/41.61f75801.js" defer></script>
+  </body>
+</html>
