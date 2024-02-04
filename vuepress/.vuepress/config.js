@@ -90,12 +90,16 @@ module.exports = {
                 text: '3rd Party Tooling',
                 items: [
                   {
-                    text: 'BabelEdit',
-                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
+                    text: 'inlang',
+                    link: 'https://marketplace.visualstudio.com/items?itemName=inlang.vs-code-extension'
                   },
                   {
                     text: 'i18n Ally',
                     link: 'https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally'
+                  },
+                  {
+                    text: 'BabelEdit',
+                    link: 'https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01'
                   }
                 ]
               },
