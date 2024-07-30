@@ -1,5 +1,8 @@
 # Pluralization
 
+> [!warning]
+> `$tc` will become deprecated in v10.0.0 and will be removed in v11.0.0. You can already update `$tc` to `$t`. Read more [here](https://eslint-plugin-vue-i18n.intlify.dev/rules/no-deprecated-tc#rule-details).
+
 You can translate with pluralization. You must define the locale that have a pipe `|` separator, and define plurals in pipe separator.
 
 *Your template will need to use `$tc()` instead of `$t()`.*
