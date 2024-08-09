@@ -14,7 +14,7 @@ export function update (el: any, binding: Object, vnode: any, oldVNode: any): vo
   const i18n: any = vnode.context.$i18n
   if (localeEqual(el, vnode) &&
     (looseEqual(binding.value, binding.oldValue) &&
-     looseEqual(el._localeMessage, i18n.getLocaleMessage(i18n.locale)))) { return }
+     el._timestamp == i18n._getLocaleTimestamp(i18n.locale))) { return }
 
   t(el, binding, vnode)
 }
@@ -34,8 +34,8 @@ export function unbind (el: any, binding: Object, vnode: any, oldVNode: any): vo
   delete el['_vt']
   el._locale = undefined
   delete el['_locale']
-  el._localeMessage = undefined
-  delete el['_localeMessage']
+  el._timestamp = undefined
+  delete el['_timestamp']
 }
 
 function assert (el: any, vnode: any): boolean {
@@ -79,7 +79,7 @@ function t (el: any, binding: Object, vnode: any): void {
     el._vt = el.textContent = vm.$i18n.t(path, ...makeParams(locale, args))
   }
   el._locale = vm.$i18n.locale
-  el._localeMessage = vm.$i18n.getLocaleMessage(vm.$i18n.locale)
+  el._timestamp = vm.$i18n._getLocaleTimestamp(vm.$i18n.locale)
 }
 
 function parseValue (value: any): Object {

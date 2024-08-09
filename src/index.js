@@ -84,6 +84,7 @@ export default class VueI18n {
     const fallbackLocale: FallbackLocale = options.fallbackLocale === false
       ? false
       : options.fallbackLocale || 'en-US'
+    const timestamp: LocaleTimestamp = { [locale]: 0 }
     const messages: LocaleMessages = options.messages || {}
     const dateTimeFormats = options.dateTimeFormats || options.datetimeFormats || {}
     const numberFormats = options.numberFormats || {}
@@ -179,6 +180,7 @@ export default class VueI18n {
       locale,
       fallbackLocale,
       messages,
+      timestamp,
       dateTimeFormats,
       numberFormats
     })
@@ -237,6 +239,7 @@ export default class VueI18n {
     locale: Locale,
     fallbackLocale: FallbackLocale,
     messages: LocaleMessages,
+    timestamp: LocaleTimestamp,
     dateTimeFormats: DateTimeFormats,
     numberFormats: NumberFormats
   }): void {
@@ -797,10 +800,15 @@ export default class VueI18n {
     return looseClone(this._vm.messages[locale] || {})
   }
 
+  _getLocaleTimestamp(locale: Locale): number {
+    return this._vm.timestamp[locale]
+  }
+
   setLocaleMessage (locale: Locale, message: LocaleMessageObject): void {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
     }
+    this._vm.$set(this._vm.timestamp, locale, Date.now())
     this._vm.$set(this._vm.messages, locale, message)
   }
 
@@ -808,6 +816,7 @@ export default class VueI18n {
     if (this._warnHtmlInMessage === 'warn' || this._warnHtmlInMessage === 'error') {
       this._checkLocaleMessage(locale, this._warnHtmlInMessage, message)
     }
+    this._vm.$set(this._vm.timestamp, locale, Date.now())
     this._vm.$set(this._vm.messages, locale, merge(
       typeof this._vm.messages[locale] !== 'undefined' && Object.keys(this._vm.messages[locale]).length
         ? Object.assign({}, this._vm.messages[locale])

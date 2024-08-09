@@ -18,6 +18,7 @@ declare type LocaleMessage = string | MessageFunction | LocaleMessageObject | Lo
 declare type LocaleMessageObject = { [key: Path]: LocaleMessage };
 declare type LocaleMessageArray = Array<LocaleMessage>;
 declare type LocaleMessages = { [key: Locale]: LocaleMessageObject };
+declare type LocaleTimestamp = { [key: Locale]: number };
 
 // This options is the same as Intl.DateTimeFormat constructor options:
 // http://www.ecma-international.org/ecma-402/2.0/#sec-intl-datetimeformat-constructor
