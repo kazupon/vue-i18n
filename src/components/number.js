@@ -1,13 +1,13 @@
 /* @flow */
 
-import { warn, isObject, numberFormatKeys } from '../util'
+import { warn, isString, isObject, includes, numberFormatKeys } from '../util'
 
 export default {
   name: 'i18n-n',
   functional: true,
   props: {
     tag: {
-      type: String,
+      type: [String, Boolean, Object],
       default: 'span'
     },
     value: {
@@ -34,7 +34,7 @@ export default {
     let key: ?string = null
     let options: ?NumberFormatOptions = null
 
-    if (typeof props.format === 'string') {
+    if (isString(props.format)) {
       key = props.format
     } else if (isObject(props.format)) {
       if (props.format.key) {
@@ -43,7 +43,7 @@ export default {
 
       // Filter out number format options only
       options = Object.keys(props.format).reduce((acc, prop) => {
-        if (numberFormatKeys.includes(prop)) {
+        if (includes(numberFormatKeys, prop)) {
           return Object.assign({}, acc, { [prop]: props.format[prop] })
         }
         return acc
@@ -58,10 +58,13 @@ export default {
       return slot ? slot({ [part.type]: part.value, index, parts }) : part.value
     })
 
-    return h(props.tag, {
-      attrs: data.attrs,
-      'class': data['class'],
-      staticClass: data.staticClass
-    }, values)
+    const tag = (!!props.tag && props.tag !== true) || props.tag === false ? props.tag : 'span'
+    return tag
+      ? h(tag, {
+        attrs: data.attrs,
+        'class': data['class'],
+        staticClass: data.staticClass
+      }, values)
+      : values
   }
 }

@@ -1,7 +1,7 @@
 # 日期时间本地化
 
 :::tip 支持版本
-:new: 7.0 新增
+:new: 7.0+ 新增
 :::
 
 你可以使用你定义的格式来本地化日期时间。
@@ -12,20 +12,33 @@
 const dateTimeFormats = {
   'en-US': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric'
     }
   },
   'ja-JP': {
     short: {
-      year: 'numeric', month: 'short', day: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: true
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
     }
   }
 }
@@ -58,7 +71,7 @@ new Vue({
 
 ```html
 <div id="app">
-  <p>Apr 19, 2017</p>
-  <p>2017年4月19日(水) 午前2:19</p>
+  <p>Jan 18, 2021</p>
+  <p>2021年1月18日日曜日 午前5:47</p>
 </div>
 ```

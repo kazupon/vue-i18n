@@ -94,9 +94,9 @@ Outputs:
 :new: 8.7+
 :::
 
-When `v-t` directive is applied to an element inside [`<transition>` component](https://vuejs.org/v2/api/#transition), you may notice that the translated message disappears during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in the disappearing element inside the `<transition>` component will be destroyed **before the transition starts**. This behavior may result in content flickering on short animations, but is most noticable on long transitions.
+When `v-t` directive is applied to an element inside [`<transition>` component](https://vuejs.org/v2/api/#transition), you may notice that the translated message disappears during the transition. This behavior is related to the nature of the `<transition>` component implementation – all directives in the disappearing element inside the `<transition>` component will be destroyed **before the transition starts**. This behavior may result in content flickering on short animations, but is most noticeable on long transitions.
 
-To make sure directive content stays un-touched during a transition, just add the [`.preserve` modifier](../api/#v-t) to the `v-t` directive defintion.
+To make sure directive content stays un-touched during a transition, just add the [`.preserve` modifier](../api/#v-t) to the `v-t` directive definition.
 
 Javascript:
 
@@ -161,7 +161,7 @@ About the above examples, see the [example](https://github.com/kazupon/vue-i18n/
 
 #### Pros
 
-You can **flexibly** use mustash syntax `{{}}` in templates and also computed props and methods in Vue instance.
+You can **flexibly** use mustache syntax `{{}}` in templates and also computed props and methods in Vue instance.
 
 #### Cons
 

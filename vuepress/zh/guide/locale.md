@@ -24,11 +24,13 @@ i18n.locale = 'en'
 
 示例：
 
-```html
+```vue
 <template>
   <div class="locale-changer">
     <select v-model="$i18n.locale">
-      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
+      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+        {{ lang }}
+      </option>
     </select>
   </div>
 </template>
@@ -45,4 +47,9 @@ export default {
 
 :::warning 警告
 :warning: 对于使用了 `sync: false` 的组件，语言环境的更改将被忽略。
+:::
+
+:::warning 组件与根范围
+:warning: 在组件内更改 `$i18n.locale` 不会更新根语言环境。
+如果您依靠根语言环境，例如在使用 [root fallbacks](./fallback.html) 时，请使用 `$root.$i18n.locale` 而不是$ `i18n.locale`。
 :::

@@ -18,12 +18,12 @@ desc('number custom formatting', () => {
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', { props: { value } })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, '10,100')
       }).then(done)
     })
@@ -34,12 +34,12 @@ desc('number custom formatting', () => {
       it('should be formatted', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: 'currency' } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, '$10,100.00')
         }).then(done)
       })
@@ -49,12 +49,12 @@ desc('number custom formatting', () => {
       it('should be formatted', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: { key: 'currency' } } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, '$10,100.00')
         }).then(done)
       })
@@ -65,28 +65,69 @@ desc('number custom formatting', () => {
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', { props: { value, format: 'currency', locale: 'ja-JP' } })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, '￥10,100')
       }).then(done)
     })
   })
 
   describe('tag', () => {
+    it('should default to span', done => {
+      const vm = new Vue({
+        i18n,
+        el: document.createElement('div'),
+        render (h) {
+          return h('i18n-n', { props: { value } })
+        },
+      })
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>10,100</span>')
+      }).then(done)
+    })
+
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', { props: { value, tag: 'p' } })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.outerHTML, '<p>10,100</p>')
+      }).then(done)
+    })
+
+    it('of value true defaults to span', done => {
+      const vm = new Vue({
+        i18n,
+        el: document.createElement('div'),
+        render (h) {
+          return h('i18n-n', { props: { value, tag: true } })
+        },
+      })
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$el.outerHTML, '<span>10,100</span>')
+      }).then(done)
+    })
+
+    it('of value false does not apply a root container', done => {
+      const vm = new Vue({
+        i18n,
+        el: document.createElement('div'),
+        render (h) {
+          return h('i18n-n', { props: { value, tag: false } })
+        },
+      })
+      Vue.nextTick().then(() => {
+        console.log('\n\n\n\n\n\n\n', vm.$el, '\n\n', vm.$el.nodeType)
+        assert.strictEqual(vm.$el.nodeType, Node.TEXT_NODE)
+        assert.strictEqual(vm.$el.data, '10,100')
       }).then(done)
     })
   })
@@ -96,12 +137,12 @@ desc('number custom formatting', () => {
       it('should be formatted', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: { style: 'currency', currency: 'JPY' } } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, '¥10,100')
         }).then(done)
       })
@@ -109,12 +150,12 @@ desc('number custom formatting', () => {
       it('should respect other number options', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: { style: 'currency', currency: 'EUR', currencyDisplay: 'code' } } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'EUR 10,100.00')
         }).then(done)
       })
@@ -124,12 +165,12 @@ desc('number custom formatting', () => {
       it('should be formatted', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: { key: 'currency', currency: 'JPY' } } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, '¥10,100')
         }).then(done)
       })
@@ -137,12 +178,12 @@ desc('number custom formatting', () => {
       it('should respect other number options', done => {
         const vm = new Vue({
           i18n,
+          el: document.createElement('div'),
           render (h) {
             return h('i18n-n', { props: { value, format: { key: 'currency', currency: 'EUR', currencyDisplay: 'code' } } })
           },
-          el: document.createElement('div')
         })
-        nextTick(() => {
+        Vue.nextTick().then(() => {
           assert.strictEqual(vm.$el.textContent, 'EUR 10,100.00')
         }).then(done)
       })
@@ -153,6 +194,7 @@ desc('number custom formatting', () => {
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', {
             props: { value },
@@ -162,9 +204,8 @@ desc('number custom formatting', () => {
             }
           })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, '<span>10</span><p>,</p><span>100</span>')
       }).then(done)
     })
@@ -172,6 +213,7 @@ desc('number custom formatting', () => {
     it('should pass part index as scoped prop', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', {
             props: { value: 1000000, format: 'currency' },
@@ -181,9 +223,8 @@ desc('number custom formatting', () => {
             }
           })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, '<span>$$$</span>1<p class="2">,</p>000<p class="4">,</p>000.00')
       }).then(done)
     })
@@ -191,6 +232,7 @@ desc('number custom formatting', () => {
     it('should pass parts as scoped prop', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', {
             props: { value: -12 },
@@ -201,9 +243,8 @@ desc('number custom formatting', () => {
             }
           })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, '-<span class="red">12</span>')
       }).then(done)
     })
@@ -211,6 +252,7 @@ desc('number custom formatting', () => {
     it('should ignore non-present scoped slot', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', {
             props: { value },
@@ -219,9 +261,8 @@ desc('number custom formatting', () => {
             }
           })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, '10,100')
       }).then(done)
     })
@@ -229,6 +270,7 @@ desc('number custom formatting', () => {
     it('should ignore default scoped slot', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', {
             props: { value },
@@ -237,9 +279,8 @@ desc('number custom formatting', () => {
             }
           })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.innerHTML, '10,100')
       }).then(done)
     })
@@ -249,13 +290,46 @@ desc('number custom formatting', () => {
     it('should be formatted', done => {
       const vm = new Vue({
         i18n,
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', { props: { value: 0.9, format: 'percent' } })
         },
-        el: document.createElement('div')
       })
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$el.textContent, '90%')
+      }).then(done)
+    })
+  })
+
+  describe('change number format runtime', () => {
+    it('should be changed', done => {
+      const i18n = new VueI18n({
+        locale: 'en-US',
+        numberFormats
+      })
+      const el = document.createElement('div')
+      document.body.appendChild(el)
+
+      const money = 101
+      const vm = new Vue({
+        i18n,
+        render (h) {
+          return h('p', { ref: 'text' }, [this.$n(money, 'currency')])
+        }
+      }).$mount(el)
+
+      const { text } = vm.$refs
+      const otherEnFormat = {
+        currency: {
+          style: 'currency', currency: 'CZK', currencyDisplay: 'name'
+        }
+      }
+
+      Vue.nextTick().then(() => {
+        assert.strictEqual(text.textContent, '$101.00')
+        i18n.setNumberFormat('en-US', otherEnFormat)
+      }).then(() => {
+        assert.strictEqual(text.textContent, '101.00 Czech korunas')
       }).then(done)
     })
   })
@@ -265,10 +339,10 @@ desc('number custom formatting', () => {
       const spy = sinon.spy(console, 'warn')
 
       new Vue({
+        el: document.createElement('div'),
         render (h) {
           return h('i18n-n', { props: { value } })
         },
-        el: document.createElement('div')
       })
       assert(spy.notCalled === false)
       assert(spy.callCount === 1)

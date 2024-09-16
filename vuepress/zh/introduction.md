@@ -10,11 +10,62 @@ Vue I18n 是 Vue.js 的国际化插件。它可以轻松地将一些本地化功
 
 ## 赞助商
 
-### 白银赞助商
+### 🥇 金
 
 <p style="text-align: center;">
-  <a href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" target="_blank">
-    <img src="/vue-i18n/patrons/babeledit.png">
+  <a
+    href="https://nuxtjs.org/"
+    style="display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/nuxt.png"
+      alt="Nuxt.js"
+    />
+  </a>
+</p>
+
+### 🥈 白银赞助商
+
+<p style="text-align: center;">
+  <a
+    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01"
+    style="display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/babeledit.png"
+      alt="适用于应用程序（Web应用程序）的BabelEdit翻译编辑器"
+    />
+  </a>
+</p>
+
+### 🥉 青铜
+
+<p style="text-align: center;">
+  <a
+    href="https://zenarchitects.co.jp/"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/zenarchitects.png"
+      alt="zenarchitects"
+    />
+  </a>
+  <a
+    href="https://www.sendcloud.com/"
+    style="max-width: 200px; width: 100%; height: 80px; display: inline-block; vertical-align: middle;"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="/vue-i18n/patrons/sendcloud.svg"
+      alt="sendcloud"
+    />
   </a>
 </p>
 
@@ -24,7 +75,5 @@ Vue I18n 是 Vue.js 的国际化插件。它可以轻松地将一些本地化功
 
 
 <p style="text-align: center;">
-  <a href="https://www.patreon.com/kazupon" target="_blank">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patreon">
-  </a>
+  <iframe src="https://github.com/sponsors/kazupon/card" title="Sponsor kazupon" height="225" width="600" style="border: 0; margin: 24px"></iframe>
 </p>

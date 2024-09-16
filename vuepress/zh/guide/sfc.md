@@ -6,7 +6,7 @@
 
 以下是[单文件组件示例](https://github.com/kazupon/vue-i18n/tree/dev/examples/sfc):
 
-```js
+```vue
 <i18n>
 {
   "en": {
@@ -197,7 +197,7 @@ mix.i18n()
 
 以下是 `YAML` 格式的 `i18n` 自定义块：
 
-```html
+```vue
 <i18n>
 en:
   hello: "hello world!"
@@ -257,7 +257,7 @@ module.exports = {
 
 你可以使用具有多个 `i18n` 自定义块的语言环境信息。
 
-```html
+```vue
 <i18n src="./common/locales.json"></i18n>
 <i18n>
   {
@@ -279,26 +279,96 @@ module.exports = {
 
 当使用带有 `scoped style` `vue-i18n` 时，重要的是要记住使用[深度选择器](https://vue-loader.vuejs.org/zh/guide/scoped-css.html#深度作用选择器) 来设置嵌套转换的样式。例如：
 
-```html
-...
+__翻译仅包含文本__（不使用深层选择器）
+
+```vue
+<i18n>
+{
+  "en": {
+    "hello": "hello world!"
+  },
+  "ja": {
+    "hello": "こんにちは、世界"
+  }
+}
+</i18n>
+
 <template>
   <div class="parent">
     <p>message: {{ $t('hello') }}</p>
   </div>
 </template>
-...
-<!-- 不可行-->
-<style scoped>
-.parent p {
-  color: #42b883;
-}
-</style>
 
 <!-- 可行 -->
-<style>
-.parent >>> p {
-  color: #42b883;
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+</style>
+```
+
+__使用 HTML 元素翻译__（必须使用深度选择器）
+
+```vue
+<i18n>
+{
+  "en": {
+    "hello": "hello<span>world!</span>"
+  },
+  "ja": {
+    "hello": "こんにちは、<span>世界！</span>"
+  }
 }
+</i18n>
+
+<template>
+  <div class="parent">
+    <p v-html="$t('hello')"></p>
+  </div>
+</template>
+
+<!-- 不可行-->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p span {
+    color: red;
+  }
+</style>
+
+<!-- 可行 >>> -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p >>> span {
+    color: red;
+  }
+</style>
+
+<!-- 可行 /deep/ -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  .parent p /deep/ span {
+    color: red;
+  }
+</style>
+
+<!-- 可行 ::v-deep -->
+<style scoped>
+  .parent p {
+    color: #42b883;
+  }
+
+  ::v-deep .parent p span {
+    color: red;
+  }
 </style>
 ```
 
@@ -308,7 +378,7 @@ module.exports = {
 
 例如，以下代码无法使用 `i18n` 自定义块的语言环境信息进行本地化。
 
-```html
+```vue
 <i18n>
 {
   "en": {

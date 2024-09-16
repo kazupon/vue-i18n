@@ -24,7 +24,7 @@
     "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.4.2",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-server": "^3.10.1",
     "@storybook/vue": "^3.2.3"
   }
 }

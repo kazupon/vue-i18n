@@ -1,13 +1,13 @@
 import { warn } from './util'
 import extend from './extend'
-import mixin from './mixin'
+import defineMixin from './mixin'
 import interpolationComponent from './components/interpolation'
 import numberComponent from './components/number'
 import { bind, update, unbind } from './directive'
 
 export let Vue
 
-export function install (_Vue) {
+export function install (_Vue, options = { bridge: false }) {
   /* istanbul ignore if */
   if (process.env.NODE_ENV !== 'production' && install.installed && _Vue === Vue) {
     warn('already installed.')
@@ -25,7 +25,7 @@ export function install (_Vue) {
   }
 
   extend(Vue)
-  Vue.mixin(mixin)
+  Vue.mixin(defineMixin(options.bridge))
   Vue.directive('t', { bind, update, unbind })
   Vue.component(interpolationComponent.name, interpolationComponent)
   Vue.component(numberComponent.name, numberComponent)

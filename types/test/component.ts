@@ -1,5 +1,5 @@
-import Vue, { ComponentOptions } from 'vue';
-import VueI18n from "../index";
+import Vue from 'vue'
+import VueI18n from '../index'
 
 // setup locale info for root Vue instance
 const i18n = new VueI18n({
@@ -33,8 +33,8 @@ const Component1 = {
       ja: { message: { hello: 'こんにちは、component1' } }
     },
     sharedMessages: {
-      en: { buttons: { save: 'Save'} },
-      ja: { buttons: { save: 'Save'} }
+      en: { buttons: { save: 'Save' } },
+      ja: { buttons: { save: 'Save' } }
     }
   }
 }

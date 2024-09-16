@@ -32,7 +32,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.who.textContent, '子')
         i18n.locale = 'en'
       }).then(() => {
@@ -61,7 +61,7 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'ルート')
         i18n.locale = 'en'
       }).then(() => {
@@ -99,11 +99,42 @@ describe('custom blocks', () => {
           return h('div', {}, [h('child', { ref: 'child' })])
         }
       }).$mount(el)
-      nextTick(() => {
+      Vue.nextTick().then(() => {
         assert.strictEqual(vm.$refs.child.$refs.foo.textContent, 'フー')
         i18n.locale = 'en'
       }).then(() => {
         assert.strictEqual(vm.$refs.child.$refs.foo.textContent, 'foo')
+      }).then(done)
+    })
+  })
+
+  describe('bridge mode', () => {
+    it('should be translated', done => {
+      const el = document.createElement('div')
+      const vm = new Vue({
+        i18n,
+        components: {
+          child: {
+            __i18nBridge: [JSON.stringify({
+              en: { who: 'child' },
+              ja: { who: '子' }
+            })],
+            render (h) {
+              return h('div', {}, [
+                h('p', { ref: 'who' }, [this.$t('who')])
+              ])
+            }
+          }
+        },
+        render (h) {
+          return h('div', {}, [h('child', { ref: 'child' })])
+        }
+      }).$mount(el)
+      Vue.nextTick().then(() => {
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, '子')
+        i18n.locale = 'en'
+      }).then(() => {
+        assert.strictEqual(vm.$refs.child.$refs.who.textContent, 'child')
       }).then(done)
     })
   })

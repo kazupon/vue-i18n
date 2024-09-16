@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discord Chat at Vue Land
+    url: https://chat.vuejs.org/
+    about: For simple beginner questions, you can get quick answers from Discord
+  - name: Questions & Discussions
+    url: https://github.com/kazupon/vue-i18n/discussions
+    about: Use GitHub discussions for message-board style questions and discussions.

@@ -40,7 +40,7 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 ```
 
-如果使用全局的 script 标签，则无须如此 (手动安装)。
+如果使用全局的 script 标签，则无须如此 (手动安装) `<script>`。
 
 ## Vue Cli 3.x
 

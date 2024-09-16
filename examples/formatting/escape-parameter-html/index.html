@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Escape parameter HTML example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8.22.0/dist/vue-i18n.esm.browser.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <p v-html="displayMsg"></p>
+    </div>
+    <script>
+      const i18n = new VueI18n({
+        locale: 'en',
+        escapeParameterHtml: true,
+        messages: {
+          en: {
+              message: 'User input: <b>{value}</b>',
+          }
+        }
+      })
+      new Vue({
+        el: '#app',
+        i18n: i18n,
+          computed: {
+              displayMsg() {
+                  return this.$t('message', {value: '<img src="" onError="alert(42)">'})
+              }
+          }
+      })
+    </script>
+  </body>
+</html>

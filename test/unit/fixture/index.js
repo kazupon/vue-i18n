@@ -19,12 +19,15 @@ export default {
       linkBrackets: 'Hello @:(message.hoge). Isn\'t @:(message.hello) great?',
       linkHyphen: '@:hyphen-hello',
       linkUnderscore: '@:underscore_hello',
+      linkPipe: '@:pipe|hello',
+      linkColon: '@:(colon:hello)',
       linkList: '@:message.hello: {0} {1}',
       linkCaseLower: 'Please provide @.lower:message.homeAddress',
       linkCaseUpper: '@.upper:message.homeAddress',
+      linkCaseCapitalize: '@.capitalize:message.homeAddress',
       linkCaseUnknown: '@.unknown:message.homeAddress',
       linkCaseCustom: '@.custom:message.homeAddress',
-      homeAddress: 'Home address',
+      homeAddress: 'home Address',
       circular1: 'Foo @:message.circular2',
       circular2: 'Bar @:message.circular3',
       circular3: 'Buz @:message.circular1',
@@ -44,6 +47,8 @@ export default {
     'hyphen-hello': 'hyphen the wolrd',
     /* eslint-disable */
     underscore_hello: 'underscore the wolrd',
+    'colon:hello': 'hello colon',
+    'pipe|hello': 'hello pipe',
     /* eslint-enable */
     underscore: '{helloMsg} world',
     plurals: {

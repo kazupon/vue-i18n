@@ -122,7 +122,7 @@ describe('component translation', () => {
     // change locale
     i18n.locale = 'en-US'
     vm.$refs.child1.$i18n.locale = 'ja-JP'
-    nextTick(() => {
+    Vue.nextTick().then(() => {
       assert.strictEqual(root.textContent, 'root')
       assert.strictEqual(child1.textContent, '子1')
       assert.strictEqual(child1Fallback.textContent, 'fallback')
@@ -135,8 +135,133 @@ describe('component translation', () => {
       assert.strictEqual(subChild2.textContent, 'sub-child2')
 
       vm.$destroy()
-    }).then(() => {
-      assert(vm.$i18n === null)
+    }).then(done)
+  })
+
+  it('fallbackRootWithEmptyString default to be true', done => {
+    const el = document.createElement('div')
+    let vm = new Vue({
+      i18n,
+      components: {
+        child: { // translation with component
+          i18n: {
+            locale: 'en-US',
+            sync: false,
+            messages: {
+              'en-US': {
+                who: 'child'
+              },
+              'ja-JP': {
+                who: '子',
+              }
+            },
+          },
+          components: {
+            'sub-child': { // translation with root
+              i18n: {
+                locale: 'ja-JP',
+                sync: false,
+                messages: {
+                  'en-US': {
+                    who: 'sub-child'
+                  },
+                  'ja-JP': {
+                    who: ''
+                  }
+                },
+                sharedMessages: { // shared messages for child1 component
+                  'en-US': { foo: { bar: 'bar' } },
+                  'ja-JP': { foo: { bar: 'バー' } }
+                }
+              },
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('sub-child', { ref: 'sub-child' })
+            ])
+          }
+        },
+      },
+      render (h) {
+        return h('div', {}, [
+          h('p', { ref: 'who' }, [this.$t('who')]),
+          h('child', { ref: 'child' }),
+        ])
+      }
+    }).$mount(el)
+    Vue.nextTick().then(() => {
+      assert.strictEqual(vm.$refs.child.$refs['sub-child'].$refs.who.textContent, 'ルート')
+    }).then(done)
+  })
+
+  it('fallbackRootWithEmptyString should work when set to false', done => {
+    const el = document.createElement('div')
+    let vm = new Vue({
+      i18n,
+      components: {
+        child: { // translation with component
+          i18n: {
+            locale: 'en-US',
+            sync: false,
+            messages: {
+              'en-US': {
+                who: 'child'
+              },
+              'ja-JP': {
+                who: '子',
+              }
+            },
+          },
+          components: {
+            'sub-child': { // translation with root
+              i18n: {
+                locale: 'ja-JP',
+                sync: false,
+                fallbackRootWithEmptyString: false,
+                messages: {
+                  'en-US': {
+                    who: 'sub-child'
+                  },
+                  'ja-JP': {
+                    who: ''
+                  }
+                },
+                sharedMessages: { // shared messages for child1 component
+                  'en-US': { foo: { bar: 'bar' } },
+                  'ja-JP': { foo: { bar: 'バー' } }
+                }
+              },
+              render (h) {
+                return h('div', {}, [
+                  h('p', { ref: 'who' }, [this.$t('who')])
+                ])
+              }
+            }
+          },
+          render (h) {
+            return h('div', {}, [
+              h('p', { ref: 'who' }, [this.$t('who')]),
+              h('sub-child', { ref: 'sub-child' })
+            ])
+          }
+        },
+      },
+      render (h) {
+        return h('div', {}, [
+          h('p', { ref: 'who' }, [this.$t('who')]),
+          h('child', { ref: 'child' }),
+        ])
+      }
+    }).$mount(el)
+    Vue.nextTick().then(() => {
+      assert.strictEqual(vm.$refs.child.$refs['sub-child'].$refs.who.textContent, '')
     }).then(done)
   })
 })

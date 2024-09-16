@@ -9,7 +9,18 @@ Locale Messages syntax below:
 type LocaleMessages = { [key: Locale]: LocaleMessageObject };
 type LocaleMessageObject = { [key: Path]: LocaleMessage };
 type LocaleMessageArray = LocaleMessage[];
-type LocaleMessage = string | LocaleMessageObject | LocaleMessageArray;
+type MessageContext = {
+  list: (index: number) => mixed,
+  named: (key: string) => mixed,
+  linked: (key: string) => TranslateResult,
+  values: any, // NOTE: not compatible for vue-i18n@v9.x
+  path: string, // NOTE: not compatible for vue-i18n@v9.x
+  formatter: Formatter, // NOTE: not compatible for vue-i18n@v9.x
+  messages: LocaleMessages, // NOTE: not compatible for vue-i18n@v9.x
+  locale: Locale // NOTE: not compatible for vue-i18n@v9.x
+};
+type MessageFunction = (ctx: MessageContext) => string;
+type LocaleMessage = string | MessageFunction | LocaleMessageObject | LocaleMessageArray;
 type Locale = string;
 type Path = string;
 ```
@@ -106,12 +117,13 @@ Output:
 ### Formatting linked locale messages
 
 If the language distinguish cases of character, you may need control the case of the linked locale messages.
-Linked messages can be formatted with modifier  `@.modifier:key`
+Linked messages can be formatted with modifier `@.modifier:key`
 
 The below modifiers are available currently.
 
 * `upper`: Uppercase all characters in the linked message.
 * `lower`: Lowercase all characters in the linked message.
+* `capitalize`: Capitalize the first character in the linked message.
 
 Locale messages the below:
 
@@ -145,15 +157,15 @@ You can add modifiers or overwrite the existing ones passing the `modifiers` opt
 ```javascript
 const i18n = new VueI18n({
   locale: 'en',
+  modifiers: {
+    // Adding a new modifier
+    snakeCase: (str) => str.split(' ').join('-')
+  },
   messages: {
     // ...
   },
-  modifiers: {
-    snakeCase: (str) => str.split(' ').join('-')
-  }
 })
 ```
-
 
 ### Grouping by brackets
 
@@ -185,3 +197,110 @@ Output:
 ```html
 <p>There's a reason, you lost, DIO.</p>
 ```
+
+## Message Function
+
+vue-i18n recommends using the string base on list or named format as locale messages when translating messages.
+
+There are situations however, where you really need the full programmatic power of JavaScript, due to the complex language syntax. So instead of string-based messages, you can use the **message function**.
+
+The following is a message function that returns a simple greeting:
+
+```js
+const messages = {
+  en: {
+    greeting: (ctx) => 'hello!'
+  }
+}
+```
+
+The use of the message function is very easy! You just specify the key of the message function with `$t` or `t`:
+
+```html
+<p>{{ $t('greeting') }}</p>
+```
+
+Output is the below:
+
+```html
+<p>hello!</p>
+```
+
+The message function outputs the message of the return value of the message function.
+
+### Named formatting
+
+vue-i18n supports [named formatting](./formatting.md#named-formatting) as a string-based message format. vue-i18n interpolate the parameter values with `$t` or `t`, and it can be output it.
+
+You can do the same thing with the message function by using **message context**:
+
+here is the example of greeting:
+
+```js
+const messages = {
+  en: {
+    greeting: (ctx) => `hello, ${ctx.named('name')}!`
+  }
+}
+```
+
+Template:
+
+```html
+<p>{{ $t('greeting', { name: 'DIO' }) }}</p>
+```
+
+Output is the below:
+
+```html
+<p>hello, DIO!</p>
+```
+
+The message context has a named function. You need to specify the key that resolves the value specified with the named of `$t` or `t`.
+
+### List formatting
+
+The use of the list format is similar to the named format described above.
+
+vue-i18n supports [list formatting](./formatting.md#list-formatting) as a string-based message format. vue-i18n interpolate the parameter values with `$t` or `t`, and it can be output it.
+
+You can do the same thing with the message function by using message context:
+
+here is the example of greeting:
+
+```js
+const messages = {
+  en: {
+    greeting: (ctx) => `hello, ${ctx.list(0)}!`
+  }
+}
+```
+
+Template:
+
+```html
+<p>{{ $t('greeting', ['DIO']) }}</p>
+```
+
+Output is the below:
+
+```html
+<p>hello, DIO!</p>
+```
+
+The message context has a list function. You need to specify the index that resolves the value specified with the list of `$t` or `t`.
+
+### Limitation
+
+In the message function, the following functions, which are provided on a string basis, are not available via a message context:
+
+- Pluralization
+
+And also, the following props of message context is not compatible for vue-i18 v9.x or later:
+
+- `path`
+- `locale`
+- `messages`
+- `formatter`
+
+If you are using these message context props means that it will be difficult to migrate to vue-i18n v9.x or later.

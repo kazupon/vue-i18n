@@ -13,6 +13,25 @@
       <p id="number">{{ $t('message.number', { current: 0.5 }) }}</p>
       <p id="time">{{ $t('message.time', { current: new Date() }) }}</p>
     </div>
+    <i18n path="terms" tag="p">
+      <!-- Using v-t="" -->
+      I accept the <a href="https://google.com" v-t="'tos'" />
+    </i18n>
+
+    <i18n path="terms" tag="p">
+      <!-- Using $t() -->
+      I accept the <a href="https://google.com">{{ $t('tos') }}</a>
+    </i18n>
+
+    <i18n path="fly.departure" tag="p">
+      <!-- You can {action} until {limit} minutes from departure -->
+      <template v-slot:action>
+        {{ $t('fly.board') }}
+      </template>
+      <template v-slot:limit>
+        <strong>25</strong>
+      </template>
+    </i18n>
   </div>
 </template>
 
