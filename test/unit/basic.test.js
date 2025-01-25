@@ -61,6 +61,14 @@ describe('basic', () => {
         assert.strictEqual(i18n.t('message.linkCaseCapitalize'), 'Home Address')
       })
 
+      it('should translate singular word with the first letter as upper-case', () => {
+        assert.strictEqual(i18n.tc('message.Car', 1), 'Car')
+      })
+
+      it('should translate plural word with the first letter as upper-case', () => {
+        assert.strictEqual(i18n.tc('message.Car', 2), 'Cars')
+      })
+
       it('should translate link without formatting if modifier is not known.', () => {
         assert.strictEqual(i18n.t('message.linkCaseUnknown'), 'home Address')
       })
