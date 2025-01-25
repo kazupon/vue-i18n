@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   en: {
     message: {
       hello: 'the world',
@@ -70,7 +70,20 @@ export default {
       ]
     ],
     issues: {
-      arrayBugs: ['bug1', 'bug2']
+      arrayBugs: ['bug1', 'bug2'],
+      builtins: {
+        existing: {
+          // '__proto__': 'i exist', // TODO
+          'constructor': 'i exist',
+          'hasOwnProperty': 'i exist',
+          'isPrototypeOf': 'i exist',
+          'propertyIsEnumerable': 'i exist',
+          'toLocaleString': 'i exist',
+          'toString': 'i exist',
+          'valueOf': 'i exist'
+        },
+        missing: {}
+      }
     },
     'foo.bar.buz': 'hello flat key!'
   },
@@ -111,7 +124,20 @@ export default {
       ]
     ],
     issues: {
-      arrayBugs: ['バグ1', 'バグ2']
+      arrayBugs: ['バグ1', 'バグ2'],
+      builtins: {
+        existing: {
+          // '__proto__': 'i exist (ja)', // TODO
+          'constructor': 'i exist (ja)',
+          'hasOwnProperty': 'i exist (ja)',
+          'isPrototypeOf': 'i exist (ja)',
+          'propertyIsEnumerable': 'i exist (ja)',
+          'toLocaleString': 'i exist (ja)',
+          'toString': 'i exist (ja)',
+          'valueOf': 'i exist (ja)'
+        },
+        missing: {}
+      }
     },
     'foo.bar.buz': 'こんにちは、フラットなキーさん！'
   }

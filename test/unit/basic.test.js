@@ -660,6 +660,89 @@ describe('basic', () => {
         assert(vm.$te('message.hello', 'xx') === false)
       })
     })
+
+    describe('builtin property handling', () => {
+      [
+        // '__proto__', // TODO: see https://github.com/kazupon/vue-i18n/issues/1706
+        'constructor',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'toLocaleString',
+        'toString',
+        'valueOf'
+      ].forEach(k => {
+        describe('top-level props', () => {
+          describe('existing key', () => {
+            let vm;
+            beforeEach(() => {
+              const i18n = new VueI18n({
+                locale: 'en',
+                fallbackLocale: 'en',
+                messages: {
+                  en: {
+                    [k]: 'i exist'
+                  },
+                  ja: {
+                    [k]: 'i exist (ja)'
+                  },
+                },
+                modifiers: {
+                  custom: str => str.replace(/[aeiou]/g, 'x')
+                }
+              })
+              vm = new Vue({ i18n })
+            })
+
+            it('should return true', () => {
+              assert(vm.$te(k) === true)
+            })
+
+            it('should return true with locale', () => {
+              assert(vm.$te(k, 'ja') === true)
+            })
+          })
+
+          describe('not existing key', () => {
+            it('should return false', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(k) === false)
+            })
+
+            it('should return false with locale', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(k, 'ja') === false)
+            })
+          })
+        })
+
+        describe('deep props', () => {
+          describe('existing key', () => {
+            it('should return true', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(`issues.builtins.existing.${k}`) === true)
+            })
+
+            it('should return true with locale', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(`issues.builtins.existing.${k}`, 'ja') === true)
+            })
+          })
+
+          describe('not existing key', () => {
+            it('should return false', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(`issues.builtins.missing.${k}`) === false)
+            })
+
+            it('should return false with locale', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$te(`issues.builtins.missing.${k}`, 'ja') === false)
+            })
+          })
+        })
+      })
+    })
   })
 
   describe('i18n#locale', () => {
