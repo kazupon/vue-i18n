@@ -14,7 +14,7 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-serve": "^1.0.2",
     "rollup-plugin-uglify": "^6.0.2",
-    "rollup-plugin-vue": "^5.0.0",
+    "rollup-plugin-vue": "^6.0.0",
     "vue-i18n": "^8.11.2",
     "vue-i18n-extensions": "^0.2.1",
     "vue-template-compiler": "^2.6.10"
