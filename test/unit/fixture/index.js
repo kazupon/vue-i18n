@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   en: {
     message: {
       hello: 'the world',
@@ -70,7 +70,16 @@ export default {
       ]
     ],
     issues: {
-      arrayBugs: ['bug1', 'bug2']
+      arrayBugs: ['bug1', 'bug2'],
+      builtins: {
+        __proto__: {
+          existing: 'i exist'
+        },
+        existing: {
+          __proto__: 'i exist',
+        },
+        missing: {}
+      }
     },
     'foo.bar.buz': 'hello flat key!'
   },
@@ -111,7 +120,16 @@ export default {
       ]
     ],
     issues: {
-      arrayBugs: ['バグ1', 'バグ2']
+      arrayBugs: ['バグ1', 'バグ2'],
+      builtins: {
+        __proto__: {
+          existing: 'i exist (ja)'
+        },
+        existing: {
+          __proto__: 'i exist (ja)',
+        },
+        missing: {}
+      }
     },
     'foo.bar.buz': 'こんにちは、フラットなキーさん！'
   }

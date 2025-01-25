@@ -526,6 +526,180 @@ describe('basic', () => {
         )
       })
     })
+
+    describe('__proto__ handling', () => {
+      describe('top-level prop', () => {
+        describe('existing key', () => {
+          let vm;
+          beforeEach(() => {
+            const i18n = new VueI18n({
+              locale: 'en',
+              fallbackLocale: 'en',
+              messages: {
+                en: {
+                  __proto__: 'i exist'
+                },
+                ja: {
+                  __proto__: 'i exist (ja)'
+                },
+              },
+              modifiers: {
+                custom: str => str.replace(/[aeiou]/g, 'x')
+              }
+            })
+            vm = new Vue({ i18n })
+          })
+
+          it('should return string', () => {
+            // FIXME: should be a string with value 'i exist'?
+            assert(typeof vm.$t('__proto__') === 'object')
+          })
+
+          it('should return string with locale', () => {
+            // FIXME: should be a string with value 'i exist (ja)'?
+            assert(typeof vm.$t('__proto__', 'ja') === 'object')
+          })
+        })
+
+        describe('not existing key', () => {
+          it('should return key', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(typeof vm.$t('__proto__') === 'object')
+          })
+
+          it('should return key with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(typeof vm.$t('__proto__', 'ja') === 'object')
+          })
+        })
+      })
+
+      describe('top-level prop with trailing prop', () => {
+        describe('with top-level prop defined', () => {
+          let vm;
+          beforeEach(() => {
+            const i18n = new VueI18n({
+              locale: 'en',
+              fallbackLocale: 'en',
+              messages: {
+                en: {
+                  __proto__: {
+                    existing: 'i exist'
+                  }
+                },
+                ja: {
+                  __proto__: {
+                    existing: 'i exist (ja)'
+                  }
+                },
+              },
+              modifiers: {
+                custom: str => str.replace(/[aeiou]/g, 'x')
+              }
+            })
+            vm = new Vue({ i18n })
+          })
+
+          describe('existing key', () => {
+            it('should return string', () => {
+              // FIXME: should be a string with value 'i exist'?
+              assert(vm.$t('__proto__.existing') === 'i exist')
+            })
+
+            it('should return string with locale', () => {
+              // FIXME: should be a string with value 'i exist (ja)'?
+              assert(vm.$t('__proto__.existing', 'ja') === 'i exist (ja)')
+            })
+          })
+
+          describe('not existing key', () => {
+            it('should return key', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$t('__proto__.missing') === '__proto__.missing')
+            })
+
+            it('should return key with locale', () => {
+              const vm = new Vue({ i18n })
+              assert(vm.$t('__proto__.missing', 'ja') === '__proto__.missing')
+            })
+          })
+        })
+
+        describe('without top-level prop defined', () => {
+          it('should return key', () => {
+            const vm = new Vue({ i18n })
+            assert(vm.$t('__proto__.missing') === '__proto__.missing')
+          })
+
+          it('should return key with locale', () => {
+            const vm = new Vue({ i18n })
+            assert(vm.$t('__proto__.missing', 'ja') === '__proto__.missing')
+          })
+        })
+      })
+
+      describe('deep prop', () => {
+        describe('existing key', () => {
+          it('should return true', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be a string with value 'i exist'?
+            assert(typeof vm.$t('issues.builtins.existing.__proto__') === 'object')
+          })
+
+          it('should return true with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be a string with value 'i exist (ja)'?
+            assert(typeof vm.$t('issues.builtins.existing.__proto__', 'ja') === 'object')
+          })
+        })
+
+        describe('not existing key', () => {
+          it('should return false', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(typeof vm.$t('issues.builtins.missing.__proto__') === 'object')
+          })
+
+          it('should return false with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(typeof vm.$t('issues.builtins.missing.__proto__', 'ja') === 'object')
+          })
+        })
+      })
+
+      describe('deep prop with proto in middle', () => {
+        describe('existing key', () => {
+          it('should return true', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be a string with value 'i exist'?
+            assert(vm.$t('issues.builtins.__proto__.existing') === 'i exist')
+          })
+
+          it('should return true with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be a string with value 'i exist (ja)'?
+            assert(vm.$t('issues.builtins.__proto__.existing', 'ja') === 'i exist (ja)')
+          })
+        })
+
+        describe('not existing key', () => {
+          it('should return false', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(vm.$t('issues.builtins.__proto__.missing') === 'issues.builtins.__proto__.missing')
+          })
+
+          it('should return false with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be key?
+            assert(vm.$t('issues.builtins.__proto__.missing', 'ja') === 'issues.builtins.__proto__.missing')
+          })
+        })
+      })
+    })
   })
 
   describe('$tc', () => {
@@ -658,6 +832,82 @@ describe('basic', () => {
       it('should return false with locale', () => {
         const vm = new Vue({ i18n })
         assert(vm.$te('message.hello', 'xx') === false)
+      })
+    })
+
+    describe('__proto__ handling', () => {
+      describe('top-level prop', () => {
+        describe('existing key', () => {
+          let vm;
+          beforeEach(() => {
+            const i18n = new VueI18n({
+              locale: 'en',
+              fallbackLocale: 'en',
+              messages: {
+                en: {
+                  __proto__: 'i exist'
+                },
+                ja: {
+                  __proto__: 'i exist (ja)'
+                },
+              },
+              modifiers: {
+                custom: str => str.replace(/[aeiou]/g, 'x')
+              }
+            })
+            vm = new Vue({ i18n })
+          })
+
+          it('should return true', () => {
+            assert(vm.$te('__proto__') === true)
+          })
+
+          it('should return true with locale', () => {
+            assert(vm.$te('__proto__', 'ja') === true)
+          })
+        })
+
+        describe('not existing key', () => {
+          it('should return false', () => {
+            const vm = new Vue({ i18n })
+            assert(vm.$te('__proto__') === true)
+          })
+
+          it('should return false with locale', () => {
+            const vm = new Vue({ i18n })
+            assert(vm.$te('__proto__', 'ja') === true)
+          })
+        })
+      })
+
+      describe('deep prop', () => {
+        describe('existing key', () => {
+          it('should return true', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be false?
+            assert(vm.$te('issues.builtins.existing.__proto__') === true)
+          })
+
+          it('should return true with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be false?
+            assert(vm.$te('issues.builtins.existing.__proto__', 'ja') === true)
+          })
+        })
+
+        describe('not existing key', () => {
+          it('should return false', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be false?
+            assert(vm.$te('issues.builtins.missing.__proto__') === true)
+          })
+
+          it('should return false with locale', () => {
+            const vm = new Vue({ i18n })
+            // FIXME: should be false?
+            assert(vm.$te('issues.builtins.missing.__proto__', 'ja') === true)
+          })
+        })
       })
     })
   })
